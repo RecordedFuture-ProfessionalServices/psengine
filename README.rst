@@ -33,7 +33,7 @@ PSEngine is a Python package that can be installed using pip. To install PSengin
 
 .. code-block:: bash
 
-   $ pip install psengine-2.0.1-py3-none-any.whl
+   $ pip install psengine-2.0.3-py3-none-any.whl
 
 PSEngine officially supports Python >= 3.9, < 3.14
 
