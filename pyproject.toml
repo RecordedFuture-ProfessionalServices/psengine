@@ -3,7 +3,7 @@ name = "psengine"
 version = "2.0.3"
 readme = "README.rst"
 requires-python = ">=3.9, <3.14"
-description = "Python 3 library for rapid integration development with Recorded Future's API"
+description = "psengine is a simple, yet elegant, library for rapid development of integrations with Recorded Future."
 authors = [
     { email = "ps@recordedfuture.com" },
 ]
@@ -53,7 +53,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project.urls]
-Homepage = "https://www.recordedfuture.com"
+Homepage = "https://github.com/RecordedFuture-ProfessionalServices/psengine"
 
 [project.scripts]
 psengine = "psengine_cli:main"
@@ -75,7 +75,7 @@ packages = [
 
 classifiers=[
         'Development Status :: 5 - Production/Stable',
-        'License :: OSI Approved :: Apache Software License',
+        'License :: OSI Approved :: MIT',
         'Programming Language :: Python',
         'Topic :: Security',
         "Programming Language :: Python :: 3.9",
