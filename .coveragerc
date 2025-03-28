@@ -1,0 +1,12 @@
+[run]
+source = psengine
+branch = True
+
+[report]
+skip_covered = True
+sort = Cover
+
+[html]
+directory = htmlcov
+
+[term]

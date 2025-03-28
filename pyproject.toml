@@ -1,0 +1,88 @@
+[project]
+name = "psengine"
+version = "2.0.3"
+readme = "README.rst"
+requires-python = ">=3.9, <3.14"
+description = "Python 3 library for rapid integration development with Recorded Future's API"
+authors = [
+    { email = "ps@recordedfuture.com" },
+]
+keywords = ['API', 'Recorded Future', 'Professional Services', 'Threat Intelligence']
+
+dependencies = [
+    "requests>=2.27.1",
+    "jsonpath_ng>=1.5.3, <=1.6.1",
+    "stix2~=3.0.1",
+    "python-dateutil>=2.7.0",
+    "more-itertools>=9.0.0, <=10.2.0",
+    "pydantic>=2.7, <3.0.0",
+    "pydantic-settings[toml]~=2.5.2",
+    "markdown-strings==3.4.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "tox==4.12.1",
+    "build==1.0.3",
+    "pytest==8.3.4",
+    "pytest-cov==6.0.0",
+    "pytest-mock==3.14.0",
+    "pytest-random-order==1.1.1",
+    "pytest-vcr==1.0.2",
+    "pytest-watch==4.2.0",
+    "requests==2.29.0",
+    "ruff~=0.7.0",
+    "wheel==0.37.1",
+    "setuptools==61.0.0",
+    "Sphinx==7.1.2",
+    "sphinxcontrib-confluencebuilder==2.3.0",
+    "atlassian-python-api==3.41.4",
+    "sphinx_autodoc_typehints==1.25.2",
+    "sphinxcontrib-napoleon",
+    "typer==0.12.5",
+    "cookiecutter==2.6.0",
+    "tomlkit>=0.13.2",
+]
+
+
+[build-system]
+requires = [
+    "setuptools>=65",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://www.recordedfuture.com"
+
+[project.scripts]
+psengine = "psengine_cli:main"
+
+[tool.setuptools]
+packages = [
+    "psengine",
+]
+
+[tool.setuptools.package-data]
+"*" = [
+    "**/*",
+]
+
+[tool.setuptools.exclude-package-data]
+"*" = [
+    "**/*.pyc",
+]
+
+classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python',
+        'Topic :: Security',
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13"
+]
+
+
