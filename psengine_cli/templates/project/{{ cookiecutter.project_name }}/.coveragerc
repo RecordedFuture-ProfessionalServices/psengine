@@ -1,0 +1,12 @@
+[run]
+source = {{ cookiecutter.lib_folder_name }}
+branch = True
+
+[report]
+skip_covered = True
+sort = Cover
+
+[html]
+directory = htmlcov
+
+[term]

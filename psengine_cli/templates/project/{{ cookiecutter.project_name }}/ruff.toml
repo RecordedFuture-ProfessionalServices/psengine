@@ -1,0 +1,105 @@
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".ruff_cache",
+    ".venv",
+    "_build",
+    "build",
+    "dist",
+    "deps",
+    "venv",
+    "tests/static",
+]
+
+line-length = 100 # Used by both linter and E501
+indent-width = 4
+output-format = "grouped"
+
+# To consider next: "B", "C4", "G", "PTH"
+[lint]
+select = [
+    "A001",  # flake8-builtins - builtin-variable-shadowing
+    "A002",  # flake8-builtins - builtin-argument-shadowing
+    "ARG",   # flake8-unused-arguments
+    "BLE",   # flake8-blind-except
+    "COM",   # flake8-commas
+    "C90",   # mccabe (max-complexity)
+    "D",     # pydocstyle
+    "E",     # pycodestyle errors
+    "ERA",   # eradicate
+    "F",     # pyflakes
+    "FLY",   # flynt
+    "I",     # isort
+    "INP",   # flake8-no-pep420
+    "ISC",   # flake8-implicit-str-concat
+    "PERF",  # Perflint
+    "PIE",   # flake8-pie
+    "PT",    # flake8-pytest-style
+    "SIM",   # flake8-simplify
+    "W",     # pycodestyle warnings
+]
+
+ignore = [
+    "COM812",  # missing-trailing-comma, formatter conflict
+    "D100",    # missing docstring in public module (__init__)
+    "D103",    # Missing docstring in public function
+    "D104",    # missing docstring in public package (__init__)
+    "D107",    # Missing docstring in __init__
+    "D401",    # First line of docstring should be in imperative mood: "{first_line}"
+    "E266",    # multiple-leading-hashes-for-block-comment
+    "ISC001",  # single-line-implicit-string-concatenation, formatter conflict
+    "SIM105",  # suppressible-exception
+    "W191",    # indentation contains tabs
+
+    # To remove in doc sprint?
+    "D417",    # Missing argument description in the docstring for {definition}: {name}	
+    "D205",    # 
+    "D415",    # 
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+[lint.mccabe]
+# Flag errors (C901) whenever the complexity level exceeds 10.
+max-complexity = 10
+
+[lint.pydocstyle]
+convention = "google"
+
+[lint.extend-per-file-ignores]
+"tests/*" = [
+    "D",       # pydocstyle
+    "INP001",  # implicit-namespace-package
+    "PIE794",  # duplicate-class-field-definition
+    "PT011",   # pytest-raises-too-broad 
+]
+"**/__init__.py" = [
+    "F401",   # unused-import
+    "F403",   # undefined-local-with-import-star
+]
+
+"{{cookiecutter.run_file_name }}.py" = [
+    "BLE001",   # blind except
+]
+
+"tools/confluence_pdf_export.py" = [
+    "INP001",   # implicit-namespace-package
+]
+
+[format]
+# Use single quotes for strings.
+quote-style = "single"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
