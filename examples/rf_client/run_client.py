@@ -1,4 +1,4 @@
-"""##################################### TERMS OF USE ###########################################
+##################################### TERMS OF USE ###########################################
 # The following code is provided for demonstration purpose only, and should not be used      #
 # without independent verification. Recorded Future makes no representations or warranties,  #
 # express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #
@@ -8,9 +8,8 @@
 # represents that it is solely responsible for having all necessary licenses, permissions,   #
 # rights, and/or consents to connect to third party APIs, and that it is solely responsible  #
 # for having all necessary licenses, permissions, rights, and/or consents to any data        #
-# accessed from any third party API.                                                         #.
+# accessed from any third party API.                                                         #
 ##############################################################################################
-"""
 
 import argparse
 import os
@@ -20,7 +19,7 @@ from requests import ConnectionError, ConnectTimeout, HTTPError, ReadTimeout
 from psengine import RFClient
 from psengine.config import Config
 from psengine.constants import RF_TOKEN_ENV_VAR
-from psengine.endpoints import EP_ALERT_RULE
+from psengine.endpoints import EP_CLASSIC_ALERTS_RULES
 from psengine.logger import RFLogger
 
 # Name & version of the integration itself
@@ -79,7 +78,7 @@ def main():
 
     print('')
     LOG.info('Example GET request with params')
-    response = rfc.request(method='get', url=EP_ALERT_RULE, params={'limit': 1})
+    response = rfc.request(method='get', url=EP_CLASSIC_ALERTS_RULES, params={'limit': 1})
     LOG.info(f' Response Status Code: {response.status_code}')
     LOG.info(f' Response JSON: {response.json()}')
 

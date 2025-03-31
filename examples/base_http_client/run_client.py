@@ -1,16 +1,15 @@
-"""##################################### TERMS OF USE ###########################################
+##################################### TERMS OF USE ###########################################
 # The following code is provided for demonstration purpose only, and should not be used      #
-# without independent verification. makes no representations or warranties,  #
+# without independent verification. makes no representations or warranties,                  #
 # express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #
 # information it may retrieve, and provides it both strictly “as-is” and without assuming    #
-# responsibility for any information it may retrieve. shall not be liable    #
+# responsibility for any information it may retrieve. shall not be liable                    #
 # for, and you assume all risk of using, the foregoing. By using this code, Customer         #
 # represents that it is solely responsible for having all necessary licenses, permissions,   #
 # rights, and/or consents to connect to third party APIs, and that it is solely responsible  #
 # for having all necessary licenses, permissions, rights, and/or consents to any data        #
-# accessed from any third party API.                                                         #.
+# accessed from any third party API.                                                         #
 ##############################################################################################
-"""
 
 import argparse
 import os
@@ -20,7 +19,7 @@ from requests import ConnectionError, ConnectTimeout, HTTPError, ReadTimeout
 from psengine import BaseHTTPClient
 from psengine.config import Config, get_config
 from psengine.constants import RF_TOKEN_ENV_VAR
-from psengine.endpoints import EP_ALERT_RULE
+from psengine.endpoints import EP_CLASSIC_ALERTS_RULES
 from psengine.logger import RFLogger
 
 # Name & version of the integration itself
@@ -80,7 +79,7 @@ def main():
     LOG.info('Example GET request with headers and params')
     response = bc.call(
         method='get',
-        url=EP_ALERT_RULE,
+        url=EP_CLASSIC_ALERTS_RULES,
         headers={'X-RFToken': config.rf_token.get_secret_value()},
         params={'limit': 1},
     )
