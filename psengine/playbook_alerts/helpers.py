@@ -35,6 +35,7 @@ def save_pba_images(
 
     Raises:
         TypeError: If alerts are not PBA_DomainAbuse objects
+        WriteFileError: If the image save fails with an OSError
     """
     if not isinstance(playbook_alerts, (list, PBA_DomainAbuse)):
         raise TypeError('Image saving is only supported by Domain Abuse alerts')

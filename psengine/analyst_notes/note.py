@@ -74,7 +74,7 @@ class AnalystNote(RFBaseModel):
         )
 
     @property
-    def detection_rule_type(self) -> Union[str, None]:
+    def detection_rule_type(self) -> Optional[str]:
         """Returns the attachment type if present, else None. It checks for specific types like
         'sigma rule', 'yara rule', and 'snort rule' in the topics of the note.
         """
@@ -96,8 +96,7 @@ class AnalystNote(RFBaseModel):
         """Get the link to portal."""
         if self.id_.startswith('doc:'):
             return URL_TO_PORTAL.format(self.id_)
-        else:
-            return URL_TO_PORTAL.format(f'doc:{self.id_}')
+        return URL_TO_PORTAL.format(f'doc:{self.id_}')
 
 
 class AnalystNotePreviewIn(RFBaseModel):
@@ -147,4 +146,4 @@ class AnalystNoteSearchIn(RFBaseModel):
     serialization: str = None
     tagged_text: bool = None
     limit: int = NOTES_PER_PAGE
-    from_: Optional[str] = Field(default='from')
+    from_: Optional[str] = Field(alias='from', default=None)

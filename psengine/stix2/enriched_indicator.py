@@ -57,8 +57,8 @@ class EnrichedIndicator(IndicatorEntity):
             create_obs (bool, optional): flag that governs if observable should be created
             tlp_marking (str, optional): the TLP level. Default to amber
 
-        No Longer Raises:
-            STIX2TransformError
+        Raises:
+            STIX2TransformError: if transformation fails
         """
         link_hits = link_hits or []
         risk_mapping = risk_mapping or []

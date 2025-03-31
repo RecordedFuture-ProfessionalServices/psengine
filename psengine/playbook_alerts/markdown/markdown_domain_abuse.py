@@ -100,7 +100,7 @@ def _add_dns_records(pba, md_maker: MarkdownMaker):
     md_maker.add_section('DNS Records', evidence_summary)
 
 
-def _domain_abuse_markdown(pba, md_maker: MarkdownMaker, *args):  # noqa: ARG001
+def _domain_abuse_markdown(pba, md_maker: MarkdownMaker, *args) -> str:  # noqa: ARG001
     if targets := pba.panel_status.targets:
         targets = [FormattingHelpers.cleanup_rf_id(t) for t in targets]
         md_maker.iocs_to_defang.extend(targets)

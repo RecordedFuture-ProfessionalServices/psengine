@@ -57,7 +57,7 @@ class RFBundle:
             STIX2TransformError: if the bundle cannot be created
 
         Returns:
-            list[Bundle]: list of STIX2 bundles made from the risklist
+            Bundle: STIX2 bundle
         """
         if not identity:
             identity = create_rf_author()
@@ -183,7 +183,7 @@ def _split_snort_rules(note: AnalystNote, attachment: str) -> list:
     """Splits snort rules into multiple DetectionRule objects.
 
     Args:
-        note (AnalystNote): original note object from psengine
+        note (AnalystNote): AnalystNote object
         attachment (str): snort rule payload
     """
     rules = []

@@ -18,6 +18,7 @@ from typing import Union
 import jsonpath_ng
 from jsonpath_ng.exceptions import JsonPathParserError
 from pydantic import validate_call
+from requests.models import Response
 
 from .base_http_client import BaseHTTPClient
 from .constants import RF_TOKEN_VALIDATION_REGEX
@@ -89,7 +90,7 @@ class RFClient(BaseHTTPClient):
 
         self._api_token = api_token or self.config.rf_token.get_secret_value()
         if not self._api_token:
-            raise ValueError('Missing API token.')
+            raise ValueError('Missing Recorded Future API token.')
         if not is_api_token_format_valid(self._api_token):
             raise ValueError(
                 f'Invalid Recorded Future API token, must match regex {RF_TOKEN_VALIDATION_REGEX}'
@@ -106,16 +107,16 @@ class RFClient(BaseHTTPClient):
         params: Union[dict, None] = None,
         headers: Union[dict, None] = None,
         **kwargs,
-    ):
+    ) -> Response:
         """Perform an HTTP request.
 
         Args:
             method (str): HTTP Method, one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH
             url (str): URL to make the request to
-            headers (dict, optional): If specified it will override default headers and wont set
-                                    the token.
             data (dict, optional): Request body. Defaults to None.
             params (dict, optional): HTTP query parameters. Defaults to None.
+            headers (dict, optional): If specified it will override default headers and wont set
+                                    the token.
             **kwargs: Additional keyword arguments, passed to the requests library
 
         Raises:
@@ -242,7 +243,7 @@ class RFClient(BaseHTTPClient):
         results_path: str = 'data',
         offset_key: str = 'offset',
         **kwargs,
-    ) -> list:
+    ) -> list[dict]:
         """Perform a paged HTTP request.
 
         Please note that some RF APIs can not paginate through more than 1000 results and will
@@ -276,11 +277,11 @@ class RFClient(BaseHTTPClient):
         Args:
             method (str): HTTP method: GET or POST
             url (str): URL to make the request to
-            headers (dict, optional): If specified it will override default headers and wont set
-                                    the token.
             max_results (int, optional): Maximum number of results to return. Defaults to 1000.
             data (dict, optional): Request body. Defaults to None.
             params (dict, optional): HTTP query parameters. Defaults to None.
+            headers (dict, optional): If specified it will override default headers and wont set
+                                    the token.
             results_path (str, optional): Path to extract paged results from. Defaults to 'data'.
             offset_key (str, optional): Key to use for paging. Defaults to 'offset'.
             **kwargs: Additional keyword arguments, passed to the requests library
@@ -291,7 +292,7 @@ class RFClient(BaseHTTPClient):
             KeyError: If no results are found in the API response
 
         Returns:
-            list: List of results
+            list[dict]: List of dict containing the results
         """
         try:
             results_expr = jsonpath_ng.parse(results_path)
@@ -366,7 +367,7 @@ class RFClient(BaseHTTPClient):
 
         Args:
             method (str): HTTP method
-            url (str): URL to check
+            url (str): URL to perform the check against
             **kwargs: Additional keyword arguments, passed to the requests library
 
         Returns:

@@ -20,7 +20,7 @@ from pydantic import validate_call
 from ..endpoints import EP_SOAR_ENRICHMENT
 from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
 from ..rf_client import RFClient
-from .constants import _SOAR_POST_ROWS
+from .constants import SOAR_POST_ROWS
 from .errors import EnrichmentSoarError
 from .soar import SOAREnrichedEntity, SOAREnrichIn, SOAREnrichOut
 
@@ -125,21 +125,21 @@ class SoarMgr:
                     MultiThreadingHelper.multithread_it(
                         max_workers,
                         self._fetch_data,
-                        iterator=self._batched_cross_entity(iocs, _SOAR_POST_ROWS),
+                        iterator=self._batched_cross_entity(iocs, SOAR_POST_ROWS),
                     )
                 )
             )
         else:
             results = [
                 self._fetch_data(batched_iocs)
-                for batched_iocs in self._batched_cross_entity(iocs, _SOAR_POST_ROWS)
+                for batched_iocs in self._batched_cross_entity(iocs, SOAR_POST_ROWS)
             ]
 
         return list(chain.from_iterable(results))
 
     def _batched_cross_entity(self, iocs, batch_size):
-        """Batches the SOAR data in dict of maximum _SOAR_POST_ROWS elements in total.
-        It always return a SoarRequest compatible object as dict.
+        """Batches the SOAR data in dict of maximum SOAR_POST_ROWS elements in total.
+        It always return a list of SoarRequest compatible object as dict.
         """
         batches = []
         current_batch = {k: [] for k in iocs}

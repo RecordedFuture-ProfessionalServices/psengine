@@ -67,10 +67,6 @@ class CyberTrend(RFBaseModel):
     number_of_references: int
 
 
-class EmptyModelEvidence(RFBaseModel):
-    pass
-
-
 class Evidence(RFBaseModel):
     summary: str
     type_: str = Field(alias='type')

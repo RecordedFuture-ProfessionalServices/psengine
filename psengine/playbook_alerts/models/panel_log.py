@@ -55,13 +55,13 @@ class AddedRemovedTypeEntities(ChangeType):
     - ``RelatedEntityChangeV2``
     """
 
-    removed: Optional[list[IdOptionalNameType]] = None
-    added: Optional[list[IdOptionalNameType]] = None
+    removed: Optional[list[IdOptionalNameType]] = []
+    added: Optional[list[IdOptionalNameType]] = []
 
 
 class AddedRemovedList(ChangeType):
-    removed: Optional[list[str]] = None
-    added: Optional[list[str]] = None
+    removed: Optional[list[str]] = []
+    added: Optional[list[str]] = []
 
 
 class CommentChange(ChangeType):
@@ -93,7 +93,7 @@ class WhoisRecord(RFBaseModel):
     status: Optional[str] = None
     registrar_name: Optional[str] = None
     private_registration: Optional[bool] = None
-    name_servers: Optional[list[str]] = None
+    name_servers: Optional[list[str]] = []
     contact_email: Optional[str] = None
     created: Optional[datetime] = None
 
@@ -129,8 +129,8 @@ class LogotypeInScreenshot(RFBaseModel):
 
 class DomainAbuseLogoTypeChange(ChangeType):
     domain: str
-    removed: Optional[list[LogotypeInScreenshot]] = None
-    added: Optional[list[LogotypeInScreenshot]] = None
+    removed: Optional[list[LogotypeInScreenshot]] = []
+    added: Optional[list[LogotypeInScreenshot]] = []
 
 
 class MaliciousAssessment(RFBaseModel):
@@ -146,8 +146,8 @@ class MaliciousDnsRecord(RFBaseModel):
 
 class DomainAbuseMaliciousDnsChange(ChangeType):
     domain: str
-    removed: Optional[list[MaliciousDnsRecord]] = None
-    added: Optional[list[MaliciousDnsRecord]] = None
+    removed: Optional[list[MaliciousDnsRecord]] = []
+    added: Optional[list[MaliciousDnsRecord]] = []
 
 
 class ReregistrationRecord(RFBaseModel):
@@ -179,8 +179,8 @@ class MaliciousUrlRecord(RFBaseModel):
 
 class DomainAbuseMaliciousUrlChange(ChangeType):
     domain: str
-    removed: Optional[list[MaliciousUrlRecord]] = None
-    added: Optional[list[MaliciousUrlRecord]] = None
+    removed: Optional[list[MaliciousUrlRecord]] = []
+    added: Optional[list[MaliciousUrlRecord]] = []
 
 
 class MentionedEntity(RFBaseModel):

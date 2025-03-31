@@ -175,7 +175,7 @@ class AnalystNoteMgr:
     @connection_exceptions(
         ignore_status_code=[404], exception_to_raise=AnalystNoteDeleteError, on_ignore_return=False
     )
-    def delete(self, note_id: str) -> Union[bool, None]:
+    def delete(self, note_id: str) -> bool:
         """Delete Analyst Note.
 
         Endpoint:
@@ -189,7 +189,7 @@ class AnalystNoteMgr:
             AnalystNoteDeleteError: if connection error occurs.
 
         Returns:
-            Union[bool, None]: True if delete ok else None
+            Union[bool, None]: True if delete ok else False
         """
         if not note_id.startswith('doc:'):
             note_id = f'doc:{note_id}'
@@ -236,7 +236,7 @@ class AnalystNoteMgr:
             AnalystNotePreviewRequest: if connection error occurs.
 
         Returns:
-            AnalystNote: note that will be created.
+            AnalystNotePreviewOut: note that will be created.
         """
         if topic:
             topic = topic if isinstance(topic, list) else [topic]
@@ -297,7 +297,7 @@ class AnalystNoteMgr:
             AnalystNotePublishError: if connection error occurs.
 
         Returns:
-            AnalystNotePublishResponse: published note
+            AnalystNotePublishOut: published note
         """
         if topic:
             topic = topic if isinstance(topic, list) else [topic]

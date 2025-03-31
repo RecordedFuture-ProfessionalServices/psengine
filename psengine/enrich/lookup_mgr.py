@@ -25,6 +25,7 @@ from .constants import (
     ENTITY_FIELDS,
     IOC_TO_MODEL,
     MALWARE_FIELDS,
+    MESSAGE_404,
     TYPE_MAPPING,
 )
 from .errors import EnrichmentLookupError
@@ -311,7 +312,7 @@ class LookupMgr:
                 entity=entity,
                 entity_type=entity_type,
                 is_enriched=False,
-                content='404 received. Nothing known on this entity',
+                content=MESSAGE_404,
             )
 
         return enriched

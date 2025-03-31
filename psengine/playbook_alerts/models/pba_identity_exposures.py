@@ -12,7 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional, Union
+from typing import Optional
 
 from pydantic import Field, IPvAnyAddress
 
@@ -74,7 +74,7 @@ class CompromisedHost(RFBaseModel):
     timezone: Optional[str] = None
     computer_name: Optional[str] = None
     uac: Optional[str] = None
-    antivirus: Optional[list[Union[str, None]]] = []
+    antivirus: Optional[list[str]] = []
 
 
 class IdentityPanelStatus(PanelStatus):

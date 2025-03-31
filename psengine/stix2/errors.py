@@ -15,8 +15,8 @@ from ..errors import RecordedFutureError
 
 
 class STIX2TransformError(RecordedFutureError):
-    """Error raised when invalid parameters are passed to the STIX2 library."""
+    """Error raised when invalid parameters are passed to the STIX2 module."""
 
 
 class UnsupportedConversionTypeError(STIX2TransformError):
-    """Error raised when client tries to convert an RF type that is not supported."""
+    """Error raised when client tries to convert an Recorded FUture type that is not supported."""

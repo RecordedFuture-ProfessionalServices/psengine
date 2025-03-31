@@ -156,7 +156,7 @@ class TimeHelpers:
     """Helpers for time related functions."""
 
     @staticmethod
-    def rel_time_to_date(relative_time):
+    def rel_time_to_date(relative_time) -> str:
         """Convert a relative time to a date. Minutes not supported.
 
         Example:
@@ -195,8 +195,7 @@ class TimeHelpers:
 
     @staticmethod
     def is_rel_time_valid(rel_time) -> bool:
-        """Helper function to determine if relative time expression
-        is valid.
+        """Helper function to determine if relative time expression is valid.
 
         Args:
             rel_time (str): relative time
@@ -207,8 +206,7 @@ class TimeHelpers:
         if rel_time is None:
             return False
 
-        match = re.match(VALID_TIME_REGEX, rel_time)
-        return bool(match)
+        return bool(re.match(VALID_TIME_REGEX, rel_time))
 
     @staticmethod
     def is_valid_time_range(range_: str) -> bool:
@@ -237,17 +235,16 @@ class TimeHelpers:
         match = re.match(r'^(\[|\()(.*)?,\s*(.*)?(\]|\))$', range_)
         if match is None:
             return False
-        else:
-            start_time = match.groups()[1]
-            end_time = match.groups()[2]
-            try:
-                if start_time != '' and not TimeHelpers.is_rel_time_valid(start_time):
-                    date_parse(start_time)
-                if end_time != '' and not TimeHelpers.is_rel_time_valid(end_time):
-                    date_parse(end_time)
-            except ValueError:
-                return False
-            return True
+
+        start_time, end_time = match.groups()[1], match.groups()[2]
+        try:
+            if start_time != '' and not TimeHelpers.is_rel_time_valid(start_time):
+                date_parse(start_time)
+            if end_time != '' and not TimeHelpers.is_rel_time_valid(end_time):
+                date_parse(end_time)
+        except ValueError:
+            return False
+        return True
 
 
 class FormattingHelpers:
@@ -263,10 +260,7 @@ class FormattingHelpers:
         Returns:
             str: cleaned up ai insights
         """
-        ai_insights = ai_insights.replace('\n', ' ')
-        ai_insights = ai_insights.replace('1. ', '1.')
-
-        return ai_insights
+        return ai_insights.replace('\n', ' ').replace('1. ', '1.')
 
     @staticmethod
     def cleanup_rf_id(entity: str) -> str:
@@ -297,8 +291,7 @@ class OSHelpers:
             path (str or Path): path to directory
 
         Raises:
-            ValueError: if path is not a string
-            ValueError: if path is empty
+            ValueError: if path is not a string or is empty
             WriteFileError: if directory is not writeable
 
         Returns:
@@ -421,7 +414,7 @@ class FileHelpers:
         except OSError as err:
             raise WriteFileError(f"Error writing file '{err.filename}': {str(err)}") from err
 
-        LOG.info(f'File written to: {full_path}')
+        LOG.info(f'File written to: {full_path.as_posix()}')
         return full_path
 
 

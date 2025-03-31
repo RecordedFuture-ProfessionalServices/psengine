@@ -13,7 +13,8 @@
 
 import csv
 import logging
-from typing import Any, Optional
+from collections.abc import Generator
+from typing import Any, Optional, Union
 
 from pydantic import BaseModel, validate_call
 from requests.exceptions import (
@@ -53,7 +54,7 @@ class RisklistMgr:
         format: str = None,  # noqa: A002
         headers: bool = True,
         validate: Optional[Any] = None,
-    ):
+    ) -> Generator[Union[dict, list[str], BaseModel], None, None]:
         """Get a Recorded Future RiskList. Specify a fusion_path to get a custom
         risklist instead - format field is ignored when custom risklists are used.
 
@@ -74,6 +75,7 @@ class RisklistMgr:
 
         Raises:
             RisklistNotAvailableError: if HTTP error occurs on risklist fetch
+            ValidationError if any supplied parameter is of incorrect type
 
         Returns:
             Generator: Yields risklist rows or validated risklist models.
@@ -81,16 +83,17 @@ class RisklistMgr:
         if validate and not issubclass(validate, BaseModel):
             raise ValueError('`validate` should be a subclass of Pydantic BaseModel or None')
 
-        format = DEFAULT_RISKLIST_FORMAT if format is None else format  # noqa: A001
+        format = format if format else DEFAULT_RISKLIST_FORMAT  # noqa: A001
         risklist_type, url, params = self._get_risklist_url_and_params(list, entity_type, format)
 
         if risklist_type == 'fusion' and list.endswith('json'):
-            return self._json_risklist(url, params, validate)
-        return self._csv_risklist(url, params, validate, headers)
+            return self._fetch_json_risklist(url, params, validate)
+        return self._fetch_csv_risklist(url, params, validate, headers)
 
-    # NOTE: we cannot use the connection_exception decorator due to the generator nature.
     @debug_call
-    def _csv_risklist(self, url, params, validate, headers):
+    def _fetch_csv_risklist(
+        self, url, params, validate, headers
+    ) -> Generator[Union[dict, BaseModel, list[str]], None, None]:
         try:
             response = self.rf_client.request('get', url, params=params)
             response.raise_for_status()
@@ -118,7 +121,9 @@ class RisklistMgr:
             yield from reader
 
     @debug_call
-    def _json_risklist(self, url, params, validate):
+    def _fetch_json_risklist(
+        self, url, params, validate
+    ) -> Generator[Union[dict, BaseModel], None, None]:
         try:
             response = self.rf_client.request('get', url, params=params)
             response.raise_for_status()

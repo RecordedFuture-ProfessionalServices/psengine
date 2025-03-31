@@ -23,7 +23,7 @@ from ..enrich import (
     EnrichedVulnerability,
 )
 
-_SOAR_POST_ROWS = 2000
+SOAR_POST_ROWS = 2000
 
 ALLOWED_ENTITIES = Literal[
     'company',
@@ -70,3 +70,4 @@ IOC_TO_MODEL = {
     'company': EnrichedCompany,
     'company/by_domain': EnrichedCompany,
 }
+MESSAGE_404 = '404 received. Nothing known on this entity'

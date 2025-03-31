@@ -50,7 +50,7 @@ def _generic_pba_summary(pba, md_maker: MarkdownMaker):
     md_maker.add_section('Summary', general_info)
 
 
-def _unmapped_pba(pba, md_maker: MarkdownMaker, *args, **kwargs):  # noqa: ARG001
+def _unmapped_pba(pba, md_maker: MarkdownMaker, *args, **kwargs) -> str:  # noqa: ARG001
     md_maker.sections.insert(
         0,
         md_maker.validate_section(
@@ -79,7 +79,7 @@ def _markdown_playbook_alert(
     character_limit: int = None,
     defang_iocs: bool = False,
     iocs_to_defang: list = None,
-):
+) -> str:
     md_maker = MarkdownMaker(
         addendum=TRUNCATE_COMMENT.format(
             type_='alert', url=PORTAL_URL.format(playbook_alert.playbook_alert_id)

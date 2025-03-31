@@ -36,7 +36,7 @@ from .models.lookup import (
 
 
 class EnrichedIP(BaseEnrichedEntity):
-    """IP Enriched by ``/v2/ip/{ip}`` endpoint. Inherit behaviours ``from BaseEnrichedEntity``."""
+    """IP Enriched by ``/v2/ip/{ip}`` endpoint. Inherit behaviours from ``BaseEnrichedEntity``."""
 
     risk: Optional[EntityRisk] = None
     links: Optional[Links] = None
@@ -50,7 +50,7 @@ class EnrichedIP(BaseEnrichedEntity):
 
 class EnrichedDomain(BaseEnrichedEntity):
     """Domain Enriched by ``/v2/domain/{domain}`` endpoint.
-    Inherit behaviours ``from BaseEnrichedEntity``.
+    Inherit behaviours from ``BaseEnrichedEntity``.
     """
 
     risk: Optional[EntityRisk] = None
@@ -62,7 +62,7 @@ class EnrichedDomain(BaseEnrichedEntity):
 
 class EnrichedURL(BaseEnrichedEntity):
     """URL Enriched by ``/v2/url/{url}`` endpoint.
-    Inherit behaviours ``from BaseEnrichedEntity``.
+    Inherit behaviours from ``BaseEnrichedEntity``.
     """
 
     risk: Optional[EntityRisk] = None
@@ -73,7 +73,7 @@ class EnrichedURL(BaseEnrichedEntity):
 
 class EnrichedHash(BaseEnrichedEntity):
     """Hash Enriched by ``/v2/hash/{hash}`` endpoint.
-    Inherit behaviours ``from BaseEnrichedEntity``.
+    Inherit behaviours from ``BaseEnrichedEntity``.
     """
 
     risk: Optional[EntityRisk] = None
@@ -87,7 +87,7 @@ class EnrichedHash(BaseEnrichedEntity):
 
 class EnrichedVulnerability(BaseEnrichedEntity):
     """Vulnerability Enriched by ``/v2/vulnerability/{cve}`` endpoint.
-    Inherit behaviours ``from BaseEnrichedEntity``.
+    Inherit behaviours from ``BaseEnrichedEntity``.
     """
 
     risk: Optional[EntityRisk] = None
@@ -110,7 +110,9 @@ class EnrichedVulnerability(BaseEnrichedEntity):
 
 
 class EnrichedMalware(BaseEnrichedEntity):
-    """Malware Enriched by ``/v2/malware/{id}`` endpoint."""
+    """Malware Enriched by ``/v2/malware/{id}`` endpoint.
+    Inherit behaviours from ``BaseEnrichedEntity``.
+    """
 
     links: Optional[Links] = None
     categories: Optional[list[IdNameType]] = None
@@ -118,7 +120,7 @@ class EnrichedMalware(BaseEnrichedEntity):
 
 class EnrichedCompany(BaseEnrichedEntity):
     """Company Enriched by ``/v2/company/{id}`` and ``/v2/company/by_domain/{domain}`` endpoint.
-    Inherit behaviours ``from BaseEnrichedEntity``.
+    Inherit behaviours from ``BaseEnrichedEntity``.
     """
 
     risk: Optional[EntityRisk] = None

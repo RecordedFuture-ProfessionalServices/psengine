@@ -116,7 +116,7 @@ class DetectionMgr:
             ``detection-rule/search``
 
         Args:
-            doc_id: Detection rule id to lookup.
+            doc_id (str): Detection rule id to lookup.
 
         Raises:
             ValidationError if any supplied parameter is of incorrect type.

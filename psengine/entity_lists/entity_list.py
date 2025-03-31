@@ -173,10 +173,10 @@ class EntityList(RFBaseModel):
             context (dict, optional): context object for entity. Defaults to None
 
         Raises:
-            ListApiError: if list API call fails
+            ListApiError: if connection error occurs.
 
         Returns:
-            EntityOperationResponseModel: list/{id}/entity/add response
+            ListEntityOperationResponse: list/{id}/entity/add response
         """
         return self._list_op(entity, ADD_OP, context=context or {})
 
@@ -192,10 +192,10 @@ class EntityList(RFBaseModel):
             entity (str, tuple): ID or (name, type) tuple of entity to remove
 
         Raises:
-            ListApiError: if list API call fails
+            ListApiError: if connection error occurs.
 
         Returns:
-            EntityOperationResponseModel: list/{id}/entity/remove response
+            ListEntityOperationResponse: list/{id}/entity/remove response
         """
         return self._list_op(entity, REMOVE_OP)
 
@@ -210,7 +210,13 @@ class EntityList(RFBaseModel):
             ``list/{id}/entity/add``
 
         Args:
-            entities (list): list of entity string IDs or entity (name, type) tuples to add
+            entities (list[Union[str, tuple[str, str]]]): list of entity string IDs or
+            entity (name, type) tuples to add
+
+        Raises:
+            ValidationError if any supplied parameter is of incorrect type.
+            ValueError: if wrong operation is supplied
+            ListApiError: if connection error occurs
 
         Returns:
             dict: results JSON with added, unchanged, error keys containing lists of entities
@@ -237,6 +243,11 @@ class EntityList(RFBaseModel):
         Args:
             entities (list): list of entity string IDs or entity (name, type) tuples to remove
 
+        Raises:
+            ValidationError if any supplied parameter is of incorrect type.
+            ValueError: if wrong operation is supplied
+            ListApiError: if connection error occurs
+
         Returns:
             dict: results JSON with removed, unchanged, error keys containing lists of entities
         """
@@ -258,16 +269,14 @@ class EntityList(RFBaseModel):
             ``list/{id}/entities``
 
         Raises:
-            ListApiError: if list API call fails
+            ListApiError: if connection error occurs.
 
         Returns:
-            dict: list/{id}/entities JSON response
+            list[ListEntity]: list/{id}/entities JSON response
         """
         url = EP_LIST + '/' + self.id_ + '/entities'
         response = self.rf_client.request('get', url)
-        validated_entities = [ListEntity.model_validate(entity) for entity in response.json()]
-
-        return validated_entities
+        return [ListEntity.model_validate(entity) for entity in response.json()]
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
@@ -278,15 +287,13 @@ class EntityList(RFBaseModel):
             ``list/{id}/textEntries``
 
         Raises:
-            ListApiError: if list API call fails
+            ListApiError: if connection error occurs.
 
         Returns:
             list[str]: list/{id}/textEntries JSON response
         """
         url = EP_LIST + '/' + self.id_ + '/textEntries'
-        response = self.rf_client.request('get', url)
-
-        return response.json()
+        return self.rf_client.request('get', url).json()
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
@@ -297,11 +304,10 @@ class EntityList(RFBaseModel):
             ``list/{id}/status``
 
         Raises:
-            ListApiError: if List API call fails
-            ListApiError: if JSON is corrupted
+            ListApiError: if connection error occurs
 
         Returns:
-            StatusResponseModel: list/{id}/status response
+            ListStatusOut: list/{id}/status response
         """
         self.log.debug(f"Getting list status for '{self.name}'")
         url = EP_LIST + f'/{self.id_}/status'
@@ -322,11 +328,10 @@ class EntityList(RFBaseModel):
             ``list/{id}/info``
 
         Raises:
-            ListApiError: if List API call fails
-            ListApiError: if JSON is corrupted
+            ListApiError: if connection error occurs
 
         Returns:
-            ListInfo: list/{id}/info response
+            ListInfoOut: list/{id}/info response
         """
         self.log.debug(f"Getting list status for '{self.name}'")
         url = EP_LIST + f'/{self.id_}/info'
@@ -344,6 +349,10 @@ class EntityList(RFBaseModel):
         Args:
             entities (list): list of entity string IDs or (name, type) tuples to add
             operation (str): the operation to perform on the list. Can be 'added' or 'removed'.
+
+        Raises:
+            ValueError: if wrong operation is supplied
+            ListApiError: if connection error occurs
 
         Returns:
             dict: results JSON with added, unchanged, error keys containing lists of entities added
@@ -396,10 +405,10 @@ class EntityList(RFBaseModel):
             context (dict, optional): context object for entity. Defaults to {}
 
         Raises:
-            ListApiError: if list API call fails
+            ListApiError: if connection error occurs
 
         Returns:
-            EntityOperationResponseModel: list/{id}/entity/[add|remove] response
+            ListEntityOperationResponse: list/{id}/entity/[add|remove] response
         """
         if isinstance(entity, str):
             resolved_entity_id = entity

@@ -55,7 +55,7 @@ def _add_assessment(pba, md_maker: MarkdownMaker, html_tags: bool):
     md_maker.add_section('Assessments', assessments)
 
 
-def _code_repo_markdown(pba, md_maker: MarkdownMaker, html_tags: bool):
+def _code_repo_markdown(pba, md_maker: MarkdownMaker, html_tags: bool) -> str:
     if targets := pba.panel_status.targets:
         md_maker.add_section('Targets', [t.name for t in targets])
 

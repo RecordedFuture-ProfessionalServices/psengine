@@ -28,15 +28,6 @@ CONNECT_API_BASE_URL = (
     environ.get('RF_BASE_URL') if environ.get('RF_BASE_URL') else CONNECT_API_BASE_URL
 )
 
-
-###############################################################################
-# Alert Endpoints
-###############################################################################
-EP_ALERT_RULE = CONNECT_API_BASE_URL + '/alert/rule'
-EP_ALERT_LOOKUP = CONNECT_API_BASE_URL + '/alert/'
-EP_ALERT_SEARCH = CONNECT_API_BASE_URL + '/alert/search'
-EP_ALERT_UPDATE = CONNECT_API_BASE_URL + '/alert/update'
-
 ###############################################################################
 # Classic Alerts Endpoints V3
 ###############################################################################

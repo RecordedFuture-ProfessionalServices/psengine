@@ -21,12 +21,9 @@ from .playbook_alerts import (
     PBA_ThirdPartyRisk,
 )
 
-DEPRECATION_MSG = 'Deprecated property. Use the log_v2 alternative.'
 STATUS_PANEL_NAME = 'status'
-
 DEFAULT_PBA_OUTPUT_DIR = 'playbook_alerts'
 DEFAULT_PBA_FILE_NAME = 'playbook_alerts_{}.json'
-
 
 PLAYBOOK_ALERT_TYPE = Union[
     PBA_Generic,

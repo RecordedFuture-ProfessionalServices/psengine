@@ -11,15 +11,14 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from functools import total_ordering  # noqa: I001
+from functools import total_ordering
 from typing import Optional
 
 from pydantic import Field, NonNegativeInt, PositiveInt, model_validator
 
-from ..playbook_alerts.markdown.markdown import _markdown_playbook_alert
-
 from ..common_models import RFBaseModel
-from ..constants import DEFAULT_LIMIT
+from ..constants import DEFAULT_LIMIT, TIMESTAMP_STR
+from ..playbook_alerts.markdown.markdown import _markdown_playbook_alert
 from .models import (
     CodeRepoEvidencePanel,
     CodeRepoPanelStatus,
@@ -49,8 +48,6 @@ from .models.panel_log import (
     VulnerabilityLifecycleChange,
 )
 from .models.panel_status import PanelAction, PanelStatus
-
-from ..constants import TIMESTAMP_STR
 from .pa_category import PACategory
 
 

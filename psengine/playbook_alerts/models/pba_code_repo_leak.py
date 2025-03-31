@@ -42,7 +42,7 @@ class Assessment(RFBaseModel):
 class Evidence(RFBaseModel):
     assessments: list[Assessment]
     targets: list[ResolvedEntity]
-    url: Optional[HttpUrl]
+    url: Optional[HttpUrl] = None
     content: str
     published: datetime
 

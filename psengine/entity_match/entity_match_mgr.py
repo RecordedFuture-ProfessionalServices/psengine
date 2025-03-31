@@ -62,7 +62,7 @@ class EntityMatchMgr:
             MatchApiError: if connection error occurs.
 
         Returns:
-            list: list of MatchedData
+            list: list of ResolvedEntity
         """
         if entity_type is not None:
             entity_type = entity_type if isinstance(entity_type, list) else [entity_type]
@@ -99,7 +99,7 @@ class EntityMatchMgr:
             MatchApiError: if connection error occurs.
 
         Returns:
-            str: entity ID
+            ResolvedEntity
         """
         matches = self.match(entity_name, entity_type=entity_type, limit=limit)
         if len(matches) > 1:
@@ -162,7 +162,7 @@ class EntityMatchMgr:
             MatchApiError: if connection error occurs.
 
         Returns:
-            list of MatchedData objects for each entity
+            list of ResolvedEntity objects for each entity
         """
         lookup_entities = [
             (entity, None) if isinstance(entity, str) else entity for entity in entities
@@ -227,12 +227,9 @@ class EntityMatchMgr:
         """
         ids = [quote(id_, safe='.') for id_ in ids]
         if max_workers:
-            res = MultiThreadingHelper.multithread_it(
+            return MultiThreadingHelper.multithread_it(
                 max_workers,
                 self.lookup,
                 iterator=ids,
             )
-        else:
-            res = [self.lookup(id_) for id_ in ids]
-
-        return res
+        return [self.lookup(id_) for id_ in ids]

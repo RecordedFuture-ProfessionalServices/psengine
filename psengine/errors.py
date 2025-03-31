@@ -13,11 +13,11 @@
 
 
 class RecordedFutureError(Exception):
-    """Base class for exceptions in this module."""
+    """Base class for exceptions in PSEngine."""
 
     def __init__(
         self,
-        message='an error occurred. Raise exceptions with a message argument to see additional information',  # noqa: E501
+        message='An error occurred. Raise exceptions with a message argument to see additional information',  # noqa: E501
         *args,
     ):
         super().__init__(message, *args)

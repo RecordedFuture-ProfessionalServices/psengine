@@ -48,7 +48,7 @@ class PanelStatus(RFBaseModel):
     entity_id: Optional[str] = None
     entity_name: Optional[str] = None
     actions_taken: list[str]
-    targets: Optional[list[Union[ResolvedEntity, str]]] = None
+    targets: Optional[list[Union[ResolvedEntity, str]]] = []
 
     @model_validator(mode='before')
     @classmethod

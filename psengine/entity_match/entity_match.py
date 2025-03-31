@@ -23,7 +23,7 @@ class EntityMatchIn(RFBaseModel):
     """Model to validate data sent to ``entity-match/match`` endpoint."""
 
     name: str
-    type_: Optional[list[str]] = Field(alias='type', default=None)
+    type_: Optional[list[str]] = Field(alias='type', default=[])
     limit: int = Field(default=10)
 
 

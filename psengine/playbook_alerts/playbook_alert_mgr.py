@@ -75,7 +75,7 @@ class PlaybookAlertMgr:
         category: Optional[str] = None,
         panels: Optional[list[str]] = None,
         fetch_images: Optional[bool] = True,
-    ) -> Union[PLAYBOOK_ALERT_TYPE, UpdateAlertIn]:
+    ) -> PLAYBOOK_ALERT_TYPE:
         """Fetch an individual Playbook Alert.
 
         Endpoints:

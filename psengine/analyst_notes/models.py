@@ -57,20 +57,20 @@ class CyberAttackEvent(RFBaseModel):
 
 
 class ArmedConflictEvent(PositionEvent):
-    attacker: Optional[list[IdNameTypeDescription]] = None
-    target: Optional[list[IdNameTypeDescription]] = None
+    attacker: Optional[list[IdNameTypeDescription]] = []
+    target: Optional[list[IdNameTypeDescription]] = []
 
 
 class ArmsPurchaseSaleEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    arms_seller: Optional[list[IdNameTypeDescription]] = None
-    arms_purchaser: Optional[list[IdNameTypeDescription]] = None
+    arms_seller: Optional[list[IdNameTypeDescription]] = []
+    arms_purchaser: Optional[list[IdNameTypeDescription]] = []
 
 
 class DiseaseOutbreakEvent(PositionEvent):
-    disease: Optional[list[IdNameTypeDescription]] = None
-    facility: Optional[list[IdNameTypeDescription]] = None
+    disease: Optional[list[IdNameTypeDescription]] = []
+    facility: Optional[list[IdNameTypeDescription]] = []
 
 
 class EnvironmentalIssueEvent(PositionEvent):
@@ -83,7 +83,7 @@ class ManMadeDisasterEvent(PositionEvent):
 
 
 class MilitaryManeuverEvent(PositionEvent):
-    actors: Optional[list[IdNameTypeDescription]] = None
+    actors: Optional[list[IdNameTypeDescription]] = []
 
 
 class NaturalDisasterEvent(PositionEvent):
@@ -92,19 +92,19 @@ class NaturalDisasterEvent(PositionEvent):
 
 class NuclearMaterialTransactionEvent(PositionEvent):
     material: list[str]
-    location_origin: Optional[list[str]] = None
-    location_destination: Optional[list[str]] = None
+    location_origin: Optional[list[str]] = []
+    location_destination: Optional[list[str]] = []
 
 
 class PersonThreatEvent(RFBaseModel):
     start: datetime
     stop: datetime
     threatened: list[IdNameTypeDescription]
-    actor: Optional[list[IdNameTypeDescription]] = None
+    actor: Optional[list[IdNameTypeDescription]] = []
 
 
 class ProtestEvent(RFBaseModel):
-    protest_target: Optional[list[IdNameTypeDescription]] = None
+    protest_target: Optional[list[IdNameTypeDescription]] = []
 
 
 class MalwareAnalysisEvent(RFBaseModel):
@@ -199,7 +199,7 @@ class PreviewAttributesIn(RFBaseModel):
     note_entities: Optional[list[str]] = []
     context_entities: Optional[list[str]] = []
     topic: Union[list[str], str, None] = []
-    labels: Optional[list[str]] = None
+    labels: Optional[list[str]] = []
     validation_urls: Optional[list[str]] = []
 
 

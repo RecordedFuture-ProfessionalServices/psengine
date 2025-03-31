@@ -15,7 +15,6 @@ import stix2
 
 from .base_stix_entity import BaseStixEntity
 from .constants import IDENTITY_TYPE_TO_CLASS
-from .errors import STIX2TransformError  # noqa
 from .util import generate_uuid
 
 
@@ -44,8 +43,8 @@ class Identity(BaseStixEntity):
 
         Args:
             name (str): Name of the Identity
-            author (str): Recorded Future author object
             rf_type (str): Recorded Future type of the identity
+            author (str, optional): Recorded Future author object
         """
         self.rf_type = rf_type
         super().__init__(name, author)

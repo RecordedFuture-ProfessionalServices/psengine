@@ -14,16 +14,19 @@
 import sys
 
 #####################
-# RF API
+# Multithreading Defaults
 #####################
 DEFAULT_LIMIT = 10
 DEFAULT_MAX_WORKERS = 10
 
+#####################
+# Recorded Future API
+#####################
 RF_TOKEN_ENV_VAR = 'RF_TOKEN'
 RF_TOKEN_VALIDATION_REGEX = r'^[a-f0-9]{32}$'
 
 #####################
-# RF Portal
+# Recorded Future Portal
 #####################
 RF_PORTAL_BASE_URL = 'https://app.recordedfuture.com'
 
@@ -31,7 +34,7 @@ RF_PORTAL_BASE_URL = 'https://app.recordedfuture.com'
 INDICATOR_INTEL_CARD_URL = RF_PORTAL_BASE_URL + '/live/sc/entity/{}:{}'
 
 #####################
-# HTTP Client
+# HTTP Client Defaults
 #####################
 # In seconds
 REQUEST_TIMEOUT = 120

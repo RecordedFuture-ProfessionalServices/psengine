@@ -43,10 +43,10 @@ class DetectionRuleEntity(BaseStixEntity):
 
         Args:
             name (str): Name of Detection Rule
-            author (stix2.Identity): Recorded Future author
             type_ (str): Detection rule type (Yara or Sigma)
             content (str): Hunting rule itself, usually either yara, snort or sigma
             description (str, optional): Description of Detection Rule
+            author (stix2.Identity): Recorded Future author
 
         Raises:
             STIX2TransformError: Description
@@ -142,14 +142,14 @@ class Relationship(BaseStixEntity):
         """Relationship.
 
         Args:
-            author (stix2.Identity): RF author
             source (str): source of relationship
             target (str): target of relationship
             type_ (str): how the source relates to target
+            author (stix2.Identity, optional): Recorded Future Identity
         """
         self.source = source
         self.target = target
-        self.type = type_
+        self.type_ = type_
         self.stix_obj = None
         super().__init__(None, author)
 
@@ -157,7 +157,7 @@ class Relationship(BaseStixEntity):
         """Creates the Relationship object."""
         self.stix_obj = stix2.Relationship(
             id=self._generate_id(),
-            relationship_type=self.type,
+            relationship_type=self.type_,
             source_ref=self.source,
             target_ref=self.target,
             created_by_ref=self.author.id,
@@ -168,7 +168,7 @@ class Relationship(BaseStixEntity):
         return 'relationship--' + generate_uuid(
             source=self.source,
             target=self.target,
-            type=self.type,
+            type=self.type_,
         )
 
 
@@ -182,11 +182,13 @@ class NoteEntity(BaseStixEntity):
         object_refs: list,
         author: stix2.Identity = None,
     ) -> None:
-        """Args:
-        name (str): Title of Note
-        author (stix2.Identity): Description
-        content (str): Content/text of note
-        object_refs (list[str]): List of SDO IDs  note should be attached to.
+        """Note Entity.
+
+        Args:
+            name (str): Title of Note
+            content (str): Content/text of note
+            object_refs (list[str]): List of SDO IDs note should be attached to.
+            author (stix2.Identity, optional): Recorded Future Identity
         """
         self.content = content
         self.object_refs = object_refs
@@ -228,7 +230,7 @@ class IndicatorEntity(BaseStixEntity):
         Args:
             name (str): Indicator value
             type_ (str): Recorded Future type of indicator. Options: 'IpAddress',
-            'InternetDomainName', 'URL', 'FileHash'.
+                    'InternetDomainName', 'URL', 'FileHash'.
             description (str, optional): Description of Indicator. Usually an AI Insight
             author (stix2.Identity, optional): Recorded Future Identity
             create_indicator (bool, optional): flag that governs if indicator should be created
@@ -238,8 +240,8 @@ class IndicatorEntity(BaseStixEntity):
             tlp_marking (str, optional): the TLP level. Default to amber
 
 
-        No Longer Raises:
-            STIX2TransformError: Description
+        Raises:
+            STIX2TransformError: If indicator type is not supported
         """
         if not create_indicator and not create_obs:
             raise STIX2TransformError(

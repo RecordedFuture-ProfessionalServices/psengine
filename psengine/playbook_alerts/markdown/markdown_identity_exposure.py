@@ -46,7 +46,7 @@ def _get_compromised_host(pba) -> str:
     return f"\n{bold('Compromised Host:')}\n\n{unordered_list(host_data, esc=False)}"
 
 
-def _get_technology(pba):
+def _get_technology(pba) -> str:
     items = []
     for tech in pba.panel_evidence_summary.technologies:
         label = 'Category:' if tech.category else 'Technology:'
@@ -88,7 +88,7 @@ def _add_exposure(pba, md_maker: MarkdownMaker):
     md_maker.add_section('Exposure', result)
 
 
-def _format_field(label, value):
+def _format_field(label, value) -> str:
     """Generic helper for fields that can be single strings or lists.
     Returns an empty string if there's no value.
     """
@@ -112,14 +112,14 @@ def _format_password(secret_details):
     return password
 
 
-def _format_assessments(assessments):
+def _format_assessments(assessments) -> str:
     if assessments:
         names = ', '.join(ass.name for ass in assessments)
         return f"{bold('Assessment:')} {names}"
     return ''
 
 
-def _format_hashes(hashes):
+def _format_hashes(hashes) -> str:
     hash_values = [f'{bold(h.algorithm)} {h.hash_}' for h in hashes if h.hash_]
     if hash_values:
         formatted_hashes = '\n\n' + unordered_list(hash_values, esc=False)
@@ -127,7 +127,7 @@ def _format_hashes(hashes):
     return ''
 
 
-def _format_source(dump):
+def _format_source(dump) -> str:
     source_data = []
     if dump.name:
         source_data.append(f"{bold('Name:')} {dump.name}")
@@ -149,7 +149,7 @@ def _add_actions_to_consider(pba, md_maker: MarkdownMaker):
     md_maker.add_section('Actions to Consider', actions)
 
 
-def _identity_exposure_markdown(pba, md_maker: MarkdownMaker, *args):  # noqa: ARG001
+def _identity_exposure_markdown(pba, md_maker: MarkdownMaker, *args) -> str:  # noqa: ARG001
     if pba.panel_evidence_summary:
         _add_exposure(pba, md_maker)
 

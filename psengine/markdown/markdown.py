@@ -27,12 +27,12 @@ TITLE_HEADER_LEVEL = 2
 ###############################################################################
 
 
-def divider():
+def divider() -> str:
     """Return divider."""
     return '\n---\n'
 
 
-def table_from_rows(table_list):
+def table_from_rows(table_list) -> str:
     r"""Return a formatted table, using each list as the list. The specifics are
     the same as those for the table function.
 
@@ -115,9 +115,9 @@ class MarkdownMaker:
         """
         if len(content) == 0:
             raise ValueError('Section content cannot be empty.')
-        elif isinstance(content[0], str):
+        if isinstance(content[0], str):
             return Section(title=title, content=content)
-        elif isinstance(content[0], dict):
+        if isinstance(content[0], dict):
             return Section(
                 title=title, content=[self.validate_section(**section) for section in content]
             )
@@ -140,7 +140,7 @@ class MarkdownMaker:
 
         return md_str
 
-    def format_defang_iocs(self, entities: set, md_str: str):
+    def format_defang_iocs(self, entities: set, md_str: str) -> str:
         """Replace `.` with `[.]` for every IOC found."""
         for entity in entities:
             defanged = entity.replace('.', '[.]')
