@@ -1,6 +1,16 @@
 PSEngine Changelog
 ==================
 
+[2.0.3] - 2025-04-02
+--------------------
+
+Fixed
+~~~~~
+
+- Fixed docstring and typing through the whole project
+- Minor fixes on pydantic models
+
+
 [2.0.3] - 2025-03-21
 --------------------
 
