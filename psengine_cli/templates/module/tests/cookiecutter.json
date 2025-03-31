@@ -1,0 +1,11 @@
+{
+    "module_name": "module_name",
+    "conftest_file_name": "conftest",
+    "module_name_class": "{{ cookiecutter.module_name.title().replace('_', '') }}", 
+    "manager_file_name": "{{ cookiecutter.module_name + '_mgr' }}",
+    "manager_class_name": "{{ cookiecutter.module_name.title().replace('_', '') + 'Mgr' }}",
+    "test_manager_file_name": "test_{{ cookiecutter.module_name + '_mgr' }}",
+    "test_module_file_name": "test_{{ cookiecutter.module_name }}",
+    "test_manager_class_name": "Test_{{ cookiecutter.module_name.title().replace('_', '') + 'Mgr' }}"
+}
+  

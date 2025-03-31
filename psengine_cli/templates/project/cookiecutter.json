@@ -1,0 +1,11 @@
+{
+    "project_name": "project_name",
+    "project_name_title": "{{ cookiecutter.project_name.title() }}",
+    "run_file_name": "{{ 'run_' + cookiecutter.project_name.lower() }}",
+    "lib_folder_name": "{{ 'lib' + cookiecutter.project_name.lower() }}",
+    "conftest_file_name": "conftest",
+    "test_file_name": "test_{{ cookiecutter.project_name }}",
+    "app_class_file_name": "{{ cookiecutter.project_name.lower() }}",
+    "app_class_name": "RF{{ cookiecutter.project_name.capitalize() }}",
+    "base_error_name": "Base{{cookiecutter.project_name.title()}}Error"
+  }

@@ -1,0 +1,8 @@
+{
+    "module_name": "module_name",
+    "module_class_name": "{{ cookiecutter.module_name.title().replace('_', '') }}", 
+    "manager_file_name": "{{ cookiecutter.module_name + '_mgr' }}",
+    "manager_class_name": "{{ cookiecutter.module_name.title().replace('_', '') + 'Mgr' }}",
+    "error_name": "{{ cookiecutter.module_name.title() + 'Error' }}"
+  }
+  

@@ -1,0 +1,118 @@
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".ruff_cache",
+    ".venv",
+    "_build",
+    "build",
+    "dist",
+    "venv",
+    "tests/static",
+    "psengine_cli/templates"
+]
+
+line-length = 100 # Used by both linter and E501
+indent-width = 4
+output-format = "grouped"
+target-version = "py39"
+
+[lint]
+select = [
+    "A",     # flake8-builtins
+    "ARG",   # flake8-unused-arguments
+    "B",     # flake8-bugbear
+    "BLE",   # flake8-blind-except
+    "C4",    # flake8-comprehensions 
+    "COM",   # flake8-commas
+    "C90",   # mccabe (max-complexity)
+    "D",     # pydocstyle
+    "E",     # pycodestyle errors
+    "ERA",   # eradicate
+    "F",     # pyflakes
+    "FIX",   # flake8-fixme
+    "FLY",   # flynt
+    "I",     # isort
+    "INP",   # flake8-no-pep420
+    "ISC",   # flake8-implicit-str-concat
+    "N",     # pep8-naming
+    "PERF",  # Perflint
+    "PIE",   # flake8-pie
+    "PT",    # flake8-pytest-style
+    "PTH",   # flake8-use-pathlib
+    "SIM",   # flake8-simplify
+    "UP",    # pyupgrade
+    "W",     # pycodestyle warnings
+]
+
+ignore = [
+    "COM812",  # missing-trailing-comma, formatter conflict
+    "D100",    # missing docstring in public module (__init__)
+    "D104",    # missing docstring in public package (__init__)
+    "D105",    # missing docstring in magic method
+    "D107",    # Missing docstring in __init__
+    "D205",    # 1 blank line required between summary line and description
+    "D401",    # First line of docstring should be in imperative mood: "{first_line}"
+    "E266",    # multiple-leading-hashes-for-block-comment
+    "ISC001",  # single-line-implicit-string-concatenation, formatter conflict
+    "SIM105",  # suppressible-exception
+    "W191",    # indentation contains tabs
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+[lint.mccabe]
+max-complexity = 10
+
+[lint.extend-per-file-ignores]
+"tests/*" = [
+    "D",       # pydocstyle
+    "E501",    # line too long
+    "INP001",  # implicit-namespace-package
+    "N",       # pep8-naming
+    "PERF",    # Perflint
+    "PIE794",  # duplicate-class-field-definition
+    "PT011",   # pytest-raises-too-broad
+    "PTH",   # flake8-use-pathlib
+]
+"**/__init__.py" = [
+    "F401",   # unused-import
+    "F403",   # undefined-local-with-import-star
+]
+
+"examples/*" = [
+    "D101",   # undocumented-public-class
+    "D103",   # undocumented-public-function
+    "F841",   # unused-variable
+    "ERA",    # eradicate
+    "INP",    # flake8-no-pep420
+]
+
+"docs/source/*" = [
+    "D103",   # undocumented-public-function
+    "INP",    # flake8-no-pep420
+    "PTH",   # flake8-use-pathlib
+]
+
+"psengine/*models.py" = [
+    "D101",   # undocumented-public-class
+]
+"**/models/*.py" = [
+    "D101",   # undocumented-public-class
+]
+
+"psengine/playbook_alerts/*.py" = [
+    "N801",  # invalid-class-name
+]
+
+[lint.pydocstyle]
+convention = "google"
+
+[format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
