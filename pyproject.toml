@@ -2,10 +2,13 @@
 name = "psengine"
 version = "2.0.3"
 readme = "README.rst"
+license = "MIT"
 requires-python = ">=3.9, <3.14"
 description = "psengine is a simple, yet elegant, library for rapid development of integrations with Recorded Future."
 authors = [
-    { email = "ps@recordedfuture.com" },
+    {name = "Moise Medici", email = "moise.medici@recordedfuture.com"},
+    {name = "Patrick Kinsella", email = "patrick.kinsella@recordedfuture.com"},
+    {name = "Ernest Bartosevic", email = "ernest.bartosevic@recordedfuture.com"},
 ]
 keywords = ['API', 'Recorded Future', 'Professional Services', 'Threat Intelligence']
 
@@ -53,10 +56,12 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project.urls]
-Homepage = "https://github.com/RecordedFuture-ProfessionalServices/psengine"
+Homepage = "https://github.com/RecordedFuture-ProfessionalServices/psengine-py"
+Changelog = "https://github.com/RecordedFuture-ProfessionalServices/psengine-py/CHANGELOG.rst"
 
 [project.scripts]
 psengine = "psengine_cli:main"
+
 
 [tool.setuptools]
 packages = [
@@ -75,9 +80,10 @@ packages = [
 
 classifiers=[
         'Development Status :: 5 - Production/Stable',
-        'License :: OSI Approved :: MIT',
+        'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
-        'Topic :: Security',
+        "Intended Audience :: Developers",
+        'Topic :: Security :: Software Development :: Libraries',
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
