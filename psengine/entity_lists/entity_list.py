@@ -22,7 +22,7 @@ from pydantic import ConfigDict, Field, validate_call
 from ..common_models import IdNameType, RFBaseModel
 from ..constants import TIMESTAMP_STR
 from ..endpoints import EP_LIST
-from ..entity_match import EntityMatchMgr
+from ..entity_match import EntityMatchMgr, MatchApiError
 from ..helpers import debug_call
 from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
@@ -384,7 +384,7 @@ class EntityList(RFBaseModel):
                     result[op_name].append(entity_id)
                 elif response.result == UNCHANGED_NAME:
                     result[UNCHANGED_NAME].append(entity_id)
-            except (TypeError, ListApiError) as err:
+            except (TypeError, ListApiError, MatchApiError) as err:
                 result[ERROR_NAME].append({'message': str(err), 'id': entity})
             if ((idx + 1) / total) * 100 >= step:
                 self.log.info(f'{op_name.capitalize()} {step}% of entities')
