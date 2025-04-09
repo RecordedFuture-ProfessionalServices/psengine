@@ -8,17 +8,17 @@ PSEngine
 
     >>> from psengine.enrich import LookupMgr
     >>> lookup_mgr = LookupMgr(rf_token='token')
-    >>> dom = lookup_mgr.lookup('cpejcogzznpudbsmaxxm.com', 'domain')
-    >>> dom
+    >>> domain = lookup_mgr.lookup('cpejcogzznpudbsmaxxm.com', 'domain')
+    >>> domain
     'EnrichedDomain: cpejcogzznpudbsmaxxm.com, Risk Score: 20, Last Seen: 2024-07-22 02:50:59PM'
-    >>> dom.entity
+    >>> domain.entity
     'cpejcogzznpudbsmaxxm.com'
-    >>> dom.content.risk
+    >>> domain.content.risk
     EntityRisk(criticality_label='Unusual', risk_string='4/52', score=20, rules=4...)
-    >>> dom.content.risk.score
+    >>> domain.content.risk.score
     20
     >>> 
-    dom.content.risk.risk_summary
+    domain.content.risk.risk_summary
     '4 of 52 Risk Rules currently observed.'
 
 
@@ -33,7 +33,8 @@ PSEngine is a Python package that can be installed using pip. To install PSengin
 
 .. code-block:: bash
 
-   $ pip install psengine-2.0.3-py3-none-any.whl
+    $ pip install psengine git+https://github.com/RecordedFuture-ProfessionalServices/psengine.git@main
+
 
 PSEngine officially supports Python >= 3.9, < 3.14
 
