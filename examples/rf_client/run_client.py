@@ -111,7 +111,7 @@ def main():
     try:
         print('')
         LOG.info('Example request that fails, but is caught')
-        # This endpoint is a post and expect a body, we will ommit it to cause an error
+        # This endpoint is a post and expect a body, we will omit it to cause an error
         response = rfc.request(
             method='post', url='https://api.recordedfuture.com/threat/actor/search'
         )

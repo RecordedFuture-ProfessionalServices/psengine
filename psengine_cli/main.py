@@ -29,7 +29,7 @@ Command = namedtuple('Command', ['cmd', 'name', 'cmd_help', 'cmd_rich_help'])
 PKG_NAME = __name__.split('.')[0]
 CMD_FOLDER = (Path(__file__).parent / 'commands').resolve()
 
-BRANDING = 'By Professional Services at Recorded Future'
+BRANDING = 'By Cyber Security Engineering at Recorded Future'
 APP_DESCRIPTION = f"""A Recorded Future based CLI application for
 rapid integration development with PSEngine. \n\n{BRANDING}"""
 
