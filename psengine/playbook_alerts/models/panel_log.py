@@ -80,7 +80,7 @@ class AssigneeChange(ChangeType):
 
 class DnsRecord(RFBaseModel):
     type_: Optional[str] = Field(alias='type', default=None)
-    entity: IdOptionalNameType
+    entity: Optional[IdOptionalNameType] = None
 
 
 class DomainAbuseDnsChange(ChangeType):
