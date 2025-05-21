@@ -164,7 +164,10 @@ class BaseHTTPClient:
             except JSONDecodeError:
                 data = {}
 
-            message = data.get('message') or data.get('error', {}).get('message')
+            message = data.get('message') or data.get('error', {})
+            if isinstance(message, dict):
+                message = message.get('message')
+
             if message:
                 msg += f', Cause: {message}'
 

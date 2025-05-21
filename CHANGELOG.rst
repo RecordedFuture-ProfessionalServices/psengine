@@ -1,6 +1,11 @@
 PSEngine Changelog
 ==================
 
+[2.0.5] - 2025-05-12
+--------------------
+
+- ``LookupMgr`` does not fail while enrichment entities that have unexpected characters.
+
 [2.0.4] - 2025-05-07
 --------------------
 
