@@ -3,7 +3,7 @@
 ==================================================
 **PSEngine** powered integration project.
 
-PSEngine officially supports Python >= 3.9, < 3.14
+PSEngine officially supports Python >= 3.8, < 3.12
 
 Repo Structure
 -----------------
