@@ -1,6 +1,21 @@
 PSEngine Changelog
 ==================
 
+[2.0.5] - 2025-05-12
+--------------------
+
+- ``LookupMgr`` does not fail while enrichment entities that have unexpected characters.
+
+[2.0.4] - 2025-05-07
+--------------------
+
+Fixed
+~~~~~
+
+- ``ClassicAlert.markdown()`` no longer fails when hits[].fragment field is None
+- ``Domain Abuse`` playbook alert fetching with a missing ``panel_log_v2.[].added.[].entity`` no longer fails with a ValidationError.
+- ``EntityListMgr`` initializes ``EntityMatchMgr`` using supplied API token
+
 [2.0.3] - 2025-03-21
 --------------------
 
