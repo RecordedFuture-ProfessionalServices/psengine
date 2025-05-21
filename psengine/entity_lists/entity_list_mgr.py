@@ -37,7 +37,7 @@ class EntityListMgr:
         """
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
-        self.match_mgr = EntityMatchMgr()
+        self.match_mgr = EntityMatchMgr(rf_token=rf_token) if rf_token else EntityMatchMgr()
 
     @debug_call
     @validate_call

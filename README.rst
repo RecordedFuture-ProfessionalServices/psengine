@@ -8,23 +8,23 @@ PSEngine
 
     >>> from psengine.enrich import LookupMgr
     >>> lookup_mgr = LookupMgr(rf_token='token')
-    >>> dom = lookup_mgr.lookup('cpejcogzznpudbsmaxxm.com', 'domain')
-    >>> dom
+    >>> domain = lookup_mgr.lookup('cpejcogzznpudbsmaxxm.com', 'domain')
+    >>> domain
     'EnrichedDomain: cpejcogzznpudbsmaxxm.com, Risk Score: 20, Last Seen: 2024-07-22 02:50:59PM'
-    >>> dom.entity
+    >>> domain.entity
     'cpejcogzznpudbsmaxxm.com'
-    >>> dom.content.risk
+    >>> domain.content.risk
     EntityRisk(criticality_label='Unusual', risk_string='4/52', score=20, rules=4...)
-    >>> dom.content.risk.score
+    >>> domain.content.risk.score
     20
     >>> 
-    dom.content.risk.risk_summary
+    domain.content.risk.risk_summary
     '4 of 52 Risk Rules currently observed.'
 
 
 PSEngine allows you to interact with the Recorded Future API extremely easily. There’s no need to manually build the URLs and query parameters - but nowadays, just use the modules dedicated to individual API endpoints!
 
-PSEngine is a Python package solely built and maintained by the Professional Services team powering a number of high profile integrations, such as: Elasticsearch, QRadar, Anomali, Jira, TheHive, etc..
+PSEngine is a Python package solely built and maintained by the Cyber Security Engineering team powering a number of high profile integrations, such as: Elasticsearch, QRadar, Anomali, Jira, TheHive, etc..
 
 
 Installation
@@ -33,7 +33,8 @@ PSEngine is a Python package that can be installed using pip. To install PSengin
 
 .. code-block:: bash
 
-   $ pip install psengine-2.0.3-py3-none-any.whl
+    $ pip install psengine
+
 
 PSEngine officially supports Python >= 3.9, < 3.14
 

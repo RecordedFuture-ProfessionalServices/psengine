@@ -73,16 +73,25 @@ def _process_hit_fragment(
     if authors:
         content.append(f"{bold('Author(s):')} {authors}\n")
 
-    if hit.document.title:
+    if hit.document.title and hit.fragment:
         first_half_title = hit.document.title[: (len(hit.document.title) // 2)]
         if not hit.fragment.lower().startswith(first_half_title.lower()):
             content.append(f"{bold('Title:')} {clean_text(hit.document.title)}\n")
+    elif hit.document.title and not hit.fragment:
+        content.append(f"{bold('Title:')} {clean_text(hit.document.title)}\n")
 
     if hit.document.url:
         content.append(f"{bold('URL:')} {hit.document.url}\n")
 
-    fragment = html_textarea(clean_text(hit.fragment)) if html_tags else clean_text(hit.fragment)
-    content.append(f'{blockquote(fragment)}\n')
+    if hit.fragment:
+        fragment = (
+            html_textarea(clean_text(hit.fragment)) if html_tags else clean_text(hit.fragment)
+        )
+        content.append(f'{blockquote(fragment)}\n')
+    else:
+        content.append(
+            f"_Reference text is missing, check the Recorded Future {link('Portal', str(classic_alert.url.portal))} for more information._\n"  # noqa: E501
+        )
 
     if include_triggered_by:
         triggered_by = classic_alert.triggered_by_from_hit(hit)
@@ -121,7 +130,7 @@ def _hits_markdown(
     include_fragment_entities: bool = True,
     include_triggered_by: bool = True,
     html_tags: bool = False,
-) -> str:
+) -> list:
     sections = []
     for idx, hit in enumerate(hits):
         section = {
@@ -129,12 +138,11 @@ def _hits_markdown(
             'content': [],
         }
 
-        if hit.fragment:
-            title_line, fragment_content = _process_hit_fragment(
-                hit, include_triggered_by, html_tags, classic_alert
-            )
-            section['title'] += title_line
-            section['content'].extend(fragment_content)
+        title_line, fragment_content = _process_hit_fragment(
+            hit, include_triggered_by, html_tags, classic_alert
+        )
+        section['title'] += title_line
+        section['content'].extend(fragment_content)
 
         entities = None
         if hit.primary_entity and include_fragment_entities:
