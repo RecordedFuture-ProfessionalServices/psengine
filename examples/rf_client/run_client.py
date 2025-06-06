@@ -14,7 +14,7 @@
 import argparse
 import os
 
-from requests import ConnectionError, ConnectTimeout, HTTPError, ReadTimeout
+from requests import ConnectionError, ConnectTimeout, HTTPError, ReadTimeout  # noqa: A004
 
 from psengine import RFClient
 from psengine.config import Config

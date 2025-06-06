@@ -1,10 +1,36 @@
 PSEngine Changelog
 ==================
 
+[2.0.6] - 2025-06-06
+--------------------
+
+Added
+~~~~~
+
+- Analyst Note now supports markdown.
+- Third Party Risk Plyabook Alert now supports markdown.
+- Cyber Vulnerability Playbook Alert now supports markdown.
+- Geopol Playbook Alert is now supported, along with its markdown.
+
+Changed
+~~~~~~~
+
+- ``MarkdownMaker.validate_section`` now supports the ``content`` parameter as a string.
+
+Fixed
+~~~~~
+
+- ``PlaybookAlertMgr`` applies ``panels`` correctly when ``fetch`` or bulk operations are called.
+
+
 [2.0.5] - 2025-05-12
 --------------------
 
+Fixed
+~~~~~
+
 - ``LookupMgr`` does not fail while enrichment entities that have unexpected characters.
+
 
 [2.0.4] - 2025-05-07
 --------------------
@@ -15,6 +41,12 @@ Fixed
 - ``ClassicAlert.markdown()`` no longer fails when hits[].fragment field is None
 - ``Domain Abuse`` playbook alert fetching with a missing ``panel_log_v2.[].added.[].entity`` no longer fails with a ValidationError.
 - ``EntityListMgr`` initializes ``EntityMatchMgr`` using supplied API token
+
+
+Fixed
+~~~~~
+
+- ``PlaybookAlertMgr`` applies ``panels`` correctly when ``fetch`` or bulk operations are called.
 
 [2.0.3] - 2025-03-21
 --------------------
@@ -447,3 +479,4 @@ Added
 ~~~~~
 
 -  Beta Python package release
+

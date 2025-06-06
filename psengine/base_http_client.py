@@ -8,7 +8,7 @@
 # represents that it is solely responsible for having all necessary licenses, permissions,   #
 # rights, and/or consents to connect to third party APIs, and that it is solely responsible  #
 # for having all necessary licenses, permissions, rights, and/or consents to any data        #
-# accessed from any third party API.                                                         #.
+# accessed from any third party API.                                                         #
 ##############################################################################################
 
 import json
@@ -16,7 +16,14 @@ import logging
 from typing import Union
 
 from pydantic import validate_call
-from requests import ConnectionError, ConnectTimeout, HTTPError, ReadTimeout, Session, adapters
+from requests import (
+    ConnectionError,  # noqa: A004
+    ConnectTimeout,
+    HTTPError,
+    ReadTimeout,
+    Session,
+    adapters,
+)
 from requests.adapters import HTTPAdapter, Retry
 from requests.exceptions import JSONDecodeError
 from requests.models import Response

@@ -169,7 +169,7 @@ class EntityListMgr:
             if len(matches) == 0:
                 message = f"No match found for string '{list_name}'"
                 raise ListResolutionError(message)
-            elif len(matches) > 1:
+            if len(matches) > 1:
                 exact_count = 0
                 resolved_id = None
                 for match in matches:

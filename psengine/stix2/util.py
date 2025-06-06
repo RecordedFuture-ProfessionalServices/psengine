@@ -8,7 +8,7 @@
 # represents that it is solely responsible for having all necessary licenses, permissions,   #
 # rights, and/or consents to connect to third party APIs, and that it is solely responsible  #
 # for having all necessary licenses, permissions, rights, and/or consents to any data        #
-# accessed from any third party API.                                                         #.
+# accessed from any third party API.                                                         #
 ##############################################################################################
 
 import uuid

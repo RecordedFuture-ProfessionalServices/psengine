@@ -34,4 +34,6 @@ class PACategory(Enum):
     THIRD_PARTY_RISK = 'third_party_risk'
     CODE_REPO_LEAKAGE = 'code_repo_leakage'
     IDENTITY_NOVEL_EXPOSURES = 'identity_novel_exposures'
+    GEOPOLITICS_FACILITY = 'geopolitics_facility'
+    MALWARE_REPORT = 'malware_report'
     UNMAPPED_ALERT = 'unmapped_alert'

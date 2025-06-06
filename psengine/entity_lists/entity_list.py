@@ -121,7 +121,7 @@ class EntityList(RFBaseModel):
             return date.strftime(TIMESTAMP_STR)
 
         def format_field(name, value):
-            return f"{name}: {value or 'None'}"
+            return f'{name}: {value or "None"}'
 
         main_fields = [
             format_field('id', self.id_),
@@ -336,9 +336,7 @@ class EntityList(RFBaseModel):
         self.log.debug(f"Getting list status for '{self.name}'")
         url = EP_LIST + f'/{self.id_}/info'
         response = self.rf_client.request('get', url)
-        validated_info = ListInfoOut.model_validate(response.json())
-
-        return validated_info
+        return ListInfoOut.model_validate(response.json())
 
     @debug_call
     def _bulk_op(self, entities: list[Union[str, tuple[str, str]]], operation: str) -> dict:
@@ -377,8 +375,7 @@ class EntityList(RFBaseModel):
                     if not entity_id.is_found:
                         result[ERROR_NAME].append({'message': entity_id.content, 'id': entity})
                         continue
-                    else:
-                        entity_id = entity_id.content.id_
+                    entity_id = entity_id.content.id_
                 response = op_func(entity)
                 if response.result == op_name:
                     result[op_name].append(entity_id)

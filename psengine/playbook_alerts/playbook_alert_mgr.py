@@ -25,11 +25,17 @@ from ..endpoints import (
     EP_PLAYBOOK_ALERT,
     EP_PLAYBOOK_ALERT_COMMON,
     EP_PLAYBOOK_ALERT_DOMAIN_ABUSE,
+    EP_PLAYBOOK_ALERT_GEOPOLITICS_FACILITY,
     EP_PLAYBOOK_ALERT_SEARCH,
 )
 from ..helpers import TimeHelpers, connection_exceptions, debug_call
 from ..rf_client import RFClient
-from .constants import PLAYBOOK_ALERT_TYPE, STATUS_PANEL_NAME
+from .constants import (
+    PBA_WITH_IMAGES_INST,
+    PBA_WITH_IMAGES_TYPE,
+    PLAYBOOK_ALERT_TYPE,
+    STATUS_PANEL_NAME,
+)
 from .errors import (
     PlaybookAlertFetchError,
     PlaybookAlertRetrieveImageError,
@@ -41,7 +47,6 @@ from .models import SearchResponse
 from .pa_category import PACategory
 from .playbook_alerts import (
     LookupAlertIn,
-    PBA_DomainAbuse,
     PBA_Generic,
     PreviewAlertOut,
     SearchIn,
@@ -116,16 +121,19 @@ class PlaybookAlertMgr:
         data = {}
         if panels:
             # We must always fetch status panel for ADT initialization
-            panels = panels.append(STATUS_PANEL_NAME) if STATUS_PANEL_NAME not in panels else panels
+            if STATUS_PANEL_NAME not in panels:
+                panels.append(STATUS_PANEL_NAME)
             data = {'panels': panels}
+
         request_data = LookupAlertIn.model_validate(data)
 
         url = f'{endpoint}/{alert_id}'
         self.log.info(f'Fetching playbook alert: {alert_id}, category: {category}')
+
         response = self.rf_client.request('post', url=url, data=request_data.json())
         p_alert = self._playbook_alert_factory(category, response.json()['data'])
 
-        if isinstance(p_alert, PBA_DomainAbuse) and fetch_images:
+        if isinstance(p_alert, PBA_WITH_IMAGES_INST) and fetch_images:
             self.fetch_images(p_alert)
 
         return p_alert
@@ -344,9 +352,7 @@ class PlaybookAlertMgr:
         validated_payload = UpdateAlertIn.model_validate(body)
         url = f'{EP_PLAYBOOK_ALERT_COMMON}/{alert_id}'
         self.log.info(f'Updating playbook alert: {alert_id}')
-        response = self.rf_client.request('put', url=url, data=validated_payload.json())
-
-        return response
+        return self.rf_client.request('put', url=url, data=validated_payload.json())
 
     @debug_call
     @validate_call
@@ -377,7 +383,6 @@ class PlaybookAlertMgr:
             SearchIn: Validated search query
         """
         params = {key: val for key, val in locals().items() if val and key != 'self'}
-
         query = {'created_range': {}, 'updated_range': {}}
 
         for arg in params:
@@ -400,24 +405,34 @@ class PlaybookAlertMgr:
     @connection_exceptions(
         ignore_status_code=[], exception_to_raise=PlaybookAlertRetrieveImageError
     )
-    def fetch_one_image(self, alert_id: str, image_id: str) -> bytes:
-        """Retrieve image from Domain Abuse playbook alert.
+    def fetch_one_image(self, alert_id: str, image_id: str, alert_category: str) -> bytes:
+        """Retrieve image from playbook alert that have images.
 
         Endpoints:
             ``playbook-alert/domain_abuse/{alert_id}/image/{image_id}``
+            ``playbook-alert/geopolitics_facility/image/{image_id}``
 
         Args:
             alert_id (str): Alert ID for corresponding image ID
             image_id (str): Image ID to fetch
+            alert_category (str): Category of the alert
 
         Raises:
-            ValidationError if any parameter is of incorrect type
+            ValidationError: if any parameter is of incorrect type
+            ValueError: if the wrong category is provided
             PlaybookAlertRetrieveImageError: If the image fetch fails
 
         Returns:
             bytes: Bytes of the image
         """
-        url = f'{EP_PLAYBOOK_ALERT_DOMAIN_ABUSE}/{alert_id}/image/{image_id}'
+        url_by_cat = {
+            PACategory.DOMAIN_ABUSE.value: f'{EP_PLAYBOOK_ALERT_DOMAIN_ABUSE}/{alert_id}',
+            PACategory.GEOPOLITICS_FACILITY.value: EP_PLAYBOOK_ALERT_GEOPOLITICS_FACILITY,
+        }
+        if alert_category not in url_by_cat:
+            raise ValueError('The category provided does not support images.')
+
+        url = f'{url_by_cat[alert_category]}/image/{image_id}'
 
         self.log.info(f'Retrieving image: {image_id} for alert: {alert_id}')
         response = self.rf_client.request('get', url)
@@ -429,22 +444,25 @@ class PlaybookAlertMgr:
     @connection_exceptions(
         ignore_status_code=[], exception_to_raise=PlaybookAlertRetrieveImageError
     )
-    def fetch_images(self, playbook_alert: PBA_DomainAbuse) -> None:
+    def fetch_images(self, playbook_alert: PBA_WITH_IMAGES_TYPE) -> None:
         """Domain Abuse: Retrieve the associated images, if any available.
 
         Endpoint:
             ``playbook-alert/domain_abuse/{alert_id}/image/{image_id}``
+            ``playbook-alert/geopolitics_facility/image/{image_id}``
 
         Args:
-            playbook_alert (DomainAbuse): Domain Abuse Playbook Alert ADT
+            playbook_alert: ADT of an alert supporting images.
 
         Raises:
             ValidationError if any parameter is of incorrect type
             PlaybookAlertRetrieveImageError: if an API error occurs
         """
-        if isinstance(playbook_alert, PBA_DomainAbuse):
+        if isinstance(playbook_alert, PBA_WITH_IMAGES_INST):
             for image_id in playbook_alert.image_ids:
-                image_bytes = self.fetch_one_image(playbook_alert.playbook_alert_id, image_id)
+                image_bytes = self.fetch_one_image(
+                    playbook_alert.playbook_alert_id, image_id, playbook_alert.category
+                )
                 playbook_alert.store_image(image_id, image_bytes)
         else:
             self.log.debug('Image fetching is only supported for Domain Abuse alerts')
@@ -543,7 +561,8 @@ class PlaybookAlertMgr:
         data = {}
         if panels:
             # We must always fetch status panel for ADT initialization
-            panels = panels.append(STATUS_PANEL_NAME) if STATUS_PANEL_NAME not in panels else panels
+            if STATUS_PANEL_NAME not in panels:
+                panels.append(STATUS_PANEL_NAME)
             data = {'panels': panels}
 
         self.log.info(f'Fetching {len(alert_ids)} {category} alerts')
@@ -579,15 +598,15 @@ class PlaybookAlertMgr:
         list_or_str_args = ['entity', 'statuses', 'priority', 'category', 'assignee']
         if attr == 'filter_from':
             return 'from', value
-        elif attr in ['created_from', 'created_until', 'updated_from', 'updated_until']:
+        if attr in ['created_from', 'created_until', 'updated_from', 'updated_until']:
             range_field = attr.split('_')[0] + '_range'
             query_key = 'from' if attr.endswith('from') else 'until'
             if TimeHelpers.is_rel_time_valid(value):
                 return range_field, {query_key: TimeHelpers.rel_time_to_date(value)}
             return range_field, {query_key: value}
-        elif attr in list_or_str_args and isinstance(value, str):
+        if attr in list_or_str_args and isinstance(value, str):
             return attr, [value]
-        elif attr == 'max_results':
+        if attr == 'max_results':
             return 'limit', value
 
         return attr, value

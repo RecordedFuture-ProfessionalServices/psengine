@@ -57,12 +57,11 @@ def convert_entity(
             create_indicator=create_indicator,
             create_obs=create_obs,
         )
-    elif entity_type in SIMPLE_ENTITY_MAP:
+    if entity_type in SIMPLE_ENTITY_MAP:
         ent = SIMPLE_ENTITY_MAP[entity_type]
         if ent == Identity:
             return ent(name, rf_type=entity_type)
         return SIMPLE_ENTITY_MAP[entity_type](name, **kwargs)
-    else:
-        raise UnsupportedConversionTypeError(
-            f'Could not convert entity {name} because type {entity_type} is not supported',
-        )
+    raise UnsupportedConversionTypeError(
+        f'Could not convert entity {name} because type {entity_type} is not supported',
+    )

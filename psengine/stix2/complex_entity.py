@@ -302,24 +302,24 @@ class IndicatorEntity(BaseStixEntity):
         if self.type == 'IpAddress':
             if ':' in self.name:
                 return f"[ipv6-addr:value = '{self.name}']"
-            else:
-                return f"[ipv4-addr:value = '{self.name}']"
-        elif self.type == 'InternetDomainName':
+            return f"[ipv4-addr:value = '{self.name}']"
+        if self.type == 'InternetDomainName':
             return f"[domain-name:value = '{self.name}']"
-        elif self.type == 'URL':
+        if self.type == 'URL':
             ioc = self.name.replace('\\', '\\\\')
             ioc = ioc.replace("'", "\\'")
             return f"[url:value = '{ioc}']"
-        elif self.type == 'FileHash':
+        if self.type == 'FileHash':
             return f"[file:hashes.'{self._determine_algorithm()}' = '{self.name}']"
+        return None
 
     def _determine_algorithm(self) -> str:
         """Determines Hash Algorithm."""
         if len(self.name) == 64:
             return 'SHA-256'
-        elif len(self.name) == 40:
+        if len(self.name) == 40:
             return 'SHA-1'
-        elif len(self.name) == 32:
+        if len(self.name) == 32:
             return 'MD5'
         msg = (
             f'Could not determine hash type for {self.name}. Only MD5, SHA1'
@@ -350,13 +350,12 @@ class IndicatorEntity(BaseStixEntity):
         if self.type == 'IpAddress':
             if ':' in self.name:
                 return stix2.IPv6Address(id='ipv6-addr--' + uuid, value=self.name)
-            else:
-                return stix2.IPv4Address(id='ipv4-addr--' + uuid, value=self.name)
-        elif self.type == 'InternetDomainName':
+            return stix2.IPv4Address(id='ipv4-addr--' + uuid, value=self.name)
+        if self.type == 'InternetDomainName':
             return stix2.DomainName(id='domain-name--' + uuid, value=self.name)
-        elif self.type == 'URL':
+        if self.type == 'URL':
             return stix2.URL(id='url--' + uuid, value=self.name)
-        elif self.type == 'FileHash':
+        if self.type == 'FileHash':
             algo = self._determine_algorithm()
             return stix2.File(id='file--' + uuid, hashes={algo: self.name})
         raise STIX2TransformError('')

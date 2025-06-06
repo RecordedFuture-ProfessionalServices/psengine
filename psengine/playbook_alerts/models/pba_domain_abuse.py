@@ -85,7 +85,7 @@ class Screenshot(RFBaseModel):
     tag: Optional[str] = None
 
 
-class DomainAbuseEvidenceSummary(RFBaseModel):
+class DomainAbusePanelEvidenceSummary(RFBaseModel):
     explanation: Optional[str] = None
     resolved_record_list: Optional[list[ResolvedRecord]] = []
     screenshots: Optional[list[Screenshot]] = []
@@ -94,7 +94,7 @@ class DomainAbuseEvidenceSummary(RFBaseModel):
     keywords_in_domain_name: Optional[Keywords] = Field(default_factory=Keywords)
 
 
-class DomainAbuseEvidenceDns(RFBaseModel):
+class DomainAbusePanelEvidenceDns(RFBaseModel):
     ip_list: Optional[list[ResolvedRecord]] = []
     mx_list: Optional[list[ResolvedRecord]] = []
     ns_list: Optional[list[ResolvedRecord]] = []
@@ -135,5 +135,5 @@ class WhoisAttribute(RFBaseModel):
     removed: Optional[datetime] = None
 
 
-class DomainAbuseEvidenceWhois(RFBaseModel):
+class DomainAbusePanelEvidenceWhois(RFBaseModel):
     body: Optional[list[WhoisAttribute]] = []

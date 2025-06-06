@@ -18,7 +18,7 @@ from typing import Any, Optional, Union
 
 from pydantic import BaseModel, validate_call
 from requests.exceptions import (
-    ConnectionError,
+    ConnectionError,  # noqa: A004
     ConnectTimeout,
     HTTPError,
     JSONDecodeError,
@@ -83,7 +83,7 @@ class RisklistMgr:
         if validate and not issubclass(validate, BaseModel):
             raise ValueError('`validate` should be a subclass of Pydantic BaseModel or None')
 
-        format = format if format else DEFAULT_RISKLIST_FORMAT  # noqa: A001
+        format = format or DEFAULT_RISKLIST_FORMAT  # noqa: A001
         risklist_type, url, params = self._get_risklist_url_and_params(list, entity_type, format)
 
         if risklist_type == 'fusion' and list.endswith('json'):

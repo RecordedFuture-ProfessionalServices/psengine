@@ -57,6 +57,7 @@ class DefaultRiskList(RFBaseModel):
                 raise ValueError(
                     'Evidence details cannot be converted to json or key not found'
                 ) from err
+        return v
 
     def __str__(self):
         return f'{self.ioc}: {self.risk_score} {self.evidence_details}'

@@ -11,17 +11,23 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from typing import TYPE_CHECKING
+
 from markdown_strings import bold, unordered_list
 
 from ...constants import TIMESTAMP_STR
 from ...markdown import MarkdownMaker
 from ...markdown.markdown import divider
 
+if TYPE_CHECKING:
+    from ...playbook_alerts.playbook_alerts import PBA_IdentityNovelExposure
+
+
 DOMAIN_CONFIG_URL = 'https://app.recordedfuture.com/portal/identity/domain-configuration'
 PORTAL_URL = 'https://app.recordedfuture.com/portal/playbook-alerts/{}'
 
 
-def _get_compromised_host(pba) -> str:
+def _get_compromised_host(pba: 'PBA_IdentityNovelExposure') -> str:
     host_data = []
     summ = pba.panel_evidence_summary
 
@@ -43,10 +49,10 @@ def _get_compromised_host(pba) -> str:
 
     host_data = [x for x in [os, username, file_path, timezone, machine, uac, av] if x]
 
-    return f"\n{bold('Compromised Host:')}\n\n{unordered_list(host_data, esc=False)}"
+    return f'\n{bold("Compromised Host:")}\n\n{unordered_list(host_data, esc=False)}'
 
 
-def _get_technology(pba) -> str:
+def _get_technology(pba: 'PBA_IdentityNovelExposure') -> str:
     items = []
     for tech in pba.panel_evidence_summary.technologies:
         label = 'Category:' if tech.category else 'Technology:'
@@ -55,10 +61,10 @@ def _get_technology(pba) -> str:
     if not items:
         return ''
 
-    return f"\n{bold('Technology:')}\n\n{unordered_list(items, esc=False)}"
+    return f'\n{bold("Technology:")}\n\n{unordered_list(items, esc=False)}'
 
 
-def _add_exposure(pba, md_maker: MarkdownMaker):
+def _add_exposure(pba: 'PBA_IdentityNovelExposure', md_maker: MarkdownMaker):
     summ = pba.panel_evidence_summary
     result = []
 
@@ -95,8 +101,8 @@ def _format_field(label, value) -> str:
     if not value:
         return ''
     if isinstance(value, list):
-        value = ', '.join(value)
-    return f'{bold(label + ":")} {value}'
+        value = ', '.join(value) + '  '
+    return f'{bold(label + ":")} {value}  '
 
 
 def _format_password(secret_details):
@@ -104,18 +110,18 @@ def _format_password(secret_details):
     if secret_details.clear_text_hint:
         # Hides all but the password hint
         password = (
-            f"{bold('Password:')} {secret_details.clear_text_hint:•<8} [ⓘ] ({DOMAIN_CONFIG_URL})"
+            f'{bold("Password:")} {secret_details.clear_text_hint:•<8} [ⓘ]({DOMAIN_CONFIG_URL})  '
         )
     if secret_details.clear_text_value:
         # If support has enabled clear text, it takes precedence
-        password = f"{bold('Password:')} {secret_details.clear_text_value}"
+        password = f'{bold("Password:")} {secret_details.clear_text_value}  '
     return password
 
 
 def _format_assessments(assessments) -> str:
     if assessments:
         names = ', '.join(ass.name for ass in assessments)
-        return f"{bold('Assessment:')} {names}"
+        return f'{bold("Assessment:")} {names}  '
     return ''
 
 
@@ -123,24 +129,24 @@ def _format_hashes(hashes) -> str:
     hash_values = [f'{bold(h.algorithm)} {h.hash_}' for h in hashes if h.hash_]
     if hash_values:
         formatted_hashes = '\n\n' + unordered_list(hash_values, esc=False)
-        return f"\n{bold('Hashes:')} {formatted_hashes}\n"
+        return f'\n{bold("Hashes:")} {formatted_hashes}\n'
     return ''
 
 
 def _format_source(dump) -> str:
     source_data = []
     if dump.name:
-        source_data.append(f"{bold('Name:')} {dump.name}")
+        source_data.append(f'{bold("Name:")} {dump.name}')
     if dump.description:
-        source_data.append(f"{bold('Description:')} {dump.description}")
+        source_data.append(f'{bold("Description:")} {dump.description}')
     if source_data:
-        return f"\n{bold('Source:')}\n\n{unordered_list(source_data, esc=False)}"
+        return f'\n{bold("Source:")}\n\n{unordered_list(source_data, esc=False)}'
     return ''
 
 
-def _add_actions_to_consider(pba, md_maker: MarkdownMaker):
+def _add_actions_to_consider(pba: 'PBA_IdentityNovelExposure', md_maker: MarkdownMaker):
     actions = []
-    actions.append(f'-  [Check Incident Report] ({PORTAL_URL.format(pba.playbook_alert_id)})')
+    actions.append(f'-  [Check Incident Report]({PORTAL_URL.format(pba.playbook_alert_id)})')
     actions.append('-  Enforce Password Reset')
     actions.append('-  Initiate MFA Challenge')
     actions.append('-  Request Compromised Host Incident Response')
@@ -149,7 +155,11 @@ def _add_actions_to_consider(pba, md_maker: MarkdownMaker):
     md_maker.add_section('Actions to Consider', actions)
 
 
-def _identity_exposure_markdown(pba, md_maker: MarkdownMaker, *args) -> str:  # noqa: ARG001
+def _identity_exposure_markdown(
+    pba: 'PBA_IdentityNovelExposure',
+    md_maker: MarkdownMaker,
+    *args,  # noqa: ARG001
+) -> str:
     if pba.panel_evidence_summary:
         _add_exposure(pba, md_maker)
 

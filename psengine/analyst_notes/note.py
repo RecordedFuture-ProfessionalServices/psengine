@@ -19,6 +19,7 @@ from pydantic import Field
 from ..common_models import IdNameTypeDescription, RFBaseModel
 from ..constants import TIMESTAMP_STR
 from .constants import NOTES_PER_PAGE, URL_TO_PORTAL
+from .markdown import _markdown
 from .models import Attributes, PreviewAttributesIn, PreviewAttributesOut, RequestAttachment
 
 
@@ -97,6 +98,37 @@ class AnalystNote(RFBaseModel):
         if self.id_.startswith('doc:'):
             return URL_TO_PORTAL.format(self.id_)
         return URL_TO_PORTAL.format(f'doc:{self.id_}')
+
+    def markdown(
+        self,
+        extract_entities: bool = True,
+        diamond_model: bool = True,
+        html_tags: bool = False,
+        defang_malicious_infrastructure: bool = False,
+        character_limit: int = None,
+    ) -> str:
+        """Return the markdown representation of the Note.
+
+        Args:
+            extract_entities (bool): Extract and include entities in the markdown. Defaults to True.
+            diamond_model (bool): Include a diamond model visualization. Defaults to True.
+            html_tags (bool): Include HTML tags in the output. Defaults to False.
+            defang_malicious_infrastructure (bool): Defang URLs or other malicious indicators.
+                Defaults to False.
+            character_limit (int, optional): Limit the output to a specified number of characters.
+                Defaults to None.
+
+        Returns:
+            str: The generated markdown string.
+        """
+        return _markdown(
+            self,
+            extract_entities=extract_entities,
+            diamond_model=diamond_model,
+            html_tags=html_tags,
+            defang_malicious_infrastructure=defang_malicious_infrastructure,
+            character_limit=character_limit,
+        )
 
 
 class AnalystNotePreviewIn(RFBaseModel):

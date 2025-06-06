@@ -171,9 +171,7 @@ class RFBundle:
         )
         objects.append(report)
 
-        bundle = Bundle(objects=objects, allow_custom=True)
-
-        return bundle
+        return Bundle(objects=objects, allow_custom=True)
 
 
 # Helpers for bundle creation
@@ -190,17 +188,17 @@ def _split_snort_rules(note: AnalystNote, attachment: str) -> list:
     ctr = 1
     temp_description = []
     for line in attachment.split('\n'):
-        line = line.strip()
+        new_line = line.strip()
 
         # skip comments and empty lines
-        if line.startswith('#') or not line:
-            temp_description.append(line[1:].strip())
+        if new_line.startswith('#') or not new_line:
+            temp_description.append(new_line[1:].strip())
             continue
         rules.append(
             DetectionRuleEntity(
                 name=note.attributes.title + f', Rule {ctr}',
                 type_=note.detection_rule_type,
-                content=line,
+                content=new_line,
                 description='\n'.join(temp_description),
             ).stix_obj,
         )
