@@ -15,7 +15,9 @@ from ..endpoints import (
     EP_PLAYBOOK_ALERT_CODE_REPO_LEAKAGE,
     EP_PLAYBOOK_ALERT_CYBER_VULNERABILITY,
     EP_PLAYBOOK_ALERT_DOMAIN_ABUSE,
+    EP_PLAYBOOK_ALERT_GEOPOLITICS_FACILITY,
     EP_PLAYBOOK_ALERT_IDENTITY_NOVEL_EXPOSURES,
+    EP_PLAYBOOK_ALERT_MALWARE_REPORT,
     EP_PLAYBOOK_ALERT_THIRD_PARTY_RISK,
 )
 from .pa_category import PACategory
@@ -23,7 +25,9 @@ from .playbook_alerts import (
     PBA_CodeRepoLeakage,
     PBA_CyberVulnerability,
     PBA_DomainAbuse,
+    PBA_GeopoliticsFacility,
     PBA_IdentityNovelExposure,
+    PBA_MalwareReport,
     PBA_ThirdPartyRisk,
 )
 
@@ -31,14 +35,18 @@ CATEGORY_ENDPOINTS = {
     PACategory.CODE_REPO_LEAKAGE.value: EP_PLAYBOOK_ALERT_CODE_REPO_LEAKAGE,
     PACategory.CYBER_VULNERABILITY.value: EP_PLAYBOOK_ALERT_CYBER_VULNERABILITY,
     PACategory.DOMAIN_ABUSE.value: EP_PLAYBOOK_ALERT_DOMAIN_ABUSE,
+    PACategory.GEOPOLITICS_FACILITY.value: EP_PLAYBOOK_ALERT_GEOPOLITICS_FACILITY,
     PACategory.IDENTITY_NOVEL_EXPOSURES.value: EP_PLAYBOOK_ALERT_IDENTITY_NOVEL_EXPOSURES,
     PACategory.THIRD_PARTY_RISK.value: EP_PLAYBOOK_ALERT_THIRD_PARTY_RISK,
+    PACategory.MALWARE_REPORT.value: EP_PLAYBOOK_ALERT_MALWARE_REPORT,
 }
 
 CATEGORY_TO_OBJECT_MAP = {
     PACategory.CODE_REPO_LEAKAGE.value: PBA_CodeRepoLeakage,
     PACategory.CYBER_VULNERABILITY.value: PBA_CyberVulnerability,
     PACategory.DOMAIN_ABUSE.value: PBA_DomainAbuse,
+    PACategory.GEOPOLITICS_FACILITY.value: PBA_GeopoliticsFacility,
     PACategory.IDENTITY_NOVEL_EXPOSURES.value: PBA_IdentityNovelExposure,
     PACategory.THIRD_PARTY_RISK.value: PBA_ThirdPartyRisk,
+    PACategory.MALWARE_REPORT.value: PBA_MalwareReport,
 }

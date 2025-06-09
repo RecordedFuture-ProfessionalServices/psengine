@@ -217,7 +217,7 @@ class EnrichmentData(RFBaseModel):
                     self.content.timestamps.last_seen,
                 )
             )
-        elif isinstance(self.content, str):
+        if isinstance(self.content, str):
             return hash(self.entity)
 
         return hash(
@@ -237,7 +237,7 @@ class EnrichmentData(RFBaseModel):
                 other.content.entity.name,
                 other.content.timestamps.last_seen,
             )
-        elif isinstance(self.content, str):
+        if isinstance(self.content, str):
             return self.entity == other.entity
         return (
             self.content.risk.score,
@@ -258,7 +258,7 @@ class EnrichmentData(RFBaseModel):
                 other.content.timestamps.last_seen,
                 other.content.entity.name,
             )
-        elif isinstance(self.content, str):
+        if isinstance(self.content, str):
             return self.entity > other.entity
         return (
             self.content.risk.score,
@@ -276,7 +276,7 @@ class EnrichmentData(RFBaseModel):
                 f'{self.content.__class__.__name__}: {self.content.entity.name}, '
                 f'Last Seen: {self.content.timestamps.last_seen.strftime(TIMESTAMP_STR)}'
             )
-        elif isinstance(self.content, str):
+        if isinstance(self.content, str):
             return f'{self.entity}: {self.content}'
         return (
             f'{self.content.__class__.__name__}: {self.content.entity.name}, '
@@ -290,7 +290,7 @@ class EnrichmentData(RFBaseModel):
                 f'{self.content.__class__.__name__}: {self.content.entity.name}, '
                 f'Last Seen: {self.content.timestamps.last_seen.strftime(TIMESTAMP_STR)}'
             )
-        elif isinstance(self.content, str):
+        if isinstance(self.content, str):
             return f'{self.entity}: {self.content}'
         return (
             f'{self.content.__class__.__name__}: {self.content.entity.name}, '

@@ -157,7 +157,7 @@ class LookupMgr:
             EnrichmentLookupError: if a lookup terminates with a non 200 or 404 return code.
         """
         default_fields = MALWARE_FIELDS if entity_type.lower() == 'malware' else ENTITY_FIELDS
-        fields = fields if fields else default_fields
+        fields = fields or default_fields
         fields = self._merge_fields(fields, default_fields)
 
         return self._lookup(entity, entity_type, fields)
@@ -279,7 +279,7 @@ class LookupMgr:
              EnrichmentLookupError: if a lookup terminates with a non 200 or 404 return code.
         """
         default_fields = MALWARE_FIELDS if entity_type.lower() == 'malware' else ENTITY_FIELDS
-        fields = fields if fields else default_fields
+        fields = fields or default_fields
         fields = self._merge_fields(fields, default_fields)
         if max_workers:
             res = MultiThreadingHelper.multithread_it(

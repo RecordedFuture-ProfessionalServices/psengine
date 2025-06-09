@@ -26,7 +26,7 @@ from typing import Callable, Union
 
 from dateutil.parser import parse as date_parse
 from requests.exceptions import (
-    ConnectionError,
+    ConnectionError,  # noqa: A004
     ConnectTimeout,
     HTTPError,
     JSONDecodeError,
@@ -180,18 +180,17 @@ class TimeHelpers:
             raise ValueError(
                 f"Invalid relative time '{relative_time}'. Accepted format: [-|][integer][h|d]",
             )
+        relative_time = match.groups()[-1]
+        time_now = datetime.utcnow()
+        digit = int(re.findall(r'^\d+', relative_time)[0])
+        if relative_time.endswith('d'):
+            subtracted = (time_now - timedelta(days=digit)).strftime('%Y-%m-%dT%H:%M')
         else:
-            relative_time = match.groups()[-1]
-            time_now = datetime.utcnow()
-            digit = int(re.findall(r'^\d+', relative_time)[0])
-            if relative_time.endswith('d'):
-                subtracted = (time_now - timedelta(days=digit)).strftime('%Y-%m-%dT%H:%M')
-            else:
-                subtracted = (time_now - timedelta(hours=digit)).strftime('%Y-%m-%dT%H:%M')
-            logger.debug(f'UTC Time now: {time_now}')
-            logger.debug(f'Relative time -{relative_time} to date: {subtracted}')
+            subtracted = (time_now - timedelta(hours=digit)).strftime('%Y-%m-%dT%H:%M')
+        logger.debug(f'UTC Time now: {time_now}')
+        logger.debug(f'Relative time -{relative_time} to date: {subtracted}')
 
-            return subtracted
+        return subtracted
 
     @staticmethod
     def is_rel_time_valid(rel_time) -> bool:

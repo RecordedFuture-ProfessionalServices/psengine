@@ -13,8 +13,12 @@
 
 import re
 from itertools import chain
+from typing import TYPE_CHECKING
 
 from markdown_strings import blockquote, bold, esc_format, link
+
+if TYPE_CHECKING:
+    from ..classic_alerts.classic_alert import ClassicAlert
 
 from ...constants import TIMESTAMP_STR, TRUNCATE_COMMENT
 from ...markdown import (
@@ -44,7 +48,7 @@ def _clean_title(alert_title: str) -> str:
     return re.sub(expression, '', alert_title).strip()
 
 
-def _owner_org_markdown(classic_alert) -> list[str]:
+def _owner_org_markdown(classic_alert: 'ClassicAlert') -> list[str]:
     results = []
     details = classic_alert.owner_organisation_details
 
@@ -52,9 +56,9 @@ def _owner_org_markdown(classic_alert) -> list[str]:
         return []
 
     if details.enterprise_name:
-        results.append(f"{bold('Enterprise:')} {details.enterprise_name}  ")
+        results.append(f'{bold("Enterprise:")} {details.enterprise_name}  ')
     if details.owner_name:
-        results.append(f"{bold('Owner:')} {details.owner_name}  ")
+        results.append(f'{bold("Owner:")} {details.owner_name}  ')
 
     orgs = [[org.organisation_id, org.organisation_name] for org in details.organisations]
     orgs.insert(0, ['Organisation ID', 'Organisation Name'])
@@ -64,24 +68,24 @@ def _owner_org_markdown(classic_alert) -> list[str]:
 
 
 def _process_hit_fragment(
-    hit, include_triggered_by: bool, html_tags: bool, classic_alert
+    hit, include_triggered_by: bool, html_tags: bool, classic_alert: 'ClassicAlert'
 ) -> tuple[str, str]:
     content = []
     authors = ', '.join(author.name for author in hit.document.authors)
 
     title_line = f' From {hit.document.source.name}'
     if authors:
-        content.append(f"{bold('Author(s):')} {authors}\n")
+        content.append(f'{bold("Author(s):")} {authors}\n')
 
     if hit.document.title and hit.fragment:
         first_half_title = hit.document.title[: (len(hit.document.title) // 2)]
         if not hit.fragment.lower().startswith(first_half_title.lower()):
-            content.append(f"{bold('Title:')} {clean_text(hit.document.title)}\n")
+            content.append(f'{bold("Title:")} {clean_text(hit.document.title)}\n')
     elif hit.document.title and not hit.fragment:
-        content.append(f"{bold('Title:')} {clean_text(hit.document.title)}\n")
+        content.append(f'{bold("Title:")} {clean_text(hit.document.title)}\n')
 
     if hit.document.url:
-        content.append(f"{bold('URL:')} {hit.document.url}\n")
+        content.append(f'{bold("URL:")} {hit.document.url}\n')
 
     if hit.fragment:
         fragment = (
@@ -90,7 +94,7 @@ def _process_hit_fragment(
         content.append(f'{blockquote(fragment)}\n')
     else:
         content.append(
-            f"_Reference text is missing, check the Recorded Future {link('Portal', str(classic_alert.url.portal))} for more information._\n"  # noqa: E501
+            f'_Reference text is missing, check the Recorded Future {link("Portal", str(classic_alert.url.portal))} for more information._\n'  # noqa: E501
         )
 
     if include_triggered_by:
@@ -101,7 +105,7 @@ def _process_hit_fragment(
                 triggered_by = TRIGGERED_BY_HTML.format(triggered_by)
                 content.append(triggered_by)
             else:
-                content.append(f"{bold('Triggered By:')}\n+ {triggered_by}\n")
+                content.append(f'{bold("Triggered By:")}\n+ {triggered_by}\n')
 
     return title_line, content
 
@@ -125,7 +129,7 @@ def _process_entities(entities, hit) -> list[list[str]]:
 
 
 def _hits_markdown(
-    classic_alert,
+    classic_alert: 'ClassicAlert',
     hits,
     include_fragment_entities: bool = True,
     include_triggered_by: bool = True,
@@ -167,7 +171,7 @@ def _hits_markdown(
     return sections
 
 
-def _enriched_entities_markdown(classic_alert) -> list:
+def _enriched_entities_markdown(classic_alert: 'ClassicAlert') -> list:
     results = []
     for entity in classic_alert.enriched_entities:
         if not entity.evidence:
@@ -175,10 +179,10 @@ def _enriched_entities_markdown(classic_alert) -> list:
 
         criticality = entity.criticality
         contents = [
-            f"{bold('Risk Score:')} {criticality.score}",
-            f"{bold('Criticality:')} {criticality.name}",
-            f"{bold('Triggered:')} {criticality.triggered.strftime(TIMESTAMP_STR)}",
-            f"{bold('Last Triggered:')} {criticality.last_triggered.strftime(TIMESTAMP_STR)}  \n\n",
+            f'{bold("Risk Score:")} {criticality.score}',
+            f'{bold("Criticality:")} {criticality.name}',
+            f'{bold("Triggered:")} {criticality.triggered.strftime(TIMESTAMP_STR)}',
+            f'{bold("Last Triggered:")} {criticality.last_triggered.strftime(TIMESTAMP_STR)}  \n\n',
         ]
 
         evidences = []
@@ -197,7 +201,7 @@ def _enriched_entities_markdown(classic_alert) -> list:
     return results
 
 
-def _target_entities_markdown(classic_alert, html_tags: bool = False) -> list:
+def _target_entities_markdown(classic_alert: 'ClassicAlert', html_tags: bool = False) -> list:
     results = []
     for entity in classic_alert.enriched_entities:
         result = {'title': f'Target {entity.entity.name}'}
@@ -213,17 +217,16 @@ def _target_entities_markdown(classic_alert, html_tags: bool = False) -> list:
     return results
 
 
-def _create_summary_section(ca) -> None:
-    summary_content = [
-        f"{bold('ID:')} {ca.id_}  ",
-        f"{bold('Triggered:')} {ca.log.triggered.strftime(TIMESTAMP_STR)}  ",
-        f"{bold('Alerting Rule:')} {ca.rule.name}  ",
-        f"{link('API', str(ca.url.api))} | {link('Portal', str(ca.url.portal))}",
+def _create_summary_section(ca: 'ClassicAlert') -> None:
+    return [
+        f'{bold("ID:")} {ca.id_}  ',
+        f'{bold("Triggered:")} {ca.log.triggered.strftime(TIMESTAMP_STR)}  ',
+        f'{bold("Alerting Rule:")} {ca.rule.name}  ',
+        f'{link("API", str(ca.url.api))} | {link("Portal", str(ca.url.portal))}',
     ]
-    return summary_content
 
 
-def _get_entities_to_defang(classic_alert) -> set:
+def _get_entities_to_defang(classic_alert: 'ClassicAlert') -> set:
     """Return a set of IOC entities to defang from the classic_alert hits."""
     if not classic_alert.hits:
         return set()
@@ -233,35 +236,38 @@ def _get_entities_to_defang(classic_alert) -> set:
         for entity in chain.from_iterable(h.entities for h in classic_alert.hits)
         if entity.type_ in MARKDOWN_ENTITY_TYPES_TO_DEFANG
     }
-    defanged_entities = raw_entities.union({esc_format(ent, esc=True) for ent in raw_entities})
-    return defanged_entities
+    return raw_entities.union({esc_format(ent, esc=True) for ent in raw_entities})
 
 
-def _add_summary_section(md_maker: MarkdownMaker, classic_alert) -> None:
+def _add_summary_section(md_maker: MarkdownMaker, classic_alert: 'ClassicAlert') -> None:
     """Adds the 'Summary' section to the markdown builder."""
     md_maker.add_title(_clean_title(classic_alert.title))
     md_maker.add_section('Summary', _create_summary_section(classic_alert))
 
 
-def _add_owner_org_section(md_maker: MarkdownMaker, classic_alert, owner_org: bool) -> None:
+def _add_owner_org_section(
+    md_maker: MarkdownMaker, classic_alert: 'ClassicAlert', owner_org: bool
+) -> None:
     """Adds 'Owner Organisation Details' section if owner_org is True and details are present."""
     if owner_org and classic_alert.owner_organisation_details:
         md_maker.add_section('Owner Organisation Details', _owner_org_markdown(classic_alert))
 
 
-def _add_ai_insights_section(md_maker: MarkdownMaker, classic_alert, ai_insights: bool) -> None:
+def _add_ai_insights_section(
+    md_maker: MarkdownMaker, classic_alert: 'ClassicAlert', ai_insights: bool
+) -> None:
     """Adds the 'AI Insights' sections if ai_insights is True and data is present."""
     if ai_insights and classic_alert.ai_insights:
         if classic_alert.ai_insights.text:
             md_maker.add_section('AI Insights', [classic_alert.ai_insights.text])
         if classic_alert.ai_insights.comment:
             md_maker.add_section(
-                'AI Insights', [f"{bold('Comment:')} {classic_alert.ai_insights.comment}"]
+                'AI Insights', [f'{bold("Comment:")} {classic_alert.ai_insights.comment}']
             )
 
 
 def _add_enriched_entities_sections(
-    md_maker: MarkdownMaker, classic_alert, html_tags: bool
+    md_maker: MarkdownMaker, classic_alert: 'ClassicAlert', html_tags: bool
 ) -> None:
     """Adds sections related to enriched entities (evidence and references)."""
     if any(x.evidence for x in classic_alert.enriched_entities):
@@ -277,7 +283,7 @@ def _add_enriched_entities_sections(
 
 def _add_hits_section_if_no_enriched_entities(
     md_maker: MarkdownMaker,
-    classic_alert,
+    classic_alert: 'ClassicAlert',
     fragment_entities: bool,
     triggered_by: bool,
     html_tags: bool,
@@ -297,7 +303,7 @@ def _add_hits_section_if_no_enriched_entities(
 
 
 def _markdown_alert(
-    classic_alert,
+    classic_alert: 'ClassicAlert',
     owner_org: bool = False,
     ai_insights: bool = True,
     fragment_entities: bool = True,

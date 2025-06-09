@@ -11,7 +11,10 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+import re
+from collections import defaultdict
 from functools import total_ordering
+from itertools import chain
 from typing import Optional
 
 from pydantic import Field, NonNegativeInt, PositiveInt, model_validator
@@ -20,18 +23,25 @@ from ..common_models import RFBaseModel
 from ..constants import DEFAULT_LIMIT, TIMESTAMP_STR
 from ..playbook_alerts.markdown.markdown import _markdown_playbook_alert
 from .models import (
-    CodeRepoEvidencePanel,
+    CodeRepoPanelEvidence,
     CodeRepoPanelStatus,
-    CyberVulnerabilityEvidencePanel,
+    CyberVulnerabilityPanelEvidence,
     CyberVulnerabilityPanelStatus,
     DatetimeRange,
-    DomainAbuseEvidenceDns,
-    DomainAbuseEvidenceSummary,
-    DomainAbuseEvidenceWhois,
+    DomainAbusePanelEvidenceDns,
+    DomainAbusePanelEvidenceSummary,
+    DomainAbusePanelEvidenceWhois,
     DomainAbusePanelStatus,
-    IdentityEvidencePanel,
+    GeopolPanelEvents,
+    GeopolPanelEvidence,
+    GeopolPanelOverview,
+    GeopolPanelStatus,
+    IdentityPanelEvidence,
     IdentityPanelStatus,
-    TPREvidencePanel,
+    MalwareReportPanelEvidence,
+    MalwareReportPanelStatus,
+    TPRAssessment,
+    TPRPanelEvidence,
     TPRPanelStatus,
 )
 from .models.panel_log import (
@@ -123,13 +133,43 @@ class PBA_Generic(RFBaseModel):
 
     def markdown(
         self,
-        html_tags: bool = True,
+        html_tags: bool = False,
         character_limit: Optional[int] = None,
         defang_iocs: bool = False,
-    ):
-        """Markdown implementation for Playbook Alerts."""
+        extra_context: Optional[list] = None,
+    ) -> str:
+        """Markdown implementation for Playbook Alerts.
+
+        Args:
+            html_tags (bool, optional): Include HTML tags in the markdown. Defaults to False.
+            character_limit (int, optional): Character limit for the markdown. Defaults to None.
+            defang_iocs (bool, optional): Defang IOCs in hits. Defaults to False.
+            extra_context (list, optional): list of models that will be utilised by the respective
+                PBA classes when rendering the markdown. Defaults to None. Not all PBA classes
+                support this.
+
+                The following PBA classes support extra_context and accept the following models:
+
+                * ``PBA_ThirdPartyRisk``:
+                    * ``psengine.enrich.lookup.EnrichmentData``: enriched indicators and company
+                            with fields: risk
+                    * ``psengine.enrich.soar.SoarEnrichOut``: enriched indicators and company
+                    * ``psengine.analyst_notes.note.AnalystNotes``: analyst notes
+
+                * ``PBA_CyberVulnerability``:
+                    * ``psengine.enrich.lookup.EnrichmentData``: enriched CVE with fields:
+                            CVSSv2, CVSSv3 or AI Insight (in any combination)
+
+        Returns:
+            str: Markdown formatted playbook alert.
+
+        """
         return _markdown_playbook_alert(
-            self, html_tags=html_tags, character_limit=character_limit, defang_iocs=defang_iocs
+            self,
+            html_tags=html_tags,
+            character_limit=character_limit,
+            defang_iocs=defang_iocs,
+            extra_context=extra_context,
         )
 
     def _get_changes(self, change_type):
@@ -147,14 +187,21 @@ class PBA_CodeRepoLeakage(PBA_Generic):
     category: str = PACategory.CODE_REPO_LEAKAGE.value
 
     panel_status: Optional[CodeRepoPanelStatus] = Field(default_factory=CodeRepoPanelStatus)
-    panel_evidence_summary: Optional[CodeRepoEvidencePanel] = Field(
-        default_factory=CodeRepoEvidencePanel
+    panel_evidence_summary: Optional[CodeRepoPanelEvidence] = Field(
+        default_factory=CodeRepoPanelEvidence
     )
 
     @property
     def log_code_repo_leakage_evidence_changes(self) -> list:
         """Code Repo Leakage Evidence change."""
         return self._get_changes(CodeRepoLeakageEvidenceChange)
+
+
+IPV4 = (
+    r'(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.'
+    r'(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)'
+)
+SEQ_IPV4 = r'((?:' + IPV4 + r'(?:,\s*)?)+)'
 
 
 class PBA_ThirdPartyRisk(PBA_Generic):
@@ -165,12 +212,93 @@ class PBA_ThirdPartyRisk(PBA_Generic):
     category: str = PACategory.THIRD_PARTY_RISK.value
 
     panel_status: Optional[TPRPanelStatus] = Field(default_factory=TPRPanelStatus)
-    panel_evidence_summary: Optional[TPREvidencePanel] = Field(default_factory=TPREvidencePanel)
+    panel_evidence_summary: Optional[TPRPanelEvidence] = Field(default_factory=TPRPanelEvidence)
 
     @property
     def log_third_party_assessment_changes(self) -> list:
         """Third Party Assessment change."""
         return self._get_changes(ThirdPartyAssessmentChange)
+
+    def ips_from_ip_rule(self, assessment: TPRAssessment) -> tuple[str, dict[str, list[str]]]:
+        """Extracts via regex the IP addresses of each IP Rule in ``assessment.nevidence.summary``.
+
+        The addresses are deduplicated and sorted.
+
+        Args:
+            assessment (TPRAssessment): The assessment object to get ips and risk rule
+
+        Returns:
+            tuple: ('IT Policy Violations', {'Recent Tor Node': ['47.91.72.129', '47.254.128.11'}])
+        """
+        if assessment.evidence.type_ != 'ip_rule':
+            return '', {}
+
+        names = [entry.name for entry in assessment.evidence.data]
+        risk_rule = assessment.risk_rule
+        result = {}
+
+        for name in names:
+            pattern = (
+                re.escape(name)
+                + r' seen for \d+ IP Address(?:es)? on company infrastructure(?::)?(?: including)? '
+                + SEQ_IPV4
+            )
+            matches = re.search(pattern, assessment.evidence.summary)
+            if matches:
+                result[name] = sorted(
+                    {client_ip.strip() for client_ip in matches.group(1).split(',') if client_ip}
+                )
+
+        return risk_rule, result
+
+    @property
+    def ip_address_by_assessment(self) -> dict[list]:
+        """Get all IP addresses that this PBA has divided by assessment type.
+
+        This function searches for indicators inside the assessments of type:
+
+            * ip_rule
+            * hosts_communication (malware IPs)
+
+        Returns:
+            dict[list]: key as assessment, value as deduplicated, sorted list of ip addresses.
+        """
+        data = defaultdict(set)
+        if not self.panel_evidence_summary.assessments:
+            return {}
+
+        for assessment in self.panel_evidence_summary.assessments:
+            if assessment.evidence.type_ == 'ip_rule':
+                _, ips_from_summary = self.ips_from_ip_rule(assessment)
+                data['ip_rule'] = data['ip_rule'].union(
+                    chain.from_iterable(ips_from_summary.values())
+                )
+
+            if assessment.evidence.type_ == 'hosts_communication':
+                assess_data = assessment.evidence.data or []
+                malware_ips = {
+                    row.malware_ip_address for row in assess_data if row.malware_ip_address
+                }
+                data['hosts_communication'] = data['hosts_communication'].union(malware_ips)
+
+        return {k: sorted(v) for k, v in data.items()}
+
+    @property
+    def all_ip_addresses(self) -> list:
+        """Return a sorted list of all the IP addresses of the alert."""
+        return sorted(chain.from_iterable(self.ip_address_by_assessment.values()))
+
+    @property
+    def all_insikt_notes(self) -> list:
+        """Return a list of all the analyst notes IDs for the alert."""
+        return list(
+            {
+                note.id_
+                for a in self.panel_evidence_summary.assessments
+                for note in a.evidence.data
+                if a.evidence.type_ == 'insikt_note'
+            }
+        )
 
 
 class PBA_CyberVulnerability(PBA_Generic):
@@ -183,13 +311,13 @@ class PBA_CyberVulnerability(PBA_Generic):
     panel_status: Optional[CyberVulnerabilityPanelStatus] = Field(
         default_factory=CyberVulnerabilityPanelStatus
     )
-    panel_evidence_summary: Optional[CyberVulnerabilityEvidencePanel] = Field(
-        default_factory=CyberVulnerabilityEvidencePanel
+    panel_evidence_summary: Optional[CyberVulnerabilityPanelEvidence] = Field(
+        default_factory=CyberVulnerabilityPanelEvidence
     )
 
     @property
     def lifecycle_stage(self) -> str:
-        """Get playbook alert lifecycle_stage."""
+        """Get playbook alert ``lifecycle_stage``."""
         if stage := self.panel_status.lifecycle_stage:
             return stage
         return self.panel_evidence_summary.summary.lifecycle_stage
@@ -198,6 +326,13 @@ class PBA_CyberVulnerability(PBA_Generic):
     def log_vulnerability_lifecycle_changes(self) -> list:
         """Get ``VulnerabilityLifecycleChange`` log changes."""
         return self._get_changes(VulnerabilityLifecycleChange)
+
+    @property
+    def insikt_note_ids(self) -> list[str]:
+        """Get Insikt note IDs if found in ``self.panel_evidence_summary.insikt_notes``."""
+        if self.panel_evidence_summary.insikt_notes:
+            return [insikt_note.id_ for insikt_note in self.panel_evidence_summary.insikt_notes]
+        return []
 
 
 class PBA_IdentityNovelExposure(PBA_Generic):
@@ -208,28 +343,20 @@ class PBA_IdentityNovelExposure(PBA_Generic):
     category: str = PACategory.IDENTITY_NOVEL_EXPOSURES.value
 
     panel_status: Optional[IdentityPanelStatus] = Field(default_factory=IdentityPanelStatus)
-    panel_evidence_summary: Optional[IdentityEvidencePanel] = Field(
-        default_factory=IdentityEvidencePanel
+    panel_evidence_summary: Optional[IdentityPanelEvidence] = Field(
+        default_factory=IdentityPanelEvidence
     )
 
     @property
     def assessment_names(self) -> list[str]:
-        """Assessments contain name and criticality, this returns all assessment names.
-
-        Returns:
-            List[str]: assessments names or [] if not found
-        """
-        if not self.panel_evidence_summary or not self.panel_evidence_summary.assessments:
+        """Assessments contain name and criticality, this returns all assessment names."""
+        if not (self.panel_evidence_summary and self.panel_evidence_summary.assessments):
             return []
         return [assessment.name for assessment in self.panel_evidence_summary.assessments]
 
     @property
     def technology_names(self) -> list[str]:
-        """Novel Identity Exposure: Return the technologies names list.
-
-        Returns:
-            list[str]: List of technologies names
-        """
+        """Return the technologies names list."""
         if not self.panel_evidence_summary or not self.panel_evidence_summary.technologies:
             return []
         return [tech.name for tech in self.panel_evidence_summary.technologies]
@@ -246,22 +373,18 @@ class PBA_DomainAbuse(PBA_Generic):
 
     panel_action: Optional[list[PanelAction]] = []
     panel_status: Optional[DomainAbusePanelStatus] = Field(default_factory=DomainAbusePanelStatus)
-    panel_evidence_summary: Optional[DomainAbuseEvidenceSummary] = Field(
-        default_factory=DomainAbuseEvidenceSummary
+    panel_evidence_summary: Optional[DomainAbusePanelEvidenceSummary] = Field(
+        default_factory=DomainAbusePanelEvidenceSummary
     )
-    panel_evidence_dns: Optional[DomainAbuseEvidenceDns] = Field(
-        default_factory=DomainAbuseEvidenceDns
+    panel_evidence_dns: Optional[DomainAbusePanelEvidenceDns] = Field(
+        default_factory=DomainAbusePanelEvidenceDns
     )
-    panel_evidence_whois: Optional[DomainAbuseEvidenceWhois] = Field(
-        default_factory=DomainAbuseEvidenceWhois
+    panel_evidence_whois: Optional[DomainAbusePanelEvidenceWhois] = Field(
+        default_factory=DomainAbusePanelEvidenceWhois
     )
 
     def store_image(self, image_id: str, image_bytes: bytes) -> None:
         """Domain Abuse: store image bytes in ``self._images`` dictionary.
-
-        Args:
-            image_id (str): image id
-            image_bytes (bytes): image bytes
 
         Raises:
             ValueError: if the image_id is not present in alert screenshots list
@@ -283,12 +406,8 @@ class PBA_DomainAbuse(PBA_Generic):
         self._images[image_id]['image_bytes'] = image_bytes
 
     @property
-    def image_ids(self) -> list:
-        """Domain Abuse: get the playbook alert image ids.
-
-        Returns:
-            list: Alert image ids or empty list if not found
-        """
+    def image_ids(self) -> list[str]:
+        """Get the playbook alert image IDs."""
         ids = []
         if self.panel_evidence_summary.screenshots:
             ids = [screenshot.image_id for screenshot in self.panel_evidence_summary.screenshots]
@@ -349,6 +468,93 @@ class PBA_DomainAbuse(PBA_Generic):
     def log_screenshot_mentions_changes(self) -> list:
         """Screenshot mentions change."""
         return self._get_changes(DomainAbuseScreenshotMentions)
+
+
+class PBA_GeopoliticsFacility(PBA_Generic):
+    """Model for Geopolitics Facility. Inherit behaviours from BasePlaybookAlert."""
+
+    __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
+
+    _images: Optional[dict] = {}
+    category: str = PACategory.GEOPOLITICS_FACILITY.value
+
+    panel_status: Optional[GeopolPanelStatus] = Field(default_factory=GeopolPanelStatus)
+    panel_evidence_summary: Optional[GeopolPanelEvidence] = Field(
+        default_factory=GeopolPanelEvidence
+    )
+    panel_overview: Optional[GeopolPanelOverview] = Field(default_factory=GeopolPanelOverview)
+    panel_events_summary: Optional[GeopolPanelEvents] = Field(default_factory=GeopolPanelEvents)
+
+    @property
+    def image_ids(self) -> list[str]:
+        """Get the playbook alert image IDs."""
+        return list(
+            chain.from_iterable(
+                [
+                    e.images
+                    for e in self.panel_events_summary.events
+                    if self.panel_events_summary.events
+                ]
+            )
+        )
+
+    @property
+    def images(self) -> dict:
+        """Geopolitics Facility: get raw bytes of the screenshots.
+
+        This data is stored in the following format:
+
+        .. code-block::
+
+            {
+                image_id : {
+                    'created': "date",
+                    'image_bytes': b'xyz'
+                }
+            }
+
+        Returns:
+            dict: Alert images raw bytes or {} if not found
+        """
+        return self._images
+
+    def store_image(self, image_id: str, image_bytes: bytes) -> None:
+        """Geopolitics Facility: store image bytes in ``self._images`` dictionary.
+
+        Raises:
+            ValueError: if the image_id is not present in alert screenshots list
+        """
+        events_with_images = [e for e in self.panel_events_summary.events if e.images]
+
+        if not (events_with_images and any(image_id in e.images for e in events_with_images)):
+            raise ValueError(
+                f"Alert '{self.playbook_alert_id}' does not contain image id: '{image_id}'"
+            )
+        for event in events_with_images:
+            if image_id in event.images:
+                matched_event = event
+                break
+
+        self._images[image_id] = {}
+        self._images[image_id]['created'] = matched_event.time
+        self._images[image_id]['image_bytes'] = image_bytes
+
+
+class PBA_MalwareReport(PBA_Generic):
+    """Model for Malware Report. Inherit behaviours from BasePlaybookAlert."""
+
+    __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
+
+    _images: Optional[dict] = {}
+
+    category: str = PACategory.MALWARE_REPORT.value
+
+    panel_status: Optional[MalwareReportPanelStatus] = Field(
+        default_factory=MalwareReportPanelStatus
+    )
+    panel_summary: Optional[MalwareReportPanelEvidence] = Field(
+        default_factory=MalwareReportPanelEvidence
+    )
 
 
 class SearchIn(RFBaseModel):

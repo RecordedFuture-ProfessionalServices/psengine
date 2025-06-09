@@ -22,9 +22,15 @@ from .models import Section
 
 TITLE_HEADER_LEVEL = 2
 
-###############################################################################
-# Helpers
-###############################################################################
+
+def html_collapsible(title: str, data: str) -> str:
+    """Return a html collapsible element."""
+    return f'<details><summary>{title} (Click to expand)</summary>{data}</details>'
+
+
+def html_textarea(text: str) -> str:
+    """Wrap text in a markdown code block."""
+    return f'<textarea readonly="true">{text}</textarea>'
 
 
 def divider() -> str:
@@ -69,11 +75,6 @@ def escape_pipe_characters(text: str) -> str:
     return text.replace('|', '\\|')
 
 
-def html_textarea(text: str) -> str:
-    """Wrap text in a markdown code block."""
-    return f'<textarea readonly="true">{text}</textarea>'
-
-
 class MarkdownMaker:
     """Class to manage markdown inputs and formatting of markdown output."""
 
@@ -100,12 +101,12 @@ class MarkdownMaker:
         """Add title to the markdown."""
         self.title = title
 
-    def validate_section(self, title: str, content: Union[list[dict], list[str]]) -> Section:
+    def validate_section(self, title: str, content: Union[list[dict], list[str], str]) -> Section:
         """Recursive function to validate a section and its content.
 
         Args:
             title (str): Section title
-            content (Union[list[dict], list[str]]): Section content
+            content (Union[list[dict], list[str], str]): Section content
 
         Raises:
             ValueError: Raised if the section content is empty.
@@ -115,15 +116,18 @@ class MarkdownMaker:
         """
         if len(content) == 0:
             raise ValueError('Section content cannot be empty.')
+
+        if isinstance(content, str):
+            return Section(title=title, content=[content])
         if isinstance(content[0], str):
             return Section(title=title, content=content)
-        if isinstance(content[0], dict):
-            return Section(
-                title=title, content=[self.validate_section(**section) for section in content]
-            )
+
+        return Section(
+            title=title, content=[self.validate_section(**section) for section in content]
+        )
 
     @validate_call
-    def add_section(self, title: str, content: Union[list[dict], list[str]]) -> None:
+    def add_section(self, title: str, content: Union[list[dict], list[str], str]) -> None:
         """Add a section to the markdown."""
         self.sections.append(self.validate_section(title, content))
 

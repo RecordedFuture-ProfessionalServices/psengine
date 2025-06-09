@@ -47,6 +47,6 @@ class Evidence(RFBaseModel):
     published: datetime
 
 
-class CodeRepoEvidencePanel(RFBaseModel):
+class CodeRepoPanelEvidence(RFBaseModel):
     repository: Optional[Repository] = Field(default_factory=Repository)
     evidence: Optional[list[Evidence]] = []

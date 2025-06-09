@@ -11,8 +11,21 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from datetime import datetime
+from typing import Optional
+
+from pydantic import Field
+
 from ...common_models import RFBaseModel
 
 
 class ResolvedEntity(RFBaseModel):
     name: str
+
+
+class PBAInsiktNote(RFBaseModel):
+    id_: str = Field(alias='id')
+    title: Optional[str] = None
+    published: Optional[datetime] = None
+    topic: Optional[str] = None
+    fragment: Optional[str] = None

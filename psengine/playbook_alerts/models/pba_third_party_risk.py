@@ -17,7 +17,7 @@ from typing import Optional
 from pydantic import Field, model_validator
 
 from ...common_models import RFBaseModel
-from ..models.common_models import ResolvedEntity
+from ..models.common_models import PBAInsiktNote, ResolvedEntity
 from ..models.panel_status import PanelStatus
 
 
@@ -25,14 +25,6 @@ class TPRPanelStatus(PanelStatus):
     risk_score: Optional[int] = None
     entity_criticality: Optional[str] = None
     targets: Optional[list[ResolvedEntity]] = []
-
-
-class InsiktNote(RFBaseModel):
-    id_: str = Field(alias='id')
-    title: Optional[str] = None
-    published: Optional[datetime] = None
-    topic: Optional[str] = None
-    fragment: Optional[str] = None
 
 
 class ObservedNetworkTraffic(RFBaseModel):
@@ -79,7 +71,7 @@ class Evidence(RFBaseModel):
         type_mapping = {
             'ip_rule': IpRule,
             'cyber_trend': CyberTrend,
-            'insikt_note': InsiktNote,
+            'insikt_note': PBAInsiktNote,
             'reference': Reference,
             'hosts_communication': ObservedNetworkTraffic,
             'summary_string': SummaryString,
@@ -92,12 +84,12 @@ class Evidence(RFBaseModel):
         return evidence
 
 
-class Assessment(RFBaseModel):
+class TPRAssessment(RFBaseModel):
     risk_rule: str
     level: int
     added: datetime
     evidence: Evidence
 
 
-class TPREvidencePanel(RFBaseModel):
-    assessments: Optional[list[Assessment]] = []
+class TPRPanelEvidence(RFBaseModel):
+    assessments: Optional[list[TPRAssessment]] = []

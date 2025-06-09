@@ -376,7 +376,7 @@ class RFClient(BaseHTTPClient):
         try:
             response = self.request(method, url, **kwargs)
             return response.status_code == 200
-        except Exception as err:  # noqa: BLE001:
+        except Exception as err:  # noqa: BLE001
             self.log.error(f'Error during validation: {err}')
             return False
 

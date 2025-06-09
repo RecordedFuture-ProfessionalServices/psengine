@@ -15,22 +15,29 @@ from .common_models import ResolvedEntity
 from .panel_log import PanelLogV2
 from .panel_status import PanelAction
 from .pba_code_repo_leak import (
-    CodeRepoEvidencePanel,
+    CodeRepoPanelEvidence,
     CodeRepoPanelStatus,
 )
 from .pba_cyber_vulnerability import (
-    CyberVulnerabilityEvidencePanel,
+    CyberVulnerabilityPanelEvidence,
     CyberVulnerabilityPanelStatus,
 )
 from .pba_domain_abuse import (
-    DomainAbuseEvidenceDns,
-    DomainAbuseEvidenceSummary,
-    DomainAbuseEvidenceWhois,
+    DomainAbusePanelEvidenceDns,
+    DomainAbusePanelEvidenceSummary,
+    DomainAbusePanelEvidenceWhois,
     DomainAbusePanelStatus,
 )
+from .pba_geopolitics_facility import (
+    GeopolPanelEvents,
+    GeopolPanelEvidence,
+    GeopolPanelOverview,
+    GeopolPanelStatus,
+)
 from .pba_identity_exposures import (
-    IdentityEvidencePanel,
+    IdentityPanelEvidence,
     IdentityPanelStatus,
 )
-from .pba_third_party_risk import TPREvidencePanel, TPRPanelStatus
+from .pba_malware_report import MalwareReportPanelEvidence, MalwareReportPanelStatus
+from .pba_third_party_risk import TPRAssessment, TPRPanelEvidence, TPRPanelStatus
 from .search_endpoint import DatetimeRange, SearchCounts, SearchData, SearchResponse, SearchStatus

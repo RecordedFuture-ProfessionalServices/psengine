@@ -12,6 +12,7 @@
 ##############################################################################################
 
 import base64
+from typing import TYPE_CHECKING
 
 from markdown_strings import bold
 
@@ -21,11 +22,14 @@ from ...markdown import MarkdownMaker
 from ...markdown.markdown import divider, table_from_rows
 from ..models.pba_domain_abuse import ValueServer
 
+if TYPE_CHECKING:
+    from ...playbook_alerts.playbook_alerts import PBA_DomainAbuse
 
-def _add_screenshots(pba, md_maker: MarkdownMaker):
-    screenshots = [f'{bold("Screenshot Count:")} {len(pba.panel_evidence_summary.screenshots)}']
+
+def _add_screenshots(pba: 'PBA_DomainAbuse', md_maker: MarkdownMaker):
+    screenshots = [f'{bold("Screenshot Count:")} {len(pba.panel_evidence_summary.screenshots)}  ']
     for screenshot in pba.panel_evidence_summary.screenshots:
-        screenshots.append(f'{bold("Created:")} {screenshot.created.strftime(TIMESTAMP_STR)}')
+        screenshots.append(f'{bold("Created:")} {screenshot.created.strftime(TIMESTAMP_STR)}  ')
 
         image = base64.b64encode(pba.images[screenshot.image_id]['image_bytes']).decode('utf-8')
 
@@ -41,7 +45,7 @@ def _add_screenshots(pba, md_maker: MarkdownMaker):
     md_maker.add_section('Screenshots', screenshots)
 
 
-def _add_whois(pba, md_maker: MarkdownMaker):
+def _add_whois(pba: 'PBA_DomainAbuse', md_maker: MarkdownMaker):
     whois_body = [
         body for body in pba.panel_evidence_whois.body if isinstance(body.value, ValueServer)
     ]
@@ -50,34 +54,43 @@ def _add_whois(pba, md_maker: MarkdownMaker):
     for whois in whois_body:
         entity = FormattingHelpers.cleanup_rf_id(whois.entity)
         md_maker.iocs_to_defang.append(entity)
-        whois_entity = f"{bold('Entity:')} {entity}"
+        whois_entity = f'{bold("Entity:")} {entity}  '
 
         if (v := whois.value) and v.name_servers:
             created_dt, updated_dt, expires_dt = '', '', ''
             name_servers = [FormattingHelpers.cleanup_rf_id(s) for s in v.name_servers]
-            servers = f"{bold('Name servers:')} {', '.join(name_servers)}"
+            servers = f'{bold("Name servers:")} {", ".join(name_servers)}  '
             md_maker.iocs_to_defang.extend(name_servers)
 
             if v.created_date:
-                created_dt = f'{bold("Creation Date:")} {v.created_date.strftime(TIMESTAMP_STR)}'
+                created_dt = f'{bold("Creation Date:")} {v.created_date.strftime(TIMESTAMP_STR)}  '
 
             if v.updated_date:
-                updated_dt = f'{bold("Update Date:")} {v.updated_date.strftime(TIMESTAMP_STR)}'
+                updated_dt = f'{bold("Update Date:")} {v.updated_date.strftime(TIMESTAMP_STR)}  '
 
             if v.expires_date:
-                expires_dt = f'{bold("Expiration Date:")} {v.expires_date.strftime(TIMESTAMP_STR)}'
+                expires_dt = (
+                    f'{bold("Expiration Date:")} {v.expires_date.strftime(TIMESTAMP_STR)}  '
+                )
 
-            registrar = f'{bold("Registrar:")} {v.registrar_name}' if v.registrar_name else ''
+            registrar = f'{bold("Registrar:")} {v.registrar_name}  ' if v.registrar_name else ''
 
             whois_data.extend(
-                [whois_entity, servers, created_dt, updated_dt, expires_dt, registrar]
+                [
+                    whois_entity,
+                    servers,
+                    created_dt,
+                    updated_dt,
+                    expires_dt,
+                    registrar,
+                ]
             )
 
     if whois_data:
         md_maker.add_section('WHOIS Details', whois_data)
 
 
-def _add_dns_records(pba, md_maker: MarkdownMaker):
+def _add_dns_records(pba: 'PBA_DomainAbuse', md_maker: MarkdownMaker):
     records = [
         [
             FormattingHelpers.cleanup_rf_id(record.entity),
@@ -100,7 +113,7 @@ def _add_dns_records(pba, md_maker: MarkdownMaker):
     md_maker.add_section('DNS Records', evidence_summary)
 
 
-def _domain_abuse_markdown(pba, md_maker: MarkdownMaker, *args) -> str:  # noqa: ARG001
+def _domain_abuse_markdown(pba: 'PBA_DomainAbuse', md_maker: MarkdownMaker, *args) -> str:  # noqa: ARG001
     if targets := pba.panel_status.targets:
         targets = [FormattingHelpers.cleanup_rf_id(t) for t in targets]
         md_maker.iocs_to_defang.extend(targets)

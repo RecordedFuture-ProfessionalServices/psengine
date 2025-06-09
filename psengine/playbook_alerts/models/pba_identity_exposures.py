@@ -81,7 +81,7 @@ class IdentityPanelStatus(PanelStatus):
     targets: Optional[list[ResolvedEntity]] = []
 
 
-class IdentityEvidencePanel(RFBaseModel):
+class IdentityPanelEvidence(RFBaseModel):
     assessments: Optional[list[Assessment]] = []
     subject: Optional[str] = None
     exposed_secret: Optional[ExposedSecret] = Field(default_factory=ExposedSecret)

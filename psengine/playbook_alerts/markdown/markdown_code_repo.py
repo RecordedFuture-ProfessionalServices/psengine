@@ -12,17 +12,21 @@
 ##############################################################################################
 
 from collections import defaultdict
+from typing import TYPE_CHECKING
 
 from markdown_strings import blockquote, bold
 
 from ...constants import TIMESTAMP_STR
 from ...markdown import MarkdownMaker, clean_text, divider, html_textarea
 
+if TYPE_CHECKING:
+    from ..playbook_alerts.playbook_alerts import PBA_CodeRepoLeakage
+
 
 def _add_repository(pba, md_maker: MarkdownMaker):
     repos = [
-        f'{bold("Owner:" )} {pba.panel_evidence_summary.repository.owner.name}',
-        f'{bold("URL:" )} {pba.panel_evidence_summary.repository.name}',
+        f'{bold("Owner:")} {pba.panel_evidence_summary.repository.owner.name}  ',
+        f'{bold("URL:")} {pba.panel_evidence_summary.repository.name}  ',
     ]
 
     md_maker.add_section('Repository', repos)
@@ -33,29 +37,40 @@ def _add_assessment(pba, md_maker: MarkdownMaker, html_tags: bool):
 
     for assess in pba.panel_evidence_summary.evidence:
         details = defaultdict(list)
+
         for a in assess.assessments:
             details[a.title].append(clean_text(a.value))
 
         details_list = []
         for k, v in details.items():
-            details_list.append(f'{bold(k + ":")} {", ".join(v)}')
+            details_list.append(f'{bold(k + ":")} {", ".join(v)}  ')
 
         targets = ''
         if targets := ', '.join(t.name for t in assess.targets):
-            targets = f'{bold("Assessment targets:")} {targets}'
+            targets = f'{bold("Assessment targets:")} {targets}  '
 
-        commit = f'{bold("Commit:")} {assess.url}'
-        published = f'{bold("Published:")} {assess.published.strftime(TIMESTAMP_STR)}'
+        commit = f'{bold("Commit:")} {assess.url}  '
+        published = f'{bold("Published:")} {assess.published.strftime(TIMESTAMP_STR)}  '
         content = blockquote(
             html_textarea(clean_text(assess.content)) if html_tags else clean_text(assess.content)
         )
-        content = f'{bold("Content:")}\n\n{content}'
+        content = f'{bold("Content:")}\n\n{content}  '
 
-        assessments.extend([published, targets, *details_list, commit, content, divider()])
+        assessment = [published]
+        if targets:
+            assessment.append(targets)
+        assessment.extend([*details_list, commit, content, divider()])
+
+        assessments.extend(assessment)
     md_maker.add_section('Assessments', assessments)
 
 
-def _code_repo_markdown(pba, md_maker: MarkdownMaker, html_tags: bool) -> str:
+def _code_repo_markdown(
+    pba: 'PBA_CodeRepoLeakage',
+    md_maker: MarkdownMaker,
+    html_tags: bool,
+    *args,  # noqa: ARG001
+) -> str:
     if targets := pba.panel_status.targets:
         md_maker.add_section('Targets', [t.name for t in targets])
 

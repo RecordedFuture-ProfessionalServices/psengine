@@ -132,4 +132,6 @@ class DetectionMgr:
 
         if result:
             return result[0]
+
         self.log.info(f'No rule found for id {doc_id}')
+        return None

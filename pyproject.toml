@@ -1,6 +1,6 @@
 [project]
 name = "psengine"
-version = "2.0.5"
+version = "2.0.6"
 readme = "README.rst"
 license = "MIT"
 requires-python = ">=3.9, <3.14"
@@ -34,7 +34,7 @@ dev = [
     "pytest-vcr==1.0.2",
     "pytest-watch==4.2.0",
     "requests==2.29.0",
-    "ruff~=0.7.0",
+    "ruff~=0.11.0",
     "wheel==0.37.1",
     "setuptools==61.0.0",
     "Sphinx==7.1.2",
@@ -57,7 +57,7 @@ build-backend = "setuptools.build_meta"
 
 [project.urls]
 Homepage = "https://github.com/RecordedFuture-ProfessionalServices/psengine"
-Changelog = "https://github.com/RecordedFuture-ProfessionalServices/psengine/CHANGELOG.rst"
+Changelog = "https://github.com/RecordedFuture-ProfessionalServices/psengine/blob/main/CHANGELOG.rst"
 
 [project.scripts]
 psengine = "psengine_cli:main"

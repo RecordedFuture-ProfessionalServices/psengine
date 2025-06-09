@@ -13,7 +13,7 @@
 
 import logging
 from itertools import chain
-from typing import Optional, Union
+from typing import Annotated, Optional, Union
 
 from pydantic import Field, validate_call
 
@@ -26,8 +26,7 @@ from ..endpoints import (
     EP_CLASSIC_ALERTS_SEARCH,
     EP_CLASSIC_ALERTS_UPDATE,
 )
-from ..helpers import MultiThreadingHelper, debug_call
-from ..helpers.helpers import connection_exceptions
+from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
 from ..rf_client import RFClient
 from .classic_alert import AlertRuleOut, ClassicAlert, ClassicAlertHit
 from .constants import ALERTS_PER_PAGE, ALL_CA_FIELDS, REQUIRED_CA_FIELDS
@@ -126,20 +125,19 @@ class ClassicAlertMgr:
                 )
             )
 
-        elif isinstance(rule_id, list):
+        if isinstance(rule_id, list):
             return list(chain.from_iterable(self._search(rule, **params) for rule in rule_id))
 
-        elif isinstance(rule_id, str):
+        if isinstance(rule_id, str):
             return self._search(rule_id, **params)
-        else:
-            return self._search(**params)
+        return self._search(**params)
 
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=AlertFetchError)
     def fetch(
         self,
-        id_: str,
+        id_: Annotated[str, Field(min_length=4)],
         fields: Optional[list[str]] = ALL_CA_FIELDS,
         tagged_text: Optional[bool] = None,
     ) -> ClassicAlert:
@@ -418,8 +416,7 @@ class ClassicAlertMgr:
             JSON response
         """
         self.log.info(f'Updating alerts: {updates}')
-        response = self.rf_client.request('post', url=EP_CLASSIC_ALERTS_UPDATE, data=updates).json()
-        return response
+        return self.rf_client.request('post', url=EP_CLASSIC_ALERTS_UPDATE, data=updates).json()
 
     @debug_call
     @validate_call

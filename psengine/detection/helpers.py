@@ -47,9 +47,9 @@ def save_rule(rule: DetectionRule, output_directory: Union[str, Path] = None):
     output_directory = Path(output_directory).absolute() if output_directory else Path().cwd()
     OSHelpers.mkdir(output_directory)
 
-    for data in rule.rules:
+    for i, data in enumerate(rule.rules):
         try:
-            full_path = output_directory / data.file_name
+            full_path = output_directory / (data.file_name or f'{rule.id_.replace(":", "_")}_{i}')
             full_path.write_text(data.content)
             LOG.info(f'Wrote: {full_path}')
         except (FileNotFoundError, IsADirectoryError, PermissionError, OSError) as err:  # noqa: PERF203

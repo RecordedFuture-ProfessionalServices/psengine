@@ -20,8 +20,11 @@ from ...markdown import (
 from ..models.common_models import ResolvedEntity
 from ..pa_category import PACategory
 from .markdown_code_repo import _code_repo_markdown
+from .markdown_cyber_vulnerability import _cyber_vulnerability_markdown
 from .markdown_domain_abuse import _domain_abuse_markdown
+from .markdown_geopolitics_facility import _geopolitics_facility_markdown
 from .markdown_identity_exposure import _identity_exposure_markdown
+from .markdown_third_party_risk import _third_party_risk_markdown
 
 PORTAL_URL = 'https://app.recordedfuture.com/portal/playbook-alerts/{}'
 API_URL = 'https://api.recordedfuture.com/playbook-alert/{}/{}'
@@ -31,6 +34,9 @@ MARKDOWN_BY_PBA_TYPE = {
     PACategory.CODE_REPO_LEAKAGE.value: _code_repo_markdown,
     PACategory.DOMAIN_ABUSE.value: _domain_abuse_markdown,
     PACategory.IDENTITY_NOVEL_EXPOSURES.value: _identity_exposure_markdown,
+    PACategory.THIRD_PARTY_RISK.value: _third_party_risk_markdown,
+    PACategory.GEOPOLITICS_FACILITY.value: _geopolitics_facility_markdown,
+    PACategory.CYBER_VULNERABILITY.value: _cyber_vulnerability_markdown,
 }
 
 
@@ -38,11 +44,11 @@ def _generic_pba_summary(pba, md_maker: MarkdownMaker):
     md_maker.add_title(pba.panel_status.case_rule_label)
     id_ = pba.playbook_alert_id
     general_info = [
-        f'{bold("ID:")} {id_}',
-        f'{bold("Created:")} {pba.panel_status.created.strftime(TIMESTAMP_STR)}',
-        f'{bold("Updated:")} {pba.panel_status.updated.strftime(TIMESTAMP_STR)}',
-        f'{bold("Status:")} {pba.panel_status.status}',
-        f'{bold("Priority:")} {pba.panel_status.priority}',
+        f'{bold("ID:")} {id_}  ',
+        f'{bold("Created:")} {pba.panel_status.created.strftime(TIMESTAMP_STR)}  ',
+        f'{bold("Updated:")} {pba.panel_status.updated.strftime(TIMESTAMP_STR)}  ',
+        f'{bold("Status:")} {pba.panel_status.status}  ',
+        f'{bold("Priority:")} {pba.panel_status.priority}  ',
         '{} | {}'.format(
             link('API', API_URL.format(pba.category, id_)), link('Portal', PORTAL_URL.format(id_))
         ),
@@ -79,6 +85,7 @@ def _markdown_playbook_alert(
     character_limit: int = None,
     defang_iocs: bool = False,
     iocs_to_defang: list = None,
+    extra_context: list = None,
 ) -> str:
     md_maker = MarkdownMaker(
         addendum=TRUNCATE_COMMENT.format(
@@ -90,9 +97,9 @@ def _markdown_playbook_alert(
     )
     _generic_pba_summary(playbook_alert, md_maker)
 
-    try:
-        return MARKDOWN_BY_PBA_TYPE.get(playbook_alert.category, _unmapped_pba)(
-            playbook_alert, md_maker, html_tags
-        )
-    except AttributeError:
-        return _unmapped_pba(playbook_alert, md_maker, html_tags)
+    if markdown := MARKDOWN_BY_PBA_TYPE.get(playbook_alert.category, _unmapped_pba)(
+        playbook_alert, md_maker, html_tags, extra_context
+    ):
+        return markdown
+
+    return md_maker.format_output()
