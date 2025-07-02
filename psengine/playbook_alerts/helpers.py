@@ -16,7 +16,7 @@ from typing import Union
 
 from ..errors import WriteFileError
 from ..helpers import OSHelpers, debug_call
-from .constants import DEFAULT_PBA_OUTPUT_DIR
+from .constants import DEFAULT_ALERTS_OUTPUT_DIR
 from .playbook_alerts import PBA_DomainAbuse
 
 LOG = logging.getLogger('psengine.playbook_alerts.helpers')
@@ -25,7 +25,7 @@ LOG = logging.getLogger('psengine.playbook_alerts.helpers')
 @debug_call
 def save_pba_images(
     playbook_alerts: Union[PBA_DomainAbuse, list[PBA_DomainAbuse]],
-    output_directory: str = DEFAULT_PBA_OUTPUT_DIR,
+    output_directory: str = DEFAULT_ALERTS_OUTPUT_DIR,
 ) -> None:
     """Save Domain Abuse images/screenshots to disk as a .png file.
 
@@ -56,7 +56,9 @@ def save_pba_images(
 
 
 def _save_image(
-    file_name: str, image_bytes: bytes, output_directory: Union[str, Path] = DEFAULT_PBA_OUTPUT_DIR
+    file_name: str,
+    image_bytes: bytes,
+    output_directory: Union[str, Path] = DEFAULT_ALERTS_OUTPUT_DIR,
 ) -> None:
     """Save image to disk as a .png file.
 

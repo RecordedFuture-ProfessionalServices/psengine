@@ -60,7 +60,6 @@ def do_alerts(playbook_mgr: PlaybookAlertMgr):  # noqa: C901
     query = {
         'max_results': 2,
         'statuses': ['New', 'InProgress'],
-        'filter_from': 0,
         'direction': 'asc',
         'category': ['domain_abuse'],
         'created_from': '2023-09-01',

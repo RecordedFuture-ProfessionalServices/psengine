@@ -11,7 +11,9 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from .constants import PBA_WITH_IMAGES_INST
 from .errors import (
+    PlaybookAlertBulkFetchError,
     PlaybookAlertError,
     PlaybookAlertFetchError,
     PlaybookAlertRetrieveImageError,
@@ -27,6 +29,7 @@ from .playbook_alerts import (
     PBA_DomainAbuse,
     PBA_Generic,
     PBA_IdentityNovelExposure,
+    PBA_MalwareReport,
     PBA_ThirdPartyRisk,
     PreviewAlertOut,
     SearchIn,

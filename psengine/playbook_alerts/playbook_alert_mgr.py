@@ -12,31 +12,33 @@
 ##############################################################################################
 
 import logging
-from pathlib import Path
 from typing import Optional, Union
 
 import pydantic
 import requests
 from more_itertools import batched
-from pydantic import validate_call
+from pydantic import Field, validate_call
 
-from ..constants import DEFAULT_LIMIT, ROOT_DIR
+from ..constants import DEFAULT_LIMIT
 from ..endpoints import (
     EP_PLAYBOOK_ALERT,
     EP_PLAYBOOK_ALERT_COMMON,
-    EP_PLAYBOOK_ALERT_DOMAIN_ABUSE,
-    EP_PLAYBOOK_ALERT_GEOPOLITICS_FACILITY,
     EP_PLAYBOOK_ALERT_SEARCH,
 )
 from ..helpers import TimeHelpers, connection_exceptions, debug_call
 from ..rf_client import RFClient
 from .constants import (
+    ALERTS_PER_PAGE,
+    BULK_LOOKUP_BATCH_SIZE,
     PBA_WITH_IMAGES_INST,
     PBA_WITH_IMAGES_TYPE,
+    PBA_WITH_IMAGES_VALIDATOR,
+    PLAYBOOK_ALERT_INST,
     PLAYBOOK_ALERT_TYPE,
     STATUS_PANEL_NAME,
 )
 from .errors import (
+    PlaybookAlertBulkFetchError,
     PlaybookAlertFetchError,
     PlaybookAlertRetrieveImageError,
     PlaybookAlertSearchError,
@@ -46,17 +48,10 @@ from .mappings import CATEGORY_ENDPOINTS, CATEGORY_TO_OBJECT_MAP
 from .models import SearchResponse
 from .pa_category import PACategory
 from .playbook_alerts import (
-    LookupAlertIn,
-    PBA_Generic,
     PreviewAlertOut,
     SearchIn,
     UpdateAlertIn,
 )
-
-BULK_LOOKUP_BATCH_SIZE = 200
-
-DEFAULT_ALERTS_OUTPUT_DIR = Path(ROOT_DIR) / 'playbook_alerts'
-PLAYBOOK_ALERTS_OUTPUT_FNAME = 'rf_playbook_alerts_'
 
 
 class PlaybookAlertMgr:
@@ -77,46 +72,36 @@ class PlaybookAlertMgr:
     def fetch(
         self,
         alert_id: str,
-        category: Optional[str] = None,
+        category: Optional[PACategory] = None,
         panels: Optional[list[str]] = None,
         fetch_images: Optional[bool] = True,
     ) -> PLAYBOOK_ALERT_TYPE:
         """Fetch an individual Playbook Alert.
 
         Endpoints:
-
             - ``playbook-alert/{category}``
             - ``playbook-alert/common/{alert_id}``
 
         Args:
-            alert_id (str): Alert ID to fetch
-            category (Optional[PACategory], optional): Category to fetch. When this is not supplied,
-                                                       fetch uses ``playbook-alert/common`` to find
-                                                       the alert category. Defaults to None
+            alert_id (str): Alert ID to fetch.
+            category (Optional[PACategory]): Category to fetch. When this is not supplied,
+                fetch uses ``playbook-alert/common`` to find the alert category. Defaults to None.
             panels (Optional[List[str]]): Panels to fetch. The ``status`` panel is always fetched,
-                                          to correctly initialize ADTs. Defaults to None (all)
-            fetch_images (Optional[bool]): Fetch images for Domain Abuse alerts. Defaults to True
+                to correctly initialize ADTs. Defaults to None (all).
+            fetch_images (Optional[bool]): Fetch images for Domain Abuse & Geopol alerts.
+                Defaults to True.
 
         Raises:
-            ValidationError if any parameter is of incorrect type
-            PlaybookAlertFetchError: if an API-related error occurs
+            ValidationError: If any parameter is of incorrect type.
+            PlaybookAlertFetchError: If an API-related error occurs.
 
         Returns:
-            PBA ADT: Any one of the playbook alert ADTs. Unknown alert types return PBA_Generic
+            PBA ADT (PLAYBOOK_ALERT_TYPE): Any one of the playbook alert ADTs
         """
         if category is None:
             category = self._fetch_alert_category(alert_id)
 
         category = category.lower()
-        if category in CATEGORY_ENDPOINTS:
-            endpoint = CATEGORY_ENDPOINTS[category]
-        else:
-            # Workaround to fetch new PAs that have not been officially supported
-            self.log.warning(
-                f'Unknown playbook alert category: {category}, for alert: {alert_id}. '
-                'Using category as an endpoint for this lookup'
-            )
-            endpoint = f'{EP_PLAYBOOK_ALERT}/{category}'
 
         data = {}
         if panels:
@@ -125,12 +110,10 @@ class PlaybookAlertMgr:
                 panels.append(STATUS_PANEL_NAME)
             data = {'panels': panels}
 
-        request_data = LookupAlertIn.model_validate(data)
-
-        url = f'{endpoint}/{alert_id}'
+        url = f'{CATEGORY_ENDPOINTS[category]}/{alert_id}'
         self.log.info(f'Fetching playbook alert: {alert_id}, category: {category}')
 
-        response = self.rf_client.request('post', url=url, data=request_data.json())
+        response = self.rf_client.request('post', url=url, data=data)
         p_alert = self._playbook_alert_factory(category, response.json()['data'])
 
         if isinstance(p_alert, PBA_WITH_IMAGES_INST) and fetch_images:
@@ -143,56 +126,63 @@ class PlaybookAlertMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertFetchError)
     def fetch_bulk(
         self,
-        alerts: Optional[list[tuple[str, str]]] = None,
-        panels: Optional[list] = None,
+        alerts: Optional[list[tuple[str, PACategory]]] = None,
+        panels: Optional[list[str]] = None,
         fetch_images: Optional[bool] = False,
-        filter_from: Optional[int] = 0,
+        alerts_per_page: Optional[int] = Field(ge=1, le=10000, default=ALERTS_PER_PAGE),
         max_results: Optional[int] = DEFAULT_LIMIT,
         order_by: Optional[str] = None,
         direction: Optional[str] = None,
-        entity: Optional[Union[str, list]] = None,
-        statuses: Optional[Union[str, list]] = None,
-        priority: Optional[Union[str, list]] = None,
-        category: Optional[Union[str, list]] = None,
-        assignee: Optional[Union[str, list]] = None,
+        entity: Union[str, list, None] = None,
+        statuses: Union[str, list, None] = None,
+        priority: Union[str, list, None] = None,
+        category: Union[PACategory, list[PACategory], None] = None,
+        assignee: Union[str, list, None] = None,
         created_from: Optional[str] = None,
         created_until: Optional[str] = None,
         updated_from: Optional[str] = None,
         updated_until: Optional[str] = None,
     ) -> list[PLAYBOOK_ALERT_TYPE]:
-        """Fetch alerts in bulk based on a search query.
+        """Fetch multiple playbook alerts in bulk, either by search query or by specifying alert IDs
+        and categories.
 
         Endpoints:
-
             - ``playbook-alert/search``
             - ``playbook-alert/{category}/{alert_id}``
 
         Args:
-            alerts (tuple, optional): Alert (id, category) tuples to fetch. If alerts are supplied,
-                                      other search parameters (query, limit, statuses, category,
-                                      priority, created, updated) are ignored. Defaults to None
-            panels (list, optional): Panels to fetch. Always fetches status panel. Defaults to None
-            fetch_images (bool, optional): Fetch images for Domain Abuse alerts. Defaults to True
-            filter_from: (int, optional): Offset to page from. Defaults to 0
-            max_results (int, optional): Maximum total number of alerts to fetch. Defaults to 10
-            order_by (str, optional): Order alerts by field [created|updated]
-            direction (str, optional): Direction to order alerts [asc|desc]
-            entity (list, optional): List of entities to fetch alerts for
-            statuses (list, optional): List of statuses to fetch e.g. ['New', 'InProgress']
-            priority (list, optional): Priority of alerts to fetch e.g. ['High', 'Informational']
-            category (list, optional): List of categories to fetch e.g. ['domain_abuse']
-            assignee (list, optional): List of assignee uhashes to fetch alerts for
-            created_from (str, optional): ISO or relative [h|d], e.g. -3d or 2023-07-21T17:32:28Z
-            created_until (str, optional): ISO or relative [h|d], e.g. -3d or 2023-07-21T17:32:28Z
-            updated_from (str, optional): ISO or relative [h|d], e.g. -3d or 2023-07-21T17:32:28Z
-            updated_until (str, optional): ISO or relative [h|d], e.g. -3d or 2023-07-21T17:32:28Z
+            alerts (Optional[list[tuple[str, str]]]): List of (alert_id, category) tuples to fetch
+                directly. If provided, all other search parameters are ignored. Defaults to None.
+            panels (Optional[list[str]]): List of panels to fetch for each alert. The ``status``
+                panel is always fetched. Defaults to None (fetches all panels).
+            fetch_images (Optional[bool]): Whether to fetch images for supported alert types.
+                Defaults to False.
+            alerts_per_page (Optional[int]): Number of alerts to retrieve per page (pagination).
+                Defaults to 50.
+            max_results (Optional[int]): Maximum total number of alerts to fetch. Defaults to 10.
+            order_by (Optional[str]): Field to order alerts by, e.g. ``created`` or ``updated``.
+            direction (Optional[str]): Sort direction, either ``asc`` or ``desc``.
+            entity (Union[str, list, None]): Entity or list of entities to filter alerts by.
+            statuses (Union[str, list, None]): Status or list of statuses to filter alerts by,
+                e.g. ``['New', 'InProgress']``.
+            priority (Union[str, list, None]): Priority or list of priorities to filter alerts
+                by, e.g. ``['High', 'Informational']``.
+            category (Union[PACategory, list[PACategory], None]): Category or list of
+                categories to filter alerts by.
+            assignee (Union[str, list, None]): Assignee or list of assignee uhashes to filter
+                alerts by.
+            created_from (Optional[str]): Start of created date range (ISO or relative,
+                e.g. ``-3d`` or ``2023-07-21T17:32:28Z``).
+            created_until (Optional[str]): End of created date range (ISO or relative).
+            updated_from (Optional[str]): Start of updated date range (ISO or relative).
+            updated_until (Optional[str]): End of updated date range (ISO or relative).
 
         Raises:
-            ValidationError if any parameter is of incorrect type
-            PlaybookAlertFetchError: if connection error occurs
+            ValidationError: If any parameter is of incorrect type.
+            PlaybookAlertFetchError: If a connection or API error occurs.
 
         Returns:
-            list: PlaybookAlert ADTs
+            list[PLAYBOOK_ALERT_TYPE]: List of playbook alert ADT matching the query or IDs.
         """
         query_params = locals()
         for param in ['self', 'alerts', 'panels', 'fetch_images']:
@@ -212,7 +202,7 @@ class PlaybookAlertMgr:
             in_cat_ids = [x['id'] for x in in_cat_alerts]
             try:
                 fetched_alerts.extend(self._do_bulk(in_cat_ids, cat, fetch_images, panels or []))
-            except PlaybookAlertFetchError as err:  # noqa: PERF203
+            except (PlaybookAlertBulkFetchError, PlaybookAlertRetrieveImageError) as err:  # noqa: PERF203
                 errors += 1
                 self.log.error(err)
 
@@ -227,75 +217,81 @@ class PlaybookAlertMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertSearchError)
     def search(
         self,
-        filter_from: Optional[int] = 0,
+        alerts_per_page: Optional[int] = Field(ge=1, le=10000, default=ALERTS_PER_PAGE),
         max_results: Optional[int] = DEFAULT_LIMIT,
         order_by: Optional[str] = None,
         direction: Optional[str] = None,
-        entity: Optional[Union[str, list]] = None,
-        statuses: Optional[Union[str, list]] = None,
-        priority: Optional[Union[str, list]] = None,
-        category: Optional[Union[str, list]] = None,
-        assignee: Optional[Union[str, list]] = None,
+        entity: Union[str, list, None] = None,
+        statuses: Union[str, list, None] = None,
+        priority: Union[str, list, None] = None,
+        category: Union[PACategory, list[PACategory], None] = None,
+        assignee: Union[str, list, None] = None,
         created_from: Optional[str] = None,
         created_until: Optional[str] = None,
         updated_from: Optional[str] = None,
         updated_until: Optional[str] = None,
     ) -> SearchResponse:
-        """Search playbook alerts.
+        """Search for playbook alerts using various filters.
 
-        Endpoints:
-            ``playbook-alert/search``
+        Endpoint:
+            - ``playbook-alert/search``
 
         Args:
-            filter_from: (int, optional): Offset to page from. Defaults to 0
-            max_results (int, optional): Maximum total number of alerts to fetch. Defaults to 10
-            order_by (str, optional): Order alerts by field [created|updated]
-            direction (str, optional): Direction to order alerts [asc|desc]
-            entity (list, optional): List of entities to fetch alerts for
-            statuses (list, optional): List of statuses to fetch e.g. ['New', 'InProgress']
-            priority (list, optional): Priority of alerts to fetch e.g. ['High', 'Informational']
-            category (list, optional): List of categories to fetch e.g. ['domain_abuse']
-            assignee (list, optional): List of assignee uhashes to fetch alerts for
-            created_from (str, optional): ISO or relative [h|d], e.g. -3d or 2023-07-21T17:32:28Z
-            created_until (str, optional): ISO or relative [h|d], e.g. -3d or 2023-07-21T17:32:28Z
-            updated_from (str, optional): ISO or relative [h|d], e.g. -3d or 2023-07-21T17:32:28Z
-            updated_until (str, optional): ISO or relative [h|d], e.g. -3d or 2023-07-21T17:32:28Z
+            alerts_per_page (Optional[int]): Number of alerts per page. Defaults to 50.
+            max_results (Optional[int]): Maximum total alerts to fetch. Defaults to 10.
+            order_by (Optional[str]): Field to order alerts by, e.g. 'created' or 'updated'.
+            direction (Optional[str]): Sort direction, 'asc' or 'desc'.
+            entity (Union[str, list, None]): Entity or list of entities to filter by.
+            statuses (Union[str, list, None]): Status or list of statuses to filter by.
+            priority (Union[str, list, None]): Priority or list of priorities to filter by.
+            category (Union[PACategory, list[PACategory], None]): Category/ies to filter by.
+            assignee (Union[str, list, None]): Assignee or list of assignees to filter by.
+            created_from (Optional[str]): Start of created date range (ISO or relative).
+            created_until (Optional[str]): End of created date range (ISO or relative).
+            updated_from (Optional[str]): Start of updated date range (ISO or relative).
+            updated_until (Optional[str]): End of updated date range (ISO or relative).
 
         Raises:
-            ValidationError if any parameter is of incorrect type
-            PlaybookAlertSearchError: if connection error occurs
+            ValidationError: If any parameter is of incorrect type.
+            PlaybookAlertSearchError: If a connection or API error occurs.
 
         Returns:
-            SearchResponse: Search results
+            SearchResponse: Search results matching the query.
         """
         query_params = locals()
         query_params.pop('self')
         request_body = self._prepare_query(**query_params).json()
-        self.log.info(f'Searching for playbook alerts with params {request_body}')
-        response = self.rf_client.request('post', EP_PLAYBOOK_ALERT_SEARCH, data=request_body)
-        search_results = response.json()
-
-        status_message = search_results.get('status', {}).get('status_message')
-        count_returned = search_results.get('counts', {}).get('returned')
-        count_total = search_results.get('counts', {}).get('total')
         self.log.info(
-            'Status: {}, returned: {} {}, total: {} {}'.format(
-                status_message,
-                count_returned,
-                'alert' if count_returned == 1 else 'alerts',
-                count_total,
-                'alert' if count_total == 1 else 'alerts',
-            ),
+            f'Searching for playbook alert query: {request_body}, max_results: {max_results}'
         )
 
-        return SearchResponse.model_validate(search_results)
+        search_results = self.rf_client.request_paged(
+            method='post',
+            url=EP_PLAYBOOK_ALERT_SEARCH,
+            data=request_body,
+            max_results=max_results,
+            results_path='data',
+            offset_key='from',
+        )
+
+        # To avoid a breaking change have to reconstruct the SearchResponse model manually
+        # We did lost the total count the API "could" return
+        result = {
+            'status': {'status_code': 'Ok', 'status_message': 'Playbook alert search successful'},
+            'data': search_results,
+            'counts': {'returned': len(search_results), 'total': len(search_results)},
+        }
+
+        self.log.info(f'Search returned {len(search_results)} playbook alerts')
+
+        return SearchResponse.model_validate(result)
 
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertUpdateError)
     def update(
         self,
-        alert: PLAYBOOK_ALERT_TYPE,
+        alert: Union[PLAYBOOK_ALERT_TYPE, str],
         priority: Optional[str] = None,
         status: Optional[str] = None,
         assignee: Optional[str] = None,
@@ -308,7 +304,7 @@ class PlaybookAlertMgr:
             ``playbook-alert/common/{playbook_alert_id}``
 
         Args:
-            alert (BasePlaybookAlert): Playbook alert to update
+            alert (Union[PLAYBOOK_ALERT_TYPE, str]): Playbook alert ADT or alert ID to update
             priority (str, optional): Alert priority. Defaults to None
             status (str, optional): Alert Status. Defaults to None
             assignee (str, optional): Assignee. Defaults to None
@@ -323,50 +319,39 @@ class PlaybookAlertMgr:
         Returns:
             requests.Response: API response
         """
-        if (
-            priority is None
-            and status is None
-            and assignee is None
-            and log_entry is None
-            and reopen_strategy is None
-        ):
+        body = {
+            'priority': priority,
+            'status': status,
+            'assignee': assignee,
+            'log_entry': log_entry,
+            'reopen': reopen_strategy,
+        }
+
+        body = {k: v for k, v in body.items() if v is not None}
+        if not body:
             raise ValueError('No update parameters were supplied')
 
-        body = {}
-        if priority is not None:
-            body['priority'] = priority
-
-        if status is not None:
-            body['status'] = status
-
-        if assignee is not None:
-            body['assignee'] = assignee
-
-        if log_entry is not None:
-            body['log_entry'] = log_entry
-
-        if reopen_strategy is not None:
-            body['reopen'] = reopen_strategy
-
-        alert_id = alert.playbook_alert_id
+        alert_id = alert.playbook_alert_id if isinstance(alert, PLAYBOOK_ALERT_INST) else alert
         validated_payload = UpdateAlertIn.model_validate(body)
+
         url = f'{EP_PLAYBOOK_ALERT_COMMON}/{alert_id}'
         self.log.info(f'Updating playbook alert: {alert_id}')
+
         return self.rf_client.request('put', url=url, data=validated_payload.json())
 
     @debug_call
     @validate_call
     def _prepare_query(
         self,
-        filter_from: Optional[int] = 0,
+        alerts_per_page: Optional[int] = ALERTS_PER_PAGE,
         max_results: Optional[int] = DEFAULT_LIMIT,
         order_by: Optional[str] = None,
         direction: Optional[str] = None,
-        entity: Optional[Union[str, list]] = None,
-        statuses: Optional[Union[str, list]] = None,
-        priority: Optional[Union[str, list]] = None,
-        category: Optional[Union[str, list]] = None,
-        assignee: Optional[Union[str, list]] = None,
+        entity: Union[str, list, None] = None,
+        statuses: Union[str, list, None] = None,
+        priority: Union[str, list, None] = None,
+        category: Union[str, list, None] = None,
+        assignee: Union[str, list, None] = None,
         created_from: Optional[str] = None,
         created_until: Optional[str] = None,
         updated_from: Optional[str] = None,
@@ -383,7 +368,16 @@ class PlaybookAlertMgr:
             SearchIn: Validated search query
         """
         params = {key: val for key, val in locals().items() if val and key != 'self'}
-        query = {'created_range': {}, 'updated_range': {}}
+        query = {
+            'created_range': {},
+            'updated_range': {},
+            'limit': min(max_results, alerts_per_page),
+        }
+
+        # If no category is specified by the caller,
+        # restrict the search to only the supported categories
+        if not category:
+            query['category'] = [cat.value for cat in PACategory]
 
         for arg in params:
             key, value = self._process_arg(arg, params[arg])
@@ -405,7 +399,12 @@ class PlaybookAlertMgr:
     @connection_exceptions(
         ignore_status_code=[], exception_to_raise=PlaybookAlertRetrieveImageError
     )
-    def fetch_one_image(self, alert_id: str, image_id: str, alert_category: str) -> bytes:
+    def fetch_one_image(
+        self,
+        alert_id: str = None,
+        image_id: str = None,
+        alert_category: PBA_WITH_IMAGES_VALIDATOR = 'domain_abuse',
+    ) -> bytes:
         """Retrieve image from playbook alert that have images.
 
         Endpoints:
@@ -419,23 +418,18 @@ class PlaybookAlertMgr:
 
         Raises:
             ValidationError: if any parameter is of incorrect type
-            ValueError: if the wrong category is provided
             PlaybookAlertRetrieveImageError: If the image fetch fails
 
         Returns:
             bytes: Bytes of the image
         """
-        url_by_cat = {
-            PACategory.DOMAIN_ABUSE.value: f'{EP_PLAYBOOK_ALERT_DOMAIN_ABUSE}/{alert_id}',
-            PACategory.GEOPOLITICS_FACILITY.value: EP_PLAYBOOK_ALERT_GEOPOLITICS_FACILITY,
-        }
-        if alert_category not in url_by_cat:
-            raise ValueError('The category provided does not support images.')
-
-        url = f'{url_by_cat[alert_category]}/image/{image_id}'
+        if alert_category == PACategory.DOMAIN_ABUSE.value:
+            url = f'/{alert_category}/{alert_id}/image/{image_id}'
+        else:
+            url = f'/{alert_category}/image/{image_id}'
 
         self.log.info(f'Retrieving image: {image_id} for alert: {alert_id}')
-        response = self.rf_client.request('get', url)
+        response = self.rf_client.request('get', EP_PLAYBOOK_ALERT + url)
 
         return response.content
 
@@ -451,6 +445,26 @@ class PlaybookAlertMgr:
             ``playbook-alert/domain_abuse/{alert_id}/image/{image_id}``
             ``playbook-alert/geopolitics_facility/image/{image_id}``
 
+        Examples:
+            Search and fetch images of alerts:
+
+                .. code-block:: python
+                     :linenos:
+                        from psengine.playbook_alerts import PlaybookAlertMgr, PBA_WITH_IMAGES_INST
+
+                        mgr = PlaybookAlertMgr()
+                        alerts = mgr.search()
+                        alerts_to_fetch = [(a.playbook_alert_id, a.category) for a in alerts.data]
+
+                        alerts_details = mgr.fetch_bulk(alerts_to_fetch)
+                        retrieve_images_alerts = [
+                            a for a in alerts_details if isinstance(a, PBA_WITH_IMAGES_INST)
+                        ]
+
+                        for alert in retrieve_images_alerts:
+                            mgr.fetch_images(alert)
+                            print(alert.images)
+
         Args:
             playbook_alert: ADT of an alert supporting images.
 
@@ -458,14 +472,11 @@ class PlaybookAlertMgr:
             ValidationError if any parameter is of incorrect type
             PlaybookAlertRetrieveImageError: if an API error occurs
         """
-        if isinstance(playbook_alert, PBA_WITH_IMAGES_INST):
-            for image_id in playbook_alert.image_ids:
-                image_bytes = self.fetch_one_image(
-                    playbook_alert.playbook_alert_id, image_id, playbook_alert.category
-                )
-                playbook_alert.store_image(image_id, image_bytes)
-        else:
-            self.log.debug('Image fetching is only supported for Domain Abuse alerts')
+        for image_id in playbook_alert.image_ids:
+            image_bytes = self.fetch_one_image(
+                playbook_alert.playbook_alert_id, image_id, playbook_alert.category
+            )
+            playbook_alert.store_image(image_id, image_bytes)
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertFetchError)
@@ -482,10 +493,16 @@ class PlaybookAlertMgr:
             RFPACategory: Alert category
         """
         endpoint = EP_PLAYBOOK_ALERT_COMMON + '/' + alert_id
-        result = self.rf_client.request('get', endpoint)
-        validated_alert_info = PreviewAlertOut.model_validate(result.json()['data'])
+        result = self.rf_client.request('get', endpoint).json()['data']
+        validated_alert_info = PreviewAlertOut.model_validate(result)
 
-        return PACategory(validated_alert_info.category)
+        try:
+            return PACategory(validated_alert_info.category)
+        except ValueError as v:
+            raise ValueError(
+                f'Unsupported playbook alert category(s): {validated_alert_info.category}. '
+                f'Supported: {list(CATEGORY_ENDPOINTS.keys())}'
+            ) from v
 
     @debug_call
     def _playbook_alert_factory(
@@ -504,31 +521,19 @@ class PlaybookAlertMgr:
         """
         p_alert = None
         try:
-            try:
-                p_alert = CATEGORY_TO_OBJECT_MAP[category].model_validate(raw_alert)
-            except KeyError:
-                # This way when we consume an unmapped(new) PA, we get a base object to work with
-                self.log.warning(
-                    f'Unmapped playbook alert category: {category}. '
-                    + 'Will initialize {} as a BasePlaybookAlert'.format(
-                        raw_alert['playbook_alert_id']
-                    ),
-                )
-                p_alert = PBA_Generic.model_validate(raw_alert)
-        except pydantic.ValidationError as validation_error:
+            p_alert = CATEGORY_TO_OBJECT_MAP[category].model_validate(raw_alert)
+        except pydantic.ValidationError as ve:
             self.log.error(
                 'Error validating playbook alert {}'.format(raw_alert['playbook_alert_id'])
             )
-            for error in validation_error.errors():
+            for error in ve.errors():
                 self.log.error('{} at location: {}'.format(error['msg'], error['loc']))
             raise
 
         return p_alert
 
     @validate_call
-    @connection_exceptions(
-        ignore_status_code=[], exception_to_raise=PlaybookAlertRetrieveImageError
-    )
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertBulkFetchError)
     def _do_bulk(
         self, alert_ids: list, category: str, fetch_image: bool, panels: list
     ) -> list[PLAYBOOK_ALERT_TYPE]:
@@ -542,21 +547,12 @@ class PlaybookAlertMgr:
 
         Raises:
             ValidationError if any supplied parameter is of incorrect type
-            PlaybookAlertRetrieveImageError: if connection error occurs
+            PlaybookAlertBulkFetchError if connection error occurs
 
         Returns:
             list: Playbook alert ADTs. Unknown alert types return PBA_Generic
         """
         category = category.lower()
-        if category in CATEGORY_ENDPOINTS:
-            endpoint = CATEGORY_ENDPOINTS[category]
-        else:
-            # Workaround to fetch new PAs that have not been officially supported
-            self.log.warning(
-                f'Unknown playbook alert category: {category}.'
-                'Using category as an endpoint for this lookup',
-            )
-            endpoint = f'{EP_PLAYBOOK_ALERT}/{category}'
 
         data = {}
         if panels:
@@ -570,12 +566,15 @@ class PlaybookAlertMgr:
         results = []
         for batch in batched(alert_ids, BULK_LOOKUP_BATCH_SIZE):
             data['playbook_alert_ids'] = batch
-            response = self.rf_client.request('post', url=endpoint, data=data)
+            response = self.rf_client.request('post', url=CATEGORY_ENDPOINTS[category], data=data)
             results += response.json()['data']
 
         p_alerts = [self._playbook_alert_factory(category, raw_alert) for raw_alert in results]
 
-        if category == PACategory.DOMAIN_ABUSE.value and fetch_image:
+        if (
+            category == PACategory.DOMAIN_ABUSE.value
+            or category == PACategory.GEOPOLITICS_FACILITY.value
+        ) and fetch_image:
             for alert in p_alerts:
                 self.fetch_images(alert)
 
@@ -596,8 +595,6 @@ class PlaybookAlertMgr:
             tuple (str, Union[str, list]): canonicalized query attributes
         """
         list_or_str_args = ['entity', 'statuses', 'priority', 'category', 'assignee']
-        if attr == 'filter_from':
-            return 'from', value
         if attr in ['created_from', 'created_until', 'updated_from', 'updated_until']:
             range_field = attr.split('_')[0] + '_range'
             query_key = 'from' if attr.endswith('from') else 'until'
@@ -606,7 +603,5 @@ class PlaybookAlertMgr:
             return range_field, {query_key: value}
         if attr in list_or_str_args and isinstance(value, str):
             return attr, [value]
-        if attr == 'max_results':
-            return 'limit', value
 
         return attr, value

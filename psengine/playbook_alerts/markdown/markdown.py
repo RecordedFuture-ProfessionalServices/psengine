@@ -17,13 +17,13 @@ from ...constants import TIMESTAMP_STR, TRUNCATE_COMMENT
 from ...markdown import (
     MarkdownMaker,
 )
-from ..models.common_models import ResolvedEntity
 from ..pa_category import PACategory
 from .markdown_code_repo import _code_repo_markdown
 from .markdown_cyber_vulnerability import _cyber_vulnerability_markdown
 from .markdown_domain_abuse import _domain_abuse_markdown
 from .markdown_geopolitics_facility import _geopolitics_facility_markdown
 from .markdown_identity_exposure import _identity_exposure_markdown
+from .markdown_malware_report import _malware_report_markdown
 from .markdown_third_party_risk import _third_party_risk_markdown
 
 PORTAL_URL = 'https://app.recordedfuture.com/portal/playbook-alerts/{}'
@@ -37,6 +37,7 @@ MARKDOWN_BY_PBA_TYPE = {
     PACategory.THIRD_PARTY_RISK.value: _third_party_risk_markdown,
     PACategory.GEOPOLITICS_FACILITY.value: _geopolitics_facility_markdown,
     PACategory.CYBER_VULNERABILITY.value: _cyber_vulnerability_markdown,
+    PACategory.MALWARE_REPORT.value: _malware_report_markdown,
 }
 
 
@@ -56,27 +57,8 @@ def _generic_pba_summary(pba, md_maker: MarkdownMaker):
     md_maker.add_section('Summary', general_info)
 
 
-def _unmapped_pba(pba, md_maker: MarkdownMaker, *args, **kwargs) -> str:  # noqa: ARG001
-    md_maker.sections.insert(
-        0,
-        md_maker.validate_section(
-            'Warning',
-            [
-                (
-                    '> 🚨 The markdown of this alert is not fully supported yet. '
-                    'For full details check the portal 🚨'
-                )
-            ],
-        ),
-    )
-
-    if targets := pba.panel_status.targets:
-        if any(isinstance(t, str) for t in targets):
-            md_maker.add_section('Targets', ', '.join(t for t in targets))
-        elif any(isinstance(t, ResolvedEntity) for t in targets):
-            md_maker.add_section('Targets', [t.name for t in targets])
-
-    return md_maker.format_output()
+def _unsupported_pba(pba, *args, **kwargs) -> str:  # noqa: ARG001
+    raise NotImplementedError(f'No markdown function for playbook alert category: {pba.category}')
 
 
 def _markdown_playbook_alert(
@@ -97,7 +79,7 @@ def _markdown_playbook_alert(
     )
     _generic_pba_summary(playbook_alert, md_maker)
 
-    if markdown := MARKDOWN_BY_PBA_TYPE.get(playbook_alert.category, _unmapped_pba)(
+    if markdown := MARKDOWN_BY_PBA_TYPE.get(playbook_alert.category, _unsupported_pba)(
         playbook_alert, md_maker, html_tags, extra_context
     ):
         return markdown

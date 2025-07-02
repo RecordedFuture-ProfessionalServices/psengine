@@ -65,6 +65,19 @@ class RisklistMgr:
                 - If ``validate`` is None: If it has headers, they will be returned.
                 - If ``validate`` is not None, an empty list will be returned.
 
+        Examples:
+            Download and return print as json:
+
+            .. code-block:: python
+                :linenos:
+
+                from psengine.risklists import RisklistMgr, DefaultRiskList
+
+                mgr = RisklistMgr()
+                data = mgr.fetch_risklist('default', 'domain', validate=DefaultRiskList)
+                for entry in data:
+                    print(entry.json())
+
         Args:
             list (str): name of the risklist to download.
             entity_type (str, optional): Type of entity to get risklist for.

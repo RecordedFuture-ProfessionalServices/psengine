@@ -36,4 +36,3 @@ class PACategory(Enum):
     IDENTITY_NOVEL_EXPOSURES = 'identity_novel_exposures'
     GEOPOLITICS_FACILITY = 'geopolitics_facility'
     MALWARE_REPORT = 'malware_report'
-    UNMAPPED_ALERT = 'unmapped_alert'

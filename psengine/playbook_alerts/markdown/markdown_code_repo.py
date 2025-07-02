@@ -20,7 +20,7 @@ from ...constants import TIMESTAMP_STR
 from ...markdown import MarkdownMaker, clean_text, divider, html_textarea
 
 if TYPE_CHECKING:
-    from ..playbook_alerts.playbook_alerts import PBA_CodeRepoLeakage
+    from ...playbook_alerts.playbook_alerts import PBA_CodeRepoLeakage
 
 
 def _add_repository(pba, md_maker: MarkdownMaker):
