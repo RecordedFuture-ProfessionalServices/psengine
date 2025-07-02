@@ -94,7 +94,8 @@ def _process_hit_fragment(
         content.append(f'{blockquote(fragment)}\n')
     else:
         content.append(
-            f'_Reference text is missing, check the Recorded Future {link("Portal", str(classic_alert.url.portal))} for more information._\n'  # noqa: E501
+            '_Reference text is missing, check the Recorded Future '
+            f'{link("Portal", str(classic_alert.url.portal))} for more information._\n'
         )
 
     if include_triggered_by:

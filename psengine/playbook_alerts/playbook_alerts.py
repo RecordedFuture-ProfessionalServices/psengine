@@ -71,15 +71,15 @@ class PBA_Generic(RFBaseModel):
             Returns hash value based on ``playbook_alert_id`` and updated timestamp in panel status.
 
         __eq__:
-            Checks equality between two BasePlaybookAlert instances based on ``playbook_alert_id``
+            Checks equality between two PBA_Generic instances based on ``playbook_alert_id``
             and updated timestamp in panel status.
 
         __gt__:
-            Defines a greater-than comparison between two ``BasePlaybookAlert`` instances based on
+            Defines a greater-than comparison between two ``PBA_Generic`` instances based on
             ``playbook_alert_id`` and updated timestamp in panel status.
 
         __str__:
-            Returns a string representation of the BasePlaybookAlert instance with:
+            Returns a string representation of the PBA_Generic instance with:
             ``playbook_alert_id``, updated timestamp, case rule label, and status.
 
             .. code-block:: python
@@ -89,7 +89,7 @@ class PBA_Generic(RFBaseModel):
                 Category: Third Party Risk, Lookup Status: New
 
     Total Ordering:
-        The ordering of BasePlaybookAlert instances is determined primarily by the updated timestamp
+        The ordering of PBA_Generic instances is determined primarily by the updated timestamp
         of the panel status. If two instances have the same updated timestamp, their
         ``playbook_alert_id`` is used as a secondary criterion for ordering.
     """
@@ -98,7 +98,7 @@ class PBA_Generic(RFBaseModel):
     panel_log_v2: Optional[list[PanelLogV2]] = []
     panel_status: Optional[PanelStatus] = Field(default_factory=PanelStatus)
 
-    category: str = PACategory.UNMAPPED_ALERT.value
+    category: str = 'unmapped_alert'
 
     @model_validator(mode='before')
     @classmethod
@@ -180,7 +180,7 @@ class PBA_Generic(RFBaseModel):
 
 
 class PBA_CodeRepoLeakage(PBA_Generic):
-    """Model for Code Repo Leakage. Inherit behaviours from BasePlaybookAlert."""
+    """Model for Code Repo Leakage. Inherit behaviours from PBA_Generic."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -205,7 +205,7 @@ SEQ_IPV4 = r'((?:' + IPV4 + r'(?:,\s*)?)+)'
 
 
 class PBA_ThirdPartyRisk(PBA_Generic):
-    """Model for Third Party Risk. Inherit behaviours from BasePlaybookAlert."""
+    """Model for Third Party Risk. Inherit behaviours from PBA_Generic."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -302,7 +302,7 @@ class PBA_ThirdPartyRisk(PBA_Generic):
 
 
 class PBA_CyberVulnerability(PBA_Generic):
-    """Model for Cyber Vulnerability. Inherit behaviours from BasePlaybookAlert."""
+    """Model for Cyber Vulnerability. Inherit behaviours from PBA_Generic."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -336,7 +336,7 @@ class PBA_CyberVulnerability(PBA_Generic):
 
 
 class PBA_IdentityNovelExposure(PBA_Generic):
-    """Model for Identity Exposure. Inherit behaviours from BasePlaybookAlert."""
+    """Model for Identity Exposure. Inherit behaviours from PBA_Generic."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -363,7 +363,7 @@ class PBA_IdentityNovelExposure(PBA_Generic):
 
 
 class PBA_DomainAbuse(PBA_Generic):
-    """Model for Domain Abuse. Inherit behaviours from BasePlaybookAlert."""
+    """Model for Domain Abuse. Inherit behaviours from PBA_Generic."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -471,7 +471,7 @@ class PBA_DomainAbuse(PBA_Generic):
 
 
 class PBA_GeopoliticsFacility(PBA_Generic):
-    """Model for Geopolitics Facility. Inherit behaviours from BasePlaybookAlert."""
+    """Model for Geopolitics Facility. Inherit behaviours from PBA_Generic."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -541,7 +541,7 @@ class PBA_GeopoliticsFacility(PBA_Generic):
 
 
 class PBA_MalwareReport(PBA_Generic):
-    """Model for Malware Report. Inherit behaviours from BasePlaybookAlert."""
+    """Model for Malware Report. Inherit behaviours from PBA_Generic."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -552,7 +552,7 @@ class PBA_MalwareReport(PBA_Generic):
     panel_status: Optional[MalwareReportPanelStatus] = Field(
         default_factory=MalwareReportPanelStatus
     )
-    panel_summary: Optional[MalwareReportPanelEvidence] = Field(
+    panel_evidence_summary: Optional[MalwareReportPanelEvidence] = Field(
         default_factory=MalwareReportPanelEvidence
     )
 
@@ -591,9 +591,3 @@ class UpdateAlertIn(RFBaseModel):
     reopen: Optional[str] = None
     added_actions_taken: Optional[list[str]] = None
     removed_actions_taken: Optional[list[str]] = None
-
-
-class LookupAlertIn(RFBaseModel):
-    """Model for playbook alert POST ``{playbook_alert_id}`` endpoints."""
-
-    panels: Optional[list] = None

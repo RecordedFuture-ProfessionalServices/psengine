@@ -314,7 +314,8 @@ class EntityList(RFBaseModel):
         response = self.rf_client.request('get', url)
         validated_status = ListStatusOut.model_validate(response.json())
         self.log.debug(
-            f"List '{self.name}' status: {validated_status.status}, entities: {validated_status.size}"  # noqa: E501
+            f"List '{self.name}' status: {validated_status.status}, "
+            f'entities: {validated_status.size}'
         )
 
         return validated_status

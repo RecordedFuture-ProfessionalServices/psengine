@@ -10,30 +10,53 @@
 # for having all necessary licenses, permissions, rights, and/or consents to any data        #
 # accessed from any third party API.                                                         #
 ##############################################################################################
-from typing import Union
+from pathlib import Path
+from typing import Literal, Union
 
+from ..constants import ROOT_DIR
+from ..playbook_alerts.pa_category import PACategory
 from .playbook_alerts import (
     PBA_CodeRepoLeakage,
     PBA_CyberVulnerability,
     PBA_DomainAbuse,
-    PBA_Generic,
     PBA_GeopoliticsFacility,
     PBA_IdentityNovelExposure,
+    PBA_MalwareReport,
     PBA_ThirdPartyRisk,
 )
 
 STATUS_PANEL_NAME = 'status'
-DEFAULT_PBA_OUTPUT_DIR = 'playbook_alerts'
-DEFAULT_PBA_FILE_NAME = 'playbook_alerts_{}.json'
+
+DEFAULT_ALERTS_OUTPUT_DIR = Path(ROOT_DIR) / 'playbook_alerts'
+PLAYBOOK_ALERTS_OUTPUT_FNAME = 'rf_playbook_alerts_'
+
 
 PLAYBOOK_ALERT_TYPE = Union[
-    PBA_Generic,
     PBA_CodeRepoLeakage,
     PBA_CyberVulnerability,
     PBA_DomainAbuse,
     PBA_IdentityNovelExposure,
     PBA_ThirdPartyRisk,
+    PBA_GeopoliticsFacility,
+    PBA_MalwareReport,
 ]
+PLAYBOOK_ALERT_INST = (
+    PBA_CodeRepoLeakage,
+    PBA_CyberVulnerability,
+    PBA_DomainAbuse,
+    PBA_IdentityNovelExposure,
+    PBA_ThirdPartyRisk,
+    PBA_GeopoliticsFacility,
+    PBA_MalwareReport,
+)
+
 
 PBA_WITH_IMAGES_TYPE = Union[PBA_DomainAbuse, PBA_GeopoliticsFacility]
+PBA_WITH_IMAGES_VALIDATOR = Union[
+    Literal[PACategory.DOMAIN_ABUSE.value], Literal[PACategory.GEOPOLITICS_FACILITY.value]
+]
 PBA_WITH_IMAGES_INST = (PBA_DomainAbuse, PBA_GeopoliticsFacility)
+
+ALERTS_PER_PAGE = 50
+
+BULK_LOOKUP_BATCH_SIZE = 200

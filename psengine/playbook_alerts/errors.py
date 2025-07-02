@@ -31,5 +31,9 @@ class PlaybookAlertFetchError(PlaybookAlertError):
     """Error raised when playbook alert fetch fails."""
 
 
+class PlaybookAlertBulkFetchError(PlaybookAlertError):
+    """Error raised when playbook alert bulk fetch fails."""
+
+
 class PlaybookAlertRetrieveImageError(PlaybookAlertError):
     """Error raised when playbook alert image fetch fails."""

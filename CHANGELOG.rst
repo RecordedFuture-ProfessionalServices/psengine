@@ -1,6 +1,34 @@
 PSEngine Changelog
 ==================
 
+[2.0.7] - 2025-07-02
+--------------------
+
+Added
+~~~~~
+
+- ``PBA_MalwareReport`` playbook alert is now supported, including its markdown rendering.
+- ``RFClient.request_paged()``supports multiple paths when used on a POST request where the pagination field is ``next_offset``.
+
+Changed
+~~~~~~~
+
+- ``PlaybookAlertMgr.update()`` now accepts either a playbook alert ADT instance or an alert ID string as the ``alert`` parameter, instead of only a playbook alert ADT.
+- ``PlaybookAlertMgr.search()`` and ``PlaybookAlertMgr.fetch_bulk()`` now fully support pagination. The ``alerts_per_page`` and ``max_results`` parameters accurately control the number of alerts returned, ensuring users receive the requested number of results even when the API response is paginated.
+- ``PlaybookAlertMgr.search()`` and ``PlaybookAlertMgr.fetch_bulk()`` now restrict searches and fetches to supported playbook alert categories only. Providing an unsupported alert category will raise a ``ValueError``.
+
+Fixed
+~~~~~
+
+- ``RFClient.request_paged()`` now correctly updates the ``limit`` parameter when using the ``post`` method, ensuring the correct number of results are returned.
+- ``PlaybookAlertMgr`` bulk operations now count the correct amount of errors from ingestion.
+
+Removed
+~~~~~~~
+
+- Ability for searching and fetching unsupported playbook alert categories and returning a ``PBA_Generic`` ADT instance.
+
+
 [2.0.6] - 2025-06-06
 --------------------
 

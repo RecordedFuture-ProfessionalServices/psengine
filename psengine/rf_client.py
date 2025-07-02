@@ -12,6 +12,8 @@
 ##############################################################################################
 
 import re
+from collections import defaultdict
+from contextlib import suppress
 from json.decoder import JSONDecodeError
 from typing import Union
 
@@ -193,6 +195,7 @@ class RFClient(BaseHTTPClient):
         max_results,
         json_response,
         all_results,
+        dict_results,
         **kwargs,
     ):
         if 'next_offset' in json_response:
@@ -206,10 +209,19 @@ class RFClient(BaseHTTPClient):
                     params=params,
                     **kwargs,
                 ).json()
-                all_results += self._get_matches(results_expr, json_response)
-                if len(all_results) >= max_results:
-                    all_results = all_results[:max_results]
-                    break
+                if isinstance(results_expr, list):
+                    for expr in results_expr:
+                        with suppress(KeyError):
+                            dict_results[str(expr)].extend(self._get_matches(expr, json_response))
+
+                    if any(len(v) >= max_results for v in dict_results.values()):
+                        dict_results = {k: v[:max_results] for k, v in dict_results.items()}
+                        break
+                else:
+                    all_results += self._get_matches(results_expr, json_response)
+                    if len(all_results) >= max_results:
+                        all_results = all_results[:max_results]
+                        break
         else:
             seen = json_response['counts']['returned']
             if json_response['counts']['total'] > max_results:
@@ -219,6 +231,7 @@ class RFClient(BaseHTTPClient):
 
             while seen < total:
                 data[offset_key] = seen
+                data['limit'] = min(json_response['counts']['returned'], max_results - seen)
                 json_response = self.request(
                     method=method,
                     url=url,
@@ -229,7 +242,7 @@ class RFClient(BaseHTTPClient):
                 ).json()
                 all_results += self._get_matches(results_expr, json_response)
                 seen += json_response['counts']['returned']
-        return all_results
+        return dict_results or all_results
 
     def request_paged(
         self,
@@ -240,7 +253,7 @@ class RFClient(BaseHTTPClient):
         *,
         params: Union[dict, None] = None,
         headers: Union[dict, None] = None,
-        results_path: str = 'data',
+        results_path: Union[str, list[str]] = 'data',
         offset_key: str = 'offset',
         **kwargs,
     ) -> list[dict]:
@@ -294,11 +307,13 @@ class RFClient(BaseHTTPClient):
         Returns:
             list[dict]: List of dict containing the results
         """
+        results_paths = [results_path] if isinstance(results_path, str) else results_path
+
         try:
-            results_expr = jsonpath_ng.parse(results_path)
+            results_expr = [jsonpath_ng.parse(p) for p in results_paths]
         except JsonPathParserError as err:
             raise ValueError(f'Invalid results_path: {results_path}') from err
-        root_key = self._get_root_key(results_expr)
+        root_key = [self._get_root_key(e) for e in results_expr]
 
         # Make the first request
         response = self.request(
@@ -310,23 +325,28 @@ class RFClient(BaseHTTPClient):
             **kwargs,
         )
 
-        all_results = []
         try:
-            # Try to parse the response as JSON
             json_response = response.json()
         except JSONDecodeError:
             self.log.debug(f'Paged request does not contain valid JSON:\n{response.text}')
             raise
 
-        # Check if the root key is in the response
-        if root_key not in json_response:
+        if all(r not in json_response for r in root_key):
             raise KeyError(results_path)
 
-        if len(json_response[root_key]) == 0:
+        all_results = []
+        dict_results = defaultdict(list)
+
+        if all(len(json_response[r]) == 0 for r in root_key):
             return all_results
 
         # Get the initial results from the first response and add them to the list
-        all_results += self._get_matches(results_expr, json_response)
+        if isinstance(results_path, str):
+            all_results += self._get_matches(results_expr[0], json_response)
+        else:
+            for expr in results_expr:
+                with suppress(KeyError):
+                    dict_results[str(expr)].extend(self._get_matches(expr, json_response))
 
         if method.lower() == 'get':
             return self._request_paged_get(
@@ -336,7 +356,7 @@ class RFClient(BaseHTTPClient):
                 method=method,
                 params=params,
                 max_results=max_results,
-                results_expr=results_expr,
+                results_expr=results_expr[0] if isinstance(results_path, str) else results_expr,
                 offset_key=offset_key,
                 json_response=json_response,
                 all_results=all_results,
@@ -351,10 +371,11 @@ class RFClient(BaseHTTPClient):
                 data=data,
                 params=params,
                 max_results=max_results,
-                results_expr=results_expr,
+                results_expr=results_expr[0] if isinstance(results_path, str) else results_expr,
                 offset_key=offset_key,
                 json_response=json_response,
                 all_results=all_results,
+                dict_results=dict_results,
                 **kwargs,
             )
 

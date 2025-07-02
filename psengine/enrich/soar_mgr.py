@@ -51,12 +51,12 @@ class SoarMgr:
     ) -> list[SOAREnrichOut]:
         """Enrich multiple types of IOCs via the SOAR API.
 
-        Endpoint:
-            ``v2/soar/enrichment``
-
         This method allows for batch processing of various IOC types, including IP addresses,
         domains, file hashes, vulnerabilities, URLs, and company domains. It utilizes either
         multi-threading or sequential processing based on the `max_workers` parameter.
+
+        Endpoint:
+            ``v2/soar/enrichment``
 
         Examples:
             Simple SOAR enrichment:
