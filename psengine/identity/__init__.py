@@ -11,4 +11,21 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-__version__ = '2.1.0'
+from .errors import IdentityError
+from .identity import (
+    Credential,
+    CredentialSearch,
+    CredentialsLookupIn,
+    CredentialsSearchIn,
+    Detection,
+    Detections,
+    DetectionsIn,
+    DumpSearchIn,
+    HostnameLookupIn,
+    IncidentReportIn,
+    IncidentReportOut,
+    IPLookupIn,
+    LeakedIdentity,
+    PasswordLookup,
+)
+from .identity_mgr import IdentityMgr

@@ -11,4 +11,45 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-__version__ = '2.1.0'
+from typing import Optional
+
+from pydantic import AnyUrl, Field, IPvAnyAddress
+
+from ...common_models import ClearTextPassword, RFBaseModel
+from .common_models import (
+    PasswordHash,
+    Technology,
+)
+
+
+class AuthorizationService(RFBaseModel):
+    url: AnyUrl
+    domain: str
+    fqdn: str
+    technology: list[Technology]
+    protocols: list[str]
+
+
+class ExposedSecretDetails(RFBaseModel):
+    properties: list[str]
+    rank: Optional[str] = None
+    clear_text_value: Optional[ClearTextPassword] = None
+    clear_text_hint: Optional[str] = None
+
+
+class SecretDetails(RFBaseModel):
+    type_: str = Field(alias='type')
+    hashes: list[PasswordHash]
+    details: ExposedSecretDetails
+    effectively_clear: bool
+
+
+class IdentityDetails(RFBaseModel):
+    subjects: list[str]
+
+
+class IPRange(RFBaseModel):
+    gte: Optional[IPvAnyAddress] = None
+    gt: Optional[IPvAnyAddress] = None
+    lte: Optional[IPvAnyAddress] = None
+    lt: Optional[IPvAnyAddress] = None

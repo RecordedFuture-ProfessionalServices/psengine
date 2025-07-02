@@ -98,3 +98,16 @@ EP_ANALYST_NOTE_PREVIEW = EP_ANALYST_NOTE + 'preview'
 EP_ANALYST_NOTE_PUBLISH = EP_ANALYST_NOTE + 'publish'
 EP_ANALYST_NOTE_DELETE = EP_ANALYST_NOTE + 'delete/{}'
 EP_ANALYST_NOTE_ATTACHMENT = EP_ANALYST_NOTE + 'attachment/{}'
+
+###############################################################################
+# Identity API Endpoints
+###############################################################################
+EP_IDENTITY = BASE_URL + '/identity/'
+EP_IDENTITY_DETECTIONS = EP_IDENTITY + 'detections'
+EP_IDENTITY_INCIDENT_REPORT = EP_IDENTITY + 'incident/report'
+EP_IDENTITY_HOSTNAME_LOOKUP = EP_IDENTITY + 'hostname/lookup'
+EP_IDENTITY_PASSWORD_LOOKUP = EP_IDENTITY + 'password/lookup'
+EP_IDENTITY_IP_LOOKUP = EP_IDENTITY + 'ip/lookup'
+EP_IDENTITY_CREDENTIALS_SEARCH = EP_IDENTITY + 'credentials/search'
+EP_IDENTITY_CREDENTIALS_LOOKUP = EP_IDENTITY + 'credentials/lookup'
+EP_IDENTITY_DUMP_SEARCH = EP_IDENTITY + 'metadata/dump/search'

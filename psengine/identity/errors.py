@@ -11,4 +11,24 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-__version__ = '2.1.0'
+from ..errors import RecordedFutureError
+
+
+class IdentityError(RecordedFutureError):
+    """Error raised when there is an error with the Identity API."""
+
+
+class DetectionsFetchError(IdentityError):
+    """Error raised when there is an issue searching for detections."""
+
+
+class IncidentReportFetchError(IdentityError):
+    """Error raised when there is an issue fetching an incident report."""
+
+
+class IdentityLookupError(IdentityError):
+    """Error raised when there is an issue looking up identities."""
+
+
+class IdentitySearchError(IdentityError):
+    """Error raised when there is an issue searching identities."""

@@ -1,6 +1,13 @@
 PSEngine Changelog
 ==================
 
+[2.1.0] - 2025-07-02
+--------------------
+
+Added
+~~~~~
+- ``IdentityMgr`` added to support interaction with the identity API.
+
 [2.0.7] - 2025-07-02
 --------------------
 
