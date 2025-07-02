@@ -15,7 +15,7 @@ import os
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, Secret
 
 
 class RFBaseModel(BaseModel):
@@ -50,7 +50,6 @@ class RFBaseModel(BaseModel):
             else kwargs['exclude_unset']
         )
         kwargs['exclude_unset'] = exclude_unset
-
         return self.model_dump(mode='json', by_alias=by_alias, exclude_none=exclude_none, **kwargs)
 
 
@@ -87,3 +86,13 @@ class DetectionRuleType(Enum):
     sigma = 'sigma'
     yara = 'yara'
     snort = 'snort'
+
+
+class ClearTextPassword(Secret[str]):
+    """Model to hide passwords while logging.
+
+    To view the clear text password do ``value.get_secret_value()``
+    """
+
+    def _display(self) -> str:
+        return self.get_secret_value()[:4] + '********'

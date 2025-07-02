@@ -11,4 +11,5 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-__version__ = '2.1.0'
+DETECTIONS_PER_PAGE = 20
+MAXIMUM_IDENTITIES = 500

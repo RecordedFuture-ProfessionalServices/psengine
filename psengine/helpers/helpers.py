@@ -156,7 +156,7 @@ class TimeHelpers:
     """Helpers for time related functions."""
 
     @staticmethod
-    def rel_time_to_date(relative_time) -> str:
+    def rel_time_to_date(relative_time: str) -> str:
         """Convert a relative time to a date. Minutes not supported.
 
         Example:
@@ -193,7 +193,7 @@ class TimeHelpers:
         return subtracted
 
     @staticmethod
-    def is_rel_time_valid(rel_time) -> bool:
+    def is_rel_time_valid(rel_time: str) -> bool:
         """Helper function to determine if relative time expression is valid.
 
         Args:
@@ -202,7 +202,7 @@ class TimeHelpers:
         Returns:
             bool: True if valid, False otherwise
         """
-        if rel_time is None:
+        if rel_time is None or not isinstance(rel_time, str):
             return False
 
         return bool(re.match(VALID_TIME_REGEX, rel_time))
@@ -468,3 +468,39 @@ class MultiThreadingHelper:
             futures = [pool.submit(func, element, **kwargs) for element in iterator]
 
         return [f.result() for f in futures]
+
+
+class Validators:
+    """Common validators for pydantic models."""
+
+    @staticmethod
+    def convert_str_to_list(value: Union[str, list]) -> list:
+        """Convert value from str to list and remove None values."""
+        value = value if isinstance(value, list) else [value]
+        return [v for v in value if v is not None]
+
+    @staticmethod
+    def convert_relative_time(input_time: str) -> str:
+        """Covert relative time to datetime string if possible."""
+        return (
+            TimeHelpers.rel_time_to_date(input_time)
+            if TimeHelpers.is_rel_time_valid(input_time)
+            else input_time
+        )
+
+    @staticmethod
+    def check_uhash_prefix(value: Union[str, list]) -> Union[str, list]:
+        """Validates that the field contains fields starting with uhash and add it otherwise."""
+        uhash = 'uhash:'
+        if isinstance(value, str):
+            return f'{uhash}{value}' if not value.startswith(uhash) else value
+
+        if isinstance(value, list):
+            new_values = []
+            for h in value:
+                if h:
+                    complete_value = f'{uhash}{h}' if not h.startswith(uhash) else h
+                    new_values.append(complete_value)
+            return new_values
+
+        return value
