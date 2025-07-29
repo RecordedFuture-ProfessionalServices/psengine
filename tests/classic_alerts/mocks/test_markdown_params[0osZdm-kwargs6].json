@@ -1,0 +1,224 @@
+{
+    "data": {
+        "review": {
+            "note": null,
+            "status_in_portal": "Tuples are containers for a fixed number of Erlang data types.",
+            "assignee": null,
+            "status": "Ports are created with the built-in function open_port."
+        },
+        "owner_organisation_details": {
+            "organisations": [
+                {
+                    "organisation_id": "Any element of a tuple can be accessed in constant time.",
+                    "organisation_name": "Atoms are used within a program to denote distinguished values."
+                }
+            ],
+            "enterprise_id": "Erlang is known for its designs that are well suited for systems.",
+            "enterprise_name": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase."
+        },
+        "url": {
+            "api": "https://google.com",
+            "portal": "https://google.com"
+        },
+        "rule": {
+            "use_case_deprecation": null,
+            "name": "Senate bean soup",
+            "id": "puqQNK",
+            "url": {
+                "portal": "https://google.com"
+            }
+        },
+        "id": "JTMYYh",
+        "hits": [
+            {
+                "entities": [
+                    {
+                        "id": "ip:136.66.191.94",
+                        "name": "Gazpacho",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "7gYpI3l0spJQaNv",
+                        "name": "Tomato compote",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "ip:87.55.195.104",
+                        "name": "Charleston red rice",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "ip:84.134.252.141",
+                        "name": "Garden salad",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "ip:50.69.225.70",
+                        "name": "Pan Seared Scallops",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "x879V",
+                        "name": "Vegemite on Toast",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "lQW6Ne",
+                        "name": "Poke",
+                        "type": "NetworkPort"
+                    },
+                    {
+                        "id": "ff9rNQ",
+                        "name": "Gyoza",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "ip:139.170.242.39",
+                        "name": "Calas",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "ip:120.113.48.87",
+                        "name": "Fries",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "ip:143.235.242.250",
+                        "name": "Crab cake",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "ip:233.2.125.167",
+                        "name": "White chocolate cookie",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "ip:8.36.247.77",
+                        "name": "Boulliabaise",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "8qjyXx",
+                        "name": "Chowder",
+                        "type": "NetworkProtocol"
+                    },
+                    {
+                        "id": "ip:218.246.243.30",
+                        "name": "Spanish rice",
+                        "type": "IpAddress"
+                    },
+                    {
+                        "id": "sTItc2",
+                        "name": "Peanut butter",
+                        "type": "Category"
+                    },
+                    {
+                        "id": "ip:181.176.174.199",
+                        "name": "Ranch dressing",
+                        "type": "IpAddress"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "aXwsbmVLCLDc5",
+                        "name": "Scampi",
+                        "type": "Source"
+                    },
+                    "title": "I don't even care.",
+                    "url": null,
+                    "authors": []
+                },
+                "fragment": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "id": "ULcVBpBq07a",
+                "language": "Ports are used to communicate with the external world.",
+                "primary_entity": null,
+                "analyst_note": null
+            }
+        ],
+        "enriched_entities": [],
+        "ai_insights": {
+            "comment": "Where are my pants?",
+            "text": null
+        },
+        "log": {
+            "note_author": null,
+            "note_date": null,
+            "status_date": "2025-04-12T12:54:33.611Z",
+            "triggered": "2025-09-03T02:14:50.269Z",
+            "status_change_by": "Erlang is known for its designs that are well suited for systems."
+        },
+        "triggered_by": [
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "TayaIDbZKj6PnDrEOBgXwEWsR2hll"
+                            },
+                            "entity": {
+                                "id": "ip:203.89.28.10",
+                                "name": "Juba",
+                                "type": "IpAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "aZ7H21sZEztWi6"
+                            },
+                            "entity": {
+                                "id": "ip:70.197.190.59",
+                                "name": "Tuna Pizza",
+                                "type": "IpAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "A5yD87khrWju"
+                            },
+                            "entity": {
+                                "id": "N8pJCELcPwF2m",
+                                "name": "Pumpkin pie",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "CIQU2ntyXlg8W2kPHiOLYQLnM9ffW"
+                        },
+                        "entity": {
+                            "id": "ip:132.159.183.51",
+                            "name": "Texas Toast",
+                            "type": "IpAddress"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "VqUtTI3H1wuB4F"
+                        },
+                        "entity": {
+                            "id": "ip:41.121.201.2",
+                            "name": "Chicken \u00e0 la King",
+                            "type": "IpAddress"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "GtN6IdGSL5XH"
+                        },
+                        "entity": {
+                            "id": "x1EqrQ4WEbXg9",
+                            "name": "Philadelphia cheesesteak",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "It is also a garbage-collected runtime system."
+            }
+        ],
+        "title": "Tuples are containers for a fixed number of Erlang data types.",
+        "type": "EVENT"
+    }
+}

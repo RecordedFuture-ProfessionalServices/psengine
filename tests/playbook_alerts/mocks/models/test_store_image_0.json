@@ -1,0 +1,333 @@
+{
+    "status": {
+        "status_code": "She spent her earliest years reading classic literature, and writing poetry.",
+        "status_message": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+    },
+    "data": {
+        "playbook_alert_id": "task:28d92c9f-efd5-4a3a-a09b-7cd7ede909a4",
+        "panel_status": {
+            "status": "New",
+            "priority": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "created": "2025-12-14T11:41:08.330Z",
+            "updated": "2025-05-24T13:23:49.570Z",
+            "case_rule_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "case_rule_label": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "owner_id": "Do you come here often?",
+            "owner_name": "Do you come here often?",
+            "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "organisation_name": "It is also a garbage-collected runtime system.",
+            "owner_organisation_details": {
+                "organisations": [
+                    {
+                        "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                        "organisation_name": "She spent her earliest years reading classic literature, and writing poetry."
+                    }
+                ],
+                "enterprise_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "enterprise_name": "Atoms are used within a program to denote distinguished values."
+            },
+            "entity_id": "Erlang is known for its designs that are well suited for systems.",
+            "entity_name": "founded.mz",
+            "entity_criticality": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "risk_score": 26,
+            "context_list": [
+                {
+                    "context": "Erlang is known for its designs that are well suited for systems."
+                },
+                {
+                    "context": "He looked inquisitively at his keyboard and wrote another sentence."
+                }
+            ],
+            "targets": [
+                "Ports are created with the built-in function open_port.",
+                "In 1989 the building was heavily damaged by fire, but it has since been restored."
+            ],
+            "actions_taken": []
+        },
+        "panel_action": [],
+        "panel_evidence_summary": {
+            "explanation": "Make me a sandwich.",
+            "resolved_record_list": [
+                {
+                    "entity": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "risk_score": 53,
+                    "criticality": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "record_type": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "context_list": []
+                },
+                {
+                    "entity": "It is also a garbage-collected runtime system.",
+                    "risk_score": 10,
+                    "criticality": "Where are my pants?",
+                    "record_type": "Do you come here often?",
+                    "context_list": []
+                },
+                {
+                    "entity": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "risk_score": 10,
+                    "criticality": "Do you come here often?",
+                    "record_type": "Make me a sandwich.",
+                    "context_list": [
+                        {
+                            "context": "Tuples are containers for a fixed number of Erlang data types."
+                        }
+                    ]
+                },
+                {
+                    "entity": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "risk_score": 5,
+                    "criticality": "I don't even care.",
+                    "record_type": "Haskell features a type system with type inference and lazy evaluation.",
+                    "context_list": [
+                        {
+                            "context": "He looked inquisitively at his keyboard and wrote another sentence."
+                        }
+                    ]
+                },
+                {
+                    "entity": "Where are my pants?",
+                    "risk_score": 41,
+                    "criticality": "Where are my pants?",
+                    "record_type": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "context_list": []
+                },
+                {
+                    "entity": "Do you come here often?",
+                    "risk_score": 15,
+                    "criticality": "It is also a garbage-collected runtime system.",
+                    "record_type": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "context_list": []
+                }
+            ],
+            "screenshots": [
+                {
+                    "description": "The arguments can be primitive data types or compound data types.",
+                    "image_id": "img:58765072-691a-49f5-b52e-c69776b2c803",
+                    "created": "2025-05-20T13:30:14.378Z",
+                    "availability": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "tag": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                }
+            ],
+            "screenshot_mentions": []
+        },
+        "panel_evidence_dns": {
+            "ip_list": [
+                {
+                    "entity": "I don't even care.",
+                    "risk_score": 53,
+                    "criticality": "Ports are created with the built-in function open_port.",
+                    "record_type": "Type classes first appeared in the Haskell programming language.",
+                    "context_list": []
+                },
+                {
+                    "entity": "Ports are used to communicate with the external world.",
+                    "risk_score": 41,
+                    "criticality": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "record_type": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "context_list": []
+                }
+            ],
+            "mx_list": [
+                {
+                    "entity": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "risk_score": 10,
+                    "criticality": "Haskell features a type system with type inference and lazy evaluation.",
+                    "record_type": "Do you have any idea why this is not working?",
+                    "context_list": [
+                        {
+                            "context": "Erlang is known for its designs that are well suited for systems."
+                        }
+                    ]
+                },
+                {
+                    "entity": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "risk_score": 5,
+                    "criticality": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "record_type": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "context_list": [
+                        {
+                            "context": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                        }
+                    ]
+                }
+            ],
+            "ns_list": [
+                {
+                    "entity": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "risk_score": 10,
+                    "criticality": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "record_type": "Make me a sandwich.",
+                    "context_list": []
+                },
+                {
+                    "entity": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "risk_score": 15,
+                    "criticality": "Atoms are used within a program to denote distinguished values.",
+                    "record_type": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "context_list": []
+                }
+            ]
+        },
+        "panel_evidence_whois": {
+            "body": [
+                {
+                    "provider": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "entity": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "attribute": "The arguments can be primitive data types or compound data types.",
+                    "value": {
+                        "privateRegistration": false,
+                        "status": "clientDeleteProhibited clientRenewProhibited clientTransferProhibited clientUpdateProhibited",
+                        "nameServers": [
+                            "Ports are created with the built-in function open_port.",
+                            "Type classes first appeared in the Haskell programming language."
+                        ],
+                        "registrarName": "Tuples are containers for a fixed number of Erlang data types.",
+                        "createdDate": "2025-07-04T10:56:52.797Z"
+                    },
+                    "added": "2025-03-28T20:15:51.143Z"
+                },
+                {
+                    "provider": "Ports are used to communicate with the external world.",
+                    "entity": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "attribute": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "value": {
+                        "organization": "Its main implementation is the Glasgow Haskell Compiler.",
+                        "city": "Type classes first appeared in the Haskell programming language.",
+                        "name": "Beignets",
+                        "state": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                        "street1": "It is also a garbage-collected runtime system.",
+                        "country": "Any element of a tuple can be accessed in constant time.",
+                        "postalCode": "Erlang is known for its designs that are well suited for systems.",
+                        "countryCode": "Tuples are containers for a fixed number of Erlang data types.",
+                        "telephone": "Erlang is a general-purpose, concurrent, functional programming language.",
+                        "type": "technicalContact"
+                    },
+                    "added": "2025-01-05T15:53:52.578Z"
+                },
+                {
+                    "provider": "The arguments can be primitive data types or compound data types.",
+                    "entity": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "attribute": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "value": {
+                        "organization": "It is also a garbage-collected runtime system.",
+                        "city": "Do you have any idea why this is not working?",
+                        "name": "Cheese dog",
+                        "state": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                        "street1": "Do you have any idea why this is not working?",
+                        "country": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                        "postalCode": "Ports are created with the built-in function open_port.",
+                        "countryCode": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                        "telephone": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                        "type": "administrativeContact"
+                    },
+                    "added": "2025-09-24T10:21:23.369Z"
+                },
+                {
+                    "provider": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "entity": "The arguments can be primitive data types or compound data types.",
+                    "attribute": "Atoms are used within a program to denote distinguished values.",
+                    "value": {
+                        "city": "Where are my pants?",
+                        "name": "Muffuletta",
+                        "state": "Do you come here often?",
+                        "street1": "Type classes first appeared in the Haskell programming language.",
+                        "country": "Do you have any idea why this is not working?",
+                        "postalCode": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                        "countryCode": "Where are my pants?",
+                        "telephone": "Haskell features a type system with type inference and lazy evaluation.",
+                        "type": "registrant"
+                    },
+                    "added": "2025-12-21T19:04:42.603Z"
+                }
+            ]
+        },
+        "panel_log": [
+            {
+                "id": "CJPr9khCKeHjLDRPnfx35BnbsgnIEVnWpFFA83Z2R",
+                "created": "2025-11-27T22:21:32.112Z",
+                "modified": "2025-06-13T10:49:19.552Z",
+                "action_priority": "Where are my pants?",
+                "changes": {
+                    "priority_change": {
+                        "old": "Erlang is a general-purpose, concurrent, functional programming language.",
+                        "new": "Tuples are containers for a fixed number of Erlang data types.",
+                        "type": "priority_change"
+                    }
+                },
+                "context": {
+                    "type": "domain_abuse",
+                    "changes": [
+                        {
+                            "old": "The arguments can be primitive data types or compound data types.",
+                            "new": "Type classes first appeared in the Haskell programming language.",
+                            "type": "priority_change"
+                        },
+                        {
+                            "domain": "Do you come here often?",
+                            "removed": [],
+                            "added": [
+                                {
+                                    "id": "idn:advisors.media",
+                                    "assessments": [
+                                        {
+                                            "id": "C80fC4XXaEGEvOk3li3BaZJoNxYqKNlS5yIwZ",
+                                            "level": 2
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "idn:cathedral.moscow",
+                                    "assessments": [
+                                        {
+                                            "id": "h14zFOdF7SzcY3uUNRAqGa0DmvUThR67jmaPs",
+                                            "level": 2
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "malicious_dns_change"
+                        }
+                    ]
+                }
+            }
+        ],
+        "panel_log_v2": [
+            {
+                "id": "xJpKHGGWQKr7iFqVdAHE8Qws0jgGocC4Xv0ksyrTb",
+                "created": "2025-10-31T14:49:28.466Z",
+                "changes": [
+                    {
+                        "old": "It is also a garbage-collected runtime system.",
+                        "new": "Tuples are containers for a fixed number of Erlang data types.",
+                        "type": "priority_change"
+                    },
+                    {
+                        "domain": "contracts.theatre",
+                        "removed": [],
+                        "added": [
+                            {
+                                "id": "idn:pride.se",
+                                "assessments": [
+                                    {
+                                        "id": "7zW8ozuPiF8yj8QuLW",
+                                        "level": 2
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "idn:producing.com",
+                                "assessments": [
+                                    {
+                                        "id": "XVlVL2i54vjfgbCj6n",
+                                        "level": 2
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "malicious_dns_change"
+                    }
+                ]
+            }
+        ]
+    }
+}

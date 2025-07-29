@@ -1,0 +1,90 @@
+{
+	"count": 1,
+	"total_count": 1,
+	"result": [
+		{
+			"id": "doc:lmRPGB",
+			"type": "yara",
+			"title": "Do you come here often?",
+			"description": "Any element of a tuple can be accessed in constant time.",
+			"created": "2025-02-07T02:45:31.902Z",
+			"updated": "2025-12-20T06:27:26.895Z",
+			"rules": [
+				{
+					"entities": [
+						{
+							"id": "GnKI9BHYYta",
+							"type": "MitreAttackIdentifier",
+							"name": "American fried rice",
+							"display_name": "Ports are used to communicate with the external world."
+						},
+						{
+							"id": "vzaKRSiudTd",
+							"type": "MitreAttackIdentifier",
+							"name": "Hot chicken",
+							"display_name": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+						},
+						{
+							"id": "y2ZhKQ",
+							"type": "Malware",
+							"name": "Bread"
+						},
+						{
+							"id": "YY5hT3SfA6M",
+							"type": "MitreAttackIdentifier",
+							"name": "Carne pizzaiola",
+							"display_name": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+						},
+						{
+							"id": "hash:502213b90845b47d2ac81bdd8be235be89bb8bff316297b410820679ac19eebf",
+							"type": "Hash",
+							"name": "Cheesecake"
+						},
+						{
+							"id": "hash:071cbeccc4e30794cedc8d0ca81655db14342bdc383e96352e48b7e11d725cd6",
+							"type": "Hash",
+							"name": "Funnel Cake"
+						},
+						{
+							"id": "u5n7p5udJ9e",
+							"type": "MitreAttackIdentifier",
+							"name": "Boulliabaise",
+							"display_name": "Its main implementation is the Glasgow Haskell Compiler."
+						},
+						{
+							"id": "fvJruDhiHFJ",
+							"type": "MitreAttackIdentifier",
+							"name": "Kung Pao Chicken",
+							"display_name": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+						},
+						{
+							"id": "99dMjaTkveF",
+							"type": "MitreAttackIdentifier",
+							"name": "Energy bar",
+							"display_name": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+						},
+						{
+							"id": "Nf6uVG",
+							"type": "Technology",
+							"name": "Mango and Sticky Rice"
+						},
+						{
+							"id": "0lqEYB",
+							"type": "MalwareCategory",
+							"name": "Ribs"
+						},
+						{
+							"id": "XbxeNj",
+							"type": "Malware",
+							"name": "American fried rice"
+						}
+					],
+					"content": "Type classes first appeared in the Haskell programming language.",
+					"file_name": "Make me a sandwich."
+				}
+			]
+		}
+	],
+	"next_offset": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase."
+}
+

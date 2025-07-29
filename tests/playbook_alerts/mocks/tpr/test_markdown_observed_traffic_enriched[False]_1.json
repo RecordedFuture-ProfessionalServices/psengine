@@ -1,0 +1,31 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-07-19T23:55:01.484Z",
+            "firstSeen": "2025-03-03T08:02:23.316Z"
+        },
+        "risk": {
+            "criticalityLabel": "Atoms are used within a program to denote distinguished values.",
+            "riskString": "The arguments can be primitive data types or compound data types.",
+            "rules": 1,
+            "criticality": 1,
+            "riskSummary": "Do you come here often?",
+            "score": 5,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "evidenceString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-18T23:51:41.804Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:138.172.23.71",
+            "name": "Bird's Nest Soup",
+            "type": "IpAddress"
+        }
+    }
+}

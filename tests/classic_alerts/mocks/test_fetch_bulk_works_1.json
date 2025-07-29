@@ -1,0 +1,756 @@
+{
+    "data": {
+        "review": {
+            "note": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "status_in_portal": "Ports are used to communicate with the external world.",
+            "assignee": null,
+            "status": "Ports are created with the built-in function open_port."
+        },
+        "owner_organisation_details": {
+            "organisations": [
+                {
+                    "organisation_id": "The arguments can be primitive data types or compound data types.",
+                    "organisation_name": "Any element of a tuple can be accessed in constant time."
+                }
+            ],
+            "enterprise_id": "Type classes first appeared in the Haskell programming language.",
+            "enterprise_name": "Erlang is known for its designs that are well suited for systems."
+        },
+        "url": {
+            "api": "https://google.com",
+            "portal": "https://google.com"
+        },
+        "rule": {
+            "use_case_deprecation": null,
+            "name": "Bellini",
+            "id": "XJfS08",
+            "url": {
+                "portal": "https://google.com"
+            }
+        },
+        "id": "OgRw60",
+        "hits": [
+            {
+                "entities": [
+                    {
+                        "id": "rJ6bR",
+                        "name": "Churrasco",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "Tiz20QCLqsTzG8TQk7upHnSqYLA9XxF9VLg9xA9s",
+                        "name": "Milk Steak",
+                        "type": "Image"
+                    },
+                    {
+                        "id": "l7KwqVUUUQIlTOh9knDpRZKMI",
+                        "name": "Swiss steak",
+                        "type": "EmailAddress"
+                    },
+                    {
+                        "id": "6Xwjs",
+                        "name": "Souvlaki",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "uoYmpK",
+                        "name": "Chinese food",
+                        "type": "IndustryTerm"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "tWAUQi1gxVghf",
+                        "name": "St. Paul Sandwich",
+                        "type": "Source"
+                    },
+                    "title": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "url": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "authors": [
+                        {
+                            "id": "A3cZYj",
+                            "name": "Pigs in blankets",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Do you have any idea why this is not working?",
+                "id": "XDXZJkPLuWj",
+                "language": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "primary_entity": null,
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "ai7v1",
+                        "name": "Turkish Delight",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "9dbW4ABwBf9gQwcb0mxfKwwS01uoy3WUecyBw17E",
+                        "name": "Hot chicken",
+                        "type": "Image"
+                    },
+                    {
+                        "id": "dWidcG",
+                        "name": "Chicago Hot Dog",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "Sz4tSF",
+                        "name": "Pancakes",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "YOgUpNaMNfAJ5HdoB9lugwg",
+                        "name": "Chinese food",
+                        "type": "EmailAddress"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "fPgSBqXxjGqvQ",
+                        "name": "Phaal",
+                        "type": "Source"
+                    },
+                    "title": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "url": "Where are my pants?",
+                    "authors": [
+                        {
+                            "id": "AnqO8P",
+                            "name": "Energy bar",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Make me a sandwich.",
+                "id": "vXXfWxWx0ST",
+                "language": "She spent her earliest years reading classic literature, and writing poetry.",
+                "primary_entity": null,
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "hhmYy",
+                        "name": "Eggs Benedict",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "gwbdvhtTkvAdGhWTOWKBigjFOrgs9ts6JdKSYy8V",
+                        "name": "Seafood cocktail",
+                        "type": "Image"
+                    },
+                    {
+                        "id": "eZ8GEku0E52yR0vdneV9Tn57jy",
+                        "name": "Chile Relleno",
+                        "type": "EmailAddress"
+                    },
+                    {
+                        "id": "x8qiR",
+                        "name": "Pan Seared Scallops",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "zsLlMc",
+                        "name": "Seafood cocktail",
+                        "type": "IndustryTerm"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "g73eJezxB5CbU",
+                        "name": "Spaghetti and Meatballs",
+                        "type": "Source"
+                    },
+                    "title": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "url": "Where are my pants?",
+                    "authors": [
+                        {
+                            "id": "ozoMZx",
+                            "name": "Alice Springs Chicken",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "id": "snq3ZKJMWVn",
+                "language": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "primary_entity": null,
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "CGI9sIhp89wAqFelw",
+                        "name": "Salad bar",
+                        "type": "EmailAddress"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "SWNhpudQmOJro",
+                        "name": "Mashed pumpkin",
+                        "type": "Source"
+                    },
+                    "title": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "url": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "authors": []
+                },
+                "fragment": "It is also a garbage-collected runtime system.",
+                "id": "DPBxCePXhka",
+                "language": "Tuples are containers for a fixed number of Erlang data types.",
+                "primary_entity": null,
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "FbFOh",
+                        "name": "Shawarma",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "IPjuU",
+                        "name": "Chicken French",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "XnlGW5",
+                        "name": "Corn chowder",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "AKDjMa6jF2v0Q8M7SK3NgwEDiN6HQRTCjkrk0LdJ",
+                        "name": "Milkshake",
+                        "type": "Image"
+                    },
+                    {
+                        "id": "n5dsx2Lq7IkIaF4TBdNSwUuDjZkXdY0zQO0",
+                        "name": "London broil",
+                        "type": "EmailAddress"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "zzN1Qbz6DQoLa",
+                        "name": "Clam cake",
+                        "type": "Source"
+                    },
+                    "title": "Atoms are used within a program to denote distinguished values.",
+                    "url": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "authors": [
+                        {
+                            "id": "QQzrl9",
+                            "name": "Cordon bleu",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Any element of a tuple can be accessed in constant time.",
+                "id": "Sd02rbk6Rrf",
+                "language": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "primary_entity": null,
+                "analyst_note": null
+            }
+        ],
+        "enriched_entities": [],
+        "ai_insights": {
+            "comment": null,
+            "text": "It is also a garbage-collected runtime system. Do you have any idea why this is not working? Do you have any idea why this is not working? The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. Type classes first appeared in the Haskell programming language."
+        },
+        "log": {
+            "note_author": "Any element of a tuple can be accessed in constant time.",
+            "note_date": "2025-01-12T19:52:08.468Z",
+            "status_date": "2025-12-15T02:17:02.218Z",
+            "triggered": "2025-05-27T08:00:55.985Z",
+            "status_change_by": "Do you have any idea why this is not working?"
+        },
+        "triggered_by": [
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "wf2EK0pbH9Vm6f"
+                            },
+                            "entity": {
+                                "id": "1Gsla",
+                                "name": "French Onion Soup",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "B8SWdqCyJVa1"
+                            },
+                            "entity": {
+                                "id": "8F7awQceZXSjc",
+                                "name": "Piroshky",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "7zgouQHnPxLoSN"
+                        },
+                        "entity": {
+                            "id": "NAHuK",
+                            "name": "Funnel Cake",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "FcEXn8CARVEp"
+                        },
+                        "entity": {
+                            "id": "afWDkdAwYxo23",
+                            "name": "Risotto",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "The arguments can be primitive data types or compound data types."
+            },
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "s1fMsR3oOMrHAb"
+                            },
+                            "entity": {
+                                "id": "54hiE",
+                                "name": "Fattoush Salad",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "jT3Z3hi48O05"
+                            },
+                            "entity": {
+                                "id": "FNXFneBzVC0F2",
+                                "name": "Roasted Chickpeas",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "In3rig6buDOdWS"
+                        },
+                        "entity": {
+                            "id": "xte60",
+                            "name": "Eggs Benedict",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "jvhg2dockWpJ"
+                        },
+                        "entity": {
+                            "id": "32piNwEOMfcbB",
+                            "name": "Cordon bleu",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "Ports are used to communicate with the external world."
+            },
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "EakxvH7qqxWnxa"
+                            },
+                            "entity": {
+                                "id": "LeHj6d",
+                                "name": "Grilled Snake",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "bo4m5gw4eMUl"
+                            },
+                            "entity": {
+                                "id": "pAbUn",
+                                "name": "Hot chicken",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "l42UoWSoHwYH"
+                            },
+                            "entity": {
+                                "id": "gjRO7Kg6ItezA",
+                                "name": "Jell-O",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "9D5qeq7QzbjioA"
+                        },
+                        "entity": {
+                            "id": "LzOHt6",
+                            "name": "Chile Relleno",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "uPaRo6incURo"
+                        },
+                        "entity": {
+                            "id": "wmwOL",
+                            "name": "Currywurst",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "TB94uq1iePaa"
+                        },
+                        "entity": {
+                            "id": "c7RHsP7b8ewgT",
+                            "name": "Currywurst",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "Do you come here often?"
+            },
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "x4XVTZqQbJIh0u"
+                            },
+                            "entity": {
+                                "id": "zvmzU",
+                                "name": "Abalone",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "hhBMZzK1yQ2P"
+                            },
+                            "entity": {
+                                "id": "jGGDykMGUu6vL",
+                                "name": "Fry sauce",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "GiHz9Y5orY2DAA"
+                        },
+                        "entity": {
+                            "id": "RISED",
+                            "name": "Cheese dog",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "6djCZiWeEviT"
+                        },
+                        "entity": {
+                            "id": "XH37zpz6PQIAK",
+                            "name": "Shucked Oysters",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+            },
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "SseCJ2xjrcsIhBc9E7g2nR"
+                            },
+                            "entity": {
+                                "id": "2IGRagEE87zHmCd8W",
+                                "name": "Protein bar",
+                                "type": "EmailAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "7qmd74TeGNbz1Af10Dp"
+                            },
+                            "entity": {
+                                "id": "idn:euros.saarland",
+                                "name": "Samosa",
+                                "type": "InternetDomainName"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "5BGKzA62IVRu"
+                            },
+                            "entity": {
+                                "id": "O4Kbfe",
+                                "name": "Gazpacho",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "tBZIkkxL0XzT"
+                            },
+                            "entity": {
+                                "id": "osMEr",
+                                "name": "Massaman Curry",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "SO0i8Y4haTVN"
+                            },
+                            "entity": {
+                                "id": "WoMFFBjgfzl8N",
+                                "name": "Chinese food",
+                                "type": "EntityList"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "attribute": {
+                                "id": "WUlbFWf1QIr7JdAJq8qh39"
+                            },
+                            "entity": {
+                                "id": "5y7XurF3UyI1bBCRi",
+                                "name": "Jambalaya",
+                                "type": "EmailAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "K7dLevd3KTKpQRl5bue"
+                            },
+                            "entity": {
+                                "id": "idn:historic.cloud",
+                                "name": "Fried Catfish",
+                                "type": "InternetDomainName"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "7q7IuQA2d0OsXSJe"
+                            },
+                            "entity": {
+                                "id": "oQri4b",
+                                "name": "Key Lime Pie",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "wNeVBeSrcuEk"
+                            },
+                            "entity": {
+                                "id": "5Ls4V",
+                                "name": "Drunken chicken",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "31pP5JO4OKol"
+                            },
+                            "entity": {
+                                "id": "3ryXVW4Q9R04Q",
+                                "name": "White chocolate cookie",
+                                "type": "EntityList"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "attribute": {
+                                "id": "UTg3LZ7Rw88jgI"
+                            },
+                            "entity": {
+                                "id": "PfCnswztlHFGoUQSo",
+                                "name": "Venison",
+                                "type": "EmailAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "Yg3ruQk4ADBhD3SQFHQ"
+                            },
+                            "entity": {
+                                "id": "idn:word.gent",
+                                "name": "Vegemite on Toast",
+                                "type": "InternetDomainName"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "MaKUuc5sYZjE"
+                            },
+                            "entity": {
+                                "id": "XZwGL3",
+                                "name": "Gyros",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "Mn9uvmdoPyNB"
+                            },
+                            "entity": {
+                                "id": "ixwS7",
+                                "name": "Sweet Potato Fries",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "ErLIiTnTvQTl"
+                            },
+                            "entity": {
+                                "id": "ktJ1c4vcDITmr",
+                                "name": "Polenta",
+                                "type": "EntityList"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "attribute": {
+                                "id": "A6HbFh36ByiTVK"
+                            },
+                            "entity": {
+                                "id": "GSMg20Ht3CNrItPGU",
+                                "name": "Apple butter",
+                                "type": "EmailAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "z1CMfMNXeVhxoyS6lPc"
+                            },
+                            "entity": {
+                                "id": "idn:activity.abudhabi",
+                                "name": "Hoppin' John",
+                                "type": "InternetDomainName"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "FwCHKgGGqDekp4Nb"
+                            },
+                            "entity": {
+                                "id": "dZb599",
+                                "name": "Ranch dressing",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "L1dxQ9II0Yt0"
+                            },
+                            "entity": {
+                                "id": "Ccp4C",
+                                "name": "Calamari",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "5V43O1B3Deu5"
+                            },
+                            "entity": {
+                                "id": "OjV4uOkU6YHc5",
+                                "name": "Alice Springs Chicken",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "meSBnT5ljaBVMeFCh2OkLb"
+                        },
+                        "entity": {
+                            "id": "TUGM5f8Xsa1DZNJAH",
+                            "name": "Gumbo",
+                            "type": "EmailAddress"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "6cofP4tTnEaRxgrnNhG"
+                        },
+                        "entity": {
+                            "id": "idn:burton.zuerich",
+                            "name": "Potato wedges",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "sYJ58uDzkz6j"
+                        },
+                        "entity": {
+                            "id": "Tv48CY",
+                            "name": "Sour cream",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "3yQZwU5ajoGl"
+                        },
+                        "entity": {
+                            "id": "eKuqn",
+                            "name": "Lobster roll",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "7ZLEFqKZvWGP"
+                        },
+                        "entity": {
+                            "id": "1eFGPAytR09rn",
+                            "name": "Creamed corn",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "Atoms are used within a program to denote distinguished values."
+            }
+        ],
+        "title": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+        "type": "EVENT"
+    }
+}

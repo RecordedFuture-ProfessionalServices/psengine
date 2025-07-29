@@ -1,0 +1,265 @@
+{
+    "data": {
+        "analystNotes": [],
+        "enterpriseLists": [],
+        "aiInsights": {
+            "comment": null,
+            "text": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase. Atoms are used within a program to denote distinguished values. Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\" Do you have any idea why this is not working? Where are my pants?",
+            "numberOfReferences": 6
+        },
+        "timestamps": {
+            "lastSeen": "2025-12-18T16:39:56.791Z",
+            "firstSeen": "2025-10-31T05:12:22.794Z"
+        },
+        "risk": {
+            "criticalityLabel": "I don't even care.",
+            "riskString": "Where are my pants?",
+            "rules": 6,
+            "criticality": 1,
+            "riskSummary": "I don't even care.",
+            "score": 24,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "evidenceString": "Tuples are containers for a fixed number of Erlang data types.",
+                    "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "criticality": 1,
+                    "timestamp": "2025-10-04T15:57:41.062Z",
+                    "criticalityLabel": "It is also a garbage-collected runtime system."
+                },
+                {
+                    "mitigationString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "evidenceString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "rule": "Any element of a tuple can be accessed in constant time.",
+                    "criticality": 1,
+                    "timestamp": "2025-11-13T11:47:34.592Z",
+                    "criticalityLabel": "Atoms are used within a program to denote distinguished values."
+                },
+                {
+                    "mitigationString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "evidenceString": "Do you come here often?",
+                    "rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "criticality": 1,
+                    "timestamp": "2025-09-29T01:04:12.652Z",
+                    "criticalityLabel": "Do you come here often?"
+                },
+                {
+                    "mitigationString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "evidenceString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "rule": "The arguments can be primitive data types or compound data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-02-15T13:46:07.333Z",
+                    "criticalityLabel": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+                },
+                {
+                    "mitigationString": "Where are my pants?",
+                    "evidenceString": "Where are my pants?",
+                    "rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "criticality": 1,
+                    "timestamp": "2025-11-25T04:44:02.221Z",
+                    "criticalityLabel": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                },
+                {
+                    "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "evidenceString": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "rule": "Do you come here often?",
+                    "criticality": 1,
+                    "timestamp": "2025-08-29T07:05:59.758Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                }
+            ]
+        },
+        "sightings": [],
+        "riskMapping": [
+            {
+                "rule": "I don't even care.",
+                "categories": []
+            },
+            {
+                "rule": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "categories": [
+                    {
+                        "framework": "Any element of a tuple can be accessed in constant time.",
+                        "name": "Greek salad"
+                    },
+                    {
+                        "framework": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                        "name": "Calas"
+                    }
+                ]
+            },
+            {
+                "rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "categories": [
+                    {
+                        "framework": "Type classes first appeared in the Haskell programming language.",
+                        "name": "Steak sandwich"
+                    }
+                ]
+            },
+            {
+                "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                "categories": [
+                    {
+                        "framework": "Type classes first appeared in the Haskell programming language.",
+                        "name": "Shrimp Creole"
+                    }
+                ]
+            },
+            {
+                "rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "categories": [
+                    {
+                        "framework": "Haskell features a type system with type inference and lazy evaluation.",
+                        "name": "Deep Fried Oreos"
+                    }
+                ]
+            },
+            {
+                "rule": "Haskell features a type system with type inference and lazy evaluation.",
+                "categories": []
+            }
+        ],
+        "entity": {
+            "id": "url:https://tip.istanbul/",
+            "name": "Pop-Tarts",
+            "type": "URL"
+        },
+        "relatedEntities": [],
+        "intelCard": "Haskell features a type system with type inference and lazy evaluation.",
+        "links": {
+            "hits": [],
+            "method_aggregates": [
+                {
+                    "count": 0,
+                    "type": "hHQyM6"
+                },
+                {
+                    "count": 0,
+                    "type": "hHQyM7"
+                },
+                {
+                    "count": 0,
+                    "type": "gTB8y2"
+                }
+            ],
+            "counts": []
+        },
+        "counts": [
+            {
+                "date": "2024-02-02",
+                "count": 1
+            },
+            {
+                "date": "2024-02-02",
+                "count": 4
+            },
+            {
+                "date": "2024-02-02",
+                "count": 1
+            },
+            {
+                "date": "2024-02-02",
+                "count": 4
+            }
+        ],
+        "metrics": [
+            {
+                "type": "defangedURLSightings",
+                "value": 10
+            },
+            {
+                "type": "defangedURL",
+                "value": 7
+            },
+            {
+                "type": "suspectedCncUrlSightings",
+                "value": 1
+            },
+            {
+                "type": "oneDayHits",
+                "value": 0
+            },
+            {
+                "type": "totalHits",
+                "value": 10
+            },
+            {
+                "type": "malwareSiteDetected",
+                "value": 1
+            },
+            {
+                "type": "urlscan",
+                "value": 1
+            },
+            {
+                "type": "c2Subscore",
+                "value": 0
+            },
+            {
+                "type": "whitelistedCount",
+                "value": 0
+            },
+            {
+                "type": "phishingSiteSuspectedSightings",
+                "value": 1
+            },
+            {
+                "type": "publicSubscore",
+                "value": 24
+            },
+            {
+                "type": "mitigatedCount",
+                "value": 0
+            },
+            {
+                "type": "phishingSiteDetectedSightings",
+                "value": 1
+            },
+            {
+                "type": "criticality",
+                "value": 1
+            },
+            {
+                "type": "reportedCncUrl",
+                "value": 2
+            },
+            {
+                "type": "sevenDaysHits",
+                "value": 0
+            },
+            {
+                "type": "suspectedCncUrl",
+                "value": 1
+            },
+            {
+                "type": "reportedCncUrlSightings",
+                "value": 3171
+            },
+            {
+                "type": "malwareSiteDetectedSightings",
+                "value": 1
+            },
+            {
+                "type": "phishingSiteDetected",
+                "value": 1
+            },
+            {
+                "type": "phishingSiteSuspected",
+                "value": 1
+            },
+            {
+                "type": "phishingSubscore",
+                "value": 0
+            },
+            {
+                "type": "malwareSubscore",
+                "value": 5
+            },
+            {
+                "type": "sixtyDaysHits",
+                "value": 0
+            }
+        ]
+    }
+}

@@ -1,0 +1,73 @@
+{
+	"attributes": {
+		"title": "It is also a garbage-collected runtime system.",
+		"text": "Atoms are used within a program to denote distinguished values. Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. Its main implementation is the Glasgow Haskell Compiler. Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. Tuples are containers for a fixed number of Erlang data types.",
+		"published": "2025-03-31T15:22:58.537Z",
+		"note_entities": [
+			{
+				"id": "ixxBNSKIIiA",
+				"name": "Sushi",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "STXkFJ",
+				"name": "Sichuan Hot Pot",
+				"type": "Person"
+			},
+			{
+				"id": "5pxLTXaTHqP",
+				"name": "Patty",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "64drQqIDN1Y",
+				"name": "Beignets",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "h5tggt4390CTl",
+				"name": "Gyoza",
+				"type": "Source"
+			}
+		],
+		"context_entities": [
+			{
+				"id": "bSgue",
+				"name": "Apple sauce",
+				"type": "Country"
+			},
+			{
+				"id": "dJdWQz",
+				"name": "Fry sauce",
+				"type": "Industry"
+			},
+			{
+				"id": "x0Obdg",
+				"name": "Escargot",
+				"type": "Industry"
+			}
+		],
+		"topic": [
+			{
+				"id": "bDoxnh",
+				"name": "Turkish Delight",
+				"type": "Topic",
+				"description": "Where are my pants?"
+			}
+		],
+		"validation_urls": [
+			{
+				"id": "url:https://ware.weather/",
+				"name": "https://ware.weather/",
+				"type": "URL"
+			}
+		]
+	},
+	"id": "ofgFCfmplM",
+	"source": {
+		"id": "hsvKMtfkp4IZm",
+		"name": "Spaghetti Bolognese",
+		"type": "Source"
+	}
+}
+

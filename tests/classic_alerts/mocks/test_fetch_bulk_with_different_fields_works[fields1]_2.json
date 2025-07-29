@@ -1,0 +1,85 @@
+{
+    "data": {
+        "review": {
+            "note": null,
+            "status_in_portal": "Tuples are containers for a fixed number of Erlang data types.",
+            "assignee": null,
+            "status": "Tuples are containers for a fixed number of Erlang data types."
+        },
+        "owner_organisation_details": {
+            "organisations": [
+                {
+                    "organisation_id": "Where are my pants?",
+                    "organisation_name": "The arguments can be primitive data types or compound data types."
+                }
+            ],
+            "enterprise_id": "Its main implementation is the Glasgow Haskell Compiler.",
+            "enterprise_name": "Do you have any idea why this is not working?"
+        },
+        "url": {
+            "api": "https://google.com",
+            "portal": "https://google.com"
+        },
+        "rule": {
+            "use_case_deprecation": null,
+            "name": "Ice Cream Sundae",
+            "id": "oW9wKR",
+            "url": {
+                "portal": "https://google.com"
+            }
+        },
+        "id": "zfvps9",
+        "hits": [
+            {
+                "entities": [
+                    {
+                        "id": "W25TQo",
+                        "name": "St. Paul Sandwich",
+                        "type": "Organization"
+                    },
+                    {
+                        "id": "fcqJbj",
+                        "name": "Baked potato",
+                        "type": "Malware"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "LDso91BkuecBX",
+                        "name": "Roasted Bone Marrow",
+                        "type": "Source"
+                    },
+                    "title": "Haskell features a type system with type inference and lazy evaluation.",
+                    "url": null,
+                    "authors": []
+                },
+                "fragment": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "id": "UJTGbK9aRv2",
+                "language": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "primary_entity": null,
+                "analyst_note": {
+                    "id": "guo7xS",
+                    "url": {
+                        "api": "https://google.com",
+                        "portal": "https://google.com"
+                    }
+                }
+            }
+        ],
+        "enriched_entities": [],
+        "ai_insights": {
+            "comment": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "text": null
+        },
+        "log": {
+            "note_author": null,
+            "note_date": null,
+            "status_date": "2025-07-22T17:39:23.030Z",
+            "triggered": "2025-09-30T22:56:48.970Z",
+            "status_change_by": "Tuples are containers for a fixed number of Erlang data types."
+        },
+        "triggered_by": [],
+        "title": "The arguments can be primitive data types or compound data types.",
+        "type": "REFERENCE"
+    }
+}

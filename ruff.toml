@@ -10,6 +10,7 @@ exclude = [
     "dist",
     "venv",
     "tests/static",
+    "tests/tools",
     "psengine_cli/templates"
 ]
 
@@ -94,7 +95,6 @@ max-complexity = 10
     "F401",   # unused-import
     "F403",   # undefined-local-with-import-star
 ]
-
 "examples/*" = [
     "D101",    # undocumented-public-class
     "D103",    # undocumented-public-function

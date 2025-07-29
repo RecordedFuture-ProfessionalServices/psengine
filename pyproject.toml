@@ -31,8 +31,7 @@ dev = [
     "pytest-cov==6.0.0",
     "pytest-mock==3.14.0",
     "pytest-random-order==1.1.1",
-    "pytest-vcr==1.0.2",
-    "pytest-watch==4.2.0",
+    "pytest-httpdbg==0.8.1",
     "requests==2.29.0",
     "ruff~=0.11.0",
     "wheel==0.37.1",
@@ -42,9 +41,7 @@ dev = [
     "atlassian-python-api==3.41.4",
     "sphinx_autodoc_typehints==1.25.2",
     "sphinxcontrib-napoleon",
-    "typer==0.12.5",
-    "cookiecutter==2.6.0",
-    "tomlkit>=0.13.2",
+    "mimesis>=12.1.0",
 ]
 
 

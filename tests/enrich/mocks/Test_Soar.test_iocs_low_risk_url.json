@@ -1,0 +1,88 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 10,
+                    "level": 1.0,
+                    "context": {
+                        "phishing": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 2
+                            }
+                        },
+                        "malware": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 6
+                            }
+                        },
+                        "public": {
+                            "summary": [
+                                {
+                                    "level": 1.0,
+                                    "count": 1.0
+                                }
+                            ],
+                            "score": 10.0,
+                            "mostCriticalRule": "Haskell features a type system with type inference and lazy evaluation.",
+                            "rule": {
+                                "maxCount": 34
+                            }
+                        },
+                        "c2": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 1
+                            }
+                        }
+                    },
+                    "rule": {
+                        "count": 2,
+                        "mostCritical": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                        "maxCount": 35,
+                        "evidence": {
+                            "phishingSiteDetected": {
+                                "count": 1,
+                                "timestamp": "2025-07-27T18:49:44.493Z",
+                                "description": "Any element of a tuple can be accessed in constant time.",
+                                "rule": "I don't even care.",
+                                "sightings": 2,
+                                "mitigation": "Atoms are used within a program to denote distinguished values.",
+                                "level": 1
+                            },
+                            "defangedURL": {
+                                "count": 1,
+                                "timestamp": "2025-08-30T17:17:13.628Z",
+                                "description": "Type classes first appeared in the Haskell programming language.",
+                                "rule": "Do you come here often?",
+                                "sightings": 1,
+                                "mitigation": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                                "level": 1
+                            }
+                        },
+                        "summary": [
+                            {
+                                "level": 1.0,
+                                "count": 2.0
+                            }
+                        ]
+                    }
+                },
+                "entity": {
+                    "id": "url:https://mon.social/",
+                    "name": "Bear claw",
+                    "type": "URL"
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

@@ -1,0 +1,80 @@
+{
+    "status": {
+        "status_code": "Tuples are containers for a fixed number of Erlang data types.",
+        "status_message": "Ports are created with the built-in function open_port."
+    },
+    "data": [
+        {
+            "playbook_alert_id": "task:06bdbb0b-c478-4abb-8546-a551cc254ac0",
+            "panel_status": {
+                "status": "New",
+                "priority": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "created": "2025-12-31T12:27:00.121Z",
+                "updated": "2025-12-04T22:46:55.901Z",
+                "case_rule_id": "Its main implementation is the Glasgow Haskell Compiler.",
+                "case_rule_label": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "owner_id": "Where are my pants?",
+                "owner_name": "Do you have any idea why this is not working?",
+                "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "organisation_name": "Haskell features a type system with type inference and lazy evaluation.",
+                "owner_organisation_details": {
+                    "organisations": [
+                        {
+                            "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                            "organisation_name": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                        }
+                    ],
+                    "enterprise_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "enterprise_name": "Where are my pants?"
+                },
+                "entity_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "entity_name": "respondents.biz",
+                "entity_criticality": "Ports are used to communicate with the external world.",
+                "risk_score": 0,
+                "context_list": [],
+                "targets": [
+                    "Ports are created with the built-in function open_port."
+                ],
+                "actions_taken": []
+            }
+        },
+        {
+            "playbook_alert_id": "task:ba32b48e-e895-43bb-97cc-26144eeeb0cb",
+            "panel_status": {
+                "status": "New",
+                "priority": "Any element of a tuple can be accessed in constant time.",
+                "created": "2025-01-19T00:59:19.213Z",
+                "updated": "2025-07-13T21:00:05.202Z",
+                "case_rule_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "case_rule_label": "Erlang is known for its designs that are well suited for systems.",
+                "owner_id": "Type classes first appeared in the Haskell programming language.",
+                "owner_name": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "organisation_id": "Its main implementation is the Glasgow Haskell Compiler.",
+                "organisation_name": "Type classes first appeared in the Haskell programming language.",
+                "owner_organisation_details": {
+                    "organisations": [
+                        {
+                            "organisation_id": "Ports are used to communicate with the external world.",
+                            "organisation_name": "Atoms are used within a program to denote distinguished values."
+                        }
+                    ],
+                    "enterprise_id": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "enterprise_name": "Atoms are used within a program to denote distinguished values."
+                },
+                "entity_id": "Ports are created with the built-in function open_port.",
+                "entity_name": "hobby.biz",
+                "entity_criticality": "Haskell features a type system with type inference and lazy evaluation.",
+                "risk_score": 0,
+                "context_list": [
+                    {
+                        "context": "Do you have any idea why this is not working?"
+                    }
+                ],
+                "targets": [
+                    "Type classes first appeared in the Haskell programming language."
+                ],
+                "actions_taken": []
+            }
+        }
+    ]
+}

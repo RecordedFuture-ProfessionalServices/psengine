@@ -1,0 +1,74 @@
+{
+    "data": {
+        "cvssv3": {
+            "source": "Do you have any idea why this is not working?",
+            "scope": "Erlang is known for its designs that are well suited for systems.",
+            "exploitabilityScore": 2.8,
+            "baseSeverity": "Where are my pants?",
+            "baseScore": 8.8,
+            "privilegesRequired": "Ports are used to communicate with the external world.",
+            "userInteraction": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "impactScore": 5.9,
+            "attackVector": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "integrityImpact": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "confidentialityImpact": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "vectorString": "Tuples are containers for a fixed number of Erlang data types.",
+            "version": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "attackComplexity": "Make me a sandwich.",
+            "created": "2025-05-21T21:16:14.580Z",
+            "availabilityImpact": "Ports are created with the built-in function open_port."
+        },
+        "timestamps": {
+            "lastSeen": "2025-11-27T17:59:26.329Z",
+            "firstSeen": "2025-10-26T06:41:40.307Z"
+        },
+        "risk": {
+            "criticalityLabel": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "riskString": "Atoms are used within a program to denote distinguished values.",
+            "rules": 4,
+            "criticality": 3,
+            "riskSummary": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "score": 69,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Make me a sandwich.",
+                    "evidenceString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "rule": "Make me a sandwich.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-29T08:13:09.998Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "It is also a garbage-collected runtime system.",
+                    "evidenceString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-09T11:02:02.862Z",
+                    "criticalityLabel": "The arguments can be primitive data types or compound data types."
+                },
+                {
+                    "mitigationString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "evidenceString": "It is also a garbage-collected runtime system.",
+                    "rule": "The arguments can be primitive data types or compound data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-13T04:51:00.850Z",
+                    "criticalityLabel": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+                },
+                {
+                    "mitigationString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "evidenceString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "rule": "Atoms are used within a program to denote distinguished values.",
+                    "criticality": 3,
+                    "timestamp": "2025-05-21T14:05:13.241Z",
+                    "criticalityLabel": "Haskell features a type system with type inference and lazy evaluation."
+                }
+            ]
+        },
+        "entity": {
+            "id": "3XJSZo",
+            "name": "Stuffed peppers",
+            "type": "CyberVulnerability",
+            "description": "Any element of a tuple can be accessed in constant time."
+        }
+    }
+}

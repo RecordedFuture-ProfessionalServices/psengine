@@ -1,0 +1,103 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-08-24T16:50:06.512Z",
+            "firstSeen": "2025-06-23T02:59:52.534Z"
+        },
+        "risk": {
+            "criticalityLabel": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "riskString": "I don't even care.",
+            "rules": 10,
+            "criticality": 2,
+            "riskSummary": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "score": 32,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "Where are my pants?",
+                    "criticality": 1,
+                    "timestamp": "2025-10-13T17:52:38.310Z",
+                    "criticalityLabel": "I don't even care."
+                },
+                {
+                    "mitigationString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "evidenceString": "Do you have any idea why this is not working?",
+                    "rule": "Do you come here often?",
+                    "criticality": 1,
+                    "timestamp": "2025-01-02T09:42:09.507Z",
+                    "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "mitigationString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "evidenceString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "rule": "Type classes first appeared in the Haskell programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-07T10:53:12.945Z",
+                    "criticalityLabel": "Ports are created with the built-in function open_port."
+                },
+                {
+                    "mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "evidenceString": "It is also a garbage-collected runtime system.",
+                    "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "criticality": 1,
+                    "timestamp": "2025-09-23T17:26:53.437Z",
+                    "criticalityLabel": "Haskell features a type system with type inference and lazy evaluation."
+                },
+                {
+                    "mitigationString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "evidenceString": "I don't even care.",
+                    "rule": "The arguments can be primitive data types or compound data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-06-01T18:57:22.335Z",
+                    "criticalityLabel": "She spent her earliest years reading classic literature, and writing poetry."
+                },
+                {
+                    "mitigationString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "evidenceString": "Type classes first appeared in the Haskell programming language.",
+                    "rule": "Any element of a tuple can be accessed in constant time.",
+                    "criticality": 1,
+                    "timestamp": "2025-09-19T08:26:55.187Z",
+                    "criticalityLabel": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
+                },
+                {
+                    "mitigationString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "evidenceString": "I don't even care.",
+                    "rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "criticality": 1,
+                    "timestamp": "2025-03-02T20:46:21.689Z",
+                    "criticalityLabel": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "rule": "Where are my pants?",
+                    "criticality": 1,
+                    "timestamp": "2025-03-08T23:28:17.765Z",
+                    "criticalityLabel": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+                },
+                {
+                    "mitigationString": "Make me a sandwich.",
+                    "evidenceString": "Do you come here often?",
+                    "rule": "Do you come here often?",
+                    "criticality": 2,
+                    "timestamp": "2025-12-31T21:18:09.818Z",
+                    "criticalityLabel": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase."
+                },
+                {
+                    "mitigationString": "Do you come here often?",
+                    "evidenceString": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "rule": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "criticality": 2,
+                    "timestamp": "2025-06-17T14:22:43.932Z",
+                    "criticalityLabel": "I don't even care."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:10.174.116.200",
+            "name": "Corn dog",
+            "type": "IpAddress"
+        }
+    }
+}

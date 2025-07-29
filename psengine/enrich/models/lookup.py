@@ -247,7 +247,7 @@ class DNS(RFBaseModel):
 
 
 class Port(RFBaseModel):
-    name: str
+    name: Optional[str] = None
     version: Union[str, None]
     port: int
     extra_info: Union[str, None] = Field(alias='extraInfo')

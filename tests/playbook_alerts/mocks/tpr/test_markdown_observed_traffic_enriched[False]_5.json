@@ -1,0 +1,47 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-02-22T20:55:07.561Z",
+            "firstSeen": "2025-08-09T04:50:08.591Z"
+        },
+        "risk": {
+            "criticalityLabel": "It is also a garbage-collected runtime system.",
+            "riskString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "rules": 3,
+            "criticality": 2,
+            "riskSummary": "Atoms are used within a program to denote distinguished values.",
+            "score": 26,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "evidenceString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "rule": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "criticality": 1,
+                    "timestamp": "2025-03-12T15:32:53.424Z",
+                    "criticalityLabel": "She spent her earliest years reading classic literature, and writing poetry."
+                },
+                {
+                    "mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "evidenceString": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-01-27T00:55:51.204Z",
+                    "criticalityLabel": "Haskell features a type system with type inference and lazy evaluation."
+                },
+                {
+                    "mitigationString": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "evidenceString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "rule": "It is also a garbage-collected runtime system.",
+                    "criticality": 2,
+                    "timestamp": "2025-02-03T12:27:57.749Z",
+                    "criticalityLabel": "It is also a garbage-collected runtime system."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:6.159.224.141",
+            "name": "Creme Brulee",
+            "type": "IpAddress"
+        }
+    }
+}

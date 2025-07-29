@@ -1,0 +1,60 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 10,
+                    "level": 1.0,
+                    "context": {
+                        "malware": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 4
+                            }
+                        },
+                        "public": {
+                            "summary": [],
+                            "score": 10.0,
+                            "mostCriticalRule": "It is also a garbage-collected runtime system.",
+                            "rule": {
+                                "maxCount": 15
+                            }
+                        }
+                    },
+                    "rule": {
+                        "count": 1,
+                        "mostCritical": "He looked inquisitively at his keyboard and wrote another sentence.",
+                        "maxCount": 17,
+                        "evidence": {
+                            "threatResearcher": {
+                                "count": 2,
+                                "timestamp": "2025-12-08T06:52:21.871Z",
+                                "description": "Erlang is a general-purpose, concurrent, functional programming language.",
+                                "rule": "Make me a sandwich.",
+                                "sightings": 7,
+                                "mitigation": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                                "level": 1
+                            }
+                        },
+                        "summary": [
+                            {
+                                "level": 1.0,
+                                "count": 1.0
+                            }
+                        ]
+                    }
+                },
+                "entity": {
+                    "id": "hash:8c567d84a562830cc293235ff52b04008f549ab714198f757cf39b2cdd205839",
+                    "name": "Alice Springs Chicken",
+                    "type": "Hash"
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

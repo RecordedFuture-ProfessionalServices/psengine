@@ -1,0 +1,49 @@
+{
+	"count": 1,
+	"total_count": 1,
+	"result": [
+		{
+			"id": "doc:6DWzsX",
+			"type": "sigma",
+			"title": "The arguments can be primitive data types or compound data types.",
+			"description": "Make me a sandwich.",
+			"created": "2025-11-24T12:25:58.244Z",
+			"updated": "2025-03-06T20:48:40.303Z",
+			"rules": [
+				{
+					"entities": [
+						{
+							"id": "EcPzad",
+							"type": "Malware",
+							"name": "Sweetbreads"
+						},
+						{
+							"id": "LjVcWV",
+							"type": "SigmaDetectionRule",
+							"name": "Glorified rice"
+						},
+						{
+							"id": "PXMaZXD1EgB",
+							"type": "MitreAttackIdentifier",
+							"name": "Shrimp Creole",
+							"display_name": "Erlang is a general-purpose, concurrent, functional programming language."
+						},
+						{
+							"id": "kM4sff",
+							"type": "Technology",
+							"name": "Elote"
+						},
+						{
+							"id": "4uB4u",
+							"type": "Product",
+							"name": "Corn relish"
+						}
+					],
+					"content": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+				}
+			]
+		}
+	],
+	"next_offset": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+}
+

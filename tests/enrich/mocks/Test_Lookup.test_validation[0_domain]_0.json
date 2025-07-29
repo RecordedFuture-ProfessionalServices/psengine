@@ -1,0 +1,1042 @@
+{
+    "data": {
+        "analystNotes": [],
+        "enterpriseLists": [],
+        "aiInsights": {
+            "comment": null,
+            "text": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. Haskell features a type system with type inference and lazy evaluation. Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\" Erlang is known for its designs that are well suited for systems. The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "numberOfReferences": 5
+        },
+        "risk": {
+            "criticalityLabel": "Its main implementation is the Glasgow Haskell Compiler.",
+            "riskString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "rules": 5,
+            "criticality": 4,
+            "riskSummary": "I don't even care.",
+            "score": 94,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "evidenceString": "I don't even care.",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-11-13T17:55:33.586Z",
+                    "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "mitigationString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "evidenceString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "rule": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "criticality": 1,
+                    "timestamp": "2025-04-20T07:27:32.643Z",
+                    "criticalityLabel": "The arguments can be primitive data types or compound data types."
+                },
+                {
+                    "mitigationString": "Any element of a tuple can be accessed in constant time.",
+                    "evidenceString": "Do you come here often?",
+                    "rule": "Make me a sandwich.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-03T05:34:24.049Z",
+                    "criticalityLabel": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase."
+                },
+                {
+                    "mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "evidenceString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-31T12:34:19.933Z",
+                    "criticalityLabel": "Erlang is a general-purpose, concurrent, functional programming language."
+                },
+                {
+                    "mitigationString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "evidenceString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "rule": "Do you have any idea why this is not working?",
+                    "criticality": 4,
+                    "timestamp": "2025-02-02T14:25:51.264Z",
+                    "criticalityLabel": "Any element of a tuple can be accessed in constant time."
+                }
+            ]
+        },
+        "sightings": [
+            {
+                "source": "Erlang is known for its designs that are well suited for systems.",
+                "url": "Make me a sandwich.",
+                "published": "2025-09-21T20:00:48.413Z",
+                "fragment": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "title": "Ports are created with the built-in function open_port.",
+                "type": "first"
+            },
+            {
+                "source": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "url": "Ports are used to communicate with the external world.",
+                "published": "2025-12-29T19:55:42.513Z",
+                "fragment": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "title": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "type": "mostRecent"
+            },
+            {
+                "source": "Its main implementation is the Glasgow Haskell Compiler.",
+                "url": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "published": "2025-02-11T00:40:32.358Z",
+                "fragment": "Where are my pants?",
+                "title": "Its main implementation is the Glasgow Haskell Compiler.",
+                "type": "recentPaste"
+            },
+            {
+                "source": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "url": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "published": "2025-10-14T23:06:53.048Z",
+                "fragment": "The arguments can be primitive data types or compound data types.",
+                "title": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "type": "recentInfoSec"
+            }
+        ],
+        "riskMapping": [
+            {
+                "rule": "Ports are created with the built-in function open_port.",
+                "categories": [
+                    {
+                        "framework": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                        "name": "Chicken French"
+                    },
+                    {
+                        "framework": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                        "name": "Chicken fried steak"
+                    }
+                ]
+            },
+            {
+                "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "categories": [
+                    {
+                        "framework": "He looked inquisitively at his keyboard and wrote another sentence.",
+                        "name": "Juba"
+                    },
+                    {
+                        "framework": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                        "name": "Baklava"
+                    },
+                    {
+                        "framework": "He looked inquisitively at his keyboard and wrote another sentence.",
+                        "name": "Mozzarella Sticks"
+                    }
+                ]
+            },
+            {
+                "rule": "Make me a sandwich.",
+                "categories": []
+            },
+            {
+                "rule": "Ports are created with the built-in function open_port.",
+                "categories": [
+                    {
+                        "framework": "She spent her earliest years reading classic literature, and writing poetry.",
+                        "name": "Reuben"
+                    },
+                    {
+                        "framework": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                        "name": "Mozzarella Sticks"
+                    }
+                ]
+            },
+            {
+                "rule": "Do you have any idea why this is not working?",
+                "categories": []
+            }
+        ],
+        "entity": {
+            "id": "idn:moscow.xxx",
+            "name": "Bangers and mash",
+            "type": "InternetDomainName"
+        },
+        "relatedEntities": [
+            {
+                "entities": [
+                    {
+                        "count": 3,
+                        "entity": {
+                            "id": "yBHtE4",
+                            "name": "Beef Manhattan",
+                            "type": "MalwareCategory"
+                        }
+                    }
+                ],
+                "type": "RelatedMalwareCategory"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 3,
+                        "entity": {
+                            "id": "JdIeZ6",
+                            "name": "Deviled crab",
+                            "type": "Malware"
+                        }
+                    }
+                ],
+                "type": "RelatedMalware"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "jnxXG",
+                            "name": "Cheese balls",
+                            "type": "Product"
+                        }
+                    }
+                ],
+                "type": "RelatedProduct"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "ip:152.192.58.205",
+                            "name": "Spring Rolls",
+                            "type": "IpAddress"
+                        }
+                    }
+                ],
+                "type": "RelatedIpAddress"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:without.edu",
+                            "name": "Philadelphia cheesesteak",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:trick.wiki",
+                            "name": "Butter cookie",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:maria.alsace",
+                            "name": "Pulled pork",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:angle.org",
+                            "name": "Popover",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:prospect.kp",
+                            "name": "Oysters Rockefeller",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:macintosh.net",
+                            "name": "Toaster Strudel",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:honolulu.zulu",
+                            "name": "Maine Lobster",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:dies.mq",
+                            "name": "Alphabet pasta",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:collaborative.jobs",
+                            "name": "Macaroni and Cheese",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:chapters.ml",
+                            "name": "Root Beer Float",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:procedure.name",
+                            "name": "Fried Green Tomatoes",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:avatar.aero",
+                            "name": "Milkshake",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:own.net",
+                            "name": "Energy bar",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:commodities.africa",
+                            "name": "Churrasco",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:level.jobs",
+                            "name": "Chicken nuggets",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:hardcover.gov",
+                            "name": "Pumpkin pie",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:fit.kp",
+                            "name": "Chicken sandwich",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 4,
+                        "entity": {
+                            "id": "idn:situations.ist",
+                            "name": "Philly Cheese Steak",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:rabbit.graphics",
+                            "name": "Spanish rice",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:morocco.estate",
+                            "name": "Fried Green Tomatoes",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:guarantee.cat",
+                            "name": "Currywurst",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 4,
+                        "entity": {
+                            "id": "idn:designers.koeln",
+                            "name": "Chocolate Chip Cookie",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:lately.lc",
+                            "name": "Chips and dip",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:seeker.review",
+                            "name": "Meat Feast Pizza",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:exams.jobs",
+                            "name": "Sandwich",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:christ.kz",
+                            "name": "Gyoza",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:rebound.gov",
+                            "name": "Buffalo Wings",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:costa.equipment",
+                            "name": "Hot Chicken sandwich",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:cos.berlin",
+                            "name": "Soft Shell Crab",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:washington.cab",
+                            "name": "Chicharones",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:saturn.im",
+                            "name": "Toaster Strudel",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:invisible.mh",
+                            "name": "Quesadilla",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:oregon.edu",
+                            "name": "Ribs",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:amount.gov",
+                            "name": "Milk toast",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:endorsement.llc",
+                            "name": "Grits",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:want.jobs",
+                            "name": "Samosa",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:follows.gf",
+                            "name": "Creamed eggs on toast",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:checking.re",
+                            "name": "Calas",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:occupied.info",
+                            "name": "Senate bean soup",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:putting.org",
+                            "name": "Apple butter",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:gods.okinawa",
+                            "name": "Laksa",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:bmw.info",
+                            "name": "Hummus",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:incomplete.museum.post",
+                            "name": "Boulliabaise",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:learned.forsale",
+                            "name": "Naan",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:dependence.bayern",
+                            "name": "Macaroni and Cheese",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:arch.org",
+                            "name": "Spaghetti and Meatballs",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:number.contact",
+                            "name": "Sloppy joe",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:highlighted.feedback",
+                            "name": "Patty",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 3,
+                        "entity": {
+                            "id": "idn:either.my",
+                            "name": "Naan",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:totally.com",
+                            "name": "Domesticated turkey",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:carlo.net",
+                            "name": "Chili dog",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:kathy.aero",
+                            "name": "Shawarma",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 5,
+                        "entity": {
+                            "id": "idn:head.int",
+                            "name": "Baba Ghanoush",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:hungarian.bzh",
+                            "name": "Beef Manhattan",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:ceo.motorcycles",
+                            "name": "Pastrami",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:obligations.film",
+                            "name": "Stuffed zucchini",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:religion.org",
+                            "name": "Pepperoni",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:texture.ist",
+                            "name": "Mulligan stew",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:smoke.xxx",
+                            "name": "Cowboy beans",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:requiring.nz",
+                            "name": "Meatloaf",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:shield.edu",
+                            "name": "Baba Ghanoush",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:interactions.okinawa",
+                            "name": "Turkish Delight",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:eggs.doha",
+                            "name": "London broil",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:limit.adult",
+                            "name": "Chicken Salad Wrap",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:cooked.tv",
+                            "name": "Sichuan Hot Pot",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 6,
+                        "entity": {
+                            "id": "idn:grey.mobi",
+                            "name": "Barbecue",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:goat.dz",
+                            "name": "Brisket",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:vegetarian.hu",
+                            "name": "Ranch dressing",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:controversy.doha",
+                            "name": "Shawarma",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:pending.biz",
+                            "name": "Kung Pao Chicken",
+                            "type": "InternetDomainName"
+                        }
+                    }
+                ],
+                "type": "RelatedInternetDomainName"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:883a407568d883580d82714bb229f3b4020e26d0e8847f04171cd2cc0a9ba19e",
+                            "name": "Fish and Chips!",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:db5761ab3a2cbae88986b8c64a34e8133b9135d97865c0718a36d36fc839ff4b",
+                            "name": "Apple sauce",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:2d3e53dc784c4e459312daa937e4aa63b2696df5ea510b6a0ab5dae279c6573b",
+                            "name": "Rabbit pie",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:de67db7d986f3c7aae853f26a21fb823c42e1bd2c78ddbde716231007adef6c4",
+                            "name": "Bao",
+                            "type": "Hash"
+                        }
+                    }
+                ],
+                "type": "RelatedHash"
+            }
+        ],
+        "timestamps": {
+            "lastSeen": "2025-04-22T09:38:22.315Z",
+            "firstSeen": "2025-10-30T20:45:58.244Z"
+        },
+        "threatLists": [
+            {
+                "id": "LooCXbnl4UxaM",
+                "name": "Burnt ends",
+                "type": "EntityList",
+                "description": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+            },
+            {
+                "id": "lNPoITmB2pvhu",
+                "name": "Queso Fresco",
+                "type": "EntityList",
+                "description": "She spent her earliest years reading classic literature, and writing poetry."
+            }
+        ],
+        "intelCard": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+        "links": {
+            "hits": [],
+            "method_aggregates": [
+                {
+                    "count": 0,
+                    "type": "hHQyM6"
+                },
+                {
+                    "count": 0,
+                    "type": "hHQyM7"
+                },
+                {
+                    "count": 0,
+                    "type": "gTB8y2"
+                }
+            ],
+            "counts": []
+        },
+        "counts": [
+            {
+                "date": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "count": 1
+            },
+            {
+                "date": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "count": 1
+            },
+            {
+                "date": "Its main implementation is the Glasgow Haskell Compiler.",
+                "count": 1
+            },
+            {
+                "date": "Do you come here often?",
+                "count": 1
+            },
+            {
+                "date": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "count": 1
+            },
+            {
+                "date": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "count": 1
+            },
+            {
+                "date": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "count": 2
+            },
+            {
+                "date": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "count": 1
+            },
+            {
+                "date": "Ports are created with the built-in function open_port.",
+                "count": 1
+            },
+            {
+                "date": "She spent her earliest years reading classic literature, and writing poetry.",
+                "count": 1
+            },
+            {
+                "date": "Its main implementation is the Glasgow Haskell Compiler.",
+                "count": 1
+            },
+            {
+                "date": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "count": 2
+            },
+            {
+                "date": "Type classes first appeared in the Haskell programming language.",
+                "count": 1
+            },
+            {
+                "date": "Make me a sandwich.",
+                "count": 2
+            },
+            {
+                "date": "Haskell features a type system with type inference and lazy evaluation.",
+                "count": 1
+            },
+            {
+                "date": "She spent her earliest years reading classic literature, and writing poetry.",
+                "count": 1
+            },
+            {
+                "date": "Any element of a tuple can be accessed in constant time.",
+                "count": 1
+            },
+            {
+                "date": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "count": 1
+            },
+            {
+                "date": "Do you come here often?",
+                "count": 1
+            }
+        ],
+        "metrics": [
+            {
+                "type": "defangedSightings",
+                "value": 1
+            },
+            {
+                "type": "sevenDaysHits",
+                "value": 0
+            },
+            {
+                "type": "oneDayHits",
+                "value": 0
+            },
+            {
+                "type": "totalHits",
+                "value": 22
+            },
+            {
+                "type": "malwareSiteDetected",
+                "value": 2
+            },
+            {
+                "type": "bitdefender",
+                "value": 2
+            },
+            {
+                "type": "malwareSiteDetectedSightings",
+                "value": 23
+            },
+            {
+                "type": "whitelistedCount",
+                "value": 0
+            },
+            {
+                "type": "recentCncSiteSightings",
+                "value": 1
+            },
+            {
+                "type": "maliciousHits",
+                "value": 0
+            },
+            {
+                "type": "defanged",
+                "value": 1
+            },
+            {
+                "type": "socialMediaHits",
+                "value": 1
+            },
+            {
+                "type": "undergroundForumHits",
+                "value": 0
+            },
+            {
+                "type": "infoSecHits",
+                "value": 18
+            },
+            {
+                "type": "c2Subscore",
+                "value": 90
+            },
+            {
+                "type": "observedTelemetry",
+                "value": 1
+            },
+            {
+                "type": "recentCncSite",
+                "value": 1
+            },
+            {
+                "type": "malwareSiteSuspectedSightings",
+                "value": 1
+            },
+            {
+                "type": "phishingSubscore",
+                "value": 0
+            },
+            {
+                "type": "malwareSiteSuspected",
+                "value": 1
+            },
+            {
+                "type": "darkWebHits",
+                "value": 0
+            },
+            {
+                "type": "publicSubscore",
+                "value": 94
+            },
+            {
+                "type": "pasteHits",
+                "value": 1
+            },
+            {
+                "type": "observedTelemetrySightings",
+                "value": 1
+            },
+            {
+                "type": "mitigatedCount",
+                "value": 0
+            },
+            {
+                "type": "criticality",
+                "value": 4
+            },
+            {
+                "type": "technicalReportingHits",
+                "value": 0
+            },
+            {
+                "type": "malwareSubscore",
+                "value": 90
+            },
+            {
+                "type": "sixtyDaysHits",
+                "value": 2
+            }
+        ]
+    }
+}

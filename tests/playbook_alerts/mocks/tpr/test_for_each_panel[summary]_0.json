@@ -1,0 +1,97 @@
+{
+    "status": {
+        "status_code": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+        "status_message": "He looked inquisitively at his keyboard and wrote another sentence."
+    },
+    "data": {
+        "playbook_alert_id": "task:2836006c-5e63-4039-8ede-d1682c5efc50",
+        "panel_status": {
+            "status": "New",
+            "priority": "Any element of a tuple can be accessed in constant time.",
+            "created": "2025-03-13T22:12:56.252Z",
+            "updated": "2025-01-21T08:22:14.210Z",
+            "case_rule_id": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "case_rule_label": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "owner_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "owner_name": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "organisation_id": "Where are my pants?",
+            "organisation_name": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "owner_organisation_details": {
+                "organisations": [
+                    {
+                        "organisation_id": "Any element of a tuple can be accessed in constant time.",
+                        "organisation_name": "He looked inquisitively at his keyboard and wrote another sentence."
+                    }
+                ],
+                "enterprise_id": "I don't even care.",
+                "enterprise_name": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+            },
+            "entity_id": "Type classes first appeared in the Haskell programming language.",
+            "entity_name": "Any element of a tuple can be accessed in constant time.",
+            "entity_criticality": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "risk_score": 64,
+            "targets": [
+                {
+                    "name": "French Onion Soup"
+                },
+                {
+                    "name": "Hawaiian Pizza"
+                },
+                {
+                    "name": "Bookbinder Soup"
+                }
+            ],
+            "actions_taken": []
+        },
+        "panel_evidence_summary": {
+            "assessments": [
+                {
+                    "risk_rule": "Erlang is known for its designs that are well suited for systems.",
+                    "level": 3,
+                    "added": "2025-02-27T20:08:20.147Z",
+                    "evidence": {
+                        "type": "summary_string",
+                        "summary": "It is also a garbage-collected runtime system.",
+                        "data": []
+                    }
+                },
+                {
+                    "risk_rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "level": 4,
+                    "added": "2025-01-19T18:24:36.165Z",
+                    "evidence": {
+                        "type": "summary_string",
+                        "summary": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                        "data": []
+                    }
+                },
+                {
+                    "risk_rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "level": 2,
+                    "added": "2025-09-04T00:30:33.211Z",
+                    "evidence": {
+                        "type": "ip_rule",
+                        "summary": "Do you have any idea why this is not working?",
+                        "data": [
+                            {
+                                "name": "Corn dog",
+                                "criticality": 4,
+                                "number_of_ip_addresses": 15
+                            },
+                            {
+                                "name": "Chicken sandwich",
+                                "criticality": 3,
+                                "number_of_ip_addresses": 37
+                            },
+                            {
+                                "name": "Milkshake",
+                                "criticality": 2,
+                                "number_of_ip_addresses": 17
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

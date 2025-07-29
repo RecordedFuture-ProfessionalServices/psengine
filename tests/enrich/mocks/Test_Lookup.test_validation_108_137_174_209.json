@@ -1,0 +1,3389 @@
+{
+	"data": {
+		"enterpriseLists": [],
+		"aiInsights": {
+			"comment": null,
+			"text": "Tuples are containers for a fixed number of Erlang data types. Erlang is a general-purpose, concurrent, functional programming language. Its main implementation is the Glasgow Haskell Compiler. Type classes first appeared in the Haskell programming language. Erlang is known for its designs that are well suited for systems.",
+			"numberOfReferences": 9
+		},
+		"risk": {
+			"criticalityLabel": "He looked inquisitively at his keyboard and wrote another sentence.",
+			"riskString": "Erlang is a general-purpose, concurrent, functional programming language.",
+			"rules": 9,
+			"criticality": 2,
+			"riskSummary": "Ports are created with the built-in function open_port.",
+			"score": 45,
+			"evidenceDetails": [
+				{
+					"mitigationString": "Haskell features a type system with type inference and lazy evaluation.",
+					"evidenceString": "Do you have any idea why this is not working?",
+					"rule": "Make me a sandwich.",
+					"criticality": 1,
+					"timestamp": "2025-07-27T21:56:01.379Z",
+					"criticalityLabel": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+				},
+				{
+					"mitigationString": "Tuples are containers for a fixed number of Erlang data types.",
+					"evidenceString": "Tuples are containers for a fixed number of Erlang data types.",
+					"rule": "Ports are created with the built-in function open_port.",
+					"criticality": 1,
+					"timestamp": "2025-08-19T15:01:56.747Z",
+					"criticalityLabel": "Do you come here often?"
+				},
+				{
+					"mitigationString": "Haskell features a type system with type inference and lazy evaluation.",
+					"evidenceString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+					"rule": "Erlang is known for its designs that are well suited for systems.",
+					"criticality": 1,
+					"timestamp": "2025-02-07T14:22:29.665Z",
+					"criticalityLabel": "The arguments can be primitive data types or compound data types."
+				},
+				{
+					"mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+					"evidenceString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+					"rule": "Its main implementation is the Glasgow Haskell Compiler.",
+					"criticality": 1,
+					"timestamp": "2025-03-20T18:12:28.052Z",
+					"criticalityLabel": "Any element of a tuple can be accessed in constant time."
+				},
+				{
+					"mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+					"evidenceString": "Atoms are used within a program to denote distinguished values.",
+					"rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+					"criticality": 1,
+					"timestamp": "2025-04-08T20:06:08.044Z",
+					"criticalityLabel": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+				},
+				{
+					"mitigationString": "She spent her earliest years reading classic literature, and writing poetry.",
+					"evidenceString": "He looked inquisitively at his keyboard and wrote another sentence.",
+					"rule": "Do you come here often?",
+					"criticality": 1,
+					"timestamp": "2025-05-27T17:08:10.985Z",
+					"criticalityLabel": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+				},
+				{
+					"mitigationString": "Haskell features a type system with type inference and lazy evaluation.",
+					"evidenceString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+					"rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+					"criticality": 1,
+					"timestamp": "2025-03-26T05:30:31.809Z",
+					"criticalityLabel": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+				},
+				{
+					"mitigationString": "I don't even care.",
+					"evidenceString": "Erlang is a general-purpose, concurrent, functional programming language.",
+					"rule": "Do you have any idea why this is not working?",
+					"criticality": 2,
+					"timestamp": "2025-12-21T19:39:29.366Z",
+					"criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+				},
+				{
+					"mitigationString": "He looked inquisitively at his keyboard and wrote another sentence.",
+					"evidenceString": "Ports are used to communicate with the external world.",
+					"rule": "Erlang is known for its designs that are well suited for systems.",
+					"criticality": 2,
+					"timestamp": "2025-08-14T16:54:12.519Z",
+					"criticalityLabel": "I don't even care."
+				}
+			]
+		},
+		"sightings": [
+			{
+				"source": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+				"url": "Where are my pants?",
+				"published": "2025-09-22T13:05:06.772Z",
+				"fragment": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+				"title": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+				"type": "recentInfoSec"
+			},
+			{
+				"source": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+				"url": "Ports are created with the built-in function open_port.",
+				"published": "2025-07-23T21:18:23.669Z",
+				"fragment": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+				"title": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+				"type": "first"
+			},
+			{
+				"source": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+				"url": "She spent her earliest years reading classic literature, and writing poetry.",
+				"published": "2025-06-10T21:19:32.430Z",
+				"fragment": "Ports are used to communicate with the external world.",
+				"title": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+				"type": "recentPaste"
+			},
+			{
+				"source": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+				"url": "It is also a garbage-collected runtime system.",
+				"published": "2025-07-28T21:03:46.078Z",
+				"fragment": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+				"title": "Ports are used to communicate with the external world.",
+				"type": "mostRecent"
+			}
+		],
+		"riskMapping": [
+			{
+				"rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+				"categories": []
+			},
+			{
+				"rule": "Ports are used to communicate with the external world.",
+				"categories": []
+			},
+			{
+				"rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+				"categories": [
+					{
+						"framework": "She spent her earliest years reading classic literature, and writing poetry.",
+						"name": "Surf and turf"
+					},
+					{
+						"framework": "It is also a garbage-collected runtime system.",
+						"name": "Calamari"
+					}
+				]
+			},
+			{
+				"rule": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+				"categories": []
+			},
+			{
+				"rule": "Ports are used to communicate with the external world.",
+				"categories": []
+			},
+			{
+				"rule": "Ports are used to communicate with the external world.",
+				"categories": [
+					{
+						"framework": "Do you have any idea why this is not working?",
+						"name": "Poke"
+					},
+					{
+						"framework": "Its main implementation is the Glasgow Haskell Compiler.",
+						"name": "Paella"
+					}
+				]
+			},
+			{
+				"rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+				"categories": [
+					{
+						"framework": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+						"name": "Chinese food"
+					}
+				]
+			},
+			{
+				"rule": "Haskell features a type system with type inference and lazy evaluation.",
+				"categories": []
+			},
+			{
+				"rule": "The arguments can be primitive data types or compound data types.",
+				"categories": []
+			}
+		],
+		"entity": {
+			"id": "ip:108.137.174.209",
+			"name": "108.137.174.209",
+			"type": "IpAddress"
+		},
+		"dnsPortCert": {
+			"certificates": [],
+			"dns": {
+				"forwardDns": [],
+				"reverseDns": null
+			},
+			"ports": []
+		},
+		"relatedEntities": [
+			{
+				"entities": [
+					{
+						"count": 1,
+						"entity": {
+							"id": "hash:746932f8b469a4c8774a84793c344b1f40517ccfd2a1628a88beca93007e9ff8",
+							"name": "Ratatouille",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "hash:7182c2a9c65d72da3c211ef8824a0637ef19053e1cee5dac6b0058ba58f2927b",
+							"name": "Chicken Divan",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "hash:dd61bb4457a02f10ff7b47611f0f3e599b8ce64302adba5556312f34fedf8cdc",
+							"name": "Drunken chicken",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "hash:4e2c381a15b730bccb02a1f3c1063a95ca24a37b48cd7a9b5f43ad9b1d6e2b9b",
+							"name": "Milk toast",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "hash:1fd0872a9bb698d8a2551e67129ce0dcabbe71be03a5cdf4940113ac57151677",
+							"name": "Funnel Cake",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "hash:c25ff9a2c56c0682fea9e6d5ad70f36a53da1949e1c93c011381e2c73ff0ed6a",
+							"name": "Bulgogi",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "hash:1e0f6bd8da1a47e2256729f691985dab7aa51fb9665762e5742b601921dc1380",
+							"name": "Celery Victor",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "hash:12b37f485336eee7b272ede891854a3234373a9a3ffc90d1444d679765840faa",
+							"name": "Bear claw",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "hash:3a18700b399c9388ee7a0ea23f1e732879469566f5a5ccc3418ff198a28ba0d4",
+							"name": "Lobster roll",
+							"type": "Hash"
+						}
+					}
+				],
+				"type": "RelatedHash"
+			},
+			{
+				"entities": [
+					{
+						"count": 53,
+						"entity": {
+							"id": "idn:packed.asia",
+							"name": "Chicken fried steak",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 25,
+						"entity": {
+							"id": "idn:beneficial.tel",
+							"name": "Pastrami on Rye",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 23,
+						"entity": {
+							"id": "idn:degree.tr",
+							"name": "Mozzarella sticks",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 16,
+						"entity": {
+							"id": "idn:nominations.mutualfunds",
+							"name": "Swiss steak",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 44,
+						"entity": {
+							"id": "idn:fly.lt",
+							"name": "Eggo",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 36,
+						"entity": {
+							"id": "idn:player.cat",
+							"name": "BBQ Ribs",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 21,
+						"entity": {
+							"id": "idn:recipients.condos",
+							"name": "Pocky",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 244,
+						"entity": {
+							"id": "idn:packs.pr",
+							"name": "Creme Brulee",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 14,
+						"entity": {
+							"id": "idn:bloom.stroke",
+							"name": "Venison",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 37,
+						"entity": {
+							"id": "idn:nationwide.joburg",
+							"name": "Vichyssoise",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 39,
+						"entity": {
+							"id": "idn:elevation.hu",
+							"name": "Shish Kabob",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 22,
+						"entity": {
+							"id": "idn:closes.tickets",
+							"name": "Kung Pao Chicken",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:turkey.it",
+							"name": "Gumbo",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "idn:penn.koeln",
+							"name": "Chinese food",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 51,
+						"entity": {
+							"id": "idn:cottages.abudhabi",
+							"name": "Coleslaw",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 141,
+						"entity": {
+							"id": "idn:tracy.asia",
+							"name": "French Dip",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 70,
+						"entity": {
+							"id": "idn:removable.tokyo",
+							"name": "Escargot",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 17,
+						"entity": {
+							"id": "idn:equipment.cat",
+							"name": "Salted caramel cookie",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 32,
+						"entity": {
+							"id": "idn:charge.org",
+							"name": "Rolled oyster",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 57,
+						"entity": {
+							"id": "idn:fighters.bar",
+							"name": "Quesadilla",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 53,
+						"entity": {
+							"id": "idn:chip.net",
+							"name": "Tetrazzini",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 30,
+						"entity": {
+							"id": "idn:label.taipei",
+							"name": "Pan Seared Scallops",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 53,
+						"entity": {
+							"id": "idn:politicians.email",
+							"name": "Chowder",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:sheet.africa",
+							"name": "Ice Cream",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 18,
+						"entity": {
+							"id": "idn:dead.jobs",
+							"name": "Bird's Nest Soup",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 71,
+						"entity": {
+							"id": "idn:appropriate.sale",
+							"name": "Sauteed Morel Mushrooms",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:uncle.net",
+							"name": "Liver and onions",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 28,
+						"entity": {
+							"id": "idn:drugs.cg",
+							"name": "Jerky",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 13,
+						"entity": {
+							"id": "idn:seafood.africa",
+							"name": "Tetrazzini",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 35,
+						"entity": {
+							"id": "idn:susan.mn",
+							"name": "Macaroni salad",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 36,
+						"entity": {
+							"id": "idn:dump.com",
+							"name": "Cheesecake",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 53,
+						"entity": {
+							"id": "idn:march.hu",
+							"name": "Swiss steak",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 50,
+						"entity": {
+							"id": "idn:manufacturers.tirol",
+							"name": "Osso Buco",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 14,
+						"entity": {
+							"id": "idn:worry.gh",
+							"name": "Low Country Boil",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 23,
+						"entity": {
+							"id": "idn:yoga.cam",
+							"name": "Spaghetti and Meatballs",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 150,
+						"entity": {
+							"id": "idn:limiting.duck",
+							"name": "Jerky",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 10,
+						"entity": {
+							"id": "idn:died.living",
+							"name": "Russian dressing",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 29,
+						"entity": {
+							"id": "idn:merger.mom",
+							"name": "Banh Mi Vi\u00eat",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 10,
+						"entity": {
+							"id": "idn:receivers.nyc",
+							"name": "Pork Belly",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:greensboro.scot",
+							"name": "Chowder",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 300,
+						"entity": {
+							"id": "idn:fragrances.llp",
+							"name": "Soft Shell Crab",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 53,
+						"entity": {
+							"id": "idn:nation.aero",
+							"name": "Clam cake",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:bush.name",
+							"name": "Lobster roll",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 27,
+						"entity": {
+							"id": "idn:natural.abudhabi",
+							"name": "Naan",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 53,
+						"entity": {
+							"id": "idn:row.aero",
+							"name": "Chowder",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 391,
+						"entity": {
+							"id": "idn:tablet.data",
+							"name": "Liver and onions",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:mall.mobi",
+							"name": "Prawn Pizza",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 67,
+						"entity": {
+							"id": "idn:poland.security",
+							"name": "Gyoza",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 71,
+						"entity": {
+							"id": "idn:racks.gsla",
+							"name": "Waffle",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 115,
+						"entity": {
+							"id": "idn:times.glass",
+							"name": "Chicken Liver Pate",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:emissions.amsterdam",
+							"name": "Cowboy beans",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "idn:kenya.coop",
+							"name": "Deviled egg",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:wan.bd",
+							"name": "Gyros",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 51,
+						"entity": {
+							"id": "idn:sierra.melbourne",
+							"name": "Shrimp and Grits",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 53,
+						"entity": {
+							"id": "idn:identical.taxi",
+							"name": "Creamed eggs on toast",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:lamp.ping",
+							"name": "Sweetbreads",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "idn:relative.baseball",
+							"name": "Celery Victor",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 37,
+						"entity": {
+							"id": "idn:curves.cr",
+							"name": "Hangtown fry",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:sentences.jobs",
+							"name": "Paella",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 53,
+						"entity": {
+							"id": "idn:fits.homes",
+							"name": "Bao",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 18,
+						"entity": {
+							"id": "idn:friends.deal",
+							"name": "Hog fry",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 81,
+						"entity": {
+							"id": "idn:telecom.helsinki",
+							"name": "Poppyseed muffin",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 53,
+						"entity": {
+							"id": "idn:mug.com",
+							"name": "Chicken Manchurian",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 66,
+						"entity": {
+							"id": "idn:disclose.xxx",
+							"name": "Cheese stuffed crust pizza",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 43,
+						"entity": {
+							"id": "idn:spelling.ad",
+							"name": "Potato salad",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 13,
+						"entity": {
+							"id": "idn:tough.pf",
+							"name": "St. Paul Sandwich",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 71,
+						"entity": {
+							"id": "idn:hiking.tl",
+							"name": "Salted caramel cookie",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "idn:composite.gov",
+							"name": "Ice Cream",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 12,
+						"entity": {
+							"id": "idn:measured.io",
+							"name": "Baked potato",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 20,
+						"entity": {
+							"id": "idn:soma.quebec",
+							"name": "Liver and onions",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 23,
+						"entity": {
+							"id": "idn:suites.miami",
+							"name": "Creme Brulee",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 177,
+						"entity": {
+							"id": "idn:volumes.org",
+							"name": "Fish Tacos",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:conf.mobi",
+							"name": "Breaded shrimp",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 27,
+						"entity": {
+							"id": "idn:vice.tennis",
+							"name": "Chicken bog",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 64,
+						"entity": {
+							"id": "idn:gothic.red",
+							"name": "St. Paul Sandwich",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 13,
+						"entity": {
+							"id": "idn:jokes.stockholm",
+							"name": "Potato wedges",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 15,
+						"entity": {
+							"id": "idn:moved.carinsurance",
+							"name": "Chicken nuggets",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:south.va",
+							"name": "Chowder",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 45,
+						"entity": {
+							"id": "idn:disposition.istanbul",
+							"name": "Pemmican",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:bring.sucks",
+							"name": "Chicken French",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:ballot.country",
+							"name": "Potato Wedges",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:anywhere.ee",
+							"name": "Beef Lo Mein",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 16,
+						"entity": {
+							"id": "idn:winners.cooking",
+							"name": "Roasted Chickpeas",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 23,
+						"entity": {
+							"id": "idn:task.coop",
+							"name": "Bear claw",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 23,
+						"entity": {
+							"id": "idn:stands.museum.post",
+							"name": "Maraca pie",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 33,
+						"entity": {
+							"id": "idn:bandwidth.vg",
+							"name": "Salmon pasta bake",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 21,
+						"entity": {
+							"id": "idn:score.company",
+							"name": "Queso Fresco",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "idn:background.st",
+							"name": "Sausage gravy",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 27,
+						"entity": {
+							"id": "idn:highs.biz",
+							"name": "Montreal Smoked Meat",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 48,
+						"entity": {
+							"id": "idn:predict.cat",
+							"name": "Spaghetti Bolognese",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 51,
+						"entity": {
+							"id": "idn:robots.osaka",
+							"name": "Banh Mi Vi\u00eat",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 12,
+						"entity": {
+							"id": "idn:translations.madrid",
+							"name": "Seafood cocktail",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 20,
+						"entity": {
+							"id": "idn:spirit.name",
+							"name": "Ploye",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 113,
+						"entity": {
+							"id": "idn:destiny.yu",
+							"name": "Fried Catfish",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 12,
+						"entity": {
+							"id": "idn:professional.info",
+							"name": "Alphabet pasta",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 11,
+						"entity": {
+							"id": "idn:tribune.int",
+							"name": "Stuffed ham",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 36,
+						"entity": {
+							"id": "idn:wise.travel",
+							"name": "Domesticated turkey",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 18,
+						"entity": {
+							"id": "idn:began.software",
+							"name": "Yeung Chow fried rice",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 15,
+						"entity": {
+							"id": "idn:villa.coop",
+							"name": "Fried Green Tomatoes",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 34,
+						"entity": {
+							"id": "idn:cash.ie",
+							"name": "Tagine",
+							"type": "InternetDomainName"
+						}
+					}
+				],
+				"type": "RelatedInternetDomainName"
+			},
+			{
+				"entities": [
+					{
+						"count": 43,
+						"entity": {
+							"id": "ip:26.111.35.114",
+							"name": "Reuben",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 34,
+						"entity": {
+							"id": "ip:192.208.201.11",
+							"name": "Cheesy Garlic Bread",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:172.42.128.150",
+							"name": "Empanada",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 49,
+						"entity": {
+							"id": "ip:39.94.182.161",
+							"name": "Burnt ends",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 35,
+						"entity": {
+							"id": "ip:48.72.234.122",
+							"name": "Buffalo burger",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 44,
+						"entity": {
+							"id": "ip:41.4.104.245",
+							"name": "Wasabi Peas",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:49.252.168.125",
+							"name": "Chicken French",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 32,
+						"entity": {
+							"id": "ip:117.168.65.159",
+							"name": "Lasagna",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 29,
+						"entity": {
+							"id": "ip:88.194.160.9",
+							"name": "Brisket",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 40,
+						"entity": {
+							"id": "ip:178.41.3.247",
+							"name": "Baked potato",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 25,
+						"entity": {
+							"id": "ip:224.97.81.248",
+							"name": "Sichuan Hot Pot",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 45,
+						"entity": {
+							"id": "ip:132.224.146.177",
+							"name": "Bookbinder Soup",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 27,
+						"entity": {
+							"id": "ip:65.170.160.61",
+							"name": "Peanut butter",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 28,
+						"entity": {
+							"id": "ip:195.76.47.249",
+							"name": "Crab Rangoon",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 56,
+						"entity": {
+							"id": "ip:97.161.169.94",
+							"name": "Banh Mi Vi\u00eat",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 96,
+						"entity": {
+							"id": "ip:234.240.53.203",
+							"name": "Barbecue",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 41,
+						"entity": {
+							"id": "ip:219.75.39.152",
+							"name": "Bagels and Lox",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 34,
+						"entity": {
+							"id": "ip:153.196.208.171",
+							"name": "Fajitas",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 25,
+						"entity": {
+							"id": "ip:139.149.1.45",
+							"name": "Energy bar",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 37,
+						"entity": {
+							"id": "ip:183.210.98.122",
+							"name": "Massaman Curry",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 69,
+						"entity": {
+							"id": "ip:98.69.34.184",
+							"name": "Juba",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 71,
+						"entity": {
+							"id": "ip:51.48.62.71",
+							"name": "Squab",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 44,
+						"entity": {
+							"id": "ip:155.2.203.130",
+							"name": "Jambalaya",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 62,
+						"entity": {
+							"id": "ip:180.134.151.185",
+							"name": "Vegemite on Toast",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 33,
+						"entity": {
+							"id": "ip:137.13.56.253",
+							"name": "Deep Fried Oreos",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:225.111.17.141",
+							"name": "Shucked Oysters",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 68,
+						"entity": {
+							"id": "ip:24.159.104.244",
+							"name": "Empanada",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 62,
+						"entity": {
+							"id": "ip:113.124.119.24",
+							"name": "Chicken nuggets",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 33,
+						"entity": {
+							"id": "ip:194.33.218.10",
+							"name": "Souvlaki",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 37,
+						"entity": {
+							"id": "ip:121.124.170.175",
+							"name": "Glorified rice",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 52,
+						"entity": {
+							"id": "ip:25.201.116.113",
+							"name": "Chocolate Chip Cookie",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 51,
+						"entity": {
+							"id": "ip:6.149.34.15",
+							"name": "Potato wedges",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 68,
+						"entity": {
+							"id": "ip:231.49.147.192",
+							"name": "Russian tea cake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:78.236.149.243",
+							"name": "Pork Belly",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 45,
+						"entity": {
+							"id": "ip:212.170.102.51",
+							"name": "Pigs in blankets",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 35,
+						"entity": {
+							"id": "ip:193.151.248.196",
+							"name": "Chocolate cheesecake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 49,
+						"entity": {
+							"id": "ip:253.120.227.116",
+							"name": "Chicago Hot Dog",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 68,
+						"entity": {
+							"id": "ip:131.54.149.45",
+							"name": "Lobster roll",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 35,
+						"entity": {
+							"id": "ip:223.13.255.39",
+							"name": "French Dip",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 28,
+						"entity": {
+							"id": "ip:134.128.58.27",
+							"name": "Pocky",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 25,
+						"entity": {
+							"id": "ip:41.71.17.140",
+							"name": "Banh Mi Vi\u00eat",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 57,
+						"entity": {
+							"id": "ip:90.117.138.0",
+							"name": "Schnitzel",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 25,
+						"entity": {
+							"id": "ip:73.14.188.12",
+							"name": "Venison",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 28,
+						"entity": {
+							"id": "ip:192.45.51.46",
+							"name": "Banh Mi Vi\u00eat",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 38,
+						"entity": {
+							"id": "ip:83.247.145.133",
+							"name": "Calas",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 33,
+						"entity": {
+							"id": "ip:222.221.182.128",
+							"name": "Ranch dressing",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 29,
+						"entity": {
+							"id": "ip:40.216.159.97",
+							"name": "White chocolate cookie",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 31,
+						"entity": {
+							"id": "ip:3.151.36.185",
+							"name": "Oysters Rockefeller",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 45,
+						"entity": {
+							"id": "ip:228.93.192.200",
+							"name": "Souvlaki",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 30,
+						"entity": {
+							"id": "ip:214.51.95.100",
+							"name": "Swiss steak",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 38,
+						"entity": {
+							"id": "ip:57.201.220.163",
+							"name": "Root Beer Float",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 29,
+						"entity": {
+							"id": "ip:251.62.112.11",
+							"name": "Juba",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 28,
+						"entity": {
+							"id": "ip:227.233.76.50",
+							"name": "Poke",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 74,
+						"entity": {
+							"id": "ip:179.19.178.244",
+							"name": "Chicken herby pasta bake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 38,
+						"entity": {
+							"id": "ip:174.211.64.127",
+							"name": "Turducken",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 61,
+						"entity": {
+							"id": "ip:12.247.88.171",
+							"name": "Jambalaya",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 33,
+						"entity": {
+							"id": "ip:152.177.128.44",
+							"name": "American fried rice",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:51.39.41.180",
+							"name": "Reuben",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 45,
+						"entity": {
+							"id": "ip:72.154.129.140",
+							"name": "Mozzarella sticks",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 31,
+						"entity": {
+							"id": "ip:209.221.13.143",
+							"name": "Apple sauce",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 28,
+						"entity": {
+							"id": "ip:58.132.113.142",
+							"name": "Chocolate Brownie",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 41,
+						"entity": {
+							"id": "ip:80.224.217.221",
+							"name": "Peanut butter",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 42,
+						"entity": {
+							"id": "ip:34.45.170.78",
+							"name": "Creamed eggs on toast",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 399,
+						"entity": {
+							"id": "ip:238.175.251.201",
+							"name": "Baba Ghanoush",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 28,
+						"entity": {
+							"id": "ip:30.197.29.85",
+							"name": "Bagels and Lox",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 109,
+						"entity": {
+							"id": "ip:205.12.122.211",
+							"name": "Steak Tartare",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 30,
+						"entity": {
+							"id": "ip:167.78.245.35",
+							"name": "Tin Roof Ice Cream",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 155,
+						"entity": {
+							"id": "ip:208.25.223.143",
+							"name": "Hot chicken",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 32,
+						"entity": {
+							"id": "ip:227.110.84.69",
+							"name": "Shawarma",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 76,
+						"entity": {
+							"id": "ip:48.119.187.232",
+							"name": "Eggs Neptune",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 30,
+						"entity": {
+							"id": "ip:205.19.18.124",
+							"name": "Hawaiian haystack",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 33,
+						"entity": {
+							"id": "ip:44.52.117.17",
+							"name": "Oreo",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 66,
+						"entity": {
+							"id": "ip:147.125.32.53",
+							"name": "Maple Bacon Doughnut",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 31,
+						"entity": {
+							"id": "ip:125.57.246.21",
+							"name": "Swiss steak",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 31,
+						"entity": {
+							"id": "ip:130.169.173.255",
+							"name": "Tagine",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 35,
+						"entity": {
+							"id": "ip:111.8.75.2",
+							"name": "Pepperoni",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 50,
+						"entity": {
+							"id": "ip:169.7.168.20",
+							"name": "Carolina style",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 59,
+						"entity": {
+							"id": "ip:192.219.74.80",
+							"name": "Onion ring",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 47,
+						"entity": {
+							"id": "ip:222.109.185.164",
+							"name": "Mashed pumpkin",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 27,
+						"entity": {
+							"id": "ip:239.232.113.139",
+							"name": "Drunken chicken",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 28,
+						"entity": {
+							"id": "ip:235.30.41.229",
+							"name": "Suckling Pig",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:128.66.0.110",
+							"name": "Brunswick stew",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 50,
+						"entity": {
+							"id": "ip:190.66.63.252",
+							"name": "BBQ Ribs",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 33,
+						"entity": {
+							"id": "ip:114.245.38.149",
+							"name": "Steak Tartare",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 25,
+						"entity": {
+							"id": "ip:24.81.163.244",
+							"name": "Salted caramel cookie",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:198.163.0.66",
+							"name": "Roasted Bone Marrow",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 32,
+						"entity": {
+							"id": "ip:164.221.13.31",
+							"name": "Hawaiian haystack",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:231.97.164.117",
+							"name": "Peanut butter",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 39,
+						"entity": {
+							"id": "ip:121.72.100.106",
+							"name": "Paella",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 27,
+						"entity": {
+							"id": "ip:18.193.200.104",
+							"name": "Potato Wedges",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:214.191.133.117",
+							"name": "Veggie Pizza",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 30,
+						"entity": {
+							"id": "ip:34.39.177.61",
+							"name": "Chicken Tikka Masala",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 49,
+						"entity": {
+							"id": "ip:219.221.41.109",
+							"name": "Crepes",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 37,
+						"entity": {
+							"id": "ip:146.9.51.241",
+							"name": "Potato Wedges",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 30,
+						"entity": {
+							"id": "ip:22.133.95.39",
+							"name": "Frybread",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 63,
+						"entity": {
+							"id": "ip:137.154.80.171",
+							"name": "Bulgogi",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 26,
+						"entity": {
+							"id": "ip:131.247.10.245",
+							"name": "Hot chicken",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 38,
+						"entity": {
+							"id": "ip:168.49.33.79",
+							"name": "Salad bar",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 28,
+						"entity": {
+							"id": "ip:186.216.171.167",
+							"name": "Cheesy Garlic Bread",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 32,
+						"entity": {
+							"id": "ip:219.77.9.127",
+							"name": "Coleslaw",
+							"type": "IpAddress"
+						}
+					}
+				],
+				"type": "RelatedIpAddress"
+			},
+			{
+				"entities": [
+					{
+						"count": 3,
+						"entity": {
+							"id": "7N0CiA",
+							"name": "Macaroni and Cheese",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 801,
+						"entity": {
+							"id": "Io3od",
+							"name": "Pork Belly",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ZQPcXW",
+							"name": "Bagels and Lox",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "jibrmB",
+							"name": "Corn chowder",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 8,
+						"entity": {
+							"id": "AAbWXd",
+							"name": "Shrimp and Grits",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "avKuk",
+							"name": "Churrasco",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "kUnsvH",
+							"name": "Deviled crab",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "YyXxmc",
+							"name": "Sauteed Morel Mushrooms",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "5Bomr",
+							"name": "Rice and gravy",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "gnNu4l",
+							"name": "Vichyssoise",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "0kxMZ",
+							"name": "Geoduck",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "fp8bA",
+							"name": "Jalapeno Poppers",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 376,
+						"entity": {
+							"id": "Ms5ve",
+							"name": "Quesadilla",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 13,
+						"entity": {
+							"id": "QGexxP",
+							"name": "Thousand Island dressing",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 7,
+						"entity": {
+							"id": "9RVeC",
+							"name": "Mango and Sticky Rice",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 9,
+						"entity": {
+							"id": "THx09h",
+							"name": "Cheese dog",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "s97HnR",
+							"name": "Fajita",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 834,
+						"entity": {
+							"id": "oaVIdU",
+							"name": "Matzo Ball Soup",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 15,
+						"entity": {
+							"id": "pMoXO9",
+							"name": "Bread",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "OZ8fq4",
+							"name": "Jambalaya",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ZzfPd",
+							"name": "Rabbit pie",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "jfyK",
+							"name": "Deviled egg",
+							"type": "Product"
+						}
+					}
+				],
+				"type": "RelatedProduct"
+			},
+			{
+				"entities": [
+					{
+						"count": 18,
+						"entity": {
+							"id": "K7J3cl",
+							"name": "Rabbit pie",
+							"type": "Malware"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "Qjq3yy",
+							"name": "Phaal",
+							"type": "Malware"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "o1IMml",
+							"name": "Black Pudding",
+							"type": "Malware"
+						}
+					},
+					{
+						"count": 1023,
+						"entity": {
+							"id": "T6DTUA",
+							"name": "BBQ Chicken Pizza",
+							"type": "Malware"
+						}
+					}
+				],
+				"type": "RelatedMalware"
+			},
+			{
+				"entities": [
+					{
+						"count": 18,
+						"entity": {
+							"id": "eCFnx",
+							"name": "Chicken Alfredo",
+							"type": "MalwareCategory"
+						}
+					},
+					{
+						"count": 993,
+						"entity": {
+							"id": "RsWa4i",
+							"name": "Tuna casserole",
+							"type": "MalwareCategory"
+						}
+					},
+					{
+						"count": 18,
+						"entity": {
+							"id": "HcIu5t",
+							"name": "Pop-Tarts",
+							"type": "MalwareCategory"
+						}
+					}
+				],
+				"type": "RelatedMalwareCategory"
+			}
+		],
+		"analystNotes": [],
+		"location": {
+			"organization": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+			"cidr": {
+				"id": "ip:174.118.118.249",
+				"name": "Matzo Ball Soup",
+				"type": "IpAddress"
+			},
+			"location": {
+				"continent": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+				"country": "Erlang is a general-purpose, concurrent, functional programming language.",
+				"city": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+			},
+			"asn": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+		},
+		"timestamps": {
+			"lastSeen": "2025-01-23T02:50:43.979Z",
+			"firstSeen": "2025-10-14T07:47:30.103Z"
+		},
+		"threatLists": [],
+		"intelCard": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+		"links": {
+			"hits": [],
+			"method_aggregates": [
+				{
+					"count": 0,
+					"type": "hHQyM6"
+				},
+				{
+					"count": 0,
+					"type": "hHQyM7"
+				},
+				{
+					"count": 0,
+					"type": "gTB8y2"
+				}
+			],
+			"counts": []
+		},
+		"counts": [
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 9
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 16
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 15
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 20
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 12
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 17
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 12
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 22
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 13
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 17
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 14
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 15
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 9
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 13
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 11
+			},
+			{
+				"date": "2024-02-02",
+				"count": 12
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 17
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 16
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 21
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 15
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 16
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 17
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 27
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 12
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 12
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 9
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 13
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 11
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 13
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 11
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 9
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 9
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 16
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 11
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 12
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 11
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 15
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 21
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 7
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 11
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 9
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 9
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 12
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 24
+			},
+			{
+				"date": "2024-02-02",
+				"count": 12
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			}
+		],
+		"metrics": [
+			{
+				"type": "defangedSightings",
+				"value": 14
+			},
+			{
+				"type": "sevenDaysHits",
+				"value": 0
+			},
+			{
+				"type": "validatedCncSightings",
+				"value": 1582
+			},
+			{
+				"type": "reportedCnc",
+				"value": 2
+			},
+			{
+				"type": "totalHits",
+				"value": 1389
+			},
+			{
+				"type": "phishingSubscore",
+				"value": 5
+			},
+			{
+				"type": "whitelistedCount",
+				"value": 0
+			},
+			{
+				"type": "linkedIntrusionSightings",
+				"value": 1026
+			},
+			{
+				"type": "linkedIntrusion",
+				"value": 4
+			},
+			{
+				"type": "dhsAisSightings",
+				"value": 149
+			},
+			{
+				"type": "oneDayHits",
+				"value": 0
+			},
+			{
+				"type": "reportedCncSightings",
+				"value": 137
+			},
+			{
+				"type": "trendVolume",
+				"value": 0
+			},
+			{
+				"type": "suspectedCnc",
+				"value": 2
+			},
+			{
+				"type": "historicalThreatListMembershipSightings",
+				"value": -1
+			},
+			{
+				"type": "validatedCnc",
+				"value": 1
+			},
+			{
+				"type": "socialMediaHits",
+				"value": 20
+			},
+			{
+				"type": "undergroundForumHits",
+				"value": 0
+			},
+			{
+				"type": "infoSecHits",
+				"value": 1195
+			},
+			{
+				"type": "linkedToCyberAttack",
+				"value": 1
+			},
+			{
+				"type": "dhsAis",
+				"value": 1
+			},
+			{
+				"type": "c2Subscore",
+				"value": 37
+			},
+			{
+				"type": "linkedToCyberAttackSightings",
+				"value": 2
+			},
+			{
+				"type": "historicalThreatListMembership",
+				"value": 2
+			},
+			{
+				"type": "suspectedCncSightings",
+				"value": 16
+			},
+			{
+				"type": "maliciousHits",
+				"value": 151
+			},
+			{
+				"type": "darkWebHits",
+				"value": 0
+			},
+			{
+				"type": "publicSubscore",
+				"value": 45
+			},
+			{
+				"type": "pasteHits",
+				"value": 19
+			},
+			{
+				"type": "mitigatedCount",
+				"value": 0
+			},
+			{
+				"type": "criticality",
+				"value": 2
+			},
+			{
+				"type": "technicalReportingHits",
+				"value": 161
+			},
+			{
+				"type": "malwareSubscore",
+				"value": 0
+			},
+			{
+				"type": "sixtyDaysHits",
+				"value": 1
+			},
+			{
+				"type": "phishingHost",
+				"value": 1
+			},
+			{
+				"type": "phishingHostSightings",
+				"value": 1
+			},
+			{
+				"type": "defanged",
+				"value": 2
+			}
+		]
+	},
+	"warnings": ["Do you have any idea why this is not working?"]
+}
+

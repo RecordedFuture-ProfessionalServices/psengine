@@ -1,0 +1,155 @@
+{
+    "attributes": {
+        "title": "I don't even care.",
+        "text": "Where are my pants? Do you come here often? I don't even care. Erlang is known for its designs that are well suited for systems. The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+        "published": "2025-10-29T19:33:35.742Z",
+        "events": [
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-04-10T06:06:48.292Z",
+                    "stop": "2025-07-31T16:04:48.980Z",
+                    "capabilities": [
+                        {
+                            "id": "Cw31jCAiFh5",
+                            "name": "Tagine",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "9ZIM2V",
+                            "name": "Chicken Tikka Masala",
+                            "type": "Person"
+                        }
+                    ],
+                    "target": [
+                        {
+                            "id": "UdSoNF",
+                            "name": "Chili dog",
+                            "type": "Product"
+                        },
+                        {
+                            "id": "hiwOO",
+                            "name": "Veggie Pizza",
+                            "type": "Company"
+                        },
+                        {
+                            "id": "CaTxV2",
+                            "name": "Salmon pasta bake",
+                            "type": "Industry"
+                        },
+                        {
+                            "id": "UNU4Zv",
+                            "name": "Bird's Nest Soup",
+                            "type": "Industry"
+                        }
+                    ]
+                }
+            }
+        ],
+        "note_entities": [
+            {
+                "id": "gHr4jB",
+                "name": "Roasted Bone Marrow",
+                "type": "Person"
+            },
+            {
+                "id": "tY0gZc",
+                "name": "Liver and onions",
+                "type": "Industry"
+            },
+            {
+                "id": "AIDt5U86zEb",
+                "name": "Baba Ghanoush",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "kyJ58",
+                "name": "Fattoush Salad",
+                "type": "Company"
+            },
+            {
+                "id": "lbfvsw",
+                "name": "Pop-Tarts",
+                "type": "Product"
+            },
+            {
+                "id": "3OVMRo",
+                "name": "Cheesy Garlic Bread",
+                "type": "Industry"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "o2U7FPu7sDol6",
+                "name": "Ploye",
+                "type": "Source"
+            }
+        ],
+        "topic": [
+            {
+                "id": "mHCyno",
+                "name": "Chicken Tikka Masala",
+                "type": "Topic",
+                "description": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+            }
+        ],
+        "validation_urls": [
+            {
+                "id": "url:https://controls.photo/",
+                "name": "Butter cookie",
+                "type": "URL"
+            }
+        ],
+        "validated_on": "2025-12-18T17:17:17.834Z",
+        "diamond_model": [
+            {
+                "start": "2025-09-17T12:31:23.877Z",
+                "stop": "2025-02-07T00:17:45.429Z",
+                "capabilities": [
+                    {
+                        "id": "WKGgKvFrZGy",
+                        "name": "Baked potato",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "qvs9LG",
+                        "name": "Pasta salad",
+                        "type": "Person"
+                    }
+                ],
+                "target": [
+                    {
+                        "id": "WNsLnF",
+                        "name": "Slinger",
+                        "type": "Product"
+                    },
+                    {
+                        "id": "TaJ3x",
+                        "name": "Russian tea cake",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "3xVzJH",
+                        "name": "Oysters Rockefeller",
+                        "type": "Industry"
+                    },
+                    {
+                        "id": "PglsdB",
+                        "name": "Protein bar",
+                        "type": "Industry"
+                    }
+                ]
+            }
+        ]
+    },
+    "id": "iBUE1Jxnok",
+    "source": {
+        "id": "3ctY02SQ2DYC9",
+        "name": "Chicken and waffles",
+        "type": "Source"
+    }
+}

@@ -1,0 +1,160 @@
+{
+    "attributes": {
+        "title": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+        "text": "Erlang is known for its designs that are well suited for systems. Erlang is known for its designs that are well suited for systems. Erlang is known for its designs that are well suited for systems. The arguments can be primitive data types or compound data types. Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+        "published": "2025-05-14T14:01:29.984Z",
+        "events": [
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-09-11T05:54:10.846Z",
+                    "stop": "2025-10-09T19:06:50.549Z",
+                    "capabilities": [
+                        {
+                            "id": "qE6APo",
+                            "name": "Bao",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "JZGGA",
+                            "name": "Chowder",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "soHRZ",
+                            "name": "Pepperoni Pizza",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "k2cQiWZY4HC",
+                            "name": "Dirty rice",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "GzXCjC",
+                            "name": "Queso Fresco",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            }
+        ],
+        "note_entities": [
+            {
+                "id": "w44QR",
+                "name": "Chili dog",
+                "type": "AttackVector"
+            },
+            {
+                "id": "I7v8y",
+                "name": "Cheesy Garlic Bread",
+                "type": "AttackVector"
+            },
+            {
+                "id": "QChZZ0IWbXg",
+                "name": "Hawaiian Pizza",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "Lc8zTS",
+                "name": "Lorna Doone",
+                "type": "AttackVector"
+            },
+            {
+                "id": "i9UFFJ",
+                "name": "Fried chicken",
+                "type": "Organization"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "kaS3Cq",
+                "name": "Caviar",
+                "type": "Technology"
+            },
+            {
+                "id": "4R1gOs",
+                "name": "Salad bar",
+                "type": "AttackVector"
+            },
+            {
+                "id": "ncFiT2W7U9dJC",
+                "name": "Buffalo Wings",
+                "type": "Source"
+            },
+            {
+                "id": "KYJdTceJuMj7b",
+                "name": "Tres Leches Cake",
+                "type": "Source"
+            },
+            {
+                "id": "HXkxjB",
+                "name": "Montreal Smoked Meat",
+                "type": "Technology"
+            },
+            {
+                "id": "DPdit",
+                "name": "Lasagna",
+                "type": "Country"
+            }
+        ],
+        "topic": [
+            {
+                "id": "d8W0D8",
+                "name": "Kung Pao Chicken",
+                "type": "Topic",
+                "description": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+            }
+        ],
+        "validation_urls": [
+            {
+                "id": "url:https://ghz.frl/",
+                "name": "Cheese balls",
+                "type": "URL"
+            }
+        ],
+        "diamond_model": [
+            {
+                "start": "2025-03-18T05:58:27.118Z",
+                "stop": "2025-10-29T17:57:53.133Z",
+                "capabilities": [
+                    {
+                        "id": "uuAiQJ",
+                        "name": "Hog fry",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "tjl3o",
+                        "name": "Meatloaf",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "dEcyq",
+                        "name": "French Onion Soup",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "UjKZMvE4xJd",
+                        "name": "Lorna Doone",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "fdEFKJ",
+                        "name": "Paella",
+                        "type": "Organization"
+                    }
+                ]
+            }
+        ]
+    },
+    "id": "VcEZc8XM4U",
+    "source": {
+        "id": "O0XBpQKoXUl5m",
+        "name": "Salad bar",
+        "type": "Source"
+    }
+}

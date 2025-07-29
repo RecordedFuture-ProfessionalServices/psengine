@@ -1,0 +1,214 @@
+{
+    "data": {
+        "rule": {
+            "use_case_deprecation": null,
+            "name": "Pork Belly",
+            "id": "FHb5P4",
+            "url": {
+                "portal": "https://google.com"
+            }
+        },
+        "id": "hFuUSb",
+        "enriched_entities": [
+            {
+                "evidence": [
+                    {
+                        "timestamp": "2025-04-07T09:01:07.394Z",
+                        "mitigation_string": "Make me a sandwich.",
+                        "criticality_label": "She spent her earliest years reading classic literature, and writing poetry.",
+                        "rule": "Any element of a tuple can be accessed in constant time.",
+                        "evidence_string": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                        "criticality": 1
+                    },
+                    {
+                        "timestamp": "2025-09-21T21:27:33.378Z",
+                        "mitigation_string": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                        "criticality_label": "Its main implementation is the Glasgow Haskell Compiler.",
+                        "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                        "evidence_string": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                        "criticality": 1
+                    },
+                    {
+                        "timestamp": "2025-12-15T11:20:17.618Z",
+                        "mitigation_string": "Erlang is known for its designs that are well suited for systems.",
+                        "criticality_label": "Where are my pants?",
+                        "rule": "Do you have any idea why this is not working?",
+                        "evidence_string": "Do you have any idea why this is not working?",
+                        "criticality": 2
+                    }
+                ],
+                "references": [],
+                "criticality": {
+                    "name": "Steak sauce",
+                    "score": 29,
+                    "last_triggered": "2025-03-17T15:52:21.486Z",
+                    "triggered": "2025-10-06T10:20:59.253Z",
+                    "level": 2
+                },
+                "entity": {
+                    "id": "ip:226.174.242.243",
+                    "name": "Paella",
+                    "type": "IpAddress"
+                }
+            },
+            {
+                "evidence": [
+                    {
+                        "timestamp": "2025-10-13T00:29:15.776Z",
+                        "mitigation_string": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                        "criticality_label": "Ports are used to communicate with the external world.",
+                        "rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                        "evidence_string": "Make me a sandwich.",
+                        "criticality": 2
+                    }
+                ],
+                "references": [],
+                "criticality": {
+                    "name": "Bird's Nest Soup",
+                    "score": 25,
+                    "last_triggered": "2025-11-26T22:48:08.647Z",
+                    "triggered": "2025-01-03T23:01:52.585Z",
+                    "level": 2
+                },
+                "entity": {
+                    "id": "ip:117.238.45.71",
+                    "name": "Cheese Curds",
+                    "type": "IpAddress"
+                }
+            },
+            {
+                "evidence": [
+                    {
+                        "timestamp": "2025-02-06T13:11:40.053Z",
+                        "mitigation_string": "Erlang is a general-purpose, concurrent, functional programming language.",
+                        "criticality_label": "Haskell features a type system with type inference and lazy evaluation.",
+                        "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                        "evidence_string": "Type classes first appeared in the Haskell programming language.",
+                        "criticality": 2
+                    }
+                ],
+                "references": [],
+                "criticality": {
+                    "name": "Gazpacho",
+                    "score": 25,
+                    "last_triggered": "2025-01-21T14:55:07.189Z",
+                    "triggered": "2025-08-14T18:45:12.988Z",
+                    "level": 2
+                },
+                "entity": {
+                    "id": "ip:13.177.25.207",
+                    "name": "Alphabet pasta",
+                    "type": "IpAddress"
+                }
+            },
+            {
+                "evidence": [
+                    {
+                        "timestamp": "2025-03-17T04:17:03.119Z",
+                        "mitigation_string": "Erlang is a general-purpose, concurrent, functional programming language.",
+                        "criticality_label": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                        "rule": "Do you have any idea why this is not working?",
+                        "evidence_string": "Ports are used to communicate with the external world.",
+                        "criticality": 1
+                    }
+                ],
+                "references": [],
+                "criticality": {
+                    "name": "Coleslaw",
+                    "score": 29,
+                    "last_triggered": "2025-01-07T00:06:25.445Z",
+                    "triggered": "2025-10-15T07:58:31.195Z",
+                    "level": 2
+                },
+                "entity": {
+                    "id": "ip:80.2.58.102",
+                    "name": "Chicken Alfredo",
+                    "type": "IpAddress"
+                }
+            },
+            {
+                "evidence": [
+                    {
+                        "timestamp": "2025-04-19T22:11:45.709Z",
+                        "mitigation_string": "I don't even care.",
+                        "criticality_label": "He looked inquisitively at his keyboard and wrote another sentence.",
+                        "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                        "evidence_string": "Do you have any idea why this is not working?",
+                        "criticality": 1
+                    }
+                ],
+                "references": [],
+                "criticality": {
+                    "name": "Dirty rice",
+                    "score": 5,
+                    "last_triggered": "2025-09-09T21:57:20.863Z",
+                    "triggered": "2025-07-03T18:14:49.125Z",
+                    "level": 1
+                },
+                "entity": {
+                    "id": "ip:150.209.154.185",
+                    "name": "Supreme pizza",
+                    "type": "IpAddress"
+                }
+            },
+            {
+                "evidence": [
+                    {
+                        "timestamp": "2025-02-02T03:16:02.296Z",
+                        "mitigation_string": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                        "criticality_label": "Ports are used to communicate with the external world.",
+                        "rule": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                        "evidence_string": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                        "criticality": 1
+                    }
+                ],
+                "references": [],
+                "criticality": {
+                    "name": "Chicken herby pasta bake",
+                    "score": 5,
+                    "last_triggered": "2025-09-24T14:03:39.788Z",
+                    "triggered": "2025-04-18T02:12:15.826Z",
+                    "level": 1
+                },
+                "entity": {
+                    "id": "ip:235.59.49.42",
+                    "name": "Fattoush Salad",
+                    "type": "IpAddress"
+                }
+            },
+            {
+                "evidence": [
+                    {
+                        "timestamp": "2025-05-12T03:45:26.661Z",
+                        "mitigation_string": "Make me a sandwich.",
+                        "criticality_label": "Atoms are used within a program to denote distinguished values.",
+                        "rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+                        "evidence_string": "Where are my pants?",
+                        "criticality": 1
+                    }
+                ],
+                "references": [],
+                "criticality": {
+                    "name": "Cordon bleu",
+                    "score": 5,
+                    "last_triggered": "2025-12-25T03:59:15.418Z",
+                    "triggered": "2025-10-13T08:54:52.122Z",
+                    "level": 1
+                },
+                "entity": {
+                    "id": "ip:11.254.19.208",
+                    "name": "Cheese stuffed crust pizza",
+                    "type": "IpAddress"
+                }
+            }
+        ],
+        "title": "He looked inquisitively at his keyboard and wrote another sentence.",
+        "log": {
+            "note_author": null,
+            "note_date": null,
+            "status_date": "2025-01-01T23:09:15.817Z",
+            "triggered": "2025-10-29T20:30:49.620Z",
+            "status_change_by": "He looked inquisitively at his keyboard and wrote another sentence."
+        }
+    }
+}

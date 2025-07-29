@@ -1,0 +1,103 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-06-12T14:22:21.035Z",
+            "firstSeen": "2025-02-02T05:19:12.065Z"
+        },
+        "risk": {
+            "criticalityLabel": "Where are my pants?",
+            "riskString": "Type classes first appeared in the Haskell programming language.",
+            "rules": 10,
+            "criticality": 2,
+            "riskSummary": "Do you have any idea why this is not working?",
+            "score": 32,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Atoms are used within a program to denote distinguished values.",
+                    "evidenceString": "Any element of a tuple can be accessed in constant time.",
+                    "rule": "The arguments can be primitive data types or compound data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-01-05T08:19:33.291Z",
+                    "criticalityLabel": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+                },
+                {
+                    "mitigationString": "Where are my pants?",
+                    "evidenceString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "rule": "The arguments can be primitive data types or compound data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-09-09T01:39:05.012Z",
+                    "criticalityLabel": "Do you have any idea why this is not working?"
+                },
+                {
+                    "mitigationString": "Where are my pants?",
+                    "evidenceString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "rule": "I don't even care.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-17T16:34:26.046Z",
+                    "criticalityLabel": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                },
+                {
+                    "mitigationString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "evidenceString": "Where are my pants?",
+                    "rule": "Do you have any idea why this is not working?",
+                    "criticality": 1,
+                    "timestamp": "2025-11-30T08:20:23.530Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-17T05:09:50.518Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "evidenceString": "Ports are created with the built-in function open_port.",
+                    "rule": "Do you have any idea why this is not working?",
+                    "criticality": 1,
+                    "timestamp": "2025-09-03T08:36:35.279Z",
+                    "criticalityLabel": "Make me a sandwich."
+                },
+                {
+                    "mitigationString": "Any element of a tuple can be accessed in constant time.",
+                    "evidenceString": "Ports are used to communicate with the external world.",
+                    "rule": "Make me a sandwich.",
+                    "criticality": 1,
+                    "timestamp": "2025-10-06T14:17:53.249Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "evidenceString": "Ports are used to communicate with the external world.",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-03-02T11:11:20.723Z",
+                    "criticalityLabel": "Its main implementation is the Glasgow Haskell Compiler."
+                },
+                {
+                    "mitigationString": "Atoms are used within a program to denote distinguished values.",
+                    "evidenceString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "rule": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "criticality": 2,
+                    "timestamp": "2025-05-02T09:15:07.776Z",
+                    "criticalityLabel": "Ports are created with the built-in function open_port."
+                },
+                {
+                    "mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "evidenceString": "Where are my pants?",
+                    "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "criticality": 2,
+                    "timestamp": "2025-01-22T09:22:32.633Z",
+                    "criticalityLabel": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:196.24.172.63",
+            "name": "Deviled crab",
+            "type": "IpAddress"
+        }
+    }
+}

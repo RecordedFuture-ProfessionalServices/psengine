@@ -1,0 +1,83 @@
+{
+    "total": 390525,
+    "detections": [
+        {
+            "id": "U5SkAsuNDjvgVssLgceYzbHGBlwmXHKV",
+            "novel": true,
+            "type": "External",
+            "subject": "Ports are created with the built-in function open_port.",
+            "password": {
+                "type": "clear",
+                "hashes": [
+                    {
+                        "algorithm": "SHA1",
+                        "hash": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                    },
+                    {
+                        "algorithm": "SHA256",
+                        "hash": "Erlang is known for its designs that are well suited for systems."
+                    },
+                    {
+                        "algorithm": "MD5",
+                        "hash": "Any element of a tuple can be accessed in constant time."
+                    }
+                ],
+                "properties": [
+                    "Ports are created with the built-in function open_port.",
+                    "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "Ports are used to communicate with the external world.",
+                    "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                ],
+                "cleartext_hint": "Its main implementation is the Glasgow Haskell Compiler.",
+                "cleartext": "Erlang is a general-purpose, concurrent, functional programming language."
+            },
+            "authorization_service": {
+                "url": "https://handling.org/",
+                "domain": "Ports are used to communicate with the external world.",
+                "fqdn": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "technology": [
+                    {
+                        "name": "Queso Fresco",
+                        "id": "AeTS",
+                        "category": "Erlang is known for its designs that are well suited for systems."
+                    },
+                    {
+                        "name": "Fry sauce",
+                        "id": "zqnMyF"
+                    }
+                ],
+                "protocols": [
+                    "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                ]
+            },
+            "cookies": [],
+            "malware_family": {
+                "name": "Pumpkin pie",
+                "id": "UkmiUM"
+            },
+            "dump": {
+                "name": "Laksa",
+                "source": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "description": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "downloaded": "2025-08-28T06:48:51.280Z",
+                "compromise": {
+                    "exfiltration_date": "2025-11-29T00:37:14.911Z",
+                    "os": "I don't even care.",
+                    "os_username": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "malware_file": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "timezone": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "computer_name": "Type classes first appeared in the Haskell programming language.",
+                    "antivirus": [
+                        "Atoms are used within a program to denote distinguished values."
+                    ]
+                },
+                "infrastructure": {
+                    "ip": "132.172.199.100"
+                }
+            },
+            "created": "2025-11-15T08:18:43.622Z"
+        }
+    ],
+    "next_offset": "Tuples are containers for a fixed number of Erlang data types."
+}

@@ -1,0 +1,105 @@
+{
+    "data": {
+        "aiInsights": {
+            "comment": null,
+            "text": "She spent her earliest years reading classic literature, and writing poetry. It is also a garbage-collected runtime system. Make me a sandwich. Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "numberOfReferences": 3
+        },
+        "timestamps": {
+            "lastSeen": "2025-03-03T22:42:18.503Z",
+            "firstSeen": "2025-06-24T08:28:28.512Z"
+        },
+        "risk": {
+            "criticalityLabel": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "riskString": "Ports are created with the built-in function open_port.",
+            "rules": 3,
+            "criticality": 3,
+            "riskSummary": "Any element of a tuple can be accessed in constant time.",
+            "score": 70,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Tuples are containers for a fixed number of Erlang data types.",
+                    "evidenceString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "rule": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "criticality": 1,
+                    "timestamp": "2025-02-28T01:52:53.476Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                },
+                {
+                    "mitigationString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-04-07T05:59:24.889Z",
+                    "criticalityLabel": "Tuples are containers for a fixed number of Erlang data types."
+                },
+                {
+                    "mitigationString": "Do you come here often?",
+                    "evidenceString": "Do you come here often?",
+                    "rule": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "criticality": 3,
+                    "timestamp": "2025-01-10T04:22:35.799Z",
+                    "criticalityLabel": "Type classes first appeared in the Haskell programming language."
+                }
+            ]
+        },
+        "links": {
+            "hits": [],
+            "method_aggregates": [
+                {
+                    "count": 0,
+                    "type": "hHQyM6"
+                },
+                {
+                    "count": 0,
+                    "type": "hHQyM7"
+                },
+                {
+                    "count": 0,
+                    "type": "gTB8y2"
+                }
+            ],
+            "counts": []
+        },
+        "riskMapping": [
+            {
+                "rule": "He looked inquisitively at his keyboard and wrote another sentence."
+            },
+            {
+                "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "categories": [
+                    {
+                        "framework": "Do you have any idea why this is not working?",
+                        "name": "Popover"
+                    },
+                    {
+                        "framework": "Where are my pants?",
+                        "name": "Reuben sandwich"
+                    }
+                ]
+            },
+            {
+                "rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "categories": [
+                    {
+                        "framework": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                        "name": "Huevos Rancheros"
+                    },
+                    {
+                        "framework": "Do you come here often?",
+                        "name": "Pop-Tarts"
+                    },
+                    {
+                        "framework": "She spent her earliest years reading classic literature, and writing poetry.",
+                        "name": "Tuna Pizza"
+                    }
+                ]
+            }
+        ],
+        "entity": {
+            "id": "url:https://mustang.mobi/",
+            "name": "Waffle",
+            "type": "URL"
+        }
+    }
+}

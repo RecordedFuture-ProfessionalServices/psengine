@@ -1,0 +1,31 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-01-01T22:15:45.816Z",
+            "firstSeen": "2025-09-30T16:05:35.782Z"
+        },
+        "risk": {
+            "criticalityLabel": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "riskString": "It is also a garbage-collected runtime system.",
+            "rules": 1,
+            "criticality": 1,
+            "riskSummary": "Any element of a tuple can be accessed in constant time.",
+            "score": 5,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Do you come here often?",
+                    "evidenceString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "rule": "Type classes first appeared in the Haskell programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-03-25T22:59:53.633Z",
+                    "criticalityLabel": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:249.99.107.100",
+            "name": "Wasabi Peas",
+            "type": "IpAddress"
+        }
+    }
+}

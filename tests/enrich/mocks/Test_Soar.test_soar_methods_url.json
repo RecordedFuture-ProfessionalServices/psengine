@@ -1,0 +1,58 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 0,
+                    "level": 0.0,
+                    "context": {
+                        "phishing": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 2
+                            }
+                        },
+                        "malware": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 6
+                            }
+                        },
+                        "public": {
+                            "summary": [],
+                            "score": 0.0,
+                            "mostCriticalRule": "",
+                            "rule": {
+                                "maxCount": 34
+                            }
+                        },
+                        "c2": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 1
+                            }
+                        }
+                    },
+                    "rule": {
+                        "summary": [],
+                        "mostCritical": "",
+                        "count": 0,
+                        "maxCount": 35
+                    }
+                },
+                "entity": {
+                    "id": "url:https://phishing-example.net",
+                    "name": "https://phishing-example.net",
+                    "type": "URL"
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

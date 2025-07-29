@@ -1,0 +1,713 @@
+{
+	"data": {
+		"enterpriseLists": [],
+		"aiInsights": {
+			"comment": null,
+			"text": "Do you come here often? Its main implementation is the Glasgow Haskell Compiler. Make me a sandwich. Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. Erlang is known for its designs that are well suited for systems.",
+			"numberOfReferences": 7
+		},
+		"risk": {
+			"criticalityLabel": "Haskell features a type system with type inference and lazy evaluation.",
+			"riskString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+			"rules": 7,
+			"criticality": 2,
+			"riskSummary": "Ports are used to communicate with the external world.",
+			"score": 54,
+			"evidenceDetails": [
+				{
+					"mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+					"evidenceString": "Any element of a tuple can be accessed in constant time.",
+					"rule": "It is also a garbage-collected runtime system.",
+					"criticality": 1,
+					"timestamp": "2025-09-19T21:42:49.222Z",
+					"criticalityLabel": "Its main implementation is the Glasgow Haskell Compiler."
+				},
+				{
+					"mitigationString": "Haskell features a type system with type inference and lazy evaluation.",
+					"evidenceString": "Haskell features a type system with type inference and lazy evaluation.",
+					"rule": "Tuples are containers for a fixed number of Erlang data types.",
+					"criticality": 1,
+					"timestamp": "2025-11-10T22:34:03.309Z",
+					"criticalityLabel": "Any element of a tuple can be accessed in constant time."
+				},
+				{
+					"mitigationString": "Atoms are used within a program to denote distinguished values.",
+					"evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+					"rule": "Where are my pants?",
+					"criticality": 1,
+					"timestamp": "2025-12-22T17:59:25.190Z",
+					"criticalityLabel": "Do you have any idea why this is not working?"
+				},
+				{
+					"mitigationString": "Erlang is known for its designs that are well suited for systems.",
+					"evidenceString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+					"rule": "Its main implementation is the Glasgow Haskell Compiler.",
+					"criticality": 1,
+					"timestamp": "2025-09-28T20:23:41.811Z",
+					"criticalityLabel": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+				},
+				{
+					"mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+					"evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+					"rule": "I don't even care.",
+					"criticality": 1,
+					"timestamp": "2025-02-28T16:20:09.194Z",
+					"criticalityLabel": "Any element of a tuple can be accessed in constant time."
+				},
+				{
+					"mitigationString": "Do you have any idea why this is not working?",
+					"evidenceString": "Type classes first appeared in the Haskell programming language.",
+					"rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+					"criticality": 2,
+					"timestamp": "2025-10-15T18:54:21.924Z",
+					"criticalityLabel": "Ports are created with the built-in function open_port."
+				},
+				{
+					"mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+					"evidenceString": "Where are my pants?",
+					"rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+					"criticality": 2,
+					"timestamp": "2025-01-15T01:12:24.769Z",
+					"criticalityLabel": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+				}
+			]
+		},
+		"sightings": [
+			{
+				"source": "He looked inquisitively at his keyboard and wrote another sentence.",
+				"url": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+				"published": "2025-02-25T12:35:33.609Z",
+				"fragment": "He looked inquisitively at his keyboard and wrote another sentence.",
+				"title": "He looked inquisitively at his keyboard and wrote another sentence.",
+				"type": "recentPaste"
+			},
+			{
+				"source": "Tuples are containers for a fixed number of Erlang data types.",
+				"url": "I don't even care.",
+				"published": "2025-06-14T12:15:17.579Z",
+				"fragment": "Its main implementation is the Glasgow Haskell Compiler.",
+				"title": "She spent her earliest years reading classic literature, and writing poetry.",
+				"type": "recentInfoSec"
+			},
+			{
+				"source": "Tuples are containers for a fixed number of Erlang data types.",
+				"url": "Make me a sandwich.",
+				"published": "2025-04-14T15:39:57.943Z",
+				"fragment": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+				"title": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+				"type": "mostRecent"
+			}
+		],
+		"riskMapping": [
+			{
+				"rule": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+				"categories": []
+			},
+			{
+				"rule": "The arguments can be primitive data types or compound data types.",
+				"categories": []
+			},
+			{
+				"rule": "Do you come here often?",
+				"categories": []
+			},
+			{
+				"rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+				"categories": [
+					{
+						"framework": "Make me a sandwich.",
+						"name": "Grilled Snake"
+					}
+				]
+			},
+			{
+				"rule": "Atoms are used within a program to denote distinguished values.",
+				"categories": [
+					{
+						"framework": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+						"name": "Fried Catfish"
+					}
+				]
+			},
+			{
+				"rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+				"categories": []
+			},
+			{
+				"rule": "The arguments can be primitive data types or compound data types.",
+				"categories": []
+			}
+		],
+		"entity": {
+			"id": "ip:152.65.223.64",
+			"name": "152.65.223.64",
+			"type": "IpAddress"
+		},
+		"dnsPortCert": {
+			"certificates": [],
+			"dns": {
+				"forwardDns": [],
+				"reverseDns": null
+			},
+			"ports": [
+				{
+					"name": null,
+					"version": null,
+					"port": 22,
+					"extraInfo": null,
+					"protocol": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+					"product": null
+				}
+			]
+		},
+		"relatedEntities": [
+			{
+				"entities": [
+					{
+						"count": 2,
+						"entity": {
+							"id": "Na826W",
+							"name": "Souvlaki",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ziDs2n",
+							"name": "Kung Pao Chicken",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "08syNm",
+							"name": "Hot chicken",
+							"type": "Product"
+						}
+					}
+				],
+				"type": "RelatedProduct"
+			},
+			{
+				"entities": [
+					{
+						"count": 3,
+						"entity": {
+							"id": "99HuA",
+							"name": "Soft Shell Crab",
+							"type": "AttackVector"
+						}
+					}
+				],
+				"type": "RelatedAttackVector"
+			},
+			{
+				"entities": [
+					{
+						"count": 3,
+						"entity": {
+							"id": "ip:111.113.22.83",
+							"name": "Apple sauce",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "ip:140.39.168.51",
+							"name": "Tagine",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:219.123.236.1",
+							"name": "Chicken Biryani",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:66.3.13.137",
+							"name": "Milk Steak",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:164.155.148.58",
+							"name": "Escargot",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:101.252.105.2",
+							"name": "Shucked Oysters",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:48.34.13.22",
+							"name": "Domesticated turkey",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:100.156.244.209",
+							"name": "Cheesecake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:242.234.32.181",
+							"name": "Shucked Oysters",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:99.183.159.18",
+							"name": "Turducken",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:144.234.183.188",
+							"name": "Bellini",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:120.155.246.203",
+							"name": "Elote",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:67.155.206.235",
+							"name": "Gyros",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:190.219.240.110",
+							"name": "Philadelphia cheesesteak",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:249.185.43.27",
+							"name": "Pasta salad",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:253.17.110.240",
+							"name": "Fish and Chips!",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:21.22.131.11",
+							"name": "Pastrami",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:246.92.251.2",
+							"name": "Clam cake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:209.12.109.51",
+							"name": "Grits",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:161.163.207.168",
+							"name": "Jerky",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:127.68.23.116",
+							"name": "Blue cheese dressing",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "ip:24.31.18.10",
+							"name": "Ice Cream",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:10.166.23.96",
+							"name": "Chips and dip",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:41.147.111.158",
+							"name": "Gumbo",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "ip:44.174.143.125",
+							"name": "Patty",
+							"type": "IpAddress"
+						}
+					}
+				],
+				"type": "RelatedIpAddress"
+			},
+			{
+				"entities": [
+					{
+						"count": 1,
+						"entity": {
+							"id": "hash:10155521fc9a2ccdd4812f2a17f16fb6f32226cb316659c2bf2d318b2c8b0791",
+							"name": "Popover",
+							"type": "Hash"
+						}
+					}
+				],
+				"type": "RelatedHash"
+			},
+			{
+				"entities": [
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:math.gold",
+							"name": "Chicken Biryani",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:leeds.td",
+							"name": "Steak sauce",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:jose.cat",
+							"name": "Potato skins",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "idn:blog.tl",
+							"name": "Lorna Doone",
+							"type": "InternetDomainName"
+						}
+					}
+				],
+				"type": "RelatedInternetDomainName"
+			}
+		],
+		"analystNotes": [],
+		"location": {
+			"organization": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+			"cidr": {
+				"id": "ip:175.191.137.26",
+				"name": "Banh Mi Vi\u00eat",
+				"type": "IpAddress"
+			},
+			"location": {
+				"continent": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+				"country": "Any element of a tuple can be accessed in constant time.",
+				"city": "Type classes first appeared in the Haskell programming language."
+			},
+			"asn": "Atoms are used within a program to denote distinguished values."
+		},
+		"timestamps": {
+			"lastSeen": "2025-05-27T01:31:11.761Z",
+			"firstSeen": "2025-03-23T01:56:16.496Z"
+		},
+		"threatLists": [
+			{
+				"id": "ygpCrxzO8QC3g",
+				"name": "Pemmican",
+				"type": "EntityList",
+				"description": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
+			}
+		],
+		"intelCard": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+		"links": {
+			"hits": [],
+			"method_aggregates": [
+				{
+					"count": 0,
+					"type": "hHQyM6"
+				},
+				{
+					"count": 0,
+					"type": "hHQyM7"
+				},
+				{
+					"count": 0,
+					"type": "gTB8y2"
+				}
+			],
+			"counts": []
+		},
+		"counts": [
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			}
+		],
+		"metrics": [
+			{
+				"type": "defangedSightings",
+				"value": 3
+			},
+			{
+				"type": "sevenDaysHits",
+				"value": 0
+			},
+			{
+				"type": "validatedCncSightings",
+				"value": 586
+			},
+			{
+				"type": "linkedIntrusion",
+				"value": 1
+			},
+			{
+				"type": "reportedCnc",
+				"value": 4
+			},
+			{
+				"type": "totalHits",
+				"value": 22
+			},
+			{
+				"type": "c2Subscore",
+				"value": 48
+			},
+			{
+				"type": "botnet",
+				"value": 1
+			},
+			{
+				"type": "phishingSubscore",
+				"value": 0
+			},
+			{
+				"type": "whitelistedCount",
+				"value": 0
+			},
+			{
+				"type": "linkedIntrusionSightings",
+				"value": 3
+			},
+			{
+				"type": "oneDayHits",
+				"value": 0
+			},
+			{
+				"type": "reportedCncSightings",
+				"value": 428
+			},
+			{
+				"type": "trendVolume",
+				"value": 0
+			},
+			{
+				"type": "suspectedCnc",
+				"value": 3
+			},
+			{
+				"type": "historicalThreatListMembershipSightings",
+				"value": -1
+			},
+			{
+				"type": "validatedCnc",
+				"value": 1
+			},
+			{
+				"type": "socialMediaHits",
+				"value": 8
+			},
+			{
+				"type": "undergroundForumHits",
+				"value": 0
+			},
+			{
+				"type": "infoSecHits",
+				"value": 11
+			},
+			{
+				"type": "historicalThreatListMembership",
+				"value": 2
+			},
+			{
+				"type": "suspectedCncSightings",
+				"value": 10
+			},
+			{
+				"type": "maliciousHits",
+				"value": 6
+			},
+			{
+				"type": "darkWebHits",
+				"value": 0
+			},
+			{
+				"type": "publicSubscore",
+				"value": 54
+			},
+			{
+				"type": "pasteHits",
+				"value": 1
+			},
+			{
+				"type": "mitigatedCount",
+				"value": 0
+			},
+			{
+				"type": "criticality",
+				"value": 2
+			},
+			{
+				"type": "technicalReportingHits",
+				"value": 2
+			},
+			{
+				"type": "malwareSubscore",
+				"value": 0
+			},
+			{
+				"type": "sixtyDaysHits",
+				"value": 0
+			},
+			{
+				"type": "defanged",
+				"value": 2
+			},
+			{
+				"type": "botnetSightings",
+				"value": 1
+			}
+		]
+	},
+	"warnings": [
+		"Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+	]
+}
+
