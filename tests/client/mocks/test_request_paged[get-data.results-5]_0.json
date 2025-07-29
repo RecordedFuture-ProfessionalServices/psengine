@@ -1,0 +1,38 @@
+{
+    "data": {
+        "results": [
+            {
+                "intelligence_goals": [
+                    {
+                        "name": "Poppyseed muffin",
+                        "id": "report:_intelligence_goal_ig-46"
+                    }
+                ],
+                "priority": false,
+                "tags": [],
+                "use_case_id": "Ports are used to communicate with the external world.",
+                "id": "pYtlNJ",
+                "owner": {
+                    "name": "Meatloaf",
+                    "id": "olQ1YeMfTG3HbRrI"
+                },
+                "title": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                "created": "2025-12-27T02:40:45.503Z",
+                "notification_settings": {
+                    "email_subscribers": [
+                        {
+                            "name": "Butter cookie",
+                            "id": "o08vN8OPBHOR4x56"
+                        }
+                    ],
+                    "mobile_subscribers": []
+                },
+                "enabled": true
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 5
+    }
+}

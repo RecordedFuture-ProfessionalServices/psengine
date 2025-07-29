@@ -1,0 +1,330 @@
+{
+    "data": {
+        "results": [
+            {
+                "riskMapping": [
+                    {
+                        "rule": "Type classes first appeared in the Haskell programming language.",
+                        "categories": [
+                            {
+                                "framework": "Ports are used to communicate with the external world.",
+                                "name": "Shawarma"
+                            },
+                            {
+                                "framework": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                                "name": "Crab cake"
+                            }
+                        ]
+                    },
+                    {
+                        "rule": "The arguments can be primitive data types or compound data types."
+                    },
+                    {
+                        "rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                        "categories": [
+                            {
+                                "framework": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                                "name": "Turducken"
+                            }
+                        ]
+                    },
+                    {
+                        "rule": "It is also a garbage-collected runtime system.",
+                        "categories": [
+                            {
+                                "framework": "Ports are created with the built-in function open_port.",
+                                "name": "Montreal Smoked Meat"
+                            }
+                        ]
+                    },
+                    {
+                        "rule": "Type classes first appeared in the Haskell programming language."
+                    },
+                    {
+                        "rule": "Haskell features a type system with type inference and lazy evaluation.",
+                        "categories": [
+                            {
+                                "framework": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                                "name": "Veggie Pizza"
+                            }
+                        ]
+                    },
+                    {
+                        "rule": "Atoms are used within a program to denote distinguished values."
+                    },
+                    {
+                        "rule": "Erlang is known for its designs that are well suited for systems.",
+                        "categories": [
+                            {
+                                "framework": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                                "name": "Corn flakes"
+                            }
+                        ]
+                    },
+                    {
+                        "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+                    },
+                    {
+                        "rule": "Erlang is known for its designs that are well suited for systems.",
+                        "categories": [
+                            {
+                                "framework": "Erlang is a general-purpose, concurrent, functional programming language.",
+                                "name": "Oreo"
+                            }
+                        ]
+                    },
+                    {
+                        "rule": "The arguments can be primitive data types or compound data types.",
+                        "categories": [
+                            {
+                                "framework": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                                "name": "Hawaiian haystack"
+                            }
+                        ]
+                    },
+                    {
+                        "rule": "Its main implementation is the Glasgow Haskell Compiler."
+                    },
+                    {
+                        "rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                        "categories": [
+                            {
+                                "framework": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                                "name": "Chicken nugget"
+                            }
+                        ]
+                    }
+                ],
+                "risk": {
+                    "criticalityLabel": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "riskString": "Erlang is known for its designs that are well suited for systems.",
+                    "rules": 13,
+                    "criticality": 4,
+                    "riskSummary": "Ports are created with the built-in function open_port.",
+                    "score": 99,
+                    "evidenceDetails": [
+                        {
+                            "mitigationString": "Atoms are used within a program to denote distinguished values.",
+                            "evidenceString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                            "rule": "The arguments can be primitive data types or compound data types.",
+                            "criticality": 1,
+                            "timestamp": "2025-06-30T23:54:40.225Z",
+                            "criticalityLabel": "It is also a garbage-collected runtime system."
+                        },
+                        {
+                            "mitigationString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                            "evidenceString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                            "rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                            "criticality": 1,
+                            "timestamp": "2025-03-30T00:32:11.723Z",
+                            "criticalityLabel": "Atoms are used within a program to denote distinguished values."
+                        },
+                        {
+                            "mitigationString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                            "evidenceString": "Tuples are containers for a fixed number of Erlang data types.",
+                            "rule": "Type classes first appeared in the Haskell programming language.",
+                            "criticality": 1,
+                            "timestamp": "2025-01-20T05:06:46.346Z",
+                            "criticalityLabel": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                        },
+                        {
+                            "mitigationString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                            "evidenceString": "Make me a sandwich.",
+                            "rule": "Where are my pants?",
+                            "criticality": 1,
+                            "timestamp": "2025-02-01T02:58:26.499Z",
+                            "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                        },
+                        {
+                            "mitigationString": "Make me a sandwich.",
+                            "evidenceString": "Where are my pants?",
+                            "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                            "criticality": 1,
+                            "timestamp": "2025-05-04T01:49:30.237Z",
+                            "criticalityLabel": "She spent her earliest years reading classic literature, and writing poetry."
+                        },
+                        {
+                            "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                            "evidenceString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                            "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                            "criticality": 1,
+                            "timestamp": "2025-12-14T22:03:27.732Z",
+                            "criticalityLabel": "Ports are used to communicate with the external world."
+                        },
+                        {
+                            "mitigationString": "Ports are created with the built-in function open_port.",
+                            "evidenceString": "Type classes first appeared in the Haskell programming language.",
+                            "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                            "criticality": 2,
+                            "timestamp": "2025-10-14T15:20:22.885Z",
+                            "criticalityLabel": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                        },
+                        {
+                            "mitigationString": "Type classes first appeared in the Haskell programming language.",
+                            "evidenceString": "The arguments can be primitive data types or compound data types.",
+                            "rule": "I don't even care.",
+                            "criticality": 2,
+                            "timestamp": "2025-02-28T23:14:17.987Z",
+                            "criticalityLabel": "She spent her earliest years reading classic literature, and writing poetry."
+                        },
+                        {
+                            "mitigationString": "Erlang is known for its designs that are well suited for systems.",
+                            "evidenceString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                            "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                            "criticality": 2,
+                            "timestamp": "2025-10-02T03:29:01.616Z",
+                            "criticalityLabel": "Erlang is a general-purpose, concurrent, functional programming language."
+                        },
+                        {
+                            "mitigationString": "It is also a garbage-collected runtime system.",
+                            "evidenceString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                            "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                            "criticality": 2,
+                            "timestamp": "2025-08-21T12:02:24.095Z",
+                            "criticalityLabel": "Erlang is known for its designs that are well suited for systems."
+                        },
+                        {
+                            "mitigationString": "Its main implementation is the Glasgow Haskell Compiler.",
+                            "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                            "rule": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                            "criticality": 2,
+                            "timestamp": "2025-12-29T08:20:04.633Z",
+                            "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                        },
+                        {
+                            "mitigationString": "Make me a sandwich.",
+                            "evidenceString": "I don't even care.",
+                            "rule": "Do you have any idea why this is not working?",
+                            "criticality": 3,
+                            "timestamp": "2025-05-27T22:31:20.883Z",
+                            "criticalityLabel": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                        },
+                        {
+                            "mitigationString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                            "evidenceString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                            "rule": "It is also a garbage-collected runtime system.",
+                            "criticality": 4,
+                            "timestamp": "2025-06-19T03:17:14.881Z",
+                            "criticalityLabel": "Haskell features a type system with type inference and lazy evaluation."
+                        }
+                    ]
+                },
+                "links": {
+                    "hits": [
+                        {
+                            "sections": [
+                                {
+                                    "section_id": {
+                                        "id": "JxGr88",
+                                        "name": "Beef Manhattan",
+                                        "type": "Category"
+                                    },
+                                    "total_count": 3,
+                                    "lists": [
+                                        {
+                                            "entities": [
+                                                {
+                                                    "id": "p6toB4ZeFDcu",
+                                                    "name": "Chicken Tikka Masala",
+                                                    "type": "MitreAttackIdentifier"
+                                                }
+                                            ],
+                                            "total_count": 1,
+                                            "type": {
+                                                "id": "ThxZNc26cD0yaTCWWydrmBfv7R",
+                                                "name": "Pistachio Ice Cream",
+                                                "type": "MetaType",
+                                                "description": "Haskell features a type system with type inference and lazy evaluation."
+                                            }
+                                        },
+                                        {
+                                            "entities": [
+                                                {
+                                                    "id": "lHBMLc",
+                                                    "name": "Tuna Pizza",
+                                                    "type": "Malware"
+                                                },
+                                                {
+                                                    "id": "dojZxi",
+                                                    "name": "Escargot",
+                                                    "type": "Malware"
+                                                }
+                                            ],
+                                            "total_count": 2,
+                                            "type": {
+                                                "id": "ys6DGczqVV7m",
+                                                "name": "Bird's Nest Soup",
+                                                "type": "MetaType",
+                                                "description": "Where are my pants?"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "section_id": {
+                                        "id": "zYh2zE",
+                                        "name": "Fried fish",
+                                        "type": "Category"
+                                    },
+                                    "total_count": 1,
+                                    "lists": []
+                                }
+                            ],
+                            "start_date": "2024-02-02",
+                            "stop_date": "2024-02-02",
+                            "total_count": 21,
+                            "sample_reference_ids": [
+                                "Do you come here often?",
+                                "He looked inquisitively at his keyboard and wrote another sentence.",
+                                "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                                "Atoms are used within a program to denote distinguished values.",
+                                "She spent her earliest years reading classic literature, and writing poetry."
+                            ],
+                            "counts": [
+                                {
+                                    "count": 21,
+                                    "type": {
+                                        "id": "pryXUcrakxH61QsaIhtuL60or54",
+                                        "name": "Scrapple",
+                                        "type": "MetaType",
+                                        "description": "Any element of a tuple can be accessed in constant time."
+                                    }
+                                }
+                            ],
+                            "event_count": 21
+                        }
+                    ],
+                    "method_aggregates": [
+                        {
+                            "count": 4,
+                            "type": "gTB8y2"
+                        },
+                        {
+                            "count": 0,
+                            "type": "hHQyM6"
+                        },
+                        {
+                            "count": 0,
+                            "type": "hHQyM7"
+                        }
+                    ],
+                    "counts": [
+                        {
+                            "count": 21,
+                            "type": {
+                                "id": "t7rkDXwUFyZyJW6CLBer0ClELzL",
+                                "name": "Matzo Ball Soup",
+                                "type": "MetaType",
+                                "description": "Haskell features a type system with type inference and lazy evaluation."
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 215694319
+    }
+}

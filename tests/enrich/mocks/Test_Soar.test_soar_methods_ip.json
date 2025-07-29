@@ -1,0 +1,196 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 99,
+                    "level": 4.0,
+                    "context": {
+                        "phishing": {
+                            "score": 5.0,
+                            "rule": {
+                                "count": 1,
+                                "maxCount": 3
+                            }
+                        },
+                        "public": {
+                            "summary": [
+                                {
+                                    "level": 1.0,
+                                    "count": 7.0
+                                },
+                                {
+                                    "level": 2.0,
+                                    "count": 1.0
+                                },
+                                {
+                                    "level": 4.0,
+                                    "count": 1.0
+                                }
+                            ],
+                            "score": 99.0,
+                            "mostCriticalRule": "Validated C&C Server",
+                            "rule": {
+                                "maxCount": 79
+                            }
+                        },
+                        "c2": {
+                            "score": 96.0,
+                            "rule": {
+                                "count": 2,
+                                "maxCount": 7
+                            }
+                        }
+                    },
+                    "rule": {
+                        "count": 13,
+                        "mostCritical": "Validated C&C Server",
+                        "maxCount": 79,
+                        "evidence": {
+                            "linkedIntrusion": {
+                                "count": 4,
+                                "timestamp": "2024-06-01T13:09:37.000Z",
+                                "description": "25 sightings on 4 sources: <e id=source:k_7zaW>C2IntelFeeds IPC2s</e>, <e id=source:BV5>Twitter</e>, <e id=source:b5tNVA>Recorded Future Command & Control List</e>, <e id=source:lmtVW4>C2IntelFeeds Cobalt Strike C2 Servers</e>. 3 related intrusion methods: <e id=JLHNoH>Cobalt Strike</e>, <e id=hzdgTv>Offensive Security Tools (OST)</e>, <e id=LnK3Q6>Cobalt Strike Beacon</e>. Most recent link (Jun 1, 2024): https://twitter.com/drb_ra/statuses/1796891853544894552",
+                                "rule": "Historically Linked to Intrusion Method",
+                                "sightings": 25,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "reportedCnc": {
+                                "count": 2,
+                                "timestamp": "2023-09-18T14:14:13.113Z",
+                                "description": "196 sightings on 2 sources: <e id=source:qU_q-9>Recorded Future Command & Control Reports</e>, <e id=source:b5tNVA>Recorded Future Command & Control List</e>. <e id=ip:42.194.199.231>42.194.199.231</e>:<e id=gf0wYN>443</e> was reported as a command and control server for <e id=LnK3Q6>Cobalt Strike</e> on Jun 05, 2023",
+                                "rule": "Historically Reported C&C Server",
+                                "sightings": 196,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "botnet": {
+                                "count": 1,
+                                "timestamp": "2021-10-31T12:58:00.227Z",
+                                "description": "2 sightings on 1 source: <e id=source:kBB1fk>External Sensor Data Analysis</e>. <e id=ip:42.194.199.231>42.194.199.231</e> was historically observed as <e id=mitre:T1584>botnets</e>. No longer observed as of Oct 31, 2021.",
+                                "rule": "Historical Botnet Traffic",
+                                "sightings": 2,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "recentValidatedCnc": {
+                                "count": 1,
+                                "timestamp": "2024-08-30T05:16:57.000Z",
+                                "description": "6 sightings on 1 source: <e id=source:qGriFQ>Recorded Future Command & Control Validation</e>. Recorded Future analysis validated <e id=ip:42.194.199.231>42.194.199.231</e>:<e id=m3rnfR>8709</e> as a command and control server for <e id=LnK3Q6>Cobalt Strike</e> on Aug 30, 2024",
+                                "rule": "Validated C&C Server",
+                                "sightings": 6,
+                                "mitigation": "",
+                                "level": 4
+                            },
+                            "historicalThreatListMembership": {
+                                "count": 3,
+                                "timestamp": "2024-07-02T19:15:54.716Z",
+                                "description": "Previous sightings on 3 sources: <e id=report:oJewMx>Recently Viewed Integrations Indicators</e>, <e id=report:POW5Yc>RAT Controller \u2013 Shodan / Recorded Future</e>, <e id=report:aD1qtM>Cobalt Strike Default Certificate Detected - Shodan / Recorded Future</e>. Observed between Mar 30, 2024, and Jul 2, 2024.",
+                                "rule": "Historically Reported in Threat List",
+                                "sightings": -1,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "spam": {
+                                "count": 1,
+                                "timestamp": "2022-11-22T11:14:24.149Z",
+                                "description": "3 sightings on 1 source: <e id=source:kBCI-b>External Sensor Spam</e>. <e id=ip:42.194.199.231>42.194.199.231</e> was identified as <e id=kCopL>spam</e> in External Sensor data. Reported to Recorded Future on Nov 22, 2022.",
+                                "rule": "Historical Spam Source",
+                                "sightings": 3,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "openProxies": {
+                                "count": 1,
+                                "timestamp": "2021-10-30T18:42:18.541Z",
+                                "description": "3 sightings on 1 source: <e id=source:kBB1fk>External Sensor Data Analysis</e>. <e id=ip:42.194.199.231>42.194.199.231</e> was historically observed as <e id=mitre:T1090>proxy</e>. No longer observed as of Oct 30, 2021.",
+                                "rule": "Historical Open Proxies",
+                                "sightings": 3,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "suspectedCnc": {
+                                "count": 4,
+                                "timestamp": "2024-04-28T14:10:21.360Z",
+                                "description": "24 sightings on 4 sources: <e id=source:sIoEOQ>ThreatFox Infrastructure Analysis</e>, <e id=source:UZNze8>DHS Automated Indicator Sharing</e>, <e id=source:qs_-cU>Malware Patrol</e>, <e id=source:tI3ayU>Proofpoint Reputation Feed</e>. <e id=LnK3Q6>cobaltstrike</e> Control Server at <e id=ip:42.194.199.231>42.194.199.231</e>:<e id=hpLN98>7443</e>",
+                                "rule": "Historical Suspected C&C Server",
+                                "sightings": 24,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "validatedCnc": {
+                                "count": 1,
+                                "timestamp": "2024-08-28T05:55:50.000Z",
+                                "description": "954 sightings on 1 source: <e id=source:qGriFQ>Recorded Future Command & Control Validation</e>. Recorded Future analysis validated <e id=ip:42.194.199.231>42.194.199.231</e>:<e id=m3rnfR>8709</e> as a command and control server for <e id=LnK3Q6>Cobalt Strike</e> on Aug 28, 2024",
+                                "rule": "Previously Validated C&C Server",
+                                "sightings": 954,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "linkedToCyberAttack": {
+                                "count": 2,
+                                "timestamp": "2022-02-01T18:30:19.000Z",
+                                "description": "8 sightings on 2 sources: <e id=source:k_7zaW>C2IntelFeeds IPC2s</e>, <e id=source:lmtVW4>C2IntelFeeds Cobalt Strike C2 Servers</e>. Most recent link (Feb 1, 2022): https://github.com/drb-ra/C2IntelFeeds/blob/master/feeds/IPC2s.csv?q=42.194.199.231_20220201",
+                                "rule": "Historically Linked to Cyber Attack",
+                                "sightings": 8,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "dhsAis": {
+                                "count": 1,
+                                "timestamp": "2024-04-17T13:25:10.021Z",
+                                "description": "14 sightings on 1 source: <e id=source:UZNze8>DHS Automated Indicator Sharing</e>. 14 reports including IXR_2024_94425_1, from DiligentWesternLowlandGorilla77 (Apr 17, 2024).",
+                                "rule": "Historically Reported by DHS AIS",
+                                "sightings": 14,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "defanged": {
+                                "count": 2,
+                                "timestamp": "2024-06-01T13:09:37.000Z",
+                                "description": "16 sightings on 2 sources: <e id=idn:redpacketsecurity.com>redpacketsecurity.com</e>, <e id=source:BV5>Twitter</e>. Most recent link (Jun 1, 2024): https://twitter.com/drb_ra/statuses/1796891853544894552",
+                                "rule": "Historically Reported as a Defanged IP",
+                                "sightings": 16,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "phishingHost": {
+                                "count": 1,
+                                "timestamp": "2023-08-04T04:16:20.236Z",
+                                "description": "7 sightings on 1 source: <e id=source:kBB1fk>External Sensor Data Analysis</e>. <e id=ip:42.194.199.231>42.194.199.231</e> was historically observed as <e id=mitre:T1566>phishing</e>. No longer observed as of Nov 02, 2021.",
+                                "rule": "Historical Phishing Host",
+                                "sightings": 7,
+                                "mitigation": "",
+                                "level": 1
+                            }
+                        },
+                        "summary": [
+                            {
+                                "level": 1.0,
+                                "count": 10.0
+                            },
+                            {
+                                "level": 2.0,
+                                "count": 2.0
+                            },
+                            {
+                                "level": 4.0,
+                                "count": 1.0
+                            }
+                        ]
+                    }
+                },
+                "entity": {
+                    "id": "ip:42.194.199.231",
+                    "name": "42.194.199.231",
+                    "type": "IpAddress"
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

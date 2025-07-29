@@ -1,0 +1,95 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-01-09T11:35:03.635Z",
+            "firstSeen": "2025-06-19T05:28:12.441Z"
+        },
+        "risk": {
+            "criticalityLabel": "Do you come here often?",
+            "riskString": "Ports are created with the built-in function open_port.",
+            "rules": 9,
+            "criticality": 2,
+            "riskSummary": "She spent her earliest years reading classic literature, and writing poetry.",
+            "score": 60,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Any element of a tuple can be accessed in constant time.",
+                    "evidenceString": "Where are my pants?",
+                    "rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "criticality": 1,
+                    "timestamp": "2025-06-09T12:57:29.551Z",
+                    "criticalityLabel": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                },
+                {
+                    "mitigationString": "Ports are used to communicate with the external world.",
+                    "evidenceString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-11-22T13:50:49.230Z",
+                    "criticalityLabel": "Make me a sandwich."
+                },
+                {
+                    "mitigationString": "Where are my pants?",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-03-13T15:23:37.050Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "evidenceString": "Ports are created with the built-in function open_port.",
+                    "rule": "Make me a sandwich.",
+                    "criticality": 1,
+                    "timestamp": "2025-08-13T12:30:03.677Z",
+                    "criticalityLabel": "Type classes first appeared in the Haskell programming language."
+                },
+                {
+                    "mitigationString": "The arguments can be primitive data types or compound data types.",
+                    "evidenceString": "Type classes first appeared in the Haskell programming language.",
+                    "rule": "Do you have any idea why this is not working?",
+                    "criticality": 1,
+                    "timestamp": "2025-01-27T18:02:08.556Z",
+                    "criticalityLabel": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+                },
+                {
+                    "mitigationString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "evidenceString": "Any element of a tuple can be accessed in constant time.",
+                    "rule": "Atoms are used within a program to denote distinguished values.",
+                    "criticality": 2,
+                    "timestamp": "2025-02-27T09:58:53.851Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "Do you come here often?",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 2,
+                    "timestamp": "2025-07-16T19:11:10.752Z",
+                    "criticalityLabel": "Type classes first appeared in the Haskell programming language."
+                },
+                {
+                    "mitigationString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "evidenceString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 2,
+                    "timestamp": "2025-05-11T04:12:50.274Z",
+                    "criticalityLabel": "Any element of a tuple can be accessed in constant time."
+                },
+                {
+                    "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "evidenceString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 2,
+                    "timestamp": "2025-05-02T19:04:38.903Z",
+                    "criticalityLabel": "Its main implementation is the Glasgow Haskell Compiler."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:123.171.59.210",
+            "name": "Key Lime Pie",
+            "type": "IpAddress"
+        }
+    }
+}

@@ -1,0 +1,2461 @@
+{
+    "attributes": {
+        "title": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+        "text": "Haskell features a type system with type inference and lazy evaluation. Its main implementation is the Glasgow Haskell Compiler. Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s. Do you come here often?",
+        "published": "2025-07-28T23:24:38.416Z",
+        "events": [
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-12-17T18:50:13.427Z",
+                    "stop": "2025-02-09T05:13:48.898Z",
+                    "capabilities": [
+                        {
+                            "id": "q4mB46gid0EL",
+                            "name": "Chicken \u00e0 la King",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "4ak3vLy6AmAfAAf",
+                            "name": "Escargot",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "MjBzc6",
+                            "name": "Jerky",
+                            "type": "Malware"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "RBL5i4",
+                            "name": "Cheesy Garlic Bread",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-07-11T17:06:49.890Z",
+                    "stop": "2025-02-07T20:18:07.713Z",
+                    "capabilities": [
+                        {
+                            "id": "hB8wrMMt42ni",
+                            "name": "Bread",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "wJZQ6lB8Az1",
+                            "name": "Fried Catfish",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "eApiAgH5RMTYmYt",
+                            "name": "Stroganoff",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "76sMk5",
+                            "name": "Coleslaw",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-05-02T15:54:58.141Z",
+                    "stop": "2025-11-03T20:15:41.422Z",
+                    "capabilities": [
+                        {
+                            "id": "OqXxvFfuecRr",
+                            "name": "Shrimp Creole",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "MFBI5qDRtHpMwb9",
+                            "name": "Apple butter",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "lYjwRd",
+                            "name": "Spaghetti and Meatballs",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-01-08T22:17:13.911Z",
+                    "stop": "2025-06-08T06:37:14.724Z",
+                    "malicious_infrastructure": [
+                        {
+                            "id": "tJQo9L",
+                            "name": "Pumpkin pie",
+                            "type": "Product"
+                        }
+                    ],
+                    "capabilities": [
+                        {
+                            "id": "cKvD5XZERYJM",
+                            "name": "New York-Style Pizza",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "GqqJMnik9at",
+                            "name": "Ploye",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "3HzpuX",
+                            "name": "Tres Leches Cake",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-02-06T16:41:37.053Z",
+                    "stop": "2025-06-28T19:38:49.338Z",
+                    "capabilities": [
+                        {
+                            "id": "9jGgCTVqZIA1",
+                            "name": "Blue cheese dressing",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "ggsG33bdoQE",
+                            "name": "Dirty rice",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "PIyoDX",
+                            "name": "Montreal Smoked Meat",
+                            "type": "Malware"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "kFpEhw",
+                            "name": "Potato Wedges",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-01-12T05:12:38.132Z",
+                    "stop": "2025-03-10T18:20:10.745Z",
+                    "capabilities": [
+                        {
+                            "id": "WFjHVXbylfcm",
+                            "name": "Home fries",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "88Sfv3tfoqO4kPm",
+                            "name": "Porterhouse Steak",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "lytCzPmpHUKFbtX",
+                            "name": "Baked potato",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "C8PaR5",
+                            "name": "Yeung Chow fried rice",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-08-23T21:52:16.438Z",
+                    "stop": "2025-07-25T06:25:06.481Z",
+                    "capabilities": [
+                        {
+                            "id": "6eEL9Qbk5hJ",
+                            "name": "Calf's liver and bacon",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "WNjdHpBslhff",
+                            "name": "Onion Rings",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "UzNSlF",
+                            "name": "Pickled Okra",
+                            "type": "CyberVulnerability",
+                            "description": "He looked inquisitively at his keyboard and wrote another sentence."
+                        },
+                        {
+                            "id": "K0VsQa",
+                            "name": "Apple sauce",
+                            "type": "CyberVulnerability",
+                            "description": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "o7bGQ8",
+                            "name": "Sloppy joe",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-10-15T02:44:31.070Z",
+                    "stop": "2025-02-26T21:06:20.742Z",
+                    "capabilities": [
+                        {
+                            "id": "1FB4j1uuuvz6",
+                            "name": "Chicken fried steak",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "hKW177sVO2e",
+                            "name": "Creme Brulee",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "rmbh9z",
+                            "name": "Beef Manhattan",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-07-27T08:27:53.280Z",
+                    "stop": "2025-12-17T03:55:56.173Z",
+                    "malicious_infrastructure": [
+                        {
+                            "id": "WLMPE3",
+                            "name": "Eggo",
+                            "type": "Product"
+                        }
+                    ],
+                    "capabilities": [
+                        {
+                            "id": "IIveLMKpVhq1",
+                            "name": "Corn relish",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "d7kDdK7p5qZ",
+                            "name": "Steak Tartare",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "VKLRFX",
+                            "name": "Fajita",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-03-15T20:17:27.193Z",
+                    "stop": "2025-04-20T20:21:17.184Z",
+                    "capabilities": [
+                        {
+                            "id": "UK47nu7Kqd1R",
+                            "name": "Slinger",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "cxOxJBgioBI",
+                            "name": "Cheesecake",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "LfqMuA",
+                            "name": "Brisket",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-01-19T07:43:33.314Z",
+                    "stop": "2025-09-17T02:39:17.103Z",
+                    "malware": [
+                        {
+                            "id": "AfXrTI",
+                            "name": "Swiss steak",
+                            "type": "Malware"
+                        }
+                    ],
+                    "malicious_infrastructure": [
+                        {
+                            "id": "e19IS5",
+                            "name": "Caviar",
+                            "type": "Technology"
+                        },
+                        {
+                            "id": "QZVk5",
+                            "name": "Piroshky",
+                            "type": "Product"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "iS5ARMXGn46V",
+                            "name": "Matzo Ball Soup",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "N1wKf7S6m4D",
+                            "name": "Corn dog",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-12-01T06:44:43.398Z",
+                    "stop": "2025-02-17T14:57:48.869Z",
+                    "malicious_infrastructure": [
+                        {
+                            "id": "hsa1lr",
+                            "name": "Quesadilla",
+                            "type": "Product"
+                        }
+                    ],
+                    "capabilities": [
+                        {
+                            "id": "RG0PZ9O98YRb",
+                            "name": "Pasta salad",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "iDoAPFEnUmD",
+                            "name": "Fajita",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "pvOdR1",
+                            "name": "French Dip",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-04-09T00:04:14.293Z",
+                    "stop": "2025-03-16T16:39:53.674Z",
+                    "malware": [
+                        {
+                            "id": "qDvhY8",
+                            "name": "Corn dog",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "cbYKGo",
+                            "name": "Albacore Tuna Melt",
+                            "type": "Malware"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "yTvcD7Ou3Q9",
+                            "name": "Poppyseed muffin",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "8wgPN6dpxb01",
+                            "name": "Bread",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-12-18T00:49:38.748Z",
+                    "stop": "2025-04-17T09:26:56.305Z",
+                    "capabilities": [
+                        {
+                            "id": "RNcd9C",
+                            "name": "Chicken Liver Pate",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "1rSHn1kS6vSLpG1",
+                            "name": "Apple butter",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "d8gj4Jq5gxko",
+                            "name": "Parma Ham",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "GgELSZ",
+                            "name": "Gazpacho",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-08-28T22:55:28.181Z",
+                    "stop": "2025-07-08T09:51:18.463Z",
+                    "malicious_infrastructure": [
+                        {
+                            "id": "ctVSDf",
+                            "name": "Spanish rice",
+                            "type": "Product"
+                        }
+                    ],
+                    "capabilities": [
+                        {
+                            "id": "rjrXvP4wqQ9z",
+                            "name": "Spaghetti Bolognese",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "LfWgRqaDY3h",
+                            "name": "Chinese food",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "AoQbzG",
+                            "name": "Pemmican",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-04-25T07:38:58.052Z",
+                    "stop": "2025-08-08T19:59:36.519Z",
+                    "capabilities": [
+                        {
+                            "id": "WsAbdP",
+                            "name": "Biscuit",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "k4wVwXJIXaxj",
+                            "name": "Grilled Snake",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "NRh2ArdTEu0Xw58",
+                            "name": "Corned beef",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "1L8jKA",
+                            "name": "Bookbinder Soup",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-08-28T15:39:59.423Z",
+                    "stop": "2025-02-03T08:40:33.005Z",
+                    "malware": [
+                        {
+                            "id": "o6nyD4",
+                            "name": "American fried rice",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "q4iTTk",
+                            "name": "Muffuletta",
+                            "type": "Malware"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "bTJ2xDD3Mtm",
+                            "name": "Ice cream cake",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "Ys2LBsq9oT2c",
+                            "name": "Baba Ghanoush",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-02-14T12:49:17.412Z",
+                    "stop": "2025-07-29T20:24:53.276Z",
+                    "capabilities": [
+                        {
+                            "id": "G3d6zLRMwCMX",
+                            "name": "Potato Wedges",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "7C1yjPMEAjOAxtf",
+                            "name": "Massaman Curry",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "KLXfgY",
+                            "name": "Ice Cream",
+                            "type": "Malware"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "47UZcQ",
+                            "name": "Samosa",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-12-30T05:30:03.866Z",
+                    "stop": "2025-02-10T05:58:35.497Z",
+                    "malicious_infrastructure": [
+                        {
+                            "id": "EGBMh8",
+                            "name": "Cheese fries",
+                            "type": "Product"
+                        }
+                    ],
+                    "capabilities": [
+                        {
+                            "id": "4JGThDxItdWQ",
+                            "name": "Brunswick stew",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "QSFuQ4PEu6PQZIV",
+                            "name": "Ratatouille",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "xEZtWn",
+                            "name": "Beef Manhattan",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-11-25T11:59:19.373Z",
+                    "stop": "2025-11-24T21:18:08.325Z",
+                    "malware": [
+                        {
+                            "id": "s4Xhb2",
+                            "name": "Greek salad",
+                            "type": "Malware"
+                        }
+                    ],
+                    "malicious_infrastructure": [
+                        {
+                            "id": "IfGyvY",
+                            "name": "Osso Buco",
+                            "type": "Product"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "onNZxtx8L3vUfUN",
+                            "name": "Pizza strips",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "CaxV81XnkitK",
+                            "name": "Steak sauce",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-07-24T22:42:21.183Z",
+                    "stop": "2025-03-16T02:06:37.140Z",
+                    "capabilities": [
+                        {
+                            "id": "4e3hLSYTHiJW",
+                            "name": "Samosa",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "WEKfxNSONrPdbFH",
+                            "name": "Milk toast",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "9aicxFYfyEw",
+                            "name": "Chocolate Chip Cookie",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "MzqGLh",
+                            "name": "Piroshky",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-09-26T09:38:45.249Z",
+                    "stop": "2025-11-15T19:37:22.049Z",
+                    "malware": [
+                        {
+                            "id": "1sOeGn",
+                            "name": "Doughnut",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "zUTNmO",
+                            "name": "Tres Leches Cake",
+                            "type": "Malware"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "nMqG5Kl1myBQi0P",
+                            "name": "Pizza strips",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "8LQrv7jE5sYU",
+                            "name": "Reuben",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-01-17T03:04:10.010Z",
+                    "stop": "2025-12-27T01:06:47.956Z",
+                    "malware": [
+                        {
+                            "id": "cFKaZZ",
+                            "name": "French Onion Soup",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "Xb9CxE",
+                            "name": "Pasta salad",
+                            "type": "Malware"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "wE8kw6MW3VjoSiZ",
+                            "name": "Buffalo burger",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "yTSkimCreWIX",
+                            "name": "Veggie Pizza",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-12-17T22:44:50.841Z",
+                    "stop": "2025-12-19T00:02:44.781Z",
+                    "malware": [
+                        {
+                            "id": "PTfInN",
+                            "name": "Sonofabitch stew",
+                            "type": "Malware"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "hW3TmlWqqYz3HKo",
+                            "name": "Samosa",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "FnrihMm8ddMM",
+                            "name": "Russian tea cake",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-08-01T20:08:17.016Z",
+                    "stop": "2025-03-16T02:13:19.828Z",
+                    "malware": [
+                        {
+                            "id": "mMXZx3",
+                            "name": "Italian Beef Sandwich",
+                            "type": "Malware"
+                        }
+                    ],
+                    "malicious_infrastructure": [
+                        {
+                            "id": "KqJZb8",
+                            "name": "Soft Shell Crab",
+                            "type": "Product"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "0NEBp190lGVwBaM",
+                            "name": "Venison",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "JGNU43k2jp39",
+                            "name": "Sweetbreads",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-08-27T23:11:12.880Z",
+                    "stop": "2025-06-23T10:28:27.935Z",
+                    "malware": [
+                        {
+                            "id": "B7p2lX",
+                            "name": "Pickled cucumber",
+                            "type": "Malware"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "DnUMZBv5X7qGmYH",
+                            "name": "Buffalo burger",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "pmn0qY4L3g7K",
+                            "name": "Chicken fried bacon",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-12-13T11:36:24.844Z",
+                    "stop": "2025-08-02T18:31:38.691Z",
+                    "malware": [
+                        {
+                            "id": "7dTIWM",
+                            "name": "Shawarma",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "xxHmMC",
+                            "name": "Roasted Bone Marrow",
+                            "type": "Malware"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "pPiuF079QuyFgHx",
+                            "name": "Cornish game hen",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "Qx6ZebZ3m5LA",
+                            "name": "Cobb Salad",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-02-04T11:13:06.732Z",
+                    "stop": "2025-11-17T16:54:42.215Z",
+                    "capabilities": [
+                        {
+                            "id": "KyKIXLG5eooK",
+                            "name": "Sonofabitch stew",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "TpexTiianDh",
+                            "name": "Polenta",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "rXHzOYE1R5D",
+                            "name": "Lorna Doone",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "3f52XDhkrpb",
+                            "name": "Empanada",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "dvvl4M",
+                            "name": "Home fries",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-12-22T12:09:33.100Z",
+                    "stop": "2025-06-09T09:05:19.107Z",
+                    "malicious_infrastructure": [
+                        {
+                            "id": "md3ta0",
+                            "name": "Scrapple",
+                            "type": "Product"
+                        }
+                    ],
+                    "capabilities": [
+                        {
+                            "id": "6eeFwUndqFFi",
+                            "name": "Maraca pie",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "gFDWgeIAXLUdbBg",
+                            "name": "Beef Manhattan",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "mqSAxL",
+                            "name": "Pork and beans",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-01-16T06:34:37.283Z",
+                    "stop": "2025-03-19T10:47:11.754Z",
+                    "malicious_infrastructure": [
+                        {
+                            "id": "BRJRro",
+                            "name": "Pan Seared Scallops",
+                            "type": "Product"
+                        },
+                        {
+                            "id": "qpSejm",
+                            "name": "Parma Ham",
+                            "type": "Product"
+                        }
+                    ],
+                    "capabilities": [
+                        {
+                            "id": "XeNcnby5kL4w",
+                            "name": "Coleslaw",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "6OPpSlEhkzLTH80",
+                            "name": "Massaman Curry",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "Jxuu8e",
+                            "name": "Macaroni and Cheese",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-08-11T01:11:45.131Z",
+                    "stop": "2025-03-06T20:23:50.469Z",
+                    "capabilities": [
+                        {
+                            "id": "4vpDv4A4XvS1",
+                            "name": "Milk toast",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "Q9S7KqbX5W6",
+                            "name": "Steak sauce",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "EIW0XeFNjNk",
+                            "name": "Shawarma",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "9fKGo07TvDp",
+                            "name": "Bacon Cheeseburger",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "KCBWrP",
+                            "name": "Onion Rings",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-01-06T06:19:53.358Z",
+                    "stop": "2025-11-11T09:40:12.877Z",
+                    "capabilities": [
+                        {
+                            "id": "Y9Rg6JSs5LLm",
+                            "name": "Tagine",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "5Kxv4M3Lb9a",
+                            "name": "Bread",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "mqh7xE",
+                            "name": "Grits",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-05-13T15:03:53.977Z",
+                    "stop": "2025-07-03T14:31:34.132Z",
+                    "capabilities": [
+                        {
+                            "id": "G154OCnlTiwQ",
+                            "name": "Greek salad",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "x5x3IvbbWAaYWw3",
+                            "name": "Tagine",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "C5e6Wl",
+                            "name": "London broil",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "MalwareAnalysis",
+                "attributes": {
+                    "start": "2025-05-02T15:35:16.732Z",
+                    "stop": "2025-03-16T11:20:29.705Z",
+                    "malware": [
+                        {
+                            "id": "lLgUVh",
+                            "name": "Fry sauce",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "t1rIhW",
+                            "name": "Chicken Alfredo",
+                            "type": "Malware"
+                        }
+                    ],
+                    "ttp": [
+                        {
+                            "id": "i3KZ8ayEUgtDLpH",
+                            "name": "Boulliabaise",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "A8jhrr2ImKOv",
+                            "name": "Maraca pie",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-04-20T15:13:48.467Z",
+                    "stop": "2025-08-25T09:24:56.270Z",
+                    "capabilities": [
+                        {
+                            "id": "ll3legmKPk7S",
+                            "name": "Ice cream cake",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "CRrGJGpLye6Fjds",
+                            "name": "Fattoush Salad",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "GM85JT",
+                            "name": "Choco pie",
+                            "type": "Malware"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "xlfCbH",
+                            "name": "Naan",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-09-14T12:12:13.177Z",
+                    "stop": "2025-02-23T19:28:02.395Z",
+                    "capabilities": [
+                        {
+                            "id": "ccsrTFkYWQKJ",
+                            "name": "Jalapeno Poppers",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "aqVST6U9EcY",
+                            "name": "Sour cream",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "VZPPqn",
+                            "name": "Poke",
+                            "type": "Malware"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "Jw0GNs",
+                            "name": "Ice Cream",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-01-09T08:52:38.717Z",
+                    "stop": "2025-11-29T07:12:03.707Z",
+                    "malicious_infrastructure": [
+                        {
+                            "id": "O4fhb",
+                            "name": "Spaghetti Bolognese",
+                            "type": "Product"
+                        }
+                    ],
+                    "capabilities": [
+                        {
+                            "id": "2skO5SU1Bn8O",
+                            "name": "Pistachio Ice Cream",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "EyJ8TXSK51F0IaL",
+                            "name": "Hokkien fried rice",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "xExk3S",
+                            "name": "Gyros",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            }
+        ],
+        "note_entities": [
+            {
+                "id": "U8EuqFVgiM2x",
+                "name": "Fries",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "jW0OXV",
+                "name": "Maple Bacon Doughnut",
+                "type": "Product"
+            },
+            {
+                "id": "YEZT5l",
+                "name": "Muffuletta",
+                "type": "Malware"
+            },
+            {
+                "id": "6FeQuE",
+                "name": "Juba",
+                "type": "Product"
+            },
+            {
+                "id": "O9JdKOfjCvzVgFC",
+                "name": "Garlic bread",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "89M3vH6hqO1u",
+                "name": "Steamed clams",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "O1kosJ",
+                "name": "Cheesy Garlic Bread",
+                "type": "Malware"
+            },
+            {
+                "id": "6T9cvFGDncA",
+                "name": "American fried rice",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "CN8DL24uBpTC",
+                "name": "Kimchi",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "eqa8F3Ei9kl",
+                "name": "Moules Frites",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "Bggg9cYoLw4",
+                "name": "Dirty rice",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "VpBdkmQcpbnpQpY",
+                "name": "Apple butter",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "I8ixaH0C7gpmBo2",
+                "name": "Laksa",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "Em4NBKZDo6I2EIE",
+                "name": "Vegemite on Toast",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "RuSacs",
+                "name": "Fish and Chips!",
+                "type": "Product"
+            },
+            {
+                "id": "YRpE753cQkt6K4w",
+                "name": "Ice Cream",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "oTefEe",
+                "name": "Roasted Bone Marrow",
+                "type": "Malware"
+            },
+            {
+                "id": "UwpfDMIaWyl",
+                "name": "Sausage gravy",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "CZERZbTeQVP6xaD",
+                "name": "Succotash",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "Ecl8J4I6Gx8",
+                "name": "Chicago Hot Dog",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "BBhZx2HgUqJ",
+                "name": "Fry sauce",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "luJs3x",
+                "name": "BBQ Ribs",
+                "type": "Product"
+            },
+            {
+                "id": "lI0RyI1CzyRNqnT",
+                "name": "Ploye",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "idn:niger.lv",
+                "name": "Phaal",
+                "type": "InternetDomainName"
+            },
+            {
+                "id": "KfOvkd",
+                "name": "Mashed pumpkin",
+                "type": "Technology"
+            },
+            {
+                "id": "xtqALcWSC8X",
+                "name": "Corn chowder",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "CwHHeVNUMKdCryV",
+                "name": "Margherita Pizza",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "oljTtnjT61v",
+                "name": "Potato wedges",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "b4uaudC0TWR",
+                "name": "Waffle",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "BrFGwF",
+                "name": "Garlic bread",
+                "type": "MalwareCategory"
+            },
+            {
+                "id": "uzk4Xq",
+                "name": "Cordon bleu",
+                "type": "Malware"
+            },
+            {
+                "id": "tt0YeqdgUqsY",
+                "name": "Russian dressing",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "0Qx8z3",
+                "name": "Pan Seared Scallops",
+                "type": "Product"
+            },
+            {
+                "id": "HhzJKz",
+                "name": "Cheese balls",
+                "type": "Product"
+            },
+            {
+                "id": "eh5XkY3WZOp",
+                "name": "Soul food",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "DY0kpbkSbUJS",
+                "name": "BBQ Ribs",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "hdjET6",
+                "name": "Steak sandwich",
+                "type": "Product"
+            },
+            {
+                "id": "HsuLrh",
+                "name": "Abalone",
+                "type": "Organization"
+            },
+            {
+                "id": "TYpBWUnlqUx",
+                "name": "Stuffed ham",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "avLIrtyUdovA",
+                "name": "Chocolate Brownie",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "HhzOtA",
+                "name": "Pemmican",
+                "type": "Product"
+            },
+            {
+                "id": "BPtqVdIxexqZyYF",
+                "name": "Tin Roof Ice Cream",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "P7saZ",
+                "name": "Hoppin' John",
+                "type": "Product"
+            },
+            {
+                "id": "ctMkF9w1XrjvfMP",
+                "name": "Corn flakes",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "BavRmYfobCs",
+                "name": "Surf and turf",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "q1naev",
+                "name": "Sandwich",
+                "type": "CyberVulnerability",
+                "description": "Type classes first appeared in the Haskell programming language."
+            },
+            {
+                "id": "8lCRqTnDNZx",
+                "name": "Senate bean soup",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "WbXyPHN1NXf",
+                "name": "Onion ring",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "YkcWYwc7quOm",
+                "name": "Pork and beans",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "5RO7YExgMz6t",
+                "name": "St. Paul Sandwich",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "aS1amT",
+                "name": "Rice and gravy",
+                "type": "CyberVulnerability",
+                "description": "It is also a garbage-collected runtime system."
+            },
+            {
+                "id": "mySuBv",
+                "name": "Bread",
+                "type": "Malware"
+            },
+            {
+                "id": "ynouCFtjHs9",
+                "name": "Pickled Okra",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "S6nMM",
+                "name": "Sonofabitch stew",
+                "type": "Product"
+            },
+            {
+                "id": "KcFRHK5cL6G",
+                "name": "Corn flakes",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "qv0Ezf",
+                "name": "Crab Rangoon",
+                "type": "Product"
+            },
+            {
+                "id": "FCdMih",
+                "name": "Turducken",
+                "type": "Product"
+            },
+            {
+                "id": "zI6ZAn",
+                "name": "Chicken Alfredo",
+                "type": "Malware"
+            },
+            {
+                "id": "GHwOdYrdUyFE4xI",
+                "name": "Blue cheese dressing",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "YNiL8ILVIJsa",
+                "name": "Bruschetta",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "GXYKij4y1Sc4XCG",
+                "name": "Prawn Pizza",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "idn:complaint.jobs",
+                "name": "Spanish rice",
+                "type": "InternetDomainName"
+            },
+            {
+                "id": "kahk9YelA7sV",
+                "name": "Hoppin' John",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "b6AvbCssJn2",
+                "name": "Cordon bleu",
+                "type": "MitreAttackIdentifier"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "srcN1ewHBM1",
+                "name": "Ratatouille",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "fefiqnwzxWBSovRnAkSyjKk",
+                "name": "Hot chicken",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "6Dvbkz3ygrc",
+                "name": "Domesticated turkey",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "6ei0qAFjo6lbZI9",
+                "name": "Domesticated turkey",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "17Ca8aU3Pi4",
+                "name": "Hummus",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "UFgoOr5WpLB3Fu54qmCAdhUCglrsoXgVNcWX0a4",
+                "name": "Steamed clams",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "iC0CKAalyiK",
+                "name": "Black Pudding",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "Z5akTjBtBVeFE5U",
+                "name": "Jalapeno Poppers",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "LdqK1Mdjt2gltsW",
+                "name": "Satay",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "mvySoRc8yg0qyH5",
+                "name": "Lasagna",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "ypAlqvdYEUGiKLJ",
+                "name": "Fried chicken",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "m7N0EGLaYfOxk51DYMM0m6",
+                "name": "Apple sauce",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "Xg3VJyAnDOoRqIOzpMfPD1g9PYzbl",
+                "name": "Empanada",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "A2K2IPohkTsMeiC",
+                "name": "Scrapple",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "EnabtReDtjMNS5gEUadflEsSgx",
+                "name": "Potato Wedges",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "xgkhoZkbc2E",
+                "name": "Slinger",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "HXgjHLKPDzPdtnE7n2cwoBjlUKeej05Lx",
+                "name": "Tin Roof Ice Cream",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "lXt5l4yv5Av",
+                "name": "Russian dressing",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "OaXVgCpFC7r",
+                "name": "Bull roast",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "BhRFK9MWDTt3nK1zvzxsbwtz",
+                "name": "Tuna Pizza",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "F5ADi1QomEBSAI3S7928E9QM9Nssg",
+                "name": "Pastrami on Rye",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "B0Ro91Q8SecbKJopSdtJ2kcQr",
+                "name": "Reuben sandwich",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "2hsVb8wA55KjXWa",
+                "name": "Philadelphia cheesesteak",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "aGOAn11m4LqSaan",
+                "name": "Fish Tacos",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "TR5pJLGKna0",
+                "name": "Fried Green Tomatoes",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "48q55jS62R5mecT",
+                "name": "Cornish game hen",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "mVTpeU8p5Xc",
+                "name": "Boulliabaise",
+                "type": "MitreAttackIdentifier"
+            }
+        ],
+        "topic": [
+            {
+                "id": "w2e9wL",
+                "name": "Boulliabaise",
+                "type": "Topic",
+                "description": "Do you come here often?"
+            },
+            {
+                "id": "jJqkBX",
+                "name": "Doughnut",
+                "type": "Topic",
+                "description": "Make me a sandwich."
+            }
+        ],
+        "validation_urls": [
+            {
+                "id": "url:https://argument.aero/",
+                "name": "Fried chicken",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://mph.roma/",
+                "name": "Crepes",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://drives.okinawa/",
+                "name": "Gazpacho",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://muslim.hr/",
+                "name": "Rabbit pie",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://ebooks.budapest/",
+                "name": "Slinger",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://evans.xxx/",
+                "name": "Bear claw",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://pix.tata/",
+                "name": "Spaghetti Bolognese",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://started.aero/",
+                "name": "Deviled egg",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://mechanics.asia/",
+                "name": "Churrasco",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://wesley.domains/",
+                "name": "Satay",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://hungary.th/",
+                "name": "Sweet Potato Fries",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://internationally.discount/",
+                "name": "Seafood cocktail",
+                "type": "URL"
+            }
+        ],
+        "diamond_model": [
+            {
+                "start": "2025-02-13T14:26:10.368Z",
+                "stop": "2025-10-08T05:58:39.088Z",
+                "capabilities": [
+                    {
+                        "id": "w1RMWbP0fkZ1",
+                        "name": "Baba Ghanoush",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "7IISJhFxzzUStVa",
+                        "name": "Fajitas",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "sJOePm",
+                        "name": "Cheese balls",
+                        "type": "Malware"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "aV26g2",
+                        "name": "Chicken fried steak",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-06-06T00:38:46.914Z",
+                "stop": "2025-02-20T18:26:42.067Z",
+                "capabilities": [
+                    {
+                        "id": "BVwqdmL88wt",
+                        "name": "Key Lime Pie",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "tWaMZSD6NPBG",
+                        "name": "Lobster Newberg",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "OMvtWz",
+                        "name": "Bi Bim Bap",
+                        "type": "CyberVulnerability",
+                        "description": "She spent her earliest years reading classic literature, and writing poetry."
+                    },
+                    {
+                        "id": "3XWnDk",
+                        "name": "Gyoza",
+                        "type": "CyberVulnerability",
+                        "description": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "7DflXr",
+                        "name": "Cordon bleu",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-08-11T23:38:34.042Z",
+                "stop": "2025-05-13T00:05:16.928Z",
+                "capabilities": [
+                    {
+                        "id": "HYDfGm9LMZIu",
+                        "name": "Laksa",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "Ys24KSk6k7Y",
+                        "name": "Geoduck",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "A5ybLW",
+                        "name": "Margherita Pizza",
+                        "type": "Malware"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "GXTTeA",
+                        "name": "Currywurst",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-10-03T00:50:57.434Z",
+                "stop": "2025-11-04T17:50:06.637Z",
+                "capabilities": [
+                    {
+                        "id": "6aH4G7TnZkut",
+                        "name": "Steamed clams",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "sQM4Rdx376JndZy",
+                        "name": "Chicken \u00e0 la King",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "dKSFiK",
+                        "name": "Mashed pumpkin",
+                        "type": "Malware"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "pYc3hl",
+                        "name": "Tuna Pizza",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-09-03T18:45:03.434Z",
+                "stop": "2025-07-17T20:19:23.554Z",
+                "malicious_infrastructure": [
+                    {
+                        "id": "Y9fHcr",
+                        "name": "Sausage gravy",
+                        "type": "Product"
+                    }
+                ],
+                "capabilities": [
+                    {
+                        "id": "mM0yh85JyQCy",
+                        "name": "Crepes",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "JStWWoCYjqJ2HdM",
+                        "name": "Rabbit pie",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "WbtT4m",
+                        "name": "Bulgogi",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-09-17T15:36:44.530Z",
+                "stop": "2025-01-17T00:31:13.147Z",
+                "capabilities": [
+                    {
+                        "id": "9alDHO2Yjv9c",
+                        "name": "Paella",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "cM3m4ypm8weerLn",
+                        "name": "Buffalo Wings",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "Nxe3UzKqjqr",
+                        "name": "Gyoza",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "8IjHTA",
+                        "name": "Steak sandwich",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-07-01T19:31:29.378Z",
+                "stop": "2025-10-22T19:33:34.685Z",
+                "malicious_infrastructure": [
+                    {
+                        "id": "0rsL9b",
+                        "name": "Spanish rice",
+                        "type": "Product"
+                    }
+                ],
+                "capabilities": [
+                    {
+                        "id": "ODBWTcengiHW",
+                        "name": "Seafood cocktail",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "bHgSgvbRqp0",
+                        "name": "Po'Boy",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "5Qg1Is",
+                        "name": "Escargot",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-02-06T13:59:06.377Z",
+                "stop": "2025-10-16T10:20:39.142Z",
+                "capabilities": [
+                    {
+                        "id": "bL0VpR",
+                        "name": "Chicken Alfredo",
+                        "type": "Malware"
+                    },
+                    {
+                        "id": "7V9hgm6wMANP",
+                        "name": "Carne pizzaiola",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "zpSQc1gQxhaMGqV",
+                        "name": "Chicken fingers",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "0eHeaA",
+                        "name": "Jerky",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-06-01T15:30:43.858Z",
+                "stop": "2025-08-10T18:00:45.420Z",
+                "capabilities": [
+                    {
+                        "id": "QkOYfRDzvOY9",
+                        "name": "Mashed pumpkin",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "GN3vbKlhkYzrGyR",
+                        "name": "Butter cookie",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "aX4GKnO6i3f6CSd",
+                        "name": "Rabbit pie",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "HhpK6f",
+                        "name": "Fry sauce",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-04-05T11:56:40.318Z",
+                "stop": "2025-08-21T03:13:05.347Z",
+                "malicious_infrastructure": [
+                    {
+                        "id": "Fw1XNp",
+                        "name": "Lobster roll",
+                        "type": "Product"
+                    }
+                ],
+                "capabilities": [
+                    {
+                        "id": "isHvvi7liHOm",
+                        "name": "Ammonia cookie",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "Bp1FvFwEADu",
+                        "name": "Carolina style",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "tamNex",
+                        "name": "Mango and Sticky Rice",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-04-27T00:57:40.975Z",
+                "stop": "2025-04-02T15:48:09.456Z",
+                "capabilities": [
+                    {
+                        "id": "wxSJHtpnUEcQ",
+                        "name": "Fish Tacos",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "rpTRKTRLIL4nzEZ",
+                        "name": "Porterhouse Steak",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "yt7Mcj",
+                        "name": "Brunswick stew",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-03-02T05:32:14.235Z",
+                "stop": "2025-09-07T21:17:34.221Z",
+                "malicious_infrastructure": [
+                    {
+                        "id": "eGKtdp",
+                        "name": "Churrasco",
+                        "type": "Product"
+                    }
+                ],
+                "capabilities": [
+                    {
+                        "id": "2zK0KiuJaeT8",
+                        "name": "Swiss steak",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "dZknh7zi3B5WxEY",
+                        "name": "Sour cream",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "ajGF4D",
+                        "name": "Doughnut",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-12-19T08:06:27.922Z",
+                "stop": "2025-11-13T03:07:30.339Z",
+                "capabilities": [
+                    {
+                        "id": "DXLauLfvJZx2",
+                        "name": "French Dip",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "DXVrmwmVUCw",
+                        "name": "Patty",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "FkzKKHBu2bG",
+                        "name": "Pickled cucumber",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "qN4EWeMHX1B",
+                        "name": "Flan",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "oWBUvN",
+                        "name": "Chicken Salad Wrap",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-08-25T07:29:52.833Z",
+                "stop": "2025-11-11T17:45:08.250Z",
+                "capabilities": [
+                    {
+                        "id": "CJHyiOZcLjf4",
+                        "name": "Escargot",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "bFMOKtRdAr2lUae",
+                        "name": "Muffuletta",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "lMR4Jj",
+                        "name": "Beignets",
+                        "type": "Malware"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "LsBwJQ",
+                        "name": "Chicken Alfredo",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-08-31T02:00:55.615Z",
+                "stop": "2025-08-13T07:00:21.318Z",
+                "malicious_infrastructure": [
+                    {
+                        "id": "O9bfVu",
+                        "name": "Poppyseed muffin",
+                        "type": "Product"
+                    },
+                    {
+                        "id": "CNexKu",
+                        "name": "New York-Style Pizza",
+                        "type": "Product"
+                    }
+                ],
+                "capabilities": [
+                    {
+                        "id": "qGSWE2zzNKP8",
+                        "name": "Swiss steak",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "RhipuQf7rzKeKTZ",
+                        "name": "American fried rice",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "K07sz5",
+                        "name": "Albacore Tuna Melt",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-08-29T21:43:40.460Z",
+                "stop": "2025-08-07T23:36:46.066Z",
+                "capabilities": [
+                    {
+                        "id": "8asqVam9MMQz",
+                        "name": "Risotto",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "j5gG2znJkCN",
+                        "name": "Stuffed zucchini",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "GxQ9Aa",
+                        "name": "Spaghetti Bolognese",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-03-15T16:50:40.382Z",
+                "stop": "2025-12-05T03:19:18.016Z",
+                "capabilities": [
+                    {
+                        "id": "yT7NDn7Q8izN",
+                        "name": "Ice Cream Sundae",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "ZfSPmnE9F5V",
+                        "name": "Salad bar",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "1FtGkVzLYbL",
+                        "name": "Poppyseed muffin",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "xKjX9spklek",
+                        "name": "Lorna Doone",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "uwJcps",
+                        "name": "Maine Lobster",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-06-08T13:54:26.975Z",
+                "stop": "2025-09-26T18:57:04.746Z",
+                "malicious_infrastructure": [
+                    {
+                        "id": "W7blXJ",
+                        "name": "Chicken fried steak",
+                        "type": "Product"
+                    }
+                ],
+                "capabilities": [
+                    {
+                        "id": "LcEIZfydqxAn",
+                        "name": "Deviled crab",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "KkZON6DPBnZ",
+                        "name": "Roasted Bone Marrow",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "Ju8gvM",
+                        "name": "Risotto",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-01-21T19:18:42.833Z",
+                "stop": "2025-11-15T12:31:01.059Z",
+                "capabilities": [
+                    {
+                        "id": "j5jy5Z",
+                        "name": "Brunswick stew",
+                        "type": "Malware"
+                    },
+                    {
+                        "id": "BIJ70dLPKGsiPal",
+                        "name": "Tomato compote",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "Sw5EV0AYcjyi",
+                        "name": "Cheesecake",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "WaJ2RH",
+                        "name": "Haystack",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-10-16T09:07:52.398Z",
+                "stop": "2025-04-29T15:11:55.073Z",
+                "malicious_infrastructure": [
+                    {
+                        "id": "FWfqoQ",
+                        "name": "Jell-O",
+                        "type": "Product"
+                    }
+                ],
+                "capabilities": [
+                    {
+                        "id": "2iJIqlNmrWSJ",
+                        "name": "Jell-O",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "9MXo3WgXN0p",
+                        "name": "Goulash",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "wk1W6l",
+                        "name": "Eggo",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-05-13T16:27:12.192Z",
+                "stop": "2025-06-27T15:03:50.752Z",
+                "capabilities": [
+                    {
+                        "id": "OifAzNdawgX1",
+                        "name": "Oreo",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "qFRTWFtBE0S",
+                        "name": "Hawaiian Pizza",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "5K7oRCweAmMcv0K",
+                        "name": "Kobe Beef",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "5LtMne",
+                        "name": "Potato skins",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-07-26T22:13:58.463Z",
+                "stop": "2025-06-24T12:43:59.443Z",
+                "capabilities": [
+                    {
+                        "id": "sHHTDQNq6Yuh",
+                        "name": "Fried fish",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "oYVZK2yZp4fIF86",
+                        "name": "Tin Roof Ice Cream",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "Fn3dZ3",
+                        "name": "Ammonia cookie",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-08-13T10:29:25.222Z",
+                "stop": "2025-02-01T13:31:45.592Z",
+                "malicious_infrastructure": [
+                    {
+                        "id": "jbkDQ",
+                        "name": "Breaded shrimp",
+                        "type": "Product"
+                    }
+                ],
+                "capabilities": [
+                    {
+                        "id": "veGoHQdCpmpJ",
+                        "name": "Meatcake",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "DusQHtweZjIwdxl",
+                        "name": "Bangers and mash",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "ujFsJM",
+                        "name": "Fajitas",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-05-30T08:57:22.534Z",
+                "stop": "2025-11-01T18:19:28.054Z",
+                "capabilities": [
+                    {
+                        "id": "s2FnYh8KTNsp",
+                        "name": "Steak Tartare",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "ted3VWmkcPX",
+                        "name": "Breakfast burrito",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "FjL0sW",
+                        "name": "Stuffed peppers",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-07-17T15:28:23.870Z",
+                "stop": "2025-02-16T04:37:54.437Z",
+                "capabilities": [
+                    {
+                        "id": "h0ceeQvdyIqH",
+                        "name": "Domesticated turkey",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "2SRHsluwtw2",
+                        "name": "Potatoes O'Brien",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "pf6HKX",
+                        "name": "Carne pizzaiola",
+                        "type": "Malware"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "E4OhMh",
+                        "name": "Jambalaya",
+                        "type": "Organization"
+                    }
+                ]
+            },
+            {
+                "start": "2025-05-28T14:19:47.261Z",
+                "stop": "2025-09-25T20:20:32.288Z",
+                "capabilities": [
+                    {
+                        "id": "pFAShsZDjDc8",
+                        "name": "Caviar",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "gzTYGaWdWCn",
+                        "name": "Brunswick stew",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "2ursyW",
+                        "name": "Sweet Potato Fries",
+                        "type": "Organization"
+                    }
+                ]
+            }
+        ],
+        "header_image": {
+            "id": "77upKe0HbCh61pwwIbiwfQvUCrj2qdxveavvr9To",
+            "name": "Chicken Biryani",
+            "type": "Image"
+        }
+    },
+    "id": "5kPAHRU32c",
+    "source": {
+        "id": "p9TeqDVEUIJVX",
+        "name": "Sweetbreads",
+        "type": "Source"
+    }
+}

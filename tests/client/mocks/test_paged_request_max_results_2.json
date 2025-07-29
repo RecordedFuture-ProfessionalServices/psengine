@@ -1,0 +1,806 @@
+{
+    "identities": [
+        {
+            "login": "The arguments can be primitive data types or compound data types.",
+            "domain": "aaa.ws"
+        },
+        {
+            "login": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "domain": "contracts.winners"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "sends.exchange"
+        },
+        {
+            "login": "Make me a sandwich.",
+            "domain": "screw.int"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "jackets.ck"
+        },
+        {
+            "login": "Any element of a tuple can be accessed in constant time.",
+            "domain": "seconds.xxx"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "file.su"
+        },
+        {
+            "login": "Any element of a tuple can be accessed in constant time.",
+            "domain": "looked.asia"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "denver.name"
+        },
+        {
+            "login": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "domain": "flip.amsterdam"
+        },
+        {
+            "login": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "domain": "blades.coop"
+        },
+        {
+            "login": "Do you come here often?",
+            "domain": "removal.horse"
+        },
+        {
+            "login": "Where are my pants?",
+            "domain": "nodes.name"
+        },
+        {
+            "login": "Do you have any idea why this is not working?",
+            "domain": "superintendent.london"
+        },
+        {
+            "login": "Do you come here often?",
+            "domain": "champion.tf"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "boom.paris"
+        },
+        {
+            "login": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "domain": "searched.com"
+        },
+        {
+            "login": "Any element of a tuple can be accessed in constant time.",
+            "domain": "douglas.hotel"
+        },
+        {
+            "login": "pray.ck",
+            "domain": "strange.mil"
+        },
+        {
+            "login": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "domain": "pound.biz"
+        },
+        {
+            "login": "Its main implementation is the Glasgow Haskell Compiler.",
+            "domain": "monetary.game"
+        },
+        {
+            "login": "Do you come here often?",
+            "domain": "healing.id"
+        },
+        {
+            "login": "The arguments can be primitive data types or compound data types.",
+            "domain": "hundreds.com"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "integration.mobi"
+        },
+        {
+            "login": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "domain": "ent.gent"
+        },
+        {
+            "login": "Atoms are used within a program to denote distinguished values.",
+            "domain": "community.gl"
+        },
+        {
+            "login": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "domain": "hiv.biz"
+        },
+        {
+            "login": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "domain": "answer.int"
+        },
+        {
+            "login": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "domain": "deserve.ht"
+        },
+        {
+            "login": "Type classes first appeared in the Haskell programming language.",
+            "domain": "baghdad.name"
+        },
+        {
+            "login": "Its main implementation is the Glasgow Haskell Compiler.",
+            "domain": "mega.mobi"
+        },
+        {
+            "login": "She spent her earliest years reading classic literature, and writing poetry.",
+            "domain": "atm.rio"
+        },
+        {
+            "login": "Where are my pants?",
+            "domain": "reports.name"
+        },
+        {
+            "login": "Make me a sandwich.",
+            "domain": "laughing.tel"
+        },
+        {
+            "login": "Atoms are used within a program to denote distinguished values.",
+            "domain": "abandoned.aero"
+        },
+        {
+            "login": "Ports are created with the built-in function open_port.",
+            "domain": "provider.gy"
+        },
+        {
+            "login": "Atoms are used within a program to denote distinguished values.",
+            "domain": "commitments.lol"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "yen.pet"
+        },
+        {
+            "login": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "domain": "astronomy.ist"
+        },
+        {
+            "login": "Type classes first appeared in the Haskell programming language.",
+            "domain": "sink.biz"
+        },
+        {
+            "login": "Any element of a tuple can be accessed in constant time.",
+            "domain": "october.nyc"
+        },
+        {
+            "login": "Erlang is known for its designs that are well suited for systems.",
+            "domain": "solving.net"
+        },
+        {
+            "login": "Make me a sandwich.",
+            "domain": "typical.cn"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "watches.surgery"
+        },
+        {
+            "login": "Ports are used to communicate with the external world.",
+            "domain": "curves.frl"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "discrete.wien"
+        },
+        {
+            "login": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "domain": "clips.la"
+        },
+        {
+            "login": "The arguments can be primitive data types or compound data types.",
+            "domain": "walls.helsinki"
+        },
+        {
+            "login": "She spent her earliest years reading classic literature, and writing poetry.",
+            "domain": "relevance.is"
+        },
+        {
+            "login": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "domain": "gift.osaka"
+        },
+        {
+            "login": "Ports are used to communicate with the external world.",
+            "domain": "pays.info"
+        },
+        {
+            "login": "Make me a sandwich.",
+            "domain": "nikon.cr"
+        },
+        {
+            "login": "Erlang is known for its designs that are well suited for systems.",
+            "domain": "consumer.domains"
+        },
+        {
+            "login": "She spent her earliest years reading classic literature, and writing poetry.",
+            "domain": "dev.osaka"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "sharp.name"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "consoles.africa"
+        },
+        {
+            "login": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "domain": "parking.site"
+        },
+        {
+            "login": "Make me a sandwich.",
+            "domain": "trust.lc"
+        },
+        {
+            "login": "Type classes first appeared in the Haskell programming language.",
+            "domain": "citation.name"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "satin.net"
+        },
+        {
+            "login": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "domain": "financing.sydney"
+        },
+        {
+            "login": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "domain": "jpg.cat"
+        },
+        {
+            "login": "The arguments can be primitive data types or compound data types.",
+            "domain": "terry.biz"
+        },
+        {
+            "login": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "domain": "computed.enterprises"
+        },
+        {
+            "login": "Make me a sandwich.",
+            "domain": "nikon.gift"
+        },
+        {
+            "login": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "domain": "emergency.nagoya"
+        },
+        {
+            "login": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "domain": "patients.bt"
+        },
+        {
+            "login": "Erlang is known for its designs that are well suited for systems.",
+            "domain": "newer.name"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "similar.lighting"
+        },
+        {
+            "login": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "domain": "voip.org"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "tried.org"
+        },
+        {
+            "login": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "domain": "travel.name"
+        },
+        {
+            "login": "Do you have any idea why this is not working?",
+            "domain": "installed.info"
+        },
+        {
+            "login": "Its main implementation is the Glasgow Haskell Compiler.",
+            "domain": "temperatures.xxx"
+        },
+        {
+            "login": "Its main implementation is the Glasgow Haskell Compiler.",
+            "domain": "neck.biz"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "revealed.iq"
+        },
+        {
+            "login": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "domain": "productive.ve"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "bottle.edu"
+        },
+        {
+            "login": "Ports are created with the built-in function open_port.",
+            "domain": "remove.ai"
+        },
+        {
+            "login": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "domain": "lib.sh"
+        },
+        {
+            "login": "Ports are created with the built-in function open_port.",
+            "domain": "france.tata"
+        },
+        {
+            "login": "The arguments can be primitive data types or compound data types.",
+            "domain": "sad.tata"
+        },
+        {
+            "login": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "domain": "kitty.top"
+        },
+        {
+            "login": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "domain": "celebrity.berlin"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "court.helsinki"
+        },
+        {
+            "login": "Do you have any idea why this is not working?",
+            "domain": "actual.ist"
+        },
+        {
+            "login": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "domain": "simon.org"
+        },
+        {
+            "login": "Type classes first appeared in the Haskell programming language.",
+            "domain": "hospital.mil"
+        },
+        {
+            "login": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "domain": "nasty.tata"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "served.dj"
+        },
+        {
+            "login": "Any element of a tuple can be accessed in constant time.",
+            "domain": "managing.antivirus"
+        },
+        {
+            "login": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "domain": "morris.band"
+        },
+        {
+            "login": "Where are my pants?",
+            "domain": "bracket.llc"
+        },
+        {
+            "login": "Atoms are used within a program to denote distinguished values.",
+            "domain": "enquiries.net"
+        },
+        {
+            "login": "Haskell features a type system with type inference and lazy evaluation.",
+            "domain": "irs.osaka"
+        },
+        {
+            "login": "Atoms are used within a program to denote distinguished values.",
+            "domain": "athletics.build"
+        },
+        {
+            "login": "She spent her earliest years reading classic literature, and writing poetry.",
+            "domain": "organization.com"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "announces.network"
+        },
+        {
+            "login": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "domain": "desktops.museum.post"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "sin.net"
+        },
+        {
+            "login": "Atoms are used within a program to denote distinguished values.",
+            "domain": "geology.org"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "deadly.paris"
+        },
+        {
+            "login": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "domain": "farmers.barcelona"
+        },
+        {
+            "login": "I don't even care.",
+            "domain": "hull.kyoto"
+        },
+        {
+            "login": "Where are my pants?",
+            "domain": "msn.tt"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "percentage.tel"
+        },
+        {
+            "login": "I don't even care.",
+            "domain": "priority.tata"
+        },
+        {
+            "login": "geographical.cf",
+            "domain": "posing.pe"
+        },
+        {
+            "login": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "domain": "products.pink"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "librarian.aero"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "hung.diamonds"
+        },
+        {
+            "login": "Where are my pants?",
+            "domain": "sprint.fail"
+        },
+        {
+            "login": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "domain": "particle.eg"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "vermont.net"
+        },
+        {
+            "login": "announcements.moscow",
+            "domain": "jimmy.info"
+        },
+        {
+            "login": "The arguments can be primitive data types or compound data types.",
+            "domain": "regularly.consulting"
+        },
+        {
+            "login": "Do you have any idea why this is not working?",
+            "domain": "dealers.trade"
+        },
+        {
+            "login": "I don't even care.",
+            "domain": "garlic.theater"
+        },
+        {
+            "login": "Erlang is known for its designs that are well suited for systems.",
+            "domain": "dts.jobs"
+        },
+        {
+            "login": "Ports are used to communicate with the external world.",
+            "domain": "click.realestate"
+        },
+        {
+            "login": "Do you have any idea why this is not working?",
+            "domain": "wheel.vc"
+        },
+        {
+            "login": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "domain": "chancellor.cam"
+        },
+        {
+            "login": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "domain": "valid.joburg"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "merchants.cd"
+        },
+        {
+            "login": "Erlang is known for its designs that are well suited for systems.",
+            "domain": "franklin.red"
+        },
+        {
+            "login": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "domain": "chrysler.coop"
+        },
+        {
+            "login": "Any element of a tuple can be accessed in constant time.",
+            "domain": "owns.net"
+        },
+        {
+            "login": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "domain": "caroline.aero"
+        },
+        {
+            "login": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "domain": "treasurer.in"
+        },
+        {
+            "login": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "domain": "thinkpad.claims"
+        },
+        {
+            "login": "She spent her earliest years reading classic literature, and writing poetry.",
+            "domain": "market.gov"
+        },
+        {
+            "login": "Haskell features a type system with type inference and lazy evaluation.",
+            "domain": "storm.cat"
+        },
+        {
+            "login": "The arguments can be primitive data types or compound data types.",
+            "domain": "plays.soccer"
+        },
+        {
+            "login": "Atoms are used within a program to denote distinguished values.",
+            "domain": "worlds.bar"
+        },
+        {
+            "login": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "domain": "occurrence.org"
+        },
+        {
+            "login": "Atoms are used within a program to denote distinguished values.",
+            "domain": "mono.car"
+        },
+        {
+            "login": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "domain": "impacts.tel"
+        },
+        {
+            "login": "Haskell features a type system with type inference and lazy evaluation.",
+            "domain": "coast.web"
+        },
+        {
+            "login": "Ports are created with the built-in function open_port.",
+            "domain": "cho.name"
+        },
+        {
+            "login": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "domain": "portland.republican"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "lists.mobi"
+        },
+        {
+            "login": "Atoms are used within a program to denote distinguished values.",
+            "domain": "melissa.vi"
+        },
+        {
+            "login": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "domain": "payroll.cd"
+        },
+        {
+            "login": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "domain": "packet.insurance"
+        },
+        {
+            "login": "adopted.domains",
+            "domain": "equally.tata"
+        },
+        {
+            "login": "The arguments can be primitive data types or compound data types.",
+            "domain": "officials.org"
+        },
+        {
+            "login": "Any element of a tuple can be accessed in constant time.",
+            "domain": "unto.edu"
+        },
+        {
+            "login": "Erlang is known for its designs that are well suited for systems.",
+            "domain": "notes.catalonia"
+        },
+        {
+            "login": "Type classes first appeared in the Haskell programming language.",
+            "domain": "announces.coop"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "cad.osaka"
+        },
+        {
+            "login": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "domain": "store.info"
+        },
+        {
+            "login": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "domain": "holly.coop"
+        },
+        {
+            "login": "Erlang is known for its designs that are well suited for systems.",
+            "domain": "friday.doha"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "yield.country"
+        },
+        {
+            "login": "Ports are created with the built-in function open_port.",
+            "domain": "kai.zone"
+        },
+        {
+            "login": "Make me a sandwich.",
+            "domain": "imagination.museum.post"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "suspected.aero"
+        },
+        {
+            "login": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "domain": "omaha.li"
+        },
+        {
+            "login": "Type classes first appeared in the Haskell programming language.",
+            "domain": "younger.hn"
+        },
+        {
+            "login": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "domain": "trivia.berlin"
+        },
+        {
+            "login": "Do you come here often?",
+            "domain": "online.xxx"
+        },
+        {
+            "login": "Erlang is known for its designs that are well suited for systems.",
+            "domain": "several.sydney"
+        },
+        {
+            "login": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "domain": "pricing.org"
+        },
+        {
+            "login": "Haskell features a type system with type inference and lazy evaluation.",
+            "domain": "shoe.com"
+        },
+        {
+            "login": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "domain": "supporting.zuerich"
+        },
+        {
+            "login": "Do you come here often?",
+            "domain": "editions.ac"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "recorders.com"
+        },
+        {
+            "login": "She spent her earliest years reading classic literature, and writing poetry.",
+            "domain": "summit.bd"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "wrapped.lb"
+        },
+        {
+            "login": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "domain": "badly.tirol"
+        },
+        {
+            "login": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "domain": "nashville.gov"
+        },
+        {
+            "login": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "domain": "surprise.cat"
+        },
+        {
+            "login": "Its main implementation is the Glasgow Haskell Compiler.",
+            "domain": "observation.host"
+        },
+        {
+            "login": "Ports are created with the built-in function open_port.",
+            "domain": "christina.tk"
+        },
+        {
+            "login": "It is also a garbage-collected runtime system.",
+            "domain": "necessarily.ph"
+        },
+        {
+            "login": "I don't even care.",
+            "domain": "launched.tel"
+        },
+        {
+            "login": "Make me a sandwich.",
+            "domain": "coaching.design"
+        },
+        {
+            "login": "I don't even care.",
+            "domain": "intellectual.al"
+        },
+        {
+            "login": "Ports are created with the built-in function open_port.",
+            "domain": "centres.nl"
+        },
+        {
+            "login": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "domain": "lit.gov"
+        },
+        {
+            "login": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "domain": "preference.org"
+        },
+        {
+            "login": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "domain": "nissan.si"
+        },
+        {
+            "login": "The arguments can be primitive data types or compound data types.",
+            "domain": "melbourne.alsace"
+        },
+        {
+            "login": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "domain": "smoke.africa"
+        },
+        {
+            "login": "She spent her earliest years reading classic literature, and writing poetry.",
+            "domain": "weekly.asia"
+        },
+        {
+            "login": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "domain": "buddy.aero"
+        },
+        {
+            "login": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "domain": "broadcasting.info"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "hydrogen.africa"
+        },
+        {
+            "login": "Any element of a tuple can be accessed in constant time.",
+            "domain": "verde.wien"
+        },
+        {
+            "login": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "domain": "internal.biz"
+        },
+        {
+            "login": "Haskell features a type system with type inference and lazy evaluation.",
+            "domain": "forge.frl"
+        },
+        {
+            "login": "Its main implementation is the Glasgow Haskell Compiler.",
+            "domain": "ringtones.gt"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "task.asia"
+        },
+        {
+            "login": "Do you come here often?",
+            "domain": "league.pet"
+        },
+        {
+            "login": "Type classes first appeared in the Haskell programming language.",
+            "domain": "quotes.km"
+        },
+        {
+            "login": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "domain": "lafayette.int"
+        },
+        {
+            "login": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "domain": "factor.meet"
+        },
+        {
+            "login": "Its main implementation is the Glasgow Haskell Compiler.",
+            "domain": "million.fk"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "marriott.net"
+        },
+        {
+            "login": "Tuples are containers for a fixed number of Erlang data types.",
+            "domain": "automated.bar"
+        }
+    ],
+    "count": 200,
+    "next_offset": "Erlang is a general-purpose, concurrent, functional programming language."
+}

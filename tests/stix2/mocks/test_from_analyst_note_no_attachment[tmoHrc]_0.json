@@ -1,0 +1,78 @@
+{
+	"attributes": {
+		"title": "He looked inquisitively at his keyboard and wrote another sentence.",
+		"text": "Tuples are containers for a fixed number of Erlang data types. They are written as strings of consecutive alphanumeric characters, the first character being lowercase. Tuples are containers for a fixed number of Erlang data types. The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. Erlang is a general-purpose, concurrent, functional programming language.",
+		"published": "2025-03-12T16:37:39.468Z",
+		"note_entities": [
+			{
+				"id": "xyBJC3OyM7e",
+				"name": "Eggo",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "FIg2LD2OQif",
+				"name": "Chicken sandwich",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "yiweDL",
+				"name": "Sweetbreads",
+				"type": "Person"
+			},
+			{
+				"id": "SKQ0fzCytlE",
+				"name": "Albacore Tuna Melt",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "SEhFTZOJdUx02",
+				"name": "Wasabi Peas",
+				"type": "Source"
+			}
+		],
+		"context_entities": [
+			{
+				"id": "k9DbcF",
+				"name": "Haystack",
+				"type": "Malware"
+			},
+			{
+				"id": "bRfEJ",
+				"name": "Hawaiian haystack",
+				"type": "Country"
+			},
+			{
+				"id": "exjkAW",
+				"name": "Milk toast",
+				"type": "Industry"
+			},
+			{
+				"id": "nR3LAl",
+				"name": "Blue-plate special",
+				"type": "Industry"
+			}
+		],
+		"topic": [
+			{
+				"id": "DYR3jl",
+				"name": "Oreo",
+				"type": "Topic",
+				"description": "She spent her earliest years reading classic literature, and writing poetry."
+			}
+		],
+		"validation_urls": [
+			{
+				"id": "url:https://heath.stockholm/",
+				"name": "https://heath.stockholm/",
+				"type": "URL"
+			}
+		]
+	},
+	"id": "3JAmE2JBrd",
+	"source": {
+		"id": "AQlEFb51Aw971",
+		"name": "Naan",
+		"type": "Source"
+	}
+}
+

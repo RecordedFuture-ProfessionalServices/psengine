@@ -1,0 +1,2471 @@
+{
+	"data": {
+		"enterpriseLists": [],
+		"aiInsights": {
+			"comment": null,
+			"text": "Erlang is known for its designs that are well suited for systems. Ports are created with the built-in function open_port. The arguments can be primitive data types or compound data types. The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. The arguments can be primitive data types or compound data types.",
+			"numberOfReferences": 13
+		},
+		"risk": {
+			"criticalityLabel": "Do you come here often?",
+			"riskString": "The arguments can be primitive data types or compound data types.",
+			"rules": 2,
+			"criticality": 1,
+			"riskSummary": "Do you have any idea why this is not working?",
+			"score": 10,
+			"evidenceDetails": [
+				{
+					"mitigationString": "Erlang is known for its designs that are well suited for systems.",
+					"evidenceString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+					"rule": "The arguments can be primitive data types or compound data types.",
+					"criticality": 1,
+					"timestamp": "2025-12-10T08:54:53.608Z",
+					"criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+				},
+				{
+					"mitigationString": "Do you come here often?",
+					"evidenceString": "Erlang is known for its designs that are well suited for systems.",
+					"rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+					"criticality": 1,
+					"timestamp": "2025-06-12T16:05:14.217Z",
+					"criticalityLabel": "He looked inquisitively at his keyboard and wrote another sentence."
+				}
+			]
+		},
+		"sightings": [
+			{
+				"source": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+				"url": "I don't even care.",
+				"published": "2025-10-28T23:17:08.653Z",
+				"fragment": "Erlang is known for its designs that are well suited for systems.",
+				"title": "Its main implementation is the Glasgow Haskell Compiler.",
+				"type": "recentPaste"
+			},
+			{
+				"source": "He looked inquisitively at his keyboard and wrote another sentence.",
+				"url": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+				"published": "2025-08-31T23:18:23.132Z",
+				"fragment": "Atoms are used within a program to denote distinguished values.",
+				"title": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+				"type": "first"
+			},
+			{
+				"source": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+				"url": "She spent her earliest years reading classic literature, and writing poetry.",
+				"published": "2025-06-23T10:00:58.583Z",
+				"fragment": "Do you have any idea why this is not working?",
+				"title": "Ports are used to communicate with the external world.",
+				"type": "recentInfoSec"
+			},
+			{
+				"source": "Do you come here often?",
+				"url": "Tuples are containers for a fixed number of Erlang data types.",
+				"published": "2025-10-27T17:26:12.534Z",
+				"fragment": "He looked inquisitively at his keyboard and wrote another sentence.",
+				"title": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+				"type": "mostRecent"
+			}
+		],
+		"riskMapping": [
+			{
+				"rule": "Atoms are used within a program to denote distinguished values.",
+				"categories": [
+					{
+						"framework": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+						"name": "Clam chowder"
+					}
+				]
+			},
+			{
+				"rule": "Haskell features a type system with type inference and lazy evaluation.",
+				"categories": []
+			}
+		],
+		"entity": {
+			"id": "ip:147.102.210.202",
+			"name": "147.102.210.202",
+			"type": "IpAddress"
+		},
+		"dnsPortCert": {
+			"certificates": [],
+			"dns": {
+				"forwardDns": [
+					{
+						"hostname": "Erlang is a general-purpose, concurrent, functional programming language.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "She spent her earliest years reading classic literature, and writing poetry.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Ports are used to communicate with the external world.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Any element of a tuple can be accessed in constant time.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Where are my pants?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Where are my pants?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Do you have any idea why this is not working?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Ports are created with the built-in function open_port.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Type classes first appeared in the Haskell programming language.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Ports are used to communicate with the external world.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "I don't even care.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "She spent her earliest years reading classic literature, and writing poetry.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Do you have any idea why this is not working?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is known for its designs that are well suited for systems.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "She spent her earliest years reading classic literature, and writing poetry.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is a general-purpose, concurrent, functional programming language.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Ports are used to communicate with the external world.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "He looked inquisitively at his keyboard and wrote another sentence.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Do you have any idea why this is not working?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Tuples are containers for a fixed number of Erlang data types.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "She spent her earliest years reading classic literature, and writing poetry.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Do you have any idea why this is not working?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Tuples are containers for a fixed number of Erlang data types.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms are used within a program to denote distinguished values.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms are used within a program to denote distinguished values.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Where are my pants?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Ports are created with the built-in function open_port.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is a general-purpose, concurrent, functional programming language.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Do you come here often?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Do you come here often?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is known for its designs that are well suited for systems.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "It is also a garbage-collected runtime system.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Where are my pants?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is known for its designs that are well suited for systems.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is known for its designs that are well suited for systems.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is a general-purpose, concurrent, functional programming language.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is known for its designs that are well suited for systems.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Any element of a tuple can be accessed in constant time.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Type classes first appeared in the Haskell programming language.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Make me a sandwich.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The arguments can be primitive data types or compound data types.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The arguments can be primitive data types or compound data types.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Where are my pants?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Where are my pants?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is known for its designs that are well suited for systems.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms are used within a program to denote distinguished values.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "He looked inquisitively at his keyboard and wrote another sentence.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "I don't even care.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Any element of a tuple can be accessed in constant time.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Tuples are containers for a fixed number of Erlang data types.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms are used within a program to denote distinguished values.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The arguments can be primitive data types or compound data types.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms are used within a program to denote distinguished values.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Where are my pants?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Erlang is a general-purpose, concurrent, functional programming language.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Do you come here often?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Its main implementation is the Glasgow Haskell Compiler.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Ports are used to communicate with the external world.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "She spent her earliest years reading classic literature, and writing poetry.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Haskell features a type system with type inference and lazy evaluation.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms are used within a program to denote distinguished values.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Where are my pants?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Type classes first appeared in the Haskell programming language.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Where are my pants?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Ports are used to communicate with the external world.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Do you have any idea why this is not working?",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+						"lastSeen": null,
+						"firstSeen": null
+					},
+					{
+						"hostname": "Do you come here often?",
+						"lastSeen": null,
+						"firstSeen": null
+					}
+				],
+				"reverseDns": null
+			},
+			"ports": [
+				{
+					"name": null,
+					"version": null,
+					"port": 80,
+					"extraInfo": null,
+					"protocol": "It is also a garbage-collected runtime system.",
+					"product": null
+				},
+				{
+					"name": null,
+					"version": null,
+					"port": 443,
+					"extraInfo": null,
+					"protocol": "Any element of a tuple can be accessed in constant time.",
+					"product": null
+				},
+				{
+					"name": null,
+					"version": null,
+					"port": 2082,
+					"extraInfo": null,
+					"protocol": "Ports are created with the built-in function open_port.",
+					"product": null
+				},
+				{
+					"name": null,
+					"version": null,
+					"port": 2083,
+					"extraInfo": null,
+					"protocol": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+					"product": null
+				},
+				{
+					"name": null,
+					"version": null,
+					"port": 2086,
+					"extraInfo": null,
+					"protocol": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+					"product": null
+				},
+				{
+					"name": null,
+					"version": null,
+					"port": 2087,
+					"extraInfo": null,
+					"protocol": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+					"product": null
+				},
+				{
+					"name": null,
+					"version": null,
+					"port": 2095,
+					"extraInfo": null,
+					"protocol": "Its main implementation is the Glasgow Haskell Compiler.",
+					"product": null
+				},
+				{
+					"name": null,
+					"version": null,
+					"port": 2096,
+					"extraInfo": null,
+					"protocol": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+					"product": null
+				},
+				{
+					"name": null,
+					"version": null,
+					"port": 8080,
+					"extraInfo": null,
+					"protocol": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+					"product": null
+				},
+				{
+					"name": null,
+					"version": null,
+					"port": 8443,
+					"extraInfo": null,
+					"protocol": "Haskell features a type system with type inference and lazy evaluation.",
+					"product": null
+				}
+			]
+		},
+		"relatedEntities": [
+			{
+				"entities": [
+					{
+						"count": 238,
+						"entity": {
+							"id": "hash:4fd3cb36d4994d8c611c6d02824bbef96a522a417f8b39db9ff27f3137b6be99",
+							"name": "BBQ Chicken Pizza",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "hash:b86bb559ca4c78d67cf3036c0a98e108ec23e6003dae9c79074ab96e91372ce1",
+							"name": "Sweetbreads",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 146,
+						"entity": {
+							"id": "hash:809c6aebcaa3c878ce104f374ec0384c9a09c4122e919c6fd53c616ec2b4f96a",
+							"name": "Corn flakes",
+							"type": "Hash"
+						}
+					},
+					{
+						"count": 16,
+						"entity": {
+							"id": "hash:c1e9bf8aa953e170549ee629adf877456ca06b81045a9e5d6dc15d432cd20ad3",
+							"name": "Chicken Salad Wrap",
+							"type": "Hash"
+						}
+					}
+				],
+				"type": "RelatedHash"
+			},
+			{
+				"entities": [
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:105.11.202.228",
+							"name": "Sushi",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:40.150.71.121",
+							"name": "Russian tea cake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "ip:234.200.73.14",
+							"name": "Stuffed zucchini",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:148.229.172.230",
+							"name": "Kobe Beef",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:126.228.181.127",
+							"name": "Chicken French",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:153.60.219.43",
+							"name": "Ploye",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:115.70.48.119",
+							"name": "Salisbury steak",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:198.206.137.228",
+							"name": "Lobster roll",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:196.232.233.151",
+							"name": "Maple Bacon Doughnut",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:175.69.253.16",
+							"name": "Tin Roof Ice Cream",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:151.79.206.200",
+							"name": "Fajita",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:34.233.251.68",
+							"name": "Maple Bacon Doughnut",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:2.111.188.69",
+							"name": "Mango and Sticky Rice",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:132.68.10.8",
+							"name": "Buffalo Wings",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 41,
+						"entity": {
+							"id": "ip:216.185.67.162",
+							"name": "Yeung Chow fried rice",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:50.63.88.158",
+							"name": "Mashed potato",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "ip:169.223.245.253",
+							"name": "New York-Style Pizza",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:70.125.144.211",
+							"name": "Rolled oyster",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:210.33.255.49",
+							"name": "Hot Chicken sandwich",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:154.152.27.247",
+							"name": "Hawaiian Pizza",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:56.171.239.126",
+							"name": "City chicken",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:29.161.121.25",
+							"name": "Naan",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:35.223.214.77",
+							"name": "Matzo Ball Soup",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:161.122.80.38",
+							"name": "Churrasco",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:111.134.164.127",
+							"name": "Juba",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:193.44.200.241",
+							"name": "Popover",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "ip:108.204.40.143",
+							"name": "Eggs Neptune",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:51.214.217.189",
+							"name": "Bi Bim Bap",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:202.55.110.187",
+							"name": "Pigs in blankets",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:176.216.59.225",
+							"name": "Quesadilla",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:176.147.111.34",
+							"name": "Churrasco",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:224.92.202.235",
+							"name": "Bookbinder Soup",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:188.52.57.68",
+							"name": "Bagels and Lox",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:145.112.30.98",
+							"name": "Tin Roof Ice Cream",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:4.80.159.153",
+							"name": "Meatcake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:171.249.188.222",
+							"name": "Low Country Boil",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:41.119.169.254",
+							"name": "Milk toast",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:46.193.187.137",
+							"name": "Coleslaw",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:26.36.156.53",
+							"name": "American fried rice",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "ip:117.94.239.189",
+							"name": "Philadelphia cheesesteak",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:184.195.39.13",
+							"name": "London broil",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:3.179.129.255",
+							"name": "Frito Pie",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:39.28.137.228",
+							"name": "Chocolate Brownie",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:134.212.252.85",
+							"name": "Fries",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:227.127.66.167",
+							"name": "Suckling Pig",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:122.84.30.53",
+							"name": "Haystack",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:202.55.39.83",
+							"name": "Suckling Pig",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:148.21.96.162",
+							"name": "Butter cookie",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:228.186.68.22",
+							"name": "Fajitas",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:183.229.128.174",
+							"name": "Quesadilla",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:83.245.130.191",
+							"name": "Beef Lo Mein",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:124.10.151.166",
+							"name": "Chicken Divan",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:224.68.62.18",
+							"name": "Pigs in blankets",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "ip:13.19.199.215",
+							"name": "Creamed eggs on toast",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:180.123.225.46",
+							"name": "Seafood cocktail",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:144.10.164.203",
+							"name": "Chocolate cheesecake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:218.61.20.62",
+							"name": "Spring Rolls",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:222.142.187.229",
+							"name": "Salad bar",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:31.64.45.109",
+							"name": "Sweetbreads",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:90.182.122.240",
+							"name": "Salisbury steak",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:139.184.174.219",
+							"name": "Polenta",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:182.215.37.212",
+							"name": "Tuna casserole",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:99.244.90.74",
+							"name": "Mozzarella sticks",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:188.187.35.4",
+							"name": "Chicken and waffles",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:214.38.90.164",
+							"name": "Crab Rangoon",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:192.57.80.232",
+							"name": "Paella",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:177.33.7.30",
+							"name": "Fried Catfish",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:232.27.191.70",
+							"name": "Doughnut",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:42.162.75.115",
+							"name": "Chowder",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "ip:153.133.209.212",
+							"name": "Laksa",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:227.103.182.158",
+							"name": "Chicken nuggets",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:127.240.102.53",
+							"name": "Pigs in blankets",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:198.141.205.187",
+							"name": "Milk toast",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:27.150.127.163",
+							"name": "Cheesy Garlic Bread",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:18.147.146.95",
+							"name": "Salad bar",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 43,
+						"entity": {
+							"id": "ip:155.46.176.13",
+							"name": "Apple butter",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:8.46.66.147",
+							"name": "Bacon Cheeseburger",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:127.48.166.20",
+							"name": "Crepes",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:129.100.52.122",
+							"name": "Chinese food",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "ip:239.121.9.227",
+							"name": "Oreo",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "ip:204.197.146.17",
+							"name": "Seafood cocktail",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:202.244.130.184",
+							"name": "Rolled oyster",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "ip:123.2.4.116",
+							"name": "Crab cake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 9,
+						"entity": {
+							"id": "ip:5.154.252.40",
+							"name": "Ice Cream",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:217.8.71.111",
+							"name": "Buffalo burger",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "ip:141.156.52.164",
+							"name": "Eggs Benedict",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:172.130.172.3",
+							"name": "Porterhouse Steak",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:238.57.191.39",
+							"name": "Pepperoni",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:126.84.64.41",
+							"name": "Brunswick stew",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:255.98.199.135",
+							"name": "Yeung Chow fried rice",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:124.84.17.155",
+							"name": "Jalapeno Poppers",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:31.134.74.36",
+							"name": "Reuben",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:166.92.31.123",
+							"name": "Pepperoni Pizza",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:189.116.27.165",
+							"name": "Spring Rolls",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:216.166.229.50",
+							"name": "Shish Kabob",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:160.140.96.41",
+							"name": "Pop-Tarts",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "ip:240.46.87.179",
+							"name": "Currywurst",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 3,
+						"entity": {
+							"id": "ip:14.222.50.50",
+							"name": "Kung Pao Chicken",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "ip:20.18.219.25",
+							"name": "Russian tea cake",
+							"type": "IpAddress"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "ip:70.245.114.178",
+							"name": "Pepperoni",
+							"type": "IpAddress"
+						}
+					}
+				],
+				"type": "RelatedIpAddress"
+			},
+			{
+				"entities": [
+					{
+						"count": 2,
+						"entity": {
+							"id": "idn:oldest.doctor",
+							"name": "Waffle",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 41,
+						"entity": {
+							"id": "idn:statutes.com",
+							"name": "Pan Seared Scallops",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 78,
+						"entity": {
+							"id": "idn:cool.alsace",
+							"name": "Russian dressing",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:citations.berlin",
+							"name": "Steak sandwich",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 5,
+						"entity": {
+							"id": "idn:litigation.org",
+							"name": "Fajita",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 8,
+						"entity": {
+							"id": "idn:horizontal.asia",
+							"name": "Corn flakes",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "idn:huge.boston",
+							"name": "Wasabi Peas",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "idn:customers.com",
+							"name": "Baklava",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:aol.museum.post",
+							"name": "Moules Frites",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:graphs.am",
+							"name": "Bulgogi",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:tenant.info",
+							"name": "Kobe Beef",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:tapes.biz",
+							"name": "Chicago Deep Dish Pizza",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:approaches.info",
+							"name": "Funnel Cake",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:joan.aero",
+							"name": "Tamales",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:required.gold",
+							"name": "Chicken Divan",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:enables.travel",
+							"name": "Beignets",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "idn:chart.host",
+							"name": "Cowboy beans",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "idn:picture.com",
+							"name": "Currywurst",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:artwork.gent",
+							"name": "Frybread",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "idn:cordless.net",
+							"name": "Chocolate cheesecake",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:wherever.ai",
+							"name": "Soul food",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:hygiene.org",
+							"name": "Surf and turf",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:positive.mil",
+							"name": "Frybread",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:col.wien",
+							"name": "Goulash",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 4,
+						"entity": {
+							"id": "idn:chelsea.ir",
+							"name": "Grilled Snake",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:gis.wien",
+							"name": "Milk Steak",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 1,
+						"entity": {
+							"id": "idn:gods.cw",
+							"name": "Chicken sandwich",
+							"type": "InternetDomainName"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "idn:ids.org",
+							"name": "Fish and Chips!",
+							"type": "InternetDomainName"
+						}
+					}
+				],
+				"type": "RelatedInternetDomainName"
+			},
+			{
+				"entities": [
+					{
+						"count": 2,
+						"entity": {
+							"id": "AnNerl",
+							"name": "Kobe Beef",
+							"type": "Product"
+						}
+					},
+					{
+						"count": 2,
+						"entity": {
+							"id": "0xwCD",
+							"name": "Oreo",
+							"type": "Product"
+						}
+					}
+				],
+				"type": "RelatedProduct"
+			}
+		],
+		"analystNotes": [],
+		"location": {
+			"organization": "He looked inquisitively at his keyboard and wrote another sentence.",
+			"cidr": {
+				"id": "ip:12.255.243.185",
+				"name": "Suckling Pig",
+				"type": "IpAddress"
+			},
+			"location": {
+				"continent": null,
+				"country": null,
+				"city": null
+			},
+			"asn": "Do you have any idea why this is not working?"
+		},
+		"timestamps": {
+			"lastSeen": "2025-10-10T01:54:55.451Z",
+			"firstSeen": "2025-11-26T23:15:26.915Z"
+		},
+		"threatLists": [],
+		"intelCard": "She spent her earliest years reading classic literature, and writing poetry.",
+		"links": {
+			"hits": [],
+			"method_aggregates": [
+				{
+					"count": 0,
+					"type": "hHQyM6"
+				},
+				{
+					"count": 0,
+					"type": "hHQyM7"
+				},
+				{
+					"count": 0,
+					"type": "gTB8y2"
+				}
+			],
+			"counts": []
+		},
+		"counts": [
+			{
+				"date": "2024-02-02",
+				"count": 100
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 54
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 9
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 77
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 10
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 9
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 24
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 6
+			},
+			{
+				"date": "2024-02-02",
+				"count": 25
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 43
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 18
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 5
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 8
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 3
+			},
+			{
+				"date": "2024-02-02",
+				"count": 2
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 0
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 4
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			},
+			{
+				"date": "2024-02-02",
+				"count": 1
+			}
+		],
+		"metrics": [
+			{
+				"type": "sevenDaysHits",
+				"value": 0
+			},
+			{
+				"type": "totalHits",
+				"value": 545
+			},
+			{
+				"type": "predictionModelVerdict",
+				"value": 1
+			},
+			{
+				"type": "c2Subscore",
+				"value": 0
+			},
+			{
+				"type": "phishingSubscore",
+				"value": 0
+			},
+			{
+				"type": "whitelistedCount",
+				"value": 0
+			},
+			{
+				"type": "oneDayHits",
+				"value": 0
+			},
+			{
+				"type": "trendVolume",
+				"value": 0
+			},
+			{
+				"type": "historicalThreatListMembershipSightings",
+				"value": -1
+			},
+			{
+				"type": "socialMediaHits",
+				"value": 0
+			},
+			{
+				"type": "undergroundForumHits",
+				"value": 0
+			},
+			{
+				"type": "infoSecHits",
+				"value": 549
+			},
+			{
+				"type": "historicalThreatListMembership",
+				"value": 1
+			},
+			{
+				"type": "maliciousHits",
+				"value": 5
+			},
+			{
+				"type": "darkWebHits",
+				"value": 0
+			},
+			{
+				"type": "publicSubscore",
+				"value": 10
+			},
+			{
+				"type": "pasteHits",
+				"value": 3
+			},
+			{
+				"type": "mitigatedCount",
+				"value": 0
+			},
+			{
+				"type": "criticality",
+				"value": 1
+			},
+			{
+				"type": "technicalReportingHits",
+				"value": 108
+			},
+			{
+				"type": "malwareSubscore",
+				"value": 0
+			},
+			{
+				"type": "sixtyDaysHits",
+				"value": 0
+			}
+		]
+	},
+	"warnings": ["It is also a garbage-collected runtime system."]
+}
+

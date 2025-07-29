@@ -1,0 +1,88 @@
+{
+    "data": {
+        "aiInsights": {
+            "comment": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "text": null
+        },
+        "timestamps": {
+            "lastSeen": "2025-08-06T15:59:33.374Z",
+            "firstSeen": "2025-05-05T04:24:17.733Z"
+        },
+        "risk": {
+            "criticalityLabel": "Erlang is known for its designs that are well suited for systems.",
+            "riskString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "rules": 5,
+            "criticality": 5,
+            "riskSummary": "Any element of a tuple can be accessed in constant time.",
+            "score": 99,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "evidenceString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-05-21T23:17:44.098Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "evidenceString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "criticality": 2,
+                    "timestamp": "2025-09-15T16:45:08.006Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                },
+                {
+                    "mitigationString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "evidenceString": "Ports are used to communicate with the external world.",
+                    "rule": "I don't even care.",
+                    "criticality": 3,
+                    "timestamp": "2025-01-08T08:01:35.055Z",
+                    "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "mitigationString": "Do you have any idea why this is not working?",
+                    "evidenceString": "Make me a sandwich.",
+                    "rule": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "criticality": 3,
+                    "timestamp": "2025-03-17T02:47:38.416Z",
+                    "criticalityLabel": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                },
+                {
+                    "mitigationString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "criticality": 5,
+                    "timestamp": "2025-08-20T23:15:55.525Z",
+                    "criticalityLabel": "Tuples are containers for a fixed number of Erlang data types."
+                }
+            ]
+        },
+        "cvssv3": {
+            "source": "The arguments can be primitive data types or compound data types.",
+            "scope": "Type classes first appeared in the Haskell programming language.",
+            "exploitabilityScore": 1.8,
+            "modified": "2025-02-20T23:54:56.611Z",
+            "baseSeverity": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "baseScore": 7.8,
+            "privilegesRequired": "Its main implementation is the Glasgow Haskell Compiler.",
+            "userInteraction": "Its main implementation is the Glasgow Haskell Compiler.",
+            "impactScore": 5.9,
+            "attackVector": "Tuples are containers for a fixed number of Erlang data types.",
+            "integrityImpact": "Type classes first appeared in the Haskell programming language.",
+            "confidentialityImpact": "Any element of a tuple can be accessed in constant time.",
+            "vectorString": "Do you come here often?",
+            "version": "Any element of a tuple can be accessed in constant time.",
+            "attackComplexity": "Where are my pants?",
+            "created": "2025-01-30T10:50:59.477Z",
+            "availabilityImpact": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+        },
+        "entity": {
+            "id": "qgmpUT",
+            "name": "Chicken Liver Pate",
+            "type": "CyberVulnerability",
+            "description": "She spent her earliest years reading classic literature, and writing poetry."
+        },
+        "cvss": {}
+    }
+}

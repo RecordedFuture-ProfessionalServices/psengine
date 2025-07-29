@@ -1,0 +1,95 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-09-24T13:31:45.245Z",
+            "firstSeen": "2025-11-22T07:41:26.567Z"
+        },
+        "risk": {
+            "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "riskString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "rules": 9,
+            "criticality": 2,
+            "riskSummary": "I don't even care.",
+            "score": 33,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Atoms are used within a program to denote distinguished values.",
+                    "evidenceString": "Atoms are used within a program to denote distinguished values.",
+                    "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "criticality": 1,
+                    "timestamp": "2025-05-14T19:38:15.829Z",
+                    "criticalityLabel": "He looked inquisitively at his keyboard and wrote another sentence."
+                },
+                {
+                    "mitigationString": "Do you come here often?",
+                    "evidenceString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-03-20T06:37:32.190Z",
+                    "criticalityLabel": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+                },
+                {
+                    "mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "evidenceString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "rule": "Any element of a tuple can be accessed in constant time.",
+                    "criticality": 1,
+                    "timestamp": "2025-11-12T11:59:59.952Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                },
+                {
+                    "mitigationString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "evidenceString": "Any element of a tuple can be accessed in constant time.",
+                    "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "criticality": 1,
+                    "timestamp": "2025-09-24T02:15:26.729Z",
+                    "criticalityLabel": "Erlang is known for its designs that are well suited for systems."
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "criticality": 1,
+                    "timestamp": "2025-08-07T15:57:01.586Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "Make me a sandwich.",
+                    "evidenceString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "rule": "It is also a garbage-collected runtime system.",
+                    "criticality": 1,
+                    "timestamp": "2025-04-14T22:59:32.904Z",
+                    "criticalityLabel": "Make me a sandwich."
+                },
+                {
+                    "mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "evidenceString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "rule": "Ports are used to communicate with the external world.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-29T00:04:44.381Z",
+                    "criticalityLabel": "Do you have any idea why this is not working?"
+                },
+                {
+                    "mitigationString": "Ports are used to communicate with the external world.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "criticality": 2,
+                    "timestamp": "2025-05-16T09:55:25.540Z",
+                    "criticalityLabel": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                },
+                {
+                    "mitigationString": "Ports are created with the built-in function open_port.",
+                    "evidenceString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 2,
+                    "timestamp": "2025-06-07T16:08:26.072Z",
+                    "criticalityLabel": "Tuples are containers for a fixed number of Erlang data types."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:217.169.186.105",
+            "name": "Supreme pizza",
+            "type": "IpAddress"
+        }
+    }
+}

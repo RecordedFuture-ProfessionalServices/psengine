@@ -1,0 +1,71 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-05-28T22:46:05.634Z",
+            "firstSeen": "2025-02-23T08:58:44.079Z"
+        },
+        "risk": {
+            "criticalityLabel": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "riskString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "rules": 6,
+            "criticality": 2,
+            "riskSummary": "The arguments can be primitive data types or compound data types.",
+            "score": 37,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Do you come here often?",
+                    "evidenceString": "It is also a garbage-collected runtime system.",
+                    "rule": "The arguments can be primitive data types or compound data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-04-23T19:36:39.640Z",
+                    "criticalityLabel": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                },
+                {
+                    "mitigationString": "Any element of a tuple can be accessed in constant time.",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "criticality": 1,
+                    "timestamp": "2025-06-08T19:39:15.306Z",
+                    "criticalityLabel": "Haskell features a type system with type inference and lazy evaluation."
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "criticality": 1,
+                    "timestamp": "2025-03-01T21:05:16.068Z",
+                    "criticalityLabel": "Type classes first appeared in the Haskell programming language."
+                },
+                {
+                    "mitigationString": "Tuples are containers for a fixed number of Erlang data types.",
+                    "evidenceString": "Atoms are used within a program to denote distinguished values.",
+                    "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "criticality": 1,
+                    "timestamp": "2025-10-16T05:53:15.210Z",
+                    "criticalityLabel": "Ports are created with the built-in function open_port."
+                },
+                {
+                    "mitigationString": "Type classes first appeared in the Haskell programming language.",
+                    "evidenceString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "rule": "Do you come here often?",
+                    "criticality": 2,
+                    "timestamp": "2025-03-05T04:55:01.529Z",
+                    "criticalityLabel": "Ports are created with the built-in function open_port."
+                },
+                {
+                    "mitigationString": "The arguments can be primitive data types or compound data types.",
+                    "evidenceString": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "criticality": 2,
+                    "timestamp": "2025-07-09T02:32:32.046Z",
+                    "criticalityLabel": "Where are my pants?"
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:13.225.96.187",
+            "name": "Fish and Chips!",
+            "type": "IpAddress"
+        }
+    }
+}

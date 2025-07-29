@@ -85,16 +85,8 @@ def markdown_tpr_advanced(pba_mgr: PlaybookAlertMgr, category):
     # - IPs from the alert
     # - the company that the alert is raised against
     LOG.info('Example of TPR enriched via SOAR and returning HTML output')
-
-    search_result = pba_mgr.search(category=category, max_results=1)
-    if search_result.counts.returned == 0:
-        # The supplied token did not have access to this alert category
-        # or the were no alerts in this category
-        return
-
-    alert_id = search_result.data[0].playbook_alert_id
+    alert_id = 'task:85743a62-fa26-43a4-aadf-cf3563dfa3a3'
     alert = pba_mgr.fetch(alert_id, category)
-
     soar_mgr = SoarMgr()
     lookup_mgr = LookupMgr()
     # Use the @property to get all IPs from the alert and enrich using SOAR

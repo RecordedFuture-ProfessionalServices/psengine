@@ -1,0 +1,340 @@
+import pytest
+
+from psengine.classic_alerts import ClassicAlert, ClassicAlertMgr
+from psengine.classic_alerts.constants import ALL_CA_FIELDS
+from psengine.classic_alerts.errors import AlertMarkdownError
+from psengine.classic_alerts.markdown.markdown import _hits_markdown
+from tests.classic_alerts.conftest import MOCK_DIR
+
+ALERT_IDS = [
+    '0nwGJG',
+    '0nzN2_',
+    '0nzN5u',
+    '0n2q5G',
+    '0n_aQr',
+    '0n_aZe',
+    '0osZdm',
+    '0oxjSZ',
+    '0o2oaR',
+    '0pJJFj',
+    '0pJJFn',
+    '0pTAwu',
+    '0pUX8M',
+    '0pUX8N',
+    '0pTAxn',
+    '0pUX8o',
+    '0pUX9U',
+    '0pUX9h',
+    '0pUX-R',
+    '0pUX_M',
+    '0pUX_F',
+    '0pUX_N',
+    '0pUX_S',
+    '0pUX-8',
+    '0pUX_0',
+    '0pUX_3',
+    '0pUYAG',
+    '0quoSV',
+    '0pUYAn',
+    '0pUYAm',
+    '0pUX_4',
+    '0pUYFw',
+    '0pUYgC',
+    '0pUYhc',
+    '0pUYky',
+    '0pUYkn',
+    '0pUYkz',
+    '0pUYk0',
+    '0pUZ85',
+    '0pUZ86',
+    '0pUZ-T',
+    '0pUZ82',
+    '0pdQzG',
+    '0przGY',
+    '0pzxG4',
+    '0pzxGq',
+    '0p09dX',
+    '0p09ik',
+    '0qcGMX',
+]
+
+ALERTS_WITH_ENRICHED_ENTITIES = ['0pUYgC', '0pUZ86', '0qcGMX']
+
+ALERTS_WITH_ENRICHED_ENTITY_FRAGMENTS = [
+    '0pTAwu',
+    '0pUX_M',
+    '0pUX_S',
+    '0pUX_0',
+    '0pUX_3',
+    '0pUYAG',
+    '0pUYAm',
+    '0pUX_4',
+]
+
+PARAMS_TEST_DATA = [
+    ('0nwGJG', {'ai_insights': True, 'owner_org': True, 'fragment_entities': True}),
+    ('0nzN2_', {'ai_insights': True, 'owner_org': True, 'fragment_entities': False}),
+    ('0nzN5u', {'ai_insights': True, 'owner_org': False, 'fragment_entities': True}),
+    ('0n2q5G', {'ai_insights': True, 'owner_org': False, 'fragment_entities': False}),
+    ('0n_aQr', {'ai_insights': False, 'owner_org': True, 'fragment_entities': True}),
+    ('0n_aZe', {'ai_insights': False, 'owner_org': True, 'fragment_entities': False}),
+    ('0osZdm', {'ai_insights': False, 'owner_org': False, 'fragment_entities': True}),
+    ('0oxjSZ', {'ai_insights': False, 'owner_org': False, 'fragment_entities': False}),
+]
+
+
+class Test_ClassicAlert:
+    @pytest.mark.parametrize('alert_id', ALERT_IDS)
+    def test_markdown(self, ca_mgr: ClassicAlertMgr, alert_id: str, request, mocker, mock_request):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alert = ca_mgr.fetch(alert_id)
+        markdown = alert.markdown()
+        assert markdown
+
+    @pytest.mark.parametrize('alert_id', ALERTS_WITH_ENRICHED_ENTITIES)
+    def test_markdown_with_enriched_entities(
+        self, ca_mgr: ClassicAlertMgr, alert_id: str, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alert = ca_mgr.fetch(alert_id)
+        markdown = alert.markdown()
+        assert 'Risk Score' in markdown
+        assert 'Criticality' in markdown
+        assert 'Triggered' in markdown
+        assert 'Last Triggered' in markdown
+        assert 'Rule Criticality' in markdown
+        assert 'Rule' in markdown
+        assert 'Evidence' in markdown
+        assert 'Timestamp' in markdown
+
+    @pytest.mark.parametrize('alert_id', ALERTS_WITH_ENRICHED_ENTITY_FRAGMENTS)
+    def test_markdown_with_enriched_entity_fragments(
+        self, ca_mgr: ClassicAlertMgr, alert_id: str, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alert = ca_mgr.fetch(alert_id)
+        markdown = alert.markdown()
+        assert 'Summary' in markdown
+        assert 'AI Insights' in markdown
+        assert 'Target Entities' in markdown
+        assert '1.' in markdown
+
+    @pytest.mark.parametrize(('alert_id', 'kwargs'), PARAMS_TEST_DATA)
+    def test_markdown_params(
+        self, ca_mgr: ClassicAlertMgr, alert_id: str, kwargs, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alert = ca_mgr.fetch(alert_id)
+        markdown = alert.markdown(**kwargs)
+
+        assert markdown
+
+    def test_markdown_on_search_raises_AlertMarkdownError(
+        self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+        alert = ca_mgr.search(max_results=1)[0]
+
+        with pytest.raises(AlertMarkdownError):
+            alert.markdown()
+
+    def test_markdown_on_search_succed_with_all_fields(
+        self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alert = ca_mgr.search(max_results=1, fields=ALL_CA_FIELDS)[0]
+
+        assert alert.markdown() is not None
+
+    def test_markdown_multiple_alerts(self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alerts = ca_mgr.search(fields=ALL_CA_FIELDS)
+
+        markdowns = [alert.markdown() for alert in alerts]
+
+        assert len(markdowns) == len(alerts)
+        for i, alert in enumerate(alerts):
+            assert alert.title.split('-')[0] in markdowns[i]
+
+    def test_markdown_multiple_alerts_different_markdown_limits(
+        self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alerts = ca_mgr.search(fields=ALL_CA_FIELDS, max_results=3)
+
+        markdowns = [
+            alerts[0].markdown(character_limit=5000),
+            alerts[1].markdown(),
+            alerts[2].markdown(character_limit=2000),
+        ]
+
+        assert len(markdowns) == len(alerts)
+        assert len(markdowns[0]) == 5000
+        assert len(markdowns[1]) == 9907
+        assert len(markdowns[2]) == 2000
+
+    def test_markdown_char_limit_with_defang(
+        self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alert = ca_mgr.fetch(id_='3gepzd', fields=ALL_CA_FIELDS)
+        assert len(alert.markdown(character_limit=10000, defang_iocs=True)) == 10000
+
+    def test_markdown_multiple_alerts_different_markdown_params(
+        self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alerts = ca_mgr.search(fields=ALL_CA_FIELDS, max_results=3)
+
+        markdowns = [
+            alerts[0].markdown(html_tags=False),
+            alerts[0].markdown(html_tags=True),
+            alerts[1].markdown(ai_insights=False),
+            alerts[2].markdown(),
+        ]
+
+        assert '\n</details>' not in markdowns[0]
+        assert 'AI Insights' in markdowns[1]
+        assert 'AI Insights' not in markdowns[2]
+        assert 'AI Insights' in markdowns[3]
+
+    def test_markdown_defang_iocs(self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        alert = ca_mgr.fetch(id_='3gepzd', fields=ALL_CA_FIELDS)
+        markdown = alert.markdown(defang_iocs=True)
+
+        assert '62[.]6[.]190[.]28' in markdown
+        assert '32[.]62[.]1[.]230' in markdown
+        assert 'realty[.]trade' in markdown
+
+    def test_markdown_defang_escaped_url_in_table(
+        self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        d = ca_mgr.fetch(id_='3gepzf', fields=ALL_CA_FIELDS)
+        data = d.markdown(defang_iocs=True)
+
+        assert 'https://consciousness[.]tirol/agdkd/adf' in data
+
+    def test_markdown_table_not_broken(
+        self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request
+    ):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        d = ca_mgr.fetch('3gepzf')
+        markdown = d.markdown()
+        assert (
+            'CyberVulnerability | An authentication bypass in the Palo Alto Networks PAN-OS software enables an unauthenticated attacker with network access to the management web interface to bypass the authentication otherwise required by the PAN-OS management web interface and invoke certain PHP scripts. While invoking these PHP scripts does not enable remote code execution, it can negatively impact integrity and confidentiality of PAN-OS.  You can greatly reduce the risk of this issue by restricting access to the management web interface to only trusted internal IP addresses according to our recommended  best practices deployment guidelines https://live.paloaltonetworks.com/t5/community-blogs/tips-amp-tricks-how-to-secure-the-management-access-of-your-palo/ba-p/464431 .  This issue does not affect Cloud NGFW or Prisma Access software.'
+            in markdown
+        )
+
+    def test_hits_markdown_missing_fragment(self):
+        raw_alert = {
+            'review': {
+                'note': None,
+                'status_in_portal': 'New',
+                'assignee': None,
+                'status': 'no-action',
+            },
+            'owner_organisation_details': {
+                'owner_id': 'uhash:123456678',
+                'enterprise_id': 'uhash:12345668',
+                'owner_name': 'ernest',
+                'organisations': [
+                    {'organisation_id': 'uhash:12345678', 'organisation_name': 'cool beans'}
+                ],
+                'enterprise_name': 'cool beans',
+            },
+            'url': {'api': 'https:...', 'portal': 'https:...'},
+            'rule': {
+                'use_case_deprecation': None,
+                'name': 'name',
+                'id': 'id',
+                'url': {'portal': 'https:...'},
+            },
+            'id': '5tgAM1',
+            'hits': [
+                {
+                    'entities': [],
+                    'document': {
+                        'source': {
+                            'id': 'source:uGGyI5',
+                            'name': 'iOSGods Forum',
+                            'type': 'Source',
+                        },
+                        'title': 'DomiNations v12.1470.1470 +40++ Cheats [ Exclusive ]',
+                        'url': 'https://iosgods.com/topic/50401-dominations-v1214701470-40-cheats-exclusive/',
+                        'authors': [{'id': '5q3mLz', 'name': 'uae988', 'type': 'Username'}],
+                    },
+                    'fragment': None,
+                    'id': 'HFBfAAA4uQs',
+                    'language': 'eng',
+                    'primary_entity': None,
+                    'analyst_note': None,
+                },
+            ],
+            'enriched_entities': [],
+            'ai_insights': {'comment': None, 'text': 'n/a'},
+            'log': {
+                'note_author': None,
+                'note_date': None,
+                'status_date': None,
+                'triggered': '2025-05-02T17:56:42.187Z',
+                'status_change_by': None,
+            },
+            'triggered_by': [],
+            'title': 'test alert title',
+            'type': 'REFERENCE',
+        }
+        alert_model = ClassicAlert(**raw_alert)
+        hits_md = _hits_markdown(alert_model, alert_model.hits)
+        assert hits_md is not None
+        assert isinstance(hits_md, list)
+        assert hits_md == [
+            {
+                'content': [
+                    '**Author(s):** uae988\n',
+                    '**Title:** DomiNations v12.1470.1470 +40++ Cheats [ Exclusive ]\n',
+                    '**URL:** https://iosgods.com/topic/50401-dominations-v1214701470-40-cheats-exclusive/\n',
+                    '_Reference text is missing, check the Recorded Future [Portal](https://.../) for more information._\n',
+                ],
+                'title': '1. From iOSGods Forum',
+            }
+        ]

@@ -1,0 +1,85 @@
+{
+    "data": {
+        "review": {
+            "note": null,
+            "status_in_portal": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "assignee": null,
+            "status": "Tuples are containers for a fixed number of Erlang data types."
+        },
+        "owner_organisation_details": {
+            "organisations": [
+                {
+                    "organisation_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "organisation_name": "Any element of a tuple can be accessed in constant time."
+                }
+            ],
+            "enterprise_id": "Atoms are used within a program to denote distinguished values.",
+            "enterprise_name": "Tuples are containers for a fixed number of Erlang data types."
+        },
+        "url": {
+            "api": "https://google.com",
+            "portal": "https://google.com"
+        },
+        "rule": {
+            "use_case_deprecation": null,
+            "name": "Ice Cream Sundae",
+            "id": "HwgUET",
+            "url": {
+                "portal": "https://google.com"
+            }
+        },
+        "id": "hWmJFX",
+        "hits": [
+            {
+                "entities": [
+                    {
+                        "id": "GNcUaX",
+                        "name": "Cheese balls",
+                        "type": "Organization"
+                    },
+                    {
+                        "id": "u3XDf9",
+                        "name": "Creamed eggs on toast",
+                        "type": "Malware"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "p0SoLDyc9Xeai",
+                        "name": "Hot chicken",
+                        "type": "Source"
+                    },
+                    "title": "Haskell features a type system with type inference and lazy evaluation.",
+                    "url": null,
+                    "authors": []
+                },
+                "fragment": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "id": "umm4LpeNiuq",
+                "language": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "primary_entity": null,
+                "analyst_note": {
+                    "id": "J29y1z",
+                    "url": {
+                        "api": "https://google.com",
+                        "portal": "https://google.com"
+                    }
+                }
+            }
+        ],
+        "enriched_entities": [],
+        "ai_insights": {
+            "comment": "Ports are used to communicate with the external world.",
+            "text": null
+        },
+        "log": {
+            "note_author": null,
+            "note_date": null,
+            "status_date": "2025-06-25T00:11:39.970Z",
+            "triggered": "2025-07-20T18:33:23.428Z",
+            "status_change_by": "Type classes first appeared in the Haskell programming language."
+        },
+        "triggered_by": [],
+        "title": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+        "type": "REFERENCE"
+    }
+}

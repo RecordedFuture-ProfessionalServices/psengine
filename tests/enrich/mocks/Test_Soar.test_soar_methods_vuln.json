@@ -1,0 +1,252 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 99,
+                    "level": 5.0,
+                    "context": {
+                        "malware": {
+                            "score": 90.0,
+                            "rule": {
+                                "count": 1,
+                                "maxCount": 1
+                            }
+                        },
+                        "public": {
+                            "summary": [
+                                {
+                                    "level": 5.0,
+                                    "count": 1.0
+                                },
+                                {
+                                    "level": 1.0,
+                                    "count": 11.0
+                                },
+                                {
+                                    "level": 2.0,
+                                    "count": 6.0
+                                },
+                                {
+                                    "level": 4.0,
+                                    "count": 1.0
+                                }
+                            ],
+                            "score": 99.0,
+                            "mostCriticalRule": "Exploited in the Wild by Recently Active Malware",
+                            "rule": {
+                                "maxCount": 23
+                            }
+                        }
+                    },
+                    "rule": {
+                        "count": 19,
+                        "mostCritical": "Exploited in the Wild by Recently Active Malware",
+                        "maxCount": 25,
+                        "evidence": {
+                            "relatedNote": {
+                                "count": 1,
+                                "timestamp": "2024-07-09T00:00:00.000Z",
+                                "description": "67 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 67 reports including APT40 Exploits Multiple N-Day Vulnerabilities in Widely-Used Software To Target Government Networks. Most recent link (Jul 09, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:w6tlTf",
+                                "rule": "Historically Referenced by Insikt Group",
+                                "sightings": 67,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "linkedToCyberExploit": {
+                                "count": 3865,
+                                "timestamp": "2024-08-11T07:08:16.000Z",
+                                "description": "18,687 sightings on 3864 sources including: <e id=source:j0U6oV>LogRhythm</e>, <e id=source:cJKBXh>Habr | \u0412\u0441\u0435 \u043f\u0443\u0431\u043b\u0438\u043a\u0430\u0446\u0438\u0438</e>, <e id=idn:prohoster.info>prohoster.info</e>, <e id=source:mDB208>Valneva | Financial Reports</e>, <e id=source:B6OIEH>ARN Security</e>. Most recent tweet: Alert: Critical <e id=bfC7F>#Apache</e> <e id=KfTGzY>#Log4j</e> <i id=HFAdQAA7LGm><e id=0fsV7>zero-day flaw</e> (<e id=kvXvR5>CVE-2021-44228</e></i>) allows attackers to take control of servers. Exploitations detected in the wild! Patch now & follow mitigation steps. details: <e id=url:https://bit.ly/3ogHb1N>https://t.co/fmfmTSpQuG</e> <e id=Keinfw>#cybersecurity</e> <e id=IV9oJK>#infosec</e> <e id=KejkGJ>#databreach</e> <e id=KeisHf>#hacking</e> <e id=Kt5Q4E>#patchnow</e>. Most recent link (Aug 11, 2024): https://twitter.com/legendary_f4ctz/statuses/1822530455880520147",
+                                "rule": "Linked to Historical Cyber Exploit",
+                                "sightings": 18687,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "recentScannerUptake": {
+                                "count": 1,
+                                "timestamp": "2024-08-29T04:53:56.108Z",
+                                "description": "9 sightings on 1 source: <e id=source:MIKjae>GitHub</e>. Most recent link (Aug 29, 2024): https://gist.github.com/SwitHak/b66db3a06c2955a9cb71a8718970c592/raw/6552a01148d5dbd8c9c44dabf9767032637b3540/20211210-TLP-WHITE_LOG4J.md",
+                                "rule": "Recently Linked to Penetration Testing Tools",
+                                "sightings": 9,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "linkedToRAT": {
+                                "count": 295,
+                                "timestamp": "2024-07-31T19:47:07.000Z",
+                                "description": "1295 sightings on 295 sources including: <e id=source:cJKeNH>CSOonline.com | Security News</e>, <e id=source:m4wN3b>UFO Labs Forum</e>, <e id=source:POs2tz>FreeBufCOM</e>, <e id=source:KZFCph>XSS (ex DamageLab) Forum</e>, <e id=source:opR22y>BusinessLend | Press Releases</e>. 55 related malware families including <e id=QCqLd4>HyperBro</e>, <e id=KLhRL_>njRAT</e>, <e id=RAQbTW>Orcus RAT</e>, <e id=n4V5h4>MagicRAT</e>, <e id=B4tYL0>BlackIce</e>. Most recent tweet: Our latest attack graph emulates <e id=JbmDth>#Andariel</e>'s <e id=Fgf6A9>Operation Blacksmith</e>, which targets <e id=KekcCd>#manufacturing</e>, agriculture, and <e id=Keignb>#security</e> sectors using <e id=kvXvR5>CVE-2021-44228</e> (<e id=kvXvR5>Log4Shell</e>) & <e id=tw7XKW>NineRAT</e> <e id=B75KVV>via</e> Telegram. Learn how to validate your defenses against this threat! \u27a1\ufe0f <e id=url:https://www.attackiq.com/2024/07/31/emulating-andariel/>https://t.co/kx8DKoUJvA</e> <e id=url:https://x.com/AttackIQ/status/1818735161275453739/photo/1>https://t.co/DAjWmcJAF0</e>. Most recent link (Jul 31, 2024): https://twitter.com/AttackIQ/statuses/1818735161275453739",
+                                "rule": "Historically Linked to Remote Access Trojan",
+                                "sightings": 1295,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "linkedToRansomware": {
+                                "count": 724,
+                                "timestamp": "2024-06-03T10:04:19.000Z",
+                                "description": "2871 sightings on 724 sources including: <e id=source:QhLYm5>Reddit InfoSec Comments</e>, <e id=source:POs2tz>FreeBufCOM</e>, <e id=source:gT3MDE>Beta News | Latest Updates</e>, <e id=idn:newsworldpress.com>newsworldpress.com</e>, <e id=source:j0U6oV>LogRhythm</e>. 129 related malware families including <e id=jQYVGc>BlackMatter Ransomware</e>, <e id=SL0r9i>Luna</e>, <e id=RHoDKR>Anatel</e>, <e id=dcHaT8>WannaRen</e>, <e id=f-jzKS>Pay2Key Ransomware</e>. Most recent tweet: Noticias: <e id=i9R5n6>Avoslocker Ransomware</e> variant abuses driver file to disable anti-virus, scans for <e id=kvXvR5>Log4shell</e> - <e id=CAMux>Trend Micro</e> <e id=url:https://news.google.com/rss/articles/CBMiigFodHRwczovL3d3dy50cmVuZG1pY3JvLmNvbS9lc19teC9yZXNlYXJjaC8yMi9lL2F2b3Nsb2NrZXItcmFuc29td2FyZS12YXJpYW50LWFidXNlcy1kcml2ZXItZmlsZS10by1kaXNhYmxlLWFudGktVmlydXMtc2NhbnMtbG9nNHNoZWxsLmh0bWzSAQA>https://t.co/yPLy1ZlX9j</e> <e id=KjAQCo>#ciberseguridad</e>. Most recent link (Jun 3, 2024): https://twitter.com/Egeneroficial/statuses/1797569998057062825",
+                                "rule": "Historically Linked to Ransomware",
+                                "sightings": 2871,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "linkedToRecentRansomware": {
+                                "count": 6,
+                                "timestamp": "2024-08-23T09:00:03.000Z",
+                                "description": "14 sightings on 6 sources including: <e id=idn:datadoghq.com>datadoghq.com</e>, <e id=idn:nordvpn.com>nordvpn.com</e>, <e id=source:Y7TWfI>Telegram - Other Channels</e>, <e id=source:wKHnxc>SecurityLabs Datadoghq | Articles</e>, <e id=source:pPhTQE>Cyware | All News</e>. 8 related malware families including <e id=SiTZ5j>Nightsky Ransomware</e>, <e id=SoA6SP>Wcry</e>, <e id=i8PHuP>Hive Ransomware</e>, <e id=uU3dCg>Mimus Ransomware</e>, <e id=ThrypD>NotPetya</e>. Most recent link (Aug 23, 2024): https://securitylabs.datadoghq.com/articles/the-gift-that-keeps-on-giving-a-new-opportunistic-log4j-campaign/#indicators-of-compromise?&web_view=true",
+                                "rule": "Recently Linked to Ransomware",
+                                "sightings": 14,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "linkedToExploitKit": {
+                                "count": 7,
+                                "timestamp": "2022-08-26T20:57:12.434Z",
+                                "description": "10 sightings on 7 sources including: <e id=idn:substack.com>substack.com</e>, <e id=idn:secoperations.pt>secoperations.pt</e>, <e id=source:k4B6xb>The Cyber Beat</e>, <e id=source:lthm-2>Codebook</e>, <e id=source:jbUons>Malpedia Library</e>. 5 related malware families: <e id=J0vofx>Purple Fox</e>, <e id=LFGSHZ>RIG Exploit Kit</e>, <e id=TX9Atf>Fallout Exploit Kit</e>, <e id=SulhVx>Nebula Exploit Kit</e>, <e id=Z7SrI6>10KBlaze</e>. Most recent link (Aug 26, 2022): https://www.orbitbrain.com/blog/iranian-government-hackers-exploit-log4shell-in-sysaid-apps-for-initial-access/",
+                                "rule": "Historically Linked to Exploit Kit",
+                                "sightings": 10,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "analystNote": {
+                                "count": 1,
+                                "timestamp": "2024-01-31T00:00:00.000Z",
+                                "description": "30 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 30 reports including Patterns and Targets for <e id=J0Nl-p>Ransomware</e> Exploitation of Vulnerabilities: 2017\u20132023. Most recent link (Jan 31, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:uWqrQb",
+                                "rule": "Historically Reported by Insikt Group",
+                                "sightings": 30,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "linkedToIntrusionMethod": {
+                                "count": 2706,
+                                "timestamp": "2024-07-13T03:00:17.000Z",
+                                "description": "11,475 sightings on 2706 sources including: <e id=source:sl9FxO>Elastic Security Labs</e>, <e id=source:QhLYm5>Reddit InfoSec Comments</e>, <e id=idn:cybernoz.com>cybernoz.com</e>, <e id=source:B-i>LeMondeInformatique</e>, <e id=source:JJzdXZ>LA TERCERA</e>. 401 related malware families including <e id=dXkwxG>Kinsing</e>, <e id=qfQAi5>DcRat (qwqdanchun version)</e>, <e id=lRALi_>CharmPower</e>, <e id=mQ6Ge5>Enemybot</e>, <e id=ONtsS0>ICS Malware</e>. Most recent tweet: Threat Alert: <e id=B_FNa>China</e>'s <e id=a4crhS>APT41</e> Crew Adds A Stealthy Malware Loader And <e id=CrHTS>Fresh</e> <e id=QCqLhE>Backdoor</e> To Its Tool <e id=ktcknT>CVE-2021-44207</e> <e id=cyril->CVE-2020-0688</e> <e id=kvXvR5>CVE-2021-44228</e> Severity: Medium Maturity: Mainstream Learn more: <e id=url:https://cs.beta.fletch.ai/p/apt41>https://t.co/wrijqYqpp8</e> <e id=Keinfw>#CyberSecurity</e> <e id=KgOeUs>#ThreatIntel</e> <e id=IV9oJK>#InfoSec</e> (1/3). Most recent link (Jul 13, 2024): https://twitter.com/fletch_ai/statuses/1811958799961588169",
+                                "rule": "Historically Linked to Malware",
+                                "sightings": 11475,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "recentPocUnverified": {
+                                "count": 1,
+                                "timestamp": "2024-08-25T21:21:22.663Z",
+                                "description": "1 sighting on 1 source: <e id=idn:inl.gov>inl.gov</e>. Most recent link (Aug 25, 2024): https://inldigitallibrary.inl.gov/sites/sti/sti/Sort_65949.pdf",
+                                "rule": "Recent Unverified Proof of Concept Available",
+                                "sightings": 1,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "recentMalwareActivity": {
+                                "count": 1,
+                                "timestamp": "2024-08-29T00:00:00.000Z",
+                                "description": "231 sightings on 1 source: Recorded Future Vulnerability Analysis. Activity seen on 28 out of the last 28 days with 983 all-time daily sightings. Last observed on Aug 29, 2024. Sample hash: <e id=hash:6c63ac358a5a183a757cb63ac13040e58eb3087aa9ca25bf40a02fab83f3736f>6c63ac358a5a183a757cb63ac13040e58eb3087aa9ca25bf40a02fab83f3736f</e>.",
+                                "rule": "Exploited in the Wild by Recently Active Malware",
+                                "sightings": 231,
+                                "mitigation": "",
+                                "level": 5
+                            },
+                            "linkedToRecentRAT": {
+                                "count": 3,
+                                "timestamp": "2024-08-22T03:43:08.000Z",
+                                "description": "6 sightings on 3 sources: <e id=source:Y7TWfI>Telegram - Other Channels</e>, <e id=source:letQZt>Image OCR</e>, <e id=source:gBs4LS>Telegram - Cyber</e>. 3 related malware families: <e id=KeKuZ0>Winnti</e>, <e id=k3KyjQ>TigerRAT</e>, <e id=MjZa5o>NukeSped</e>. Most recent link (Aug 22, 2024): https://t.me/babayaga_s/259750",
+                                "rule": "Recently Linked to Remote Access Trojan",
+                                "sightings": 6,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "cyberSignalCritical": {
+                                "count": 1,
+                                "timestamp": "2024-08-30T14:41:20.647Z",
+                                "description": "Large increase of references: 257 References in the last 60 days (Aug 30, 2024, 14:41 UTC).",
+                                "rule": "Cyber Exploit Signal: Critical",
+                                "sightings": -1,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "nistCritical": {
+                                "count": 1,
+                                "timestamp": "2024-07-24T17:34:46.404Z",
+                                "description": "1 sighting on 1 source: <e id=source:cJPLvf>Recorded Future Vulnerability Analysis via National Vulnerability Database</e>. CVSS v3.1 Score (10) calculated using <e id=source:KsicdL>NIST</e> reported CVSS Base Score (10) and Recorded Future Temporal Metrics. Base vector string: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H. Temporal vector string: E:H/RL:X/RC:C. Most recent link (Jul 24, 2024): https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2021-44228",
+                                "rule": "NIST Severity: Critical",
+                                "sightings": 1,
+                                "mitigation": "",
+                                "level": 4
+                            },
+                            "linkedToRecentCyberExploit": {
+                                "count": 50,
+                                "timestamp": "2024-08-29T18:53:55.000Z",
+                                "description": "116 sightings on 50 sources including: <e id=idn:datadoghq.com>datadoghq.com</e>, <e id=source:JExgHv>The Hacker News</e>, <e id=source:rks6In>OSINT Corp</e>, <e id=source:OmzvqX>Virus malware hacking security news</e>, <e id=source:MIKjae>GitHub</e>. Most recent tweet: See how <e id=CiQA-o>Check Point</e> <e id=VN-Htm>CloudGuard</e> <e id=Ko22XN>#WAF</e> helped customers successfully block all major <i id=HFAhwADLMAI><e id=0fsV7>zero-day</e> attacks, including <e id=kvXvR5>Log4Shell</e></i>, Spring4Shell and <e id=C99XzP>MOVEit</e>: <e id=url:https://dy.si/1df6d>https://t.co/Ups5gIi6Mf</e> <e id=url:https://x.com/asksukumar/status/1829231021671493916/photo/1>https://t.co/RukruD6i2K</e>. Most recent link (Aug 29, 2024): https://twitter.com/asksukumar/statuses/1829231021671493916",
+                                "rule": "Linked to Recent Cyber Exploit",
+                                "sightings": 116,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "pocUnverified": {
+                                "count": 6,
+                                "timestamp": "2024-06-15T18:00:23.000Z",
+                                "description": "16 sightings on 6 sources including: <e id=source:roLoLW>BreachForums 2</e>, <e id=source:KcN2Oa>Steve\u00a0(GRC) Gibsons Blog</e>, <e id=source:SQ5TlO>Legacy of CarderPlanet (LPC)</e>, <e id=idn:gitbook.io>gitbook.io</e>, <e id=source:KAjuXn>ExploitDB</e>. Most recent tweet: <e id=url:https://github.com/kozmer/log4j-shell-poc>https://t.co/HerdwLfzqr</e> A <i id=HFAPAACPsMv>Proof-Of-Concept for the <e id=kvXvR5>CVE-2021-44228</e></i> vulnerability. Most recent link (Jun 15, 2024): https://twitter.com/ala_garbaa_pro/statuses/1802038460523438275",
+                                "rule": "Historical Unverified Proof of Concept Available",
+                                "sightings": 16,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "scannerUptake": {
+                                "count": 85,
+                                "timestamp": "2023-05-15T20:32:11.000Z",
+                                "description": "895 sightings on 85 sources including: <e id=source:QhLYm5>Reddit InfoSec Comments</e>, <e id=source:Y7TWfI>Telegram - Other Channels</e>, <e id=source:cJKeNH>CSOonline.com | Security News</e>, <e id=source:POs2tz>FreeBufCOM</e>, <e id=source:gX3cDs>Microsoft | Security Blog</e>. Most recent tweet: <e id=dWmV95>@AnhurX1</e>: Excited to share my first post on my blog In this <e id=e_btpv>@LetsDefendIO</e> write-up, I delve into the powerful tool <e id=O4s5An>Wireshark</e> and explain the critical <e id=kvXvR5>Log4Shell</e> vulnerability, as well as how to use filters to detect it through the packets using. https://t.co/m5qbcg4PkQ \u2026. Most recent link (May 15, 2023): https://twitter.com/0reoSec/statuses/1658208679928143875",
+                                "rule": "Historically Linked to Penetration Testing Tools",
+                                "sightings": 895,
+                                "mitigation": "",
+                                "level": 1
+                            },
+                            "linkedToRecentIntrusionMethod": {
+                                "count": 17,
+                                "timestamp": "2024-08-30T14:00:02.000Z",
+                                "description": "52 sightings on 17 sources including: <e id=source:Y7TWfI>Telegram - Other Channels</e>, <e id=source:lthm-1>IoT OT Security News</e>, <e id=source:T7sREr>GBHackers | Latest Hacking News</e>, <e id=source:letQZt>Image OCR</e>, <e id=source:gBs4LS>Telegram - Cyber</e>. 28 related malware families including <e id=Koaobw>WebShell</e>, <e id=mHx4mB>Fire Chili rootkit</e>, <e id=KuIOPj>CoinMiner</e>, <e id=lRALi_>CharmPower</e>, <e id=wNEw4W>\u6076\u610f\u8f6f\u4ef6</e>. Most recent tweet: Are your systems safe from the latest <e id=kvXvR5>Log4Shell</e> attacks? Recently, a <e id=BMQ0DW>Tor exit node</e> was detected targeting vulnerabilities to deploy <e id=VT2KmL>XMRig</e> for <e id=IVUfuV>Monero</e> mining. Don't fall victim! Check our security advisory <t>NOW</t> to stay protected. <e id=url:https://sequretek.com/cyberthreatadvisory/>https://t.co/u7Ubn59DT5</e> <e id=url:https://x.com/sequretek_sqtk/status/1829519452481757562/video/1>https://t.co/Fged4YsVr3</e>. Most recent link (Aug 30, 2024): https://twitter.com/sequretek_sqtk/statuses/1829519452481757562",
+                                "rule": "Recently Linked to Malware",
+                                "sightings": 52,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "recentRelatedNote": {
+                                "count": 1,
+                                "timestamp": "2024-08-06T00:00:00.000Z",
+                                "description": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: Recorded Future CVE Monthly: July 2024. Most recent link (Aug 06, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:xiCka9",
+                                "rule": "Recently Referenced by Insikt Group",
+                                "sightings": 1,
+                                "mitigation": "",
+                                "level": 2
+                            }
+                        },
+                        "summary": [
+                            {
+                                "level": 5.0,
+                                "count": 1.0
+                            },
+                            {
+                                "level": 1.0,
+                                "count": 11.0
+                            },
+                            {
+                                "level": 2.0,
+                                "count": 6.0
+                            },
+                            {
+                                "level": 4.0,
+                                "count": 1.0
+                            }
+                        ]
+                    }
+                },
+                "entity": {
+                    "id": "kvXvR5",
+                    "name": "CVE-2021-44228",
+                    "type": "CyberVulnerability",
+                    "description": "Apache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. From log4j 2.15.0, this behavior has been disabled by default. From version 2.16.0 (along with 2.12.2, 2.12.3, and 2.3.1), this functionality has been completely removed. Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects."
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

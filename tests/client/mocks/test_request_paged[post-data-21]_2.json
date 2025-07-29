@@ -1,0 +1,81 @@
+{
+    "data": [
+        {
+            "attributes": {
+                "title": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "text": "He looked inquisitively at his keyboard and wrote another sentence. She spent her earliest years reading classic literature, and writing poetry. Do you have any idea why this is not working? It is also a garbage-collected runtime system. The arguments can be primitive data types or compound data types.",
+                "published": "2025-02-25T20:29:31.818Z",
+                "note_entities": [
+                    {
+                        "id": "5xRyc7",
+                        "name": "Fried Catfish",
+                        "type": "Person"
+                    },
+                    {
+                        "id": "bdEUgyziP0c",
+                        "name": "Onion Rings",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "1liIKjttEKAlQ",
+                        "name": "Meatloaf",
+                        "type": "Source"
+                    }
+                ],
+                "context_entities": [
+                    {
+                        "id": "1DF4XQ",
+                        "name": "Banh Mi Vi\u00eat",
+                        "type": "Technology"
+                    },
+                    {
+                        "id": "Ykz4A",
+                        "name": "Bulgogi",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "IEBph",
+                        "name": "Waffle",
+                        "type": "Industry"
+                    },
+                    {
+                        "id": "uKSctJ",
+                        "name": "Root Beer Float",
+                        "type": "Technology"
+                    },
+                    {
+                        "id": "idn:graph.berlin",
+                        "name": "Baba Ghanoush",
+                        "type": "InternetDomainName"
+                    }
+                ],
+                "topic": [
+                    {
+                        "id": "gReaff",
+                        "name": "Frito Pie",
+                        "type": "Topic",
+                        "description": "It is also a garbage-collected runtime system."
+                    }
+                ],
+                "validation_urls": [
+                    {
+                        "id": "url:https://eddie.aero/",
+                        "name": "Salmon pasta bake",
+                        "type": "URL"
+                    }
+                ]
+            },
+            "id": "S11YSLzoQx",
+            "source": {
+                "id": "kSCTUuFeTOnB6",
+                "name": "Biscuit",
+                "type": "Source"
+            }
+        }
+    ],
+    "next_offset": "Ports are used to communicate with the external world.",
+    "counts": {
+        "returned": 1,
+        "total": 21
+    }
+}

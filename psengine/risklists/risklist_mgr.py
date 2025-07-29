@@ -66,7 +66,7 @@ class RisklistMgr:
                 - If ``validate`` is not None, an empty list will be returned.
 
         Examples:
-            Download and return print as json:
+            Download and return risklist as json:
 
             .. code-block:: python
                 :linenos:

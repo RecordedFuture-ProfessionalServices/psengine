@@ -1,0 +1,385 @@
+{
+    "total": 390525,
+    "detections": [
+        {
+            "id": "6eLop47ygrcXQY1bEXDCIdCuS5c07MVw",
+            "novel": true,
+            "type": "External",
+            "subject": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "password": {
+                "type": "clear",
+                "hashes": [
+                    {
+                        "algorithm": "SHA1",
+                        "hash": "Haskell features a type system with type inference and lazy evaluation."
+                    },
+                    {
+                        "algorithm": "SHA256",
+                        "hash": "Ports are used to communicate with the external world."
+                    },
+                    {
+                        "algorithm": "MD5",
+                        "hash": "Do you come here often?"
+                    }
+                ],
+                "properties": [
+                    "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "Do you have any idea why this is not working?",
+                    "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
+                ],
+                "cleartext_hint": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "cleartext": "I don't even care."
+            },
+            "authorization_service": {
+                "url": "https://internship.info/",
+                "domain": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "fqdn": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "technology": [],
+                "protocols": [
+                    "Ports are created with the built-in function open_port."
+                ]
+            },
+            "cookies": [
+                {
+                    "dns": "The arguments can be primitive data types or compound data types.",
+                    "name": "Drunken chicken",
+                    "http": true,
+                    "expiration": "2025-11-24T15:11:03.358Z",
+                    "secure": true,
+                    "value": "Make me a sandwich."
+                },
+                {
+                    "dns": "Tuples are containers for a fixed number of Erlang data types.",
+                    "name": "London broil",
+                    "http": true,
+                    "expiration": "2025-02-23T12:44:38.515Z",
+                    "secure": true,
+                    "value": "I don't even care."
+                },
+                {
+                    "dns": "The arguments can be primitive data types or compound data types.",
+                    "name": "Chili con carne",
+                    "http": true,
+                    "expiration": "2025-05-20T20:41:27.612Z",
+                    "secure": true,
+                    "value": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                },
+                {
+                    "dns": "Erlang is known for its designs that are well suited for systems.",
+                    "name": "Bull roast",
+                    "http": true,
+                    "expiration": "2025-08-08T18:30:30.956Z",
+                    "secure": true,
+                    "value": "I don't even care."
+                },
+                {
+                    "dns": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "name": "Flan",
+                    "http": true,
+                    "expiration": "2025-07-03T12:42:34.354Z",
+                    "secure": false,
+                    "value": "Haskell features a type system with type inference and lazy evaluation."
+                },
+                {
+                    "dns": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "name": "Spanish rice",
+                    "http": true,
+                    "expiration": "2025-11-15T05:50:10.992Z",
+                    "secure": true,
+                    "value": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "dns": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "name": "Caviar",
+                    "http": false,
+                    "expiration": "2025-08-20T21:33:27.676Z",
+                    "secure": true,
+                    "value": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
+                },
+                {
+                    "dns": "It is also a garbage-collected runtime system.",
+                    "name": "Pastrami on Rye",
+                    "http": false,
+                    "expiration": "2025-10-04T12:35:07.688Z",
+                    "secure": true,
+                    "value": "Ports are created with the built-in function open_port."
+                },
+                {
+                    "dns": "Ports are created with the built-in function open_port.",
+                    "name": "Dirty rice",
+                    "http": false,
+                    "expiration": "2025-06-10T10:14:44.833Z",
+                    "secure": true,
+                    "value": "Erlang is known for its designs that are well suited for systems."
+                },
+                {
+                    "dns": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "name": "Pizza strips",
+                    "http": false,
+                    "expiration": "2025-12-29T02:35:54.053Z",
+                    "secure": true,
+                    "value": "Erlang is known for its designs that are well suited for systems."
+                },
+                {
+                    "dns": "Any element of a tuple can be accessed in constant time.",
+                    "name": "Hot Chicken sandwich",
+                    "http": true,
+                    "expiration": "2025-02-06T04:58:37.506Z",
+                    "secure": true,
+                    "value": "The arguments can be primitive data types or compound data types."
+                },
+                {
+                    "dns": "Ports are created with the built-in function open_port.",
+                    "name": "Shrimp Creole",
+                    "http": true,
+                    "expiration": "2025-04-05T17:41:20.698Z",
+                    "secure": true,
+                    "value": "I don't even care."
+                },
+                {
+                    "dns": "Ports are used to communicate with the external world.",
+                    "name": "Garden salad",
+                    "http": false,
+                    "expiration": "2025-02-14T23:43:38.224Z",
+                    "secure": true,
+                    "value": "She spent her earliest years reading classic literature, and writing poetry."
+                },
+                {
+                    "dns": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "name": "Abalone",
+                    "http": true,
+                    "expiration": "2025-07-19T20:01:31.077Z",
+                    "secure": true,
+                    "value": "Erlang is known for its designs that are well suited for systems."
+                },
+                {
+                    "dns": "Erlang is known for its designs that are well suited for systems.",
+                    "name": "Juba",
+                    "http": true,
+                    "expiration": "2025-12-28T06:36:49.654Z",
+                    "secure": true,
+                    "value": "Where are my pants?"
+                },
+                {
+                    "dns": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "name": "Carne pizzaiola",
+                    "http": true,
+                    "expiration": "2025-08-02T14:20:48.895Z",
+                    "secure": false,
+                    "value": "Tuples are containers for a fixed number of Erlang data types."
+                },
+                {
+                    "dns": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "name": "Goulash",
+                    "http": true,
+                    "expiration": "2025-11-29T01:51:06.786Z",
+                    "secure": true,
+                    "value": "Ports are created with the built-in function open_port."
+                },
+                {
+                    "dns": "Ports are used to communicate with the external world.",
+                    "name": "Black Pudding",
+                    "http": false,
+                    "expiration": "2025-03-29T21:36:19.166Z",
+                    "secure": true,
+                    "value": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                },
+                {
+                    "dns": "Ports are used to communicate with the external world.",
+                    "name": "Maple Bacon Doughnut",
+                    "http": true,
+                    "expiration": "2025-03-10T19:04:29.042Z",
+                    "secure": true,
+                    "value": "Ports are used to communicate with the external world."
+                },
+                {
+                    "dns": "Atoms are used within a program to denote distinguished values.",
+                    "name": "Pork and beans",
+                    "http": true,
+                    "expiration": "2025-01-14T13:04:29.813Z",
+                    "secure": true,
+                    "value": "Erlang is known for its designs that are well suited for systems."
+                },
+                {
+                    "dns": "Make me a sandwich.",
+                    "name": "Domesticated turkey",
+                    "http": true,
+                    "expiration": "2025-09-17T16:03:47.060Z",
+                    "secure": true,
+                    "value": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                },
+                {
+                    "dns": "Erlang is known for its designs that are well suited for systems.",
+                    "name": "Chicken fried bacon",
+                    "http": false,
+                    "expiration": "2025-01-16T15:49:30.468Z",
+                    "secure": true,
+                    "value": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "dns": "Erlang is known for its designs that are well suited for systems.",
+                    "name": "Pistachio Ice Cream",
+                    "http": false,
+                    "expiration": "2025-10-12T03:16:19.144Z",
+                    "secure": true,
+                    "value": "She spent her earliest years reading classic literature, and writing poetry."
+                },
+                {
+                    "dns": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "name": "Pumpkin pie",
+                    "http": true,
+                    "expiration": "2025-03-14T05:20:56.908Z",
+                    "secure": true,
+                    "value": "Type classes first appeared in the Haskell programming language."
+                },
+                {
+                    "dns": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "name": "Senate bean soup",
+                    "http": true,
+                    "expiration": "2025-09-21T21:36:29.127Z",
+                    "secure": true,
+                    "value": "Type classes first appeared in the Haskell programming language."
+                },
+                {
+                    "dns": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "name": "Ranch dressing",
+                    "http": true,
+                    "expiration": "2025-09-26T07:59:59.482Z",
+                    "secure": true,
+                    "value": "It is also a garbage-collected runtime system."
+                },
+                {
+                    "dns": "I don't even care.",
+                    "name": "Choco pie",
+                    "http": true,
+                    "expiration": "2025-01-17T23:13:20.904Z",
+                    "secure": true,
+                    "value": "Ports are used to communicate with the external world."
+                },
+                {
+                    "dns": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "name": "Pepperoni",
+                    "http": false,
+                    "expiration": "2025-07-26T10:15:19.946Z",
+                    "secure": true,
+                    "value": "Do you come here often?"
+                },
+                {
+                    "dns": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "name": "Jerky",
+                    "http": true,
+                    "expiration": "2025-11-05T21:27:39.673Z",
+                    "secure": true,
+                    "value": "Do you have any idea why this is not working?"
+                },
+                {
+                    "dns": "I don't even care.",
+                    "name": "Lobster roll",
+                    "http": false,
+                    "expiration": "2025-04-21T03:08:57.438Z",
+                    "secure": true,
+                    "value": "She spent her earliest years reading classic literature, and writing poetry."
+                },
+                {
+                    "dns": "Do you come here often?",
+                    "name": "Spaghetti Bolognese",
+                    "http": true,
+                    "expiration": "2025-04-29T19:05:47.663Z",
+                    "secure": true,
+                    "value": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                },
+                {
+                    "dns": "Atoms are used within a program to denote distinguished values.",
+                    "name": "Charleston red rice",
+                    "http": true,
+                    "expiration": "2025-02-28T15:08:28.876Z",
+                    "secure": true,
+                    "value": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                },
+                {
+                    "dns": "Any element of a tuple can be accessed in constant time.",
+                    "name": "Fajitas",
+                    "http": false,
+                    "expiration": "2025-10-29T18:58:17.204Z",
+                    "secure": true,
+                    "value": "Do you have any idea why this is not working?"
+                },
+                {
+                    "dns": "Ports are used to communicate with the external world.",
+                    "name": "Banh Mi Vi\u00eat",
+                    "http": false,
+                    "expiration": "2025-09-20T13:17:13.494Z",
+                    "secure": true,
+                    "value": "Ports are created with the built-in function open_port."
+                },
+                {
+                    "dns": "I don't even care.",
+                    "name": "Gyros",
+                    "http": true,
+                    "expiration": "2025-04-05T04:04:33.073Z",
+                    "secure": true,
+                    "value": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                },
+                {
+                    "dns": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "name": "Waffle",
+                    "http": true,
+                    "expiration": "2025-06-04T19:52:57.752Z",
+                    "secure": true,
+                    "value": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                },
+                {
+                    "dns": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "name": "Hangtown fry",
+                    "http": true,
+                    "expiration": "2025-06-04T18:27:22.849Z",
+                    "secure": true,
+                    "value": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                },
+                {
+                    "dns": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "name": "Juba",
+                    "http": true,
+                    "expiration": "2025-12-14T14:42:42.460Z",
+                    "secure": true,
+                    "value": "Haskell features a type system with type inference and lazy evaluation."
+                },
+                {
+                    "dns": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "name": "Squab",
+                    "http": false,
+                    "expiration": "2025-06-28T00:40:29.767Z",
+                    "secure": true,
+                    "value": "Tuples are containers for a fixed number of Erlang data types."
+                }
+            ],
+            "malware_family": {
+                "name": "Hot Chicken sandwich",
+                "id": "n36Lwf"
+            },
+            "dump": {
+                "name": "Blue cheese dressing",
+                "source": "Any element of a tuple can be accessed in constant time.",
+                "description": "She spent her earliest years reading classic literature, and writing poetry.",
+                "downloaded": "2025-02-02T11:23:35.420Z",
+                "compromise": {
+                    "exfiltration_date": "2025-03-31T18:33:54.001Z",
+                    "os": "Tuples are containers for a fixed number of Erlang data types.",
+                    "os_username": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "malware_file": "Type classes first appeared in the Haskell programming language.",
+                    "timezone": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "computer_name": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "antivirus": [
+                        "Erlang is known for its designs that are well suited for systems."
+                    ]
+                },
+                "infrastructure": {
+                    "ip": "136.99.155.214"
+                }
+            },
+            "created": "2025-09-29T00:00:12.486Z"
+        }
+    ],
+    "next_offset": "Make me a sandwich."
+}

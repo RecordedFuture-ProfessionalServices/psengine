@@ -1,0 +1,280 @@
+{
+	"attributes": {
+		"title": "I don't even care.",
+		"text": "Any element of a tuple can be accessed in constant time. The arguments can be primitive data types or compound data types. Haskell features a type system with type inference and lazy evaluation. Erlang is known for its designs that are well suited for systems. Its main implementation is the Glasgow Haskell Compiler.",
+		"published": "2025-10-27T06:03:58.592Z",
+		"attachment": "example.yml",
+		"events": [
+			{
+				"type": "CyberAttack",
+				"attributes": {
+					"start": "2025-10-01T09:30:23.169Z",
+					"stop": "2025-02-12T01:35:14.451Z",
+					"capabilities": [
+						{
+							"id": "5SbEvfMVN1oI72F",
+							"name": "Meatcake",
+							"type": "MitreAttackIdentifier"
+						},
+						{
+							"id": "hash:096ae6c39456030f681f187a1b87e0b1f81f9fffb734bc75ebb142e3c6b7873f",
+							"name": "Kimchi",
+							"type": "Hash"
+						},
+						{
+							"id": "4AdJdoQFu9Rwaa1",
+							"name": "Baklava",
+							"type": "MitreAttackIdentifier"
+						},
+						{
+							"id": "XKRIvY",
+							"name": "Bull roast",
+							"type": "Malware"
+						},
+						{
+							"id": "BKvs6D7xF8roK6Y",
+							"name": "Doughnut",
+							"type": "MitreAttackIdentifier"
+						},
+						{
+							"id": "Ic5Pt8",
+							"name": "Protein bar",
+							"type": "AttackVector"
+						},
+						{
+							"id": "hash:8eaf5fa24d4545a84c2f667193c212e692bd5d6875620939066b4f78fec058d8",
+							"name": "Pemmican",
+							"type": "Hash"
+						},
+						{
+							"id": "fpmN2k9o6Br",
+							"name": "Eggs Neptune",
+							"type": "MitreAttackIdentifier"
+						},
+						{
+							"id": "VlV2LnYdZOFpr1e",
+							"name": "Tuna Pizza",
+							"type": "MitreAttackIdentifier"
+						}
+					],
+					"target": [
+						{
+							"id": "mYLbZ",
+							"name": "Succotash",
+							"type": "Product"
+						}
+					]
+				}
+			}
+		],
+		"note_entities": [
+			{
+				"id": "AEad7udVYPEyVWh",
+				"name": "Pumpkin pie",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "hash:433189fa319cb83a963830b23807505539c006b31b34e158358b3b7fecdc495f",
+				"name": "Onion Rings",
+				"type": "Hash"
+			},
+			{
+				"id": "7eBDo",
+				"name": "Choco pie",
+				"type": "Product"
+			},
+			{
+				"id": "rLgESt5E17fsoPG",
+				"name": "Fajita",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "95r2q5",
+				"name": "Creamed eggs on toast",
+				"type": "Malware"
+			},
+			{
+				"id": "UdveqooaNk6MLVv",
+				"name": "Bruschetta",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "hjtGWc",
+				"name": "Fried Catfish",
+				"type": "AttackVector"
+			},
+			{
+				"id": "hash:df88b9dc589888d1b80885d60a9d501c64185b2febaf47271162a51b155b930d",
+				"name": "Potato Wedges",
+				"type": "Hash"
+			},
+			{
+				"id": "jwbNKlko166",
+				"name": "White chocolate cookie",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "uRXzzhCy32VDnhJ",
+				"name": "Fried chicken",
+				"type": "MitreAttackIdentifier"
+			}
+		],
+		"context_entities": [
+			{
+				"id": "lEUrWdJP9EfKH",
+				"name": "Patty",
+				"type": "Source"
+			},
+			{
+				"id": "MVYiL",
+				"name": "Chocolate Chip Cookie",
+				"type": "Technology"
+			},
+			{
+				"id": "Oro7HJaszC",
+				"name": "Potato skins",
+				"type": "Source"
+			},
+			{
+				"id": "qqAVge",
+				"name": "Chicago Deep Dish Pizza",
+				"type": "Product"
+			},
+			{
+				"id": "q07xOq",
+				"name": "Kimchi",
+				"type": "Product"
+			},
+			{
+				"id": "gMbVqG",
+				"name": "Sausage gravy",
+				"type": "Username"
+			}
+		],
+		"topic": [
+			{
+				"id": "qNcGH5",
+				"name": "Sigma Rule",
+				"type": "Topic",
+				"description": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+			},
+			{
+				"id": "uTmZKG",
+				"name": "Fattoush Salad",
+				"type": "Topic",
+				"description": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase."
+			},
+			{
+				"id": "trkAbi",
+				"name": "Chili con carne",
+				"type": "Topic",
+				"description": "Tuples are containers for a fixed number of Erlang data types."
+			}
+		],
+		"labels": [
+			{
+				"id": "oi5hrk",
+				"name": "Dirty rice",
+				"type": "UserLabel"
+			},
+			{
+				"id": "bUIguD",
+				"name": "Albacore Tuna Melt",
+				"type": "UserLabel"
+			}
+		],
+		"validation_urls": [
+			{
+				"id": "url:https://forever.sd/",
+				"name": "Corned beef",
+				"type": "URL"
+			},
+			{
+				"id": "url:https://barry.int/",
+				"name": "Pistachio Ice Cream",
+				"type": "URL"
+			},
+			{
+				"id": "url:https://tennessee.vlaanderen/",
+				"name": "Spanish rice",
+				"type": "URL"
+			},
+			{
+				"id": "url:https://uri.bar/",
+				"name": "Root Beer Float",
+				"type": "URL"
+			},
+			{
+				"id": "url:https://delay.tel/",
+				"name": "Sour cream",
+				"type": "URL"
+			}
+		],
+		"diamond_model": [
+			{
+				"start": "2025-11-05T17:57:04.247Z",
+				"stop": "2025-05-07T13:11:09.431Z",
+				"capabilities": [
+					{
+						"id": "b7NuL5XhV0jlmPR",
+						"name": "Choco pie",
+						"type": "MitreAttackIdentifier"
+					},
+					{
+						"id": "hash:4dd0bf1f7c0ff9cfbc690fabc9569ed238da42e14545917f8ebbfe65841acf94",
+						"name": "Cheesecake",
+						"type": "Hash"
+					},
+					{
+						"id": "FlZ29oWwlSasktA",
+						"name": "Macaroni and Cheese",
+						"type": "MitreAttackIdentifier"
+					},
+					{
+						"id": "JuPyJh",
+						"name": "Deviled egg",
+						"type": "Malware"
+					},
+					{
+						"id": "SJP66KSqTK21Wq5",
+						"name": "Pork and beans",
+						"type": "MitreAttackIdentifier"
+					},
+					{
+						"id": "m8GDAp",
+						"name": "Chicken Salad Wrap",
+						"type": "AttackVector"
+					},
+					{
+						"id": "hash:3a08755a1ffc52ee67236ca50b4c36d3ca96ffb04cb141267ac9c1cf054cc06b",
+						"name": "Pastrami",
+						"type": "Hash"
+					},
+					{
+						"id": "b1f3hSwDPkJ",
+						"name": "Baked potato",
+						"type": "MitreAttackIdentifier"
+					},
+					{
+						"id": "g6KyI3Zvge1jMNB",
+						"name": "Home fries",
+						"type": "MitreAttackIdentifier"
+					}
+				],
+				"target": [
+					{
+						"id": "1Xcp8",
+						"name": "Chocolate Chip Cookie",
+						"type": "Product"
+					}
+				]
+			}
+		]
+	},
+	"id": "feUFq5klZP",
+	"source": {
+		"id": "4mClBMG43AYZZ",
+		"name": "Eggs Neptune",
+		"type": "Source"
+	}
+}

@@ -1,0 +1,860 @@
+{
+    "data": {
+        "enterpriseLists": [],
+        "aiInsights": {
+            "comment": null,
+            "text": "Ports are used to communicate with the external world. I don't even care. Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. Any element of a tuple can be accessed in constant time. The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "numberOfReferences": 5
+        },
+        "sightings": [
+            {
+                "source": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "url": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "published": "2025-07-29T20:43:13.168Z",
+                "fragment": "Make me a sandwich.",
+                "title": "Make me a sandwich.",
+                "type": "mostRecent"
+            },
+            {
+                "source": "The arguments can be primitive data types or compound data types.",
+                "url": "Where are my pants?",
+                "published": "2025-08-09T02:04:11.991Z",
+                "fragment": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "title": "Haskell features a type system with type inference and lazy evaluation.",
+                "type": "first"
+            },
+            {
+                "source": "Its main implementation is the Glasgow Haskell Compiler.",
+                "url": "She spent her earliest years reading classic literature, and writing poetry.",
+                "published": "2025-08-31T13:14:11.689Z",
+                "fragment": "It is also a garbage-collected runtime system.",
+                "title": "Ports are used to communicate with the external world.",
+                "type": "recentInfoSec"
+            },
+            {
+                "source": "Ports are used to communicate with the external world.",
+                "url": "The arguments can be primitive data types or compound data types.",
+                "published": "2025-01-09T01:17:52.735Z",
+                "fragment": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "title": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "type": "recentPaste"
+            }
+        ],
+        "riskMapping": [
+            {
+                "rule": "She spent her earliest years reading classic literature, and writing poetry.",
+                "categories": [
+                    {
+                        "framework": "It is also a garbage-collected runtime system.",
+                        "name": "Tres Leches Cake"
+                    }
+                ]
+            },
+            {
+                "rule": "Haskell features a type system with type inference and lazy evaluation.",
+                "categories": [
+                    {
+                        "framework": "Erlang is a general-purpose, concurrent, functional programming language.",
+                        "name": "Bird's Nest Soup"
+                    }
+                ]
+            },
+            {
+                "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "categories": [
+                    {
+                        "framework": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                        "name": "Breakfast burrito"
+                    }
+                ]
+            },
+            {
+                "rule": "Haskell features a type system with type inference and lazy evaluation.",
+                "categories": [
+                    {
+                        "framework": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                        "name": "Tagine"
+                    }
+                ]
+            },
+            {
+                "rule": "Type classes first appeared in the Haskell programming language.",
+                "categories": [
+                    {
+                        "framework": "Its main implementation is the Glasgow Haskell Compiler.",
+                        "name": "Chicken Biryani"
+                    }
+                ]
+            }
+        ],
+        "entity": {
+            "id": "hash:b90506677bd87591d9a33f4f8a3f12d86516072885aba79c606277f05c4e7917",
+            "name": "Home fries",
+            "type": "Hash"
+        },
+        "relatedEntities": [
+            {
+                "entities": [
+                    {
+                        "count": 9,
+                        "entity": {
+                            "id": "L4GpNe",
+                            "name": "Pocky",
+                            "type": "Malware"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "FpmVgi",
+                            "name": "Baklava",
+                            "type": "Malware"
+                        }
+                    }
+                ],
+                "type": "RelatedMalware"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:folks.org",
+                            "name": "Ranch dressing",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:arabia.qa",
+                            "name": "Meatloaf",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:continue.frl",
+                            "name": "Fried chicken",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:pavilion.pizza",
+                            "name": "Fried chicken",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:limitation.fitness",
+                            "name": "Banh Mi Vi\u00eat",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:lindsay.net",
+                            "name": "Gazpacho",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:deutsche.kyoto",
+                            "name": "Scrapple",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "idn:reveals.gt",
+                            "name": "Ribs",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 3,
+                        "entity": {
+                            "id": "idn:periodic.consulting",
+                            "name": "Frybread",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "idn:relief.biz",
+                            "name": "Gyoza",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "count": 4,
+                        "entity": {
+                            "id": "idn:unity.tirol",
+                            "name": "Pickled cucumber",
+                            "type": "InternetDomainName"
+                        }
+                    }
+                ],
+                "type": "RelatedInternetDomainName"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "ip:194.51.32.219",
+                            "name": "City chicken",
+                            "type": "IpAddress"
+                        }
+                    },
+                    {
+                        "count": 3,
+                        "entity": {
+                            "id": "ip:18.170.77.171",
+                            "name": "Lobster Newberg",
+                            "type": "IpAddress"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "ip:193.112.70.157",
+                            "name": "Pigs in blankets",
+                            "type": "IpAddress"
+                        }
+                    }
+                ],
+                "type": "RelatedIpAddress"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:ae4d3ceb0b803c9423939d776e74e05da84a934edcf30cd84e831d17cfe4a6e2",
+                            "name": "Hangtown fry",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:c9040e01fc3d8b4fd842ed1a810ff67b1708e04fd3678ebc5aa58d11eaf66923",
+                            "name": "Fried fish",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:27b927a9daa18bb2e888afad7a6ee033fdb71fe1d512ced239a3ac159c1d68bd",
+                            "name": "Beef Manhattan",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:80f7a148a0849c0c776667c182e22349983842b02429437a2179ed178a5a5066",
+                            "name": "Energy bar",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:40b8190b9eed044496d1addd2efd670591eb033534da2610ee6136c8fa12792f",
+                            "name": "Haystack",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:7d1f33b6a1d1f865b21ba9cdce8b7c98769c8362d03433b56afdac2fd09b0227",
+                            "name": "Porterhouse Steak",
+                            "type": "Hash"
+                        }
+                    }
+                ],
+                "type": "FileHashes"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:4dc01374ece9a00e10002e1bf44db2d3681901eb2fe2dbfb1996cd1b0fbc98c6",
+                            "name": "Lobster roll",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:58146c502918ccf1ea1e2365db8d2877aa356bfe95319725dc4598799aab2bc6",
+                            "name": "Lorna Doone",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:10f67fdb6f535c96ace79391a5657bc1887dbaa0a011148e5aa603d5ae3317cb",
+                            "name": "Root Beer Float",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:d1eb5fd6cabb32a31bf34f7ecedda78683d06b178799eda989a385718b027680",
+                            "name": "Laksa",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:51bff928fd67b319f306a043f7735fe754c952e1045a747fd8f53448e8333fef",
+                            "name": "Moules Frites",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:08f31956260ab7d6b32f70daef6c63b02d5d89a23d1178f4a6efc26e032a4dd8",
+                            "name": "Hangtown fry",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:5911c78487df7c584fbd9ba62d4f1d680f7b3b55e953ecd7fd3124c2b74090f3",
+                            "name": "Falafel",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:d5652a913acb50f46cf291eb54fdf62ebb9896470b5a9cfd8f9b6490f78c6e64",
+                            "name": "Biscuit",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:1123805a1489d47bd2bf8972743ec8a3ac6e487718490708192319486c298835",
+                            "name": "Hot chicken",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:5ea0270d7435e543b0cb88124886a183b94f18597099ba1fd985b52124d655ef",
+                            "name": "Juba",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:ab3812973fae506a22fd8b6d204bd755e49a8a65291ef960c7191b18512f4f8e",
+                            "name": "Steak sauce",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:3b3bb01fccfc88ad3c90f27843659047c45c5fd58584208b7cec477dc968e116",
+                            "name": "Chicken nuggets",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:32b921e64bbe5519791b94525839ae0ebec981f1c4a7c89372ebd6dea53ca889",
+                            "name": "Swiss steak",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:e90b7d092f4b4b7f5cf5b91dcf8294fdd37dbefc919820b6da90c4f87ca0db4e",
+                            "name": "Fattoush Salad",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:88c2eb99daa3c431d1d91c9df288d698881ad52ce4c3fd2043f7245002c1fd61",
+                            "name": "Philadelphia cheesesteak",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:dd6ec6ada252b1b0c42ce425351a249e62fc22dc46cea87b32a22253e641aa6a",
+                            "name": "Mozzarella Sticks",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:a823febc34c4e2eada3aa824721edb5f484625c6fdf17f3db9274d6eea6ec2ba",
+                            "name": "Vegemite on Toast",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:1162efd2aa14b9b69527038185241949c36bc8528b7d203e9654ee839177d4e5",
+                            "name": "Coq Au Vin",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "hash:20e645ac2ebaeb1008bb5ba9d7385ab2749d6ddfc2d96e832b230da2e0ccda83",
+                            "name": "Chili con carne",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "hash:1d5eb170235a8e0c352d3752207b0cfab772c810b759366f7d2bcf28ca611e7f",
+                            "name": "Bellini",
+                            "type": "Hash"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "hash:2a4856f4430c2b3b7bcc197f6cdaffd096ce6cf0d18f3ee8bc0e0f1bf24306e6",
+                            "name": "Scrapple",
+                            "type": "Hash"
+                        }
+                    }
+                ],
+                "type": "RelatedHash"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "X3ZxT2nTHDmjHAix4iUdQ",
+                            "name": "Russian tea cake",
+                            "type": "EmailAddress"
+                        }
+                    }
+                ],
+                "type": "RelatedEmailAddress"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "iGDbF",
+                            "name": "Pastrami on Rye",
+                            "type": "MalwareCategory"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "1essy5",
+                            "name": "Funnel Cake",
+                            "type": "MalwareCategory"
+                        }
+                    },
+                    {
+                        "count": 9,
+                        "entity": {
+                            "id": "2JX2N",
+                            "name": "Mango and Sticky Rice",
+                            "type": "MalwareCategory"
+                        }
+                    }
+                ],
+                "type": "RelatedMalwareCategory"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "dBHYSo",
+                            "name": "Russian dressing",
+                            "type": "Organization"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "XrLdu5",
+                            "name": "Samosa",
+                            "type": "Organization"
+                        }
+                    }
+                ],
+                "type": "RelatedThreatActor"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 5,
+                        "entity": {
+                            "id": "ovTFYU",
+                            "name": "Salisbury steak",
+                            "type": "FileNameExtension"
+                        }
+                    }
+                ],
+                "type": "RelatedFileNameExtension"
+            },
+            {
+                "entities": [
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "AcDg9j",
+                            "name": "Turkish Delight",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "count": 7,
+                        "entity": {
+                            "id": "46RVL",
+                            "name": "Reuben",
+                            "type": "Product"
+                        }
+                    },
+                    {
+                        "count": 3,
+                        "entity": {
+                            "id": "EI4LE",
+                            "name": "American fried rice",
+                            "type": "Product"
+                        }
+                    },
+                    {
+                        "count": 2,
+                        "entity": {
+                            "id": "DpKCy4",
+                            "name": "Blue-plate special",
+                            "type": "Product"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "cWdtiv",
+                            "name": "Fish and Chips!",
+                            "type": "Product"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "m22ub",
+                            "name": "Russian tea cake",
+                            "type": "Product"
+                        }
+                    },
+                    {
+                        "count": 4,
+                        "entity": {
+                            "id": "Q4YRFP",
+                            "name": "Clam cake",
+                            "type": "Product"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "MOgsP",
+                            "name": "Matzo Ball Soup",
+                            "type": "Product"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "iRGBBq",
+                            "name": "Pulled pork",
+                            "type": "IndustryTerm"
+                        }
+                    },
+                    {
+                        "count": 1,
+                        "entity": {
+                            "id": "W2L3zj",
+                            "name": "Ribs",
+                            "type": "Product"
+                        }
+                    }
+                ],
+                "type": "RelatedProduct"
+            }
+        ],
+        "analystNotes": [],
+        "hashAlgorithm": "Type classes first appeared in the Haskell programming language.",
+        "timestamps": {
+            "lastSeen": "2025-12-22T20:32:26.497Z",
+            "firstSeen": "2025-02-14T20:42:30.031Z"
+        },
+        "threatLists": [],
+        "risk": {
+            "criticalityLabel": "Haskell features a type system with type inference and lazy evaluation.",
+            "riskString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "rules": 5,
+            "criticality": 3,
+            "riskSummary": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "score": 84,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "evidenceString": "Atoms are used within a program to denote distinguished values.",
+                    "rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "criticality": 1,
+                    "timestamp": "2025-06-20T02:22:38.581Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                },
+                {
+                    "mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "evidenceString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "criticality": 2,
+                    "timestamp": "2025-07-11T02:24:30.541Z",
+                    "criticalityLabel": "Its main implementation is the Glasgow Haskell Compiler."
+                },
+                {
+                    "mitigationString": "Where are my pants?",
+                    "evidenceString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "criticality": 2,
+                    "timestamp": "2025-08-18T01:12:51.958Z",
+                    "criticalityLabel": "Do you come here often?"
+                },
+                {
+                    "mitigationString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "evidenceString": "Ports are created with the built-in function open_port.",
+                    "rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "criticality": 2,
+                    "timestamp": "2025-10-29T05:10:36.804Z",
+                    "criticalityLabel": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+                },
+                {
+                    "mitigationString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "evidenceString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "criticality": 3,
+                    "timestamp": "2025-12-05T22:27:48.519Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                }
+            ]
+        },
+        "fileHashes": [
+            "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "Do you come here often?",
+            "The arguments can be primitive data types or compound data types.",
+            "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "Any element of a tuple can be accessed in constant time."
+        ],
+        "intelCard": "Make me a sandwich.",
+        "links": {
+            "hits": [],
+            "method_aggregates": [
+                {
+                    "count": 0,
+                    "type": "hHQyM6"
+                },
+                {
+                    "count": 0,
+                    "type": "hHQyM7"
+                },
+                {
+                    "count": 0,
+                    "type": "gTB8y2"
+                }
+            ],
+            "counts": []
+        },
+        "counts": [
+            {
+                "date": "2024-02-02",
+                "count": 1
+            },
+            {
+                "date": "2024-02-02",
+                "count": 1
+            },
+            {
+                "date": "2024-02-02",
+                "count": 1
+            },
+            {
+                "date": "2024-02-02",
+                "count": 18
+            },
+            {
+                "date": "2024-02-02",
+                "count": 78
+            },
+            {
+                "date": "2024-02-02",
+                "count": 1
+            },
+            {
+                "date": "2024-02-02",
+                "count": 1
+            },
+            {
+                "date": "2024-02-02",
+                "count": 7
+            },
+            {
+                "date": "2024-02-02",
+                "count": 2
+            },
+            {
+                "date": "2024-02-02",
+                "count": 3
+            }
+        ],
+        "metrics": [
+            {
+                "type": "sevenDaysHits",
+                "value": 0
+            },
+            {
+                "type": "totalHits",
+                "value": 113
+            },
+            {
+                "type": "linkedToCyberAttack",
+                "value": 1
+            },
+            {
+                "type": "linkedToCyberAttackSightings",
+                "value": 4
+            },
+            {
+                "type": "linkedToMalware",
+                "value": 1
+            },
+            {
+                "type": "positiveMalwareVerdictSightings",
+                "value": 5
+            },
+            {
+                "type": "whitelistedCount",
+                "value": 0
+            },
+            {
+                "type": "positiveMalwareVerdict",
+                "value": 4
+            },
+            {
+                "type": "threatResearcherSightings",
+                "value": 1
+            },
+            {
+                "type": "oneDayHits",
+                "value": 0
+            },
+            {
+                "type": "suspiciousBehaviorDetectedSightings",
+                "value": 5
+            },
+            {
+                "type": "socialMediaHits",
+                "value": 6
+            },
+            {
+                "type": "undergroundForumHits",
+                "value": 0
+            },
+            {
+                "type": "infoSecHits",
+                "value": 320
+            },
+            {
+                "type": "linkedToMalwareSightings",
+                "value": 13
+            },
+            {
+                "type": "maliciousHits",
+                "value": 34
+            },
+            {
+                "type": "threatResearcher",
+                "value": 1
+            },
+            {
+                "type": "suspiciousBehaviorDetected",
+                "value": 2
+            },
+            {
+                "type": "darkWebHits",
+                "value": 0
+            },
+            {
+                "type": "publicSubscore",
+                "value": 84
+            },
+            {
+                "type": "pasteHits",
+                "value": 4
+            },
+            {
+                "type": "mitigatedCount",
+                "value": 0
+            },
+            {
+                "type": "criticality",
+                "value": 3
+            },
+            {
+                "type": "technicalReportingHits",
+                "value": 319
+            },
+            {
+                "type": "malwareSubscore",
+                "value": 80
+            },
+            {
+                "type": "sixtyDaysHits",
+                "value": 0
+            }
+        ]
+    }
+}

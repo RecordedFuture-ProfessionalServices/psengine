@@ -1,0 +1,28 @@
+{
+    "count": 1,
+    "total_count": 1,
+    "result": [
+        {
+            "id": "02WOq8aVPg",
+            "type": "snort",
+            "title": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "description": "Tuples are containers for a fixed number of Erlang data types.",
+            "created": "2025-11-25T09:31:22.233Z",
+            "updated": "2025-07-03T05:27:18.471Z",
+            "rules": [
+                {
+                    "entities": [
+                        {
+                            "id": "X41z92",
+                            "type": "Malware",
+                            "name": "Chicago Deep Dish Pizza"
+                        }
+                    ],
+                    "content": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "file_name": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                }
+            ]
+        }
+    ],
+    "next_offset": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+}

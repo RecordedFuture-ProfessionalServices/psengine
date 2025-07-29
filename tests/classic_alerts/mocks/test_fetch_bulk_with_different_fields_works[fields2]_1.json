@@ -1,0 +1,756 @@
+{
+    "data": {
+        "review": {
+            "note": "Haskell features a type system with type inference and lazy evaluation.",
+            "status_in_portal": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "assignee": null,
+            "status": "Do you have any idea why this is not working?"
+        },
+        "owner_organisation_details": {
+            "organisations": [
+                {
+                    "organisation_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "organisation_name": "Any element of a tuple can be accessed in constant time."
+                }
+            ],
+            "enterprise_id": "Do you come here often?",
+            "enterprise_name": "Haskell features a type system with type inference and lazy evaluation."
+        },
+        "url": {
+            "api": "https://google.com",
+            "portal": "https://google.com"
+        },
+        "rule": {
+            "use_case_deprecation": null,
+            "name": "Pistachio Ice Cream",
+            "id": "UrKJwt",
+            "url": {
+                "portal": "https://google.com"
+            }
+        },
+        "id": "RO2p0M",
+        "hits": [
+            {
+                "entities": [
+                    {
+                        "id": "r5ofm",
+                        "name": "Shucked Oysters",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "1xl99NUuXLRXz9g5bfKoAAooLSP7lueCunTL6rce",
+                        "name": "Beef Lo Mein",
+                        "type": "Image"
+                    },
+                    {
+                        "id": "pcjrffqn94FQKUgIa6J2FWXtR",
+                        "name": "Roasted Bone Marrow",
+                        "type": "EmailAddress"
+                    },
+                    {
+                        "id": "fEyjP",
+                        "name": "Cheesecake",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "MaoPhF",
+                        "name": "Frito Pie",
+                        "type": "IndustryTerm"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "TmAzExf9DfTLQ",
+                        "name": "Carolina style",
+                        "type": "Source"
+                    },
+                    "title": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "url": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "authors": [
+                        {
+                            "id": "ipkyY9",
+                            "name": "Polenta",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "The arguments can be primitive data types or compound data types.",
+                "id": "2Eyd8B2WloM",
+                "language": "Its main implementation is the Glasgow Haskell Compiler.",
+                "primary_entity": null,
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "LMI08",
+                        "name": "Fries",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "eTkKhQxCkSmArOJ64FxTQli9ordzgsDCqJguYGg1",
+                        "name": "Turducken",
+                        "type": "Image"
+                    },
+                    {
+                        "id": "fBb1Ih",
+                        "name": "Steak sauce",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "1xTsbC",
+                        "name": "Bird's Nest Soup",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "oZdf1zdAVjW2xNkZeX17Mgn",
+                        "name": "Drunken chicken",
+                        "type": "EmailAddress"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "xWmi2Tuc3sch7",
+                        "name": "Meat Feast Pizza",
+                        "type": "Source"
+                    },
+                    "title": "Ports are used to communicate with the external world.",
+                    "url": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "authors": [
+                        {
+                            "id": "ZzOFNi",
+                            "name": "Kung Pao Chicken",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Its main implementation is the Glasgow Haskell Compiler.",
+                "id": "8MiAHQrunFZ",
+                "language": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "primary_entity": null,
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "FJybq",
+                        "name": "Choco pie",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "14WbGxVtIe03SAillF5KymPjHCtspKC88pTJn0MW",
+                        "name": "Surf and turf",
+                        "type": "Image"
+                    },
+                    {
+                        "id": "f4NzAVu8IyymmU0ZHxNvn5vf4Q",
+                        "name": "Chicken fried steak",
+                        "type": "EmailAddress"
+                    },
+                    {
+                        "id": "qT3yk",
+                        "name": "Deep Fried Oreos",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "148e6V",
+                        "name": "Black Pudding",
+                        "type": "IndustryTerm"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "rOcDuUzFs2WzU",
+                        "name": "Bacon Cheeseburger",
+                        "type": "Source"
+                    },
+                    "title": "Haskell features a type system with type inference and lazy evaluation.",
+                    "url": "Tuples are containers for a fixed number of Erlang data types.",
+                    "authors": [
+                        {
+                            "id": "MsB0yd",
+                            "name": "Meatloaf",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "id": "8DwE1P08UKK",
+                "language": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "primary_entity": null,
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "77TGVzOIfoQodJ6xh",
+                        "name": "Bear claw",
+                        "type": "EmailAddress"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "m8bZNlb7xN1kU",
+                        "name": "Poke",
+                        "type": "Source"
+                    },
+                    "title": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "url": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "authors": []
+                },
+                "fragment": "Type classes first appeared in the Haskell programming language.",
+                "id": "Sq3J3AIEowu",
+                "language": "The arguments can be primitive data types or compound data types.",
+                "primary_entity": null,
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "syVFG",
+                        "name": "Baklava",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "BkACA",
+                        "name": "Sandwich",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "XtHLR0",
+                        "name": "Ice Cream",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "W7UQrgUTHiuSsonOpgrL41UKxyw3kU4yU89Wh8uv",
+                        "name": "Ammonia cookie",
+                        "type": "Image"
+                    },
+                    {
+                        "id": "wSpo5k660W7bs7qdny23alfmx5xXyvtWMtP",
+                        "name": "Po'Boy",
+                        "type": "EmailAddress"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "ftciYjJ6R6T95",
+                        "name": "Boulliabaise",
+                        "type": "Source"
+                    },
+                    "title": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "url": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "authors": [
+                        {
+                            "id": "rJB7RZ",
+                            "name": "Bellini",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "id": "55isetlX7hf",
+                "language": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "primary_entity": null,
+                "analyst_note": null
+            }
+        ],
+        "enriched_entities": [],
+        "ai_insights": {
+            "comment": null,
+            "text": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. Make me a sandwich. Its main implementation is the Glasgow Haskell Compiler. Haskell features a type system with type inference and lazy evaluation. Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+        },
+        "log": {
+            "note_author": "Ports are used to communicate with the external world.",
+            "note_date": "2025-12-15T15:55:43.774Z",
+            "status_date": "2025-07-27T22:18:41.100Z",
+            "triggered": "2025-04-01T08:08:46.346Z",
+            "status_change_by": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+        },
+        "triggered_by": [
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "1uyVJh8lpTB1Tn"
+                            },
+                            "entity": {
+                                "id": "dsMUr",
+                                "name": "Baked potato",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "7nuGTTmrn7M7"
+                            },
+                            "entity": {
+                                "id": "okJSZZKPAvvUy",
+                                "name": "Corn flakes",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "JOBbDIRRSJHtdd"
+                        },
+                        "entity": {
+                            "id": "elATv",
+                            "name": "Steak sauce",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "EQaV6Yd8j7Nl"
+                        },
+                        "entity": {
+                            "id": "EKCJYNvhdqdmp",
+                            "name": "City chicken",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "He looked inquisitively at his keyboard and wrote another sentence."
+            },
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "N3r9tpe69657xf"
+                            },
+                            "entity": {
+                                "id": "md4GR",
+                                "name": "Low Country Boil",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "4DcnQrw1WP2F"
+                            },
+                            "entity": {
+                                "id": "Vk3GiH2qbv0Mp",
+                                "name": "City chicken",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "84VtPEdBlKkVqR"
+                        },
+                        "entity": {
+                            "id": "jSldY",
+                            "name": "Philadelphia cheesesteak",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "uDcFJxckA29o"
+                        },
+                        "entity": {
+                            "id": "gb8tGod9ZmQO7",
+                            "name": "Gyros",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
+            },
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "asMh1Gm6X0NiaQ"
+                            },
+                            "entity": {
+                                "id": "W2c2K7",
+                                "name": "Coq Au Vin",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "MjxLV4cMc9Fd"
+                            },
+                            "entity": {
+                                "id": "d7nuJ",
+                                "name": "Butter cookie",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "4gS4Vp3XvQWW"
+                            },
+                            "entity": {
+                                "id": "OB8LOQnWfpZOG",
+                                "name": "Beignets",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "I1wi1TU7xVvg53"
+                        },
+                        "entity": {
+                            "id": "6JhAm1",
+                            "name": "Ice cream cake",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "AunUNZjAPgrd"
+                        },
+                        "entity": {
+                            "id": "tXYFu",
+                            "name": "Mozzarella sticks",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "IaxB3XUPyx8p"
+                        },
+                        "entity": {
+                            "id": "AInYwGqK4vc9l",
+                            "name": "Eggs Benedict",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+            },
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "ZjWPwwOIYJNAk1"
+                            },
+                            "entity": {
+                                "id": "EmdQx",
+                                "name": "Bruschetta",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "fmZchDKm0YhE"
+                            },
+                            "entity": {
+                                "id": "2TH6KR3oCGOOU",
+                                "name": "Veggie Pizza",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "i5nEUUchVcMnak"
+                        },
+                        "entity": {
+                            "id": "BopH2",
+                            "name": "Pepperoni Pizza",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "fV4DCwH3fZmN"
+                        },
+                        "entity": {
+                            "id": "1G8Yh3wXlqupZ",
+                            "name": "Chicken nugget",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "Make me a sandwich."
+            },
+            {
+                "entity_paths": [
+                    [
+                        {
+                            "attribute": {
+                                "id": "CjB1tDqhFrjiwRAGJJRamf"
+                            },
+                            "entity": {
+                                "id": "XfEMqri47zZp4lQsw",
+                                "name": "Fattoush Salad",
+                                "type": "EmailAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "85D18yVa5HDB2bRSz49"
+                            },
+                            "entity": {
+                                "id": "idn:study.lv",
+                                "name": "Spring Rolls",
+                                "type": "InternetDomainName"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "DeWUYh57hkDW"
+                            },
+                            "entity": {
+                                "id": "1CqWuT",
+                                "name": "Hummus",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "ZL5WA5PngniD"
+                            },
+                            "entity": {
+                                "id": "XXhJW",
+                                "name": "Mini pizzas",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "j2DXE2VuoNn4"
+                            },
+                            "entity": {
+                                "id": "u3VRonogl3yfX",
+                                "name": "Bellini",
+                                "type": "EntityList"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "attribute": {
+                                "id": "bZbdniPDzweRzNjfe8jsgl"
+                            },
+                            "entity": {
+                                "id": "xkJzjO7McASmopoOi",
+                                "name": "Italian Beef Sandwich",
+                                "type": "EmailAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "dFXn1Oh1Ln7vNDNdn94"
+                            },
+                            "entity": {
+                                "id": "idn:reaching.info",
+                                "name": "Mashed pumpkin",
+                                "type": "InternetDomainName"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "JQOHkoeG3i8ubdqI"
+                            },
+                            "entity": {
+                                "id": "r4rAo8",
+                                "name": "Shepherd's Pie",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "42cdzERZOI8z"
+                            },
+                            "entity": {
+                                "id": "ILX8f",
+                                "name": "Sauteed Morel Mushrooms",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "G61pYHC8D0xE"
+                            },
+                            "entity": {
+                                "id": "4Y3EzgBpDV8wi",
+                                "name": "Low Country Boil",
+                                "type": "EntityList"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "attribute": {
+                                "id": "UWnjoqDC9hqCHt"
+                            },
+                            "entity": {
+                                "id": "sbNLFxAdde5u02ylI",
+                                "name": "Poppyseed muffin",
+                                "type": "EmailAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "bMw41du7bjSjVDeASG5"
+                            },
+                            "entity": {
+                                "id": "idn:mention.build",
+                                "name": "Maple bacon donut",
+                                "type": "InternetDomainName"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "yS6FYBbVHmNd"
+                            },
+                            "entity": {
+                                "id": "VXOj6w",
+                                "name": "Cheese fries",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "ju9vWdHDRBxK"
+                            },
+                            "entity": {
+                                "id": "K4F30",
+                                "name": "Hot chicken",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "a8Myj5wZ1WFP"
+                            },
+                            "entity": {
+                                "id": "Y4UfMrAXJYGbj",
+                                "name": "Sandwich",
+                                "type": "EntityList"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "attribute": {
+                                "id": "F97ImdwEaYEPhb"
+                            },
+                            "entity": {
+                                "id": "LVENnau8wcaboG1QC",
+                                "name": "Sonofabitch stew",
+                                "type": "EmailAddress"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "DNEVkP4lKbnj6Rx7adb"
+                            },
+                            "entity": {
+                                "id": "idn:enough.pl",
+                                "name": "French Dip",
+                                "type": "InternetDomainName"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "4vTZMVUgn2PLu7ne"
+                            },
+                            "entity": {
+                                "id": "0Td1PL",
+                                "name": "Prawn Pizza",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "tga1mIkzXrKl"
+                            },
+                            "entity": {
+                                "id": "9ne2Q",
+                                "name": "Paella",
+                                "type": "Company"
+                            }
+                        },
+                        {
+                            "attribute": {
+                                "id": "DOCxQcCfiI4i"
+                            },
+                            "entity": {
+                                "id": "Uno86BWj3VhpN",
+                                "name": "Breaded shrimp",
+                                "type": "EntityList"
+                            }
+                        }
+                    ]
+                ],
+                "entity_path": [
+                    {
+                        "attribute": {
+                            "id": "kw61FpR8qQ1I1oImDBoyn3"
+                        },
+                        "entity": {
+                            "id": "QqivAnfd8P9mjxFsV",
+                            "name": "Beef Lo Mein",
+                            "type": "EmailAddress"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "3Gh4ve3FWUH7xVTHuB2"
+                        },
+                        "entity": {
+                            "id": "idn:classic.cologne",
+                            "name": "Doughnut",
+                            "type": "InternetDomainName"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "y2jwbONp3wHG"
+                        },
+                        "entity": {
+                            "id": "E0NvmY",
+                            "name": "Macaroni and cheese",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "mj7GuUK2jvQS"
+                        },
+                        "entity": {
+                            "id": "7oE4A",
+                            "name": "Bull roast",
+                            "type": "Company"
+                        }
+                    },
+                    {
+                        "attribute": {
+                            "id": "SfzgUPWfSlHG"
+                        },
+                        "entity": {
+                            "id": "94syHSp0uWWc9",
+                            "name": "Supreme pizza",
+                            "type": "EntityList"
+                        }
+                    }
+                ],
+                "reference_id": "Atoms are used within a program to denote distinguished values."
+            }
+        ],
+        "title": "Do you have any idea why this is not working?",
+        "type": "EVENT"
+    }
+}

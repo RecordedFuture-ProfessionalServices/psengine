@@ -1,0 +1,109 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 67,
+                    "level": 3.0,
+                    "context": {
+                        "phishing": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 3
+                            }
+                        },
+                        "malware": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 3
+                            }
+                        },
+                        "public": {
+                            "summary": [
+                                {
+                                    "level": 2.0,
+                                    "count": 1.0
+                                },
+                                {
+                                    "level": 3.0,
+                                    "count": 1.0
+                                }
+                            ],
+                            "score": 67.0,
+                            "mostCriticalRule": "Recently Reported by Insikt Group",
+                            "rule": {
+                                "maxCount": 51
+                            }
+                        },
+                        "c2": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 2
+                            }
+                        }
+                    },
+                    "rule": {
+                        "count": 3,
+                        "mostCritical": "Recently Reported by Insikt Group",
+                        "maxCount": 52,
+                        "evidence": {
+                            "recentAnalystNote": {
+                                "count": 1,
+                                "timestamp": "2024-08-29T00:00:00.000Z",
+                                "description": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: New Poseidon macOS Stealer Infrastructure Identified Following Alleged Sale. Most recent link (Aug 29, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:yLN0iq",
+                                "rule": "Recently Reported by Insikt Group",
+                                "sightings": 1,
+                                "mitigation": "",
+                                "level": 3
+                            },
+                            "recentRelatedNote": {
+                                "count": 1,
+                                "timestamp": "2024-06-28T00:00:00.000Z",
+                                "description": "2 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 2 reports including InTheBox: Activities, Services, and Web Injects Marketplace. Most recent link (Jun 28, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:ws82cF",
+                                "rule": "Recently Referenced by Insikt Group",
+                                "sightings": 2,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "historicalThreatListMembership": {
+                                "count": 2,
+                                "timestamp": "2024-08-15T18:53:24.716Z",
+                                "description": "Previous sightings on 2 sources: <e id=report:Tluf00>Recorded Future Analyst Community Trending Indicators</e>, <e id=report:oJewMx>Recently Viewed Integrations Indicators</e>. Observed between Aug 7, 2023, and Aug 15, 2024.",
+                                "rule": "Historically Reported in Threat List",
+                                "sightings": -1,
+                                "mitigation": "",
+                                "level": 1
+                            }
+                        },
+                        "summary": [
+                            {
+                                "level": 1.0,
+                                "count": 1.0
+                            },
+                            {
+                                "level": 2.0,
+                                "count": 1.0
+                            },
+                            {
+                                "level": 3.0,
+                                "count": 1.0
+                            }
+                        ]
+                    }
+                },
+                "entity": {
+                    "id": "idn:recordedfuture.com",
+                    "name": "recordedfuture.com",
+                    "type": "InternetDomainName"
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

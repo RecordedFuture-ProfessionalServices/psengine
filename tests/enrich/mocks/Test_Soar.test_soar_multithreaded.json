@@ -1,0 +1,393 @@
+{
+	"data": {
+		"results": [
+			{
+				"risk": {
+					"score": 0,
+					"level": 0.0,
+					"context": {
+						"phishing": {
+							"score": 0.0,
+							"rule": {
+								"count": 0,
+								"maxCount": 3
+							}
+						},
+						"malware": {
+							"score": 0.0,
+							"rule": {
+								"maxCount": 3,
+								"count": 0
+							}
+						},
+						"public": {
+							"summary": [],
+							"score": 0.0,
+							"mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+							"rule": {
+								"maxCount": 51
+							}
+						},
+						"c2": {
+							"score": 0.0,
+							"rule": {
+								"count": 0,
+								"maxCount": 2
+							}
+						}
+					},
+					"rule": {
+						"summary": [],
+						"mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+						"count": 0,
+						"maxCount": 52
+					}
+				},
+				"entity": {
+					"id": "idn:carmen.bar",
+					"name": "Mozzarella sticks",
+					"type": "InternetDomainName"
+				}
+			},
+			{
+				"risk": {
+					"score": 86,
+					"level": 3.0,
+					"context": {
+						"phishing": {
+							"score": 0.0,
+							"rule": {
+								"count": 0,
+								"maxCount": 2
+							}
+						},
+						"malware": {
+							"score": 10.0,
+							"rule": {
+								"maxCount": 6,
+								"count": 1
+							}
+						},
+						"public": {
+							"summary": [
+								{
+									"level": 1.0,
+									"count": 8.0
+								},
+								{
+									"level": 3.0,
+									"count": 1.0
+								}
+							],
+							"score": 86.0,
+							"mostCriticalRule": "It is also a garbage-collected runtime system.",
+							"rule": {
+								"maxCount": 34
+							}
+						},
+						"c2": {
+							"score": 0.0,
+							"rule": {
+								"count": 0,
+								"maxCount": 1
+							}
+						}
+					},
+					"rule": {
+						"count": 11,
+						"mostCritical": "Do you have any idea why this is not working?",
+						"maxCount": 35,
+						"evidence": {
+							"reportedCncUrl": {
+								"count": 2,
+								"timestamp": "2025-01-28T14:36:32.348Z",
+								"description": "I don't even care.",
+								"rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+								"sightings": 37899,
+								"mitigation": "Where are my pants?",
+								"level": 1
+							},
+							"relatedNote": {
+								"count": 1,
+								"timestamp": "2025-01-23T17:27:37.928Z",
+								"description": "Where are my pants?",
+								"rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+								"sightings": 2,
+								"mitigation": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+								"level": 1
+							},
+							"defangedURL": {
+								"count": 11,
+								"timestamp": "2025-05-27T23:57:55.642Z",
+								"description": "He looked inquisitively at his keyboard and wrote another sentence.",
+								"rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+								"sightings": 66,
+								"mitigation": "Atoms are used within a program to denote distinguished values.",
+								"level": 1
+							},
+							"suspectedCncUrl": {
+								"count": 3,
+								"timestamp": "2025-04-04T06:07:56.229Z",
+								"description": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+								"rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+								"sightings": 38675,
+								"mitigation": "It is also a garbage-collected runtime system.",
+								"level": 1
+							},
+							"dhsAis": {
+								"count": 1,
+								"timestamp": "2025-03-19T20:54:54.032Z",
+								"description": "Type classes first appeared in the Haskell programming language.",
+								"rule": "Where are my pants?",
+								"sightings": 6,
+								"mitigation": "Ports are used to communicate with the external world.",
+								"level": 1
+							},
+							"recentReportedCncUrl": {
+								"count": 2,
+								"timestamp": "2025-06-07T19:57:34.509Z",
+								"description": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+								"rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+								"sightings": 1520,
+								"mitigation": "Type classes first appeared in the Haskell programming language.",
+								"level": 3
+							},
+							"phishingSiteDetected": {
+								"count": 1,
+								"timestamp": "2025-03-09T08:13:31.123Z",
+								"description": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+								"rule": "Do you come here often?",
+								"sightings": 1,
+								"mitigation": "Make me a sandwich.",
+								"level": 1
+							},
+							"phishingSiteSuspected": {
+								"count": 1,
+								"timestamp": "2025-06-05T04:22:31.624Z",
+								"description": "It is also a garbage-collected runtime system.",
+								"rule": "Haskell features a type system with type inference and lazy evaluation.",
+								"sightings": 12,
+								"mitigation": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+								"level": 1
+							},
+							"malwareSiteSuspected": {
+								"count": 1,
+								"timestamp": "2025-04-15T15:04:18.520Z",
+								"description": "Erlang is known for its designs that are well suited for systems.",
+								"rule": "Where are my pants?",
+								"sightings": 1,
+								"mitigation": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+								"level": 1
+							},
+							"malwareSiteDetected": {
+								"count": 2,
+								"timestamp": "2025-04-07T19:03:24.478Z",
+								"description": "Its main implementation is the Glasgow Haskell Compiler.",
+								"rule": "Do you have any idea why this is not working?",
+								"sightings": 13,
+								"mitigation": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+								"level": 1
+							},
+							"botnetUrl": {
+								"count": 1,
+								"timestamp": "2025-02-12T08:27:00.614Z",
+								"description": "Erlang is known for its designs that are well suited for systems.",
+								"rule": "Make me a sandwich.",
+								"sightings": 17,
+								"mitigation": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"level": 1
+							}
+						},
+						"summary": [
+							{
+								"level": 1.0,
+								"count": 10.0
+							},
+							{
+								"level": 3.0,
+								"count": 1.0
+							}
+						]
+					}
+				},
+				"entity": {
+					"id": "url:https://money.bayern/",
+					"name": "Chowder",
+					"type": "URL"
+				}
+			},
+			{
+				"risk": {
+					"score": 86,
+					"level": 3.0,
+					"context": {
+						"phishing": {
+							"score": 0.0,
+							"rule": {
+								"count": 0,
+								"maxCount": 3
+							}
+						},
+						"public": {
+							"summary": [
+								{
+									"level": 1.0,
+									"count": 4.0
+								},
+								{
+									"level": 2.0,
+									"count": 2.0
+								},
+								{
+									"level": 3.0,
+									"count": 1.0
+								}
+							],
+							"score": 86.0,
+							"mostCriticalRule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+							"rule": {
+								"maxCount": 79
+							}
+						},
+						"c2": {
+							"score": 37.0,
+							"rule": {
+								"count": 2,
+								"maxCount": 7
+							}
+						}
+					},
+					"rule": {
+						"count": 11,
+						"mostCritical": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+						"maxCount": 79,
+						"evidence": {
+							"linkedIntrusion": {
+								"count": 3,
+								"timestamp": "2025-11-08T19:15:14.457Z",
+								"description": "Any element of a tuple can be accessed in constant time.",
+								"rule": "Haskell features a type system with type inference and lazy evaluation.",
+								"sightings": 32,
+								"mitigation": "Make me a sandwich.",
+								"level": 1
+							},
+							"reportedCnc": {
+								"count": 2,
+								"timestamp": "2025-01-30T20:57:45.951Z",
+								"description": "Haskell features a type system with type inference and lazy evaluation.",
+								"rule": "Erlang is known for its designs that are well suited for systems.",
+								"sightings": 341,
+								"mitigation": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+								"level": 2
+							},
+							"recentDhsAis": {
+								"count": 1,
+								"timestamp": "2025-02-12T10:21:43.891Z",
+								"description": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+								"rule": "Ports are used to communicate with the external world.",
+								"sightings": 34,
+								"mitigation": "Any element of a tuple can be accessed in constant time.",
+								"level": 2
+							},
+							"recentMaliciousInfrastructureAdminServer": {
+								"count": 2,
+								"timestamp": "2025-09-27T14:34:16.395Z",
+								"description": "I don't even care.",
+								"rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+								"sightings": 24,
+								"mitigation": "Atoms are used within a program to denote distinguished values.",
+								"level": 3
+							},
+							"maliciousInfrastructureAdminServer": {
+								"count": 2,
+								"timestamp": "2025-05-08T17:29:26.035Z",
+								"description": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"rule": "Do you come here often?",
+								"sightings": 374,
+								"mitigation": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+								"level": 1
+							},
+							"dhsAis": {
+								"count": 1,
+								"timestamp": "2025-07-30T03:18:22.536Z",
+								"description": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+								"rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"sightings": 299,
+								"mitigation": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"level": 1
+							},
+							"botnet": {
+								"count": 1,
+								"timestamp": "2025-05-27T15:36:55.861Z",
+								"description": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+								"rule": "Ports are created with the built-in function open_port.",
+								"sightings": 1,
+								"mitigation": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+								"level": 1
+							},
+							"historicalThreatListMembership": {
+								"count": 4,
+								"timestamp": "2025-04-10T00:13:45.628Z",
+								"description": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+								"rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+								"sightings": -1,
+								"mitigation": "Its main implementation is the Glasgow Haskell Compiler.",
+								"level": 1
+							},
+							"defanged": {
+								"count": 3,
+								"timestamp": "2025-09-24T01:29:08.876Z",
+								"description": "Tuples are containers for a fixed number of Erlang data types.",
+								"rule": "She spent her earliest years reading classic literature, and writing poetry.",
+								"sightings": 8,
+								"mitigation": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+								"level": 1
+							},
+							"suspectedCnc": {
+								"count": 3,
+								"timestamp": "2025-05-19T10:22:15.678Z",
+								"description": "Atoms are used within a program to denote distinguished values.",
+								"rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+								"sightings": 45,
+								"mitigation": "Any element of a tuple can be accessed in constant time.",
+								"level": 1
+							},
+							"validatedCnc": {
+								"count": 1,
+								"timestamp": "2025-01-23T20:57:47.072Z",
+								"description": "Ports are used to communicate with the external world.",
+								"rule": "Tuples are containers for a fixed number of Erlang data types.",
+								"sightings": 3030,
+								"mitigation": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+								"level": 2
+							}
+						},
+						"summary": [
+							{
+								"level": 1.0,
+								"count": 7.0
+							},
+							{
+								"level": 2.0,
+								"count": 3.0
+							},
+							{
+								"level": 3.0,
+								"count": 1.0
+							}
+						]
+					}
+				},
+				"entity": {
+					"id": "ip:30.238.118.3",
+					"name": "Salad bar",
+					"type": "IpAddress"
+				}
+			}
+		]
+	},
+	"counts": {
+		"returned": 3,
+		"total": 3
+	}
+}

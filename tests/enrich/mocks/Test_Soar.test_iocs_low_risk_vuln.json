@@ -1,0 +1,75 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 10,
+                    "level": 1.0,
+                    "context": {
+                        "malware": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 1
+                            }
+                        },
+                        "public": {
+                            "summary": [
+                                {
+                                    "level": 1.0,
+                                    "count": 2.0
+                                }
+                            ],
+                            "score": 10.0,
+                            "mostCriticalRule": "Where are my pants?",
+                            "rule": {
+                                "maxCount": 23
+                            }
+                        }
+                    },
+                    "rule": {
+                        "count": 2,
+                        "mostCritical": "Erlang is known for its designs that are well suited for systems.",
+                        "maxCount": 25,
+                        "evidence": {
+                            "pocUnverified": {
+                                "count": 1,
+                                "timestamp": "2025-11-12T05:52:49.460Z",
+                                "description": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                                "rule": "Do you have any idea why this is not working?",
+                                "sightings": 1,
+                                "mitigation": "Its main implementation is the Glasgow Haskell Compiler.",
+                                "level": 1
+                            },
+                            "nistLow": {
+                                "count": 1,
+                                "timestamp": "2025-04-02T20:06:37.909Z",
+                                "description": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                                "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                                "sightings": 1,
+                                "mitigation": "Atoms are used within a program to denote distinguished values.",
+                                "level": 1
+                            }
+                        },
+                        "summary": [
+                            {
+                                "level": 1.0,
+                                "count": 2.0
+                            }
+                        ]
+                    }
+                },
+                "entity": {
+                    "id": "yXgDEe",
+                    "name": "Italian Beef Sandwich",
+                    "type": "CyberVulnerability",
+                    "description": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

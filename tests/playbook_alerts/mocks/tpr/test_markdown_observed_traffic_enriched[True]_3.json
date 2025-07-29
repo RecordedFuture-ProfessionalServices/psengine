@@ -1,0 +1,95 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-03-08T16:42:55.546Z",
+            "firstSeen": "2025-01-09T15:11:33.149Z"
+        },
+        "risk": {
+            "criticalityLabel": "Ports are used to communicate with the external world.",
+            "riskString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "rules": 9,
+            "criticality": 2,
+            "riskSummary": "Haskell features a type system with type inference and lazy evaluation.",
+            "score": 48,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "criticality": 1,
+                    "timestamp": "2025-10-31T21:34:39.346Z",
+                    "criticalityLabel": "Haskell features a type system with type inference and lazy evaluation."
+                },
+                {
+                    "mitigationString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "evidenceString": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-17T17:11:33.542Z",
+                    "criticalityLabel": "Erlang is known for its designs that are well suited for systems."
+                },
+                {
+                    "mitigationString": "Where are my pants?",
+                    "evidenceString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-29T19:20:33.941Z",
+                    "criticalityLabel": "Type classes first appeared in the Haskell programming language."
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "criticality": 1,
+                    "timestamp": "2025-10-22T05:01:50.537Z",
+                    "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "mitigationString": "Ports are used to communicate with the external world.",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "criticality": 1,
+                    "timestamp": "2025-04-28T10:40:42.330Z",
+                    "criticalityLabel": "He looked inquisitively at his keyboard and wrote another sentence."
+                },
+                {
+                    "mitigationString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "evidenceString": "It is also a garbage-collected runtime system.",
+                    "rule": "Type classes first appeared in the Haskell programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-16T12:48:54.805Z",
+                    "criticalityLabel": "It is also a garbage-collected runtime system."
+                },
+                {
+                    "mitigationString": "The arguments can be primitive data types or compound data types.",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-06-01T13:09:12.584Z",
+                    "criticalityLabel": "Its main implementation is the Glasgow Haskell Compiler."
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "criticality": 2,
+                    "timestamp": "2025-07-07T22:47:20.453Z",
+                    "criticalityLabel": "Do you have any idea why this is not working?"
+                },
+                {
+                    "mitigationString": "It is also a garbage-collected runtime system.",
+                    "evidenceString": "Atoms are used within a program to denote distinguished values.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 2,
+                    "timestamp": "2025-10-27T00:22:20.957Z",
+                    "criticalityLabel": "She spent her earliest years reading classic literature, and writing poetry."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:77.26.123.208",
+            "name": "Potato salad",
+            "type": "IpAddress"
+        }
+    }
+}

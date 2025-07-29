@@ -1,0 +1,90 @@
+{
+    "attributes": {
+        "title": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+        "text": "Ports are used to communicate with the external world. Ports are created with the built-in function open_port. It is also a garbage-collected runtime system. Haskell features a type system with type inference and lazy evaluation. The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+        "note_entities": [
+            {
+                "id": "cFzNy",
+                "name": "Macaroni and cheese",
+                "type": "AttackVector"
+            },
+            {
+                "id": "0Tl8t",
+                "name": "Cowboy beans",
+                "type": "AttackVector"
+            },
+            {
+                "id": "HX9sHR",
+                "name": "Corn flakes",
+                "type": "Organization"
+            },
+            {
+                "id": "RqtQ5rUNMU5",
+                "name": "Rice and gravy",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "twYx6V",
+                "name": "Key Lime Pie",
+                "type": "AttackVector"
+            },
+            {
+                "id": "OFO8eF",
+                "name": "Chicken nuggets",
+                "type": "Organization"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "w39vMX",
+                "name": "Bull roast",
+                "type": "Technology"
+            },
+            {
+                "id": "KijFka",
+                "name": "Bagels and Lox",
+                "type": "AttackVector"
+            },
+            {
+                "id": "Y6XQaSmmVrKtN",
+                "name": "Maine Lobster",
+                "type": "Source"
+            },
+            {
+                "id": "I2ydJk6XmABpA",
+                "name": "Lobster roll",
+                "type": "Source"
+            },
+            {
+                "id": "Xc96SS",
+                "name": "Creme Brulee",
+                "type": "Technology"
+            },
+            {
+                "id": "0wvkQ",
+                "name": "Pemmican",
+                "type": "Country"
+            }
+        ],
+        "topic": [
+            {
+                "id": "RIArgZ",
+                "name": "Turducken",
+                "type": "Topic",
+                "description": "Ports are created with the built-in function open_port."
+            }
+        ],
+        "validation_urls": [
+            {
+                "id": "url:https://corresponding.org/",
+                "name": "Clam chowder",
+                "type": "URL"
+            }
+        ]
+    },
+    "source": {
+        "id": "vDYfSQybE3Gq8",
+        "name": "Chicago Hot Dog",
+        "type": "Source"
+    }
+}

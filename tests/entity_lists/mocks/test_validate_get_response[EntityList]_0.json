@@ -1,0 +1,59 @@
+[
+    {
+        "entity": {
+            "id": "ADdKI",
+            "type": "Country",
+            "name": "United States"
+        },
+        "status": "ready",
+        "added": "2025-06-21T11:48:28.481Z"
+    },
+    {
+        "entity": {
+            "id": "1ec1N8",
+            "type": "CyberVulnerability",
+            "name": "CVE-2011-0611"
+        },
+        "context": {
+            "annotation": "Haskell features a type system with type inference and lazy evaluation."
+        },
+        "status": "ready",
+        "added": "2025-01-28T15:24:21.763Z"
+    },
+    {
+        "entity": {
+            "id": "h8WV7",
+            "type": "Organization",
+            "name": "Chicago Bulls"
+        },
+        "context": {
+            "annotation": "Ports are used to communicate with the external world."
+        },
+        "status": "ready",
+        "added": "2025-08-15T05:21:52.252Z"
+    },
+    {
+        "entity": {
+            "id": "bWzMy",
+            "type": "Facility",
+            "name": "MI6 HQ"
+        },
+        "context": {
+            "annotation": "Where are my pants?"
+        },
+        "status": "ready",
+        "added": "2025-02-26T03:32:52.732Z"
+    },
+    {
+        "entity": {
+            "id": "VijbY",
+            "type": "Country",
+            "name": "Lithuania"
+        },
+        "context": {
+            "annotation": "I don't even care."
+        },
+        "status": "ready",
+        "added": "2025-09-04T04:36:44.670Z"
+    }
+]

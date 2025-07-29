@@ -1,7 +1,6 @@
 PSEngine Changelog
 ==================
-
-[2.0.7] - 2025-07-02
+[2.1.1] - 2025-08-29
 --------------------
 
 Added
@@ -27,6 +26,14 @@ Removed
 ~~~~~~~
 
 - Ability for searching and fetching unsupported playbook alert categories and returning a ``PBA_Generic`` ADT instance.
+
+
+[2.1.0] - 2025-07-02
+--------------------
+
+Added
+~~~~~
+- ``IdentityMgr`` added to support interaction with the identity API.
 
 
 [2.0.6] - 2025-06-06

@@ -1,0 +1,87 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-04-06T15:10:10.045Z",
+            "firstSeen": "2025-07-22T00:52:29.326Z"
+        },
+        "risk": {
+            "criticalityLabel": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "riskString": "The arguments can be primitive data types or compound data types.",
+            "rules": 8,
+            "criticality": 2,
+            "riskSummary": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "score": 40,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Make me a sandwich.",
+                    "evidenceString": "Do you come here often?",
+                    "rule": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "criticality": 1,
+                    "timestamp": "2025-08-20T23:56:27.444Z",
+                    "criticalityLabel": "It is also a garbage-collected runtime system."
+                },
+                {
+                    "mitigationString": "Ports are used to communicate with the external world.",
+                    "evidenceString": "Ports are used to communicate with the external world.",
+                    "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-08-17T01:04:48.600Z",
+                    "criticalityLabel": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                },
+                {
+                    "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "evidenceString": "It is also a garbage-collected runtime system.",
+                    "rule": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "criticality": 1,
+                    "timestamp": "2025-09-21T17:38:04.734Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                },
+                {
+                    "mitigationString": "Ports are used to communicate with the external world.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-18T08:49:25.131Z",
+                    "criticalityLabel": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                },
+                {
+                    "mitigationString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "evidenceString": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "criticality": 1,
+                    "timestamp": "2025-11-28T16:51:53.561Z",
+                    "criticalityLabel": "He looked inquisitively at his keyboard and wrote another sentence."
+                },
+                {
+                    "mitigationString": "Ports are created with the built-in function open_port.",
+                    "evidenceString": "Any element of a tuple can be accessed in constant time.",
+                    "rule": "Do you have any idea why this is not working?",
+                    "criticality": 1,
+                    "timestamp": "2025-05-27T22:52:27.331Z",
+                    "criticalityLabel": "I don't even care."
+                },
+                {
+                    "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "evidenceString": "Type classes first appeared in the Haskell programming language.",
+                    "rule": "Where are my pants?",
+                    "criticality": 2,
+                    "timestamp": "2025-09-12T05:43:06.748Z",
+                    "criticalityLabel": "Do you have any idea why this is not working?"
+                },
+                {
+                    "mitigationString": "Ports are used to communicate with the external world.",
+                    "evidenceString": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                    "rule": "Ports are used to communicate with the external world.",
+                    "criticality": 2,
+                    "timestamp": "2025-11-18T11:09:37.639Z",
+                    "criticalityLabel": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:220.233.22.240",
+            "name": "Chicharones",
+            "type": "IpAddress"
+        }
+    }
+}

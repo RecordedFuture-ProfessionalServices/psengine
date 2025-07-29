@@ -1,0 +1,104 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 89,
+                    "level": 3.0,
+                    "context": {
+                        "malware": {
+                            "score": 89.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 4
+                            }
+                        },
+                        "public": {
+                            "summary": [
+                                {
+                                    "level": 2.0,
+                                    "count": 1.0
+                                },
+                                {
+                                    "level": 3.0,
+                                    "count": 1.0
+                                }
+                            ],
+                            "score": 89.0,
+                            "mostCriticalRule": "Positive Malware Verdict",
+                            "rule": {
+                                "maxCount": 15
+                            }
+                        }
+                    },
+                    "rule": {
+                        "count": 4,
+                        "mostCritical": "Positive Malware Verdict",
+                        "maxCount": 17,
+                        "evidence": {
+                            "linkedToVector": {
+                                "count": 2,
+                                "timestamp": "2024-02-16T03:46:24.239Z",
+                                "description": "6 sightings on 2 sources: <e id=source:JOU>ArXiv</e>, <e id=source:BZs>The Register UK</e>. 2 related attack vectors: <e id=PI-1Yw>Inadequate Storage Encryption Key Strength</e>, <e id=PI-1Yv>Cryptanalysis Attack</e>. Most recent link (Feb 16, 2024): https://regmedia.co.uk/2024/02/12/method_for_decrypting_data_infected_with_rhysida_ransomware.pdf",
+                                "rule": "Linked to Attack Vector",
+                                "sightings": 6,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "linkedToMalware": {
+                                "count": 7,
+                                "timestamp": "2024-02-16T03:46:24.239Z",
+                                "description": "38 sightings on 7 sources including: <e id=source:doLlw5>PolySwarm</e>, <e id=source:lmoHXq>Malware Analysis News and Indicators Latest Posts</e>, <e id=source:joERuE>Fortinet | Threat Research</e>, <e id=source:JOU>ArXiv</e>, <e id=source:PA-rR4>Talos Intel</e>. 3 related malware families: <e id=i8PHuP>Hive Ransomware</e>, <e id=J0Nl-p>Ransomware</e>, <e id=rVnb7k>Rhysida</e>. Most recent link (Feb 16, 2024): https://regmedia.co.uk/2024/02/12/method_for_decrypting_data_infected_with_rhysida_ransomware.pdf",
+                                "rule": "Linked to Malware",
+                                "sightings": 38,
+                                "mitigation": "",
+                                "level": 2
+                            },
+                            "positiveMalwareVerdict": {
+                                "count": 7,
+                                "timestamp": "2023-11-08T02:47:54.093Z",
+                                "description": "11 sightings on 7 sources including: <e id=source:oWAWVb>Recorded Future Sandbox</e>, <e id=source:K16tAG>Sophos Virus and Spyware Threats</e>, <e id=source:hzRhwZ>Polyswarm Sandbox Analysis</e>, <e id=source:ndy5_2>Recorded Future Triage Malware Analysis</e>, <e id=source:o5W_VB>PolySwarm PolyUnite</e>. Malware sandbox report for <e id=content:1a9c27e5be8c58da1c02fc4245a07831d5d431cdd1a91cd35d2dd0ad62da71cd>1a9c27e5be8c58da1c02fc4245a07831d5d431cdd1a91cd35d2dd0ad62da71cd</e> on July 30, 2023.   Score: 9 (Likely malicious). No malware detections. Contains: 2 ATT&CK behaviors, 0 command and control indicators, and 5 signatures. Most recent link (Nov 2, 2023): https://tria.ge/231102-gn6nzagc8v",
+                                "rule": "Positive Malware Verdict",
+                                "sightings": 11,
+                                "mitigation": "",
+                                "level": 3
+                            },
+                            "threatResearcher": {
+                                "count": 2,
+                                "timestamp": "2023-08-17T03:39:19.000Z",
+                                "description": "23 sightings on 2 sources: <e id=source:PA-rR4>Talos Intel</e>, <e id=source:clDYM8>Cisco Japan Blog</e>. Most recent link (Aug 17, 2023): https://gblogs.cisco.com/jp/2023/08/talos-rhysida-ransomware/",
+                                "rule": "Threat Researcher",
+                                "sightings": 23,
+                                "mitigation": "",
+                                "level": 1
+                            }
+                        },
+                        "summary": [
+                            {
+                                "level": 1.0,
+                                "count": 1.0
+                            },
+                            {
+                                "level": 2.0,
+                                "count": 2.0
+                            },
+                            {
+                                "level": 3.0,
+                                "count": 1.0
+                            }
+                        ]
+                    }
+                },
+                "entity": {
+                    "id": "hash:1a9c27e5be8c58da1c02fc4245a07831d5d431cdd1a91cd35d2dd0ad62da71cd",
+                    "name": "1a9c27e5be8c58da1c02fc4245a07831d5d431cdd1a91cd35d2dd0ad62da71cd",
+                    "type": "Hash"
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

@@ -1,0 +1,107 @@
+{
+    "status": {
+        "status_code": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+        "status_message": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+    },
+    "data": {
+        "playbook_alert_id": "task:772eb0bc-807f-4981-a1d5-99710ec30172",
+        "panel_status": {
+            "status": "New",
+            "priority": "Its main implementation is the Glasgow Haskell Compiler.",
+            "created": "2025-10-03T02:03:27.906Z",
+            "updated": "2025-04-30T11:37:06.068Z",
+            "case_rule_id": "It is also a garbage-collected runtime system.",
+            "case_rule_label": "I don't even care.",
+            "owner_id": "It is also a garbage-collected runtime system.",
+            "owner_name": "Atoms are used within a program to denote distinguished values.",
+            "organisation_id": "Ports are created with the built-in function open_port.",
+            "organisation_name": "Ports are used to communicate with the external world.",
+            "owner_organisation_details": {
+                "organisations": [
+                    {
+                        "organisation_id": "Haskell features a type system with type inference and lazy evaluation.",
+                        "organisation_name": "Ports are used to communicate with the external world."
+                    }
+                ],
+                "enterprise_id": "Do you come here often?",
+                "enterprise_name": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+            },
+            "entity_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "entity_name": "Where are my pants?",
+            "targets": [
+                {
+                    "name": "Margherita Pizza"
+                },
+                {
+                    "name": "Soft Shell Crab"
+                }
+            ],
+            "actions_taken": []
+        },
+        "panel_evidence_summary": {
+            "assessments": [
+                {
+                    "name": "Maine Lobster",
+                    "criticality": "She spent her earliest years reading classic literature, and writing poetry."
+                }
+            ],
+            "subject": "Erlang is known for its designs that are well suited for systems.",
+            "authorization_url": "https://ian.wales/",
+            "exposed_secret": {
+                "type": "clear",
+                "effectively_clear": true,
+                "hashes": [
+                    {
+                        "algorithm": "SHA1",
+                        "hash": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
+                    },
+                    {
+                        "algorithm": "SHA256",
+                        "hash": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                    },
+                    {
+                        "algorithm": "NTLM",
+                        "hash": "Where are my pants?"
+                    },
+                    {
+                        "algorithm": "MD5",
+                        "hash": "It is also a garbage-collected runtime system."
+                    }
+                ],
+                "details": {
+                    "properties": [
+                        "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                        "He looked inquisitively at his keyboard and wrote another sentence.",
+                        "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                        "Any element of a tuple can be accessed in constant time.",
+                        "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing."
+                    ],
+                    "clear_text_value": "Atoms are used within a program to denote distinguished values.",
+                    "clear_text_hint": "Any element of a tuple can be accessed in constant time."
+                }
+            },
+            "dump": {
+                "name": "Lobster roll",
+                "description": "Any element of a tuple can be accessed in constant time."
+            },
+            "compromised_host": {
+                "exfiltration_date": "2025-09-27T14:00:50.887Z",
+                "os": "Ports are created with the built-in function open_port.",
+                "os_username": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "malware_file": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "timezone": "I don't even care.",
+                "computer_name": "It is also a garbage-collected runtime system.",
+                "antivirus": [
+                    "Do you come here often?"
+                ]
+            },
+            "malware_family": {
+                "id": "3p1ufa",
+                "name": "Scampi"
+            },
+            "infrastructure": {
+                "ip": "135.26.78.48"
+            }
+        }
+    }
+}

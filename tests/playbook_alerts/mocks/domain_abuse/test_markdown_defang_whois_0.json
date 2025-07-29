@@ -1,0 +1,187 @@
+{
+    "status": {
+        "status_code": "Ok",
+        "status_message": "Playbook alert single lookup successful."
+    },
+    "data": {
+        "playbook_alert_id": "task:360e1f76-1a43-4393-ae7b-91c61420b6cc",
+        "panel_status": {
+            "status": "New",
+            "priority": "Informational",
+            "created": "2025-02-28T10:48:31.034Z",
+            "updated": "2025-02-28T10:48:31.034Z",
+            "case_rule_id": "report:oT8Yal",
+            "case_rule_label": "Domain Abuse",
+            "owner_id": "uhash:oDJ5LVWfXL",
+            "owner_name": "Enterprise - Moise",
+            "organisation_id": "uhash:5zQaSyRpA1",
+            "organisation_name": "Professional Services Development",
+            "owner_organisation_details": {
+                "organisations": [
+                    {
+                        "organisation_id": "uhash:oDJ5LVWfXL",
+                        "organisation_name": "Enterprise - Moise"
+                    }
+                ],
+                "enterprise_id": "uhash:5zQaSyRpA1",
+                "enterprise_name": "Professional Services Development"
+            },
+            "entity_id": "idn:jroffer.com",
+            "entity_name": "jroffer.com",
+            "entity_criticality": "Low",
+            "risk_score": 5,
+            "context_list": [
+                {
+                    "context": "Parked / Ad hosting website"
+                }
+            ],
+            "targets": [
+                "idn:jboffer.com"
+            ],
+            "actions_taken": []
+        },
+        "panel_action": [],
+        "panel_evidence_summary": {
+            "explanation": "Alert was created as a result of a triggered typosquat detection",
+            "resolved_record_list": [
+                {
+                    "entity": "idn:ns2btz.name.com",
+                    "risk_score": 5,
+                    "criticality": "Low",
+                    "record_type": "NS",
+                    "context_list": []
+                },
+                {
+                    "entity": "idn:ns4hny.name.com",
+                    "risk_score": 5,
+                    "criticality": "Low",
+                    "record_type": "NS",
+                    "context_list": []
+                },
+                {
+                    "entity": "idn:ns1dhq.name.com",
+                    "risk_score": 5,
+                    "criticality": "Low",
+                    "record_type": "NS",
+                    "context_list": []
+                },
+                {
+                    "entity": "ip:91.195.240.94",
+                    "risk_score": 52,
+                    "criticality": "Medium",
+                    "record_type": "A",
+                    "context_list": []
+                },
+                {
+                    "entity": "idn:ns3qtx.name.com",
+                    "risk_score": 5,
+                    "criticality": "Low",
+                    "record_type": "NS",
+                    "context_list": []
+                }
+            ],
+            "screenshots": [
+                {
+                    "description": "An image associated with the Playbook Alert",
+                    "image_id": "img:db93597b-dcde-4736-8124-9ce1bb9cf9d3",
+                    "created": "2025-02-28T10:35:28.245Z",
+                    "availability": "Available",
+                    "tag": "Parked / Ad hosting website"
+                }
+            ],
+            "screenshot_mentions": []
+        },
+        "panel_evidence_dns": {
+            "ip_list": [
+                {
+                    "entity": "ip:91.195.240.94",
+                    "risk_score": 52,
+                    "criticality": "Medium",
+                    "record_type": "A",
+                    "context_list": []
+                }
+            ],
+            "mx_list": [],
+            "ns_list": [
+                {
+                    "entity": "idn:ns2btz.name.com",
+                    "risk_score": 5,
+                    "criticality": "Low",
+                    "record_type": "NS",
+                    "context_list": []
+                },
+                {
+                    "entity": "idn:ns4hny.name.com",
+                    "risk_score": 5,
+                    "criticality": "Low",
+                    "record_type": "NS",
+                    "context_list": []
+                },
+                {
+                    "entity": "idn:ns1dhq.name.com",
+                    "risk_score": 5,
+                    "criticality": "Low",
+                    "record_type": "NS",
+                    "context_list": []
+                },
+                {
+                    "entity": "idn:ns3qtx.name.com",
+                    "risk_score": 5,
+                    "criticality": "Low",
+                    "record_type": "NS",
+                    "context_list": []
+                }
+            ]
+        },
+        "panel_evidence_whois": {
+            "body": [
+                {
+                    "provider": "whois",
+                    "entity": "idn:jroffer.com",
+                    "attribute": "attr:whois",
+                    "value": {
+                        "privateRegistration": false,
+                        "status": "clientTransferProhibited",
+                        "nameServers": [
+                            "idn:ns1.dnsowl.com",
+                            "idn:ns2.dnsowl.com",
+                            "idn:ns3.dnsowl.com"
+                        ],
+                        "registrarName": "NameSilo, LLC",
+                        "createdDate": "2023-07-11T00:00:00.000Z"
+                    },
+                    "added": "2024-07-12T01:15:36.475Z"
+                },
+                {
+                    "provider": "whois",
+                    "entity": "idn:jroffer.com",
+                    "attribute": "attr:whoisContacts",
+                    "value": {
+                        "type": "technicalContact"
+                    },
+                    "added": "2024-07-12T01:15:36.475Z"
+                },
+                {
+                    "provider": "whois",
+                    "entity": "idn:jroffer.com",
+                    "attribute": "attr:whoisContacts",
+                    "value": {
+                        "type": "administrativeContact"
+                    },
+                    "added": "2024-07-12T01:15:36.475Z"
+                },
+                {
+                    "provider": "whois",
+                    "entity": "idn:jroffer.com",
+                    "attribute": "attr:whoisContacts",
+                    "value": {
+                        "type": "registrant"
+                    },
+                    "added": "2024-07-12T01:15:36.475Z"
+                }
+            ]
+        },
+        "panel_log": [],
+        "panel_log_v2": []
+    }
+}

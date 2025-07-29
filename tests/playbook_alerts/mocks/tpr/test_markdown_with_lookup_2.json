@@ -1,0 +1,95 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-10-19T20:24:54.086Z",
+            "firstSeen": "2025-06-13T09:58:06.587Z"
+        },
+        "risk": {
+            "criticalityLabel": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "riskString": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "rules": 9,
+            "criticality": 2,
+            "riskSummary": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "score": 57,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "evidenceString": "Ports are created with the built-in function open_port.",
+                    "rule": "The arguments can be primitive data types or compound data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-02-26T23:41:25.675Z",
+                    "criticalityLabel": "Do you come here often?"
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "I don't even care.",
+                    "rule": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "criticality": 1,
+                    "timestamp": "2025-05-03T10:01:48.315Z",
+                    "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "mitigationString": "Ports are created with the built-in function open_port.",
+                    "evidenceString": "Tuples are containers for a fixed number of Erlang data types.",
+                    "rule": "Do you come here often?",
+                    "criticality": 1,
+                    "timestamp": "2025-11-23T01:03:31.724Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                },
+                {
+                    "mitigationString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "evidenceString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-31T09:09:08.158Z",
+                    "criticalityLabel": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-15T08:28:37.950Z",
+                    "criticalityLabel": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                },
+                {
+                    "mitigationString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "evidenceString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "rule": "Atoms are used within a program to denote distinguished values.",
+                    "criticality": 1,
+                    "timestamp": "2025-05-19T14:33:57.743Z",
+                    "criticalityLabel": "Do you come here often?"
+                },
+                {
+                    "mitigationString": "Type classes first appeared in the Haskell programming language.",
+                    "evidenceString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "criticality": 2,
+                    "timestamp": "2025-03-02T09:57:09.407Z",
+                    "criticalityLabel": "She spent her earliest years reading classic literature, and writing poetry."
+                },
+                {
+                    "mitigationString": "Atoms are used within a program to denote distinguished values.",
+                    "evidenceString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "rule": "Where are my pants?",
+                    "criticality": 2,
+                    "timestamp": "2025-06-25T18:16:50.684Z",
+                    "criticalityLabel": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+                },
+                {
+                    "mitigationString": "Ports are created with the built-in function open_port.",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "criticality": 2,
+                    "timestamp": "2025-08-29T12:25:36.886Z",
+                    "criticalityLabel": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:165.209.0.1",
+            "name": "BBQ Ribs",
+            "type": "IpAddress"
+        }
+    }
+}

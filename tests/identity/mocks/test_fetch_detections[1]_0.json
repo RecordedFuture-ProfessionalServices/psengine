@@ -1,0 +1,93 @@
+{
+    "total": 150592,
+    "detections": [
+        {
+            "id": "VwfDhyZgezbjH8Vc9Be6k95JngQx1NSe",
+            "novel": true,
+            "type": "External",
+            "subject": "Type classes first appeared in the Haskell programming language.",
+            "password": {
+                "type": "clear",
+                "hashes": [
+                    {
+                        "algorithm": "SHA1",
+                        "hash": "Do you come here often?"
+                    },
+                    {
+                        "algorithm": "SHA256",
+                        "hash": "Tuples are containers for a fixed number of Erlang data types."
+                    },
+                    {
+                        "algorithm": "NTLM",
+                        "hash": "Do you come here often?"
+                    },
+                    {
+                        "algorithm": "MD5",
+                        "hash": "She spent her earliest years reading classic literature, and writing poetry."
+                    }
+                ],
+                "properties": [
+                    "Ports are used to communicate with the external world.",
+                    "Atoms are used within a program to denote distinguished values.",
+                    "I don't even care.",
+                    "Ports are used to communicate with the external world.",
+                    "Do you have any idea why this is not working?"
+                ],
+                "cleartext_hint": "Do you have any idea why this is not working?",
+                "cleartext": "Do you come here often?"
+            },
+            "authorization_service": {
+                "url": "https://usc.security/",
+                "domain": "I don't even care.",
+                "fqdn": "Erlang is known for its designs that are well suited for systems.",
+                "technology": [
+                    {
+                        "name": "Potato skins",
+                        "id": "kD44",
+                        "category": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                    },
+                    {
+                        "name": "London broil",
+                        "id": "Vt4OUB"
+                    }
+                ],
+                "protocols": [
+                    "Make me a sandwich."
+                ]
+            },
+            "cookies": [],
+            "malware_family": {
+                "name": "Roasted Chickpeas",
+                "id": "blvraw"
+            },
+            "dump": {
+                "name": "Sandwich",
+                "source": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "description": "Make me a sandwich.",
+                "downloaded": "2025-07-17T10:37:43.107Z",
+                "compromise": {
+                    "exfiltration_date": "2025-03-16T07:08:51.960Z",
+                    "os": "Where are my pants?",
+                    "os_username": "Any element of a tuple can be accessed in constant time.",
+                    "malware_file": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "timezone": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "computer_name": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                },
+                "infrastructure": {
+                    "ip": "99.189.11.158"
+                },
+                "location": {
+                    "country": {
+                        "name": "Fried Catfish",
+                        "displayName": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                        "countryCode": "Ports are created with the built-in function open_port.",
+                        "alpha2Code": "The arguments can be primitive data types or compound data types.",
+                        "alpha3Code": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                    }
+                }
+            },
+            "created": "2025-11-16T14:27:29.159Z"
+        }
+    ],
+    "next_offset": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+}

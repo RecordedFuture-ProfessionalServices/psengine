@@ -1,0 +1,160 @@
+{
+    "attributes": {
+        "title": "Make me a sandwich.",
+        "text": "Do you come here often? Erlang is known for its designs that are well suited for systems. Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. In 1989 the building was heavily damaged by fire, but it has since been restored. Make me a sandwich.",
+        "published": "2025-07-02T00:04:56.232Z",
+        "events": [
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-07-03T10:43:25.222Z",
+                    "stop": "2025-04-23T22:26:58.108Z",
+                    "capabilities": [
+                        {
+                            "id": "B15961",
+                            "name": "Poppyseed muffin",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "0n3aB",
+                            "name": "Drunken chicken",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "Wr6MX",
+                            "name": "Gazpacho",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "GsfiUc7pYnc",
+                            "name": "Chicago Deep Dish Pizza",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "uIdefE",
+                            "name": "Black Pudding",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            }
+        ],
+        "note_entities": [
+            {
+                "id": "c0Qxu",
+                "name": "Tamales",
+                "type": "AttackVector"
+            },
+            {
+                "id": "ilnwT",
+                "name": "Ice Cream",
+                "type": "AttackVector"
+            },
+            {
+                "id": "nRId2WOmVfd",
+                "name": "Sweet Potato Fries",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "gNKp8F",
+                "name": "Fried Green Tomatoes",
+                "type": "AttackVector"
+            },
+            {
+                "id": "WvP5yd",
+                "name": "Parma Ham",
+                "type": "Organization"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "fhbHiD",
+                "name": "Sweetbreads",
+                "type": "Technology"
+            },
+            {
+                "id": "lD9iVq",
+                "name": "Eggs Neptune",
+                "type": "AttackVector"
+            },
+            {
+                "id": "ni3igtyniL23s",
+                "name": "Sandwich",
+                "type": "Source"
+            },
+            {
+                "id": "HFpzGxtsjf87O",
+                "name": "Crab Rangoon",
+                "type": "Source"
+            },
+            {
+                "id": "V6oLU0",
+                "name": "Tres Leches Cake",
+                "type": "Technology"
+            },
+            {
+                "id": "Oh9xL",
+                "name": "Chicken nugget",
+                "type": "Country"
+            }
+        ],
+        "topic": [
+            {
+                "id": "04K6Y2",
+                "name": "Samosa",
+                "type": "Topic",
+                "description": "Ports are created with the built-in function open_port."
+            }
+        ],
+        "validation_urls": [
+            {
+                "id": "url:https://securities.gw/",
+                "name": "Soul food",
+                "type": "URL"
+            }
+        ],
+        "diamond_model": [
+            {
+                "start": "2025-02-13T11:04:47.519Z",
+                "stop": "2025-02-06T13:26:20.064Z",
+                "capabilities": [
+                    {
+                        "id": "xZVKik",
+                        "name": "Spaghetti Bolognese",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "W8HqC",
+                        "name": "Bellini",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "e1Ifm",
+                        "name": "Pasta salad",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "zNmYpHEeQaU",
+                        "name": "Greek salad",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "a5wwOH",
+                        "name": "Salmon pasta bake",
+                        "type": "Organization"
+                    }
+                ]
+            }
+        ]
+    },
+    "id": "zBHrfgQy8Q",
+    "source": {
+        "id": "GRT9vZybjF3iD",
+        "name": "Chicken Liver Pate",
+        "type": "Source"
+    }
+}

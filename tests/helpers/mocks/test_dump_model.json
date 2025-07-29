@@ -1,0 +1,92 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 0,
+                    "level": 0.0,
+                    "context": {
+                        "phishing": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 3
+                            }
+                        },
+                        "public": {
+                            "summary": [],
+                            "score": 0.0,
+                            "mostCriticalRule": "",
+                            "rule": {
+                                "maxCount": 79
+                            }
+                        },
+                        "c2": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 7
+                            }
+                        }
+                    },
+                    "rule": {
+                        "summary": [],
+                        "mostCritical": "",
+                        "count": 0,
+                        "maxCount": 79
+                    }
+                },
+                "entity": {
+                    "id": "ip:1.1.1.1",
+                    "name": "1.1.1.1",
+                    "type": "IpAddress"
+                }
+            },
+            {
+                "risk": {
+                    "score": 0,
+                    "level": 0.0,
+                    "context": {
+                        "phishing": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 3
+                            }
+                        },
+                        "public": {
+                            "summary": [],
+                            "score": 0.0,
+                            "mostCriticalRule": "",
+                            "rule": {
+                                "maxCount": 79
+                            }
+                        },
+                        "c2": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 7
+                            }
+                        }
+                    },
+                    "rule": {
+                        "summary": [],
+                        "mostCritical": "",
+                        "count": 0,
+                        "maxCount": 79
+                    }
+                },
+                "entity": {
+                    "id": "ip:8.8.8.8",
+                    "name": "8.8.8.8",
+                    "type": "IpAddress"
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 2,
+        "total": 2
+    }
+}

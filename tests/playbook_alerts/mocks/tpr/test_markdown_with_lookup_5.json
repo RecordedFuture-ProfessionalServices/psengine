@@ -1,0 +1,47 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-09-09T07:40:39.961Z",
+            "firstSeen": "2025-06-08T23:52:59.500Z"
+        },
+        "risk": {
+            "criticalityLabel": "Any element of a tuple can be accessed in constant time.",
+            "riskString": "Type classes first appeared in the Haskell programming language.",
+            "rules": 3,
+            "criticality": 2,
+            "riskSummary": "It is also a garbage-collected runtime system.",
+            "score": 36,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-20T18:03:09.059Z",
+                    "criticalityLabel": "She spent her earliest years reading classic literature, and writing poetry."
+                },
+                {
+                    "mitigationString": "Make me a sandwich.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "criticality": 2,
+                    "timestamp": "2025-03-08T12:39:45.885Z",
+                    "criticalityLabel": "Atoms are used within a program to denote distinguished values."
+                },
+                {
+                    "mitigationString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "evidenceString": "Where are my pants?",
+                    "rule": "Make me a sandwich.",
+                    "criticality": 2,
+                    "timestamp": "2025-07-27T15:28:21.611Z",
+                    "criticalityLabel": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:94.212.209.179",
+            "name": "Mashed potato",
+            "type": "IpAddress"
+        }
+    }
+}
