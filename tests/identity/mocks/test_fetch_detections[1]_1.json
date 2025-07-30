@@ -1,0 +1,93 @@
+{
+    "total": 150592,
+    "detections": [
+        {
+            "id": "AxpuwYa7Le9yKsXt7luhfrn22UEDKDv1",
+            "novel": true,
+            "type": "External",
+            "subject": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "password": {
+                "type": "clear",
+                "hashes": [
+                    {
+                        "algorithm": "SHA1",
+                        "hash": "It is also a garbage-collected runtime system."
+                    },
+                    {
+                        "algorithm": "SHA256",
+                        "hash": "Its main implementation is the Glasgow Haskell Compiler."
+                    },
+                    {
+                        "algorithm": "NTLM",
+                        "hash": "Atoms are used within a program to denote distinguished values."
+                    },
+                    {
+                        "algorithm": "MD5",
+                        "hash": "Erlang is a general-purpose, concurrent, functional programming language."
+                    }
+                ],
+                "properties": [
+                    "Haskell features a type system with type inference and lazy evaluation.",
+                    "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "The arguments can be primitive data types or compound data types.",
+                    "Any element of a tuple can be accessed in constant time.",
+                    "Erlang is a general-purpose, concurrent, functional programming language."
+                ],
+                "cleartext_hint": "Its main implementation is the Glasgow Haskell Compiler.",
+                "cleartext": "Any element of a tuple can be accessed in constant time."
+            },
+            "authorization_service": {
+                "url": "https://wheel.aquitaine/",
+                "domain": "Do you come here often?",
+                "fqdn": "Atoms are used within a program to denote distinguished values.",
+                "technology": [
+                    {
+                        "name": "Senate bean soup",
+                        "id": "vAIh",
+                        "category": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                    },
+                    {
+                        "name": "Souvlaki",
+                        "id": "IfIywa"
+                    }
+                ],
+                "protocols": [
+                    "Erlang is a general-purpose, concurrent, functional programming language."
+                ]
+            },
+            "cookies": [],
+            "malware_family": {
+                "name": "Samosa",
+                "id": "FbSd0R"
+            },
+            "dump": {
+                "name": "City chicken",
+                "source": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "description": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "downloaded": "2025-08-17T09:51:30.503Z",
+                "compromise": {
+                    "exfiltration_date": "2025-11-25T07:15:37.578Z",
+                    "os": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "os_username": "Do you have any idea why this is not working?",
+                    "malware_file": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "timezone": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "computer_name": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                },
+                "infrastructure": {
+                    "ip": "15.32.55.105"
+                },
+                "location": {
+                    "country": {
+                        "name": "Fry sauce",
+                        "displayName": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                        "countryCode": "Type classes first appeared in the Haskell programming language.",
+                        "alpha2Code": "It is also a garbage-collected runtime system.",
+                        "alpha3Code": "Erlang is known for its designs that are well suited for systems."
+                    }
+                }
+            },
+            "created": "2025-11-14T10:31:18.295Z"
+        }
+    ],
+    "next_offset": "Any element of a tuple can be accessed in constant time."
+}

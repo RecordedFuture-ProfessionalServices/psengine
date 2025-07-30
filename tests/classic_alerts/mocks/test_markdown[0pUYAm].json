@@ -1,0 +1,1135 @@
+{
+    "data": {
+        "review": {
+            "note": null,
+            "status_in_portal": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "assignee": null,
+            "status": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
+        },
+        "owner_organisation_details": {
+            "organisations": [
+                {
+                    "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "organisation_name": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                }
+            ],
+            "enterprise_id": "Type classes first appeared in the Haskell programming language.",
+            "enterprise_name": "Make me a sandwich."
+        },
+        "url": {
+            "api": "https://google.com",
+            "portal": "https://google.com"
+        },
+        "rule": {
+            "use_case_deprecation": null,
+            "name": "Spaghetti Bolognese",
+            "id": "w06Pf6",
+            "url": {
+                "portal": "https://google.com"
+            }
+        },
+        "id": "QThFfW",
+        "hits": [
+            {
+                "entities": [
+                    {
+                        "id": "url:https://admissions.gov/",
+                        "name": "Supreme pizza",
+                        "type": "URL"
+                    },
+                    {
+                        "id": "EhMo2",
+                        "name": "Brisket",
+                        "type": "Person"
+                    },
+                    {
+                        "id": "axqxRU",
+                        "name": "Fish Tacos",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "YFJxoBbAfO",
+                        "name": "Souvlaki",
+                        "type": "Emoji",
+                        "description": "Make me a sandwich."
+                    },
+                    {
+                        "id": "FDmis",
+                        "name": "Pigs in blankets",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "bbNqXZ",
+                        "name": "Chicken French",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "BdDmvT",
+                        "name": "Crepes",
+                        "type": "Organization"
+                    },
+                    {
+                        "id": "TS0Om",
+                        "name": "Ratatouille",
+                        "type": "Product"
+                    },
+                    {
+                        "id": "192XBu",
+                        "name": "Spanish rice",
+                        "type": "Organization"
+                    },
+                    {
+                        "id": "WqrqR",
+                        "name": "Vichyssoise",
+                        "type": "Country"
+                    },
+                    {
+                        "id": "9S7YyL",
+                        "name": "Coq Au Vin",
+                        "type": "Organization"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "O3BqB936hdGcI",
+                        "name": "Beef Lo Mein",
+                        "type": "Source"
+                    },
+                    "title": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "url": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "authors": [
+                        {
+                            "id": "KrWPGp",
+                            "name": "Bull roast",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                "id": "qiVPPjwdlcu",
+                "language": "Do you come here often?",
+                "primary_entity": {
+                    "id": "liNTlI",
+                    "name": "Calas",
+                    "type": "AttackVector"
+                },
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "1wOiy",
+                        "name": "Chicken nugget",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "AKd1FL",
+                        "name": "Chicago Deep Dish Pizza",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "ohLyg",
+                        "name": "Ice cream cake",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "2ESkx3",
+                        "name": "Ceviche",
+                        "type": "Position"
+                    },
+                    {
+                        "id": "VYVRQj",
+                        "name": "Cowboy beans",
+                        "type": "FileName"
+                    },
+                    {
+                        "id": "NGVbY",
+                        "name": "Lobster roll",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "UyPIdx",
+                        "name": "Lasagna",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "I9OlW",
+                        "name": "Jell-O",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "8RuxcS",
+                        "name": "Schnitzel",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "a3Lgv4",
+                        "name": "Spanish rice",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "B3GYL",
+                        "name": "Fish Tacos",
+                        "type": "IndustryTerm"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "M4rAP3dnojmTd",
+                        "name": "Popover",
+                        "type": "Source"
+                    },
+                    "title": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "url": "Atoms are used within a program to denote distinguished values.",
+                    "authors": [
+                        {
+                            "id": "yZ0X3h",
+                            "name": "Chili dog",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Where are my pants?",
+                "id": "fmo2or8wSBk",
+                "language": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "primary_entity": {
+                    "id": "YTI2Va",
+                    "name": "Risotto",
+                    "type": "AttackVector"
+                },
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "R0iBQe",
+                        "name": "Laksa",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "AtZQM",
+                        "name": "Macaroni salad",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "GOf8qn",
+                        "name": "Creamed eggs on toast",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "url:https://joe.yokohama/",
+                        "name": "Souvlaki",
+                        "type": "URL"
+                    },
+                    {
+                        "id": "pEZop",
+                        "name": "Milkshake",
+                        "type": "Person"
+                    },
+                    {
+                        "id": "yu5cdJxp4TSctV4IosaXPLysH90cUaiCNu52rXsp",
+                        "name": "Hog fry",
+                        "type": "Image"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "JRz2t0TPS7",
+                        "name": "Scampi",
+                        "type": "Source"
+                    },
+                    "title": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "url": "Ports are created with the built-in function open_port.",
+                    "authors": [
+                        {
+                            "id": "EorSdF",
+                            "name": "Fattoush Salad",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "id": "7dQn8RVMMma",
+                "language": "Erlang is known for its designs that are well suited for systems.",
+                "primary_entity": {
+                    "id": "X5IKww",
+                    "name": "Suckling Pig",
+                    "type": "AttackVector"
+                },
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "QNI2W",
+                        "name": "Butter cookie",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "2IHKE",
+                        "name": "Pickled cucumber",
+                        "type": "Country"
+                    },
+                    {
+                        "id": "pIBHt1",
+                        "name": "Tomato compote",
+                        "type": "AttackVector"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "gNJIukAM9L",
+                        "name": "Chile Relleno",
+                        "type": "Source"
+                    },
+                    "title": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "url": "Make me a sandwich.",
+                    "authors": [
+                        {
+                            "id": "UYmxTe",
+                            "name": "Creme Brulee",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Any element of a tuple can be accessed in constant time.",
+                "id": "aiPH3SE9IWI",
+                "language": "Haskell features a type system with type inference and lazy evaluation.",
+                "primary_entity": {
+                    "id": "NXH2Z9",
+                    "name": "Pickled cucumber",
+                    "type": "AttackVector"
+                },
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "sbcE7O",
+                        "name": "Grits",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "erMyO",
+                        "name": "Venison",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "khWqV",
+                        "name": "Corn flakes",
+                        "type": "Organization"
+                    },
+                    {
+                        "id": "url:https://occur.biz/",
+                        "name": "Corned beef",
+                        "type": "URL"
+                    },
+                    {
+                        "id": "tltp2",
+                        "name": "Yeung Chow fried rice",
+                        "type": "Country"
+                    },
+                    {
+                        "id": "PjG6P",
+                        "name": "Sichuan Hot Pot",
+                        "type": "Country"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "VhvzNyFow1",
+                        "name": "French Dip",
+                        "type": "Source"
+                    },
+                    "title": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "url": "Make me a sandwich.",
+                    "authors": [
+                        {
+                            "id": "AA9jwn",
+                            "name": "Cheese fries",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Ports are created with the built-in function open_port.",
+                "id": "h9y91Bb8AzT",
+                "language": "Where are my pants?",
+                "primary_entity": {
+                    "id": "TtRLHJ",
+                    "name": "Smelt",
+                    "type": "AttackVector"
+                },
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "RBiDy",
+                        "name": "Tamales",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "7GwdYG",
+                        "name": "Chicken bog",
+                        "type": "AttackVector"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "pSHtBxNSjCl2W",
+                        "name": "Eggs Benedict",
+                        "type": "Source"
+                    },
+                    "title": "Type classes first appeared in the Haskell programming language.",
+                    "url": "It is also a garbage-collected runtime system.",
+                    "authors": []
+                },
+                "fragment": "Ports are used to communicate with the external world.",
+                "id": "A6w73Z4FKdR",
+                "language": "Tuples are containers for a fixed number of Erlang data types.",
+                "primary_entity": {
+                    "id": "4tfKtB",
+                    "name": "Cheese Curds",
+                    "type": "AttackVector"
+                },
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "hNgNTM",
+                        "name": "Coq Au Vin",
+                        "type": "Hashtag"
+                    },
+                    {
+                        "id": "2DWDKx",
+                        "name": "Buffalo wing",
+                        "type": "Hashtag"
+                    },
+                    {
+                        "id": "WSFtBU",
+                        "name": "Chicken fingers",
+                        "type": "Hashtag"
+                    },
+                    {
+                        "id": "QvWfv",
+                        "name": "Naan",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "wJWgZK",
+                        "name": "Chicken nugget",
+                        "type": "Hashtag"
+                    },
+                    {
+                        "id": "url:https://beans.investments/",
+                        "name": "Bagels and Lox",
+                        "type": "URL"
+                    },
+                    {
+                        "id": "OZEXNs",
+                        "name": "Garden salad",
+                        "type": "Technology"
+                    },
+                    {
+                        "id": "51gReg",
+                        "name": "Mulligan stew",
+                        "type": "Hashtag"
+                    },
+                    {
+                        "id": "3jPdVo",
+                        "name": "Peanut butter",
+                        "type": "Hashtag"
+                    },
+                    {
+                        "id": "yz3SFZ",
+                        "name": "New York-Style Pizza",
+                        "type": "Hashtag"
+                    },
+                    {
+                        "id": "T9bKsqnpmNgSa1tKGJKKXYyri6tJRQ6lNPrgIfdF",
+                        "name": "Chicken Liver Pate",
+                        "type": "Image"
+                    },
+                    {
+                        "id": "kgt5L4",
+                        "name": "Blue cheese dressing",
+                        "type": "Hashtag"
+                    },
+                    {
+                        "id": "WFCVxp",
+                        "name": "Macaroni and Cheese",
+                        "type": "Hashtag"
+                    },
+                    {
+                        "id": "OLEVoU",
+                        "name": "Fry sauce",
+                        "type": "Position"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "EV8FNklGdK",
+                        "name": "Salad bar",
+                        "type": "Source"
+                    },
+                    "title": "Erlang is known for its designs that are well suited for systems.",
+                    "url": "Where are my pants?",
+                    "authors": [
+                        {
+                            "id": "dJCeoS",
+                            "name": "Waffle",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                "id": "T9NQZnGZxEM",
+                "language": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "primary_entity": {
+                    "id": "B0MEI",
+                    "name": "Creamed corn",
+                    "type": "AttackVector"
+                },
+                "analyst_note": null
+            },
+            {
+                "entities": [
+                    {
+                        "id": "rzGC8h",
+                        "name": "Cheesecake",
+                        "type": "IndustryTerm"
+                    },
+                    {
+                        "id": "l3ONNv",
+                        "name": "BBQ Ribs",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "aIx4i",
+                        "name": "Poutine",
+                        "type": "Organization"
+                    },
+                    {
+                        "id": "0JUZW7",
+                        "name": "Boulliabaise",
+                        "type": "Technology"
+                    }
+                ],
+                "document": {
+                    "source": {
+                        "id": "0OV3njHjaV",
+                        "name": "Dirty rice",
+                        "type": "Source"
+                    },
+                    "title": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "url": "Tuples are containers for a fixed number of Erlang data types.",
+                    "authors": [
+                        {
+                            "id": "z8CVNt",
+                            "name": "Blue cheese dressing",
+                            "type": "Username"
+                        }
+                    ]
+                },
+                "fragment": "Type classes first appeared in the Haskell programming language.",
+                "id": "NAAgsMYd7Ab",
+                "language": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "primary_entity": {
+                    "id": "PQqoD0",
+                    "name": "Roasted Bone Marrow",
+                    "type": "AttackVector"
+                },
+                "analyst_note": null
+            }
+        ],
+        "enriched_entities": [
+            {
+                "evidence": [],
+                "references": [
+                    {
+                        "entities": [
+                            {
+                                "id": "0yMY4",
+                                "name": "Fajitas",
+                                "type": "Country"
+                            },
+                            {
+                                "id": "5ORjhX",
+                                "name": "Bird's Nest Soup",
+                                "type": "Organization"
+                            },
+                            {
+                                "id": "mzKjDs",
+                                "name": "Chicken \u00e0 la King",
+                                "type": "AttackVector"
+                            },
+                            {
+                                "id": "k1T3g",
+                                "name": "Huevos Rancheros",
+                                "type": "Person"
+                            },
+                            {
+                                "id": "url:https://kind.basketball/",
+                                "name": "Empanada",
+                                "type": "URL"
+                            },
+                            {
+                                "id": "X1Oqkm",
+                                "name": "Carne pizzaiola",
+                                "type": "Organization"
+                            },
+                            {
+                                "id": "gcx0k8IbU7",
+                                "name": "Spaghetti and Meatballs",
+                                "type": "Emoji",
+                                "description": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                            },
+                            {
+                                "id": "cbTATe",
+                                "name": "Smelt",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "0kaaO",
+                                "name": "Chimichanga",
+                                "type": "Company"
+                            },
+                            {
+                                "id": "9AtmT",
+                                "name": "St. Paul Sandwich",
+                                "type": "Product"
+                            },
+                            {
+                                "id": "wwSpyy",
+                                "name": "Waffle",
+                                "type": "Organization"
+                            }
+                        ],
+                        "document": {
+                            "source": {
+                                "id": "onztuT6KlWMej",
+                                "name": "Root Beer Float",
+                                "type": "Source"
+                            },
+                            "title": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                            "url": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                            "authors": [
+                                {
+                                    "id": "29fnrL",
+                                    "name": "Massaman Curry",
+                                    "type": "Username"
+                                }
+                            ]
+                        },
+                        "fragment": "Ports are used to communicate with the external world.",
+                        "id": "sHKvN5i1Mls",
+                        "language": "She spent her earliest years reading classic literature, and writing poetry.",
+                        "primary_entity": {
+                            "id": "35QyKv",
+                            "name": "Pumpkin pie",
+                            "type": "AttackVector"
+                        }
+                    },
+                    {
+                        "entities": [
+                            {
+                                "id": "2av6Mo",
+                                "name": "London broil",
+                                "type": "AttackVector"
+                            },
+                            {
+                                "id": "7ViL6",
+                                "name": "Apple sauce",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "yLhV0g",
+                                "name": "Stuffed zucchini",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "HCKyX",
+                                "name": "Chicago Hot Dog",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "QCEiIb",
+                                "name": "Chicken nugget",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "847sFv",
+                                "name": "Gumbo",
+                                "type": "FileName"
+                            },
+                            {
+                                "id": "yrYmI",
+                                "name": "Chocolate cheesecake",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "30uSN",
+                                "name": "Chicken fried bacon",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "XSW6W",
+                                "name": "Sausage gravy",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "aM2Qi4",
+                                "name": "Buffalo wing",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "pTd25n",
+                                "name": "Goulash",
+                                "type": "Position"
+                            }
+                        ],
+                        "document": {
+                            "source": {
+                                "id": "npPSxHTEw0Tpt",
+                                "name": "Goulash",
+                                "type": "Source"
+                            },
+                            "title": "Tuples are containers for a fixed number of Erlang data types.",
+                            "url": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                            "authors": [
+                                {
+                                    "id": "OfwFyA",
+                                    "name": "Chicken sandwich",
+                                    "type": "Username"
+                                }
+                            ]
+                        },
+                        "fragment": "Atoms are used within a program to denote distinguished values.",
+                        "id": "0Ke8ZDjWIHf",
+                        "language": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                        "primary_entity": {
+                            "id": "D371rX",
+                            "name": "Lobster roll",
+                            "type": "AttackVector"
+                        }
+                    }
+                ],
+                "criticality": {
+                    "name": "Frybread",
+                    "score": null,
+                    "last_triggered": "2025-03-03T07:29:48.362Z",
+                    "triggered": "2025-07-14T00:20:40.278Z",
+                    "level": 3
+                },
+                "entity": {
+                    "id": "WuxQwg",
+                    "name": "Patty",
+                    "type": "AttackVector"
+                }
+            },
+            {
+                "evidence": [],
+                "references": [
+                    {
+                        "entities": [
+                            {
+                                "id": "VLfdC",
+                                "name": "New York-Style Pizza",
+                                "type": "Country"
+                            },
+                            {
+                                "id": "oSywi",
+                                "name": "City chicken",
+                                "type": "Company"
+                            },
+                            {
+                                "id": "RMkOa",
+                                "name": "Barbecue",
+                                "type": "Organization"
+                            },
+                            {
+                                "id": "bsUXi3",
+                                "name": "Paella",
+                                "type": "AttackVector"
+                            },
+                            {
+                                "id": "url:https://tonight.associates/",
+                                "name": "Fortune cookie",
+                                "type": "URL"
+                            },
+                            {
+                                "id": "J740m",
+                                "name": "Vegemite on Toast",
+                                "type": "Country"
+                            }
+                        ],
+                        "document": {
+                            "source": {
+                                "id": "Oz7qzplvkB",
+                                "name": "Stuffed peppers",
+                                "type": "Source"
+                            },
+                            "title": "She spent her earliest years reading classic literature, and writing poetry.",
+                            "url": "It is also a garbage-collected runtime system.",
+                            "authors": [
+                                {
+                                    "id": "AyBskJ",
+                                    "name": "Laksa",
+                                    "type": "Username"
+                                }
+                            ]
+                        },
+                        "fragment": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                        "id": "eTi9MRMmwMp",
+                        "language": "The arguments can be primitive data types or compound data types.",
+                        "primary_entity": {
+                            "id": "RI83HE",
+                            "name": "Spring Rolls",
+                            "type": "AttackVector"
+                        }
+                    },
+                    {
+                        "entities": [
+                            {
+                                "id": "Xazdi",
+                                "name": "Hawaiian haystack",
+                                "type": "Company"
+                            },
+                            {
+                                "id": "OzPs4A",
+                                "name": "Ice cream cake",
+                                "type": "AttackVector"
+                            }
+                        ],
+                        "document": {
+                            "source": {
+                                "id": "3QpmzwrSt475X",
+                                "name": "Satay",
+                                "type": "Source"
+                            },
+                            "title": "Make me a sandwich.",
+                            "url": "Erlang is a general-purpose, concurrent, functional programming language.",
+                            "authors": []
+                        },
+                        "fragment": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                        "id": "OLoiebqlPEK",
+                        "language": "Its main implementation is the Glasgow Haskell Compiler.",
+                        "primary_entity": {
+                            "id": "uFdNlF",
+                            "name": "Kimchi",
+                            "type": "AttackVector"
+                        }
+                    },
+                    {
+                        "entities": [
+                            {
+                                "id": "4OCUh",
+                                "name": "Cinnamon Roll",
+                                "type": "Company"
+                            },
+                            {
+                                "id": "AvMig",
+                                "name": "Ratatouille",
+                                "type": "Country"
+                            },
+                            {
+                                "id": "D23Y1b",
+                                "name": "Meatcake",
+                                "type": "AttackVector"
+                            }
+                        ],
+                        "document": {
+                            "source": {
+                                "id": "JIpD4h9Lhq",
+                                "name": "Ceviche",
+                                "type": "Source"
+                            },
+                            "title": "Where are my pants?",
+                            "url": "Make me a sandwich.",
+                            "authors": [
+                                {
+                                    "id": "N757oL",
+                                    "name": "Yeung Chow fried rice",
+                                    "type": "Username"
+                                }
+                            ]
+                        },
+                        "fragment": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                        "id": "x4cInfwllhd",
+                        "language": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                        "primary_entity": {
+                            "id": "kg8eD5",
+                            "name": "Celery Victor",
+                            "type": "AttackVector"
+                        }
+                    },
+                    {
+                        "entities": [
+                            {
+                                "id": "z4QIw",
+                                "name": "Steak Tartare",
+                                "type": "Company"
+                            },
+                            {
+                                "id": "mgd8z",
+                                "name": "Charleston red rice",
+                                "type": "Person"
+                            },
+                            {
+                                "id": "LwiHqR",
+                                "name": "Fried fish",
+                                "type": "AttackVector"
+                            },
+                            {
+                                "id": "qARCeH",
+                                "name": "Ice cream cake",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "xMKfw2UblzxNrkiSBjw3KzYlyivlGI3YOoEFzFsT",
+                                "name": "Souvlaki",
+                                "type": "Image"
+                            },
+                            {
+                                "id": "url:https://val.gl/",
+                                "name": "Spaghetti and Meatballs",
+                                "type": "URL"
+                            }
+                        ],
+                        "document": {
+                            "source": {
+                                "id": "pSMLdqth3v",
+                                "name": "Patty",
+                                "type": "Source"
+                            },
+                            "title": "It is also a garbage-collected runtime system.",
+                            "url": "Make me a sandwich.",
+                            "authors": [
+                                {
+                                    "id": "NvcT0n",
+                                    "name": "Cheese Curds",
+                                    "type": "Username"
+                                }
+                            ]
+                        },
+                        "fragment": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                        "id": "1YfsZg3iFY4",
+                        "language": "It is also a garbage-collected runtime system.",
+                        "primary_entity": {
+                            "id": "8JWOiQ",
+                            "name": "Maple Bacon Doughnut",
+                            "type": "AttackVector"
+                        }
+                    }
+                ],
+                "criticality": {
+                    "name": "Frito Pie",
+                    "score": null,
+                    "last_triggered": "2025-01-03T20:13:16.401Z",
+                    "triggered": "2025-10-03T11:40:31.603Z",
+                    "level": 2
+                },
+                "entity": {
+                    "id": "n06zbf",
+                    "name": "Cornish game hen",
+                    "type": "AttackVector"
+                }
+            },
+            {
+                "evidence": [],
+                "references": [
+                    {
+                        "entities": [
+                            {
+                                "id": "zELoxG",
+                                "name": "Hot Chicken sandwich",
+                                "type": "Hashtag"
+                            },
+                            {
+                                "id": "url:https://suspension.taipei/",
+                                "name": "Maine Lobster",
+                                "type": "URL"
+                            },
+                            {
+                                "id": "s1sSF",
+                                "name": "Vegemite on Toast",
+                                "type": "AttackVector"
+                            },
+                            {
+                                "id": "9sciBQ",
+                                "name": "Steak sauce",
+                                "type": "Hashtag"
+                            },
+                            {
+                                "id": "UNKspg",
+                                "name": "Jerky",
+                                "type": "Hashtag"
+                            },
+                            {
+                                "id": "vd4hBv",
+                                "name": "Brunswick stew",
+                                "type": "Position"
+                            },
+                            {
+                                "id": "CXhfEwVXQUNFbLCUwyMxk7CpBAvcDbCANBvQ3l0j",
+                                "name": "Calamari",
+                                "type": "Image"
+                            },
+                            {
+                                "id": "xK9N7A",
+                                "name": "Fattoush Salad",
+                                "type": "Hashtag"
+                            },
+                            {
+                                "id": "1wykyf",
+                                "name": "Carolina style",
+                                "type": "Hashtag"
+                            },
+                            {
+                                "id": "rc4iOn",
+                                "name": "Energy bar",
+                                "type": "Technology"
+                            },
+                            {
+                                "id": "8Jkoy1",
+                                "name": "Pumpkin pie",
+                                "type": "Hashtag"
+                            },
+                            {
+                                "id": "0zJ7m3",
+                                "name": "Ammonia cookie",
+                                "type": "Hashtag"
+                            },
+                            {
+                                "id": "i6rcvv",
+                                "name": "Pickled Okra",
+                                "type": "Hashtag"
+                            },
+                            {
+                                "id": "bX3B87",
+                                "name": "Corn dog",
+                                "type": "Hashtag"
+                            }
+                        ],
+                        "document": {
+                            "source": {
+                                "id": "2ShNd1dVDD",
+                                "name": "Beef Lo Mein",
+                                "type": "Source"
+                            },
+                            "title": "Haskell features a type system with type inference and lazy evaluation.",
+                            "url": "Do you come here often?",
+                            "authors": [
+                                {
+                                    "id": "QbqChc",
+                                    "name": "Dirty rice",
+                                    "type": "Username"
+                                }
+                            ]
+                        },
+                        "fragment": "It is also a garbage-collected runtime system.",
+                        "id": "2ldWfzrLhhC",
+                        "language": "Ports are created with the built-in function open_port.",
+                        "primary_entity": {
+                            "id": "oVLNz",
+                            "name": "Chips and dip",
+                            "type": "AttackVector"
+                        }
+                    }
+                ],
+                "criticality": {
+                    "name": "Chocolate Brownie",
+                    "score": null,
+                    "last_triggered": "2025-04-15T18:30:01.845Z",
+                    "triggered": "2025-09-19T05:56:59.405Z",
+                    "level": 1
+                },
+                "entity": {
+                    "id": "Ztkx0",
+                    "name": "Chicharones",
+                    "type": "AttackVector"
+                }
+            },
+            {
+                "evidence": [],
+                "references": [
+                    {
+                        "entities": [
+                            {
+                                "id": "gHIfFL",
+                                "name": "Hokkien fried rice",
+                                "type": "IndustryTerm"
+                            },
+                            {
+                                "id": "K3gdLP",
+                                "name": "Fish and Chips!",
+                                "type": "AttackVector"
+                            },
+                            {
+                                "id": "g0i2o",
+                                "name": "Po'Boy",
+                                "type": "Organization"
+                            },
+                            {
+                                "id": "ZLvEKH",
+                                "name": "Tetrazzini",
+                                "type": "Technology"
+                            }
+                        ],
+                        "document": {
+                            "source": {
+                                "id": "m2P74eyuXS",
+                                "name": "Liver and onions",
+                                "type": "Source"
+                            },
+                            "title": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                            "url": "She spent her earliest years reading classic literature, and writing poetry.",
+                            "authors": [
+                                {
+                                    "id": "1r4dsy",
+                                    "name": "Potatoes O'Brien",
+                                    "type": "Username"
+                                }
+                            ]
+                        },
+                        "fragment": "I don't even care.",
+                        "id": "o3DvlpkZNc5",
+                        "language": "Tuples are containers for a fixed number of Erlang data types.",
+                        "primary_entity": {
+                            "id": "QqGCm1",
+                            "name": "Haystack",
+                            "type": "AttackVector"
+                        }
+                    }
+                ],
+                "criticality": {
+                    "name": "Cheese balls",
+                    "score": null,
+                    "last_triggered": "2025-04-04T15:48:23.093Z",
+                    "triggered": "2025-11-04T21:49:59.509Z",
+                    "level": 1
+                },
+                "entity": {
+                    "id": "95djbs",
+                    "name": "Buffalo wing",
+                    "type": "AttackVector"
+                }
+            }
+        ],
+        "ai_insights": {
+            "comment": "It is also a garbage-collected runtime system.",
+            "text": null
+        },
+        "log": {
+            "note_author": null,
+            "note_date": null,
+            "status_date": "2025-04-19T05:44:14.227Z",
+            "triggered": "2025-07-09T07:04:36.516Z",
+            "status_change_by": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+        },
+        "triggered_by": [],
+        "title": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+        "type": "ENTITY"
+    }
+}

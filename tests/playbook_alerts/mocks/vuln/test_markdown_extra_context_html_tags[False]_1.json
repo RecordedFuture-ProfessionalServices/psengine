@@ -1,0 +1,88 @@
+{
+    "data": {
+        "aiInsights": {
+            "comment": "Ports are used to communicate with the external world.",
+            "text": null
+        },
+        "timestamps": {
+            "lastSeen": "2025-05-13T20:23:06.742Z",
+            "firstSeen": "2025-09-23T00:08:47.564Z"
+        },
+        "risk": {
+            "criticalityLabel": "Type classes first appeared in the Haskell programming language.",
+            "riskString": "Its main implementation is the Glasgow Haskell Compiler.",
+            "rules": 5,
+            "criticality": 5,
+            "riskSummary": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "score": 99,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "evidenceString": "Tuples are containers for a fixed number of Erlang data types.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-09-02T04:19:51.889Z",
+                    "criticalityLabel": "Erlang is known for its designs that are well suited for systems."
+                },
+                {
+                    "mitigationString": "Do you have any idea why this is not working?",
+                    "evidenceString": "Any element of a tuple can be accessed in constant time.",
+                    "rule": "Type classes first appeared in the Haskell programming language.",
+                    "criticality": 2,
+                    "timestamp": "2025-11-23T14:17:06.462Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                },
+                {
+                    "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "evidenceString": "Atoms are used within a program to denote distinguished values.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 3,
+                    "timestamp": "2025-02-02T06:01:02.059Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "evidenceString": "Tuples are containers for a fixed number of Erlang data types.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 3,
+                    "timestamp": "2025-12-22T04:02:21.593Z",
+                    "criticalityLabel": "Any element of a tuple can be accessed in constant time."
+                },
+                {
+                    "mitigationString": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "evidenceString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 5,
+                    "timestamp": "2025-05-30T03:54:16.710Z",
+                    "criticalityLabel": "Do you have any idea why this is not working?"
+                }
+            ]
+        },
+        "cvssv3": {
+            "source": "Where are my pants?",
+            "scope": "Type classes first appeared in the Haskell programming language.",
+            "exploitabilityScore": 1.8,
+            "modified": "2025-06-30T04:20:45.032Z",
+            "baseSeverity": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "baseScore": 7.8,
+            "privilegesRequired": "Tuples are containers for a fixed number of Erlang data types.",
+            "userInteraction": "I don't even care.",
+            "impactScore": 5.9,
+            "attackVector": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "integrityImpact": "Where are my pants?",
+            "confidentialityImpact": "Erlang is known for its designs that are well suited for systems.",
+            "vectorString": "The arguments can be primitive data types or compound data types.",
+            "version": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "attackComplexity": "I don't even care.",
+            "created": "2025-06-01T00:48:32.655Z",
+            "availabilityImpact": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+        },
+        "entity": {
+            "id": "fd7z7S",
+            "name": "Cheese Curds",
+            "type": "CyberVulnerability",
+            "description": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase."
+        },
+        "cvss": {}
+    }
+}

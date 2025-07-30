@@ -1,0 +1,160 @@
+{
+    "attributes": {
+        "title": "Erlang is known for its designs that are well suited for systems.",
+        "text": "In 1989 the building was heavily damaged by fire, but it has since been restored. Erlang is known for its designs that are well suited for systems. They are written as strings of consecutive alphanumeric characters, the first character being lowercase. Erlang is a general-purpose, concurrent, functional programming language. Atoms are used within a program to denote distinguished values.",
+        "published": "2025-03-08T04:24:12.310Z",
+        "events": [
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-10-27T10:08:26.419Z",
+                    "stop": "2025-04-24T20:11:36.714Z",
+                    "capabilities": [
+                        {
+                            "id": "2oLIjL",
+                            "name": "Choco pie",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "iDJLJ",
+                            "name": "Ranch dressing",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "QOFAZ",
+                            "name": "Chicken and waffles",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "e4tWRXxfzUW",
+                            "name": "Patty",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "moOZu8",
+                            "name": "New York-Style Pizza",
+                            "type": "Organization"
+                        }
+                    ]
+                }
+            }
+        ],
+        "note_entities": [
+            {
+                "id": "1Fajj",
+                "name": "Queso Fresco",
+                "type": "AttackVector"
+            },
+            {
+                "id": "ugTYr",
+                "name": "Ice Cream",
+                "type": "AttackVector"
+            },
+            {
+                "id": "0c8GVhdoKET",
+                "name": "Pickled Okra",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "reD9i2",
+                "name": "Creamed eggs on toast",
+                "type": "AttackVector"
+            },
+            {
+                "id": "WdQTBR",
+                "name": "Naan",
+                "type": "Organization"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "LkxkYs",
+                "name": "Chocolate cheesecake",
+                "type": "Technology"
+            },
+            {
+                "id": "QhhUdh",
+                "name": "Crab Rangoon",
+                "type": "AttackVector"
+            },
+            {
+                "id": "PLT2u6F8ucIrK",
+                "name": "Bruschetta",
+                "type": "Source"
+            },
+            {
+                "id": "yB4mKyYXhmVBY",
+                "name": "Mashed pumpkin",
+                "type": "Source"
+            },
+            {
+                "id": "wUqZve",
+                "name": "Spaghetti Bolognese",
+                "type": "Technology"
+            },
+            {
+                "id": "6v8bo",
+                "name": "Apple sauce",
+                "type": "Country"
+            }
+        ],
+        "topic": [
+            {
+                "id": "MaYWLL",
+                "name": "Chowder",
+                "type": "Topic",
+                "description": "Where are my pants?"
+            }
+        ],
+        "validation_urls": [
+            {
+                "id": "url:https://read.museum.post/",
+                "name": "Garlic bread",
+                "type": "URL"
+            }
+        ],
+        "diamond_model": [
+            {
+                "start": "2025-11-03T12:50:46.341Z",
+                "stop": "2025-09-16T00:35:48.832Z",
+                "capabilities": [
+                    {
+                        "id": "Jpzrz6",
+                        "name": "Vegemite on Toast",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "2TZz2",
+                        "name": "Poke",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "i8m1u",
+                        "name": "Chicken \u00e0 la King",
+                        "type": "AttackVector"
+                    },
+                    {
+                        "id": "nxfNGCLHfxB",
+                        "name": "White chocolate cookie",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "d65XX1",
+                        "name": "Hokkien fried rice",
+                        "type": "Organization"
+                    }
+                ]
+            }
+        ]
+    },
+    "id": "lJL7KaaEa2",
+    "source": {
+        "id": "KePl4WGdlxGlv",
+        "name": "Pasta salad",
+        "type": "Source"
+    }
+}

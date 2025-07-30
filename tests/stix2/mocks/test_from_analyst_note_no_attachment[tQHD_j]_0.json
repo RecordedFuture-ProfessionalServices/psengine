@@ -1,0 +1,160 @@
+{
+	"attributes": {
+		"title": "Make me a sandwich.",
+		"text": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. Any element of a tuple can be accessed in constant time. Type classes first appeared in the Haskell programming language. Erlang is known for its designs that are well suited for systems. The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+		"published": "2025-05-05T01:05:58.573Z",
+		"events": [
+			{
+				"type": "CyberAttack",
+				"attributes": {
+					"start": "2025-12-09T21:28:54.797Z",
+					"stop": "2025-02-06T23:11:14.948Z",
+					"capabilities": [
+						{
+							"id": "2f5XH3",
+							"name": "Sonofabitch stew",
+							"type": "AttackVector"
+						},
+						{
+							"id": "KO8yw",
+							"name": "Pork and beans",
+							"type": "AttackVector"
+						},
+						{
+							"id": "JNlc7",
+							"name": "Chicago Deep Dish Pizza",
+							"type": "AttackVector"
+						},
+						{
+							"id": "EV7LDXU8sPY",
+							"name": "Glorified rice",
+							"type": "MitreAttackIdentifier"
+						}
+					],
+					"adversary": [
+						{
+							"id": "HlElOp",
+							"name": "Baba Ghanoush",
+							"type": "Organization"
+						}
+					]
+				}
+			}
+		],
+		"note_entities": [
+			{
+				"id": "5vOUF",
+				"name": "Oysters Rockefeller",
+				"type": "AttackVector"
+			},
+			{
+				"id": "K4sSQ",
+				"name": "Ice Cream",
+				"type": "AttackVector"
+			},
+			{
+				"id": "zfckFEdLHEk",
+				"name": "Breaded shrimp",
+				"type": "MitreAttackIdentifier"
+			},
+			{
+				"id": "TC1ifl",
+				"name": "Pepperoni Pizza",
+				"type": "AttackVector"
+			},
+			{
+				"id": "tBE9Kx",
+				"name": "Polenta",
+				"type": "Organization"
+			}
+		],
+		"context_entities": [
+			{
+				"id": "zIZ7v7",
+				"name": "Pop-Tarts",
+				"type": "Technology"
+			},
+			{
+				"id": "BSICMs",
+				"name": "Sour cream",
+				"type": "AttackVector"
+			},
+			{
+				"id": "KDtdLd93xjsfO",
+				"name": "Brisket",
+				"type": "Source"
+			},
+			{
+				"id": "4OQHEme4BCJIQ",
+				"name": "Chicken herby pasta bake",
+				"type": "Source"
+			},
+			{
+				"id": "3VDo5j",
+				"name": "Pork Belly",
+				"type": "Technology"
+			},
+			{
+				"id": "opnrB",
+				"name": "Onion ring",
+				"type": "Country"
+			}
+		],
+		"topic": [
+			{
+				"id": "Xc9xXe",
+				"name": "Bird's Nest Soup",
+				"type": "Topic",
+				"description": "I don't even care."
+			}
+		],
+		"validation_urls": [
+			{
+				"id": "url:https://camcorder.net/",
+				"name": "https://camcorder.net/",
+				"type": "URL"
+			}
+		],
+		"diamond_model": [
+			{
+				"start": "2025-11-01T07:57:44.860Z",
+				"stop": "2025-05-29T16:16:11.044Z",
+				"capabilities": [
+					{
+						"id": "Ppw0m6",
+						"name": "Steak sandwich",
+						"type": "AttackVector"
+					},
+					{
+						"id": "WL6W0",
+						"name": "Frito Pie",
+						"type": "AttackVector"
+					},
+					{
+						"id": "WE3HA",
+						"name": "Popover",
+						"type": "AttackVector"
+					},
+					{
+						"id": "48e7heegkEo",
+						"name": "Chicken fried steak",
+						"type": "MitreAttackIdentifier"
+					}
+				],
+				"adversary": [
+					{
+						"id": "B9j2BI",
+						"name": "Meatloaf",
+						"type": "Organization"
+					}
+				]
+			}
+		]
+	},
+	"id": "zelDe94BRO",
+	"source": {
+		"id": "EdQXeTlZFmtUn",
+		"name": "Senate bean soup",
+		"type": "Source"
+	}
+}

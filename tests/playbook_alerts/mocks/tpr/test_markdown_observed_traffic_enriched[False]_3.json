@@ -1,0 +1,95 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-12-30T23:55:30.406Z",
+            "firstSeen": "2025-03-31T10:11:01.008Z"
+        },
+        "risk": {
+            "criticalityLabel": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "riskString": "Where are my pants?",
+            "rules": 9,
+            "criticality": 2,
+            "riskSummary": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "score": 48,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "It is also a garbage-collected runtime system.",
+                    "evidenceString": "Tuples are containers for a fixed number of Erlang data types.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-09-12T04:17:52.034Z",
+                    "criticalityLabel": "He looked inquisitively at his keyboard and wrote another sentence."
+                },
+                {
+                    "mitigationString": "Erlang is known for its designs that are well suited for systems.",
+                    "evidenceString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-01-20T07:00:41.940Z",
+                    "criticalityLabel": "He looked inquisitively at his keyboard and wrote another sentence."
+                },
+                {
+                    "mitigationString": "Make me a sandwich.",
+                    "evidenceString": "The arguments can be primitive data types or compound data types.",
+                    "rule": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "criticality": 1,
+                    "timestamp": "2025-02-12T10:44:14.974Z",
+                    "criticalityLabel": "Tuples are containers for a fixed number of Erlang data types."
+                },
+                {
+                    "mitigationString": "Do you come here often?",
+                    "evidenceString": "Atoms are used within a program to denote distinguished values.",
+                    "rule": "I don't even care.",
+                    "criticality": 1,
+                    "timestamp": "2025-01-23T12:56:21.762Z",
+                    "criticalityLabel": "Haskell features a type system with type inference and lazy evaluation."
+                },
+                {
+                    "mitigationString": "The arguments can be primitive data types or compound data types.",
+                    "evidenceString": "Atoms are used within a program to denote distinguished values.",
+                    "rule": "Make me a sandwich.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-17T10:01:09.424Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "evidenceString": "Where are my pants?",
+                    "rule": "Ports are used to communicate with the external world.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-31T10:32:51.713Z",
+                    "criticalityLabel": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase."
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-08-12T04:46:02.050Z",
+                    "criticalityLabel": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                },
+                {
+                    "mitigationString": "Erlang is known for its designs that are well suited for systems.",
+                    "evidenceString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "criticality": 2,
+                    "timestamp": "2025-07-26T00:32:55.806Z",
+                    "criticalityLabel": "I don't even care."
+                },
+                {
+                    "mitigationString": "Ports are used to communicate with the external world.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "Type classes first appeared in the Haskell programming language.",
+                    "criticality": 2,
+                    "timestamp": "2025-04-01T04:44:32.470Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:204.248.38.55",
+            "name": "Venison",
+            "type": "IpAddress"
+        }
+    }
+}

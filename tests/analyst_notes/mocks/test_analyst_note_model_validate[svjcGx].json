@@ -1,0 +1,79 @@
+{
+    "attributes": {
+        "title": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+        "text": "Ports are used to communicate with the external world. Any element of a tuple can be accessed in constant time. The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. Erlang is known for its designs that are well suited for systems. I don't even care.",
+        "published": "2025-11-09T02:26:08.980Z",
+        "events": [
+            {
+                "type": "PoliticalEvent",
+                "attributes": {
+                    "start": "2025-03-20T11:17:59.052Z",
+                    "stop": "2025-07-05T18:42:30.961Z",
+                    "location": [
+                        {
+                            "id": "LLFcR",
+                            "name": "Brisket",
+                            "type": "Country"
+                        }
+                    ],
+                    "event_positions": [
+                        {
+                            "longitude": 79.0,
+                            "latitude": 22.0
+                        }
+                    ]
+                }
+            }
+        ],
+        "note_entities": [
+            {
+                "id": "0jUrO",
+                "name": "Pan Seared Scallops",
+                "type": "Country"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "g33vZ0",
+                "name": "Lorna Doone",
+                "type": "Technology"
+            },
+            {
+                "id": "PjCSYM",
+                "name": "Fish and Chips!",
+                "type": "Technology"
+            }
+        ],
+        "topic": [
+            {
+                "id": "5UQngs",
+                "name": "Fried Green Tomatoes",
+                "type": "Topic",
+                "description": "Where are my pants?"
+            }
+        ],
+        "validation_urls": [
+            {
+                "id": "url:https://enjoyed.info/",
+                "name": "Deep Fried Oreos",
+                "type": "URL"
+            }
+        ],
+        "recommended_queries": [
+            {
+                "title": "Do you have any idea why this is not working?",
+                "url": {
+                    "id": "url:https://watson.ru/",
+                    "name": "Margherita Pizza",
+                    "type": "URL"
+                }
+            }
+        ]
+    },
+    "id": "yjpxkb5Apd",
+    "source": {
+        "id": "2zBhbkzqXJ0LN",
+        "name": "Crab Rangoon",
+        "type": "Source"
+    }
+}

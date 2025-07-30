@@ -1,0 +1,907 @@
+    "data": {
+        "analystNotes": [
+            {
+                "attributes": {
+                    "validated_on": "2025-09-01T15:30:16.578Z",
+                    "published": "2025-04-18T23:07:46.817Z",
+                    "text": "Erlang is a general-purpose, concurrent, functional programming language. Do you come here often? Where are my pants? Do you have any idea why this is not working? Ports are created with the built-in function open_port.",
+                    "topic": {
+                        "id": "btXiLg",
+                        "name": "Chicken nugget",
+                        "type": "Topic",
+                        "description": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase."
+                    },
+                    "context_entities": [
+                        {
+                            "id": "rkF7a",
+                            "name": "New York-Style Pizza",
+                            "type": "Organization"
+                        },
+                        {
+                            "id": "3CtBTj",
+                            "name": "Chocolate cheesecake",
+                            "type": "Organization"
+                        },
+                        {
+                            "id": "P1doVe",
+                            "name": "Celery Victor",
+                            "type": "Company"
+                        },
+                        {
+                            "id": "tFulKn",
+                            "name": "Sandwich",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "XlEHYW",
+                            "name": "Milk toast",
+                            "type": "MalwareCategory"
+                        },
+                        {
+                            "id": "iGkko",
+                            "name": "Choco pie",
+                            "type": "Company"
+                        },
+                        {
+                            "id": "2y0rMz",
+                            "name": "Doughnut",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "NwF4zD",
+                            "name": "Fattoush Salad",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "idn:honest.jobs",
+                            "name": "Spaghetti and Meatballs",
+                            "type": "InternetDomainName"
+                        },
+                        {
+                            "id": "R4TtN9",
+                            "name": "Huevos Rancheros",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "idn:collar.com",
+                            "name": "Baklava",
+                            "type": "InternetDomainName"
+                        },
+                        {
+                            "id": "6890hC",
+                            "name": "Elote",
+                            "type": "Organization"
+                        },
+                        {
+                            "id": "G3E5X",
+                            "name": "Lobster roll",
+                            "type": "Technology"
+                        },
+                        {
+                            "id": "kwKv56",
+                            "name": "Chicken fried bacon",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "v1nJlF",
+                            "name": "Fajitas",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "c0XYf",
+                            "name": "Steak Tartare",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "TTlhOr",
+                            "name": "Kobe Beef",
+                            "type": "Technology"
+                        },
+                        {
+                            "id": "fGuYa1",
+                            "name": "Soul food",
+                            "type": "Technology"
+                        },
+                        {
+                            "id": "sgHM",
+                            "name": "Butter cookie",
+                            "type": "Technology"
+                        },
+                        {
+                            "id": "IYJ0z",
+                            "name": "Cheese Curds",
+                            "type": "Product"
+                        },
+                        {
+                            "id": "rTp9f",
+                            "name": "Pepperoni Pizza",
+                            "type": "Company"
+                        },
+                        {
+                            "id": "idn:queensland.ly",
+                            "name": "Cheese stuffed crust pizza",
+                            "type": "InternetDomainName"
+                        },
+                        {
+                            "id": "QwkLM",
+                            "name": "Chili con carne",
+                            "type": "Product"
+                        },
+                        {
+                            "id": "idn:okay.com",
+                            "name": "Oreo",
+                            "type": "InternetDomainName"
+                        },
+                        {
+                            "id": "MNzhj3",
+                            "name": "London broil",
+                            "type": "Product"
+                        }
+                    ],
+                    "validation_urls": [
+                        {
+                            "id": "url:https://query.net/",
+                            "name": "Rolled oyster",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://specializing.mil/",
+                            "name": "Calas",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://wear.mortgage/",
+                            "name": "Shrimp and Grits",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://emotional.capetown/",
+                            "name": "Potato skins",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://societies.team/",
+                            "name": "Eggo",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://toys.biz/",
+                            "name": "Chili dog",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://lease.moscow/",
+                            "name": "Phaal",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://leone.biz/",
+                            "name": "Chicago Deep Dish Pizza",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://universal.aero/",
+                            "name": "Cordon bleu",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://these.scot/",
+                            "name": "Milkshake",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://beat.com/",
+                            "name": "Fried Green Tomatoes",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://labs.se/",
+                            "name": "Hawaiian haystack",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://ecuador.nyc/",
+                            "name": "Italian Beef Sandwich",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://subaru.net/",
+                            "name": "Shepherd's Pie",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://transport.com/",
+                            "name": "American fried rice",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://gibson.london/",
+                            "name": "Bi Bim Bap",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://connections.com/",
+                            "name": "Goulash",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://uri.tm/",
+                            "name": "Salad bar",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://philips.org/",
+                            "name": "Pigs in blankets",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://cards.webcam/",
+                            "name": "Pasta salad",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://prominent.zuerich/",
+                            "name": "Steak Tartare",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://laid.mil/",
+                            "name": "Sichuan Hot Pot",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://problem.info/",
+                            "name": "Bacon Cheeseburger",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://calvin.mobi/",
+                            "name": "Stroganoff",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://wellington.net/",
+                            "name": "Fortune cookie",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://investigations.name/",
+                            "name": "Corned beef",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://waiting.biz/",
+                            "name": "Protein bar",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://restrictions.com/",
+                            "name": "Fortune cookie",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://mandatory.mobi/",
+                            "name": "Macaroni and Cheese",
+                            "type": "URL"
+                        }
+                    ],
+                    "title": "Haskell features a type system with type inference and lazy evaluation.",
+                    "note_entities": [
+                        {
+                            "id": "C9RrpL",
+                            "name": "Meatcake",
+                            "type": "Malware"
+                        },
+                        {
+                            "id": "1w4hO",
+                            "name": "Philadelphia cheesesteak",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "eHVUYX",
+                            "name": "Jell-O",
+                            "type": "AttackVector"
+                        },
+                        {
+                            "id": "url:https://trail.wales/",
+                            "name": "Sweetbreads",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://shuttle.com/",
+                            "name": "Pasta salad",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://signup.osaka/",
+                            "name": "Tin Roof Ice Cream",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://delaware.analytics/",
+                            "name": "Thousand Island dressing",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "url:https://characters.broadway/",
+                            "name": "Haggis",
+                            "type": "URL"
+                        },
+                        {
+                            "id": "y5eFWO",
+                            "name": "Deep Fried Oreos",
+                            "type": "MalwareCategory"
+                        },
+                        {
+                            "id": "jOrteNu4CTA",
+                            "name": "Corn chowder",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "MgIC6MJOImx",
+                            "name": "Sonofabitch stew",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "saeI9hTZuaW",
+                            "name": "Albacore Tuna Melt",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "JqBemJdlRDH",
+                            "name": "Salmon pasta bake",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "9cTA0JUZvZme",
+                            "name": "Hummus",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "mhJCL6E2EZK",
+                            "name": "Tin Roof Ice Cream",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "xuvL6w0G1es",
+                            "name": "Mango and Sticky Rice",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "jDnlmlYiStf",
+                            "name": "Rice and gravy",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "NTs3g7uyiHkP",
+                            "name": "Escargot",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "C0oPRNGIAS7eWRE",
+                            "name": "Tomato compote",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "t3ViMlIawrFN6UG",
+                            "name": "Eggs Benedict",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "5vwIaC0hDtQ",
+                            "name": "Coleslaw",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "jJFkVzqRM26",
+                            "name": "Chocolate Chip Cookie",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "uQkdT0SHBs7",
+                            "name": "Milkshake",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "LvhU01r2lgX",
+                            "name": "Beef Manhattan",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "BooBueosERT",
+                            "name": "Salted caramel cookie",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "Bs70XpsI2hE",
+                            "name": "Cinnamon Roll",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "LBerxxLazZ3",
+                            "name": "St. Paul Sandwich",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "j4qwpBSZdyPVj6p",
+                            "name": "Fried fish",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "wogJVOsOnB6czT2",
+                            "name": "Kung Pao Chicken",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "7gJl8APxl3krFcA",
+                            "name": "Pigs in blankets",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ]
+                },
+                "source": {
+                    "id": "McLGiX03WgXbL",
+                    "name": "Vegemite on Toast",
+                    "type": "Source"
+                },
+                "id": "vUoAd2"
+            }
+        ],
+        "enterpriseLists": [],
+        "aiInsights": {
+            "comment": null,
+            "text": "He looked inquisitively at his keyboard and wrote another sentence. The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. Its main implementation is the Glasgow Haskell Compiler. Its main implementation is the Glasgow Haskell Compiler. Type classes first appeared in the Haskell programming language.",
+            "numberOfReferences": 3
+        },
+        "timestamps": {
+            "lastSeen": "2025-03-20T04:06:18.125Z",
+            "firstSeen": "2025-06-16T12:59:31.020Z"
+        },
+        "risk": {
+            "criticalityLabel": "Ports are created with the built-in function open_port.",
+            "riskString": "Any element of a tuple can be accessed in constant time.",
+            "rules": 3,
+            "criticality": 1,
+            "riskSummary": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "score": 24,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Any element of a tuple can be accessed in constant time.",
+                    "evidenceString": "Atoms are used within a program to denote distinguished values.",
+                    "rule": "Ports are created with the built-in function open_port.",
+                    "criticality": 1,
+                    "timestamp": "2025-11-27T05:25:53.860Z",
+                    "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "mitigationString": "Ports are used to communicate with the external world.",
+                    "evidenceString": "The arguments can be primitive data types or compound data types.",
+                    "rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "criticality": 1,
+                    "timestamp": "2025-09-12T07:00:04.818Z",
+                    "criticalityLabel": "Ports are created with the built-in function open_port."
+                },
+                {
+                    "mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "criticality": 1,
+                    "timestamp": "2025-02-11T19:51:00.808Z",
+                    "criticalityLabel": "Do you come here often?"
+                }
+            ]
+        },
+        "sightings": [],
+        "riskMapping": [
+            {
+                "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "categories": []
+            },
+            {
+                "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "categories": [
+                    {
+                        "framework": "Make me a sandwich.",
+                        "name": "Cobb Salad"
+                    },
+                    {
+                        "framework": "Ports are created with the built-in function open_port.",
+                        "name": "Seafood cocktail"
+                    }
+                ]
+            },
+            {
+                "rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "categories": [
+                    {
+                        "framework": "Do you come here often?",
+                        "name": "Chicken Salad Wrap"
+                    },
+                    {
+                        "framework": "Do you have any idea why this is not working?",
+                        "name": "Chicken Tikka Masala"
+                    }
+                ]
+            }
+        ],
+        "entity": {
+            "id": "url:https://dude.clinic/",
+            "name": "Chocolate cheesecake",
+            "type": "URL"
+        },
+        "relatedEntities": [],
+        "intelCard": "He looked inquisitively at his keyboard and wrote another sentence.",
+        "links": {
+            "hits": [
+                {
+                    "sections": [
+                        {
+                            "section_id": {
+                                "id": "cZtJet",
+                                "name": "Prawn Pizza",
+                                "type": "Category"
+                            },
+                            "total_count": 24,
+                            "lists": [
+                                {
+                                    "entities": [
+                                        {
+                                            "id": "pYDeNcbTPJM",
+                                            "name": "Boulliabaise",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "8q4pQsZM0s0zvxV",
+                                            "name": "Pumpkin pie",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "0m3EwYVTiojachM",
+                                            "name": "Pork and beans",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "aVk46kUINLnsL9k",
+                                            "name": "Bulgogi",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "c6CDAgq4YFl",
+                                            "name": "Risotto",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "ht3FNEWNwrT",
+                                            "name": "Calf's liver and bacon",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "hn1woDm9XB9",
+                                            "name": "Phaal",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "Q6wZ4aVROMC",
+                                            "name": "New York-Style Pizza",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "0QWeyJzO2nn",
+                                            "name": "Gazpacho",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "5DVa9jq5l4M",
+                                            "name": "Rolled oyster",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "SdGOX9NNyInCGZn",
+                                            "name": "Empanada",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "GaEWezKZofP",
+                                            "name": "Steak sauce",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "0LXshQD7373",
+                                            "name": "Senate bean soup",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "zP78PmOu2Kx",
+                                            "name": "Buffalo burger",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "8sXXKiA6Y9H",
+                                            "name": "Corn flakes",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "y0plEDyETvBil3L",
+                                            "name": "Russian dressing",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "H0rSYPhLgEC",
+                                            "name": "BBQ Chicken Pizza",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "V8LQqlPolns",
+                                            "name": "Pistachio Ice Cream",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "dKeGjH2BkY3",
+                                            "name": "Mini pizzas",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "gNZPecu820Dm",
+                                            "name": "Gazpacho",
+                                            "type": "MitreAttackIdentifier"
+                                        },
+                                        {
+                                            "id": "PpQtqsAM2R6a",
+                                            "name": "Maple Bacon Doughnut",
+                                            "type": "MitreAttackIdentifier"
+                                        }
+                                    ],
+                                    "total_count": 21,
+                                    "type": {
+                                        "id": "gMrdn1qyJ6gid3LGM7d44t3msw",
+                                        "name": "Escargot",
+                                        "type": "MetaType",
+                                        "description": "Atoms are used within a program to denote distinguished values."
+                                    }
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "id": "rlNsIT",
+                                            "name": "Blue-plate special",
+                                            "type": "AttackVector"
+                                        },
+                                        {
+                                            "id": "ukoqm",
+                                            "name": "Shrimp Creole",
+                                            "type": "AttackVector"
+                                        }
+                                    ],
+                                    "total_count": 2,
+                                    "type": {
+                                        "id": "BzVZDu59VoR3ZniXW",
+                                        "name": "Bruschetta",
+                                        "type": "MetaType",
+                                        "description": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                                    }
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "id": "7kdm3z",
+                                            "name": "Stroganoff",
+                                            "type": "Malware"
+                                        }
+                                    ],
+                                    "total_count": 1,
+                                    "type": {
+                                        "id": "Tp36tjxOE04Y",
+                                        "name": "Creamed eggs on toast",
+                                        "type": "MetaType",
+                                        "description": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "start_date": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "stop_date": "Where are my pants?",
+                    "total_count": 1,
+                    "sample_reference_ids": [
+                        "Type classes first appeared in the Haskell programming language."
+                    ],
+                    "counts": [
+                        {
+                            "count": 1,
+                            "type": {
+                                "id": "bD3MiexBX8Dlf",
+                                "name": "Lobster Newberg",
+                                "type": "Source"
+                            }
+                        }
+                    ],
+                    "event_count": 1
+                }
+            ],
+            "method_aggregates": [
+                {
+                    "count": 0,
+                    "type": "hHQyM6"
+                },
+                {
+                    "count": 1,
+                    "type": "hHQyM7"
+                },
+                {
+                    "count": 0,
+                    "type": "gTB8y2"
+                }
+            ],
+            "counts": [
+                {
+                    "count": 1,
+                    "type": {
+                        "id": "4mqxl4Tmkpx4m",
+                        "name": "Osso Buco",
+                        "type": "Source"
+                    }
+                }
+            ]
+        },
+        "counts": [
+            {
+                "date": "Tuples are containers for a fixed number of Erlang data types.",
+                "count": 1
+            },
+            {
+                "date": "It is also a garbage-collected runtime system.",
+                "count": 8
+            },
+            {
+                "date": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "count": 4
+            },
+            {
+                "date": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "count": 2
+            },
+            {
+                "date": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "count": 4
+            },
+            {
+                "date": "She spent her earliest years reading classic literature, and writing poetry.",
+                "count": 3
+            },
+            {
+                "date": "Its main implementation is the Glasgow Haskell Compiler.",
+                "count": 2
+            },
+            {
+                "date": "Its main implementation is the Glasgow Haskell Compiler.",
+                "count": 1
+            },
+            {
+                "date": "Ports are created with the built-in function open_port.",
+                "count": 4
+            },
+            {
+                "date": "Do you have any idea why this is not working?",
+                "count": 2
+            },
+            {
+                "date": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "count": 3
+            },
+            {
+                "date": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "count": 4
+            },
+            {
+                "date": "I don't even care.",
+                "count": 4
+            },
+            {
+                "date": "The arguments can be primitive data types or compound data types.",
+                "count": 4
+            },
+            {
+                "date": "Haskell features a type system with type inference and lazy evaluation.",
+                "count": 2
+            },
+            {
+                "date": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "count": 2
+            },
+            {
+                "date": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "count": 2
+            },
+            {
+                "date": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "count": 3
+            },
+            {
+                "date": "Where are my pants?",
+                "count": 3
+            },
+            {
+                "date": "Where are my pants?",
+                "count": 4
+            },
+            {
+                "date": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "count": 4
+            },
+            {
+                "date": "I don't even care.",
+                "count": 18
+            }
+        ],
+        "metrics": [
+            {
+                "type": "defangedURLSightings",
+                "value": 83
+            },
+            {
+                "type": "defangedURL",
+                "value": 18
+            },
+            {
+                "type": "oneDayHits",
+                "value": 0
+            },
+            {
+                "type": "totalHits",
+                "value": 84
+            },
+            {
+                "type": "c2Subscore",
+                "value": 0
+            },
+            {
+                "type": "mitigatedCount",
+                "value": 0
+            },
+            {
+                "type": "criticality",
+                "value": 1
+            },
+            {
+                "type": "analystNoteSightings",
+                "value": 1
+            },
+            {
+                "type": "sevenDaysHits",
+                "value": 0
+            },
+            {
+                "type": "malwareSiteSuspectedSightings",
+                "value": 6
+            },
+            {
+                "type": "phishingSubscore",
+                "value": 0
+            },
+            {
+                "type": "analystNote",
+                "value": 1
+            },
+            {
+                "type": "whitelistedCount",
+                "value": 0
+            },
+            {
+                "type": "malwareSiteSuspected",
+                "value": 1
+            },
+            {
+                "type": "publicSubscore",
+                "value": 24
+            },
+            {
+                "type": "malwareSubscore",
+                "value": 5
+            },
+            {
+                "type": "sixtyDaysHits",
+                "value": 0
+            }
+        ]
+    }
+}

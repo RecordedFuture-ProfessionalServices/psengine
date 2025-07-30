@@ -1,0 +1,175 @@
+{
+    "data": {
+        "aiInsights": {
+            "comment": null,
+            "text": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. He looked inquisitively at his keyboard and wrote another sentence. Ports are used to communicate with the external world. She spent her earliest years reading classic literature, and writing poetry. Erlang is a general-purpose, concurrent, functional programming language.",
+            "numberOfReferences": 7
+        },
+        "timestamps": {
+            "lastSeen": "2025-01-18T13:12:28.595Z",
+            "firstSeen": "2025-06-07T07:47:18.528Z"
+        },
+        "risk": {
+            "criticalityLabel": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "riskString": "Any element of a tuple can be accessed in constant time.",
+            "rules": 7,
+            "criticality": 3,
+            "riskSummary": "Any element of a tuple can be accessed in constant time.",
+            "score": 89,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "evidenceString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "rule": "Erlang is known for its designs that are well suited for systems.",
+                    "criticality": 1,
+                    "timestamp": "2025-02-10T06:39:55.263Z",
+                    "criticalityLabel": "Erlang is known for its designs that are well suited for systems."
+                },
+                {
+                    "mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "evidenceString": "I don't even care.",
+                    "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "criticality": 2,
+                    "timestamp": "2025-02-24T18:11:02.613Z",
+                    "criticalityLabel": "Erlang is a general-purpose, concurrent, functional programming language."
+                },
+                {
+                    "mitigationString": "I don't even care.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "Make me a sandwich.",
+                    "criticality": 2,
+                    "timestamp": "2025-07-30T12:41:03.981Z",
+                    "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "mitigationString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "evidenceString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "criticality": 2,
+                    "timestamp": "2025-09-11T22:04:36.903Z",
+                    "criticalityLabel": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                },
+                {
+                    "mitigationString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "evidenceString": "Tuples are containers for a fixed number of Erlang data types.",
+                    "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "criticality": 2,
+                    "timestamp": "2025-09-15T18:15:38.831Z",
+                    "criticalityLabel": "Tuples are containers for a fixed number of Erlang data types."
+                },
+                {
+                    "mitigationString": "It is also a garbage-collected runtime system.",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "criticality": 2,
+                    "timestamp": "2025-07-09T06:58:55.109Z",
+                    "criticalityLabel": "Erlang is a general-purpose, concurrent, functional programming language."
+                },
+                {
+                    "mitigationString": "Do you have any idea why this is not working?",
+                    "evidenceString": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "criticality": 3,
+                    "timestamp": "2025-01-11T14:45:09.240Z",
+                    "criticalityLabel": "Make me a sandwich."
+                }
+            ]
+        },
+        "links": {
+            "hits": [],
+            "method_aggregates": [
+                {
+                    "count": 0,
+                    "type": "hHQyM6"
+                },
+                {
+                    "count": 0,
+                    "type": "hHQyM7"
+                },
+                {
+                    "count": 0,
+                    "type": "gTB8y2"
+                }
+            ],
+            "counts": []
+        },
+        "riskMapping": [
+            {
+                "rule": "Make me a sandwich.",
+                "categories": [
+                    {
+                        "framework": "Haskell features a type system with type inference and lazy evaluation.",
+                        "name": "Caviar"
+                    }
+                ]
+            },
+            {
+                "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                "categories": [
+                    {
+                        "framework": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                        "name": "BBQ Chicken Pizza"
+                    }
+                ]
+            },
+            {
+                "rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "categories": [
+                    {
+                        "framework": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                        "name": "Cheese dog"
+                    },
+                    {
+                        "framework": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                        "name": "Carne pizzaiola"
+                    },
+                    {
+                        "framework": "I don't even care.",
+                        "name": "Crab cake"
+                    }
+                ]
+            },
+            {
+                "rule": "Erlang is known for its designs that are well suited for systems.",
+                "categories": [
+                    {
+                        "framework": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                        "name": "Fried chicken"
+                    }
+                ]
+            },
+            {
+                "rule": "Ports are created with the built-in function open_port.",
+                "categories": [
+                    {
+                        "framework": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                        "name": "Lorna Doone"
+                    }
+                ]
+            },
+            {
+                "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "categories": [
+                    {
+                        "framework": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                        "name": "Bangers and mash"
+                    }
+                ]
+            },
+            {
+                "rule": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "categories": [
+                    {
+                        "framework": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                        "name": "Buffalo Wings"
+                    }
+                ]
+            }
+        ],
+        "entity": {
+            "id": "hash:a5356446a86d4ba0e251387807e5c8a74cdf1da1bfeec481f6798724f1188072",
+            "name": "Sichuan Hot Pot",
+            "type": "Hash"
+        }
+    }
+}

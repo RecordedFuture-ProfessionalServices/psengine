@@ -1,0 +1,955 @@
+{
+    "attributes": {
+        "title": "Ports are used to communicate with the external world.",
+        "text": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. Erlang is a general-purpose, concurrent, functional programming language. Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\" Erlang is a general-purpose, concurrent, functional programming language.",
+        "published": "2025-05-13T11:16:58.341Z",
+        "attachment": "Its main implementation is the Glasgow Haskell Compiler.",
+        "note_entities": [
+            {
+                "id": "SNoOSA",
+                "name": "Cobb Salad",
+                "type": "Organization"
+            },
+            {
+                "id": "idn:effect.biz",
+                "name": "Hangtown fry",
+                "type": "InternetDomainName"
+            },
+            {
+                "id": "vxxbE",
+                "name": "Rolled oyster",
+                "type": "Person"
+            },
+            {
+                "id": "nCqyDiUzdwqTMJk9cDBxthLGWBMG",
+                "name": "Baked potato",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "nFkyvC",
+                "name": "Chili con carne",
+                "type": "Malware"
+            },
+            {
+                "id": "idn:wing.tickets",
+                "name": "Flan",
+                "type": "InternetDomainName"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "4qh3ypkiAmk3tEb4PdssG6KzYf2xY6LzwJkXhd8aCBxiSrO2tE",
+                "name": "Satay",
+                "type": "BitcoinAddress"
+            },
+            {
+                "id": "OiWHwK",
+                "name": "Alice Springs Chicken",
+                "type": "AttackVector"
+            },
+            {
+                "id": "1KH3b",
+                "name": "Laksa",
+                "type": "Company"
+            },
+            {
+                "id": "HqazL2",
+                "name": "Kimchi",
+                "type": "CyberVulnerability",
+                "description": "Where are my pants?"
+            },
+            {
+                "id": "dQ1CC",
+                "name": "Chimichanga",
+                "type": "Company"
+            },
+            {
+                "id": "URq9TOqDhf1BJOr6v2jtq5ZSr8",
+                "name": "Chicago Deep Dish Pizza",
+                "type": "EmailAddress"
+            },
+            {
+                "id": "NumrThNOBoKGhVX",
+                "name": "Garlic bread",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "1mYRMC",
+                "name": "Corn flakes",
+                "type": "Technology"
+            },
+            {
+                "id": "oUR6a3",
+                "name": "Chicken Divan",
+                "type": "AttackVector"
+            },
+            {
+                "id": "hash:4248900a6e3ec3c4450aba647ade48f2dca1bff3415dba868e657675df1494f5",
+                "name": "Garlic bread",
+                "type": "Hash"
+            },
+            {
+                "id": "uqbc6",
+                "name": "Corned beef",
+                "type": "Organization"
+            },
+            {
+                "id": "W4FmYg",
+                "name": "Ratatouille",
+                "type": "Malware"
+            },
+            {
+                "id": "ZwStc7",
+                "name": "Shish Kabob",
+                "type": "Company"
+            },
+            {
+                "id": "mN8sb7",
+                "name": "Chicken Tikka Masala",
+                "type": "Organization"
+            },
+            {
+                "id": "ZsMRo",
+                "name": "Glorified rice",
+                "type": "Company"
+            },
+            {
+                "id": "78TCCu",
+                "name": "Shrimp and Grits",
+                "type": "Malware"
+            },
+            {
+                "id": "SDi2a",
+                "name": "Bird's Nest Soup",
+                "type": "Technology"
+            },
+            {
+                "id": "gYeRGfvZBffW5a3",
+                "name": "Hog fry",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "H1THtI",
+                "name": "Pumpkin pie",
+                "type": "Malware"
+            },
+            {
+                "id": "iXJWZR",
+                "name": "Chicken nuggets",
+                "type": "Person"
+            },
+            {
+                "id": "xIqOGF",
+                "name": "Stroganoff",
+                "type": "Technology"
+            },
+            {
+                "id": "E4Zch3",
+                "name": "Low Country Boil",
+                "type": "Product"
+            },
+            {
+                "id": "LsX7WF",
+                "name": "Corn relish",
+                "type": "Technology"
+            },
+            {
+                "id": "PNW14Z",
+                "name": "Pepperoni",
+                "type": "AttackVector"
+            },
+            {
+                "id": "1GV3VG",
+                "name": "Alphabet pasta",
+                "type": "Company"
+            },
+            {
+                "id": "hrjgo",
+                "name": "Crab cake",
+                "type": "Country"
+            },
+            {
+                "id": "SGJhp4",
+                "name": "Calf's liver and bacon",
+                "type": "AttackVector"
+            },
+            {
+                "id": "6vNQ7k",
+                "name": "Tagine",
+                "type": "Product"
+            },
+            {
+                "id": "qTgQi9",
+                "name": "Reuben sandwich",
+                "type": "Product"
+            },
+            {
+                "id": "Qtw46",
+                "name": "Soul food",
+                "type": "Technology"
+            },
+            {
+                "id": "b4Vd4Texy1N9c84",
+                "name": "Margherita Pizza",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "CR2CP1",
+                "name": "Deep Fried Oreos",
+                "type": "AttackVector"
+            },
+            {
+                "id": "hash:6d6f75b39e9155343faed8d248fefe904b0bbc67a855a2de1ed7bde6ed3a036b",
+                "name": "Liver and onions",
+                "type": "Hash"
+            },
+            {
+                "id": "RxdPt",
+                "name": "Chicken fried steak",
+                "type": "Organization"
+            },
+            {
+                "id": "pgJUYp",
+                "name": "Baba Ghanoush",
+                "type": "Technology"
+            },
+            {
+                "id": "7lgs2o",
+                "name": "Chicharones",
+                "type": "AttackVector"
+            },
+            {
+                "id": "naBxX",
+                "name": "Ratatouille",
+                "type": "Technology"
+            },
+            {
+                "id": "S6GrkM",
+                "name": "Hot chicken",
+                "type": "Company"
+            },
+            {
+                "id": "HSBKd5",
+                "name": "Prawn Pizza",
+                "type": "Technology"
+            },
+            {
+                "id": "QQq7Uj",
+                "name": "Chicago Hot Dog",
+                "type": "Malware"
+            },
+            {
+                "id": "mnUtc",
+                "name": "Scrapple",
+                "type": "Product"
+            },
+            {
+                "id": "qJ2RA3",
+                "name": "Mashed pumpkin",
+                "type": "Technology"
+            },
+            {
+                "id": "uJrmoZ",
+                "name": "Parma Ham",
+                "type": "Product"
+            },
+            {
+                "id": "tA5L4m",
+                "name": "Fried Green Tomatoes",
+                "type": "Organization"
+            },
+            {
+                "id": "CWoJ2s",
+                "name": "Choco pie",
+                "type": "Product"
+            },
+            {
+                "id": "GvlAt",
+                "name": "Potato skins",
+                "type": "Country"
+            },
+            {
+                "id": "XcBTI",
+                "name": "Pickled Okra",
+                "type": "Company"
+            },
+            {
+                "id": "46aIWrO8AJuLM8SE1wGiyGpUpsvpGXadz8j6t5vtdLqnh4Cson",
+                "name": "Mulligan stew",
+                "type": "BitcoinAddress"
+            },
+            {
+                "id": "ip:155.86.154.4",
+                "name": "Beignets",
+                "type": "IpAddress"
+            },
+            {
+                "id": "sMLjm2",
+                "name": "London broil",
+                "type": "Malware"
+            },
+            {
+                "id": "VuibzjzJr9eT6AU",
+                "name": "Brunswick stew",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "f2R5l7",
+                "name": "Pickled cucumber",
+                "type": "Malware"
+            },
+            {
+                "id": "XFy8en",
+                "name": "Lasagna",
+                "type": "Organization"
+            },
+            {
+                "id": "kIgHnJ",
+                "name": "Potato wedges",
+                "type": "MalwareCategory"
+            },
+            {
+                "id": "YSZaqb",
+                "name": "Slinger",
+                "type": "Malware"
+            },
+            {
+                "id": "i9Znvh",
+                "name": "Chicken fried bacon",
+                "type": "Organization"
+            },
+            {
+                "id": "rceao4",
+                "name": "Mango and Sticky Rice",
+                "type": "Organization"
+            },
+            {
+                "id": "v0Nii",
+                "name": "Sushi",
+                "type": "Country"
+            },
+            {
+                "id": "f83Jk7",
+                "name": "Salad bar",
+                "type": "Product"
+            },
+            {
+                "id": "fnduJA",
+                "name": "Satay",
+                "type": "Technology"
+            },
+            {
+                "id": "hash:7aa832b7ba202721174d0dfd9c0c0ed9323a7a9a9144d1cf86593766b286e539",
+                "name": "Beef Lo Mein",
+                "type": "Hash"
+            },
+            {
+                "id": "FJcY",
+                "name": "Kobe Beef",
+                "type": "Technology"
+            },
+            {
+                "id": "bxRjGg",
+                "name": "Steak Tartare",
+                "type": "Organization"
+            },
+            {
+                "id": "dr9H18dYpOMx",
+                "name": "Pop-Tarts",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "21bik1",
+                "name": "French Dip",
+                "type": "CyberVulnerability",
+                "description": "I don't even care."
+            },
+            {
+                "id": "ip:140.180.220.123",
+                "name": "Cheese balls",
+                "type": "IpAddress"
+            },
+            {
+                "id": "2deYP",
+                "name": "Onion ring",
+                "type": "AttackVector"
+            },
+            {
+                "id": "hash:89c9cff5fdaea648de041d65b9de77d4093972d6160af954ff265f44bbfd0067",
+                "name": "Sandwich",
+                "type": "Hash"
+            },
+            {
+                "id": "eIJo04XGeHmvCIu",
+                "name": "Fortune cookie",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "nRZ77o",
+                "name": "Juba",
+                "type": "Company"
+            },
+            {
+                "id": "UM7p4u",
+                "name": "Goulash",
+                "type": "AttackVector"
+            },
+            {
+                "id": "hash:74025829e9201f26b856029459e1018b33b368bdc08038c0c45eb8d51708d7ef",
+                "name": "Jerky",
+                "type": "Hash"
+            },
+            {
+                "id": "ip:121.143.238.254",
+                "name": "Pork Belly",
+                "type": "IpAddress"
+            },
+            {
+                "id": "aU4Qqg4jOkpKoYvRoGnuhhGpYQnep0skwpv9t345GKEpCszJsJ",
+                "name": "Hoppin' John",
+                "type": "BitcoinAddress"
+            },
+            {
+                "id": "IL2CLs",
+                "name": "Gyros",
+                "type": "City"
+            },
+            {
+                "id": "fm6Nhr",
+                "name": "Pan Seared Scallops",
+                "type": "Company"
+            },
+            {
+                "id": "HUrvaF",
+                "name": "Chicken nugget",
+                "type": "Organization"
+            },
+            {
+                "id": "JjvLGa",
+                "name": "Chicken \u00e0 la King",
+                "type": "Malware"
+            },
+            {
+                "id": "wKB2nP",
+                "name": "Fried Catfish",
+                "type": "Organization"
+            },
+            {
+                "id": "hash:30d4b1e7a57fa7fe2085270f0d9fd6018969579a7170210e48e276415210216a",
+                "name": "Gazpacho",
+                "type": "Hash"
+            },
+            {
+                "id": "g6CyJA",
+                "name": "Supreme pizza",
+                "type": "Malware"
+            },
+            {
+                "id": "hash:e3f3367b018df5ab0bfbef9370d7a953556bf0dbb521355153d3cc86c7fe511a",
+                "name": "Eggs Benedict",
+                "type": "Hash"
+            },
+            {
+                "id": "ptM5Tp",
+                "name": "Fajita",
+                "type": "Company"
+            },
+            {
+                "id": "gKQHH7",
+                "name": "Rolled oyster",
+                "type": "Product"
+            },
+            {
+                "id": "ip:224.217.239.152",
+                "name": "Fried Catfish",
+                "type": "IpAddress"
+            },
+            {
+                "id": "POdKz",
+                "name": "Reuben",
+                "type": "Technology"
+            },
+            {
+                "id": "NrtCUI",
+                "name": "Chimichanga",
+                "type": "AttackVector"
+            },
+            {
+                "id": "eU62hcQmUaD",
+                "name": "Greek salad",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "2iB22d",
+                "name": "Chocolate cheesecake",
+                "type": "Company"
+            },
+            {
+                "id": "idn:page.catalonia",
+                "name": "Sandwich",
+                "type": "InternetDomainName"
+            },
+            {
+                "id": "pVFvhG",
+                "name": "Shucked Oysters",
+                "type": "MalwareCategory"
+            },
+            {
+                "id": "xbRGQ1",
+                "name": "Senate bean soup",
+                "type": "Technology"
+            },
+            {
+                "id": "PwxWv",
+                "name": "Cordon bleu",
+                "type": "Technology"
+            },
+            {
+                "id": "QECaky2ncFcL",
+                "name": "American fried rice",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "ip:145.99.134.199",
+                "name": "Home fries",
+                "type": "IpAddress"
+            },
+            {
+                "id": "n33wEy",
+                "name": "Spaghetti Bolognese",
+                "type": "Company"
+            },
+            {
+                "id": "fNNDp4",
+                "name": "Fried Catfish",
+                "type": "Technology"
+            },
+            {
+                "id": "AjvK8z",
+                "name": "Vichyssoise",
+                "type": "City"
+            },
+            {
+                "id": "ip:137.92.13.210",
+                "name": "Chicken nugget",
+                "type": "IpAddress"
+            },
+            {
+                "id": "FlCeE3SM5zYy",
+                "name": "Turkish Delight",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "DCrj9",
+                "name": "Chicken bog",
+                "type": "Product"
+            },
+            {
+                "id": "7JSIgYh7dwW",
+                "name": "Onion ring",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "ip:180.58.75.165",
+                "name": "Paella",
+                "type": "IpAddress"
+            },
+            {
+                "id": "P5Sp9",
+                "name": "Texas Toast",
+                "type": "Product"
+            },
+            {
+                "id": "AJmfl5",
+                "name": "Milkshake",
+                "type": "Product"
+            },
+            {
+                "id": "idn:purposes.cat",
+                "name": "Gumbo",
+                "type": "InternetDomainName"
+            },
+            {
+                "id": "HLndn",
+                "name": "Ribs",
+                "type": "Country"
+            },
+            {
+                "id": "xmzUZ",
+                "name": "BBQ Ribs",
+                "type": "Country"
+            },
+            {
+                "id": "FdO64",
+                "name": "Rabbit pie",
+                "type": "Company"
+            },
+            {
+                "id": "mhxXVi",
+                "name": "Low Country Boil",
+                "type": "Technology"
+            },
+            {
+                "id": "KPQ0P",
+                "name": "Steak sandwich",
+                "type": "Organization"
+            },
+            {
+                "id": "y9fKNo",
+                "name": "Gazpacho",
+                "type": "AttackVector"
+            },
+            {
+                "id": "EEcnIr",
+                "name": "Margherita Pizza",
+                "type": "Organization"
+            },
+            {
+                "id": "1glSLbuoizHo",
+                "name": "Pulled pork",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "CZVni",
+                "name": "Chicken Manchurian",
+                "type": "Product"
+            },
+            {
+                "id": "ip:152.228.49.171",
+                "name": "Lobster roll",
+                "type": "IpAddress"
+            },
+            {
+                "id": "EOPjk",
+                "name": "Chicken \u00e0 la King",
+                "type": "Product"
+            },
+            {
+                "id": "ZHkz9Z",
+                "name": "Shepherd's Pie",
+                "type": "Malware"
+            },
+            {
+                "id": "qVGGsb",
+                "name": "Spanish rice",
+                "type": "Malware"
+            },
+            {
+                "id": "msq8wITIwg5zaqz",
+                "name": "Baklava",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "ip:251.138.160.60",
+                "name": "Pickled cucumber",
+                "type": "IpAddress"
+            },
+            {
+                "id": "hash:66745c7b43221e6c7cc848f18745ee594bf1571bc141bfd14be292b0bb373cdb",
+                "name": "Yeung Chow fried rice",
+                "type": "Hash"
+            },
+            {
+                "id": "9QHjVX",
+                "name": "Stuffed zucchini",
+                "type": "CyberVulnerability",
+                "description": "Haskell features a type system with type inference and lazy evaluation."
+            },
+            {
+                "id": "vEmyFV",
+                "name": "Texas Toast",
+                "type": "Malware"
+            },
+            {
+                "id": "PIyCJ6",
+                "name": "Onion ring",
+                "type": "Product"
+            },
+            {
+                "id": "MToYVP",
+                "name": "Beignets",
+                "type": "Company"
+            },
+            {
+                "id": "AEPcsp",
+                "name": "Maple bacon donut",
+                "type": "Company"
+            },
+            {
+                "id": "f9p8g",
+                "name": "Chicken sandwich",
+                "type": "Organization"
+            },
+            {
+                "id": "euSslY",
+                "name": "Waffle",
+                "type": "Malware"
+            },
+            {
+                "id": "OU7pHc",
+                "name": "Drunken chicken",
+                "type": "Company"
+            },
+            {
+                "id": "evdUi7",
+                "name": "Turkish Delight",
+                "type": "CyberVulnerability",
+                "description": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+            },
+            {
+                "id": "W5SLWPUJ3NZt",
+                "name": "Burnt ends",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "PGsPrq",
+                "name": "Kung Pao Chicken",
+                "type": "Technology"
+            },
+            {
+                "id": "f8cUG",
+                "name": "Clam cake",
+                "type": "Technology"
+            },
+            {
+                "id": "sTznzg2KVJHAV7vhD4Fj8K1fo04GYFDh1fNxkW3bc5rqvpKN0H",
+                "name": "Chocolate Brownie",
+                "type": "BitcoinAddress"
+            },
+            {
+                "id": "7obvKb",
+                "name": "Chicken fingers",
+                "type": "Malware"
+            },
+            {
+                "id": "hash:37070e95cfdbb9ac8e8fa035c001bfd474921d67b7c9dc53e8d7eff8600e4f5f",
+                "name": "Root Beer Float",
+                "type": "Hash"
+            },
+            {
+                "id": "h7mcR",
+                "name": "Risotto",
+                "type": "Country"
+            },
+            {
+                "id": "ip:57.76.165.142",
+                "name": "Deviled egg",
+                "type": "IpAddress"
+            },
+            {
+                "id": "Puyvbl",
+                "name": "Porterhouse Steak",
+                "type": "Organization"
+            },
+            {
+                "id": "QVITbE",
+                "name": "Corn relish",
+                "type": "Technology"
+            },
+            {
+                "id": "jxmnCT",
+                "name": "Tuna Pizza",
+                "type": "City"
+            },
+            {
+                "id": "2jgRDm",
+                "name": "Chocolate Chip Cookie",
+                "type": "City"
+            },
+            {
+                "id": "IVWBlr",
+                "name": "Milk Steak",
+                "type": "AttackVector"
+            },
+            {
+                "id": "CjawBp",
+                "name": "Haggis",
+                "type": "Organization"
+            },
+            {
+                "id": "D2lhGd",
+                "name": "Cobb Salad",
+                "type": "Product"
+            },
+            {
+                "id": "hash:c81a721451675120ddf300fb050d2287314c82f9d409808823b92ff14c816619",
+                "name": "Ceviche",
+                "type": "Hash"
+            },
+            {
+                "id": "P7bGT7v04RmMGp1sP7yQUSOGXDII2GFjfD5g8PVV0OiI42cMt8",
+                "name": "Shucked Oysters",
+                "type": "BitcoinAddress"
+            },
+            {
+                "id": "CrY4XP",
+                "name": "Potato wedges",
+                "type": "Malware"
+            },
+            {
+                "id": "V4u7ZRONT19",
+                "name": "Cowboy beans",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "v6slIH",
+                "name": "Brunswick stew",
+                "type": "Product"
+            },
+            {
+                "id": "ip:21.82.229.175",
+                "name": "Pan Seared Scallops",
+                "type": "IpAddress"
+            },
+            {
+                "id": "CzlJjA",
+                "name": "Rolled oyster",
+                "type": "City"
+            },
+            {
+                "id": "idn:forecast.moscow",
+                "name": "Kung Pao Chicken",
+                "type": "InternetDomainName"
+            },
+            {
+                "id": "ku9eV",
+                "name": "Sauteed Morel Mushrooms",
+                "type": "Technology"
+            },
+            {
+                "id": "31S2qP",
+                "name": "Macaroni salad",
+                "type": "AttackVector"
+            },
+            {
+                "id": "MsSvV",
+                "name": "New York-Style Pizza",
+                "type": "Organization"
+            },
+            {
+                "id": "NEoz8l",
+                "name": "Stuffed ham",
+                "type": "Technology"
+            },
+            {
+                "id": "MHSoi9PuAvc",
+                "name": "Butter cookie",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "QTwKDy",
+                "name": "Polenta",
+                "type": "Malware"
+            },
+            {
+                "id": "hash:aa72954da35c3c8a5024f04ce66a1960f7512b0222456e49237d63ca6c72905c",
+                "name": "Porterhouse Steak",
+                "type": "Hash"
+            },
+            {
+                "id": "qjsG7tS5nEv8uef",
+                "name": "Ploye",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "CeRadFcIzkcU",
+                "name": "Deviled crab",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "NDvfQl",
+                "name": "Bacon Cheeseburger",
+                "type": "Technology"
+            },
+            {
+                "id": "M68pW5",
+                "name": "Chicken fried steak",
+                "type": "MalwareCategory"
+            },
+            {
+                "id": "I93A5P",
+                "name": "Chile Relleno",
+                "type": "Product"
+            },
+            {
+                "id": "EF7JtD",
+                "name": "Samosa",
+                "type": "Product"
+            },
+            {
+                "id": "spTSR",
+                "name": "Chips and dip",
+                "type": "Company"
+            },
+            {
+                "id": "sBc6g",
+                "name": "Bulgogi",
+                "type": "Organization"
+            },
+            {
+                "id": "wSODLDO6Sr0K",
+                "name": "French Onion Soup",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "kqkPz6",
+                "name": "London broil",
+                "type": "Product"
+            },
+            {
+                "id": "tWCpD1",
+                "name": "Chicken Alfredo",
+                "type": "MalwareCategory"
+            },
+            {
+                "id": "9K2WZY",
+                "name": "Black Pudding",
+                "type": "AttackVector"
+            },
+            {
+                "id": "DKPUYC6HBw7",
+                "name": "Beignets",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "hash:ac51b3dc1cb7ae6e44fe45ea8b4e53d835bb79b9a7a60774bc76c6a426777618",
+                "name": "Protein bar",
+                "type": "Hash"
+            },
+            {
+                "id": "8ElvZ",
+                "name": "Chicken Liver Pate",
+                "type": "Company"
+            },
+            {
+                "id": "Stg7lE",
+                "name": "Pizza strips",
+                "type": "Malware"
+            },
+            {
+                "id": "KdMHYs",
+                "name": "Margherita Pizza",
+                "type": "Malware"
+            }
+        ],
+        "topic": [
+            {
+                "id": "xyuWu4",
+                "name": "Root Beer Float",
+                "type": "Topic",
+                "description": "Type classes first appeared in the Haskell programming language."
+            }
+        ],
+        "header_image": {
+            "id": "HNFYl9ubh6k5y5o2MWHAMOGj3QDoLSJ4nWAu5AiB",
+            "name": "Huevos Rancheros",
+            "type": "Image"
+        }
+    },
+    "id": "b0Fxs5Ujkw",
+    "source": {
+        "id": "ozooZqhn08Loc",
+        "name": "Surf and turf",
+        "type": "Source"
+    }
+}

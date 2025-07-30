@@ -1,0 +1,18 @@
+{
+	"attributes": {
+		"title": "test pytest",
+		"text": "test related to test.com",
+		"context_entities": [
+			{
+				"id": "idn:test.com",
+				"name": "Potato wedges",
+				"type": "InternetDomainName"
+			}
+		]
+	},
+	"source": {
+		"id": "zNwT0Dy95Q2ml",
+		"name": "Tetrazzini",
+		"type": "Source"
+	}
+}

@@ -1,0 +1,53 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 5,
+                    "level": 1.0,
+                    "context": {
+                        "public": {
+                            "summary": [],
+                            "score": 0.0,
+                            "mostCriticalRule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                            "rule": {
+                                "maxCount": 0
+                            }
+                        }
+                    },
+                    "rule": {
+                        "count": 1,
+                        "mostCritical": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                        "maxCount": 48,
+                        "evidence": {
+                            "dmarcAbsent": {
+                                "count": 1,
+                                "timestamp": "2025-01-29T05:52:47.657Z",
+                                "description": "Its main implementation is the Glasgow Haskell Compiler.",
+                                "rule": "Haskell features a type system with type inference and lazy evaluation.",
+                                "sightings": 1,
+                                "mitigation": "It is also a garbage-collected runtime system.",
+                                "level": 1
+                            }
+                        },
+                        "summary": [
+                            {
+                                "level": 1.0,
+                                "count": 1.0
+                            }
+                        ]
+                    }
+                },
+                "entity": {
+                    "id": "9uz5GD",
+                    "name": "Moules Frites",
+                    "type": "Company"
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

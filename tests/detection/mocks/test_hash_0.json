@@ -1,0 +1,90 @@
+{
+	"count": 1,
+	"total_count": 1,
+	"result": [
+		{
+			"id": "doc:lmRPGB",
+			"type": "yara",
+			"title": "Its main implementation is the Glasgow Haskell Compiler.",
+			"description": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+			"created": "2025-08-15T09:44:00.373Z",
+			"updated": "2025-09-29T06:18:04.609Z",
+			"rules": [
+				{
+					"entities": [
+						{
+							"id": "Hi3OYdZUhOI",
+							"type": "MitreAttackIdentifier",
+							"name": "Oysters Rockefeller",
+							"display_name": "Do you come here often?"
+						},
+						{
+							"id": "IeKtRrPHMlb",
+							"type": "MitreAttackIdentifier",
+							"name": "Toaster Strudel",
+							"display_name": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+						},
+						{
+							"id": "a7a5H8",
+							"type": "Malware",
+							"name": "Crab Rangoon"
+						},
+						{
+							"id": "JKcG56F74CU",
+							"type": "MitreAttackIdentifier",
+							"name": "Moules Frites",
+							"display_name": "Its main implementation is the Glasgow Haskell Compiler."
+						},
+						{
+							"id": "hash:b76760128ee3b6ba412ef47c33553106b6c4c8403ce38a738e4ce1b97314a712",
+							"type": "Hash",
+							"name": "Succotash"
+						},
+						{
+							"id": "hash:a0fc3c35d64bc990c5de78aabdfbe914f0667c0d63e13656654f302ed6fa3b85",
+							"type": "Hash",
+							"name": "Greek salad"
+						},
+						{
+							"id": "EsafHrcnGL0",
+							"type": "MitreAttackIdentifier",
+							"name": "Apple butter",
+							"display_name": "Ports are created with the built-in function open_port."
+						},
+						{
+							"id": "eQMRMTxDD7N",
+							"type": "MitreAttackIdentifier",
+							"name": "Coq Au Vin",
+							"display_name": "Erlang is a general-purpose, concurrent, functional programming language."
+						},
+						{
+							"id": "UCpHOXoGFYi",
+							"type": "MitreAttackIdentifier",
+							"name": "Gumbo",
+							"display_name": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+						},
+						{
+							"id": "ejxBaQ",
+							"type": "Technology",
+							"name": "Garlic bread"
+						},
+						{
+							"id": "p1Pvc0",
+							"type": "MalwareCategory",
+							"name": "Chicken Biryani"
+						},
+						{
+							"id": "QmEfvF",
+							"type": "Malware",
+							"name": "Tomato compote"
+						}
+					],
+					"content": "Where are my pants?",
+					"file_name": "Atoms are used within a program to denote distinguished values."
+				}
+			]
+		}
+	],
+	"next_offset": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+}
+

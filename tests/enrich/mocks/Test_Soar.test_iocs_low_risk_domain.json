@@ -1,0 +1,58 @@
+{
+    "data": {
+        "results": [
+            {
+                "risk": {
+                    "score": 0,
+                    "level": 0.0,
+                    "context": {
+                        "phishing": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 3
+                            }
+                        },
+                        "malware": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 3
+                            }
+                        },
+                        "public": {
+                            "summary": [],
+                            "score": 0.0,
+                            "mostCriticalRule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                            "rule": {
+                                "maxCount": 51
+                            }
+                        },
+                        "c2": {
+                            "score": 0.0,
+                            "rule": {
+                                "count": 0,
+                                "maxCount": 2
+                            }
+                        }
+                    },
+                    "rule": {
+                        "summary": [],
+                        "mostCritical": "Tuples are containers for a fixed number of Erlang data types.",
+                        "count": 0,
+                        "maxCount": 52
+                    }
+                },
+                "entity": {
+                    "id": "idn:verified.biz",
+                    "name": "Chicken Divan",
+                    "type": "InternetDomainName"
+                }
+            }
+        ]
+    },
+    "counts": {
+        "returned": 1,
+        "total": 1
+    }
+}

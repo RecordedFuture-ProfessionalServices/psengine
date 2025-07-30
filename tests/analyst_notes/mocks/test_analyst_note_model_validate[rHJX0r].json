@@ -1,0 +1,293 @@
+{
+    "attributes": {
+        "title": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+        "text": "Atoms are used within a program to denote distinguished values. Tuples are containers for a fixed number of Erlang data types. The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+        "published": "2025-06-19T10:13:17.086Z",
+        "events": [
+            {
+                "type": "ArmedConflict",
+                "attributes": {
+                    "start": "2025-03-18T22:36:42.491Z",
+                    "stop": "2025-11-02T15:33:19.471Z",
+                    "attacker": [
+                        {
+                            "id": "EEXrd",
+                            "name": "Glorified rice",
+                            "type": "Country"
+                        }
+                    ],
+                    "target": [
+                        {
+                            "id": "LJ6Ee",
+                            "name": "Chicken Divan",
+                            "type": "Country"
+                        }
+                    ],
+                    "location": [
+                        {
+                            "id": "dfwv7",
+                            "name": "Ranch dressing",
+                            "type": "Country"
+                        },
+                        {
+                            "id": "FPLT8B",
+                            "name": "Lorna Doone",
+                            "type": "City"
+                        },
+                        {
+                            "id": "n8qMfo",
+                            "name": "Texas Toast",
+                            "type": "ProvinceOrState"
+                        },
+                        {
+                            "id": "hwfFis",
+                            "name": "Corn flakes",
+                            "type": "Facility"
+                        },
+                        {
+                            "id": "BpjZw",
+                            "name": "Gazpacho",
+                            "type": "Facility"
+                        },
+                        {
+                            "id": "YpUNL",
+                            "name": "Chicken Liver Pate",
+                            "type": "Country"
+                        }
+                    ],
+                    "event_positions": [
+                        {
+                            "latitude": 47.508333,
+                            "longitude": 34.591667
+                        },
+                        {
+                            "latitude": 49.0,
+                            "longitude": 32.0
+                        },
+                        {
+                            "latitude": 55.7520233,
+                            "longitude": 37.6174994
+                        },
+                        {
+                            "latitude": 60.0,
+                            "longitude": 100.0
+                        },
+                        {
+                            "latitude": 47.83972,
+                            "longitude": 35.14057
+                        },
+                        {
+                            "latitude": 48.59441,
+                            "longitude": 37.99983
+                        }
+                    ]
+                }
+            }
+        ],
+        "note_entities": [
+            {
+                "id": "YCjag",
+                "name": "Cheesecake",
+                "type": "Country"
+            },
+            {
+                "id": "JogWIw",
+                "name": "Pulled pork",
+                "type": "City"
+            },
+            {
+                "id": "kS1sgw",
+                "name": "Ammonia cookie",
+                "type": "ProvinceOrState"
+            },
+            {
+                "id": "Dnemwn",
+                "name": "Ice cream cake",
+                "type": "Facility"
+            },
+            {
+                "id": "bM4Gi",
+                "name": "Turkish Delight",
+                "type": "Facility"
+            },
+            {
+                "id": "kVwun",
+                "name": "Swiss steak",
+                "type": "Country"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "7xHtfp",
+                "name": "Goulash",
+                "type": "Organization"
+            },
+            {
+                "id": "pOVP9",
+                "name": "Crab cake",
+                "type": "Person"
+            },
+            {
+                "id": "HNQWG",
+                "name": "Dirty rice",
+                "type": "Country"
+            },
+            {
+                "id": "Hli0B",
+                "name": "Potatoes O'Brien",
+                "type": "Person"
+            },
+            {
+                "id": "FJLtxm",
+                "name": "Frito Pie",
+                "type": "Person"
+            },
+            {
+                "id": "MKcQPK",
+                "name": "Mashed pumpkin",
+                "type": "Person"
+            },
+            {
+                "id": "m3Liye",
+                "name": "Pigs in blankets",
+                "type": "Person"
+            },
+            {
+                "id": "a65Nyv",
+                "name": "Samosa",
+                "type": "Organization"
+            },
+            {
+                "id": "P4iFF",
+                "name": "Reuben",
+                "type": "Organization"
+            },
+            {
+                "id": "kwEUv",
+                "name": "Chicken Alfredo",
+                "type": "Person"
+            },
+            {
+                "id": "3Oc0JJ",
+                "name": "Stuffed zucchini",
+                "type": "Person"
+            },
+            {
+                "id": "yDS1i",
+                "name": "Chicago Deep Dish Pizza",
+                "type": "Country"
+            },
+            {
+                "id": "9aZyTT",
+                "name": "Supreme pizza",
+                "type": "City"
+            },
+            {
+                "id": "bkZKet",
+                "name": "Soul food",
+                "type": "Person"
+            },
+            {
+                "id": "ATUGy",
+                "name": "Souvlaki",
+                "type": "Organization"
+            },
+            {
+                "id": "k78An",
+                "name": "Pumpkin pie",
+                "type": "Person"
+            },
+            {
+                "id": "XJUcc",
+                "name": "Frito Pie",
+                "type": "Organization"
+            },
+            {
+                "id": "swZ3mN",
+                "name": "Hokkien fried rice",
+                "type": "Person"
+            },
+            {
+                "id": "YY02u",
+                "name": "Eggs Neptune",
+                "type": "Person"
+            },
+            {
+                "id": "W7YScR",
+                "name": "Lasagna",
+                "type": "City"
+            },
+            {
+                "id": "dSeAF",
+                "name": "Chicken sandwich",
+                "type": "Organization"
+            },
+            {
+                "id": "H0WYr",
+                "name": "Spring Rolls",
+                "type": "Organization"
+            },
+            {
+                "id": "1pUJ8p",
+                "name": "BBQ Ribs",
+                "type": "Person"
+            }
+        ],
+        "topic": [
+            {
+                "id": "kLHWo3",
+                "name": "Shepherd's Pie",
+                "type": "Topic",
+                "description": "Tuples are containers for a fixed number of Erlang data types."
+            }
+        ],
+        "validation_urls": [
+            {
+                "id": "url:https://dec.physio/",
+                "name": "Pop-Tarts",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://contents.gu/",
+                "name": "Geoduck",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://drainage.ar/",
+                "name": "Liver and onions",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://haiti.aero/",
+                "name": "Potato salad",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://receivers.africa/",
+                "name": "Sausage gravy",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://verification.name/",
+                "name": "Buffalo burger",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://len.aquitaine/",
+                "name": "Pickled Okra",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://outlets.club/",
+                "name": "Cowboy beans",
+                "type": "URL"
+            }
+        ]
+    },
+    "id": "77IpbxX6BA",
+    "source": {
+        "id": "jXjWhYOqZTg2S",
+        "name": "Shrimp Creole",
+        "type": "Source"
+    }
+}

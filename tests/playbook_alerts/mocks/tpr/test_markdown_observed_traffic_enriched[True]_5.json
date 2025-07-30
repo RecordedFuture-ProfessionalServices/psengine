@@ -1,0 +1,47 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-01-25T00:41:28.674Z",
+            "firstSeen": "2025-02-09T19:17:25.150Z"
+        },
+        "risk": {
+            "criticalityLabel": "Ports are created with the built-in function open_port.",
+            "riskString": "Do you come here often?",
+            "rules": 3,
+            "criticality": 2,
+            "riskSummary": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "score": 26,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Any element of a tuple can be accessed in constant time.",
+                    "evidenceString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "criticality": 1,
+                    "timestamp": "2025-02-01T11:27:58.288Z",
+                    "criticalityLabel": "Do you come here often?"
+                },
+                {
+                    "mitigationString": "Tuples are containers for a fixed number of Erlang data types.",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "Type classes first appeared in the Haskell programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-03-12T22:24:48.461Z",
+                    "criticalityLabel": "Its main implementation is the Glasgow Haskell Compiler."
+                },
+                {
+                    "mitigationString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "evidenceString": "Type classes first appeared in the Haskell programming language.",
+                    "rule": "Ports are created with the built-in function open_port.",
+                    "criticality": 2,
+                    "timestamp": "2025-02-27T10:40:25.245Z",
+                    "criticalityLabel": "Do you have any idea why this is not working?"
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:244.37.154.65",
+            "name": "Sonofabitch stew",
+            "type": "IpAddress"
+        }
+    }
+}

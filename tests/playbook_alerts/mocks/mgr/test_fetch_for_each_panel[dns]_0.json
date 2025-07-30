@@ -1,0 +1,112 @@
+{
+    "status": {
+        "status_code": "Any element of a tuple can be accessed in constant time.",
+        "status_message": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+    },
+    "data": {
+        "playbook_alert_id": "task:27547e1e-a235-41f2-bb50-d33c1befad21",
+        "panel_status": {
+            "status": "InProgress",
+            "priority": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "assignee_name": "Type classes first appeared in the Haskell programming language.",
+            "assignee_id": "Do you have any idea why this is not working?",
+            "created": "2025-03-18T02:14:07.050Z",
+            "updated": "2025-05-30T00:28:24.681Z",
+            "case_rule_id": "She spent her earliest years reading classic literature, and writing poetry.",
+            "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+            "owner_id": "Haskell features a type system with type inference and lazy evaluation.",
+            "owner_name": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "organisation_name": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "owner_organisation_details": {
+                "organisations": [
+                    {
+                        "organisation_id": "Do you come here often?",
+                        "organisation_name": "He looked inquisitively at his keyboard and wrote another sentence."
+                    }
+                ],
+                "enterprise_id": "The arguments can be primitive data types or compound data types.",
+                "enterprise_name": "Any element of a tuple can be accessed in constant time."
+            },
+            "entity_id": "Ports are used to communicate with the external world.",
+            "entity_name": "brazilian.vegas",
+            "entity_criticality": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "risk_score": 5,
+            "context_list": [
+                {
+                    "context": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                }
+            ],
+            "targets": [
+                "Ports are used to communicate with the external world.",
+                "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "Ports are created with the built-in function open_port.",
+                "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "Do you have any idea why this is not working?",
+                "Ports are created with the built-in function open_port.",
+                "Erlang is a general-purpose, concurrent, functional programming language.",
+                "Atoms are used within a program to denote distinguished values.",
+                "Ports are used to communicate with the external world.",
+                "Any element of a tuple can be accessed in constant time.",
+                "Make me a sandwich.",
+                "Its main implementation is the Glasgow Haskell Compiler.",
+                "Do you come here often?",
+                "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "I don't even care.",
+                "Do you have any idea why this is not working?",
+                "Where are my pants?",
+                "Its main implementation is the Glasgow Haskell Compiler.",
+                "Ports are created with the built-in function open_port.",
+                "I don't even care.",
+                "He looked inquisitively at his keyboard and wrote another sentence.",
+                "The arguments can be primitive data types or compound data types.",
+                "Erlang is a general-purpose, concurrent, functional programming language.",
+                "Where are my pants?",
+                "Ports are created with the built-in function open_port.",
+                "Ports are used to communicate with the external world.",
+                "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "She spent her earliest years reading classic literature, and writing poetry.",
+                "I don't even care.",
+                "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "Type classes first appeared in the Haskell programming language.",
+                "The arguments can be primitive data types or compound data types."
+            ],
+            "actions_taken": []
+        },
+        "panel_evidence_dns": {
+            "ip_list": [],
+            "mx_list": [
+                {
+                    "entity": "Where are my pants?",
+                    "risk_score": 0,
+                    "criticality": "Do you come here often?",
+                    "record_type": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "context_list": [
+                        {
+                            "context": "Haskell features a type system with type inference and lazy evaluation."
+                        }
+                    ]
+                }
+            ],
+            "ns_list": [
+                {
+                    "entity": "Where are my pants?",
+                    "risk_score": 5,
+                    "criticality": "Erlang is known for its designs that are well suited for systems.",
+                    "record_type": "Haskell features a type system with type inference and lazy evaluation.",
+                    "context_list": []
+                },
+                {
+                    "entity": "Where are my pants?",
+                    "risk_score": 5,
+                    "criticality": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "record_type": "It is also a garbage-collected runtime system.",
+                    "context_list": []
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,189 @@
+{
+    "attributes": {
+        "title": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+        "text": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\" Ports are created with the built-in function open_port. In 1989 the building was heavily damaged by fire, but it has since been restored. Type classes first appeared in the Haskell programming language.",
+        "published": "2025-05-20T04:21:24.909Z",
+        "events": [
+            {
+                "type": "CyberAttack",
+                "attributes": {
+                    "start": "2025-09-10T22:23:37.157Z",
+                    "stop": "2025-05-04T10:13:18.513Z",
+                    "capabilities": [
+                        {
+                            "id": "ORd4Y9BHnHh",
+                            "name": "Greek salad",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "J6JlmSJaEqj",
+                            "name": "Schnitzel",
+                            "type": "MitreAttackIdentifier"
+                        },
+                        {
+                            "id": "RlmabwgRKmf",
+                            "name": "Eggs Neptune",
+                            "type": "MitreAttackIdentifier"
+                        }
+                    ],
+                    "adversary": [
+                        {
+                            "id": "s2yPEr",
+                            "name": "Bao",
+                            "type": "Person"
+                        }
+                    ],
+                    "target": [
+                        {
+                            "id": "ZKR1c",
+                            "name": "Chicken Alfredo",
+                            "type": "Company"
+                        },
+                        {
+                            "id": "hcrzv",
+                            "name": "Cowboy beans",
+                            "type": "Country"
+                        },
+                        {
+                            "id": "MFPWI1",
+                            "name": "BBQ Chicken Pizza",
+                            "type": "Industry"
+                        },
+                        {
+                            "id": "tLcB1D",
+                            "name": "Ribs",
+                            "type": "Industry"
+                        }
+                    ]
+                }
+            }
+        ],
+        "note_entities": [
+            {
+                "id": "ITamCkxT3A6",
+                "name": "Lobster roll",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "R9nfuwgz7X4",
+                "name": "Eggs Neptune",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "CazZPg",
+                "name": "Pancakes",
+                "type": "Person"
+            },
+            {
+                "id": "r41mqgmxC39",
+                "name": "Ice Cream",
+                "type": "MitreAttackIdentifier"
+            },
+            {
+                "id": "jzlHWU9ozSHZr",
+                "name": "Mission burrito",
+                "type": "Source"
+            }
+        ],
+        "context_entities": [
+            {
+                "id": "4bkrkv",
+                "name": "Sloppy joe",
+                "type": "Industry"
+            },
+            {
+                "id": "fYXjC",
+                "name": "Poutine",
+                "type": "Country"
+            },
+            {
+                "id": "BgeoM8",
+                "name": "Potato skins",
+                "type": "Industry"
+            },
+            {
+                "id": "OkCOs",
+                "name": "Kobe Beef",
+                "type": "Company"
+            }
+        ],
+        "topic": [
+            {
+                "id": "emNctk",
+                "name": "Empanada",
+                "type": "Topic",
+                "description": "Make me a sandwich."
+            }
+        ],
+        "validation_urls": [
+            {
+                "id": "url:https://easter.cn/",
+                "name": "Crab Rangoon",
+                "type": "URL"
+            },
+            {
+                "id": "url:https://beneficial.com/",
+                "name": "Milk Steak",
+                "type": "URL"
+            }
+        ],
+        "diamond_model": [
+            {
+                "start": "2025-09-05T01:45:17.877Z",
+                "stop": "2025-02-01T08:40:45.105Z",
+                "capabilities": [
+                    {
+                        "id": "MxZJ1cDXblp",
+                        "name": "Vichyssoise",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "fCpkx6llVop",
+                        "name": "American fried rice",
+                        "type": "MitreAttackIdentifier"
+                    },
+                    {
+                        "id": "SVrhuXFTU76",
+                        "name": "Jell-O",
+                        "type": "MitreAttackIdentifier"
+                    }
+                ],
+                "adversary": [
+                    {
+                        "id": "CxejBJ",
+                        "name": "Chili con carne",
+                        "type": "Person"
+                    }
+                ],
+                "target": [
+                    {
+                        "id": "oZh99",
+                        "name": "Porterhouse Steak",
+                        "type": "Company"
+                    },
+                    {
+                        "id": "fpnfT",
+                        "name": "Vegemite on Toast",
+                        "type": "Country"
+                    },
+                    {
+                        "id": "8CYFCo",
+                        "name": "Soul food",
+                        "type": "Industry"
+                    },
+                    {
+                        "id": "Exkc7m",
+                        "name": "Butter cookie",
+                        "type": "Industry"
+                    }
+                ]
+            }
+        ]
+    },
+    "id": "qx5n7Zwm3H",
+    "source": {
+        "id": "C8cqPMcknbX0N",
+        "name": "Salted caramel cookie",
+        "type": "Source"
+    }
+}

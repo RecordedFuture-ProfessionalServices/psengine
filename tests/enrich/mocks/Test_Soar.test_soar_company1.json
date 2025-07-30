@@ -1,0 +1,296 @@
+{
+	"data": {
+		"results": [
+			{
+				"risk": {
+					"score": 89,
+					"level": 3.0,
+					"context": {
+						"public": {
+							"summary": [],
+							"score": 0.0,
+							"mostCriticalRule": "Ports are created with the built-in function open_port.",
+							"rule": {
+								"maxCount": 0
+							}
+						}
+					},
+					"rule": {
+						"count": 27,
+						"mostCritical": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+						"maxCount": 48,
+						"evidence": {
+							"unsupportedProduct": {
+								"count": 1,
+								"timestamp": "2025-12-23T01:42:15.499Z",
+								"description": "It is also a garbage-collected runtime system.",
+								"rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"sightings": -1,
+								"mitigation": "Any element of a tuple can be accessed in constant time.",
+								"level": 2
+							},
+							"spfMultiple": {
+								"count": 1,
+								"timestamp": "2025-04-13T10:47:45.400Z",
+								"description": "It is also a garbage-collected runtime system.",
+								"rule": "Atoms are used within a program to denote distinguished values.",
+								"sightings": 18,
+								"mitigation": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+								"level": 2
+							},
+							"recentPunyCodeTargetedDomain": {
+								"count": 1,
+								"timestamp": "2025-11-14T08:57:04.053Z",
+								"description": "Erlang is known for its designs that are well suited for systems.",
+								"rule": "Ports are used to communicate with the external world.",
+								"sightings": 269,
+								"mitigation": "Do you come here often?",
+								"level": 2
+							},
+							"recentExploitableInfrastructure": {
+								"count": 1,
+								"timestamp": "2025-09-16T06:24:57.033Z",
+								"description": "She spent her earliest years reading classic literature, and writing poetry.",
+								"rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+								"sightings": 1,
+								"mitigation": "Atoms are used within a program to denote distinguished values.",
+								"level": 1
+							},
+							"exploitableInfrastructure": {
+								"count": 1,
+								"timestamp": "2025-07-15T02:59:18.027Z",
+								"description": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+								"rule": "I don't even care.",
+								"sightings": 10,
+								"mitigation": "Make me a sandwich.",
+								"level": 1
+							},
+							"exploitedProduct": {
+								"count": 1,
+								"timestamp": "2025-05-05T01:19:28.839Z",
+								"description": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+								"rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+								"sightings": -1,
+								"mitigation": "The arguments can be primitive data types or compound data types.",
+								"level": 1
+							},
+							"infrastructureAbuse": {
+								"count": 1,
+								"timestamp": "2025-02-07T19:27:56.654Z",
+								"description": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+								"rule": "She spent her earliest years reading classic literature, and writing poetry.",
+								"sightings": 2,
+								"mitigation": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+								"level": 1
+							},
+							"vulnerableProduct": {
+								"count": 1,
+								"timestamp": "2025-02-24T21:20:02.557Z",
+								"description": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+								"rule": "Type classes first appeared in the Haskell programming language.",
+								"sightings": -1,
+								"mitigation": "She spent her earliest years reading classic literature, and writing poetry.",
+								"level": 2
+							},
+							"recentTypoTargetedDomain": {
+								"count": 1,
+								"timestamp": "2025-08-14T07:19:49.894Z",
+								"description": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+								"rule": "Ports are used to communicate with the external world.",
+								"sightings": 20,
+								"mitigation": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"level": 1
+							},
+							"validatedCyberAttack": {
+								"count": 1,
+								"timestamp": "2025-01-02T07:17:00.159Z",
+								"description": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+								"rule": "Ports are used to communicate with the external world.",
+								"sightings": 10,
+								"mitigation": "Tuples are containers for a fixed number of Erlang data types.",
+								"level": 1
+							},
+							"punyCodeTargetedDomain": {
+								"count": 1,
+								"timestamp": "2025-10-17T03:52:12.666Z",
+								"description": "Its main implementation is the Glasgow Haskell Compiler.",
+								"rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+								"sightings": 3257,
+								"mitigation": "Make me a sandwich.",
+								"level": 1
+							},
+							"recentHighTierHighVolume": {
+								"count": 1,
+								"timestamp": "2025-05-07T11:38:32.988Z",
+								"description": "Any element of a tuple can be accessed in constant time.",
+								"rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+								"sightings": 13,
+								"mitigation": "Ports are created with the built-in function open_port.",
+								"level": 2
+							},
+							"spfOverlyPermissive": {
+								"count": 1,
+								"timestamp": "2025-09-10T18:06:23.955Z",
+								"description": "It is also a garbage-collected runtime system.",
+								"rule": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+								"sightings": 204,
+								"mitigation": "Its main implementation is the Glasgow Haskell Compiler.",
+								"level": 2
+							},
+							"recentDnsSandwichTargetedDomain": {
+								"count": 1,
+								"timestamp": "2025-03-22T15:26:47.977Z",
+								"description": "Do you come here often?",
+								"rule": "It is also a garbage-collected runtime system.",
+								"sightings": 6204,
+								"mitigation": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+								"level": 2
+							},
+							"recentInfrastructureAbuse": {
+								"count": 1,
+								"timestamp": "2025-07-20T17:57:19.407Z",
+								"description": "Atoms are used within a program to denote distinguished values.",
+								"rule": "Any element of a tuple can be accessed in constant time.",
+								"sightings": 2,
+								"mitigation": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"level": 3
+							},
+							"typoTargetedDomain": {
+								"count": 1,
+								"timestamp": "2025-06-29T11:25:58.530Z",
+								"description": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+								"rule": "Atoms are used within a program to denote distinguished values.",
+								"sightings": 279,
+								"mitigation": "Make me a sandwich.",
+								"level": 1
+							},
+							"dnsSandwichTargetedDomain": {
+								"count": 1,
+								"timestamp": "2025-08-01T05:23:00.119Z",
+								"description": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+								"rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+								"sightings": 33,
+								"mitigation": "Make me a sandwich.",
+								"level": 1
+							},
+							"analystNote": {
+								"count": 1,
+								"timestamp": "2025-01-11T16:56:15.664Z",
+								"description": "Where are my pants?",
+								"rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"sightings": 340,
+								"mitigation": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+								"level": 1
+							},
+							"recentMarketHighVolume": {
+								"count": 1,
+								"timestamp": "2025-07-04T16:43:32.944Z",
+								"description": "I don't even care.",
+								"rule": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+								"sightings": 87,
+								"mitigation": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+								"level": 2
+							},
+							"certExpired": {
+								"count": 1,
+								"timestamp": "2025-04-11T15:16:03.758Z",
+								"description": "Erlang is a general-purpose, concurrent, functional programming language.",
+								"rule": "Do you have any idea why this is not working?",
+								"sightings": 822,
+								"mitigation": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"level": 2
+							},
+							"hsts": {
+								"count": 1,
+								"timestamp": "2025-05-16T20:26:26.341Z",
+								"description": "Make me a sandwich.",
+								"rule": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+								"sightings": 120,
+								"mitigation": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+								"level": 2
+							},
+							"openPort": {
+								"count": 1,
+								"timestamp": "2025-09-26T03:03:27.241Z",
+								"description": "Do you come here often?",
+								"rule": "Do you have any idea why this is not working?",
+								"sightings": 100,
+								"mitigation": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+								"level": 2
+							},
+							"infrastructureInfection": {
+								"count": 1,
+								"timestamp": "2025-07-28T13:28:41.405Z",
+								"description": "Ports are used to communicate with the external world.",
+								"rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+								"sightings": 2,
+								"mitigation": "Where are my pants?",
+								"level": 1
+							},
+							"recentHighPasswordCreds": {
+								"count": 1,
+								"timestamp": "2025-01-21T04:36:14.646Z",
+								"description": "Erlang is a general-purpose, concurrent, functional programming language.",
+								"rule": "The arguments can be primitive data types or compound data types.",
+								"sightings": -1,
+								"mitigation": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+								"level": 2
+							},
+							"dmarcAbsent": {
+								"count": 1,
+								"timestamp": "2025-04-21T04:22:53.360Z",
+								"description": "Its main implementation is the Glasgow Haskell Compiler.",
+								"rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+								"sightings": 70,
+								"mitigation": "Ports are used to communicate with the external world.",
+								"level": 1
+							},
+							"securityBreach": {
+								"count": 1,
+								"timestamp": "2025-01-19T11:44:18.831Z",
+								"description": "The arguments can be primitive data types or compound data types.",
+								"rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+								"sightings": 1,
+								"mitigation": "Tuples are containers for a fixed number of Erlang data types.",
+								"level": 1
+							},
+							"possibleMalware": {
+								"count": 1,
+								"timestamp": "2025-02-19T04:03:31.936Z",
+								"description": "Do you come here often?",
+								"rule": "He looked inquisitively at his keyboard and wrote another sentence.",
+								"sightings": 10,
+								"mitigation": "Tuples are containers for a fixed number of Erlang data types.",
+								"level": 1
+							}
+						},
+						"summary": [
+							{
+								"level": 1.0,
+								"count": 14.0
+							},
+							{
+								"level": 2.0,
+								"count": 12.0
+							},
+							{
+								"level": 3.0,
+								"count": 1.0
+							}
+						]
+					}
+				},
+				"entity": {
+					"id": "5Plx3",
+					"name": "Company1",
+					"type": "Company"
+				}
+			}
+		]
+	},
+	"counts": {
+		"returned": 1,
+		"total": 1
+	}
+}
+

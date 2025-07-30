@@ -1,0 +1,41 @@
+{
+    "data": [
+        {
+            "document": {
+                "source": {
+                    "id": "ELYF8kNS0fgUS",
+                    "name": "Pickled cucumber",
+                    "type": "Source"
+                },
+                "title": "I don't even care.",
+                "url": null,
+                "authors": []
+            },
+            "fragment": "Its main implementation is the Glasgow Haskell Compiler.",
+            "id": "CPW4fULuK46",
+            "language": "Where are my pants?",
+            "index": 0,
+            "entities": [
+                {
+                    "id": "pbApKN",
+                    "name": "Rice and gravy",
+                    "type": "Organization"
+                },
+                {
+                    "id": "iAnNvk",
+                    "name": "Pigs in blankets",
+                    "type": "Malware"
+                }
+            ],
+            "alert_id": "Type classes first appeared in the Haskell programming language.",
+            "primary_entity": null,
+            "analyst_note": {
+                "id": "67wy5t",
+                "url": {
+                    "api": "https://google.com",
+                    "portal": "https://google.com"
+                }
+            }
+        }
+    ]
+}

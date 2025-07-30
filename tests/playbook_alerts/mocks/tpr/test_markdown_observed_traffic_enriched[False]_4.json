@@ -1,0 +1,95 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-05-30T08:14:12.087Z",
+            "firstSeen": "2025-06-14T13:26:56.119Z"
+        },
+        "risk": {
+            "criticalityLabel": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "riskString": "Tuples are containers for a fixed number of Erlang data types.",
+            "rules": 9,
+            "criticality": 2,
+            "riskSummary": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "score": 47,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Do you have any idea why this is not working?",
+                    "evidenceString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-03-22T17:50:01.892Z",
+                    "criticalityLabel": "Haskell features a type system with type inference and lazy evaluation."
+                },
+                {
+                    "mitigationString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "evidenceString": "Do you come here often?",
+                    "rule": "Tuples are containers for a fixed number of Erlang data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-19T14:59:06.210Z",
+                    "criticalityLabel": "The arguments can be primitive data types or compound data types."
+                },
+                {
+                    "mitigationString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "evidenceString": "Any element of a tuple can be accessed in constant time.",
+                    "rule": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                    "criticality": 1,
+                    "timestamp": "2025-06-30T14:11:04.190Z",
+                    "criticalityLabel": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                },
+                {
+                    "mitigationString": "Atoms are used within a program to denote distinguished values.",
+                    "evidenceString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "rule": "The arguments can be primitive data types or compound data types.",
+                    "criticality": 1,
+                    "timestamp": "2025-11-16T18:14:14.022Z",
+                    "criticalityLabel": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+                },
+                {
+                    "mitigationString": "Ports are created with the built-in function open_port.",
+                    "evidenceString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-02-22T16:43:53.545Z",
+                    "criticalityLabel": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s."
+                },
+                {
+                    "mitigationString": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                    "evidenceString": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                    "rule": "Erlang is known for its designs that are well suited for systems.",
+                    "criticality": 2,
+                    "timestamp": "2025-11-18T08:16:43.410Z",
+                    "criticalityLabel": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets."
+                },
+                {
+                    "mitigationString": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "evidenceString": "Ports are used to communicate with the external world.",
+                    "rule": "Its main implementation is the Glasgow Haskell Compiler.",
+                    "criticality": 2,
+                    "timestamp": "2025-12-11T13:23:45.101Z",
+                    "criticalityLabel": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn."
+                },
+                {
+                    "mitigationString": "Do you have any idea why this is not working?",
+                    "evidenceString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "rule": "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "criticality": 2,
+                    "timestamp": "2025-10-22T15:35:49.846Z",
+                    "criticalityLabel": "I don't even care."
+                },
+                {
+                    "mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "evidenceString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "rule": "Type classes first appeared in the Haskell programming language.",
+                    "criticality": 2,
+                    "timestamp": "2025-11-25T21:20:52.742Z",
+                    "criticalityLabel": "Atoms are used within a program to denote distinguished values."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:65.118.177.61",
+            "name": "Poutine",
+            "type": "IpAddress"
+        }
+    }
+}

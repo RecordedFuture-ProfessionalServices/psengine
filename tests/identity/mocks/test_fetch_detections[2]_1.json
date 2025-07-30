@@ -1,0 +1,93 @@
+{
+    "total": 150592,
+    "detections": [
+        {
+            "id": "ZLxrItjZBl8NT1QlynqqXOHqd44LxEEm",
+            "novel": true,
+            "type": "External",
+            "subject": "He looked inquisitively at his keyboard and wrote another sentence.",
+            "password": {
+                "type": "clear",
+                "hashes": [
+                    {
+                        "algorithm": "SHA1",
+                        "hash": "He looked inquisitively at his keyboard and wrote another sentence."
+                    },
+                    {
+                        "algorithm": "SHA256",
+                        "hash": "Erlang is known for its designs that are well suited for systems."
+                    },
+                    {
+                        "algorithm": "NTLM",
+                        "hash": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+                    },
+                    {
+                        "algorithm": "MD5",
+                        "hash": "She spent her earliest years reading classic literature, and writing poetry."
+                    }
+                ],
+                "properties": [
+                    "Erlang is a general-purpose, concurrent, functional programming language.",
+                    "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "Do you come here often?",
+                    "Erlang is a general-purpose, concurrent, functional programming language."
+                ],
+                "cleartext_hint": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "cleartext": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom."
+            },
+            "authorization_service": {
+                "url": "https://atlas.org/",
+                "domain": "She spent her earliest years reading classic literature, and writing poetry.",
+                "fqdn": "Tuples are containers for a fixed number of Erlang data types.",
+                "technology": [
+                    {
+                        "name": "Doughnut",
+                        "id": "aGKs",
+                        "category": "Erlang is a general-purpose, concurrent, functional programming language."
+                    },
+                    {
+                        "name": "City chicken",
+                        "id": "wrRpQr"
+                    }
+                ],
+                "protocols": [
+                    "Erlang is known for its designs that are well suited for systems."
+                ]
+            },
+            "cookies": [],
+            "malware_family": {
+                "name": "Margherita Pizza",
+                "id": "bsW1jr"
+            },
+            "dump": {
+                "name": "Russian tea cake",
+                "source": "Any element of a tuple can be accessed in constant time.",
+                "description": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "downloaded": "2025-12-25T09:04:20.900Z",
+                "compromise": {
+                    "exfiltration_date": "2025-01-16T11:06:51.055Z",
+                    "os": "Ports are created with the built-in function open_port.",
+                    "os_username": "Where are my pants?",
+                    "malware_file": "Tuples are containers for a fixed number of Erlang data types.",
+                    "timezone": "Do you come here often?",
+                    "computer_name": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing."
+                },
+                "infrastructure": {
+                    "ip": "11.19.84.18"
+                },
+                "location": {
+                    "country": {
+                        "name": "Pocky",
+                        "displayName": "The arguments can be primitive data types or compound data types.",
+                        "countryCode": "He looked inquisitively at his keyboard and wrote another sentence.",
+                        "alpha2Code": "Ports are created with the built-in function open_port.",
+                        "alpha3Code": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+                    }
+                }
+            },
+            "created": "2025-01-27T15:45:03.074Z"
+        }
+    ],
+    "next_offset": "Do you have any idea why this is not working?"
+}

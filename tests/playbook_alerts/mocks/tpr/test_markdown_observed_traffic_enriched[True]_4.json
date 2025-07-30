@@ -1,0 +1,95 @@
+{
+    "data": {
+        "timestamps": {
+            "lastSeen": "2025-05-20T00:54:49.027Z",
+            "firstSeen": "2025-11-27T23:56:24.331Z"
+        },
+        "risk": {
+            "criticalityLabel": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "riskString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "rules": 9,
+            "criticality": 2,
+            "riskSummary": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "score": 47,
+            "evidenceDetails": [
+                {
+                    "mitigationString": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "evidenceString": "Any element of a tuple can be accessed in constant time.",
+                    "rule": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                    "criticality": 1,
+                    "timestamp": "2025-12-04T22:58:51.881Z",
+                    "criticalityLabel": "Where are my pants?"
+                },
+                {
+                    "mitigationString": "She spent her earliest years reading classic literature, and writing poetry.",
+                    "evidenceString": "He looked inquisitively at his keyboard and wrote another sentence.",
+                    "rule": "I don't even care.",
+                    "criticality": 1,
+                    "timestamp": "2025-05-07T10:21:44.519Z",
+                    "criticalityLabel": "Any element of a tuple can be accessed in constant time."
+                },
+                {
+                    "mitigationString": "Haskell features a type system with type inference and lazy evaluation.",
+                    "evidenceString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "rule": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-03T05:27:47.333Z",
+                    "criticalityLabel": "Erlang is a general-purpose, concurrent, functional programming language."
+                },
+                {
+                    "mitigationString": "Where are my pants?",
+                    "evidenceString": "Erlang is known for its designs that are well suited for systems.",
+                    "rule": "Type classes first appeared in the Haskell programming language.",
+                    "criticality": 1,
+                    "timestamp": "2025-08-16T09:44:52.399Z",
+                    "criticalityLabel": "Any element of a tuple can be accessed in constant time."
+                },
+                {
+                    "mitigationString": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                    "evidenceString": "Make me a sandwich.",
+                    "rule": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                    "criticality": 1,
+                    "timestamp": "2025-07-30T13:28:12.193Z",
+                    "criticalityLabel": "It is also a garbage-collected runtime system."
+                },
+                {
+                    "mitigationString": "The arguments can be primitive data types or compound data types.",
+                    "evidenceString": "Atoms are used within a program to denote distinguished values.",
+                    "rule": "The arguments can be primitive data types or compound data types.",
+                    "criticality": 2,
+                    "timestamp": "2025-12-18T03:48:20.375Z",
+                    "criticalityLabel": "Ports are used to communicate with the external world."
+                },
+                {
+                    "mitigationString": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                    "evidenceString": "Make me a sandwich.",
+                    "rule": "Haskell features a type system with type inference and lazy evaluation.",
+                    "criticality": 2,
+                    "timestamp": "2025-08-16T14:23:12.518Z",
+                    "criticalityLabel": "Tuples are containers for a fixed number of Erlang data types."
+                },
+                {
+                    "mitigationString": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                    "evidenceString": "The arguments can be primitive data types or compound data types.",
+                    "rule": "Where are my pants?",
+                    "criticality": 2,
+                    "timestamp": "2025-12-05T19:44:34.480Z",
+                    "criticalityLabel": "The arguments can be primitive data types or compound data types."
+                },
+                {
+                    "mitigationString": "Do you have any idea why this is not working?",
+                    "evidenceString": "Make me a sandwich.",
+                    "rule": "Haskell features a type system with type inference and lazy evaluation.",
+                    "criticality": 2,
+                    "timestamp": "2025-08-30T00:34:19.974Z",
+                    "criticalityLabel": "Erlang is a general-purpose, concurrent, functional programming language."
+                }
+            ]
+        },
+        "entity": {
+            "id": "ip:196.10.238.85",
+            "name": "Falafel",
+            "type": "IpAddress"
+        }
+    }
+}

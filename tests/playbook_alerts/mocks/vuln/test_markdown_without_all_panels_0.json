@@ -1,0 +1,43 @@
+{
+	"status": {
+		"status_code": "Ports are used to communicate with the external world.",
+		"status_message": "Erlang is a general-purpose, concurrent, functional programming language."
+	},
+	"data": {
+		"playbook_alert_id": "Type classes first appeared in the Haskell programming language.",
+		"panel_status": {
+			"status": "New",
+			"priority": "Ports are created with the built-in function open_port.",
+			"created": "2025-06-03T16:32:00.336Z",
+			"updated": "2025-10-08T01:27:45.798Z",
+			"case_rule_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+			"case_rule_label": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+			"owner_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+			"owner_name": "Haskell features a type system with type inference and lazy evaluation.",
+			"organisation_id": "Erlang is known for its designs that are well suited for systems.",
+			"organisation_name": "He looked inquisitively at his keyboard and wrote another sentence.",
+			"owner_organisation_details": {
+				"organisations": [
+					{
+						"organisation_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+						"organisation_name": "Ports are created with the built-in function open_port."
+					}
+				],
+				"enterprise_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+				"enterprise_name": "He looked inquisitively at his keyboard and wrote another sentence."
+			},
+			"entity_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+			"entity_name": "CVE-2024-38475",
+			"entity_criticality": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+			"risk_score": 99,
+			"lifecycle_stage": "Ports are used to communicate with the external world.",
+			"targets": [
+				{
+					"name": "Funnel Cake"
+				}
+			],
+			"actions_taken": []
+		}
+	}
+}
+
