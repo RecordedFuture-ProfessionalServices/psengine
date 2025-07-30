@@ -1,0 +1,32 @@
+name: Run-Examples
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  run-examples:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          
+      - name: Run all sample apps
+        env:
+          RF_TOKEN: ${{ secrets.RF_TOKEN }}
+        run: |
+          find examples -name 'run_*.py' | while read -r script; do
+            echo ""
+            echo "Running $script"
+            python "$script"
+          done 
