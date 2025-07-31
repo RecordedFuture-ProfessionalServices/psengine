@@ -1,4 +1,4 @@
-name: Run-Examples
+name: Run-Example-Apps
 
 on: 
   workflow_dispatch:
@@ -6,6 +6,12 @@ on:
 jobs:
   run-examples:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: 
+        apps: ["analyst_notes", "base_http_client", "classic_alerts", "collective_insights", "config", "detection", "enrichment", "identity", "lists", "markdown", "playbook_alerts", "rf_client", "risklists", "stix2"]
+    env:
+      RF_TOKEN: ${{ secrets.RF_TOKEN }}
     
     steps:
       - name: Checkout code
@@ -21,12 +27,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e .
           
-      - name: Run all sample apps
-        env:
-          RF_TOKEN: ${{ secrets.RF_TOKEN }}
-        run: |
-          find examples -name 'run_*.py' | while read -r script; do
-            echo ""
-            echo "Running $script"
-            python "$script"
-          done 
+      - name: Run ${{matrix.apps}}
+        run: python examples/${{matrix.apps}}/run_${{matrix.apps}}.py
