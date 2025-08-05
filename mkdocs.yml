@@ -1,0 +1,194 @@
+site_name: PSEngine
+repo_url: https://github.com/RecordedFuture-ProfessionalServices/psengine-py
+
+watch:
+  - psengine
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - content.code.wrap
+    - content.footnote.tooltips
+    - content.tabs.link
+    - content.tooltips
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: true        
+      linenums: true             
+      guess_lang: false
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["psengine"]
+          options:
+            docstring_options:
+              ignore_init_summary: true
+            merge_init_into_class: true
+            extensions:
+              - griffe_typingdoc
+            show_root_heading: true
+            show_if_no_docstring: true
+            show_signature_annotations: true
+            inherited_members: true
+            separate_signature: true
+            unwrap_annotated: true
+            docstring_section_style: spacy
+            signature_crossrefs: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+nav:
+  - index.md
+  - about.md
+  - CHANGELOG.md
+  - API Documentation:
+      - Analyst Notes:
+          - Manager: api/analyst_notes/note_mgr.md
+          - ADT: api/analyst_notes/note.md
+          - Models: api/analyst_notes/models.md
+          - Helpers: api/analyst_notes/helpers.md
+          - Constants: api/analyst_notes/constants.md
+          - Errors: api/analyst_notes/errors.md
+      - Classic Alerts:
+          - Manager: api/classic_alerts/classic_alert_mgr.md
+          - ADT: api/classic_alerts/classic_alert.md
+          - Models: api/classic_alerts/models.md
+          - Helpers: api/classic_alerts/helpers.md
+          - Constants: api/classic_alerts/constants.md
+          - Errors: api/classic_alerts/errors.md
+      - Collective Insights:
+          - Manager: api/collective_insights/collective_insights.md
+          - ADT: api/collective_insights/insight.md
+          - Models: api/collective_insights/models.md
+          - Constants: api/collective_insights/constants.md
+          - Errors: api/collective_insights/errors.md
+      - Config:
+          - Config: api/config/config.md
+          - Errors: api/config/errors.md
+      - Detection:
+          - Manager: api/detection/detection_mgr.md
+          - ADT: api/detection/detection_rule.md
+          - Models: api/detection/models.md
+          - Helpers: api/detection/helpers.md
+          - Errors: api/detection/errors.md
+      - Enrichment: 
+          - Lookup: 
+              - Manager: api/enrichment/enrich_mgr.md
+              - ADT: api/enrichment/enrich_adt.md
+              - Models: api/enrichment/enrich_models.md
+          - SOAR: 
+              - Manager: api/enrichment/soar_mgr.md
+              - ADT: api/enrichment/soar_adt.md
+              - Models: api/enrichment/soar_models.md
+          - Errors: api/enrichment/errors.md
+          - Constants: api/enrichment/constants.md
+      - Entity Lists:
+          - Manager: api/entity_lists/entity_list_mgr.md
+          - ADT: api/entity_lists/entity_list.md
+          - Models: api/entity_lists/models.md
+          - Constants: api/entity_lists/constants.md
+          - Errors: api/entity_lists/errors.md
+      - Entity Match:
+          - Manager: api/entity_match/entity_match_mgr.md
+          - ADT: api/entity_match/entity_match.md
+          - Models: api/entity_match/models.md
+          - Errors: api/entity_match/errors.md
+      - Helpers:
+          - FileHelpers: api/helpers/file_helpers.md
+          - FormattingHelpers: api/helpers/format_helpers.md
+          - MultiThreadingHelper: api/helpers/threading_helpers.md
+          - OSHelpers: api/helpers/os_helpers.md
+          - TimeHelpers: api/helpers/time_helpers.md
+          - Validators: api/helpers/validators.md
+          - Misc: api/helpers/commons.md
+      - Identity:
+          - Manager: api/identity/identity_mgr.md
+          - ADT: api/identity/identity.md
+          - Constants: api/identity/constants.md
+          - Errors: api/identity/errors.md
+      - Logger:
+          - Logger: api/logger/rf_logger.md
+          - Constants: api/logger/constants.md
+          - Errors: api/logger/errors.md
+      - Markdown:
+          - Markdown: api/markdown/markdown.md
+          - Models: api/markdown/models.md
+      - Playbook Alerts:
+          - Manager: api/playbook_alerts/playbook_alert_mgr.md
+          - ADT: api/playbook_alerts/playbook_alerts.md
+          - Helpers: api/playbook_alerts/helpers.md
+          - Constants: api/playbook_alerts/constants.md
+          - Errors: api/playbook_alerts/errors.md
+          - PA Category: api/playbook_alerts/pa_category.md
+          - Models:
+              - Common Models: api/playbook_alerts/models/common_models.md
+              - Panel Log: api/playbook_alerts/models/panel_log.md
+              - Panel Status: api/playbook_alerts/models/panel_status.md
+              - PBA Code Repo Leak: api/playbook_alerts/models/pba_code_repo_leak.md
+              - PBA Cyber Vulnerability: api/playbook_alerts/models/pba_cyber_vulnerability.md
+              - PBA Domain Abuse: api/playbook_alerts/models/pba_domain_abuse.md
+              - PBA Geopolitics Facility: api/playbook_alerts/models/pba_geopolitics_facility.md
+              - PBA Identity Exposures: api/playbook_alerts/models/pba_identity_exposures.md
+              - PBA Malware Report: api/playbook_alerts/models/pba_malware_report.md
+              - PBA Third Party Risk: api/playbook_alerts/models/pba_third_party_risk.md
+              - Search Endpoint: api/playbook_alerts/models/search_endpoint.md
+      - Risk Lists:
+          - Manager: api/risklists/risklist_mgr.md
+          - Models: api/risklists/models.md
+          - Constants: api/risklists/constants.md
+          - Errors: api/risklists/errors.md
+      - STIX2:
+          - Base STIX Entity: api/stix2/base_stix_entity.md
+          - Simple Entity: api/stix2/simple_entity.md
+          - Complex Entity: api/stix2/complex_entity.md
+          - Enriched Indicator: api/stix2/enriched_indicator.md
+          - RF Bundle: api/stix2/rf_bundle.md
+          - Util: api/stix2/util.md
+          - Helpers: api/stix2/helpers.md
+          - Constants: api/stix2/constants.md
+          - Errors: api/stix2/errors.md
+      - Client:
+          - Client: api/client/rf_client.md
+          - Base HTTP Client: api/client/base_client.md
+          - Common Models: api/client/common_models.md
+          - Constants: api/client/constants.md
+          - Errors: api/client/errors.md
