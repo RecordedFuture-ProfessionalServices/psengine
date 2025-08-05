@@ -13,9 +13,10 @@
 
 import logging
 from pathlib import Path
-from typing import Union
+from typing import Annotated, Union
 
 from pydantic import validate_call
+from typing_extensions import Doc
 
 from ..errors import WriteFileError
 from ..helpers import OSHelpers
@@ -27,23 +28,21 @@ LOG = logging.getLogger('psengine.classic_alerts.helpers')
 
 @validate_call
 def save_image(
-    image_bytes: bytes, file_name: str, output_directory: Union[str, Path] = DEFAULT_CA_OUTPUT_DIR
-) -> Path:
-    """Save an image to disk as a png file.
-
-    Args:
-        image_bytes (bytes): The image to save.
-        output_directory (str): The directory to save the image to.
-        file_name (Union[str, Path]): The file to save the image as. Without a file extension.
+    image_bytes: Annotated[bytes, Doc('The image to save.')],
+    file_name: Annotated[str, Doc('The file name to save the image as, without extension.')],
+    output_directory: Annotated[
+        Union[str, Path], Doc('The directory to save the image to.')
+    ] = DEFAULT_CA_OUTPUT_DIR,
+) -> Annotated[Path, Doc('The path to the file written.')]:
+    """Save an image to disk as a PNG file.
 
     Raises:
-        ValidationError if any supplied parameter is of incorrect type.
-        WriteFileError: if the write operation fails.
-        WriteFileError: if the path provided is not a directory or it cannot be created.
-        WriteFileError: if the write operations fail.
+        ValidationError: If any supplied parameter is of incorrect type.
+        WriteFileError: In any of the following situations:
 
-    Returns:
-        Path: The path to the file written
+            - If the path provided is not a directory
+            - If the path provided cannot be created.
+            - If the write operation fails.
     """
     try:
         LOG.info(f"Saving image '{file_name}' to disk")
@@ -61,22 +60,20 @@ def save_image(
 
 @validate_call
 def save_images(
-    alert: ClassicAlert, output_directory: Union[str, Path] = DEFAULT_CA_OUTPUT_DIR
-) -> dict:
-    """Save all images from a ``ClassicAlert`` to disk.
-
-    Args:
-        alert (ClassicAlert): The alert to save images from.
-        output_directory (Union[str, Path], optional): The directory to save the image to.
+    alert: Annotated[ClassicAlert, Doc('The alert to save images from.')],
+    output_directory: Annotated[
+        Union[str, Path], Doc('The directory to save the images to.')
+    ] = DEFAULT_CA_OUTPUT_DIR,
+) -> Annotated[dict, Doc('A dictionary of image file paths with the image ID as the key.')]:
+    """Save all images from a `ClassicAlert` to disk.
 
     Raises:
-        ValidationError if any supplied parameter is of incorrect type.
-        WriteFileError: if the write operation fails.
-        WriteFileError: if the path provided is not a directory or it cannot be created.
-        WriteFileError: if the write operations fail.
+        ValidationError: If any supplied parameter is of incorrect type.
+        WriteFileError: In any of the following situations:
 
-    Returns:
-        dict: A dictionary of image file paths with the image ID as the key.
+            - If the path provided is not a directory
+            - If the path provided cannot be created.
+            - If the write operation fails.
     """
     image_file_paths = {}
     for id_, bytes_ in alert.images.items():

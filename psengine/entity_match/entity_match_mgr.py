@@ -16,6 +16,7 @@ from typing import Annotated, Optional, Union
 from urllib.parse import quote
 
 from pydantic import Field, validate_call
+from typing_extensions import Doc
 
 from ..common_models import IdNameType
 from ..constants import DEFAULT_LIMIT, DEFAULT_MAX_WORKERS
@@ -29,12 +30,11 @@ from .errors import MatchApiError
 class EntityMatchMgr:
     """Manages requests for Recorded Future Entity Match API."""
 
-    def __init__(self, rf_token: str = None):
-        """Initializes the EntityMatchMgr object.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
-        """
+    def __init__(
+        self,
+        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+    ):
+        """Initialize the `EntityMatchMgr` object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
 
@@ -43,26 +43,20 @@ class EntityMatchMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=MatchApiError)
     def match(
         self,
-        entity_name: str,
-        entity_type: Optional[Union[list, str]] = None,
-        limit: int = DEFAULT_LIMIT,
-    ) -> list[ResolvedEntity]:
-        """Matches a text string on entity match API.
+        entity_name: Annotated[str, Doc('Name of the entity.')],
+        entity_type: Annotated[
+            Optional[Union[list, str]], Doc('Type or list of types of the entity, if known.')
+        ] = None,
+        limit: Annotated[int, Doc('Maximum number of matches to return.')] = DEFAULT_LIMIT,
+    ) -> Annotated[list[ResolvedEntity], Doc('List of resolved entity matches.')]:
+        """Match a text string using the entity match API.
 
         Endpoint:
-            ``entity-match/match``
-
-        Args:
-            entity_name (str): name of the entity.
-            entity_type (Optional[Union[list, str]): the type(s) of the entity, if known.
-            limit (int, optional): maximum number of matches to return. Default to 10.
+            `entity-match/match`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            MatchApiError: if connection error occurs.
-
-        Returns:
-            list: list of ResolvedEntity
+            ValidationError: If any supplied parameter is of incorrect type.
+            MatchApiError: If connection error occurs.
         """
         if entity_type is not None:
             entity_type = entity_type if isinstance(entity_type, list) else [entity_type]
@@ -80,26 +74,20 @@ class EntityMatchMgr:
     @validate_call
     def resolve_entity_id(
         self,
-        entity_name: str,
-        entity_type: Optional[Annotated[str, Field(min_length=2)]] = None,
-        limit: Optional[int] = DEFAULT_LIMIT,
-    ) -> ResolvedEntity:
-        """Resolves an entity name and type (optional) to an ID.
+        entity_name: Annotated[str, Doc('Name of the entity.')],
+        entity_type: Annotated[Optional[str], Doc('Type of the entity, if known.')] = Field(
+            min_length=2, default=None
+        ),
+        limit: Annotated[Optional[int], Doc('Number of matches to check.')] = DEFAULT_LIMIT,
+    ) -> Annotated[ResolvedEntity, Doc('Resolved entity match.')]:
+        """Resolve an entity name (and optionally type) to an ID.
 
         Endpoint:
-            ``entity-match/match``
-
-        Args:
-            entity_name (str): name of the entity.
-            entity_type (Optional[str]): the type of the entity, if known.
-            limit (Optional[int]): limit of results to check for matches. Default 10
+            `entity-match/match`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            MatchApiError: if connection error occurs.
-
-        Returns:
-            ResolvedEntity
+            ValidationError: If any supplied parameter is of incorrect type.
+            MatchApiError: If connection error occurs.
         """
         matches = self.match(entity_name, entity_type=entity_type, limit=limit)
         if len(matches) > 1:
@@ -125,44 +113,27 @@ class EntityMatchMgr:
 
     @debug_call
     @validate_call
-    def _bulk_resolution_helper(
-        self, entity: tuple[str, Optional[str]], limit: Optional[int] = DEFAULT_LIMIT
-    ) -> ResolvedEntity:
-        """Helper function for multithreading.
-
-        Args:
-            entity (Tuple[str, Optional[str]]): entity name and type tuple.
-            limit (Optional[int]): limit of results to check for matches. Default 10
-
-        Returns:
-            ResolvedEntity: resolved entity object.
-        """
-        return self.resolve_entity_id(entity[0], entity[1], limit)
-
-    @debug_call
-    @validate_call
     def resolve_entity_ids(
         self,
-        entities: Union[list[str], list[tuple[str, str]]],
-        limit: Optional[int] = DEFAULT_LIMIT,
-        max_workers: Optional[int] = DEFAULT_MAX_WORKERS,
-    ) -> list[ResolvedEntity]:
-        """Resolves a list of entities to IDs.
+        entities: Annotated[
+            Union[list[str], list[tuple[str, str]]],
+            Doc('List of entity names or (name, type) tuples.'),
+        ],
+        limit: Annotated[
+            Optional[int], Doc('Number of matches to return for each entity.')
+        ] = DEFAULT_LIMIT,
+        max_workers: Annotated[
+            Optional[int], Doc('Number of workers to multithread requests.')
+        ] = DEFAULT_MAX_WORKERS,
+    ) -> Annotated[list[ResolvedEntity], Doc('Resolved entities for the provided input list.')]:
+        """Resolve a list of entities to their corresponding IDs.
 
         Endpoint:
-            ``entity-match/match``
-
-        Args:
-            entities (list): list of entity name strings or entity name, type tuples
-            limit (Optional[int]): limit of results to return. Default 10
-            max_workers (int, optional): number of workers to multithread requests.
+            `entity-match/match`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            MatchApiError: if connection error occurs.
-
-        Returns:
-            list of ResolvedEntity objects for each entity
+            ValidationError: If any supplied parameter is of incorrect type.
+            MatchApiError: If connection error occurs.
         """
         lookup_entities = [
             (entity, None) if isinstance(entity, str) else entity for entity in entities
@@ -186,21 +157,18 @@ class EntityMatchMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[404], exception_to_raise=MatchApiError)
-    def lookup(self, id_: str) -> EntityLookup:
-        """Lookup a Recorded Future ID for entity details.
+    def lookup(
+        self,
+        id_: Annotated[str, Doc('Recorded Future ID to look up.')],
+    ) -> Annotated[EntityLookup, Doc('EntityLookup object containing entity details.')]:
+        """Look up a Recorded Future ID for entity details.
 
         Endpoint:
-            ``entity-match/entity/{id}``
-
-        Args:
-            id_ (str): id to lookup.
+            `entity-match/entity/{id}`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            MatchApiError: if connection error occurs.
-
-        Returns:
-            EntityLookup object
+            ValidationError: If any supplied parameter is of incorrect type.
+            MatchApiError: If connection error occurs.
         """
         id_ = quote(id_, safe='.')
         response = self.rf_client.request('get', EP_ENTITY_LOOKUP.format(id_)).json()['data']
@@ -208,22 +176,23 @@ class EntityMatchMgr:
 
     @debug_call
     @validate_call
-    def lookup_bulk(self, ids: list[str], max_workers: Optional[int] = 0) -> list[EntityLookup]:
-        """Lookup multiple Recorded Future ID for entity details.
+    def lookup_bulk(
+        self,
+        ids: Annotated[list[str], Doc('List of Recorded Future IDs to look up.')],
+        max_workers: Annotated[
+            Optional[int], Doc('Number of workers to multithread requests.')
+        ] = 0,
+    ) -> Annotated[
+        list[EntityLookup], Doc('List of EntityLookup objects containing entity details.')
+    ]:
+        """Look up multiple Recorded Future IDs for entity details.
 
         Endpoint:
-            ``entity-match/entity/{id}``
-
-        Args:
-            ids (str): id to lookup.
-            max_workers (int, optional): number of workers to multithread requests.
+            `entity-match/entity/{id}`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            MatchApiError: if connection error occurs.
-
-        Returns:
-            List[EntityLookup] object
+            ValidationError: If any supplied parameter is of incorrect type.
+            MatchApiError: If connection error occurs.
         """
         ids = [quote(id_, safe='.') for id_ in ids]
         if max_workers:
@@ -233,3 +202,17 @@ class EntityMatchMgr:
                 iterator=ids,
             )
         return [self.lookup(id_) for id_ in ids]
+
+    @debug_call
+    @validate_call
+    def _bulk_resolution_helper(
+        self,
+        entity: Annotated[
+            tuple[str, Optional[str]], Doc('Tuple containing entity name and optional type.')
+        ],
+        limit: Annotated[
+            Optional[int], Doc('Limit of results to check for matches.')
+        ] = DEFAULT_LIMIT,
+    ) -> Annotated[ResolvedEntity, Doc('ResolvedEntity object.')]:
+        """Helper function for multithreaded entity resolution."""
+        return self.resolve_entity_id(entity[0], entity[1], limit)

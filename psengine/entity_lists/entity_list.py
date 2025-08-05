@@ -15,9 +15,10 @@ import logging
 import time
 from datetime import datetime
 from functools import total_ordering
-from typing import Optional, Union
+from typing import Annotated, Optional, Union
 
 from pydantic import ConfigDict, Field, validate_call
+from typing_extensions import Doc
 
 from ..common_models import IdNameType, RFBaseModel
 from ..constants import TIMESTAMP_STR
@@ -37,7 +38,7 @@ from .models import (
 
 
 class ListInfoOut(RFBaseModel):
-    """Validate data received from ``/{listId}/info`` endpoint."""
+    """Validate data received from `/{listId}/info` endpoint."""
 
     id_: str = Field(alias='id')
     name: str
@@ -54,7 +55,7 @@ class ListInfoOut(RFBaseModel):
 
 
 class ListStatusOut(RFBaseModel):
-    """Validate data received from ``/{listId}/status`` endpoint."""
+    """Validate data received from `/{listId}/status` endpoint."""
 
     size: int
     status: str
@@ -62,7 +63,7 @@ class ListStatusOut(RFBaseModel):
 
 @total_ordering
 class ListEntity(RFBaseModel):
-    """Validate data received from ``/{listId}/entities`` endpoint."""
+    """Validate data received from `/{listId}/entities` endpoint."""
 
     entity: IdNameType
     context: Optional[dict] = None
@@ -85,7 +86,7 @@ class ListEntity(RFBaseModel):
 
 
 class EntityList(RFBaseModel):
-    """Validate data received from ``/create`` endpoint."""
+    """Validate data received from `/create` endpoint."""
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
     rf_client: RFClient = Field(exclude=True)
@@ -110,12 +111,8 @@ class EntityList(RFBaseModel):
     def __eq__(self, other: 'EntityList'):
         return self.id_ == other.id_
 
-    def __str__(self):
-        """String representation of the list.
-
-        Returns:
-            str: list data with standard info + entities
-        """
+    def __str__(self) -> Annotated[str, Doc('List data with standard info and entities.')]:
+        """Return the string representation of the list."""
 
         def format_date(date):
             return date.strftime(TIMESTAMP_STR)
@@ -161,65 +158,71 @@ class EntityList(RFBaseModel):
     @debug_call
     @validate_call
     def add(
-        self, entity: Union[str, tuple[str, str]], context: dict = None
-    ) -> ListEntityOperationResponse:
-        """Add entity to list.
+        self,
+        entity: Annotated[
+            Union[str, tuple[str, str]], Doc('ID or (name, type) tuple of the entity to add.')
+        ],
+        context: Annotated[Optional[dict], Doc('Context object for the entity.')] = None,
+    ) -> Annotated[
+        ListEntityOperationResponse, Doc('Response from the `list/{id}/entity/add` endpoint.')
+    ]:
+        """Add an entity to a list.
 
         Endpoint:
-            ``list/{id}/entity/add``
-
-        Args:
-            entity (str, tuple): ID or (name, type) tuple of entity to add
-            context (dict, optional): context object for entity. Defaults to None
+            `list/{id}/entity/add`
 
         Raises:
-            ListApiError: if connection error occurs.
-
-        Returns:
-            ListEntityOperationResponse: list/{id}/entity/add response
+            ValidationError: if any supplied parameter is of incorrect type.
+            ListApiError: If connection error occurs.
         """
         return self._list_op(entity, ADD_OP, context=context or {})
 
     @debug_call
     @validate_call
-    def remove(self, entity: Union[str, tuple[str, str]]) -> ListEntityOperationResponse:
-        """Remove entity from list.
+    def remove(
+        self,
+        entity: Annotated[
+            Union[str, tuple[str, str]], Doc('ID or (name, type) tuple of the entity to remove.')
+        ],
+    ) -> Annotated[
+        ListEntityOperationResponse, Doc('Response from the `list/{id}/entity/remove` endpoint.')
+    ]:
+        """Remove an entity from a list.
 
         Endpoint:
-            ``list/{id}/entity/remove``
-
-        Args:
-            entity (str, tuple): ID or (name, type) tuple of entity to remove
+            `list/{id}/entity/remove`
 
         Raises:
-            ListApiError: if connection error occurs.
-
-        Returns:
-            ListEntityOperationResponse: list/{id}/entity/remove response
+            ValidationError: if any supplied parameter is of incorrect type.
+            ListApiError: If connection error occurs.
         """
         return self._list_op(entity, REMOVE_OP)
 
     @debug_call
     @validate_call
-    def bulk_add(self, entities: list[Union[str, tuple[str, str]]]) -> dict:
-        """Bulk add entities to list.
+    def bulk_add(
+        self,
+        entities: Annotated[
+            list[Union[str, tuple[str, str]]],
+            Doc('List of entity string IDs or (name, type) tuples to add.'),
+        ],
+    ) -> Annotated[
+        dict,
+        Doc(
+            "Results JSON with 'added', 'unchanged', and 'error' keys containing lists of entities."
+        ),
+    ]:
+        """Bulk add entities to a list.
 
-        Adds entities 1 at a time due to List API requirement. Logs progress every 10%.
+        Adds entities one at a time due to List API requirement. Logs progress every 10%.
 
         Endpoint:
-            ``list/{id}/entity/add``
-
-        Args:
-            entities (list[Union[str, tuple[str, str]]]): list of entity string IDs or
-            entity (name, type) tuples to add
+            `list/{id}/entity/add`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            ValueError: if wrong operation is supplied
-            ListApiError: if connection error occurs
-
-        Returns:
-            dict: results JSON with added, unchanged, error keys containing lists of entities
+            ValidationError: If any supplied parameter is of incorrect type.
+            ValueError: If an invalid operation is supplied.
+            ListApiError: If connection error occurs.
         """
         result = self._bulk_op(entities, ADD_OP)
         status = self.status()
@@ -232,24 +235,29 @@ class EntityList(RFBaseModel):
 
     @debug_call
     @validate_call
-    def bulk_remove(self, entities: list[Union[str, tuple[str, str]]]) -> dict:
-        """Bulk remove entities from list.
+    def bulk_remove(
+        self,
+        entities: Annotated[
+            list[Union[str, tuple[str, str]]],
+            Doc('List of entity string IDs or (name, type) tuples to remove.'),
+        ],
+    ) -> Annotated[
+        dict,
+        Doc(
+            "Results JSON with 'removed', 'unchanged', and 'error' keys with the lists of entities."
+        ),
+    ]:
+        """Bulk remove entities from a list.
 
-        Removes entities 1 at a time due to List API requirement. Logs progress every 10%.
+        Removes entities one at a time due to List API requirement. Logs progress every 10%.
 
         Endpoint:
-            ``list/{id}/entity/remove``
-
-        Args:
-            entities (list): list of entity string IDs or entity (name, type) tuples to remove
+            `list/{id}/entity/remove`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            ValueError: if wrong operation is supplied
-            ListApiError: if connection error occurs
-
-        Returns:
-            dict: results JSON with removed, unchanged, error keys containing lists of entities
+            ValidationError: If any supplied parameter is of incorrect type.
+            ValueError: If an invalid operation is supplied.
+            ListApiError: If connection error occurs.
         """
         result = self._bulk_op(entities, REMOVE_OP)
         status = self.status()
@@ -262,17 +270,16 @@ class EntityList(RFBaseModel):
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
-    def entities(self) -> list[ListEntity]:
-        """Get entities for list.
+    def entities(
+        self,
+    ) -> Annotated[list[ListEntity], Doc('Response from the `list/{id}/entities` endpoint.')]:
+        """Get entities for a list.
 
         Endpoint:
-            ``list/{id}/entities``
+            `list/{id}/entities`
 
         Raises:
-            ListApiError: if connection error occurs.
-
-        Returns:
-            list[ListEntity]: list/{id}/entities JSON response
+            ListApiError: If connection error occurs.
         """
         url = EP_LIST + '/' + self.id_ + '/entities'
         response = self.rf_client.request('get', url)
@@ -280,17 +287,16 @@ class EntityList(RFBaseModel):
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
-    def text_entries(self) -> list[str]:
-        """Get text entries for list.
+    def text_entries(
+        self,
+    ) -> Annotated[list[str], Doc('Response from the `list/{id}/textEntries` endpoint.')]:
+        """Get text entries for a list.
 
         Endpoint:
-            ``list/{id}/textEntries``
+            `list/{id}/textEntries`
 
         Raises:
-            ListApiError: if connection error occurs.
-
-        Returns:
-            list[str]: list/{id}/textEntries JSON response
+            ListApiError: If connection error occurs.
         """
         url = EP_LIST + '/' + self.id_ + '/textEntries'
         return self.rf_client.request('get', url).json()
@@ -301,7 +307,7 @@ class EntityList(RFBaseModel):
         """Get status information about list.
 
         Endpoint:
-            ``list/{id}/status``
+            `list/{id}/status`
 
         Raises:
             ListApiError: if connection error occurs
@@ -322,17 +328,14 @@ class EntityList(RFBaseModel):
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
-    def info(self) -> ListInfoOut:
-        """Get info for list.
+    def info(self) -> Annotated[ListInfoOut, Doc('Response from the `list/{id}/info` endpoint.')]:
+        """Get info for a list.
 
         Endpoint:
-            ``list/{id}/info``
+            `list/{id}/info`
 
         Raises:
-            ListApiError: if connection error occurs
-
-        Returns:
-            ListInfoOut: list/{id}/info response
+            ListApiError: If connection error occurs.
         """
         self.log.debug(f"Getting list status for '{self.name}'")
         url = EP_LIST + f'/{self.id_}/info'
@@ -340,21 +343,28 @@ class EntityList(RFBaseModel):
         return ListInfoOut.model_validate(response.json())
 
     @debug_call
-    def _bulk_op(self, entities: list[Union[str, tuple[str, str]]], operation: str) -> dict:
-        """Bulk add or remove entities from list.
+    def _bulk_op(
+        self,
+        entities: Annotated[
+            list[Union[str, tuple[str, str]]],
+            Doc('List of entity string IDs or (name, type) tuples to process.'),
+        ],
+        operation: Annotated[
+            str, Doc("The operation to perform on the list. Must be 'added' or 'removed'.")
+        ],
+    ) -> Annotated[
+        dict,
+        Doc(
+            "Results JSON with 'added', 'unchanged', and 'error' keys with the processed entities."
+        ),
+    ]:
+        """Bulk add or remove entities from a list.
 
-        List API requires that entities are added one at a time. Logs progress every 10%
-
-        Args:
-            entities (list): list of entity string IDs or (name, type) tuples to add
-            operation (str): the operation to perform on the list. Can be 'added' or 'removed'.
+        The List API requires entities to be processed one at a time. Logs progress every 10%.
 
         Raises:
-            ValueError: if wrong operation is supplied
-            ListApiError: if connection error occurs
-
-        Returns:
-            dict: results JSON with added, unchanged, error keys containing lists of entities added
+            ValueError: If an invalid operation is supplied.
+            ListApiError: If connection error occurs.
         """
         if operation == ADD_OP:
             op_func = self.add
@@ -393,20 +403,20 @@ class EntityList(RFBaseModel):
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
     def _list_op(
-        self, entity: Union[str, tuple[str, str]], op_name: str, context: dict = None
-    ) -> ListEntityOperationResponse:
-        """Add or remove an entity from list.
-
-        Args:
-            entity (str, tuple): ID or (name, type) tuple of entity to add
-            op_name (str): operation to perform. Either 'added' or 'removed'
-            context (dict, optional): context object for entity. Defaults to {}
+        self,
+        entity: Annotated[
+            Union[str, tuple[str, str]], Doc('ID or (name, type) tuple of the entity to process.')
+        ],
+        op_name: Annotated[str, Doc("Operation to perform. Must be 'added' or 'removed'.")],
+        context: Annotated[Optional[dict], Doc('Optional context object for the entity.')] = None,
+    ) -> Annotated[
+        ListEntityOperationResponse,
+        Doc('Response from the `list/{id}/entity/[add|remove]` endpoint.'),
+    ]:
+        """Add or remove an entity from a list.
 
         Raises:
-            ListApiError: if connection error occurs
-
-        Returns:
-            ListEntityOperationResponse: list/{id}/entity/[add|remove] response
+            ListApiError: If connection error occurs.
         """
         if isinstance(entity, str):
             resolved_entity_id = entity

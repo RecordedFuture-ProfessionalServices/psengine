@@ -12,9 +12,10 @@
 ##############################################################################################
 
 import logging
-from typing import Union
+from typing import Annotated, Optional, Union
 
 from pydantic import validate_call
+from typing_extensions import Doc
 
 from ..constants import DEFAULT_LIMIT
 from ..endpoints import EP_CREATE_LIST, EP_LIST, EP_SEARCH_LIST
@@ -29,12 +30,11 @@ from .errors import ListApiError, ListResolutionError
 class EntityListMgr:
     """Manages requests for Recorded Future List API."""
 
-    def __init__(self, rf_token: str = None) -> None:
-        """Initialize EntityListMgr object.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
-        """
+    def __init__(
+        self,
+        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+    ) -> None:
+        """Initialize the `EntityListMgr` object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
         self.match_mgr = EntityMatchMgr(rf_token=rf_token) if rf_token else EntityMatchMgr()
@@ -42,22 +42,21 @@ class EntityListMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
-    def fetch(self, list_: Union[str, tuple[str, str]]) -> EntityList:
-        """Gets a list by its ID. Use this function for list info response.
+    def fetch(
+        self,
+        list_: Annotated[
+            Union[str, tuple[str, str]], Doc('List string ID or tuple of (name, type).')
+        ],
+    ) -> Annotated[EntityList, Doc('RFList object for the given list ID.')]:
+        """Get a list by its ID. Use this method to retrieve list info.
 
         Endpoint:
-            ``list/{list_id}/info``
-
-        Args:
-            list_ (str, tuple): list string ID or tuple of (name, type)
+            `list/{list_id}/info`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            ListResolutionError: when ``list_`` is a tuple and name matches 0 or multiple entities
-            ListApiError: if connection error occurs.
-
-        Returns:
-            RFList: RFList object for list ID
+            ValidationError: If any supplied parameter is of incorrect type.
+            ListResolutionError: When `list_` is a tuple and name matches zero or multiple entities.
+            ListApiError: If connection error occurs.
         """
         resolved_id = self._resolve_list_id(list_)
         self.log.info(f'Getting list with ID: {resolved_id}')
@@ -74,25 +73,21 @@ class EntityListMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
-    def create(self, list_name: str, list_type: str = 'entity') -> EntityList:
-        """Create list.
+    def create(
+        self,
+        list_name: Annotated[str, Doc('List name to use for the new list.')],
+        list_type: Annotated[
+            str, Doc('List type. Supported types are documented in the List API support page.')
+        ] = 'entity',
+    ) -> Annotated[EntityList, Doc('EntityList object for the new list.')]:
+        """Create a new list.
 
         Endpoint:
-            ``list/create``
-
-        Args:
-            list_name (str): list name to use for new list
-            list_type (str, optional): list type. Defaults to "entity"
-
-            Supported list types are available on the support page for List API:
-            https://support.recordedfuture.com/hc/en-us/articles/360058691913-List-API
+            `list/create`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            ListApiError: if connection error occurs.
-
-        Returns:
-            EntityList: EntityList object for new list
+            ValidationError: If any supplied parameter is of incorrect type.
+            ListApiError: If connection error occurs.
         """
         self.log.debug(f"Creating list '{list_name}'")
         request_body = {'name': list_name, 'type': list_type}
@@ -108,24 +103,19 @@ class EntityListMgr:
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
     def search(
-        self, list_name: str = None, list_type: str = None, max_results: int = DEFAULT_LIMIT
-    ) -> list[EntityList]:
+        self,
+        list_name: Annotated[Optional[str], Doc('List name to search.')] = None,
+        list_type: Annotated[Optional[str], Doc('List type to filter by. Ignored if None.')] = None,
+        max_results: Annotated[int, Doc('Maximum number of lists to return.')] = DEFAULT_LIMIT,
+    ) -> Annotated[list[EntityList], Doc('List of EntityList objects from `list/search`.')]:
         """Search lists.
 
         Endpoint:
-            ``list/search``
-
-        Args:
-            list_name (str): list name to search
-            list_type (str, optional): list type. Defaults to None, ignored when None
-            max_results (int, optional): maximum total number of lists to return
+            `list/search`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            ListApiError: if list API call fails
-
-        Returns:
-            list: EntityList objects from list/search
+            ValidationError: If any supplied parameter is of incorrect type.
+            ListApiError: If the list API call fails.
         """
         request_body = {}
         request_body['limit'] = max_results

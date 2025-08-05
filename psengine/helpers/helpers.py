@@ -18,13 +18,15 @@ import os
 import platform
 import re
 import sys
+from collections.abc import Iterable
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 from inspect import getmodule, isclass, signature
 from pathlib import Path
-from typing import Callable, Union
+from typing import Annotated, Callable, Optional, Union
 
 from dateutil.parser import parse as date_parse
+from pydantic import BaseModel
 from requests.exceptions import (
     ConnectionError,  # noqa: A004
     ConnectTimeout,
@@ -33,6 +35,7 @@ from requests.exceptions import (
     ReadTimeout,
     SSLError,
 )
+from typing_extensions import Doc
 
 from ..common_models import RFBaseModel
 from ..constants import ROOT_DIR
@@ -101,8 +104,13 @@ def connection_exceptions(
     return wrapper
 
 
-def dump_models(models) -> list:
-    """Return a list of model dumped as json."""
+def dump_models(
+    models: Annotated[
+        Union[BaseModel, list[BaseModel]],
+        Doc('A Pydantic model or list of models to serialize.'),
+    ],
+) -> Annotated[list[str], Doc('List of models serialized as JSON strings.')]:
+    """Return one or more Pydantic models dumped as JSON strings."""
     return (
         [json.dumps(model.json()) for model in models]
         if isinstance(models, list)
@@ -110,8 +118,10 @@ def dump_models(models) -> list:
     )
 
 
-def debug_call(func):
-    """Print debug logs for public methods."""
+def debug_call(
+    func: Annotated[Callable, Doc('The function to be wrapped with debug logging.')],
+) -> Annotated[Callable, Doc('The wrapped function with debug logging enabled.')]:
+    """Decorator to print debug logs for public methods."""
     original_func = func
     while hasattr(original_func, '__wrapped__'):
         original_func = original_func.__wrapped__
@@ -156,23 +166,21 @@ class TimeHelpers:
     """Helpers for time related functions."""
 
     @staticmethod
-    def rel_time_to_date(relative_time: str) -> str:
-        """Convert a relative time to a date. Minutes not supported.
+    def rel_time_to_date(
+        relative_time: Annotated[
+            str, Doc("Relative time string like '7d', '3h'. Minutes not supported.")
+        ],
+    ) -> Annotated[str, Doc("Formatted date string in ISO format, e.g., '2022-08-08T13:11'.")]:
+        """Convert a relative time to a date.
 
         Example:
-            .. code-block::
-
-                1h - > Return -1h from NOW
-                1d - > Return -1d from NOW.
-
-        Args:
-            relative_time (str): 7d, 3h, etc..
+            ```python
+            rel_time_to_date("1h")  # returns ISO datetime string ~1 hour ago
+            rel_time_to_date("1d")  # returns ISO datetime string ~1 day ago
+            ```
 
         Raises:
-            ValueError: if the relative time is invalid
-
-        Returns:
-            str: time delta, for example: ``2022-08-08T13:11``
+            ValueError: If the relative time is invalid.
         """
         logger = logging.getLogger(__name__)
         match = re.match(VALID_TIME_REGEX, relative_time)
@@ -193,40 +201,31 @@ class TimeHelpers:
         return subtracted
 
     @staticmethod
-    def is_rel_time_valid(rel_time: str) -> bool:
-        """Helper function to determine if relative time expression is valid.
-
-        Args:
-            rel_time (str): relative time
-
-        Returns:
-            bool: True if valid, False otherwise
-        """
+    def is_rel_time_valid(
+        rel_time: Annotated[str, Doc('Relative time expression to validate.')],
+    ) -> Annotated[bool, Doc('True if valid, False otherwise.')]:
+        """Helper function to determine if relative time expression is valid."""
         if rel_time is None or not isinstance(rel_time, str):
             return False
 
         return bool(re.match(VALID_TIME_REGEX, rel_time))
 
     @staticmethod
-    def is_valid_time_range(range_: str) -> bool:
+    def is_valid_time_range(
+        range_: Annotated[str, Doc('ISO 8601-style time range to validate.')],
+    ) -> Annotated[bool, Doc('True if valid, False otherwise.')]:
         """Verifies if an ISO 8601 compliant time range was specified.
 
         Example:
-
-            .. code-block::
-
+            ```python
                 [2017-07-30,2017-07-31]
                 (2017-07-30,2017-07-31)
                 [2017-07-30,2017-07-31)
                 [2017-07-30,)
                 [,2017-07-31)
-                https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html.
-
-        Args:
-            range_ (str): time range
-
-        Returns:
-            bool: True if valid, False otherwise
+            ```
+        For format reference see:
+            https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html
         """
         if range_ is None:
             return False
@@ -250,20 +249,17 @@ class FormattingHelpers:
     """Helpers for formatting related functions."""
 
     @staticmethod
-    def cleanup_ai_insights(ai_insights: str) -> str:
-        """Clean up RF AI Insights to avoid markdown rendering issues.
-
-        Args:
-            ai_insights (str): ai insights
-
-        Returns:
-            str: cleaned up ai insights
-        """
+    def cleanup_ai_insights(
+        ai_insights: Annotated[str, Doc('AI Insights string to clean.')],
+    ) -> Annotated[str, Doc('Cleaned-up AI Insights string.')]:
+        """Clean up Recorded Future AI Insights to avoid markdown rendering issues."""
         return ai_insights.replace('\n', ' ').replace('1. ', '1.')
 
     @staticmethod
-    def cleanup_rf_id(entity: str) -> str:
-        """Remove the Recorded Future id prefix from an entity."""
+    def cleanup_rf_id(
+        entity: Annotated[str, Doc('entity string to clean up.')],
+    ) -> Annotated[str, Doc('Entity string without the Recorded Future ID prefix.')]:
+        """Remove the Recorded Future ID prefix from an entity."""
         for id_ in IDS:
             if id_ in entity:
                 return entity.replace(id_, '')
@@ -274,27 +270,21 @@ class OSHelpers:
     """Helpers for OS related functions."""
 
     @staticmethod
-    def os_platform():
-        """Get the OS platform information, for example: ``macOS-13.0-x86_64-i386-64bit``.
-
-        Returns:
-            str: OS platform info, if unavailable return None
-        """
+    def os_platform() -> Annotated[
+        Optional[str], Doc('OS platform info string, or None if unavailable.')
+    ]:
+        """Get the OS platform information, for example: `macOS-13.0-x86_64-i386-64bit`."""
         return platform.platform(aliased=True, terse=False) or None
 
     @staticmethod
-    def mkdir(path: Union[str, Path]) -> Path:
+    def mkdir(
+        path: Annotated[Union[str, Path], Doc('Path to directory to create.')],
+    ) -> Annotated[Path, Doc('Path to the directory created.')]:
         """Safely create a directory.
 
-        Args:
-            path (str or Path): path to directory
-
         Raises:
-            ValueError: if path is not a string or is empty
-            WriteFileError: if directory is not writeable
-
-        Returns:
-            Path: path to directory created
+            ValueError: If path is not a string or is empty.
+            WriteFileError: If the directory is not writable.
         """
         if path == '':
             raise ValueError('path cannot be empty')
@@ -320,50 +310,47 @@ class FileHelpers:
 
     @staticmethod
     def read_csv(
-        csv_file: Union[str, Path], as_dict: bool = False, single_column: bool = False
-    ) -> list:
+        csv_file: Annotated[Union[str, Path], Doc('Path to CSV file.')],
+        as_dict: Annotated[bool, Doc('Return rows as dictionaries keyed by header.')] = False,
+        single_column: Annotated[bool, Doc('Return only first column values as strings.')] = False,
+    ) -> Annotated[list, Doc('List of rows from the CSV file.')]:
         """Reads all rows from a CSV.
 
         It is the client's responsibility to ensure column headers are handled appropriately.
 
-        Using ``as_dict`` will reader the CSV with ``csv.DictReader``, which treats the first row
-        as column headers. For example with CSV
+        Using `as_dict` will read the CSV with `csv.DictReader`, which treats the first row
+        as column headers. For example:
 
-        .. code-block::
+        ```csv
+        Name,ID,Level
+        Patrick,321,4
+        Ernest,123,8
+        ```
 
-            Name,ID,Level
-            Patrick,321,4
-            Ernest,123,8
+        `as_dict=True` will return:
 
-        ``as_dict=True`` will return a list of dictionaries keyed by header names
+        ```python
+        [
+            {'Name': 'Patrick', 'ID': '321', 'Level': '4'},
+            {'Name': 'Ernest', 'ID': '123', 'Level': '8'}
+        ]
+        ```
 
-        .. code-block::
+        `single_column=True` will return:
 
-            [{'Name': 'Patrick', 'ID': '321', 'Level': '4'},
-            {'Name': 'Ernest', 'ID': '123', 'Level': '8'}]
+        ```python
+        ['Name', 'Patrick', 'Ernest']
+        ```
 
+        `as_dict=False` and `single_column=False` will return:
 
-        ``single_column=True`` will return a list of only the first column of the CSV
-        as strings (note that ``as_dict=False``, ``single_column=False`` returns a list of lists)::
-
-            ['Name', 'Patrick', 'Ernest']
-
-        ``as_dict=False`` and ``single_column=False`` will return a list of lists::
-
-            [['Name', 'ID', 'Level'], ['Patrick', '321', '4'], ['Ernest', '123', '8']]
-
-        Args:
-            csv_file (str or Path): path to CSV file
-            as_dict (bool, optional): return entities as a dict. Defaults to False.
-            single_column (bool, optional): return only entities (not lists) from first column
-                cannot be used with ``as_dict``. Defaults to False.
+        ```python
+        [['Name', 'ID', 'Level'], ['Patrick', '321', '4'], ['Ernest', '123', '8']]
+        ```
 
         Raises:
-            ValueError: If both ``as_dict`` and ``single_column`` are True
-            ReadFileError: If file is not found or has restricted access
-
-        Returns:
-            list of rows from CSV
+            ValueError: If both `as_dict` and `single_column` are True.
+            ReadFileError: If file is not found or has restricted access.
         """
         if as_dict and single_column:
             raise ValueError('Cannot use as_dict and single_column together')
@@ -391,16 +378,18 @@ class FileHelpers:
             raise ReadFileError(f'Error reading entity file: {str(oe)}') from oe
 
     @staticmethod
-    def write_file(to_write: str, output_directory: Union[str, Path], fname: str) -> Path:
-        """Write bytes to file.
+    def write_file(
+        to_write: Annotated[str, Doc('Content to write to file.')],
+        output_directory: Annotated[Union[str, Path], Doc('Directory to write the file into.')],
+        fname: Annotated[str, Doc('Name of the file to write.')],
+    ) -> Annotated[Path, Doc('Path to the file written.')]:
+        """Write string content to a file.
 
-        Args:
-            to_write (bytes): bytes to write to file
-            output_directory (str or Path): path to directory to write file
-            fname (str): name of file to write
+        Creates the specified output directory if it doesn't exist. Overwrites file if it exists.
 
-        Returns:
-            Path: path to file written
+        Raises:
+            ValueError: If any of the parameters are invalid.
+            WriteFileError: If the write operation fails.
         """
         LOG.info(f'Writing file: {fname}')
         output_directory = Path(output_directory)
@@ -421,48 +410,42 @@ class MultiThreadingHelper:
     """Multithreading class."""
 
     @staticmethod
-    def multithread_it(max_workers: int, func: Callable, *, iterator, **kwargs) -> list:
+    def multithread_it(
+        max_workers: Annotated[int, Doc('Number of threads to use.')],
+        func: Annotated[Callable, Doc('Function to be executed in parallel.')],
+        *,
+        iterator: Annotated[Iterable, Doc('The list of elements to be dispatched to the threads.')],
+        **kwargs,
+    ) -> Annotated[list, Doc('List of objects returned by the calling function.')]:
         """Multithreading helper for I/O Operations.
 
         The class can be used in the following way. Given a single thread code like:
 
-            .. code-block:: python
-                :linenos:
+        Example:
+            ```python
+            def _lookup_alert(self, alert_id, index, total_num_of_alerts):
+                ...
 
-                def _lookup_alert(self, alert_id, index, total_num_of_alerts):
-                    ...
+            def all_alerts(self, alerts):
+                res = []
+                for index, alert_id in enumerate(alert_ids_to_fetch):
+                    res.append(self._lookup_alert(alert_id, index, len(alert_ids_to_fetch)))
+            ```
 
-                def all_alerts(self, alerts):
-                    res = []
-                    for index, alert_id in enumerate(alert_ids_to_fetch):
-                        res.append(self._lookup_alert(alert_id, index, len(alert_ids_to_fetch)))
+            It can be rewritten like:
 
-        It can be rewritten like:
+            ```python
+            def _lookup_alert(self, alert_id, index, total_num_of_alerts):
+                ...
 
-            .. code-block:: python
-                :linenos:
-
-                def _lookup_alert(self, alert_id, index, total_num_of_alerts):
-                    ...
-
-                def all_alerts(self, alerts):
-                    results = MultiThreadingHelper.multithread_it(
-                        self.max_workers,
-                        self._lookup_alert,
-                        iterator=alert_ids_to_fetch,
-                        total_num_of_alerts=len(alert_ids_to_fetch)
-                    )
-
-        Args:
-            max_workers (int): Number of threads to use.
-            func (Callable): Function to be executed in parallel.
-            iterator (iterator): The list of elements to be dispatched to the threads.
-                Example: This can be the list of alerts to download, the IOCs, etc.
-            kwargs: Any other argument that the function needs for execution.
-                Example: The Alert type, or the IOC type.
-
-        Returns:
-            List of objects returned by the calling function.
+            def all_alerts(self, alerts):
+                results = MultiThreadingHelper.multithread_it(
+                    self.max_workers,
+                    self._lookup_alert,
+                    iterator=alert_ids_to_fetch,
+                    total_num_of_alerts=len(alert_ids_to_fetch)
+                )
+            ```
         """
         with ThreadPoolExecutor(max_workers=max_workers) as pool:
             futures = [pool.submit(func, element, **kwargs) for element in iterator]
@@ -474,14 +457,18 @@ class Validators:
     """Common validators for pydantic models."""
 
     @staticmethod
-    def convert_str_to_list(value: Union[str, list]) -> list:
+    def convert_str_to_list(
+        value: Annotated[Union[str, list], Doc('String or list to convert.')],
+    ) -> Annotated[list, Doc('Converted list with None values removed.')]:
         """Convert value from str to list and remove None values."""
         value = value if isinstance(value, list) else [value]
         return [v for v in value if v is not None]
 
     @staticmethod
-    def convert_relative_time(input_time: str) -> str:
-        """Covert relative time to datetime string if possible."""
+    def convert_relative_time(
+        input_time: Annotated[str, Doc("Relative time string, e.g., '7d', '3h'.")],
+    ) -> Annotated[str, Doc('Datetime string in ISO 8601 format if conversion is possible.')]:
+        """Convert relative time to datetime string if possible."""
         return (
             TimeHelpers.rel_time_to_date(input_time)
             if TimeHelpers.is_rel_time_valid(input_time)
@@ -489,8 +476,12 @@ class Validators:
         )
 
     @staticmethod
-    def check_uhash_prefix(value: Union[str, list]) -> Union[str, list]:
-        """Validates that the field contains fields starting with uhash and add it otherwise."""
+    def check_uhash_prefix(
+        value: Annotated[
+            Union[str, list], Doc('String or list of strings to check for uhash prefix.')
+        ],
+    ) -> Annotated[Union[str, list], Doc("String or list with 'uhash:' prefix ensured.")]:
+        """Validate that all fields start with 'uhash:' and add it if missing."""
         uhash = 'uhash:'
         if isinstance(value, str):
             return f'{uhash}{value}' if not value.startswith(uhash) else value

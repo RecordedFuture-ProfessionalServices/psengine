@@ -36,33 +36,31 @@ from .models.lookup import IdentityDetails, IPRange, SecretDetails
 
 @total_ordering
 class Detection(RFBaseModel):
-    """Model to validate output of the ``/identity/detections`` endpoint.
+    """Model to validate output of the `/identity/detections` endpoint.
 
-    Methods:
-        __hash__:
-            Returns hash value based on Detection ``id_`` and created time.
+    Hashing:
+        Returns a hash value based on Detection `id_` and created time.
 
-        __eq__:
-            Checks equality between two Detection instances based on ``id_`` and created time.
+    Equality:
+        Checks equality between two Detection instances based on `id_` and created time.
 
-        __gt__:
-            Defines a greater-than comparison between two Detection instances based on
-            created timestamp and ``id_``.
+    Greater-than Comparison:
+        Defines a greater-than comparison between two Detection instances based on
+        created timestamp and `id_`.
 
-        __str__:
-            Returns a string representation of the Detection instance with:
-            ``id_``, created timestamp, type, and novel.
+    String Representation:
+        Returns a string representation of the Detection instance with:
+        `id_`, created timestamp, type, and novel.
 
-            .. code-block:: python
-
-                >>> print(detection)
-                ID: detection123, Created: 2025-01-01 05:00:30AM, Type: Workforce, Novel: True
-
+        ```python
+        >>> print(detection)
+        ID: detection123, Created: 2025-01-01 05:00:30AM, Type: Workforce, Novel: True
+        ```
 
     Total Ordering:
-            The ordering of Detection instances is determined primarily by the created timestamp
-            of the detection. If two instances have the same created timestamp, their
-            ``id_`` is used as a secondary criterion for ordering.
+        The ordering of Detection instances is determined primarily by the created timestamp
+        of the detection. If two instances have the same created timestamp, their
+        `id_` is used as a secondary criterion for ordering.
     """
 
     id_: str = Field(alias='id')
@@ -99,33 +97,31 @@ class Detection(RFBaseModel):
 
 @total_ordering
 class CredentialSearch(RFBaseModel):
-    """Model to validate output of the ``/identity/credentials/search`` endpoint.
+    """Model to validate output of the `/identity/credentials/search` endpoint.
 
-    Methods:
-        __hash__:
-            Returns hash value based on CredentialSearch ``login`` and ``domain``.
+    Hashing:
+        Returns a hash value based on the `login` and `domain` of `CredentialSearch`.
 
-        __eq__:
-            Checks equality between two CredentialSearch based on ``login`` and ``domain``.
+    Equality:
+        Checks equality between two `CredentialSearch` instances based on `login` and `domain`.
 
-        __gt__:
-            Defines a greater-than comparison between two CredentialSearch instances based on
-            ``login`` and ``domain``.
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `CredentialSearch` instances based on
+        `login` and `domain`.
 
-        __str__:
-            Returns a string representation of the CredentialSearch instance with:
-            ``login`` and ``domain``.
+    String Representation:
+        Returns a string representation of the `CredentialSearch` instance with:
+        `login` and `domain`.
 
-            .. code-block:: python
+        ```python
+        >>> print(credential)
+        Login: example Domain: norsegods.online
+        ```
 
-                >>> print(credential)
-                Login: example Domain: norsegods.online
-
-    Total Ordering:
-            The ordering of CredentialSearch instances is determined primarily by the ``login`` of
-            the detection. If two instances have the same ``login, their ``domain`` is used as a
-            secondary criterion for ordering.
-
+    Ordering:
+        The ordering of `CredentialSearch` instances is determined primarily by the `login` of
+        the detection. If two instances have the same `login`, their `domain` is used as a
+        secondary criterion for ordering.
     """
 
     login: str
@@ -146,7 +142,7 @@ class CredentialSearch(RFBaseModel):
 
 
 class Detections(RFBaseModel):
-    """Model for payload received by POST ``/identity/detections`` endpoint."""
+    """Model for payload received by POST `/identity/detections` endpoint."""
 
     total: int
     detections: list[Detection]
@@ -158,34 +154,32 @@ class Detections(RFBaseModel):
 
 @total_ordering
 class PasswordLookup(RFBaseModel):
-    """Model to validate output of the ``/identity/credentials/lookup`` endpoint.
+    """Model to validate output of the `/identity/credentials/lookup` endpoint.
 
-    Methods:
-        __hash__:
-            Returns hash value based on ``password.hash_`` (or ``hash_prefix``) and ``algorithm``.
+    Hashing:
+        Returns a hash value based on `password.hash_` (or `hash_prefix`) and `algorithm`.
 
-        __eq__:
-            Checks equality between two PasswordLookup instances based on ``password.hash_`` (or
-            ``hash_prefix``) and ``algorithm``.
+    Equality:
+        Checks equality between two `PasswordLookup` instances based on `password.hash_` (or
+        `hash_prefix`) and `algorithm`.
 
-        __gt__:
-            Defines a greater-than comparison between two PasswordLookup instances based on
-            ``password.hash_`` (or ``hash_prefix``) and ``algorithm``.
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `PasswordLookup` instances based on
+        `password.hash_` (or `hash_prefix`) and `algorithm`.
 
-        __str__:
-            Returns a string representation of the PasswordLookup instance with:
-            ``password.hash_`` (or ``hash_prefix``), ``algorithm``, and ``exposure_status``.
+    String Representation:
+        Returns a string representation of the `PasswordLookup` instance with:
+        `password.hash_` (or `hash_prefix`), `algorithm`, and `exposure_status`.
 
-            .. code-block:: python
+        ```python
+        >>> print(lookup)
+        Hash: abc123 Algorithm: sha1 Exposure Status: Common
+        ```
 
-                >>> print(lookup)
-                Hash: abc123 Algorithm: sha1 Exposure Status: Common
-
-    Total Ordering:
-            The ordering of PasswordLookup instances is determined primarily by the
-            ``password.hash_`` (or ``hash_prefix``). If two instances have the same hash, their
-            ``algorithm`` is used as a secondary criterion for ordering.
-
+    Ordering:
+        The ordering of `PasswordLookup` instances is determined primarily by the
+        `password.hash_` (or `hash_prefix`). If two instances have the same hash, their
+        `algorithm` is used as a secondary criterion for ordering.
     """
 
     password: PasswordHash
@@ -217,38 +211,37 @@ class PasswordLookup(RFBaseModel):
 
 
 class Credential(RFBaseModel):
-    """Detection model to validate output of the ``/identity/credentials/search`` endpoint.
+    """Detection model to validate output of the `/identity/credentials/search` endpoint.
 
-    Methods:
-        __hash__:
-            Returns hash value based on ``subject``, ``first_downloaded``, the exposed secret's
-            ``hashes``, and the ``authorization_service`` URL (if present).
+    Hashing:
+        Returns a hash value based on `subject`, `first_downloaded`, the exposed secret's
+        `hashes`, and the `authorization_service` URL (if present).
 
-        __eq__:
-            Checks equality between two Credential instances based on ``subject``,
-            ``first_downloaded``, the exposed secret's ``hashes``, and the
-            ``authorization_service`` URL.
+    Equality:
+        Checks equality between two `Credential` instances based on `subject`,
+        `first_downloaded`, the exposed secret's `hashes`, and the
+        `authorization_service` URL.
 
-        __gt__:
-            Defines a greater-than comparison between two Credential instances based on
-            ``subject``, ``first_downloaded``, the exposed secret's ``hashes``, and the
-            ``authorization_service`` URL.
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `Credential` instances based on
+        `subject`, `first_downloaded`, the exposed secret's `hashes`, and the
+        `authorization_service` URL.
 
-        __str__:
-            Returns a string representation of the Credential instance with:
-            ``subject``, ``first_downloaded``, exposed secret ``hashes``, and
-            ``authorization_service``.
+    String Representation:
+        Returns a string representation of the `Credential` instance with:
+        `subject`, `first_downloaded`, exposed secret `hashes`, and
+        `authorization_service`.
 
-            .. code-block:: python
+        ```python
+        >>> print(credential)
+        Subject: admin@example.com, First Downloaded: 2024-03-01T12:00:00,
+        Hashes: [abc123, def456], Authorization Service: login.service.com
+        ```
 
-                >>> print(credential)
-                Subject: admin@example.com, First Downloaded: 2024-03-01T12:00:00,
-                Hashes: [abc123, def456], Authorization Service: login.service.com
-
-    Total Ordering:
-            The ordering of Credential instances is determined primarily by the ``subject`` and
-            ``first_downloaded`` timestamp. If those are equal, the ``hashes`` and then the
-            ``authorization_service`` URL are used as secondary criteria.
+    Ordering:
+        The ordering of `Credential` instances is determined primarily by the `subject` and
+        `first_downloaded` timestamp. If those are equal, the `hashes` and then the
+        `authorization_service` URL are used as secondary criteria.
     """
 
     subject: str
@@ -308,7 +301,10 @@ class Credential(RFBaseModel):
 class LeakedIdentity(RFBaseModel):
     """Model to validate output of several endpoints.
 
-    ``/identity/ip/lookup``, ``/identity/credentials/lookup``, ``/identity/hostname/lookup``
+    Endpoints:
+    - `/identity/ip/lookup`,
+    - `/identity/credentials/lookup`,
+    - `/identity/hostname/lookup`
     """
 
     identity: IdentityDetails
@@ -317,7 +313,7 @@ class LeakedIdentity(RFBaseModel):
 
 
 class DetectionsIn(RFBaseModel):
-    """Model for payload sent to POST ``/identity/detections`` endpoint."""
+    """Model for payload sent to POST `/identity/detections` endpoint."""
 
     organization_id: Annotated[
         Optional[list[str]],
@@ -332,14 +328,14 @@ class DetectionsIn(RFBaseModel):
 
 
 class IncidentReportIn(IdentityOrgIn):
-    """Model for payload sent to POST ``/identity/detections`` endpoint."""
+    """Model for payload sent to POST `/identity/detections` endpoint."""
 
     source: str
     include_details: bool
 
 
 class IncidentReportOut(RFBaseModel):
-    """Model for payload received by POST ``/identity/incident/report`` endpoint."""
+    """Model for payload received by POST `/identity/incident/report` endpoint."""
 
     details: Optional[IncidentReportDetails] = None
     credentials: list[IncidentReportCredentials]
@@ -355,20 +351,20 @@ class IncidentReportOut(RFBaseModel):
 
 
 class HostnameLookupIn(BaseIdentityIn):
-    """Model for payload sent to POST ``/identity/incident/report` endpoint."""
+    """Model for payload sent to POST `/identity/incident/report` endpoint."""
 
     hostname: str
 
 
 class IPLookupIn(BaseIdentityIn):
-    """Model for payload sent to POST ``/identity/ip/lookup`` endpoint."""
+    """Model for payload sent to POST `/identity/ip/lookup` endpoint."""
 
     ip: Optional[str] = None
     range_: Optional[IPRange] = Field(alias='range', default=None)
 
 
 class CredentialsLookupIn(BaseIdentityIn):
-    """Model for payload sent to POST ``/identity/credentials/lookup`` endpoint."""
+    """Model for payload sent to POST `/identity/credentials/lookup` endpoint."""
 
     subjects: Annotated[Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)] = None
     subjects_sha1: Annotated[
@@ -379,7 +375,7 @@ class CredentialsLookupIn(BaseIdentityIn):
 
 
 class CredentialsSearchIn(BaseIdentityIn):
-    """Model for payload sent to POST ``/identity/credentials/search`` endpoint."""
+    """Model for payload sent to POST `/identity/credentials/search` endpoint."""
 
     domains: Annotated[list[str], BeforeValidator(Validators.convert_str_to_list)]
     domain_types: Annotated[
@@ -390,7 +386,7 @@ class CredentialsSearchIn(BaseIdentityIn):
 
 
 class DumpSearchIn(RFBaseModel):
-    """Model for payload sent to POST ``/identity/metadata/dump/search`` endpoint."""
+    """Model for payload sent to POST `/identity/metadata/dump/search` endpoint."""
 
     names: Annotated[list[str], BeforeValidator(Validators.convert_str_to_list)]
     limit: Optional[int] = None

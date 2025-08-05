@@ -55,58 +55,58 @@ class RiskRule(ScoreCount):
     @model_validator(mode='before')
     @classmethod
     def evidence_transform(cls, data: dict) -> dict:
-        """Transforms the evidence field into a list of dicts, each with a 'type' key.
+        """Transforms the evidence field into a list of dicts, each with a `type` key.
 
         From:
 
-        .. code-block::
-
-            "evidence": {
-                "recentValidatedCnc": {
-                    "count": 1,
-                    "timestamp": "2024-03-25T07:18:35.000Z",
-                    "description": "xyz",
-                    "rule": "Validated C&C Server",
-                    "sightings": 41,
-                    "mitigation": "",
-                    "level": 4
-                },
-                "recentSuspectedCnc": {
-                    "count": 1,
-                    "timestamp": "2024-03-24T16:05:31.634Z",
-                    "description": "xyz",
-                    "rule": "Recent Suspected C&C Server",
-                    "sightings": 5,
-                    "mitigation": "",
-                    "level": 2
-                }
+        ```json
+        "evidence": {
+            "recentValidatedCnc": {
+                "count": 1,
+                "timestamp": "2024-03-25T07:18:35.000Z",
+                "description": "xyz",
+                "rule": "Validated C&C Server",
+                "sightings": 41,
+                "mitigation": "",
+                "level": 4
+            },
+            "recentSuspectedCnc": {
+                "count": 1,
+                "timestamp": "2024-03-24T16:05:31.634Z",
+                "description": "xyz",
+                "rule": "Recent Suspected C&C Server",
+                "sightings": 5,
+                "mitigation": "",
+                "level": 2
             }
+        }
+        ```
 
         To:
 
-        .. code-block::
-
-            "evidence": [
-                {
-                    "count": 1,
-                    "timestamp": "2023-12-11T19:25:25.892000Z",
-                    "description": "xyz",
-                    "sightings": 1,
-                    "mitigation": "",
-                    "level": 3,
-                    "type": "recentReportedCnc"
-                },
-                {
-                    "count": 2,
-                    "timestamp": "2023-12-25T22:09:55.398000Z",
-                    "description": "xyz",
-                    "rule": "Historical Suspected C&C Server",
-                    "sightings": 2,
-                    "mitigation": "",
-                    "level": 1,
-                    "type": "suspectedCnc"
-                }
-            ]
+        ```json
+        "evidence": [
+            {
+                "count": 1,
+                "timestamp": "2023-12-11T19:25:25.892000Z",
+                "description": "xyz",
+                "sightings": 1,
+                "mitigation": "",
+                "level": 3,
+                "type": "recentReportedCnc"
+            },
+            {
+                "count": 2,
+                "timestamp": "2023-12-25T22:09:55.398000Z",
+                "description": "xyz",
+                "rule": "Historical Suspected C&C Server",
+                "sightings": 2,
+                "mitigation": "",
+                "level": 1,
+                "type": "suspectedCnc"
+            }
+        ]
+        ```
 
         Args:
             data (dict): The data to be validated.

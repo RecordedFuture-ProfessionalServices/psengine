@@ -36,7 +36,7 @@ from .models.lookup import (
 
 
 class EnrichedIP(BaseEnrichedEntity):
-    """IP Enriched by ``/v2/ip/{ip}`` endpoint. Inherit behaviours from ``BaseEnrichedEntity``."""
+    """IP Enriched by `/v2/ip/{ip}` endpoint. Inherit behaviours from `BaseEnrichedEntity`."""
 
     risk: Optional[EntityRisk] = None
     links: Optional[Links] = None
@@ -49,8 +49,8 @@ class EnrichedIP(BaseEnrichedEntity):
 
 
 class EnrichedDomain(BaseEnrichedEntity):
-    """Domain Enriched by ``/v2/domain/{domain}`` endpoint.
-    Inherit behaviours from ``BaseEnrichedEntity``.
+    """Domain Enriched by `/v2/domain/{domain}` endpoint.
+    Inherit behaviours from `BaseEnrichedEntity`.
     """
 
     risk: Optional[EntityRisk] = None
@@ -61,8 +61,8 @@ class EnrichedDomain(BaseEnrichedEntity):
 
 
 class EnrichedURL(BaseEnrichedEntity):
-    """URL Enriched by ``/v2/url/{url}`` endpoint.
-    Inherit behaviours from ``BaseEnrichedEntity``.
+    """URL Enriched by `/v2/url/{url}` endpoint.
+    Inherit behaviours from `BaseEnrichedEntity`.
     """
 
     risk: Optional[EntityRisk] = None
@@ -72,8 +72,8 @@ class EnrichedURL(BaseEnrichedEntity):
 
 
 class EnrichedHash(BaseEnrichedEntity):
-    """Hash Enriched by ``/v2/hash/{hash}`` endpoint.
-    Inherit behaviours from ``BaseEnrichedEntity``.
+    """Hash Enriched by `/v2/hash/{hash}` endpoint.
+    Inherit behaviours from `BaseEnrichedEntity`.
     """
 
     risk: Optional[EntityRisk] = None
@@ -86,8 +86,8 @@ class EnrichedHash(BaseEnrichedEntity):
 
 
 class EnrichedVulnerability(BaseEnrichedEntity):
-    """Vulnerability Enriched by ``/v2/vulnerability/{cve}`` endpoint.
-    Inherit behaviours from ``BaseEnrichedEntity``.
+    """Vulnerability Enriched by `/v2/vulnerability/{cve}` endpoint.
+    Inherit behaviours from `BaseEnrichedEntity`.
     """
 
     risk: Optional[EntityRisk] = None
@@ -110,8 +110,8 @@ class EnrichedVulnerability(BaseEnrichedEntity):
 
 
 class EnrichedMalware(BaseEnrichedEntity):
-    """Malware Enriched by ``/v2/malware/{id}`` endpoint.
-    Inherit behaviours from ``BaseEnrichedEntity``.
+    """Malware Enriched by `/v2/malware/{id}` endpoint.
+    Inherit behaviours from `BaseEnrichedEntity`.
     """
 
     links: Optional[Links] = None
@@ -119,8 +119,8 @@ class EnrichedMalware(BaseEnrichedEntity):
 
 
 class EnrichedCompany(BaseEnrichedEntity):
-    """Company Enriched by ``/v2/company/{id}`` and ``/v2/company/by_domain/{domain}`` endpoint.
-    Inherit behaviours from ``BaseEnrichedEntity``.
+    """Company Enriched by `/v2/company/{id}` and `/v2/company/by_domain/{domain}` endpoint.
+    Inherit behaviours from `BaseEnrichedEntity`.
     """
 
     risk: Optional[EntityRisk] = None
@@ -142,63 +142,57 @@ _EnrichmentObjectType = Union[
 
 @total_ordering
 class EnrichmentData(RFBaseModel):
-    """Model for the custom return of lookup of IOCs.
+    """Model for the custom return of IOC lookups.
 
-    Methods:
-        __hash__:
-            Returns a hash value based on the content's attributes.
+    This class supports hashing, equality comparison, string representation, and total
+    ordering of `EnrichmentData` instances based on their `content`.
 
-            - If ``content`` is an instance of ``EnrichedMalware``:
-                The hash is calculated using the entity ``id_`` and the last seen timestamp.
-            - Else:
-                The hash includes the entity ``id_``, risk score, and the last seen timestamp.
+    Hashing:
+        Returns a hash value based on the content's attributes.
 
-        __eq__:
-            Checks equality between two ``EnrichmentData`` instances based on their ``content``.
+        - If `content` is an instance of `EnrichedMalware`:
+            The hash is calculated using the entity `id_` and the last seen timestamp.
+        - Else:
+            The hash includes the entity `id_`, risk score, and the last seen timestamp.
 
-            - If ``content`` is an instance of ``EnrichedMalware``:
-                Equality is determined by comparing the entity name and the last seen timestamp.
-            - Else:
-                Equality is determined by comparing the entity name, last seen timestamp and
-                risk score.
+    Equality:
+        Checks equality between two `EnrichmentData` instances based on their `content`.
 
-        __gt__:
-            Defines a greater-than comparison between ``EnrichmentData`` instances based on their
-            ``content``.
+        - If `content` is an instance of `EnrichedMalware`:
+            Equality is determined by comparing the entity name and the last seen timestamp.
+        - Else:
+            Equality is determined by comparing the entity name, last seen timestamp, and
+            risk score.
 
-            - If ``content`` is an instance of ``EnrichedMalware``:
-                Comparison is based on the last seen timestamp and entity name.
-            - Else:
-                Comparison is based on the last seen timestamp, entity name, and risk score.
+    Greater-than Comparison:
+        Defines a greater-than comparison between `EnrichmentData` instances based on their
+        `content`.
 
-        __str__ and __repr__:
-            Returns a string representation of the ``EnrichmentData`` instance.
-            __repr__ is used for printing elements properly within a list.
+        - If `content` is an instance of `EnrichedMalware`:
+            Comparison is based on the last seen timestamp and entity name.
+        - Else:
+            Comparison is based on the last seen timestamp, entity name, and risk score.
 
-            - If ``content`` is an instance of ``EnrichedMalware``:
-                Includes class name, entity name, and last seen timestamp.
+    String Representation:
+        `__str__` and `__repr__` return a formatted string representation of the instance.
 
-                .. code-block:: python
+        - If `content` is an instance of `EnrichedMalware`:
+            Includes class name, entity name, and last seen timestamp.
+        - Else:
+            Includes class name, entity name, risk score, and last seen timestamp.
 
-                    >>> print(enrichment_data)
-                    EnrichedMalware: exampleMalware, Last Seen: 2024-05-21 01:30:00PM
+        ```python
+        >>> print(enrichment_data)
+        EnrichedIP: 1.1.1.1, Risk Score: 85, Last Seen: 2024-05-21 01:30:00PM
+        ```
 
-            - Else:
-                Includes class name, entity name, risk score, and last seen timestamp.
+    Total ordering:
+        The ordering of `EnrichmentData` instances is determined by the content's last seen
+        timestamp.
 
-                .. code-block:: python
-
-                    >>> print(enrichment_data)
-                    EnrichedIP: 1.1.1.1, Risk Score: 85, Last Seen: 2024-05-21 01:30:00PM
-
-    Total Ordering:
-        The ordering of ``EnrichmentData`` instances is determined by the ``content``'s last
-        seen timestamp.
-
-        - If ``content`` is an instance of ``EnrichedMalware``:
+        - If `content` is an instance of `EnrichedMalware`:
             If two instances have the same last seen timestamp, their entity name is used as a
             secondary criterion.
-
         - Else:
             If two instances have the same last seen timestamp, their entity name and risk score are
             used as secondary criteria.

@@ -12,31 +12,26 @@
 ##############################################################################################
 
 import uuid
+from typing import Annotated
 
 import stix2
 from stix2.canonicalization.Canonicalize import canonicalize
+from typing_extensions import Doc
 
 from .constants import RF_IDENTITY_UUID, RF_NAMESPACE
 
 
-def generate_uuid(**kwargs: dict) -> str:
-    """Generated a unique UUID to be used as a STIX2 ID.
-
-    Args:
-        **kwargs (dict): a list of parameters to be hashed for the UUId.
-            Usually just {name:'somename'}, but could be more complex
-    """
+def generate_uuid(
+    **kwargs: Annotated[dict, Doc('A list of parameters to be hashed for the UUID.')],
+) -> Annotated[str, Doc('A unique UUID to be used as a STIX2 ID.')]:
+    """Generate a unique UUID to be used as a STIX2 ID."""
     data = {k: str(v) for k, v in kwargs.items()}
     data = canonicalize(data, utf8=False)
     return str(uuid.uuid5(uuid.UUID(RF_NAMESPACE), data))
 
 
-def create_rf_author() -> stix2.v21.Identity:
-    """Create the Recorded Future Author Identity.
-
-    Returns:
-        stix2.v21.Identity: Recorded Future, as an identity
-    """
+def create_rf_author() -> Annotated[stix2.v21.Identity, Doc('Recorded Future as an identity.')]:
+    """Create the Recorded Future Author Identity."""
     name = 'Recorded Future'
     id_class = 'organization'
     return stix2.Identity(

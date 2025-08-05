@@ -13,9 +13,10 @@
 
 import logging
 from itertools import chain
-from typing import Optional
+from typing import Annotated, Optional
 
 from pydantic import validate_call
+from typing_extensions import Doc
 
 from ..endpoints import EP_SOAR_ENRICHMENT
 from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
@@ -28,12 +29,11 @@ from .soar import SOAREnrichedEntity, SOAREnrichIn, SOAREnrichOut
 class SoarMgr:
     """Perform SOAR enrichment of entities."""
 
-    def __init__(self, rf_token: str = None):
-        """Initializes the SoarMgr object.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
-        """
+    def __init__(
+        self,
+        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+    ):
+        """Initialize the `SoarMgr` object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
 
@@ -41,69 +41,63 @@ class SoarMgr:
     @debug_call
     def soar(
         self,
-        ip: Optional[list[str]] = None,
-        domain: Optional[list[str]] = None,
-        hash_: Optional[list[str]] = None,
-        vulnerability: Optional[list[str]] = None,
-        url: Optional[list[str]] = None,
-        companybydomain: Optional[list[str]] = None,
-        max_workers: Optional[int] = 0,
-    ) -> list[SOAREnrichOut]:
+        ip: Annotated[Optional[list[str]], Doc('List of IP addresses to enrich.')] = None,
+        domain: Annotated[Optional[list[str]], Doc('List of domains to enrich.')] = None,
+        hash_: Annotated[Optional[list[str]], Doc('List of file hashes to enrich.')] = None,
+        vulnerability: Annotated[
+            Optional[list[str]], Doc('List of vulnerabilities to enrich.')
+        ] = None,
+        url: Annotated[Optional[list[str]], Doc('List of URLs to enrich.')] = None,
+        companybydomain: Annotated[
+            Optional[list[str]], Doc('List of company domains to enrich.')
+        ] = None,
+        max_workers: Annotated[
+            Optional[int], Doc('Number of workers to multithread requests.')
+        ] = 0,
+    ) -> Annotated[list[SOAREnrichOut], Doc('A list of enriched data for the provided IOCs.')]:
         """Enrich multiple types of IOCs via the SOAR API.
 
-        This method allows for batch processing of various IOC types, including IP addresses,
-        domains, file hashes, vulnerabilities, URLs, and company domains. It utilizes either
-        multi-threading or sequential processing based on the `max_workers` parameter.
+        This method supports batch processing of IOC types including IPs, domains, hashes,
+        vulnerabilities, URLs, and company domains. Uses multithreading if `max_workers` > 0.
 
         Endpoint:
-            ``v2/soar/enrichment``
+            `v2/soar/enrichment`
 
-        Examples:
-            Simple SOAR enrichment:
+        Example:
+            Simple bulk enrichment:
+            ```python
+            from psengine.enrich import SoarMgr
 
-            .. code-block:: python
-                :linenos:
+            mgr = SoarMgr()
+            ips = mgr.soar(ip=['1.1.1.1'])
+            ```
 
-                mgr.soar(ip=['1.1.1.1'])
+            With multithreading:
+            ```python
+            from psengine.enrich import SoarMgr
 
-            Multithreaded example:
+            mgr = SoarMgr()
+            ips = mgr.soar(ip=['1.1.1.1'], max_workers=10)
+            ```
 
-            .. code-block:: python
-                :linenos:
+            Save enriched results to file:
+            ```
+            from pathlib import Path
+            from json import dumps
+            from psengine.enrich import SoarMgr
 
-                mgr.soar(ip=['1.1.1.1'], max_workers=10)
+            mgr = SoarMgr()
 
-            To write an enriched object to file:
-
-            .. code-block:: python
-                :linenos:
-
-                from pathlib import Path
-                from json import dump
-
-                mgr = SoarMgr()
-                OUTPUT_DIR = Path('your' / 'path')
-                OUTPUT_DIR.mkdir(exists_ok=True)
-                data = mgr.soar(ip=['1.1.1.1', '8.8.8.8'])
-                for ip in data:
-                    (OUTPUT_DIR / f'{ip.entity}.json').write_text(dumps(ip.json(), indent=2))
-
-        Args:
-            ip (List[str], optional): List of IP addresses to enrich.
-            domain (List[str], optional): List of domains to enrich.
-            hash_ (List[str], optional): List of file hashes to enrich.
-            vulnerability (List[str], optional): List of vulnerabilities to enrich.
-            url (List[str], optional): List of URLs to enrich.
-            companybydomain (List[str], optional): List of company domains to enrich.
-            max_workers (int, optional): number of workers to multithread requests.
-
-        Returns:
-            List[SOAREnrichOut]: A list of enriched data for the provided IOCs.
+            OUTPUT_DIR = Path('your' / 'path')
+            OUTPUT_DIR.mkdir(exist_ok=True)
+            data = mgr.soar(ip=['1.1.1.1', '8.8.8.8'])
+            for ip in data:
+                (OUTPUT_DIR / f'{ip.entity}.json').write_text(dumps(ip.json(), indent=2))
+            ```
 
         Raises:
             ValueError: If no parameters are provided or all provided lists are empty.
-            ValidationError If the arguments have incorrect types or if the data returned
-                                    by the API is malformed.
+            ValidationError: if any supplied parameter is of incorrect type.
             EnrichmentSoarError: If an HTTP or JSON decoding error occurs during enrichment.
         """
         iocs = {

@@ -24,32 +24,33 @@ from .models import DetectionRuleType, RuleContext, SearchFilter
 
 @total_ordering
 class DetectionRule(RFBaseModel):
-    """Detection rule model to validate output of the ``/search`` endpoint.
+    """Detection rule model to validate output of the `/search` endpoint.
 
-    Methods:
-        __hash__:
-            Returns a hash value based on ``id_`` and updated timestamp.
+    This class supports hashing, equality comparison, string representation, and total
+    ordering of `DetectionRule` instances.
 
-        __eq__:
-            Checks equality between two DetectionRule instances based on ``id_`` and updated time.
+    Hashing:
+        Returns a hash value based on `id_` and the updated timestamp.
 
-        __gt__:
-            Defines a greater-than comparison between two DetectionRule instances based on
-            updated timestamp and ``id_``.
+    Equality:
+        Checks equality between two `DetectionRule` instances based on `id_` and updated time.
 
-        __str__:
-            Returns a string representation of the DetectionRule instance with:
-            ``id_``, created timestamp, updated timestamp, and title.
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `DetectionRule` instances based on
+        the updated timestamp and `id_`.
 
-            .. code-block:: python
+    String Representation:
+        Returns a string representation of the `DetectionRule` instance including `id_`,
+        created timestamp, updated timestamp, and title.
 
-                >>> print(detection_rule)
-                ID: rule123, Created: 2024-05-21 10:42:30AM, Updated: 2024-05-21 10:42:30AM,
-                Title: Example Rule
+        ```python
+        >>> print(detection_rule)
+        ID: rule123, Created: 2024-05-21 10:42:30AM, Updated: 2024-05-21 10:42:30AM, Title: Example.
+        ```
 
-    Total Ordering:
-        The ordering of DetectionRule instances is determined primarily by the updated timestamp.
-        If two instances have the same updated timestamp, ``id_`` is used as a secondary criterion.
+    Total ordering:
+        The ordering of `DetectionRule` instances is determined primarily by the updated timestamp.
+        If two instances have the same updated timestamp, `id_` is used as a secondary criterion.
     """
 
     id_: str = Field(alias='id')
@@ -77,7 +78,7 @@ class DetectionRule(RFBaseModel):
 
 
 class DetectionRuleSearchOut(RFBaseModel):
-    """Model to validate ``/search`` endpoint payload sent."""
+    """Model to validate `/search` endpoint payload sent."""
 
     filter_: Optional[SearchFilter] = Field(alias='filter', default={})
     tagged_entities: Optional[bool] = False

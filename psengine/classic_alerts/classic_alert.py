@@ -11,12 +11,14 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+
 from datetime import datetime
 from functools import total_ordering
 from itertools import chain
-from typing import Optional
+from typing import Annotated, Optional
 
 from pydantic import Field, field_validator
+from typing_extensions import Doc
 
 from ..common_models import IdName, IdNameTypeDescription, RFBaseModel
 from ..constants import TIMESTAMP_STR
@@ -37,32 +39,34 @@ from .models import (
 
 @total_ordering
 class ClassicAlert(RFBaseModel):
-    """Validate data received from ``/v3/alerts/{id}``.
+    """Validate data received from the `/v3/alerts/{id}` endpoint.
 
-    Methods:
-        __hash__:
-            Returns a hash value based on the ``id_``.
+    This class supports hashing, equality comparison, string representation, and total
+    ordering of `ClassicAlert` instances.
 
-        __eq__:
-            Checks equality between two ClassicAlert instances based on their ``id_``.
+    Hashing:
+        Returns a hash value based on the `id_`.
 
-        __gt__:
-            Defines a greater-than comparison between two ClassicAlert instances based on their
-            log triggered timestamp.
+    Equality:
+        Checks equality between two `ClassicAlert` instances based on their `id_`.
 
-        __str__:
-            Returns a string representation of the ClassicAlert instance with:
-            ``id_``, triggered timestamp, title, and alerting rule name.
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `ClassicAlert` instances based on their
+        log triggered timestamp.
 
-            .. code-block:: python
+    String Representation:
+        Returns a string representation of the `ClassicAlert` instance including the `id_`,
+        triggered timestamp, title, and alerting rule name.
 
-                >>> print(alert_id_response)
-                Classic Alert ID: a123, Triggered: 2024-05-21 10:42:30AM, Title: Example Alert
+        ```python
+        >>> print(alert_id_response)
+        Classic Alert ID: a123, Triggered: 2024-05-21 10:42:30AM, Title: Example Alert
+        ```
 
-    Total Ordering:
-        The ordering of ClassicAlert instances is determined primarily by the log triggered
-        timestamp. If two instances have the same triggered timestamp, their ``id_`` is used as a
-        secondary criterion for ordering.
+    Total ordering:
+        The ordering of `ClassicAlert` instances is determined primarily by the log triggered
+        timestamp. If two instances have the same triggered timestamp, their `id_` is used as a
+        secondary criterion.
     """
 
     id_: str = Field(alias='id')
@@ -82,54 +86,52 @@ class ClassicAlert(RFBaseModel):
 
     @field_validator('triggered_by', mode='before')
     @classmethod
-    def parse_trigger_by(cls, data: list[dict]) -> list[dict]:
-        """Parses a list of data dictionaries to extract and format entity paths.
+    def parse_trigger_by(
+        cls,
+        data: Annotated[
+            list[dict],
+            Doc('List of dicts, each containing a `reference_id` and an `entity_paths` list.'),
+        ],
+    ) -> Annotated[
+        list[dict],
+        Doc("""
+            List of dicts with `reference_id` and a list of unique formatted
+            `triggered_by_strings` paths.
+            """),
+    ]:
+        """Parse a list of data dictionaries to extract and format entity paths.
 
         Each entity path is transformed into a formatted string where each entity is represented as
-        'EntityName (EntityType)', joined by ' -> '.
-        If an entity's type is 'MetaType', it is formatted as 'Any EntityName' instead.
+        `EntityName (EntityType)`, joined by ` -> `.
 
-        Args:
-            data (List[Dict]): A list of dictionaries, each containing a 'reference_id' and an
-                               'entity_paths' list.
-
-        Returns:
-            List[Dict]: A list of dictionaries with 'reference_id' and a list of unique formatted
-                        'triggered_by_strings' paths.
+        If an entity's type is `MetaType`, it is formatted as `Any EntityName` instead.
 
         Example:
-            Input:
-
-            .. code-block::
-
-                [
-                    {
-                        'reference_id': '123',
-                        'entity_paths': [
-                            [
-                                {'entity': {'name': 'URL1', 'type': 'URL'}},
-                                {'entity': {'name': 'Domain1', 'type': 'InternetDomainName'}}
-                            ],
-                            [
-                                {'entity': {'name': 'URL1', 'type': 'URL'}},
-                                {'entity': {'name': 'Domain1', 'type': 'InternetDomainName'}}
-                            ]
-                        ]
-                    }
+        ```python
+        >>> print(parse_triggered_by([
+            {
+                'reference_id': '123',
+                'entity_paths': [
+                    [
+                        {'entity': {'name': 'URL1', 'type': 'URL'}},
+                        {'entity': {'name': 'Domain1', 'type': 'InternetDomainName'}}
+                    ],
+                    [
+                        {'entity': {'name': 'URL1', 'type': 'URL'}},
+                        {'entity': {'name': 'Domain1', 'type': 'InternetDomainName'}}
+                    ]
                 ]
-
-            Output:
-
-            .. code-block::
-
-                [
-                    {
-                        'reference_id': '123',
-                        'triggered_by_strings': [
-                            'URL1 (URL) -> Domain1 (InternetDomainName)'
-                        ]
-                    }
+            }
+        ])
+        [
+            {
+                'reference_id': '123',
+                'triggered_by_strings': [
+                    'URL1 (URL) -> Domain1 (InternetDomainName)'
                 ]
+            }
+        ]
+        ```
         """
         result = []
         for item in data:
@@ -180,56 +182,43 @@ class ClassicAlert(RFBaseModel):
             )
         )
 
-    def store_image(self, image_id: str, image_bytes: bytes) -> None:
-        """Stores the image id and image bytes in ``@images`` dictionary.
+    def store_image(
+        self,
+        image_id: Annotated[str, Doc('The image ID.')],
+        image_bytes: Annotated[bytes, Doc('The image bytes.')],
+    ) -> None:
+        """Store the image ID and image bytes in the `@images` dictionary.
 
         Example:
-            .. code-block:: python
-
-                {
-                    image_id: image_bytes,
-                    image_id: image_bytes
-                }
-
-
-        Args:
-            image_id (str): image id
-            image_bytes (bytes): image bytes
+        ```python
+        {
+            image_id: image_bytes,
+            image_id: image_bytes
+        }
+        ```
         """
         self._images[image_id] = image_bytes
 
     def markdown(
         self,
-        owner_org: bool = False,
-        ai_insights: bool = True,
-        fragment_entities: bool = True,
-        triggered_by: bool = True,
-        html_tags: bool = False,
-        character_limit: int = None,
-        defang_iocs: bool = False,
-    ):
-        """Returns a markdown string representation of the ``ClassicAlert`` instance.
+        owner_org: Annotated[bool, Doc('Include owner org details.')] = False,
+        ai_insights: Annotated[bool, Doc('Include AI insights.')] = True,
+        fragment_entities: Annotated[bool, Doc('Include fragment entities.')] = True,
+        triggered_by: Annotated[bool, Doc('Include triggered by.')] = True,
+        html_tags: Annotated[bool, Doc('Include HTML tags in the markdown.')] = False,
+        character_limit: Annotated[Optional[int], Doc('Character limit for the markdown.')] = None,
+        defang_iocs: Annotated[bool, Doc('Defang IOCs in hits.')] = False,
+    ) -> Annotated[str, Doc('Markdown representation of the alert.')]:
+        """Return a markdown string representation of the `ClassicAlert` instance.
 
-        This function works on ``ClassicAlert`` instances returned by ``ClassicAlertMgr.fetch()``,
-        if you are passing the result of ``ClassicAlertMgr.search()`` make sure the ``search``
-        method has been called with all the fields. Keep in mind that this will make the
-        ``search`` slower.
-
-        Args:
-            self (ClassicAlert): ClassicAlert instance to create markdown from.
-            owner_org (bool, optional): Include owner org details. Defaults to False.
-            ai_insights (bool, optional): Include AI insights. Defaults to True.
-            fragment_entities (bool, optional): Include fragment entities. Defaults to True.
-            triggered_by (bool, optional): Include triggered by. Defaults to True.
-            html_tags (bool, optional): Include HTML tags in the markdown. Defaults to False.
-            character_limit (int, optional): Character limit for the markdown. Defaults to None.
-            defang_iocs (bool, optional): Defang IOCs in hits. Defaults to False.
+        Note:
+            This function works on `ClassicAlert` instances returned by `ClassicAlertMgr.fetch()`.
+            If you are passing the result of `ClassicAlertMgr.search()`, make sure the `search`
+            method has been called with all the fields. Keep in mind that this will make the
+            `search` slower.
 
         Raises:
             AlertMarkdownError: If fields are not available.
-
-        Returns:
-            str: Markdown representation of the alert.
         """
         return _markdown_alert(
             self,
@@ -243,26 +232,22 @@ class ClassicAlert(RFBaseModel):
         )
 
     @property
-    def images(self) -> dict:
-        """If the alert has images, then return them in a dict.
+    def images(self) -> Annotated[dict, Doc('A dictionary of image IDs and image bytes.')]:
+        """Return a dictionary of images if the alert has any.
 
         Example:
-            .. code-block:: python
-
-                {
-                    image_id: image_bytes,
-                    image_id: image_bytes
-                }
-
-
-        Returns:
-            dict: dictionary of image ids and image bytes
+        ```python
+        {
+            image_id: image_bytes,
+            image_id: image_bytes
+        }
+        ```
         """
         return self._images
 
 
 class AlertRuleOut(RFBaseModel):
-    """Validate data received from ``v2/alert/rule``."""
+    """Validate data received from `v2/alert/rule`."""
 
     intelligence_goals: list[IdName]
     priority: bool = None

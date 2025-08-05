@@ -11,7 +11,10 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from typing import Annotated
+
 import stix2
+from typing_extensions import Doc
 
 from .base_stix_entity import BaseStixEntity
 from .constants import IDENTITY_TYPE_TO_CLASS
@@ -38,14 +41,13 @@ class TTP(BaseStixEntity):
 class Identity(BaseStixEntity):
     """Converts various RF entity types to a STIX2 Identity."""
 
-    def __init__(self, name: str, rf_type: str, author: str = None) -> None:
-        """Init Identity Class.
-
-        Args:
-            name (str): Name of the Identity
-            rf_type (str): Recorded Future type of the identity
-            author (str, optional): Recorded Future author object
-        """
+    def __init__(
+        self,
+        name: Annotated[str, Doc('The name of the identity.')],
+        rf_type: Annotated[str, Doc('The Recorded Future type of the identity.')],
+        author: Annotated[str, Doc('A Recorded Future author object.')] = None,
+    ) -> None:
+        """Init Identity Class."""
         self.rf_type = rf_type
         super().__init__(name, author)
 
@@ -119,15 +121,13 @@ class Malware(BaseStixEntity):
 class Vulnerability(BaseStixEntity):
     """Converts a CyberVulnerability to a Vulnerability SDO."""
 
-    def __init__(self, name: str, description: str = None, author: str = None) -> None:
-        """Init Vulnerability Class.
-
-        Args:
-            name (str): Name of the Identity
-            description (str, optional): Vulnerability description
-            author (str, optional): Recorded Future author object
-
-        """
+    def __init__(
+        self,
+        name: Annotated[str, Doc('The name of the identity.')],
+        description: Annotated[str, Doc('A vulnerability description.')] = None,
+        author: Annotated[str, Doc('A Recorded Future author object.')] = None,
+    ) -> None:
+        """Init Vulnerability Class."""
         self.description = description
         super().__init__(name, author)
 

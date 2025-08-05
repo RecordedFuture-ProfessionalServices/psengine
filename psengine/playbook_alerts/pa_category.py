@@ -12,21 +12,20 @@
 ##############################################################################################
 
 from enum import Enum
+from typing import Annotated
+
+from typing_extensions import Doc
 
 
 class PACategory(Enum):
     """Playbook Alert categories as Enum."""
 
-    def __str__(self):
+    def __str__(self) -> str:
         """String representation of the enum value."""
         return str(self.value)
 
-    def lower(self):
-        """Return the lower case version of the enum value.
-
-        Returns:
-            str: lower case version of the enum value
-        """
+    def lower(self) -> Annotated[str, Doc('Lower case version of the enum value.')]:
+        """Return the lower case version of the enum value."""
         return self.value.lower()
 
     DOMAIN_ABUSE = 'domain_abuse'

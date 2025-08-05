@@ -12,8 +12,10 @@
 ##############################################################################################
 
 import logging
+from typing import Annotated
 
 import stix2
+from typing_extensions import Doc
 
 from ..helpers import FormattingHelpers
 from .base_stix_entity import BaseStixEntity
@@ -30,35 +32,26 @@ class EnrichedIndicator(IndicatorEntity):
 
     def __init__(
         self,
-        name: str,
-        type_: str,
-        evidence_details: list,
-        link_hits: list = None,
-        risk_mapping: list = None,
-        ai_insights: dict = None,
-        author: stix2.Identity = None,
-        confidence: int = None,
-        create_indicator: bool = True,
-        create_obs: bool = True,
-        tlp_marking='amber',
+        name: Annotated[str, Doc('An indicator value.')],
+        type_: Annotated[str, Doc('A Recorded Future type of indicator.')],
+        evidence_details: Annotated[list, Doc('Risk rules and evidence details.')],
+        link_hits: Annotated[list, Doc('A list of lists for link hits.')] = None,
+        risk_mapping: Annotated[list, Doc('A risk rule to TTP mapping.')] = None,
+        ai_insights: Annotated[dict, Doc('AI insights for IOC in Recorded Future.')] = None,
+        author: Annotated[stix2.Identity, Doc('A Recorded Future Identity.')] = None,
+        confidence: Annotated[int, Doc('A confidence score of the indicator.')] = None,
+        create_indicator: Annotated[
+            bool, Doc('A flag that governs if the indicator should be created.')
+        ] = True,
+        create_obs: Annotated[
+            bool, Doc('A flag that governs if the observable should be created.')
+        ] = True,
+        tlp_marking: Annotated[str, Doc('The TLP level. Defaults to amber.')] = 'amber',
     ):
-        """Indicator container. Containers Indicator, observable, and relationship between them.
-
-        Args:
-            name (str): Indicator value
-            type_ (str): Recorded Future type of indicator
-            evidence_details (list): risk rules + evidence details
-            link_hits (list, optional): list of lists
-            risk_mapping (list, optional): Risk rule to TTP mapping
-            ai_insights (dict, optional): AI insights for IOC in Recorded Future
-            author (stix2.Identity, optional): Recorded Future Identity
-            confidence (int, optional): Confidence score of indicator
-            create_indicator (bool, optional): flag that governs if indicator should be created
-            create_obs (bool, optional): flag that governs if observable should be created
-            tlp_marking (str, optional): the TLP level. Default to amber
+        """Indicator container. Contains indicator, observable, and relationship between them.
 
         Raises:
-            STIX2TransformError: if transformation fails
+            STIX2TransformError: If transformation fails.
         """
         link_hits = link_hits or []
         risk_mapping = risk_mapping or []
@@ -93,9 +86,6 @@ class EnrichedIndicator(IndicatorEntity):
         """If AI insights are available then:
             - use it as a description
             - otherwise use a default string value.
-
-        Args:
-            ai_insights (dict): string from RF API
 
         Returns:
             str: Indicator description
@@ -134,9 +124,6 @@ class EnrichedIndicator(IndicatorEntity):
 
     def _relate(self, obj: BaseStixEntity) -> None:
         """Creates relationship between object and indicator/observabe.
-
-        Args:
-            obj (RFBaseStixEntity): Stix object we're linking to
 
         Raises:
             STIX2TransformError: Generic transofmr error

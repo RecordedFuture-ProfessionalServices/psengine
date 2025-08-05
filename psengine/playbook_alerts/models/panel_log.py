@@ -37,10 +37,10 @@ class StatusChange(ChangeType):
 class OldNewOptionalType(ChangeType):
     """This is valid for the following Panel Log types.
 
-    - ``ExternalIdChange``,
-    - ``DescriptionChange``,
-    - ``TitleChange``,
-    - ``ReopenStrategyChange``
+    - `ExternalIdChange`,
+    - `DescriptionChange`,
+    - `TitleChange`,
+    - `ReopenStrategyChange`
 
     """
 
@@ -51,8 +51,8 @@ class OldNewOptionalType(ChangeType):
 class AddedRemovedTypeEntities(ChangeType):
     """This is valid for the following Panel Log types.
 
-    - ``EntityChangeV2``,
-    - ``RelatedEntityChangeV2``
+    - `EntityChangeV2`,
+    - `RelatedEntityChangeV2`
     """
 
     removed: Optional[list[IdOptionalNameType]] = []
@@ -318,7 +318,7 @@ class PanelLogV2(RFBaseModel):
     def validate_changes(cls, data):
         """Validate each panel_log_v2 changes based on the supported changes.
 
-        The list of changes is in ``TYPE_MAPPING``. Skip unsupported changes.
+        The list of changes is in `TYPE_MAPPING`. Skip unsupported changes.
         """
         new_changes = [
             model_type.model_validate(change)

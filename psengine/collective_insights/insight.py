@@ -29,27 +29,31 @@ from .models import (
 class Insight(RFBaseModel):
     """Validate a single insight.
 
-    Methods:
-        __hash__:
-            Returns a hash value based on the IOC value.
+    This class supports hashing, equality comparison, string representation, and total
+    ordering of `Insight` instances.
 
-        __eq__:
-            Checks equality between two Insight instances based on their IOC value and timestamp.
+    Hashing:
+        Returns a hash value based on the IOC value.
 
-        __gt__:
-            Defines a greater-than comparison between two Insight instances based on their
-            timestamp and IOC value.
+    Equality:
+        Checks equality between two `Insight` instances based on their IOC value and timestamp.
 
-        __str__:
-            Returns a string representation of the Insight instance with:
-            IOC value, timestamp, and detection type.
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `Insight` instances based on their
+        timestamp and IOC value.
 
-            >>> print(insight)
-            IOC: mal_dom.com, Timestamp: 2024-05-21 10:42:30AM, Detection Type: sandbox
+    String Representation:
+        Returns a string representation of the `Insight` instance including the IOC value,
+        timestamp, and detection type.
 
-    Total Ordering:
-        Ordering of Insight instances is determined primarily by the timestamp. If two instances
-        have the same timestamp, their IOC value is used as a secondary criterion for ordering.
+        ```python
+        >>> print(insight)
+        IOC: mal_dom.com, Timestamp: 2024-05-21 10:42:30AM, Detection Type: sandbox
+        ```
+
+    Total ordering:
+        Ordering of `Insight` instances is determined primarily by the timestamp.
+        If two instances have the same timestamp, their IOC value is used as a secondary criterion.
     """
 
     timestamp: datetime

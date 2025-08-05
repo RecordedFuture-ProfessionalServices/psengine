@@ -189,7 +189,7 @@ class Attributes(RFBaseModel):
     @field_validator('events', mode='after')
     @classmethod
     def remove_empty_events(cls, values):
-        """Remove empty events when ``NoteEvent`` skip the validation."""
+        """Remove empty events when `NoteEvent` skip the validation."""
         return [v for v in values if v.type_ and v.attributes]
 
 

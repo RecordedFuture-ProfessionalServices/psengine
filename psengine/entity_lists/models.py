@@ -36,14 +36,14 @@ class OwnerOrganisationDetails(RFBaseModel):
 
 
 class CreateRequestModel(RFBaseModel):
-    """Validate data sent to ``/create`` endpoint."""
+    """Validate data sent to `/create` endpoint."""
 
     name: str
     type_: str = Field(alias='type', default=None)
 
 
 class SearchInModel(RFBaseModel):
-    """Validate data sent to ``/search`` endpoint."""
+    """Validate data sent to `/search` endpoint."""
 
     name: Optional[str] = None
     type_: str = Field(alias='type', default=None)
@@ -51,37 +51,37 @@ class SearchInModel(RFBaseModel):
 
 
 class InfoRequestModel(RFBaseModel):
-    """Validate data sent to ``/{listId}/info`` endpoint."""
+    """Validate data sent to `/{listId}/info` endpoint."""
 
     list_id: str
 
 
 class StatusRequestModel(RFBaseModel):
-    """Validate data sent to ``/{listId}/status`` endpoint."""
+    """Validate data sent to `/{listId}/status` endpoint."""
 
     list_id: str
 
 
 class EntitiesRequestModel(RFBaseModel):
-    """Validate data sent to ``/{listId}/entities`` endpoint."""
+    """Validate data sent to `/{listId}/entities` endpoint."""
 
     list_id: str
 
 
 class AddEntityRequestModel(RFBaseModel):
-    """Validate data sent to ``/{listId}/entity/add`` endpoint."""
+    """Validate data sent to `/{listId}/entity/add` endpoint."""
 
     entity: EntityID
     context: Optional[dict] = None
 
 
 class RemoveEntityRequestModel(RFBaseModel):
-    """Validate data sent to ``/{listId}/entity/remove`` endpoint."""
+    """Validate data sent to `/{listId}/entity/remove` endpoint."""
 
     entity: EntityID
 
 
 class ListEntityOperationResponse(RFBaseModel):
-    """Validate data received from ``/{listId}/entity/remove`` endpoint."""
+    """Validate data received from `/{listId}/entity/remove` endpoint."""
 
     result: str
