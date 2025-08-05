@@ -22,33 +22,35 @@ from .models.soar import Risk
 
 @total_ordering
 class SOAREnrichedEntity(RFBaseModel):
-    """Model used for validating returned data from SOAR enrichment endpoint for bulk enrichment.
+    """Model used for validating returned data from the SOAR endpoint for bulk enrichment.
 
-    Methods:
-        __hash__:
-            Returns a hash value based on the entity ``id_`` and the risk score.
+    This class supports hashing, equality comparison, string representation, and total
+    ordering of `SOAREnrichedEntity` instances.
 
-        __eq__:
-            Checks equality between two ``SOAREnrichedEntity`` instances based on their entity name
-            and the risk score.
+    Hashing:
+        Returns a hash value based on the entity `id_` and the risk score.
 
-        __gt__:
-            Defines a greater-than comparison between two ``SOAREnrichedEntity`` instances based on
-            their risk score and entity name.
+    Equality:
+        Checks equality between two `SOAREnrichedEntity` instances based on their entity name
+        and risk score.
 
-        __str__:
-            Returns a string representation of the ``SOAREnrichedEntity`` instance with:
-            enriched entity name, risk score, and most critical rule.
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `SOAREnrichedEntity` instances based on
+        their risk score and entity name.
 
-            .. code-block:: python
+    String Representation:
+        Returns a string representation of the `SOAREnrichedEntity` instance including the
+        enriched entity name, risk score, and most critical rule.
 
-                >>> print(soar_enriched_entity)
-                Enriched Entity: 1.1.1.1, Risk Score: 95, Most Critical Rule: C&C Server
+        ```python
+        >>> print(soar_enriched_entity)
+        Enriched Entity: 1.1.1.1, Risk Score: 95, Most Critical Rule: C&C Server
+        ```
 
-    Total Ordering:
-        The ordering of ``SOAREnrichedEntity`` instances is determined primarily by the risk score.
+    Total ordering:
+        The ordering of `SOAREnrichedEntity` instances is determined primarily by the risk score.
         If two instances have the same risk score, their entity name is used as a secondary
-        criterion for ordering.
+        criterion.
     """
 
     risk: Risk

@@ -13,7 +13,7 @@
 
 import json
 import logging
-from typing import Union
+from typing import Annotated, Union
 
 from pydantic import validate_call
 from requests import (
@@ -27,6 +27,7 @@ from requests import (
 from requests.adapters import HTTPAdapter, Retry
 from requests.exceptions import JSONDecodeError
 from requests.models import Response
+from typing_extensions import Doc
 
 from ._sdk_id import SDK_ID
 from .config import get_config
@@ -47,35 +48,24 @@ class BaseHTTPClient:
 
     def __init__(
         self,
-        http_proxy: str = None,
-        https_proxy: str = None,
-        verify: Union[str, bool] = SSL_VERIFY,
-        auth: tuple[str, str] = None,
-        cert: Union[str, tuple[str, str], None] = None,
-        timeout=REQUEST_TIMEOUT,
-        retries=RETRY_TOTAL,
-        backoff_factor=BACKOFF_FACTOR,
-        status_forcelist=STATUS_FORCELIST,
-        pool_max_size=POOL_MAX_SIZE,
+        http_proxy: Annotated[str, Doc('An HTTP proxy URL.')] = None,
+        https_proxy: Annotated[str, Doc('An HTTPS proxy URL.')] = None,
+        verify: Annotated[
+            Union[str, bool], Doc('An SSL verification flag or path to CA bundle.')
+        ] = SSL_VERIFY,
+        auth: Annotated[tuple[str, str], Doc('Basic Auth credentials.')] = None,
+        cert: Annotated[Union[str, tuple[str, str], None], Doc('Client certificates.')] = None,
+        timeout: Annotated[int, Doc('A request timeout.')] = REQUEST_TIMEOUT,
+        retries: Annotated[int, Doc('A number of retries.')] = RETRY_TOTAL,
+        backoff_factor: Annotated[int, Doc('A backoff factor.')] = BACKOFF_FACTOR,
+        status_forcelist: Annotated[
+            int, Doc('A list of status codes to force a retry. Defaults to [502, 503, 504].')
+        ] = STATUS_FORCELIST,
+        pool_max_size: Annotated[
+            int, Doc('The maximum number of connections in the pool.')
+        ] = POOL_MAX_SIZE,
     ):
-        """Generic HTTP client for making requests (``requests`` wrapper).
-
-        Args:
-            http_proxy (str, optional): HTTP Proxy URL. Defaults to None.
-            https_proxy (str, optional): HTTPS Proxy URL. Defaults to None.
-            verify (Union[str, bool], optional): SSL verification flag or path to CA bundle.
-                                                Defaults to True.
-            auth (Tuple[str, str], optional): Basic Auth credentials. Defaults to None.
-            cert (Union[str, Tuple[str, str], None], optional): Client certificates.
-                                                Defaults to None.
-            timeout (int, optional): Request timeout. Defaults to 120.
-            retries (int, optional): Number of retries. Defaults to 5.
-            backoff_factor (int, optional): Backoff factor. Defaults to 1.
-            status_forcelist (int, optional): List of status codes to force a retry.
-                                                Defaults to [502, 503, 504].
-            pool_max_size (int, optional): Maximum number of connections in the pool.
-                                                Defaults to 120.
-        """
+        """Generic HTTP client for making requests (`requests` wrapper)."""
         self.log = logging.getLogger(__name__)
         self.config = get_config()
         self.http_proxy = http_proxy if http_proxy is not None else self.config.http_proxy
@@ -105,35 +95,26 @@ class BaseHTTPClient:
     @validate_call
     def call(
         self,
-        method: str,
-        url: str,
-        data: Union[dict, list[dict], None] = None,
+        method: Annotated[str, Doc('An HTTP method.')],
+        url: Annotated[str, Doc('A URL to make the request to.')],
+        data: Annotated[Union[dict, list[dict], None], Doc('A request body.')] = None,
         *,
-        params: Union[dict, None] = None,
-        headers: Union[dict, None] = None,
+        params: Annotated[Union[dict, None], Doc('HTTP query parameters.')] = None,
+        headers: Annotated[
+            Union[dict, None],
+            Doc('If specified, overrides default headers and does not set the token.'),
+        ] = None,
         **kwargs,
-    ) -> Response:
-        """Invokes a HTTP request using the ``requests`` library.
-
-        Args:
-            method (str): HTTP Method, one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH
-            url (str): URL to make the request to
-            headers (dict, optional): If specified it will override default headers and wont
-            set the token. Defaults to None.
-            data (dict, optional): Body. Defaults to None.
-            params (dict, optional): HTTP query parameters. Defaults to None.
-            **kwargs: Additional keyword arguments, passed to the requests library
+    ) -> Annotated[Response, Doc('A requests.Response object.')]:
+        """Invoke an HTTP request using the `requests` library.
 
         Raises:
-            ValueError: if method is neither of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH
-            HTTPError: if requests returns a non 2xx status.
-            JSONDecodeError: if requests returns malformed data.
-            ConnectTimeout: if requests times out while trying to connect to the server.
-            ConnectionError: if requests fails before terminating.
-            ReadTimeout: if the server didnt send any data on time.
-
-        Returns:
-            requests.Response: requests.Response object
+            ValueError: If method is not one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.
+            HTTPError: If the response status is not 2xx.
+            JSONDecodeError: If the response contains malformed JSON.
+            ConnectTimeout: If the connection to the server times out.
+            ConnectionError: If the request fails before completing.
+            ReadTimeout: If the server did not send any data in time.
         """
         method_func = self._choose_method_type(method)
 
@@ -186,17 +167,12 @@ class BaseHTTPClient:
 
     @debug_call
     @validate_call
-    def can_connect(self, method: str = 'get', url: str = BASE_URL) -> bool:
-        """Check if the client can reach the specified API URL.
-
-        Args:
-            method (str, optional): HTTP Method, one of GET, PUT, POST, DELETE,
-                HEAD, OPTIONS, PATCH. Default: GET
-            url (str, optional): url to test. Default: api.recordedfuture.com
-
-        Returns:
-            bool: True if connection is 200 else False
-        """
+    def can_connect(
+        self,
+        method: Annotated[str, Doc('An HTTP method.')] = 'get',
+        url: Annotated[str, Doc('A URL to test.recordedfuture.com.')] = BASE_URL,
+    ) -> Annotated[bool, Doc('True if connection returns status 200, else False.')]:
+        """Check if the client can reach the specified API URL."""
         try:
             request = self.call(method=method, url=url)
             request.raise_for_status()
@@ -207,12 +183,13 @@ class BaseHTTPClient:
 
     @debug_call
     @validate_call
-    def set_urllib_log_level(self, level: str) -> None:
-        """Set log level for urllib3 library.
-
-        Args:
-            level (str): log level to be set: CRITICAL, ERROR, WARNING, INFO, DEBUG, NOTSET
-        """
+    def set_urllib_log_level(
+        self,
+        level: Annotated[
+            str, Doc('A log level to be set: CRITICAL, ERROR, WARNING, INFO, DEBUG, NOTSET.')
+        ],
+    ) -> None:
+        """Set log level for urllib3 library."""
         if not level or level.upper() not in (
             'CRITICAL',
             'ERROR',

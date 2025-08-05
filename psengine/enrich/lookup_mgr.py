@@ -12,10 +12,11 @@
 ##############################################################################################
 
 import logging
-from typing import Optional
+from typing import Annotated, Optional
 from urllib.parse import quote
 
 from pydantic import validate_call
+from typing_extensions import Doc
 
 from ..endpoints import CONNECT_API_BASE_URL
 from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
@@ -35,12 +36,11 @@ from .lookup import EnrichmentData
 class LookupMgr:
     """Enrichment of a single or a group of Entities."""
 
-    def __init__(self, rf_token: str = None):
-        """Initializes the LookupMgr object.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
-        """
+    def __init__(
+        self,
+        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+    ):
+        """Initialize the `LookupMgr` object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
 
@@ -48,113 +48,97 @@ class LookupMgr:
     @debug_call
     def lookup(
         self,
-        entity: str,
-        entity_type: ALLOWED_ENTITIES,
-        fields: Optional[list[str]] = None,
-    ) -> EnrichmentData:
-        """Perform lookup of an entity based on its id or name.
-        ``entity`` can contain both a Recorded Future ID or a entity name. See example below.
+        entity: Annotated[str, Doc('Name or Recorded Future ID of the entity.')],
+        entity_type: Annotated[ALLOWED_ENTITIES, Doc('Type of the entity to enrich.')],
+        fields: Annotated[
+            Optional[list[str]], Doc('Optional additional fields for enrichment.')
+        ] = None,
+    ) -> Annotated[EnrichmentData, Doc('An object containing the enriched entity details.')]:
+        """Perform lookup of an entity based on its ID or name.
 
-        The entity_type must always be specified.
-        The allowed values are:
+        The `entity` can be either a Recorded Future ID or a readable entity name.
+        The `entity_type` must always be specified. Allowed values include:
 
-            - ``company``,
-            - ``Company``,
-            - ``company_by_domain``,
-            - ``CyberVulnerability``,
-            - ``domain``,
-            - ``hash``,
-            - ``Hash``,
-            - ``InternetDomainName``,
-            - ``ip``,
-            - ``IpAddress``,
-            - ``malware``,
-            - ``Malware``,
-            - ``Organization``,
-            - ``url``,
-            - ``URL``,
-            - ``vulnerability``,
+        - `company`
+        - `Company`
+        - `company_by_domain`
+        - `CyberVulnerability`
+        - `domain`
+        - `hash`
+        - `Hash`
+        - `InternetDomainName`
+        - `ip`
+        - `IpAddress`
+        - `malware`
+        - `Malware`
+        - `Organization`
+        - `url`
+        - `URL`
+        - `vulnerability`
 
-        If ``fields`` parameter is specified, it will be added to the mandatory fields, which
-        are:
+        If `fields` are specified, they are added to the mandatory fields:
 
-            - for every entity except malware: ``['entity', 'risk', 'timestamps']``
-            - for malware: ``['entity', 'timestamps']``
-
-
-        Examples:
-            Performing a lookup using different ``entity`` type:
-
-                .. code-block:: python
-                    :linenos:
-
-                    mgr.lookup('idn:google.com', 'domain')
-                    mgr.lookup('google.com', 'domain')
-                    mgr.lookup('A_BCDE', 'company')
-
-
-            Performing a lookup of a ``company_by_domain`` specifying additional fields:
-
-                .. code-block:: python
-                    :linenos:
-
-                    mgr.lookup(
-                        'recordedfuture.com',
-                        entity_type='company_by_domain',
-                        fields=['curated']
-                    )
-
-        The output is always ``EnrichmentData`` object with a format like below:
-        If a 404 is received:
-
-            .. code-block:: python
-
-                {
-                    'entity': entity,
-                    'entity_type': entity_type,
-                    'is_enriched': False,
-                    'content': '404 received. Nothing known on this entity',
-                }
-
-        If a 200 is received:
-
-            .. code-block:: python
-
-                {
-                    'entity': entity,
-                    'entity_type': entity_type,
-                    'is_enriched': True,
-                    'content': the enriched data model
-                }
-
-        To write an enriched object to file:
-
-            .. code-block:: python
-                :linenos:
-
-                from pathlib import Path
-                from json import dump
-                from psengine.enrich import LookupMgr
-
-                mgr = LookupMgr()
-                OUTPUT_DIR = Path('your' / 'path')
-                OUTPUT_DIR.mkdir(exists_ok=True)
-                ip = mgr.lookup('1.1.1.1', 'ip')
-                (OUTPUT_DIR / f'{ip.entity}.json').write_text(dumps(ip.json(), indent=2))
-
+        - All entities except malware: `['entity', 'risk', 'timestamps']`
+        - For malware: `['entity', 'timestamps']`
 
         Endpoint:
-            ``v2/{entity_type}/{entity}``
+            `v2/{entity_type}/{entity}`
 
-        Args:
-            entity (str): Name or RFID of the entity.
-            entity_type (str): Type of the entity.
-            fields (List[str], optional): Fields for the entity to enrich.
-            EnrichmentData: An object containing the entity details.
+        Example:
+            ```python
+            from psengine.enrich import LookupMgr
 
+            mgr = LookupMgr()
+            enriched_dom = mgr.lookup('idn:google.com', 'domain')
+            enriched_dom2 = mgr.lookup('google.com', 'domain')
+            enriched_company_via_id = mgr.lookup('A_BCDE', 'company')
+            ```
+
+            Lookup with additional fields:
+            ```python
+            from psengine.enrich import LookupMgr
+
+            mgr = LookupMgr()
+            enriched_dom = mgr.lookup('idn:google.com', 'domain')
+            company_by_domain = mgr.lookup(
+                'recordedfuture.com',
+                entity_type='company_by_domain',
+                fields=['curated']
+            )
+            ```
+            To save to file:
+            ```python
+            from pathlib import Path
+            from json import dumps
+
+            OUTPUT_DIR = Path('your' / 'path')
+            OUTPUT_DIR.mkdir(exist_ok=True)
+            ip = mgr.lookup('1.1.1.1', 'ip')
+            (OUTPUT_DIR / f'{ip.entity}.json').write_text(dumps(ip.json(), indent=2))
+            ```
+
+        If a 404 is received:
+        ```python
+        {
+            'entity': entity,
+            'entity_type': entity_type,
+            'is_enriched': False,
+            'content': '404 received. Nothing known on this entity',
+        }
+        ```
+
+        If a 200 is received:
+        ```python
+        {
+            'entity': entity,
+            'entity_type': entity_type,
+            'is_enriched': True,
+            'content': the enriched data model
+        }
+        ```
         Raises:
-            ValidationError If a field does not match the type hint.
-            EnrichmentLookupError: if a lookup terminates with a non 200 or 404 return code.
+            ValidationError: if any supplied parameter is of incorrect type.
+            EnrichmentLookupError: If the lookup fails with a non-200 or non-404 status.
         """
         default_fields = MALWARE_FIELDS if entity_type.lower() == 'malware' else ENTITY_FIELDS
         fields = fields or default_fields
@@ -166,117 +150,106 @@ class LookupMgr:
     @debug_call
     def lookup_bulk(
         self,
-        entity: list[str],
-        entity_type: ALLOWED_ENTITIES,
-        fields: list[str] = ENTITY_FIELDS,
-        max_workers: Optional[int] = 0,
-    ) -> list[EnrichmentData]:
-        """Perform lookup of multiple entities based on ids or name.
-        ``entity`` can contain both a Recorded Future ID or a entity name.
-        The entities must be of the same ``entity_type``. See example below.
+        entity: Annotated[list[str], Doc('List of entity names or Recorded Future IDs.')],
+        entity_type: Annotated[ALLOWED_ENTITIES, Doc('Type of the entities to enrich.')],
+        fields: Annotated[
+            list[str], Doc('Optional additional fields for enrichment.')
+        ] = ENTITY_FIELDS,
+        max_workers: Annotated[
+            Optional[int], Doc('Number of workers to multithread requests.')
+        ] = 0,
+    ) -> Annotated[
+        list[EnrichmentData], Doc('A list of objects containing the enriched entity details.')
+    ]:
+        """Perform lookup of multiple entities based on IDs or names.
 
-        The ``entity_type`` must always be specified.
-        The allowed values are:
+        The `entity` list can contain Recorded Future IDs or plain entity names.
+        All entities must be of the same `entity_type`.
 
-             - ``company``,
-             - ``Company``,
-             - ``company_by_domain``,
-             - ``CyberVulnerability``,
-             - ``domain``,
-             - ``hash``,
-             - ``Hash``,
-             - ``InternetDomainName``,
-             - ``ip``,
-             - ``IpAddress``,
-             - ``malware``,
-             - ``Malware``,
-             - ``Organization``,
-             - ``url``,
-             - ``URL``,
-             - ``vulnerability``,
+        Allowed `entity_type` values include:
 
-        If ``fields`` parameter is specified, it will be added to the mandatory fields, which
-        are:
+        - `company`
+        - `Company`
+        - `company_by_domain`
+        - `CyberVulnerability`
+        - `domain`
+        - `hash`
+        - `Hash`
+        - `InternetDomainName`
+        - `ip`
+        - `IpAddress`
+        - `malware`
+        - `Malware`
+        - `Organization`
+        - `url`
+        - `URL`
+        - `vulnerability`
 
-            - for every entity except malware: ``['entity', 'risk', 'timestamps']``
-            - for malware: ``['entity', 'timestamps']``
+        If `fields` are specified, they are added to the mandatory fields:
 
-        Examples:
-            Multiple IOC types enrichment:
-
-                .. code-block:: python
-                     :linenos:
-
-                     data = {
-                         'IpAddress': ['1.1.1.1', '2.2.2.2'],
-                         'InternetDomainName': [ 'google.com', 'facebook.com']
-                     }
-                     results = []
-                     for entity_type, entities in data.items():
-                         results.extend(mgr.lookup_bulk(entities, entity_type)
-
-            To write an enriched object to file:
-
-                .. code-block:: python
-                    :linenos:
-
-                    from pathlib import Path
-                    from json import dump
-                    from psengine.enrich import LookupMgr
-
-                    mgr = LookupMgr()
-                    OUTPUT_DIR = Path('your' / 'path')
-                    OUTPUT_DIR.mkdir(exists_ok=True)
-                    data = mgr.lookup_bulk(['1.1.1.1', '8.8.8.8'], 'ip')
-                    for ip in data:
-                        (OUTPUT_DIR / f'{ip.entity}.json').write_text(dumps(ip.json(), indent=2))
-
-
-            The output is always a list of ``EnrichmentData`` object with a format like below:
-            If a 404 is received:
-
-                .. code-block:: python
-
-                    {
-                        'entity': entity,
-                        'entity_type': entity_type,
-                        'is_enriched': False,
-                        'content': '404 received. Nothing known on this entity',
-                    }
-
-            If a 200 is received:
-
-                .. code-block:: python
-
-                    {
-                        'entity': entity,
-                        'entity_type': entity_type,
-                        'is_enriched': True,
-                        'content': the enriched data model
-                    }
-
-            Multithreaded examples:
-
-                .. code-block:: python
-
-                    mgr.lookup_bulk(['google.com', 'facebook.com'], 'domain', max_workers=10)
+        - All entities except malware: `['entity', 'risk', 'timestamps']`
+        - For malware: `['entity', 'timestamps']`
 
         Endpoint:
-             ``v2/{entity_type}/{entity}``
+            `v2/{entity_type}/{entity}`
 
+        Example:
+            ```python
+            from psengine.enrich import LookupMgr
 
-        Args:
-             entity (List[str]): list of names or RFIDs.
-             entity_type (List[str]): Type of the entities.
-             fields (List[str], optional): Fields for the entities to enrich.
-             max_workers (int, optional): number of workers to multithread requests.
+            mgr = LookupMgr()
+            data = {
+                'IpAddress': ['1.1.1.1', '2.2.2.2'],
+                'InternetDomainName': ['google.com', 'facebook.com']
+            }
+            results = []
+            for entity_type, entities in data.items():
+                results.extend(mgr.lookup_bulk(entities, entity_type))
+            ```
 
-        Returns:
-             List[EnrichmentData]: A list of object containing the entity details.
+            To save the results:
+            ```python
+            from pathlib import Path
+            from json import dumps
+
+            OUTPUT_DIR = Path('your' / 'path')
+            OUTPUT_DIR.mkdir(exist_ok=True)
+            results = mgr.lookup_bulk(['1.1.1.1', '8.8.8.8'], 'ip')
+            for entity in results:
+                (OUTPUT_DIR / f'{entity.entity}.json').write_text(dumps(entity.json(), indent=2))
+            ```
+
+            With multithreading:
+            ```python
+            from psengine.enrich import LookupMgr
+
+            mgr = LookupMgr()
+            domains = mgr.lookup_bulk(['google.com', 'facebook.com'], 'domain', max_workers=10)
+            ```
+
+        If a 404 is received:
+        ```python
+        {
+            'entity': entity,
+            'entity_type': entity_type,
+            'is_enriched': False,
+            'content': '404 received. Nothing known on this entity',
+        }
+        ```
+
+        If a 200 is received:
+        ```python
+        {
+            'entity': entity,
+            'entity_type': entity_type,
+            'is_enriched': True,
+            'content': the enriched data model
+        }
+        ```
 
         Raises:
-             ValidationError If a field does not match the type hint.
-             EnrichmentLookupError: if a lookup terminates with a non 200 or 404 return code.
+            ValidationError: if any supplied parameter is of incorrect type.
+            EnrichmentLookupError: If a lookup terminates with a non-200 or 404 return code.
         """
         default_fields = MALWARE_FIELDS if entity_type.lower() == 'malware' else ENTITY_FIELDS
         fields = fields or default_fields

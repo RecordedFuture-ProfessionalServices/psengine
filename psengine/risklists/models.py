@@ -13,9 +13,10 @@
 
 import json
 from datetime import datetime
-from typing import Optional
+from typing import Annotated, Any, Optional
 
 from pydantic import Field, field_validator
+from typing_extensions import Doc
 
 from ..common_models import RFBaseModel
 
@@ -48,8 +49,18 @@ class DefaultRiskList(RFBaseModel):
 
     @field_validator('evidence_details', mode='before')
     @classmethod
-    def evidence_to_dict(cls, v):
-        """Dump the EvidenceDetails block to dict, if possible."""
+    def evidence_to_dict(
+        cls, v: Annotated[Any, Doc('Input value expected to be a JSON string or dictionary.')]
+    ) -> Annotated[Any, Doc('Parsed EvidenceDetails dictionary or original value.')]:
+        """Convert the EvidenceDetails block from a JSON string to a dictionary, if possible.
+
+        If the input is a string, is expected to be a JSON containing an `EvidenceDetails` key.
+
+        Raises:
+            ValueError:
+                - If the input string cannot be parsed as JSON
+                - If the `EvidenceDetails` key is missing.
+        """
         if isinstance(v, str):
             try:
                 return json.loads(v)['EvidenceDetails']

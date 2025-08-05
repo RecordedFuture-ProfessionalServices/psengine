@@ -12,38 +12,54 @@
 ##############################################################################################
 
 import html
-from typing import Union
+from typing import Annotated, Union
 
 import markdown_strings
 from markdown_strings import header
 from pydantic import validate_call
+from typing_extensions import Doc
 
 from .models import Section
 
 TITLE_HEADER_LEVEL = 2
 
 
-def html_collapsible(title: str, data: str) -> str:
-    """Return a html collapsible element."""
+def html_collapsible(
+    title: Annotated[str, Doc('The title displayed in the collapsible summary.')],
+    data: Annotated[str, Doc('The HTML content inside the collapsible element.')],
+) -> Annotated[str, Doc('A complete HTML <details> element with the given content.')]:
+    """Return an HTML collapsible element."""
     return f'<details><summary>{title} (Click to expand)</summary>{data}</details>'
 
 
-def html_textarea(text: str) -> str:
-    """Wrap text in a markdown code block."""
+def html_textarea(
+    text: Annotated[str, Doc('Text to wrap inside a read-only HTML <textarea>.')],
+) -> Annotated[str, Doc('A <textarea> element containing the input text.')]:
+    """Wrap text in an HTML <textarea> block."""
     return f'<textarea readonly="true">{text}</textarea>'
 
 
-def divider() -> str:
-    """Return divider."""
+def divider() -> Annotated[str, Doc('A horizontal rule divider in markdown.')]:
+    """Return a markdown divider."""
     return '\n---\n'
 
 
-def table_from_rows(table_list) -> str:
-    r"""Return a formatted table, using each list as the list. The specifics are
-    the same as those for the table function.
+def table_from_rows(
+    table_list: Annotated[list[list[str]], Doc('2D list with each sublist is a row of the table.')],
+) -> Annotated[str, Doc('A markdown-formatted table string built from the row data.')]:
+    r"""Return a formatted markdown table, using each list as a row.
 
-    >>> table_from_rows([["1","2","3"],["4","5","6"],["7","8","9"]])
-    '| 1 | 2 | 3 |\\n| --- | --- | --- |\\n| 4 | 5 | 6 |\\n| 7 | 8 | 9 |'
+    Example:
+        ```python
+        table_from_rows([
+            ["1", "2", "3"],
+            ["4", "5", "6"],
+            ["7", "8", "9"]
+        ])
+        ```
+
+        Output:
+            '| 1 | 2 | 3 |\\n| --- | --- | --- |\\n| 4 | 5 | 6 |\\n| 7 | 8 | 9 |'
     """
     longest_list = max(table_list, key=len)
     number_of_columns = len(longest_list)
@@ -127,11 +143,23 @@ class MarkdownMaker:
         )
 
     @validate_call
-    def add_section(self, title: str, content: Union[list[dict], list[str], str]) -> None:
+    def add_section(
+        self,
+        title: Annotated[str, Doc('Title of the section to add.')],
+        content: Annotated[
+            Union[list[dict], list[str], str], Doc('Content to include in the section.')
+        ],
+    ) -> None:
         """Add a section to the markdown."""
         self.sections.append(self.validate_section(title, content))
 
-    def format_section(self, section: Section, header_level: int) -> str:
+    def format_section(
+        self,
+        section: Annotated[Section, Doc('The section object to format.')],
+        header_level: Annotated[
+            int, Doc('The level of markdown header to use for the section title.')
+        ],
+    ) -> Annotated[str, Doc('Formatted markdown section as a string.')]:
         """Recursive function to format a section and its content."""
         md_str = header(section.title, header_level) + '\n\n'
         if isinstance(section.content[0], str):
@@ -144,7 +172,11 @@ class MarkdownMaker:
 
         return md_str
 
-    def format_defang_iocs(self, entities: set, md_str: str) -> str:
+    def format_defang_iocs(
+        self,
+        entities: Annotated[set, Doc('Set of IOCs to defang.')],
+        md_str: Annotated[str, Doc('The markdown string to apply defanging to.')],
+    ) -> Annotated[str, Doc('The updated markdown string with defanged IOCs.')]:
         """Replace `.` with `[.]` for every IOC found."""
         for entity in entities:
             defanged = entity.replace('.', '[.]')
@@ -152,7 +184,7 @@ class MarkdownMaker:
 
         return md_str
 
-    def format_output(self) -> str:
+    def format_output(self) -> Annotated[str, Doc('The fully formatted markdown output.')]:
         """Format the markdown output.
 
         Call this method after adding a title and any sections.

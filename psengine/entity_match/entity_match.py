@@ -20,7 +20,7 @@ from .models import Attributes
 
 
 class EntityMatchIn(RFBaseModel):
-    """Model to validate data sent to ``entity-match/match`` endpoint."""
+    """Model to validate data sent to `entity-match/match` endpoint."""
 
     name: str
     type_: Optional[list[str]] = Field(alias='type', default=[])
@@ -28,23 +28,25 @@ class EntityMatchIn(RFBaseModel):
 
 
 class EntityLookup(RFBaseModel):
-    """Model to validate data received from ``entity-match/entity/{id}`` endpoint.
+    """Model to validate data received from the `entity-match/entity/{id}` endpoint.
 
-    Methods:
-        __str__:
-            Returns a string representation of the EntityLookup instance with:
-            entity match name, type and ID.
+    This class supports string representation, equality comparison, and hashing of `EntityLookup`
+    instances.
 
-            .. code-block:: python
+    String Representation:
+        Returns a string representation of the `EntityLookup` instance including the
+        entity match name, type, and ID.
 
-                >>> print(entity)
-                Entity Name: BlueDelta, Type: Organization, ID: L37nw-'
+        ```python
+        >>> print(entity)
+        Entity Name: BlueDelta, Type: Organization, ID: L37nw-'
+        ```
 
-        __eq__:
-            Validate equality between two EntityLookup objects by entity Id.
+    Equality:
+        Validates equality between two `EntityLookup` objects based on the entity ID.
 
-        __hash__:
-            Defines the uniqueness of an EntityLookup object by entity Id.
+    Hashing:
+        Defines uniqueness of an `EntityLookup` object by the entity ID.
     """
 
     id_: str = Field(alias='id')
@@ -62,17 +64,18 @@ class EntityLookup(RFBaseModel):
 
 
 class ResolvedEntity(RFBaseModel):
-    """Model to validate data received from ``entity-match/match`` endpoint.
+    """Model to validate data received from the `entity-match/match` endpoint.
 
-    Methods:
-        __str__:
-            Returns a string representation of the EntityMatch instance with:
-            entity match name, type and ID.
+    This class supports string representation of `ResolvedEntity` instances.
 
-            .. code-block:: python
+    String Representation:
+        Returns a string representation of the `ResolvedEntity` instance including the
+        entity match name, type, and ID.
 
-                >>> print(entity_match)
-                [Entity: Wannacry, Type: Username, ID: Ub_GAO]
+        ```python
+        >>> print(entity_match)
+        Entity: Wannacry, Type: Username, ID: Ub_GAO
+        ```
     """
 
     entity: str

@@ -1,0 +1,1 @@
+::: psengine.stix2.simple_entity

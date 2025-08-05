@@ -15,9 +15,10 @@ import re
 from collections import defaultdict
 from functools import total_ordering
 from itertools import chain
-from typing import Optional
+from typing import Annotated, Optional
 
 from pydantic import Field, NonNegativeInt, PositiveInt, model_validator
+from typing_extensions import Doc
 
 from ..common_models import RFBaseModel
 from ..constants import DEFAULT_LIMIT, TIMESTAMP_STR
@@ -63,35 +64,34 @@ from .pa_category import PACategory
 
 @total_ordering
 class PBA_Generic(RFBaseModel):
-    """Base Model for Playbook Alerts. Removes the deprecated panel_log.
-    This model is intended to be inherited and should not be used on its own.
+    """Base model for Playbook Alerts. Removes the deprecated `panel_log`.
 
-    Methods:
-        __hash__:
-            Returns hash value based on ``playbook_alert_id`` and updated timestamp in panel status.
+    This model is intended to be inherited and should not be used directly.
 
-        __eq__:
-            Checks equality between two PBA_Generic instances based on ``playbook_alert_id``
-            and updated timestamp in panel status.
+    Hashing:
+        Returns a hash value based on `playbook_alert_id` and the updated timestamp
+        from the status panel.
 
-        __gt__:
-            Defines a greater-than comparison between two ``PBA_Generic`` instances based on
-            ``playbook_alert_id`` and updated timestamp in panel status.
+    Equality:
+        Checks equality between two `PBA_Generic` instances based on `playbook_alert_id`
+        and the updated timestamp from the status panel.
 
-        __str__:
-            Returns a string representation of the PBA_Generic instance with:
-            ``playbook_alert_id``, updated timestamp, case rule label, and status.
+    Greater-than Comparison:
+        Compares two `PBA_Generic` instances based on updated timestamp from the
+        status panel, using `playbook_alert_id` as a secondary criterion.
 
-            .. code-block:: python
+    String Representation:
+        Returns a string representation of the alert:
 
-                >>> print(playbook_alert)
-                Playbook Alert ID: task:a1ccb1c8-5554-42af, Updated: 2024-05-21 10:42:30AM,
-                Category: Third Party Risk, Lookup Status: New
+        ```python
+        >>> print(playbook_alert)
+        Playbook Alert ID: task:a1ccb1c8-5554-42af, Updated: 2024-05-21 10:42:30AM,
+        Category: Third Party Risk, Lookup Status: New
+        ```
 
-    Total Ordering:
-        The ordering of PBA_Generic instances is determined primarily by the updated timestamp
-        of the panel status. If two instances have the same updated timestamp, their
-        ``playbook_alert_id`` is used as a secondary criterion for ordering.
+    Ordering:
+        Ordering of `PBA_Generic` instances is based on the updated timestamp of the
+        status panel. If timestamps are equal, `playbook_alert_id` is used as a tiebreaker.
     """
 
     playbook_alert_id: str
@@ -103,7 +103,7 @@ class PBA_Generic(RFBaseModel):
     @model_validator(mode='before')
     @classmethod
     def remove_panel_log(cls, data):
-        """Remove panel_log since it is deprecated."""
+        """Remove `panel_log` since it is deprecated."""
         if 'panel_log' in data:
             del data['panel_log']
         return data
@@ -133,37 +133,34 @@ class PBA_Generic(RFBaseModel):
 
     def markdown(
         self,
-        html_tags: bool = False,
-        character_limit: Optional[int] = None,
-        defang_iocs: bool = False,
-        extra_context: Optional[list] = None,
-    ) -> str:
-        """Markdown implementation for Playbook Alerts.
-
-        Args:
-            html_tags (bool, optional): Include HTML tags in the markdown. Defaults to False.
-            character_limit (int, optional): Character limit for the markdown. Defaults to None.
-            defang_iocs (bool, optional): Defang IOCs in hits. Defaults to False.
-            extra_context (list, optional): list of models that will be utilised by the respective
-                PBA classes when rendering the markdown. Defaults to None. Not all PBA classes
-                support this.
-
-                The following PBA classes support extra_context and accept the following models:
-
-                * ``PBA_ThirdPartyRisk``:
-                    * ``psengine.enrich.lookup.EnrichmentData``: enriched indicators and company
-                            with fields: risk
-                    * ``psengine.enrich.soar.SoarEnrichOut``: enriched indicators and company
-                    * ``psengine.analyst_notes.note.AnalystNotes``: analyst notes
-
-                * ``PBA_CyberVulnerability``:
-                    * ``psengine.enrich.lookup.EnrichmentData``: enriched CVE with fields:
-                            CVSSv2, CVSSv3 or AI Insight (in any combination)
-
-        Returns:
-            str: Markdown formatted playbook alert.
-
-        """
+        html_tags: Annotated[bool, Doc('Include HTML tags in the markdown output.')] = False,
+        character_limit: Annotated[
+            Optional[int],
+            Doc('Character limit for the markdown output.'),
+        ] = None,
+        defang_iocs: Annotated[bool, Doc('Defang IOCs in markdown output.')] = False,
+        extra_context: Annotated[
+            Optional[list],
+            Doc(
+                """
+                List of context models used by supported PBA classes when rendering markdown.
+                Supported formats:
+                - `PBA_ThirdPartyRisk`:
+                    - `psengine.enrich.lookup.EnrichmentData`: enriched indicators or company
+                    (risk field)
+                    - `psengine.enrich.soar.SoarEnrichOut`: enriched indicators or company
+                    - `psengine.analyst_notes.note.AnalystNotes`: analyst notes
+                - `PBA_CyberVulnerability`:
+                    - `psengine.enrich.lookup.EnrichmentData`: enriched CVE data (CVSSv2, CVSSv3,
+                                                                                  or AI Insight)
+                    """
+            ),
+        ] = None,
+    ) -> Annotated[
+        str,
+        Doc('Markdown-formatted string representation of the Playbook Alert.'),
+    ]:
+        """Generate markdown for Playbook Alerts."""
         return _markdown_playbook_alert(
             self,
             html_tags=html_tags,
@@ -180,7 +177,7 @@ class PBA_Generic(RFBaseModel):
 
 
 class PBA_CodeRepoLeakage(PBA_Generic):
-    """Model for Code Repo Leakage. Inherit behaviours from PBA_Generic."""
+    """Model for Code Repo Leakage. Inherit behaviours from `PBA_Generic`."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -205,7 +202,7 @@ SEQ_IPV4 = r'((?:' + IPV4 + r'(?:,\s*)?)+)'
 
 
 class PBA_ThirdPartyRisk(PBA_Generic):
-    """Model for Third Party Risk. Inherit behaviours from PBA_Generic."""
+    """Model for Third Party Risk. Inherit behaviours from `PBA_Generic`."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -219,16 +216,24 @@ class PBA_ThirdPartyRisk(PBA_Generic):
         """Third Party Assessment change."""
         return self._get_changes(ThirdPartyAssessmentChange)
 
-    def ips_from_ip_rule(self, assessment: TPRAssessment) -> tuple[str, dict[str, list[str]]]:
-        """Extracts via regex the IP addresses of each IP Rule in ``assessment.nevidence.summary``.
+    def ips_from_ip_rule(
+        self,
+        assessment: Annotated[
+            TPRAssessment, Doc('An assessment object to extract IPs and risk rules from.')
+        ],
+    ) -> Annotated[
+        tuple[str, dict[str, list[str]]],
+        Doc('Tuple containing a risk label and a dict of IP rule names mapped to IP addresses.'),
+    ]:
+        """Extracts via regex the IP addresses of each IP Rule in `assessment.nevidence.summary`.
 
         The addresses are deduplicated and sorted.
 
-        Args:
-            assessment (TPRAssessment): The assessment object to get ips and risk rule
-
-        Returns:
-            tuple: ('IT Policy Violations', {'Recent Tor Node': ['47.91.72.129', '47.254.128.11'}])
+        Example:
+            Return value example:
+            ```python
+            ('IT Policy Violations', {'Recent Tor Node': ['47.91.72.129', '47.254.128.11'}])
+            ```
         """
         if assessment.evidence.type_ != 'ip_rule':
             return '', {}
@@ -252,16 +257,18 @@ class PBA_ThirdPartyRisk(PBA_Generic):
         return risk_rule, result
 
     @property
-    def ip_address_by_assessment(self) -> dict[list]:
-        """Get all IP addresses that this PBA has divided by assessment type.
+    def ip_address_by_assessment(
+        self,
+    ) -> Annotated[
+        dict[list],
+        Doc('Key is an assessment type and value is a deduplicated, sorted list of IP addresses.'),
+    ]:
+        """Get all IP addresses that this PBA has, divided by assessment type.
 
         This function searches for indicators inside the assessments of type:
 
-            * ip_rule
-            * hosts_communication (malware IPs)
-
-        Returns:
-            dict[list]: key as assessment, value as deduplicated, sorted list of ip addresses.
+            - `ip_rule`
+            - `hosts_communication` (malware IPs)
         """
         data = defaultdict(set)
         if not self.panel_evidence_summary.assessments:
@@ -302,7 +309,7 @@ class PBA_ThirdPartyRisk(PBA_Generic):
 
 
 class PBA_CyberVulnerability(PBA_Generic):
-    """Model for Cyber Vulnerability. Inherit behaviours from PBA_Generic."""
+    """Model for Cyber Vulnerability. Inherit behaviours from `PBA_Generic`."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -317,26 +324,26 @@ class PBA_CyberVulnerability(PBA_Generic):
 
     @property
     def lifecycle_stage(self) -> str:
-        """Get playbook alert ``lifecycle_stage``."""
+        """Get playbook alert `lifecycle_stage`."""
         if stage := self.panel_status.lifecycle_stage:
             return stage
         return self.panel_evidence_summary.summary.lifecycle_stage
 
     @property
     def log_vulnerability_lifecycle_changes(self) -> list:
-        """Get ``VulnerabilityLifecycleChange`` log changes."""
+        """Get `VulnerabilityLifecycleChange` log changes."""
         return self._get_changes(VulnerabilityLifecycleChange)
 
     @property
     def insikt_note_ids(self) -> list[str]:
-        """Get Insikt note IDs if found in ``self.panel_evidence_summary.insikt_notes``."""
+        """Get Insikt note IDs if found in `self.panel_evidence_summary.insikt_notes`."""
         if self.panel_evidence_summary.insikt_notes:
             return [insikt_note.id_ for insikt_note in self.panel_evidence_summary.insikt_notes]
         return []
 
 
 class PBA_IdentityNovelExposure(PBA_Generic):
-    """Model for Identity Exposure. Inherit behaviours from PBA_Generic."""
+    """Model for Identity Exposure. Inherit behaviours from `PBA_Generic`."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -363,7 +370,7 @@ class PBA_IdentityNovelExposure(PBA_Generic):
 
 
 class PBA_DomainAbuse(PBA_Generic):
-    """Model for Domain Abuse. Inherit behaviours from PBA_Generic."""
+    """Model for Domain Abuse. Inherit behaviours from `PBA_Generic`."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -384,10 +391,10 @@ class PBA_DomainAbuse(PBA_Generic):
     )
 
     def store_image(self, image_id: str, image_bytes: bytes) -> None:
-        """Domain Abuse: store image bytes in ``self._images`` dictionary.
+        """Domain Abuse: store image bytes in `self._images` dictionary.
 
         Raises:
-            ValueError: if the image_id is not present in alert screenshots list
+            ValueError: if the `image_id` is not present in alert screenshots list
         """
         image_id_matches = list(
             filter(
@@ -414,23 +421,25 @@ class PBA_DomainAbuse(PBA_Generic):
         return ids
 
     @property
-    def images(self) -> dict:
-        """Domain Abuse: get raw bytes of the screenshots.
+    def images(
+        self,
+    ) -> Annotated[
+        dict,
+        Doc('Dict containing alert images with metadata and raw bytes, or empty if not found.'),
+    ]:
+        """Domain Abuse: Get raw bytes of the screenshots.
 
         This data is stored in the following format:
 
-        .. code-block::
-
-            {
-                image_id : {
-                    'description': "awesome image description",
-                    'created': "date",
-                    'image_bytes': b'xyz'
-                }
+        ```python
+        {
+            image_id : {
+                'description': "awesome image description",
+                'created': "date",
+                'image_bytes': b'xyz'
             }
-
-        Returns:
-            dict: Alert images raw bytes or {} if not found
+        }
+        ```
         """
         return self._images
 
@@ -471,7 +480,7 @@ class PBA_DomainAbuse(PBA_Generic):
 
 
 class PBA_GeopoliticsFacility(PBA_Generic):
-    """Model for Geopolitics Facility. Inherit behaviours from PBA_Generic."""
+    """Model for Geopolitics Facility. Inherit behaviours from `PBA_Generic`."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -499,27 +508,29 @@ class PBA_GeopoliticsFacility(PBA_Generic):
         )
 
     @property
-    def images(self) -> dict:
-        """Geopolitics Facility: get raw bytes of the screenshots.
+    def images(
+        self,
+    ) -> Annotated[
+        dict,
+        Doc('Dict containing alert images with metadata and raw bytes, or empty if not found.'),
+    ]:
+        """Geopolitics Facility: Get raw bytes of the screenshots.
 
         This data is stored in the following format:
 
-        .. code-block::
-
-            {
-                image_id : {
-                    'created': "date",
-                    'image_bytes': b'xyz'
-                }
+        ```python
+        {
+            image_id : {
+                'created': "date",
+                'image_bytes': b'xyz'
             }
-
-        Returns:
-            dict: Alert images raw bytes or {} if not found
+        }
+        ```
         """
         return self._images
 
     def store_image(self, image_id: str, image_bytes: bytes) -> None:
-        """Geopolitics Facility: store image bytes in ``self._images`` dictionary.
+        """Geopolitics Facility: store image bytes in `self._images` dictionary.
 
         Raises:
             ValueError: if the image_id is not present in alert screenshots list
@@ -541,7 +552,7 @@ class PBA_GeopoliticsFacility(PBA_Generic):
 
 
 class PBA_MalwareReport(PBA_Generic):
-    """Model for Malware Report. Inherit behaviours from PBA_Generic."""
+    """Model for Malware Report. Inherit behaviours from `PBA_Generic`."""
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
@@ -558,7 +569,7 @@ class PBA_MalwareReport(PBA_Generic):
 
 
 class SearchIn(RFBaseModel):
-    """Model for payload sent to ``/search`` endpoint."""
+    """Model for payload sent to `/search` endpoint."""
 
     from_: Optional[NonNegativeInt] = Field(alias='from', default=None)
     limit: Optional[PositiveInt] = DEFAULT_LIMIT
@@ -574,7 +585,7 @@ class SearchIn(RFBaseModel):
 
 
 class PreviewAlertOut(PanelStatus):
-    """Model for payload received by GET ``/common/{alert_id}`` endpoint."""
+    """Model for payload received by GET `/common/{alert_id}` endpoint."""
 
     playbook_alert_id: str
     title: str
@@ -582,7 +593,7 @@ class PreviewAlertOut(PanelStatus):
 
 
 class UpdateAlertIn(RFBaseModel):
-    """Model for payload sent to PUT ``/common/{playbook_alert_id}`` endpoint."""
+    """Model for payload sent to PUT `/common/{playbook_alert_id}` endpoint."""
 
     priority: Optional[str] = None
     status: Optional[str] = None

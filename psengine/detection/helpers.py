@@ -13,9 +13,10 @@
 
 import logging
 from pathlib import Path
-from typing import Union
+from typing import Annotated, Optional, Union
 
 from pydantic import validate_call
+from typing_extensions import Doc
 
 from ..errors import WriteFileError
 from ..helpers import OSHelpers, debug_call
@@ -26,19 +27,23 @@ LOG = logging.getLogger('psengine.detection.helpers')
 
 @debug_call
 @validate_call
-def save_rule(rule: DetectionRule, output_directory: Union[str, Path] = None):
-    """Write detection rule content to file. If more than one detection rule is attached to rule,
-    all will be saved.
+def save_rule(
+    rule: Annotated[DetectionRule, Doc('Single detection rule to write.')],
+    output_directory: Annotated[
+        Optional[Union[str, Path]],
+        Doc('Path to write to. If not provided, the current working directory will be used.'),
+    ] = None,
+):
+    """Write detection rule content to file.
 
-    Args:
-        rule (DetectionRule): single detection to write.
-        output_directory (Union[str, Path]): a path to write to. If not provided, it will be the
-        current working directory.
+    If more than one detection rule is attached to the rule, all will be saved.
 
     Raises:
-       WriteFileError: if the path provided is not a directory or it cannot be created.
-       WriteFileError: if the write operations fail.
+        WriteFileError: In one of those cases:
 
+            - If the path provided is not a directory.
+            - If the path cannot be created.
+            - If the write operations fail.
     """
     if not rule.rules:
         LOG.info(f'No rules to write for {rule.id_}')

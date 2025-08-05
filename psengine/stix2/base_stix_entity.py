@@ -11,7 +11,10 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from typing import Annotated
+
 import stix2
+from typing_extensions import Doc
 
 from .util import create_rf_author, generate_uuid
 
@@ -19,14 +22,12 @@ from .util import create_rf_author, generate_uuid
 class BaseStixEntity:
     """Base STIX entity class for Recorded Future entities."""
 
-    def __init__(self, name: str, author: stix2.Identity = None) -> None:
-        """Initializes base STIX entity.
-
-        Args:
-            name (str): Name of entity
-            author (stix2.Identity): Recorded Future Identity object
-
-        """
+    def __init__(
+        self,
+        name: Annotated[str, Doc('The name of the entity.')],
+        author: Annotated[stix2.Identity, Doc('A Recorded Future Identity object.')] = None,
+    ) -> None:
+        """Initializes base STIX entity."""
         self.name = name
         if not author:
             author = self._create_author()
@@ -35,11 +36,7 @@ class BaseStixEntity:
         self.create_stix_object()
 
     def __str__(self) -> str:
-        """String representation of entity.
-
-        Returns:
-            str: String representation of entity
-        """
+        """String representation of entity."""
         return f'Base STIX Entity: {self.name}, Author Name: {self.author.name}'
 
     def create_stix_object(self) -> None:

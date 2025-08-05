@@ -12,7 +12,9 @@
 ##############################################################################################
 import logging
 from pathlib import Path
-from typing import Union
+from typing import Annotated, Union
+
+from typing_extensions import Doc
 
 from ..errors import WriteFileError
 from ..helpers import OSHelpers, debug_call
@@ -24,18 +26,19 @@ LOG = logging.getLogger('psengine.playbook_alerts.helpers')
 
 @debug_call
 def save_pba_images(
-    playbook_alerts: Union[PBA_DomainAbuse, list[PBA_DomainAbuse]],
-    output_directory: str = DEFAULT_ALERTS_OUTPUT_DIR,
+    playbook_alerts: Annotated[
+        Union[PBA_DomainAbuse, list[PBA_DomainAbuse]],
+        Doc('Domain Abuse alert or a list of Domain Abuse alerts.'),
+    ],
+    output_directory: Annotated[
+        str, Doc('A directory to save the images to.')
+    ] = DEFAULT_ALERTS_OUTPUT_DIR,
 ) -> None:
-    """Save Domain Abuse images/screenshots to disk as a .png file.
-
-    Args:
-        playbook_alerts (Union[PBA_DomainAbuse, List[PBA_DomainAbuse]]): Domain Abuse alert(s)
-        output_directory (str): The directory to save the images to
+    """Save Domain Abuse images/screenshots to disk as a `.png` file.
 
     Raises:
-        TypeError: If alerts are not PBA_DomainAbuse objects
-        WriteFileError: If the image save fails with an OSError
+        TypeError: If alerts are not `PBA_DomainAbuse` objects.
+        WriteFileError: If the image save fails with an `OSError`.
     """
     if not isinstance(playbook_alerts, (list, PBA_DomainAbuse)):
         raise TypeError('Image saving is only supported by Domain Abuse alerts')
@@ -61,11 +64,6 @@ def _save_image(
     output_directory: Union[str, Path] = DEFAULT_ALERTS_OUTPUT_DIR,
 ) -> None:
     """Save image to disk as a .png file.
-
-    Args:
-        file_name (str): File name without the extension
-        image_bytes (bytes): Image bytes
-        output_directory (str or Path): The directory to save the image to
 
     Raises:
         WriteFileError: If the image save fails with an OSError

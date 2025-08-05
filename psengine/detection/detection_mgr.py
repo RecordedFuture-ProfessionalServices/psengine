@@ -12,9 +12,10 @@
 ##############################################################################################
 
 import logging
-from typing import Optional, Union
+from typing import Annotated, Optional, Union
 
 from pydantic import validate_call
+from typing_extensions import Doc
 
 from ..constants import DEFAULT_LIMIT
 from ..endpoints import EP_DETECTION_RULES
@@ -30,12 +31,11 @@ SEARCH_LIMIT = 100
 class DetectionMgr:
     """Class to manage DetectionRules and interaction with the Detection API."""
 
-    def __init__(self, rf_token: str = None):
-        """Initializes the DetectionMgr object.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
-        """
+    def __init__(
+        self,
+        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+    ):
+        """Initialize the `DetectionMgr` object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
 
@@ -44,40 +44,43 @@ class DetectionMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=DetectionRuleSearchError)
     def search(
         self,
-        detection_rule: Union[list[str], str, None] = None,
-        entities: Optional[list[str]] = None,
-        created_before: Optional[str] = None,
-        created_after: Optional[str] = None,
-        updated_before: Optional[str] = None,
-        updated_after: Optional[str] = None,
-        doc_id: Optional[str] = None,
-        title: Optional[str] = None,
-        tagged_entities: Optional[bool] = None,
-        max_results: Optional[int] = DEFAULT_LIMIT,
-    ) -> list[DetectionRule]:
+        detection_rule: Annotated[
+            Union[list[str], str, None], Doc('Types of detection rules to search for.')
+        ] = None,
+        entities: Annotated[
+            Optional[list[str]], Doc('List of entities to filter the search.')
+        ] = None,
+        created_before: Annotated[
+            Optional[str], Doc('Filter for rules created before this date.')
+        ] = None,
+        created_after: Annotated[
+            Optional[str], Doc('Filter for rules created after this date.')
+        ] = None,
+        updated_before: Annotated[
+            Optional[str], Doc('Filter for rules updated before this date.')
+        ] = None,
+        updated_after: Annotated[
+            Optional[str], Doc('Filter for rules updated after this date.')
+        ] = None,
+        doc_id: Annotated[Optional[str], Doc('Filter by document ID.')] = None,
+        title: Annotated[Optional[str], Doc('Filter by title.')] = None,
+        tagged_entities: Annotated[
+            Optional[bool], Doc('Whether to filter by tagged entities.')
+        ] = None,
+        max_results: Annotated[
+            Optional[int], Doc('Limit the total number of results returned.')
+        ] = DEFAULT_LIMIT,
+    ) -> Annotated[
+        list[DetectionRule], Doc('A list of detection rules matching the search criteria.')
+    ]:
         """Search for detection rules based on various filter criteria.
 
         Endpoint:
-            ``detection-rule/search``
-
-        Args:
-            detection_rule: Types of detection rules to search for. Defaults to None.
-            entities: List of entities to filter the search. Defaults to None.
-            created_before: Filter for rules created before this date. Defaults to None.
-            created_after: Filter for rules created after this date. Defaults to None.
-            updated_before: Filter for rules updated before this date. Defaults to None.
-            updated_after: Filter for rules updated after this date. Defaults to None.
-            doc_id: Filter by document ID. Defaults to None.
-            title: Filter by title. Defaults to None.
-            tagged_entities: Whether to filter by tagged entities. Defaults to None.
-            max_results: Limit the total number of results returned. Defaults to 10.
+            `detection-rule/search`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            DetectionRuleSearchError: if connection error occurs.
-
-        Returns:
-            List[DetectionRule]: A list of detection rules matching the search criteria.
+            ValidationError: If any supplied parameter is of incorrect type.
+            DetectionRuleSearchError: If connection error occurs.
         """
         detection_rule = [detection_rule] if isinstance(detection_rule, str) else detection_rule
         filters = {
@@ -109,21 +112,18 @@ class DetectionMgr:
 
     @debug_call
     @validate_call
-    def fetch(self, doc_id: str) -> Optional[DetectionRule]:
-        """Fetch of a detection rule based on rule id.
+    def fetch(
+        self,
+        doc_id: Annotated[str, Doc('Detection rule ID to look up.')],
+    ) -> Annotated[Optional[DetectionRule], Doc('The detection rule found for the given ID.')]:
+        """Fetch a detection rule based on its ID.
 
         Endpoint:
-            ``detection-rule/search``
-
-        Args:
-            doc_id (str): Detection rule id to lookup.
+            `detection-rule/search`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            DetectionRuleLookupError: If no rule is found for the given id.
-
-        Returns:
-            Optional[DetectionRule]: The detection rule found for the given id.
+            ValidationError: If any supplied parameter is of incorrect type.
+            DetectionRuleLookupError: If no rule is found for the given ID.
         """
         try:
             result = self.search(doc_id=doc_id)

@@ -12,9 +12,10 @@
 ##############################################################################################
 
 from functools import total_ordering
-from typing import Optional, Union
+from typing import Annotated, Optional, Union
 
 from pydantic import Field
+from typing_extensions import Doc
 
 from ..common_models import IdNameTypeDescription, RFBaseModel
 from ..constants import TIMESTAMP_STR
@@ -26,32 +27,34 @@ from .models import Attributes, PreviewAttributesIn, PreviewAttributesOut, Reque
 # AnalystNote also used by BaseEnrichedEntity
 @total_ordering
 class AnalystNote(RFBaseModel):
-    """Validate data received from ``/search``, ``/analystnote/{note}`` endpoints.
+    """Validate data received from the `/search` and `/analystnote/{note}` endpoints.
 
-    Methods:
-        __hash__:
-            Returns a hash value based on note ``id_``.
+    This class supports hashing, equality comparison, string representation, and total ordering
+    of `AnalystNote` instances.
 
-        __eq__:
-            Checks equality between two AnalystNote instances based on ``id_`` and published time.
+    Hashing:
+        Returns a hash value based on the note `id_`.
 
-        __gt__:
-            Defines a greater-than comparison between two AnalystNote instances based published time
-            and the ``id_``
+    Equality:
+        Checks equality between two `AnalystNote` instances based on the `id_` and published time.
 
-        __str__:
-            Returns a string representation of the AnalystNote instance with:
-            ``id_``, ``title``, and published timestamp.
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `AnalystNote` instances based on the published
+        time and the `id_`.
 
-            .. code-block:: python
+    String Representation:
+        Returns a string representation of the `AnalystNote` instance including the `id_`, `title`,
+        and published timestamp.
 
-                >>> print(analyst_note)
-                Analyst Note ID: 12345, Title: Cyber Vuln, Published: 2024-05-21 10:42:30AM
+        ```python
+        >>> print(analyst_note)
+        Analyst Note ID: 12345, Title: Cyber Vuln, Published: 2024-05-21 10:42:30AM
+        ```
 
-    Total Ordering:
-        The ordering of AnalystNote instances is determined primarily by the published timestamp in
-        the attributes. If two instances have the same published timestamp, the note id is used as
-        a secondary criterion for ordering.
+    Ordering:
+        The ordering of `AnalystNote` instances is determined primarily by the published timestamp.
+        If two instances have the same published timestamp, the note `id_` is used as a secondary
+        criterion.
     """
 
     external_id: Optional[str] = None
@@ -77,7 +80,7 @@ class AnalystNote(RFBaseModel):
     @property
     def detection_rule_type(self) -> Optional[str]:
         """Returns the attachment type if present, else None. It checks for specific types like
-        'sigma rule', 'yara rule', and 'snort rule' in the topics of the note.
+        `sigma rule`, `yara rule`, and `snort rule` in the topics of the note.
         """
         topics_type = ('sigma rule', 'yara rule', 'snort rule')
 
@@ -101,26 +104,20 @@ class AnalystNote(RFBaseModel):
 
     def markdown(
         self,
-        extract_entities: bool = True,
-        diamond_model: bool = True,
-        html_tags: bool = False,
-        defang_malicious_infrastructure: bool = False,
-        character_limit: int = None,
-    ) -> str:
-        """Return the markdown representation of the Note.
-
-        Args:
-            extract_entities (bool): Extract and include entities in the markdown. Defaults to True.
-            diamond_model (bool): Include a diamond model visualization. Defaults to True.
-            html_tags (bool): Include HTML tags in the output. Defaults to False.
-            defang_malicious_infrastructure (bool): Defang URLs or other malicious indicators.
-                Defaults to False.
-            character_limit (int, optional): Limit the output to a specified number of characters.
-                Defaults to None.
-
-        Returns:
-            str: The generated markdown string.
-        """
+        extract_entities: Annotated[
+            bool, Doc('Extract and include entities in the markdown.')
+        ] = True,
+        diamond_model: Annotated[bool, Doc('Include a diamond model visualization.')] = True,
+        html_tags: Annotated[bool, Doc('Include HTML tags in the output.')] = False,
+        defang_malicious_infrastructure: Annotated[
+            bool, Doc('Defang URLs or other malicious indicators.')
+        ] = False,
+        character_limit: Annotated[
+            Optional[int],
+            Doc('Limit the output to a specified number of characters.'),
+        ] = None,
+    ) -> Annotated[str, Doc('The generated markdown string.')]:
+        """Return the markdown representation of the note."""
         return _markdown(
             self,
             extract_entities=extract_entities,
@@ -132,7 +129,7 @@ class AnalystNote(RFBaseModel):
 
 
 class AnalystNotePreviewIn(RFBaseModel):
-    """Validate data sent to ``/preview`` endpoint."""
+    """Validate data sent to `/preview` endpoint."""
 
     attributes: PreviewAttributesIn
     source: Optional[str]
@@ -141,14 +138,14 @@ class AnalystNotePreviewIn(RFBaseModel):
 
 
 class AnalystNotePreviewOut(RFBaseModel):
-    """Validate data received from ``/preview`` endpoint."""
+    """Validate data received from `/preview` endpoint."""
 
     attributes: PreviewAttributesOut
     source: IdNameTypeDescription
 
 
 class AnalystNotePublishIn(AnalystNotePreviewIn):
-    """Validate data sent to ``/publish`` endpoint."""
+    """Validate data sent to `/publish` endpoint."""
 
     attributes: PreviewAttributesIn
     source: Optional[str] = None
@@ -160,13 +157,13 @@ class AnalystNotePublishIn(AnalystNotePreviewIn):
 
 
 class AnalystNotePublishOut(RFBaseModel):
-    """Validate data received from ``/publish`` endpoint."""
+    """Validate data received from `/publish` endpoint."""
 
     note_id: str
 
 
 class AnalystNoteSearchIn(RFBaseModel):
-    """Validate data sent to ``/search`` endpoint."""
+    """Validate data sent to `/search` endpoint."""
 
     published: Optional[str] = None
     entity: Optional[str] = None

@@ -13,6 +13,7 @@
 
 import json
 import logging
+from typing import Annotated
 
 from stix2 import Bundle, Identity, Report
 from stix2.exceptions import (
@@ -21,6 +22,7 @@ from stix2.exceptions import (
     MissingPropertiesError,
     STIXError,
 )
+from typing_extensions import Doc
 
 from ..analyst_notes import AnalystNote
 from ..risklists.models import DefaultRiskList
@@ -40,24 +42,21 @@ class RFBundle:
     @classmethod
     def from_default_risklist(
         cls,
-        risklist: list[DefaultRiskList],
-        entity_type: str,
-        identity: Identity = None,
-    ) -> Bundle:
+        risklist: Annotated[
+            list[DefaultRiskList],
+            Doc('A Recorded Future default risklist (contains the standard 5 columns).'),
+        ],
+        entity_type: Annotated[str, Doc('An entity type.')],
+        identity: Annotated[
+            Identity, Doc('An author identity. Defaults to Recorded Future.')
+        ] = None,
+    ) -> Annotated[Bundle, Doc('A STIX2 bundle.')]:
         """Creates STIX2 bundle from a Recorded Future default risklist.
 
-        Args:
-            risklist (str): Recorded Future default risklist (contains the standard 5 columns)
-            entity_type (str): entity type
-            identity (_type_, optional): Author identity. Defaults to Recorded Future
-
         Raises:
-            STIX2TransformError: if the risklist is not valid
-            STIX2TransformError: if EvidenceDetails is not valid JSON
-            STIX2TransformError: if the bundle cannot be created
-
-        Returns:
-            Bundle: STIX2 bundle
+            STIX2TransformError: If the risklist is not valid.
+            STIX2TransformError: If EvidenceDetails is not valid JSON.
+            STIX2TransformError: If the bundle cannot be created.
         """
         if not identity:
             identity = create_rf_author()
@@ -100,23 +99,16 @@ class RFBundle:
     @classmethod
     def from_analyst_note(
         cls,
-        note: AnalystNote,
-        attachment: bytes = None,
-        split_snort: bool = False,
-        identity: Identity = None,
-    ) -> Bundle:
-        """Creates a STIX2 bundle from a Recorded Future analyst note.
-
-        Args:
-            note (AnalystNote): Recorded Future analyst note
-            attachment (bytes, optional): Note attachment. Defaults to None.
-            split_snort (bool, optional): Split snort rules into separate DetectionRule objects.
-            Defaults to False.
-            identity (stix2.Identity, optional): Author. Defaults to Recorded Future.
-
-        Returns:
-            Bundle: STIX2 bundle
-        """
+        note: Annotated[AnalystNote, Doc('A Recorded Future analyst note.')],
+        attachment: Annotated[bytes, Doc('A note attachment.')] = None,
+        split_snort: Annotated[
+            bool, Doc('Whether to split Snort rules into separate DetectionRule objects.')
+        ] = False,
+        identity: Annotated[
+            Identity, Doc('An author identity. Defaults to Recorded Future.')
+        ] = None,
+    ) -> Annotated[Bundle, Doc('A STIX2 bundle.')]:
+        """Creates a STIX2 bundle from a Recorded Future analyst note."""
         LOG.info(f'Creating STIX2 bundle from analyst note {note.id_}')
 
         if not identity:
@@ -178,12 +170,7 @@ class RFBundle:
 
 
 def _split_snort_rules(note: AnalystNote, attachment: str) -> list:
-    """Splits snort rules into multiple DetectionRule objects.
-
-    Args:
-        note (AnalystNote): AnalystNote object
-        attachment (str): snort rule payload
-    """
+    """Splits snort rules into multiple DetectionRule objects."""
     rules = []
     ctr = 1
     temp_description = []
@@ -210,9 +197,6 @@ def _split_snort_rules(note: AnalystNote, attachment: str) -> list:
 
 def _create_report_types(topics: list) -> list:
     """Map topics to STIX2 report types.
-
-    Args:
-        topics (list): List of topics to map
 
     Returns:
         list: List of STIX2 report types

@@ -15,12 +15,13 @@ import re
 from collections import defaultdict
 from contextlib import suppress
 from json.decoder import JSONDecodeError
-from typing import Union
+from typing import Annotated, Optional, Union
 
 import jsonpath_ng
 from jsonpath_ng.exceptions import JsonPathParserError
 from pydantic import validate_call
 from requests.models import Response
+from typing_extensions import Doc
 
 from .base_http_client import BaseHTTPClient
 from .constants import RF_TOKEN_VALIDATION_REGEX
@@ -28,15 +29,12 @@ from .helpers import debug_call
 
 
 @validate_call
-def is_api_token_format_valid(token: str):
-    """Checks if the token format is valid. The function does a
-    simple regex check, but does not validate the token against the API.
+def is_api_token_format_valid(
+    token: Annotated[str, Doc('A Recorded Future API token.')],
+) -> Annotated[bool, Doc('True if the token format is valid, False otherwise.')]:
+    """Check if the token format is valid.
 
-    Args:
-        token(str): Recorded Future API token
-
-    Returns:
-        bool: True if token format is valid, False otherwise
+    The function performs a simple regex check but does not validate the token against the API.
     """
     return re.match(RF_TOKEN_VALIDATION_REGEX, token) is not None
 
@@ -46,37 +44,28 @@ class RFClient(BaseHTTPClient):
 
     def __init__(
         self,
-        api_token: Union[str, None] = None,
-        http_proxy=None,
-        https_proxy=None,
-        verify: Union[str, bool] = None,
-        auth: tuple[str, str] = None,
-        cert: Union[str, tuple[str, str], None] = None,
-        timeout: int = None,
-        retries: int = None,
-        backoff_factor: int = None,
-        status_forcelist: list = None,
-        pool_max_size: int = None,
+        api_token: Annotated[
+            Union[str, None], Doc('An RF API token. Defaults to RF_TOKEN environment variable.')
+        ] = None,
+        http_proxy: Annotated[str, Doc('An HTTP proxy URL.')] = None,
+        https_proxy: Annotated[str, Doc('An HTTPS proxy URL.')] = None,
+        verify: Annotated[
+            Union[str, bool],
+            Doc('An SSL verification flag or path to CA bundle.'),
+        ] = None,
+        auth: Annotated[tuple[str, str], Doc('Basic Auth credentials.')] = None,
+        cert: Annotated[Union[str, tuple[str, str], None], Doc('Client certificates.')] = None,
+        timeout: Annotated[int, Doc('A request timeout. Defaults to 120.')] = None,
+        retries: Annotated[int, Doc('A number of retries. Defaults to 5.')] = None,
+        backoff_factor: Annotated[int, Doc('A backoff factor. Defaults to 1.')] = None,
+        status_forcelist: Annotated[
+            list, Doc('A list of status codes to force a retry. Defaults to [502, 503, 504].')
+        ] = None,
+        pool_max_size: Annotated[
+            int, Doc('The maximum number of connections in the pool. Defaults to 120.')
+        ] = None,
     ):
-        """Recorded Future HTTP API client.
-
-        Args:
-            api_token (str, optional): RF API token. Defaults to RF_TOKEN env variable.
-            http_proxy (str, optional): HTTP Proxy URL. Defaults to None.
-            https_proxy (str, optional): HTTPS Proxy URL. Defaults to None.
-            verify (Union[str, bool], optional): SSL verification flag or path to CA bundle.
-                                            Defaults to True.
-            auth (Tuple[str, str], optional): Basic Auth credentials. Defaults to None.
-            cert (Union[str, Tuple[str, str], None], optional): Client certificates.
-                                            Defaults to None.
-            timeout (int, optional): Request timeout. Defaults to 120.
-            retries (int, optional): Number of retries. Defaults to 5.
-            backoff_factor (int, optional): Backoff factor. Defaults to 1.
-            status_forcelist (int, optional): List of status codes to force a retry.
-                                            Defaults to [502, 503, 504].
-            pool_max_size (int, optional): Maximum number of connections in the pool.
-                                                Defaults to 120.
-        """
+        """Recorded Future HTTP API client."""
         super().__init__(
             http_proxy=http_proxy,
             https_proxy=https_proxy,
@@ -95,37 +84,30 @@ class RFClient(BaseHTTPClient):
             raise ValueError('Missing Recorded Future API token.')
         if not is_api_token_format_valid(self._api_token):
             raise ValueError(
-                f'Invalid Recorded Future API token, must match regex {RF_TOKEN_VALIDATION_REGEX}'
+                f'Invalid Recorded Future API token.must match regex {RF_TOKEN_VALIDATION_REGEX}'
             )
 
     @debug_call
     @validate_call
     def request(
         self,
-        method: str,
-        url: str,
-        data: Union[dict, list[dict], None] = None,
+        method: Annotated[
+            str, Doc('An HTTP method, one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.')
+        ],
+        url: Annotated[str, Doc('A URL to make the request to.')],
+        data: Annotated[Union[dict, list[dict], None], Doc('A request body.')] = None,
         *,
-        params: Union[dict, None] = None,
-        headers: Union[dict, None] = None,
+        params: Annotated[Optional[dict], Doc('HTTP query parameters.')] = None,
+        headers: Annotated[
+            Optional[dict],
+            Doc('If specified, it overrides default headers and does not set the token.'),
+        ] = None,
         **kwargs,
-    ) -> Response:
+    ) -> Annotated[Response, Doc('A requests.Response object.')]:
         """Perform an HTTP request.
 
-        Args:
-            method (str): HTTP Method, one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH
-            url (str): URL to make the request to
-            data (dict, optional): Request body. Defaults to None.
-            params (dict, optional): HTTP query parameters. Defaults to None.
-            headers (dict, optional): If specified it will override default headers and wont set
-                                    the token.
-            **kwargs: Additional keyword arguments, passed to the requests library
-
         Raises:
-            ValueError: if method is neither of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH
-
-        Returns:
-            requests.Response: requests.Response object
+            ValidationError: If method is not one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.
         """
         headers = headers or self._prepare_headers()
 
@@ -246,66 +228,57 @@ class RFClient(BaseHTTPClient):
 
     def request_paged(
         self,
-        method: str,
-        url: str,
-        max_results: int = 1000,
-        data: Union[dict, list[dict], None] = None,
+        method: Annotated[str, Doc('An HTTP method: GET or POST.')],
+        url: Annotated[str, Doc('A URL to make the request to.')],
+        max_results: Annotated[int, Doc('The maximum number of results to return.')] = 1000,
+        data: Annotated[Union[dict, list[dict], None], Doc('A request body.')] = None,
         *,
-        params: Union[dict, None] = None,
-        headers: Union[dict, None] = None,
-        results_path: Union[str, list[str]] = 'data',
-        offset_key: str = 'offset',
+        params: Annotated[Union[dict, None], Doc('HTTP query parameters.')] = None,
+        headers: Annotated[
+            Union[dict, None],
+            Doc('If specified, it overrides default headers and does not set the token.'),
+        ] = None,
+        results_path: Annotated[
+            Union[str, list[str]], Doc('Path to extract paged results from.')
+        ] = 'data',
+        offset_key: Annotated[str, Doc("Key to use for paging. Defaults to 'offset'.")] = 'offset',
         **kwargs,
-    ) -> list[dict]:
+    ) -> Annotated[list[dict], Doc('Resulting data.')]:
         """Perform a paged HTTP request.
 
-        Please note that some RF APIs can not paginate through more than 1000 results and will
-        result in an error (HTTP 400) if ``max_results`` is set to a higher value. While APIs such
-        as Identity can paginate through more than 1000 results.
+        Please note that some RF APIs cannot paginate through more than 1000 results and will
+        return an error (HTTP 400) if `max_results` exceeds that. APIs such as Identity support
+        pagination beyond 1000 results.
 
-            .. code-block:: python
-                :linenos:
+        Example:
+            ```python
+            >>> response = rfc.request_paged(
+                    method='post',
+                    url='https://api.recordedfuture.com/identity/credentials/search',
+                    max_results=1565,
+                    data={
+                        'domains': ['norsegods.online'],
+                        'filter': {'first_downloaded_gte': '2024-01-01T23:40:47.034Z'},
+                        'limit': 100,
+                    },
+                    results_path='identities',
+                    offset_key='offset',
+                )
 
-                >>> response = rfc.request_paged(
-                        method='post',
-                        url='https://api.recordedfuture.com/identity/credentials/search',
-                        max_results=1565,
-                        data={
-                            'domains': ['norsegods.online'],
-                            'filter': {'first_downloaded_gte': '2024-01-01T23:40:47.034Z'},
-                            'limit': 100,
-                        },
-                        results_path='identities',
-                        offset_key='offset',
-                    )
-
-                >>> response = rfc.request_paged(
-                        method='get',
-                        url='https://api.recordedfuture.com/v2/ip/search',
-                        params={'limit': 100, 'fields': 'entity', 'riskRule': 'dnsAbuse'},
-                        results_path='data.results',
-                        offset_key='from',
-                    )
-
-        Args:
-            method (str): HTTP method: GET or POST
-            url (str): URL to make the request to
-            max_results (int, optional): Maximum number of results to return. Defaults to 1000.
-            data (dict, optional): Request body. Defaults to None.
-            params (dict, optional): HTTP query parameters. Defaults to None.
-            headers (dict, optional): If specified it will override default headers and wont set
-                                    the token.
-            results_path (str, optional): Path to extract paged results from. Defaults to 'data'.
-            offset_key (str, optional): Key to use for paging. Defaults to 'offset'.
-            **kwargs: Additional keyword arguments, passed to the requests library
+            >>> response = rfc.request_paged(
+                    method='get',
+                    url='https://api.recordedfuture.com/v2/ip/search',
+                    params={'limit': 100, 'fields': 'entity', 'riskRule': 'dnsAbuse'},
+                    results_path='data.results',
+                    offset_key='from',
+                )
+            ```
 
         Raises:
-            ValueError: if method is not GET or POST
-            ValueError: If results_path is invalid
-            KeyError: If no results are found in the API response
-
-        Returns:
-            list[dict]: List of dict containing the results
+            KeyError: If no results are found in the API response.
+            ValueError:
+                - If method is not GET or POST.
+                - If results_path is invalid.
         """
         results_paths = [results_path] if isinstance(results_path, str) else results_path
 
@@ -383,17 +356,13 @@ class RFClient(BaseHTTPClient):
 
     @debug_call
     @validate_call
-    def is_authorized(self, method: str, url: str, **kwargs) -> bool:
-        """Check if the request is authorized to a given Recorded Future API endpoint.
-
-        Args:
-            method (str): HTTP method
-            url (str): URL to perform the check against
-            **kwargs: Additional keyword arguments, passed to the requests library
-
-        Returns:
-            bool: True if authorized, False otherwise
-        """
+    def is_authorized(
+        self,
+        method: Annotated[str, Doc('An HTTP method.')],
+        url: Annotated[str, Doc('A URL to perform the check against.')],
+        **kwargs,
+    ) -> Annotated[bool, Doc('True if authorized, False otherwise.')]:
+        """Check if the request is authorized to a given Recorded Future API endpoint."""
         try:
             response = self.request(method, url, **kwargs)
             return response.status_code == 200

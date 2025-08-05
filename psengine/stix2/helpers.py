@@ -11,6 +11,10 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from typing import Annotated, Union
+
+from typing_extensions import Doc
+
 from .complex_entity import IndicatorEntity
 from .constants import CONVERT_ENTITY_KWARGS, INDICATOR_TYPES
 from .errors import STIX2TransformError, UnsupportedConversionTypeError
@@ -27,24 +31,24 @@ SIMPLE_ENTITY_MAP = {
 
 
 def convert_entity(
-    name: str,
-    entity_type: str,
-    create_indicator: bool = True,
-    create_obs: bool = False,
+    name: Annotated[str, Doc('The name of the entity.')],
+    entity_type: Annotated[str, Doc('The Recorded Future type of entity.')],
+    create_indicator: Annotated[
+        bool, Doc('A flag to determine if an indicator should be created.')
+    ] = True,
+    create_obs: Annotated[
+        bool, Doc('A flag to determine if an observable should be created.')
+    ] = False,
     **kwargs,
-):
-    """Converts RF entity to STIX2.
+) -> Annotated[
+    Union[IndicatorEntity, Identity, Malware, Vulnerability, TTP],
+    Doc('An instance of a corresponding STIX2 entity based on the provided entity type.'),
+]:
+    """Convert an RF entity to STIX2.
 
-    Args:
-        name (str): Name of entity
-        entity_type (str): Recorded Future type of entity
-        create_indicator (bool, optional): flag to determine if create indicator
-        create_obs (bool, optional): flag to determine if create observable
-        **kwargs: Any other fields that can be used in an entity.
-                  Must be one of CONVERT_ENTITY_KWARGS
-
-    No Longer Returned:
-        A subclass of RFBaseEntity.
+    Raises:
+        STIX2TransformError: If an invalid keyword argument is passed in `kwargs`.
+        UnsupportedConversionTypeError: If the provided entity type is unsupported for conversion.
     """
     for key in kwargs:
         if key not in CONVERT_ENTITY_KWARGS:

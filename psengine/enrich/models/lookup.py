@@ -27,7 +27,6 @@ class EnterpriseList(RFBaseModel):
     list_: IdNameTypeDescription = Field(alias='list')
 
 
-###########################################################
 class RiskyCIDRPIP(RFBaseModel):
     score: int
     ip: IdNameType
@@ -264,8 +263,6 @@ class DnsPortCert(RFBaseModel):
 ###########################################################
 # NVD
 ###########################################################
-
-
 class NvdReference(RFBaseModel):
     url: str
     tags: list[str]

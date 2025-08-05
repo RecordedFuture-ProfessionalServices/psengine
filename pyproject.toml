@@ -25,25 +25,25 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "tox==4.12.1",
-    "build==1.0.3",
     "pytest==8.3.4",
     "pytest-cov==6.0.0",
     "pytest-mock==3.14.0",
     "pytest-random-order==1.1.1",
     "pytest-httpdbg==0.8.1",
-    "requests==2.29.0",
     "ruff~=0.11.0",
+    "mimesis>=12.1.0",
+    "build==1.0.3",
     "wheel==0.37.1",
     "setuptools==61.0.0",
-    "Sphinx==7.1.2",
-    "sphinxcontrib-confluencebuilder==2.3.0",
-    "atlassian-python-api==3.41.4",
-    "sphinx_autodoc_typehints==1.25.2",
-    "sphinxcontrib-napoleon",
-    "mimesis>=12.1.0",
 ]
 
+docs = [
+    "ruff~=0.11.0",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "griffe-typingdoc",
+]
 
 [build-system]
 requires = [
@@ -54,7 +54,7 @@ build-backend = "setuptools.build_meta"
 
 [project.urls]
 Homepage = "https://github.com/RecordedFuture-ProfessionalServices/psengine"
-Changelog = "https://github.com/RecordedFuture-ProfessionalServices/psengine/blob/main/CHANGELOG.rst"
+Changelog = "https://recordedfuture-professionalservices.github.io/psengine/CHANGELOG/"
 
 [tool.setuptools]
 packages = [

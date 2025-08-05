@@ -16,6 +16,7 @@ from itertools import chain
 from typing import Annotated, Optional, Union
 
 from pydantic import Field, validate_call
+from typing_extensions import Doc
 
 from ..constants import DEFAULT_LIMIT
 from ..endpoints import (
@@ -46,7 +47,7 @@ class ClassicAlertMgr:
         """Initializes the ClassicAlertMgr object.
 
         Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
+            rf_token (str, optional): Recorded Future API token.
         """
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
@@ -56,53 +57,67 @@ class ClassicAlertMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=AlertSearchError)
     def search(
         self,
-        triggered: Optional[str] = None,
-        status: Optional[str] = None,
-        rule_id: Union[str, list[str], None] = None,
-        freetext: Optional[str] = None,
-        tagged_text: Optional[bool] = None,
-        order_by: Optional[str] = None,
-        direction: Optional[str] = None,
-        fields: Optional[list[str]] = REQUIRED_CA_FIELDS,
-        max_results: Optional[int] = Field(ge=1, le=1000, default=DEFAULT_LIMIT),
-        max_workers: Optional[int] = Field(ge=0, le=50, default=0),
-        alerts_per_page: Optional[int] = Field(ge=1, le=1000, default=ALERTS_PER_PAGE),
-    ) -> list[ClassicAlert]:
+        triggered: Annotated[
+            Optional[str], Doc('Filter on triggered time. Format: -1d or [2017-07-30,2017-07-31].')
+        ] = None,
+        status: Annotated[
+            Optional[str],
+            Doc('Filter on status, such as: `New`, `Resolved`, `Pending`, `Dismissed`.'),
+        ] = None,
+        rule_id: Annotated[
+            Union[str, list[str], None], Doc('Filter by a specific Alert Rule ID.')
+        ] = None,
+        freetext: Annotated[Optional[str], Doc('Filter by a freetext search.')] = None,
+        tagged_text: Annotated[
+            Optional[bool], Doc('Entities in the alert title and message body will be marked up.')
+        ] = None,
+        order_by: Annotated[
+            Optional[str], Doc('Sort by a specific field, such as: `triggered`.')
+        ] = None,
+        direction: Annotated[
+            Optional[str], Doc('Sort direction, such as: `asc` or `desc`.')
+        ] = None,
+        fields: Annotated[
+            Optional[list[str]],
+            Doc(
+                """
+                Fields to include in the search result.
+
+                **Note:**
+                Defaults fields are `id`, `log`, `title`, `rule` which are always retrieved.
+                Any provided fields are added to these."
+                """
+            ),
+        ] = REQUIRED_CA_FIELDS,
+        max_results: Annotated[
+            Optional[int], Doc('Maximum number of records to return. Maximum 1000.')
+        ] = Field(ge=1, le=1000, default=DEFAULT_LIMIT),
+        max_workers: Annotated[
+            Optional[int],
+            Doc(
+                """
+                Number of workers to use for concurrent fetches.
+                Applied only when multiple `rule_id` values are provided.
+                """
+            ),
+        ] = Field(ge=0, le=50, default=0),
+        alerts_per_page: Annotated[
+            Optional[int], Doc('Number of items to retrieve per page.')
+        ] = Field(ge=1, le=1000, default=ALERTS_PER_PAGE),
+    ) -> Annotated[list[ClassicAlert], Doc('List of ClassicAlert models.')]:
         """Search for triggered alerts.
 
-        Does pagination requests on batches of ``alerts_per_page`` up to ``max_results``.
+        Does pagination requests on batches of `alerts_per_page` up to `max_results`.
 
-        Note, paginating for a high number of items per page, might lead to timeout errors from the
-        API.
-
-        The fields 'id', 'log', 'title', 'rule' are always retrieved.
+        Warning:
+            Paginating with a high number of items per page may lead to timeout errors from the API.
 
         Endpoint:
-            ``v3/alerts/``
-
-        Args:
-            triggered (str): filter on triggered time. Format: -1d or [2017-07-30,2017-07-31]
-            status (str): filter on status, such as: 'New', 'Resolved', 'Pending', 'Dismissed'
-            rule_id (str, list[str]): filter by a specific Alert Rule ID
-            freetext (str): filter by a freetext search
-            max_results (int): maximum number of records to return. Default 10, Maximum 1000
-            tagged_text (bool): entities in the alert title and message body will be marked up
-            order_by (str): sort by a specific field, such as: 'triggered'
-            direction (str): sort direction, such as: 'asc' or 'desc'
-            fields (List[str]): By default the search will fetch only these fields:
-                'id', 'log', 'title', 'rule'. If a user specifies a list of fields, the search
-                will use the specified fields + the default fields.
-            max_workers (int, Optional): Number of workers to use for concurrent fetches. Only
-                applied when more ``rule_id`` are provided.
-            alerts_per_page (int, Optional): Number of items to retrieve in for each page.
-                Defaults to 50.
+            `v3/alerts/`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AlertSearchError: if connection error occurs.
-
-        Returns:
-             List[ClassicAlert]: List of ClassicAlert models
+            ValidationError: If any supplied parameter is of incorrect type.
+            AlertSearchError: If connection error occurs.
         """
         rule_id = None if rule_id == [] else rule_id
         params = {
@@ -137,46 +152,47 @@ class ClassicAlertMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=AlertFetchError)
     def fetch(
         self,
-        id_: Annotated[str, Field(min_length=4)],
-        fields: Optional[list[str]] = ALL_CA_FIELDS,
-        tagged_text: Optional[bool] = None,
-    ) -> ClassicAlert:
+        id_: Annotated[str, Doc('The alert ID to be fetched.')] = Field(min_length=4),
+        fields: Annotated[
+            Optional[list[str]],
+            Doc(
+                """
+                Fields to include in the search result.
+
+                **Note:**
+                Defaults fields are `id`, `log`, `title`, `rule` which are always retrieved.
+                Any provided fields are added to these."
+                """
+            ),
+        ] = ALL_CA_FIELDS,
+        tagged_text: Annotated[
+            Optional[bool],
+            Doc('Entities in the alert title and message body will be marked up with entity IDs.'),
+        ] = None,
+    ) -> Annotated[ClassicAlert, Doc('ClassicAlert model.')]:
         """Fetch a specific alert.
 
-        The alert can be saved on file as shown below:
+        The alert can be saved to a file as shown below:
 
-            .. code-block:: python
-                :linenos:
+        Example:
+            ```python
+            from pathlib import Path
+            from json import dumps
+            from psengine.classic_alerts import ClassicAlertMgr
 
-                from pathlib import Path
-                from json import dumps
-                from psengine.classic_alerts import ClassicAlertMgr
-
-                mgr = ClassicAlertMgr()
-                alert = mgr.fetch('zVEe6k')
-                OUTPUT_DIR = Path('your' / 'path')
-                OUTPUT_DIR.mkdir(exists_ok=True)
-                (OUTPUT_DIR / f'{alert.id_}.json').write_text(dumps(alert.json(), indent=2))
+            mgr = ClassicAlertMgr()
+            alert = mgr.fetch('zVEe6k')
+            OUTPUT_DIR = Path('your' / 'path')
+            OUTPUT_DIR.mkdir(exist_ok=True)
+            (OUTPUT_DIR / f'{alert.id_}.json').write_text(dumps(alert.json(), indent=2))
+            ```
 
         Endpoint:
-            ``v3/alerts/{id_}``
-
-        Args:
-            id_ (str): alertID that should be fetched
-            fields (List[str]): by default, all fields are returned; but if only a subset of
-                the alert details needed, this parameter can be used to limit which sections
-                of the alert details are returned in the API response. If a user specifies a list
-                of fields, the fetch will use the specified fields + the default fields required
-                by the ADT ['id', 'log', 'title', 'rule'].
-            tagged_text (bool): entities in the alert title and message body will be marked up
-                with Recorded Future entity IDs
+            `v3/alerts/{id_}`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AlertFetchError: if a fetch of the alert via API function fails.
-
-        Returns:
-            ClassicAlert: ClassicAlert model
+            ValidationError: If any supplied parameter is of incorrect type.
+            AlertFetchError: If a fetch of the alert via the API fails.
         """
         params = {}
         params['fields'] = set((fields or []) + REQUIRED_CA_FIELDS)
@@ -195,65 +211,63 @@ class ClassicAlertMgr:
     @validate_call
     def fetch_bulk(
         self,
-        ids: list[str],
-        fields: Optional[list[str]] = ALL_CA_FIELDS,
-        tagged_text: Optional[bool] = None,
-        max_workers: Optional[int] = 0,
-    ) -> list[ClassicAlert]:
+        ids: Annotated[list[str], Doc('Alert IDs that should be fetched.')],
+        fields: Annotated[
+            Optional[list[str]],
+            Doc(
+                """
+                Fields to include in the search result.
+
+                **Note:**
+                Defaults fields are `id`, `log`, `title`, `rule` which are always retrieved.
+                Any provided fields are added to these."
+                """
+            ),
+        ] = ALL_CA_FIELDS,
+        tagged_text: Annotated[
+            Optional[bool],
+            Doc('Entities in the alert title and message body will be marked up with entity IDs.'),
+        ] = None,
+        max_workers: Annotated[
+            Optional[int], Doc('Number of workers to multithread requests.')
+        ] = 0,
+    ) -> Annotated[list[ClassicAlert], Doc('List of ClassicAlert models.')]:
         """Fetch multiple alerts.
 
         Example:
-            Each alert can be saved on file as shown below:
+            ```python
+            from json import dumps
+            from pathlib import Path
+            from psengine.classic_alerts import ClassicAlertMgr
 
-            .. code-block:: python
-                :linenos:
+            mgr = ClassicAlertMgr()
+            alerts = mgr.fetch_bulk(ids=['zVEe6k', 'zVHPXX'])
+            OUTPUT_DIR = Path('your/path')
+            OUTPUT_DIR.mkdir(exist_ok=True)
+            for i, alert in enumerate(alerts):
+                (OUTPUT_DIR / f'filename_{i}.json').write_text(dumps(alert.json(), indent=2))
+            ```
 
-                from json import dumps
-                from pathlib import Path
-                from ..helpers import dump_models
-                from psengine.classic_alerts import ClassicAlertMgr
+            Alternatively, save all alerts to a single file:
 
-                mgr = ClassicAlertMgr()
-                alerts = mgr.fetch_bulk(ids=['zVEe6k', 'zVHPXX'])
-                OUTPUT_DIR = Path('your/path')
-                OUTPUT_DIR.mkdir(exists_ok=True)
-                for i, alert in enumerate(alerts):
-                    (OUTPUT_DIR / f'filename_{i}.json').write_text(dumps(alert.json(), indent=2))
+            ```python
+            from json import dump
+            from pathlib import Path
+            from psengine.classic_alerts import ClassicAlertMgr
 
-            Alternatively all alerts can be saved on a single file:
-
-            .. code-block:: python
-                :linenos:
-
-                from json import dump
-                from pathlib import Path
-                from psengine.classic_alerts import ClassicAlertMgr
-                from ..helpers import dump_models
-
-                mgr = ClassicAlertMgr()
-                OUTPUT_FILE = Path('your/path/file')
-                alerts = mgr.fetch_bulk(ids=['zVEe6k', 'zVHPXX'])
-                with OUTPUT_FILE.open('w') as f:
-                    dump([alert.json() for alert in alerts], f, indent=2)
+            mgr = ClassicAlertMgr()
+            OUTPUT_FILE = Path('your/path/file')
+            alerts = mgr.fetch_bulk(ids=['zVEe6k', 'zVHPXX'])
+            with OUTPUT_FILE.open('w') as f:
+                dump([alert.json() for alert in alerts], f, indent=2)
+            ```
 
         Endpoint:
-            ``v3/alerts/{id_}``
-
-        Args:
-            ids (List[str]): alert IDs that should be fetched
-            fields (List[str]): by default, all fields are returned; but if only a subset of
-                the alert details needed, this parameter can be used to limit which sections
-                of the alert details are returned in the API response
-            tagged_text (bool): entities in the alert title and message body will be marked up
-                with Recorded Future entity IDs
-            max_workers (int, optional): number of workers to multithread requests.
+            `v3/alerts/{id_}`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AlertFetchError: if a fetch of the alert via API function fails.
-
-        Returns:
-            List[ClassicAlert]: List of ClassicAlert model
+            ValidationError: If any supplied parameter is of incorrect type.
+            AlertFetchError: If a fetch of the alert via the API fails.
         """
         self.log.info(f'Fetching alerts: {ids}')
         results = []
@@ -274,24 +288,21 @@ class ClassicAlertMgr:
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=AlertFetchError)
     def fetch_hits(
-        self, ids: Union[str, list[str]], tagged_text: Optional[bool] = None
-    ) -> list[ClassicAlertHit]:
-        """Fetch only a list of all the data that caused the alert to trigger (hits).
+        self,
+        ids: Annotated[Union[str, list[str]], Doc('One or more alert IDs to fetch.')],
+        tagged_text: Annotated[
+            Optional[bool],
+            Doc('Entities in the alert title and message body will be marked up with entity IDs.'),
+        ] = None,
+    ) -> Annotated[list[ClassicAlertHit], Doc('List of ClassicAlertHit models.')]:
+        """Fetch a list of all the data that caused the alert to trigger (hits).
 
         Endpoint:
-            ``v3/alerts/hits``
-
-        Args:
-            ids (Union[str, List[str]]): one or more alert ids to fetch
-            tagged_text (bool): entities in the alert title and message body will be marked up
-                with Recorded Future entity IDs
+            `v3/alerts/hits`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AlertFetchError: if a fetch of the alert hit via API function fails.
-
-        Returns:
-            List[ClassicAlertHit]: List of ClassicAlertHit models
+            ValidationError: If any supplied parameter is of incorrect type.
+            AlertFetchError: If a fetch of the alert hit via the API fails.
         """
         data = {}
 
@@ -310,21 +321,20 @@ class ClassicAlertMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=AlertImageFetchError)
-    def fetch_image(self, id_: str) -> bytes:
+    def fetch_image(
+        self,
+        id_: Annotated[
+            str, Doc('Image ID to fetch, for example: img:d4620c6a-c789-48aa-b652-b47e0d06d91a')
+        ],
+    ) -> Annotated[bytes, Doc('Image content.')]:
         """Fetch an image.
 
         Endpoint:
-            ``v3/alerts/image``
-
-        Args:
-            id_ (str): image id to fetch, for example: img:d4620c6a-c789-48aa-b652-b47e0d06d91a
+            `v3/alerts/image`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AlertImageFetchError: if a fetch of the alert image via API function fails.
-
-        Returns:
-            bytes: image content
+            ValidationError: If any supplied parameter is of incorrect type.
+            AlertImageFetchError: If a fetch of the alert image via the API fails.
         """
         self.log.info(f'Fetching image: {id_}')
         response = self.rf_client.request('get', url=EP_CLASSIC_ALERTS_IMAGE, params={'id': id_})
@@ -332,17 +342,17 @@ class ClassicAlertMgr:
 
     @debug_call
     @validate_call
-    def fetch_all_images(self, alert: ClassicAlert) -> None:
-        """Fetch all images from an alert and stores them in the alert object under ``@images``.
+    def fetch_all_images(
+        self,
+        alert: Annotated[ClassicAlert, Doc('Alert to fetch images from.')],
+    ) -> None:
+        """Fetch all images from an alert and store them in the alert object under `@images`.
 
         Endpoint:
-            ``v3/alerts/image``
-
-        Args:
-            alert (ClassicAlert): alert to fetch images from
+            `v3/alerts/image`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
+            ValidationError: If any supplied parameter is of incorrect type.
         """
         for hit in alert.hits:
             for entity in hit.entities:
@@ -353,25 +363,21 @@ class ClassicAlertMgr:
     @validate_call
     def fetch_rules(
         self,
-        freetext: Union[str, list[str], None] = None,
-        max_results: int = Field(default=DEFAULT_LIMIT, ge=1, le=1000),
-    ) -> list[AlertRuleOut]:
+        freetext: Annotated[
+            Union[str, list[str], None], Doc('Filter by a freetext search.')
+        ] = None,
+        max_results: Annotated[
+            int, Doc('Maximum number of rules to return. Maximum 1000.')
+        ] = Field(default=DEFAULT_LIMIT, ge=1, le=1000),
+    ) -> Annotated[list[AlertRuleOut], Doc('List of AlertRule models.')]:
         """Search for alerting rules.
 
         Endpoint:
-            ``v2/alert/rules``
-
-        Args:
-            freetext (Union[str, list[str]], optional): filter by a freetext search, can be a
-                a freetext string or a list of strings. Default None (will return all rules)
-            max_results (int): maximum number of rules to return. Default 10, maximum 1000
+            `v2/alert/rules`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type or value
-            NoRulesFoundError: if rule has not been found.
-
-        Returns:
-            List[AlertRule]: List of AlertRule models
+            ValidationError: If any supplied parameter is of incorrect type or value.
+            NoRulesFoundError: If a rule has not been found.
         """
         if not freetext:
             return self._fetch_rules(max_results=max_results)
@@ -387,55 +393,48 @@ class ClassicAlertMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=AlertUpdateError)
-    def update(self, updates: list[dict]):
-        """Updates one or more alerts. It's possible to update assignee, ``statusInPortal`` and a
-        note tied to the triggered alert.
+    def update(
+        self,
+        updates: Annotated[list[dict], Doc('List of updates to perform.')],
+    ):
+        """Update one or more alerts.
+
+        It is possible to update the assignee, `statusInPortal`, and a note tied to the alert.
 
         Example:
-            updates argument:
-
-            .. code-block:: python
-
-                [
-                    {
-                        "id": "string",
-                        "assignee": "string",
-                        "status": "unassigned",
-                        "note": "string",
-                        "statusInPortal": "New"
-                    }
-                ]
+            ```python
+            [
+                {
+                    "id": "string",
+                    "assignee": "string",
+                    "status": "unassigned",
+                    "note": "string",
+                    "statusInPortal": "New"
+                }
+            ]
+            ```
 
         Endpoint:
-            ``v2/alert/update``
-
-        Args:
-            updates (List[dict]): list of updates to perform
-
-        Returns:
-            JSON response
+            `v2/alert/update`
         """
         self.log.info(f'Updating alerts: {updates}')
         return self.rf_client.request('post', url=EP_CLASSIC_ALERTS_UPDATE, data=updates).json()
 
     @debug_call
     @validate_call
-    def update_status(self, ids: Union[str, list[str]], status: str):
+    def update_status(
+        self,
+        ids: Annotated[Union[str, list[str]], Doc('One or more alert IDs.')],
+        status: Annotated[str, Doc('Status to update to.')],
+    ):
         """Update the status of one or several alerts.
 
         Endpoint:
-            ``v2/alert/update``
-
-        Args:
-            ids (Union[str, List[str]]): one or more alert ids
-            status (str): status to update to
+            `v2/alert/update`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AlertUpdateError: if connection error occurs.
-
-        Returns:
-            JSON response
+            ValidationError: If any supplied parameter is of incorrect type.
+            AlertUpdateError: If connection error occurs.
         """
         ids = ids if isinstance(ids, list) else ids.split(',')
         payload = [{'id': alert_id, 'statusInPortal': status} for alert_id in ids]

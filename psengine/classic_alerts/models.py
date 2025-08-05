@@ -116,7 +116,7 @@ class EntityCriticality(RFBaseModel):
 
 
 class ClassicAlertHit(RFBaseModel):
-    """Validate data received from ``/v3/alerts/hits``, ``/v3/alert/search``, ``/v3/alert/{id}``."""
+    """Validate data received from `/v3/alerts/hits`, `/v3/alert/search`, `/v3/alert/{id}`."""
 
     entities: list[IdNameTypeDescription]
     document: AlertDocument

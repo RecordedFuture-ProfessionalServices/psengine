@@ -14,7 +14,7 @@
 import csv
 import logging
 from collections.abc import Generator
-from typing import Any, Optional, Union
+from typing import Annotated, Any, Optional, Union
 
 from pydantic import BaseModel, validate_call
 from requests.exceptions import (
@@ -25,6 +25,7 @@ from requests.exceptions import (
     ReadTimeout,
     SSLError,
 )
+from typing_extensions import Doc
 
 from ..endpoints import EP_FUSION_FILES, EP_RISKLIST
 from ..helpers import debug_call
@@ -36,12 +37,11 @@ from .errors import RiskListNotAvailableError
 class RisklistMgr:
     """Manages requests for Recorded Future risk lists."""
 
-    def __init__(self, rf_token: str = None):
-        """Initializes the RiskListMgr object.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
-        """
+    def __init__(
+        self,
+        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+    ):
+        """Initializes the RiskListMgr object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
 
@@ -49,49 +49,43 @@ class RisklistMgr:
     @validate_call
     def fetch_risklist(
         self,
-        list: str,  # noqa: A002
-        entity_type: str = None,
-        format: str = None,  # noqa: A002
-        headers: bool = True,
-        validate: Optional[Any] = None,
-    ) -> Generator[Union[dict, list[str], BaseModel], None, None]:
-        """Get a Recorded Future RiskList. Specify a fusion_path to get a custom
-        risklist instead - format field is ignored when custom risklists are used.
+        list: Annotated[str, Doc('Name of the risklist to download.')],  # noqa: A002
+        entity_type: Annotated[Optional[str], Doc('Type of entity to get risklist for.')] = None,
+        format: Annotated[Optional[str], Doc('Format of the risklist.')] = None,  # noqa: A002
+        headers: Annotated[bool, Doc('Whether headers are included in the CSV.')] = True,
+        validate: Annotated[
+            Optional[Any], Doc('Validation model to use. Must be a subclass of pydantic BaseModel.')
+        ] = None,
+    ) -> Annotated[
+        Generator[Union[dict, list[str], BaseModel], None, None],
+        Doc('Yields risklist rows or validated risklist models.'),
+    ]:
+        """Get a Recorded Future RiskList as generator.
 
-        Gotchas:
+        For a custom risklist, specify a `fusion_path` the `format` field is ignored
+        when custom risklists are used.
 
-            - If a specified list does not exist, RF API returns the default risklist
-            - An empty risklist can be returned.
-                - If ``validate`` is None: If it has headers, they will be returned.
-                - If ``validate`` is not None, an empty list will be returned.
+        Warning:
+            - If a specified list does't exist, the API returns the default risklist.
+            - An empty risklist may be returned:
+                - If `validate` is None and headers are included, headers are returned.
+                - If `validate` is set, an empty list is returned.
 
-        Examples:
-            Download and return risklist as json:
+        Example:
+            Download and return entries as JSON:
 
-            .. code-block:: python
-                :linenos:
+            ```python
+            from psengine.risklists import RisklistMgr, DefaultRiskList
 
-                from psengine.risklists import RisklistMgr, DefaultRiskList
-
-                mgr = RisklistMgr()
-                data = mgr.fetch_risklist('default', 'domain', validate=DefaultRiskList)
-                for entry in data:
-                    print(entry.json())
-
-        Args:
-            list (str): name of the risklist to download.
-            entity_type (str, optional): Type of entity to get risklist for.
-            format (str, optional): Format of the risklist.
-            headers (bool, optional): Whether headers are included in the CSV.
-            validate (BaseModel, optional): Validation model to use. Has to be subclass of pydantic
-                BaseModel.
+            mgr = RisklistMgr()
+            data = mgr.fetch_risklist('default', 'domain', validate=DefaultRiskList)
+            for entry in data:
+                print(entry.json())
+            ```
 
         Raises:
-            RisklistNotAvailableError: if HTTP error occurs on risklist fetch
-            ValidationError if any supplied parameter is of incorrect type
-
-        Returns:
-            Generator: Yields risklist rows or validated risklist models.
+            RisklistNotAvailableError: If an HTTP error occurs during risklist fetch.
+            ValidationError: If any parameter is of incorrect type.
         """
         if validate and not issubclass(validate, BaseModel):
             raise ValueError('`validate` should be a subclass of Pydantic BaseModel or None')

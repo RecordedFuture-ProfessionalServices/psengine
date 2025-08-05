@@ -13,9 +13,10 @@
 
 import json
 import logging
-from typing import Union
+from typing import Annotated, Optional, Union
 
 from pydantic import validate_call
+from typing_extensions import Doc
 
 from ..endpoints import EP_COLLECTIVE_INSIGHTS_DETECTIONS
 from ..helpers import connection_exceptions, debug_call
@@ -32,7 +33,7 @@ class CollectiveInsights:
         """Initializes the CollectiveInsights object.
 
         Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
+            rf_token (str, optional): Recorded Future API token.
         """
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
@@ -41,29 +42,30 @@ class CollectiveInsights:
     @debug_call
     def create(
         self,
-        ioc_value: str,
-        ioc_type: str,
-        timestamp: str,
-        detection_type: str,
-        detection_sub_type: str = None,
-        detection_id: str = None,
-        detection_name: str = None,
-        ioc_field: str = None,
-        ioc_source_type: str = None,
-        incident_id: str = None,
-        incident_name: str = None,
-        incident_type: str = None,
-        mitre_codes: Union[list[str], str] = None,
-        malwares: Union[list[str], str] = None,
+        ioc_value: Annotated[str, Doc('The value of the IOC.')],
+        ioc_type: Annotated[str, Doc('The type of the IOC.')],
+        timestamp: Annotated[str, Doc('The timestamp associated with the detection as ISO 8601.')],
+        detection_type: Annotated[str, Doc('The type of the detection.')],
+        detection_sub_type: Annotated[Optional[str], Doc('The subtype of the detection.')] = None,
+        detection_id: Annotated[Optional[str], Doc('The ID of the detection.')] = None,
+        detection_name: Annotated[Optional[str], Doc('The name of the detection.')] = None,
+        ioc_field: Annotated[Optional[str], Doc('The field in which the IOC was detected.')] = None,
+        ioc_source_type: Annotated[Optional[str], Doc('The source type of the IOC.')] = None,
+        incident_id: Annotated[Optional[str], Doc('The ID of the incident.')] = None,
+        incident_name: Annotated[Optional[str], Doc('The name of the incident.')] = None,
+        incident_type: Annotated[Optional[str], Doc('The type of the incident.')] = None,
+        mitre_codes: Annotated[
+            Union[list[str], str, None], Doc('MITRE ATT&CK technique or tactic codes.')
+        ] = None,
+        malwares: Annotated[
+            Union[list[str], str, None], Doc('Associated malware family or names.')
+        ] = None,
         **kwargs,
-    ) -> Insight:
+    ) -> Annotated[Insight, Doc('The created Insight object.')]:
         """Create a new Insight object.
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-
-        Returns:
-            Insight object.
+            ValidationError: If any supplied parameter is of incorrect type.
         """
         malwares = malwares if isinstance(malwares, list) else [malwares] if malwares else None
         mitre_codes = (
@@ -107,26 +109,22 @@ class CollectiveInsights:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=CollectiveInsightsError)
     def submit(
         self,
-        insight: Union[Insight, list[Insight]],
-        debug: bool = True,
-        organization_ids: list = None,
-    ) -> InsightsIn:
-        """Submit a detection or insight to Recorded Future Collective Insights API.
+        insight: Annotated[
+            Union[Insight, list[Insight]], Doc('A detection or list of detections to submit.')
+        ],
+        debug: Annotated[
+            bool, Doc('Whether the submission should appear in the SecOPS dashboard.')
+        ] = True,
+        organization_ids: Annotated[Optional[list], Doc('List of organization IDs.')] = None,
+    ) -> Annotated[InsightsIn, Doc('Response from the Recorded Future API.')]:
+        """Submit a detection or insight to the Recorded Future Collective Insights API.
 
         Endpoint:
-            ``collective-insights/detections``
-
-        Args:
-            insight (list[Insight] or Insight): A detection/insight
-            debug (bool, optional): Determines if submission will show in SecOPS dashboard.
-            organization_ids (list, optional): Org ID. Defaults to None.
+            `collective-insights/detections`
 
         Raises:
-            CollectiveInsightsError: if connection error occurs.
-            ValidationError if any supplied parameter is of incorrect type.
-
-        Returns:
-            InsightsIn: response from Recorded Future API
+            CollectiveInsightsError: If connection error occurs.
+            ValidationError: If any supplied parameter is of incorrect type.
         """
         if not insight:
             raise ValueError('Insight cannot be empty')

@@ -15,6 +15,9 @@ import logging
 import logging.config
 import sys
 from pathlib import Path
+from typing import Annotated
+
+from typing_extensions import Doc
 
 from ..errors import WriteFileError
 from ..helpers.helpers import OSHelpers
@@ -38,14 +41,24 @@ class RFLogger:
 
     def __init__(
         self,
-        output: str = DEFAULT_PSENGINE_OUTPUT,
-        root_output: str = DEFAULT_ROOT_OUTPUT,
-        level=logging.INFO,
-        propagate: bool = True,
-        to_file=True,
-        to_console=True,
-        console_is_root=True,
+        output: Annotated[
+            str, Doc('Subdirectory name to use for output (e.g., `psengine`).')
+        ] = DEFAULT_PSENGINE_OUTPUT,
+        root_output: Annotated[
+            str, Doc('Root directory path for all output files.')
+        ] = DEFAULT_ROOT_OUTPUT,
+        level: Annotated[
+            int, Doc('Logging level (e.g., logging.INFO, logging.DEBUG).')
+        ] = logging.INFO,
+        propagate: Annotated[bool, Doc('Whether logs should propagate to parent loggers.')] = True,
+        to_file: Annotated[bool, Doc('Enable logging to a file.')] = True,
+        to_console: Annotated[bool, Doc('Enable logging to the console.')] = True,
+        console_is_root: Annotated[bool, Doc('Set console logger as root logger.')] = True,
     ):
+        """Initialize the logger for the application.
+
+        Sets up console and/or file-based logging under a structured directory layout.
+        """
         if to_file is False and to_console is False:
             raise ValueError('At least one of to_file or to_console must be set to True')
 
@@ -107,9 +120,6 @@ class RFLogger:
 
     def _setup_output(self, output):
         """Confirms path is valid, returns cwd path and log cfg fullpath.
-
-        Args:
-            output (str): logging output path
 
         Raises:
             LoggingError: Raised when logging path does not exist

@@ -313,11 +313,11 @@ def _markdown_alert(
     character_limit: int = None,
     defang_iocs: bool = False,
 ) -> str:
-    """Returns a markdown string representation of the ``ClassicAlert`` instance.
+    """Returns a markdown string representation of the `ClassicAlert` instance.
 
-    This function works on ``ClassicAlert`` instances returned by ``ClassicAlertMgr.fetch()``,
-    if you are passing the result of ``ClassicAlertMgr.search()`` make sure the ``search`` method
-    has been called with all the fields. Keep in mind that this will make the ``search`` slower.
+    This function works on `ClassicAlert` instances returned by `ClassicAlertMgr.fetch()`,
+    if you are passing the result of `ClassicAlertMgr.search()` make sure the `search` method
+    has been called with all the fields. Keep in mind that this will make the `search` slower.
 
     Args:
         classic_alert (ClassicAlert): ClassicAlert instance to create markdown from.

@@ -13,34 +13,41 @@
 
 import os
 from enum import Enum
-from typing import Optional
+from typing import Annotated, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, Secret
+from typing_extensions import Doc
 
 
 class RFBaseModel(BaseModel):
     model_config = ConfigDict(extra=os.environ.get('RF_MODEL_EXTRA', 'ignore'))
 
-    def json(self, by_alias=True, exclude_none=True, auto_exclude_unset=True, **kwargs):
-        """JSON representation of models. It is inherited by every model.
+    def json(
+        self,
+        by_alias: Annotated[
+            bool,
+            Doc(
+                """
+                Alias flag:
 
-        Args:
-            by_alias (bool): If True, writes fields with their API alias (eg. ``IpAddress``) instead
-                of the Python alias (eg. ``ip_address``). Defaults to True.
+                - If `True`, writes fields with their API alias (e.g., `IpAddress`)
+                - If `False` uses the Python attribute name alias.
+                """
+            ),
+        ] = True,
+        exclude_none: Annotated[bool, Doc('Whether to exclude fields equal to None.')] = True,
+        auto_exclude_unset: Annotated[
+            bool,
+            Doc("""
+                Whether to auto exclude values not set.
 
-            exclude_none (bool): Whether fields equal to None should be excluded from the returned
-                dictionary. Defaults to True.
-
-            auto_exclude_unset (bool): Excludes values that are not set.
-
-                - True: Based on ``RF_EXTRA_MODEL``, decides if output should have unmapped fields.
-                  If the ``model_config`` extra is set to 'allow', includes unmapped values;
-                  otherwise, excludes them.
-
-                - False: You need to provide the boolean ``exclude_unset`` in the kwargs.
-
-            kwargs (dict, optional): Any other parameters.
-        """
+                - If `True`, uses `RF_EXTRA_MODEL` config to decide inclusion of unmapped fields.
+                - If `False`, you must specify `exclude_unset` manually.
+                """),
+        ] = True,
+        **kwargs,
+    ):
+        """JSON representation of models. It is inherited by every model."""
         if not auto_exclude_unset and kwargs.get('exclude_unset') is None:
             raise ValueError('`auto_exclude_unset` is False, `exclude_unset has to be provided`')
 
@@ -91,7 +98,7 @@ class DetectionRuleType(Enum):
 class ClearTextPassword(Secret[str]):
     """Model to hide passwords while logging.
 
-    To view the clear text password do ``value.get_secret_value()``
+    To view the clear text password do `value.get_secret_value()`
     """
 
     def _display(self) -> str:

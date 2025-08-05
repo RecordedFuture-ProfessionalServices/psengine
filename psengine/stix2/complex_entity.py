@@ -11,9 +11,10 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 from datetime import datetime
-from typing import Union
+from typing import Annotated, Union
 
 import stix2
+from typing_extensions import Doc
 
 from ..constants import INDICATOR_INTEL_CARD_URL
 from .base_stix_entity import BaseStixEntity
@@ -33,20 +34,13 @@ class DetectionRuleEntity(BaseStixEntity):
 
     def __init__(
         self,
-        name: str,
-        type_: str,
-        content: str,
-        description: str = None,
-        author: stix2.Identity = None,
+        name: Annotated[str, Doc('The name of the Detection Rule.')],
+        type_: Annotated[str, Doc('The detection rule type (YARA or Sigma).')],
+        content: Annotated[str, Doc('The hunting rule itself, typically YARA, Snort, or Sigma.')],
+        description: Annotated[str, Doc('A description of the Detection Rule.')] = None,
+        author: Annotated[stix2.Identity, Doc('A Recorded Future author.')] = None,
     ) -> None:
         """Detection Rule.
-
-        Args:
-            name (str): Name of Detection Rule
-            type_ (str): Detection rule type (Yara or Sigma)
-            content (str): Hunting rule itself, usually either yara, snort or sigma
-            description (str, optional): Description of Detection Rule
-            author (stix2.Identity): Recorded Future author
 
         Raises:
             STIX2TransformError: Description
@@ -87,25 +81,18 @@ class Grouping(BaseStixEntity):
 
     def __init__(
         self,
-        name: str,
-        description: str = None,
-        is_malware: bool = False,
-        is_suspicious=False,
-        object_refs: list = None,
-        author: stix2.Identity = None,
+        name: Annotated[str, Doc('The name of the event. Should be unique.')],
+        description: Annotated[str, Doc('A description, usually empty.')] = None,
+        is_malware: Annotated[
+            bool, Doc('A flag to determine if malware-analysis context should be used.')
+        ] = False,
+        is_suspicious: Annotated[
+            bool, Doc('A flag to determine if suspicious-activity context should be used.')
+        ] = False,
+        object_refs: Annotated[list, Doc('A list of objects to group together.')] = None,
+        author: Annotated[stix2.Identity, Doc('A Recorded Future Identity.')] = None,
     ):
-        """Grouping of STIX2 objects. Usually as part of the same event.
-
-        Args:
-            name (str): Name of the event. Should be unique
-            description (str, optional): Description, Usually empty
-            is_malware (bool, optional):
-                flag to determine if malware-analysis context should be used
-            is_suspicious (bool, optional):
-                Flag to determine is suspicious-activity flag should be used
-            object_refs (list, optional): List of objects to group together
-            author (stix2.Identity, optional): Recorded Future Identity
-        """
+        """Grouping of STIX2 objects. Usually as part of the same event."""
         self.name = name
         self.description = description
         if is_malware:
@@ -138,15 +125,14 @@ class Grouping(BaseStixEntity):
 class Relationship(BaseStixEntity):
     """Represents Relationship SDO."""
 
-    def __init__(self, source: str, target: str, type_: str, author: stix2.Identity = None) -> None:
-        """Relationship.
-
-        Args:
-            source (str): source of relationship
-            target (str): target of relationship
-            type_ (str): how the source relates to target
-            author (stix2.Identity, optional): Recorded Future Identity
-        """
+    def __init__(
+        self,
+        source: Annotated[str, Doc('The source of the relationship.')],
+        target: Annotated[str, Doc('The target of the relationship.')],
+        type_: Annotated[str, Doc('How the source relates to the target.')],
+        author: Annotated[stix2.Identity, Doc('A Recorded Future Identity.')] = None,
+    ) -> None:
+        """Relationship."""
         self.source = source
         self.target = target
         self.type_ = type_
@@ -177,19 +163,12 @@ class NoteEntity(BaseStixEntity):
 
     def __init__(
         self,
-        name: str,
-        content: str,
-        object_refs: list,
-        author: stix2.Identity = None,
+        name: Annotated[str, Doc('The title of the note.')],
+        content: Annotated[str, Doc('The content or text of the note.')],
+        object_refs: Annotated[list, Doc('A list of SDO IDs the note should be attached to.')],
+        author: Annotated[stix2.Identity, Doc('A Recorded Future Identity.')] = None,
     ) -> None:
-        """Note Entity.
-
-        Args:
-            name (str): Title of Note
-            content (str): Content/text of note
-            object_refs (list[str]): List of SDO IDs note should be attached to.
-            author (stix2.Identity, optional): Recorded Future Identity
-        """
+        """Note Entity."""
         self.content = content
         self.object_refs = object_refs
         self.stix_obj = None
@@ -215,33 +194,34 @@ class IndicatorEntity(BaseStixEntity):
 
     def __init__(
         self,
-        name: str,
-        type_: str,
-        description: str = None,
-        author: stix2.Identity = None,
-        create_indicator: bool = True,
-        create_obs: bool = True,
-        confidence: int = None,
-        labels: list = None,
-        tlp_marking='amber',
+        name: Annotated[str, Doc('An indicator value.')],
+        type_: Annotated[
+            str,
+            Doc(
+                """
+                A Recorded Future type of indicator.
+                Options: 'IpAddress', 'InternetDomainName', 'URL', 'FileHash'.
+                """
+            ),
+        ],
+        description: Annotated[
+            str, Doc('A description of the indicator, usually an AI Insight.')
+        ] = None,
+        author: Annotated[stix2.Identity, Doc('A Recorded Future Identity.')] = None,
+        create_indicator: Annotated[
+            bool, Doc('A flag that governs if the indicator should be created.')
+        ] = True,
+        create_obs: Annotated[
+            bool, Doc('A flag that governs if the observable should be created.')
+        ] = True,
+        confidence: Annotated[int, Doc('A confidence score of the indicator.')] = None,
+        labels: Annotated[list, Doc('Labels applied to the indicator, often risk rules.')] = None,
+        tlp_marking: Annotated[str, Doc('The TLP level. Defaults to amber.')] = 'amber',
     ):
-        """Indicator container. Containers Indicator, observable, and relationship between them.
-
-        Args:
-            name (str): Indicator value
-            type_ (str): Recorded Future type of indicator. Options: 'IpAddress',
-                    'InternetDomainName', 'URL', 'FileHash'.
-            description (str, optional): Description of Indicator. Usually an AI Insight
-            author (stix2.Identity, optional): Recorded Future Identity
-            create_indicator (bool, optional): flag that governs if indicator should be created
-            create_obs (bool, optional): flag that governs if observable should be created
-            confidence (int, optional): Confidence score of indicator
-            labels (list, optional): labels applied to Indicator. Often risk rules
-            tlp_marking (str, optional): the TLP level. Default to amber
-
+        """Indicator container. Contains indicator, observable, and relationship between them.
 
         Raises:
-            STIX2TransformError: If indicator type is not supported
+            STIX2TransformError: If indicator type is not supported.
         """
         if not create_indicator and not create_obs:
             raise STIX2TransformError(

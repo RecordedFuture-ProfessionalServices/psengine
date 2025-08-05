@@ -215,7 +215,7 @@ class IdentityOrgIn(BaseIdentityIn):
 
 
 class DumpSearchOut(RFBaseModel):
-    """Model for payload received by POST ``/identity/metadata/dump/search`` endpoint."""
+    """Model for payload received by POST `/identity/metadata/dump/search` endpoint."""
 
     name: str
     source: Optional[str] = None

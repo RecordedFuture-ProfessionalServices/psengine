@@ -1,0 +1,1 @@
+::: psengine.stix2.base_stix_entity

@@ -14,9 +14,10 @@
 import logging
 import re
 from itertools import chain
-from typing import Optional, Union
+from typing import Annotated, Optional, Union
 
 from pydantic import Field, validate_call
+from typing_extensions import Doc
 
 from ..constants import DEFAULT_LIMIT
 from ..endpoints import (
@@ -53,10 +54,10 @@ class AnalystNoteMgr:
     """Manages requests for Recorded Future analyst notes."""
 
     def __init__(self, rf_token: str = None):
-        """Initializes the AnalystNoteMgr object.
+        """Initializes the `AnalystNoteMgr` object.
 
         Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
+            rf_token (str, optional): Recorded Future API token.
         """
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
@@ -65,47 +66,39 @@ class AnalystNoteMgr:
     @validate_call
     def search(
         self,
-        published: Optional[str] = None,
-        entity: Optional[str] = None,
-        author: Optional[str] = None,
-        title: Optional[str] = None,
-        topic: Optional[Union[str, list]] = None,
-        label: Optional[str] = None,
-        source: Optional[str] = None,
-        serialization: Optional[str] = None,
-        tagged_text: Optional[bool] = None,
-        max_results: Optional[int] = Field(ge=1, le=1000, default=DEFAULT_LIMIT),
-        notes_per_page: Optional[int] = Field(ge=1, le=1000, default=NOTES_PER_PAGE),
-    ) -> list[AnalystNote]:
-        """Execute a search for the analyst notes based on the parameters provided. Every parameter
-        that has not been set up will be discarded.
-        If more than one topic is specified, a search for each topic is executed and the
-        AnalystNotes will be deduplicated.
+        published: Annotated[Optional[str], Doc('Notes published after a date.')] = None,
+        entity: Annotated[Optional[str], Doc('An entity the note refers to, RF ID.')] = None,
+        author: Annotated[Optional[str], Doc('An author of the note, RF ID.')] = None,
+        title: Annotated[Optional[str], Doc('A title of the note.')] = None,
+        topic: Annotated[Optional[Union[str, list]], Doc('A topic of the note, RF ID.')] = None,
+        label: Annotated[Optional[str], Doc('A label of the note, by name.')] = None,
+        source: Annotated[Optional[str], Doc('The source of the note.')] = None,
+        serialization: Annotated[
+            Optional[str], Doc('An entity serializer (id, min, full, raw).')
+        ] = None,
+        tagged_text: Annotated[Optional[bool], Doc('Should the text contain tags.')] = None,
+        max_results: Annotated[
+            Optional[int],
+            Doc('The maximum number of references (not notes), max 1000.'),
+        ] = Field(ge=1, le=1000, default=DEFAULT_LIMIT),
+        notes_per_page: Annotated[
+            Optional[int], Doc('The number of notes for each paged request.')
+        ] = Field(ge=1, le=1000, default=NOTES_PER_PAGE),
+    ) -> Annotated[list[AnalystNote], Doc('A list of deduplicated AnalystNote objects.')]:
+        """Execute a search for the analyst notes based on the parameters provided.
+        Every parameter that has not been set up will be discarded.
 
-        ``max_results`` is the maximum number of references, not notes.
+        If more than one topic is specified, a search for each topic is executed and the
+        `AnalystNotes` will be deduplicated.
+
+        `max_results` is the maximum number of references, not notes.
 
         Endpoint:
-            ``/analystnote/search``
-
-        Args:
-           published (str): Notes published after this date. Defaults to -1d.
-           entity (str): Notes referring entity, RF ID.
-           author (str): Notes by author, RF ID.
-           title (str): Notes by title.
-           topic (Union[str, list]): Notes by topic, RF ID.
-           label (str): Notes by label, by name.
-           source (str): source of note.
-           tagged_text (bool): Should text contain tags. Defaults to False.
-           serialization (str): Entity serializer (id, min, full, raw).
-           max_results (int): Maximum number of references (not notes), at most 1000. Default 10.
-           notes_per_page (int): Number of notes for each paged request.
+            `/analystnote/search`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AnalystNoteSearchError: if API error occurs.
-
-        Returns:
-            List[AnalystNote]: List of deduplicated AnalystNote objects.
+            ValidationError: If any supplied parameter is of incorrect type.
+            AnalystNoteSearchError: If API error occurs.
         """
         responses = []
         topic = None if topic == [] else topic
@@ -136,29 +129,21 @@ class AnalystNoteMgr:
 
     @debug_call
     @validate_call
-    @connection_exceptions(
-        ignore_status_code=[404],
-        exception_to_raise=AnalystNoteLookupError,
-    )
+    @connection_exceptions(ignore_status_code=[404], exception_to_raise=AnalystNoteLookupError)
     def lookup(
-        self, note_id: str, tagged_text: bool = False, serialization: str = 'full'
-    ) -> AnalystNote:
-        """Lookup an analyst note by ID.
+        self,
+        note_id: Annotated[str, Doc('The ID of the analyst note to look up.')],
+        tagged_text: Annotated[bool, Doc('Add RF IDs to the note entities.')] = False,
+        serialization: Annotated[str, Doc('The serialization type of the payload.')] = 'full',
+    ) -> Annotated[AnalystNote, Doc('The requested note.')]:
+        """Look up an analyst note by ID.
 
         Endpoint:
-            ``/analystnote/lookup/{note_id}``
-
-        Args:
-           note_id (str): The ID of the analyst note to lookup
-           tagged_text (bool): Add RF IDs to note entities, default to False.
-           serialization (str): Serialization type of payload. Default to full.
+            `/analystnote/lookup/{note_id}`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AnalystNoteLookupError: if API error occurs.
-
-        Returns:
-            AnalystNote: Requested note.
+            ValidationError: If any supplied parameter is of incorrect type.
+            AnalystNoteLookupError: If API error occurs.
         """
         if not note_id.startswith('doc:'):
             note_id = f'doc:{note_id}'
@@ -175,21 +160,17 @@ class AnalystNoteMgr:
     @connection_exceptions(
         ignore_status_code=[404], exception_to_raise=AnalystNoteDeleteError, on_ignore_return=False
     )
-    def delete(self, note_id: str) -> bool:
-        """Delete Analyst Note.
+    def delete(
+        self, note_id: Annotated[str, Doc('The ID of the analyst note to look up.')]
+    ) -> Annotated[bool, Doc('True if delete is successful, False otherwise.')]:
+        """Delete an analyst note.
 
         Endpoint:
-            ``/analystnote/delete/{note_id}``
-
-        Args:
-            note_id (str): The ID of the note to delete
+            `/analystnote/delete/{note_id}`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AnalystNoteDeleteError: if connection error occurs.
-
-        Returns:
-            Union[bool, None]: True if delete ok else False
+            ValidationError: If any supplied parameter is of incorrect type.
+            AnalystNoteDeleteError: If connection error occurs.
         """
         if not note_id.startswith('doc:'):
             note_id = f'doc:{note_id}'
@@ -206,37 +187,28 @@ class AnalystNoteMgr:
     )
     def preview(
         self,
-        title: str,
-        text: str,
-        published: Optional[str] = None,
-        topic: Union[str, list[str], None] = None,
-        context_entities: Optional[list[str]] = None,
-        note_entities: Optional[list[str]] = None,
-        validation_urls: Optional[list[str]] = None,
-        source: Optional[str] = None,
-    ) -> AnalystNotePreviewOut:
-        """Preview of the AnalystNote. It does not create a note, it just return how the note
-        will look like.
+        title: Annotated[str, Doc('The title of the note.')],
+        text: Annotated[str, Doc('The text of the note.')],
+        published: Annotated[Optional[str], Doc('The date when the note was published.')] = None,
+        topic: Annotated[Union[str, list[str], None], Doc('The topic of the note.')] = None,
+        context_entities: Annotated[
+            Optional[list[str]], Doc('The context entities of the note.')
+        ] = None,
+        note_entities: Annotated[Optional[list[str]], Doc('The note entities of the note.')] = None,
+        validation_urls: Annotated[
+            Optional[list[str]], Doc('The validation URLs of the note.')
+        ] = None,
+        source: Annotated[Optional[str], Doc('The source of the note.')] = None,
+    ) -> Annotated[AnalystNotePreviewOut, Doc('The note that will be created.')]:
+        """Preview of the AnalystNote. It does not create a note; it just returns how the note
+        will look.
 
         Endpoint:
-            ``/analystnote/preview``
-
-        Args:
-            title (str): title of the note.
-            text (str): text of the note.
-            published (Optional[str]): date when the note was published.
-            topic (Optional[List[str]]): topic of the note.
-            context_entities (Optional[List[str]]): context entities of the note.
-            note_entities (Optional[List[str]]): note entities of the note.
-            source (Optional[List[str]]): source of the note.
-            validation_urls (Optional[List[str]]): validation urls of the note.
+            `/analystnote/preview`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AnalystNotePreviewRequest: if connection error occurs.
-
-        Returns:
-            AnalystNotePreviewOut: note that will be created.
+            ValidationError: If any supplied parameter is of incorrect type.
+            AnalystNotePreviewRequest: If connection error occurs.
         """
         if topic:
             topic = topic if isinstance(topic, list) else [topic]
@@ -265,39 +237,30 @@ class AnalystNoteMgr:
     @connection_exceptions(ignore_status_code=[404], exception_to_raise=AnalystNotePublishError)
     def publish(
         self,
-        title: str,
-        text: str,
-        published: Optional[str] = None,
-        topic: Union[str, list[str], None] = None,
-        context_entities: Optional[list[str]] = None,
-        note_entities: Optional[list[str]] = None,
-        validation_urls: Optional[list[str]] = None,
-        source: Optional[str] = None,
-        note_id: Optional[str] = None,
-    ) -> AnalystNotePublishOut:
-        """Publish of data. This method does create a note and returns the id.
+        title: Annotated[str, Doc('The title of the note.')],
+        text: Annotated[str, Doc('The text of the note.')],
+        published: Annotated[Optional[str], Doc('The date when the note was published.')] = None,
+        topic: Annotated[Union[str, list[str], None], Doc('The topic of the note.')] = None,
+        context_entities: Annotated[
+            Optional[list[str]], Doc('The context entities of the note.')
+        ] = None,
+        note_entities: Annotated[Optional[list[str]], Doc('The note entities of the note.')] = None,
+        validation_urls: Annotated[
+            Optional[list[str]], Doc('The validation URLs of the note.')
+        ] = None,
+        source: Annotated[Optional[str], Doc('The source of the note.')] = None,
+        note_id: Annotated[
+            Optional[str], Doc('The ID of the note. Use if you want to modify an existing note.')
+        ] = None,
+    ) -> Annotated[AnalystNotePublishOut, Doc('The published note.')]:
+        """Publish data. This method creates a note and returns its ID.
 
         Endpoint:
-            ``/analystnote/publish``
-
-        Args:
-            title (str): title of the note.
-            text (str): text of the note.
-            published (Optional[str]): date when the note was published.
-            topic (Optional[List[str]]): topic of the note.
-            context_entities (Optional[List[str]]): context entities of the note.
-            note_entities (Optional[List[str]]): note entities of the note.
-            entities (Optional[List[str]]): entities of the note.
-            validation_urls (Optional[List[str]]): validation urls of the note.
-            note_id (Optional[str]): id of the note, use if you want to modify an existing note.
-            source (Optional[str]): source of the note.
+            `/analystnote/publish`
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AnalystNotePublishError: if connection error occurs.
-
-        Returns:
-            AnalystNotePublishOut: published note
+            ValidationError: If any supplied parameter is of incorrect type.
+            AnalystNotePublishError: If connection error occurs.
         """
         if topic:
             topic = topic if isinstance(topic, list) else [topic]
@@ -327,41 +290,38 @@ class AnalystNoteMgr:
         exception_to_raise=AnalystNoteAttachmentError,
         on_ignore_return=(b'', None),
     )
-    def fetch_attachment(self, note_id: str) -> tuple[bytes, str]:
-        """Get Analyst Note Attachment. To work with the attachment is the same no matter the ext.
+    def fetch_attachment(
+        self,
+        note_id: Annotated[str, Doc('The ID of the note.')],
+    ) -> Annotated[
+        tuple[bytes, str],
+        Doc('A tuple containing the file content (bytes) and the file extension (str).'),
+    ]:
+        """Get an analyst note attachment.
 
-
-        Example:
-            Fetch and save an attachment from an Analyst Note:
-
-            .. code-block:: python
-                :linenos:
-
-                from psengine.analyst_notes import save_attachment
-
-                # note with pdf attachment
-                attachment, extension = note_mgr.fetch_attachment('tPtLVw')
-                save_attachment('tPtLVw', attachment, extension)
-
-                # note with yar attachment
-                attachment, extension = note_mgr.fetch_attachment('oJeqDP')
-                save_attachment('oJeqDP', attachment, extension)
-
+        To work with the attachment is the same regardless of the file extension.
 
         Endpoint:
-            ``/analystnote/attachment/{note_id}``
+            `/analystnote/attachment/{note_id}`
 
+        Example:
+            Fetch and save an attachment from an analyst note:
 
-        Args:
-            note_id (str): id of the note
+            ```python
+            from psengine.analyst_notes import save_attachment
+
+            # Note with PDF attachment
+            attachment, extension = note_mgr.fetch_attachment('tPtLVw')
+            save_attachment('tPtLVw', attachment, extension)
+
+            # Note with YAR attachment
+            attachment, extension = note_mgr.fetch_attachment('oJeqDP')
+            save_attachment('oJeqDP', attachment, extension)
+            ```
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            AnalystNoteAttachmentError: if connection error occurs.
-
-        Returns:
-            Tuple[bytes, str]: content of the attachment in bytes and extension of the file
-
+            ValidationError: If any supplied parameter is of incorrect type.
+            AnalystNoteAttachmentError: If connection error occurs.
         """
         if not note_id.startswith('doc:'):
             note_id = f'doc:{note_id}'
@@ -381,10 +341,7 @@ class AnalystNoteMgr:
         """Search for Analayst notes.
 
         Raises:
-            AnalystNoteSearchError: if connection error occurs.
-
-        Return:
-            dict: json data for 'data.results' for the analayst notes found by the search.
+            AnalystNoteSearchError: If connection error occurs.
         """
         self.log.info(f'Searching analyst notes with query: {data}')
         search_data = AnalystNoteSearchIn.model_validate(data)

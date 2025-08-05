@@ -13,9 +13,10 @@
 
 import logging
 from contextlib import suppress
-from typing import Optional, Union
+from typing import Annotated, Optional, Union
 
 from pydantic import Field, validate_call
+from typing_extensions import Doc
 
 from ..constants import DEFAULT_LIMIT
 from ..endpoints import (
@@ -58,14 +59,15 @@ from .models.common_models import FilterIn
 class IdentityMgr:
     """Manages requests for Recorded Future Identity API."""
 
-    def __init__(self, rf_token: str = None):
-        """Initializes the IdentityMgr object.
+    def __init__(
+        self,
+        rf_token: Annotated[Optional[str], Doc('A Recorded Future API token.')] = None,
+    ) -> None:
+        """Initializes the `IdentityMgr` object.
 
-
-        Note: The identity API has some rate limiting that the user need to take into account.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token. Defaults to None
+        Note:
+            The Identity API has some rate limiting that the user needs to take into account.
+            See: [Support Article](https://support.recordedfuture.com/hc/en-us/articles/33694346668819-Identity-Lookup-API)
         """
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
@@ -75,55 +77,56 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=DetectionsFetchError)
     def fetch_detections(
         self,
-        domains: Union[str, list[str], None] = None,
-        created_gte: Optional[str] = None,
-        created_lt: Optional[str] = None,
-        cookies: Optional[str] = None,
-        detection_type: Optional[str] = None,
-        organization_id: Union[list[str], str, None] = None,
-        include_enterprise_level: Optional[bool] = None,
-        novel_only: Optional[bool] = None,
-        max_results: Optional[int] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
-        detections_per_page: Optional[int] = Field(
-            ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE
-        ),
-        offset: Optional[str] = None,
-    ) -> Detections:
+        domains: Annotated[
+            Union[str, list[str], None], Doc('A domain or a list of domains to filter.')
+        ] = None,
+        created_gte: Annotated[
+            Optional[str],
+            Doc(
+                'A timestamp to return detections created on or after it (e.g., "7d" or ISO 8601).'
+            ),
+        ] = None,
+        created_lt: Annotated[
+            Optional[str], Doc('A timestamp to return detections created before it.')
+        ] = None,
+        cookies: Annotated[Optional[str], Doc('A filter by cookie type.')] = None,
+        detection_type: Annotated[
+            Optional[str], Doc('A detection type to filter by ("workforce", "external").')
+        ] = None,
+        organization_id: Annotated[
+            Union[list[str], str, None],
+            Doc('Organization ID or a list of IDs for multi-org filtering.'),
+        ] = None,
+        include_enterprise_level: Annotated[
+            Optional[bool], Doc('Whether to include enterprise-level detections.')
+        ] = None,
+        novel_only: Annotated[
+            Optional[bool], Doc('If True, only return novel (previously unseen) detections.')
+        ] = None,
+        max_results: Annotated[
+            Optional[int], Doc('The maximum number of detections returned.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
+        detections_per_page: Annotated[
+            Optional[int], Doc('The number of detections per page for pagination.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
+        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+    ) -> Annotated[Detections, Doc('A structured response containing the detection records.')]:
         """Fetch latest detections.
 
-        Example:
-
-            .. code-block:: python
-                :linenos:
-
-                from psengine.identity import IdentityMgr
-
-                identity_mgr = IdentityMgr()
-                detections = identity_mgr.fetch_detections(created_gte='7d', novel_only=True)
-
         Endpoint:
-            ``/identity/detections``
+            `/identity/detections`
 
-        Args:
-            domains (Union[str, list[str], optional]): Domain or list of domains to filter.
-            created_gte (str, optional): Return detections created on or after this timestamp
-                ('7d' or ISO 8601).
-            created_lt (str, optional): Return detections created before this timestamp.
-            detection_type (str, optional): Filter by detection type ('workforce', 'external').
-            cookies (str, optional): Filter by cookie type.
-            organization_id (Union[str, list[str], optional]): Organization ID(s) for multi-orgs.
-            include_enterprise_level (bool, optional): Whether include enterprise-level detections.
-            novel_only (bool, optional): If True, only return novel (previously unseen) detections.
-            max_results (int, optional): Max number of detections returned (default: DEFAULT_LIMIT).
-            detections_per_page (int, optional): Number of detections per page for pagination.
-            offset (str, optional): Offset token for paginated results.
+        Example:
+            ```python
+            from psengine.identity import IdentityMgr
 
-        Returns:
-            DetectionsOut: A structured response containing the detection records.
+            identity_mgr = IdentityMgr()
+            detections = identity_mgr.fetch_detections(created_gte='7d', novel_only=True)
+            ```
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            DetectionsFetchError: if connection error occurs.
+            ValidationError: If any supplied parameter is of incorrect type.
+            DetectionsFetchError: If connection error occurs.
         """
         data = {
             'organization_id': organization_id,
@@ -160,76 +163,64 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentityLookupError)
     def lookup_hostname(
         self,
-        hostname: str,
-        first_downloaded_gte: Optional[str] = None,
-        latest_downloaded_gte: Optional[str] = None,
-        exfiltration_date_gte: Optional[str] = None,
-        properties: Union[str, list[str], None] = None,
-        breach_name: Optional[str] = None,
-        breach_date: Optional[str] = None,
-        dump_name: Optional[str] = None,
-        dump_date: Optional[str] = None,
-        username_properties: Union[str, list[str], None] = None,
-        authorization_technologies: Union[str, list[str], None] = None,
-        authorization_protocols: Union[str, list[str], None] = None,
-        malware_families: Union[str, list[str], None] = None,
-        organization_id: Optional[str] = None,
-        max_results: Optional[int] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
-        identities_per_page: Optional[int] = Field(
-            ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE
-        ),
-        offset: Optional[str] = None,
-    ) -> list[LeakedIdentity]:
+        hostname: Annotated[str, Doc('The hostname of a compromised machine.')],
+        first_downloaded_gte: Annotated[
+            Optional[str],
+            Doc('First date when these credentials were received and indexed by Recorded Future.'),
+        ] = None,
+        latest_downloaded_gte: Annotated[
+            Optional[str],
+            Doc('Latest date when these credentials were received and indexed by Recorded Future.'),
+        ] = None,
+        exfiltration_date_gte: Annotated[
+            Optional[str],
+            Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
+        ] = None,
+        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
+        breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
+        breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
+        dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
+        dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
+        username_properties: Annotated[
+            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+        ] = None,
+        authorization_technologies: Annotated[
+            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+        ] = None,
+        authorization_protocols: Annotated[
+            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+        ] = None,
+        malware_families: Annotated[
+            Union[str, list[str], None], Doc('Known infostealer malware families.')
+        ] = None,
+        organization_id: Annotated[
+            Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
+        ] = None,
+        max_results: Annotated[
+            Optional[int], Doc('The maximum number of credential records returned.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
+        identities_per_page: Annotated[
+            Optional[int], Doc('The number of credentials per page for pagination.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
+        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+    ) -> Annotated[list[LeakedIdentity], Doc('A list containing the leaked identity records.')]:
         """Return credentials for a given hostname.
 
-        Example:
-            .. code-block:: python
-                :linenos:
-
-                from psengine.identity import IdentityMgr
-
-                identity_mgr = IdentityMgr()
-                properties = ["Letter", "Symbol"]
-                creds = identity_mgr.lookup_hostname(hostname="HOSTNAME", properties=properties)
-
         Endpoint:
-            ``/identity/hostname/lookup``
+            `/identity/hostname/lookup`
 
-        Args:
-            hostname (str): The hostname of a compromised machine.
-            first_downloaded_gte (Optional[str]): First date when these credentials were received
-                and indexed by Recorded Future.
-            latest_downloaded_gte (Optional[str]): Latest date when these credentials were received
-                and indexed by Recorded Future. It is not unusual for the same credentials to be
-                exposed multiple times, in data from different dumps and/or logs.
-            exfiltration_date_gte (Optional[str]): Date when the infostealer malware exfiltrated
-                data from the victim device. If Recorded Future has received data indicating that
-                the credentials were stolen and exfiltrated repeatedly, then the response will
-                contain several exfiltration dates.
-            properties (Union[str, list[str]], None]): Password properties.
-            breach_name (Optional[str]): The name of a breach.
-            breach_date (Optional[str]): The date of a breach.
-            dump_name (Optional[str]): The name of a database dump.
-            dump_date (Optional[str]): The date of a database dump.
-            username_properties (Optional[list[str]]): Only valid value is 'Email'.
-            authorization_technologies (Union[str, list[str]], None]): Only include credential with
-                these authorization technologies.
-            authorization_protocols (Union[str, list[str]], None]): Only include credentials with
-                these authorization protocols.
-            malware_families (Union[str, list[str]], None]): Known infostealer malware families
-                (refer to User Interface for latest list of supported values).
-            organization_id (Optional[str]): The org_id if utilizing a multi-org setup.
-            max_results (int, optional): Specifies the maximum number of credential records returned
-                (default: DEFAULT_LIMIT).
-            identities_per_page (int, optional): Number of credentials per page for pagination.
-            offset (str, optional): Offset token for paginated results.
+        Example:
+            ```python
+            from psengine.identity import IdentityMgr
 
-        Returns:
-            list[LeakedIdentity]: A list containing the leaked identity records.
+            identity_mgr = IdentityMgr()
+            properties = ["Letter", "Symbol"]
+            creds = identity_mgr.lookup_hostname(hostname="HOSTNAME", properties=properties)
+            ```
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            IdentityLookupError: if connection error occurs.
+            ValidationError: If any supplied parameter is of incorrect type.
+            IdentityLookupError: If connection error occurs.
         """
         filter_params = locals()
         for param in [
@@ -270,48 +261,44 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentityLookupError)
     def lookup_password(
         self,
-        hash_prefix: Optional[str] = None,
-        algorithm: Optional[str] = None,
-        passwords: Optional[list[tuple[str, str]]] = None,
-    ) -> list[PasswordLookup]:
+        hash_prefix: Annotated[
+            Optional[str], Doc('The prefix of the password hash to be looked up.')
+        ] = None,
+        algorithm: Annotated[
+            Optional[str], Doc('The algorithm used for the password hash.')
+        ] = None,
+        passwords: Annotated[
+            Optional[list[tuple[str, str]]],
+            Doc('A list of tuples containing hash prefixes and their respective algorithms.'),
+        ] = None,
+    ) -> Annotated[list[PasswordLookup], Doc('A list of password lookup results.')]:
         """Lookup passwords to determine if they have been previously exposed.
 
         Check if either specific password hash prefixes and algorithms, or a list of hash and
         algorithm tuples, have been exposed in the past.
 
-        Example:
-
-            .. code-block:: python
-                :linenos:
-
-                from psengine.identity import IdentityMgr
-
-                identity_mgr = IdentityMgr()
-                creds = identity_mgr.lookup_password(hash_prefix='8e9a96e', algorithm='sha256')
-
-                passwords = [
-                    ('995bb852c775d6', 'ntlm'),
-                    ('8985b89acb97b011913c8b7f57e298d2', 'md5'),
-                ]
-
-                creds = identity_mgr.lookup_password(passwords=passwords)
-
         Endpoint:
-            ``/identity/password/lookup``
+            `/identity/password/lookup`
 
-        Args:
-            hash_prefix (str, optional): The prefix of the password hash to be looked up.
-            algorithm (str, optional): The algorithm used for the password hash.
-            passwords (list[tuple[str, str]], optional): A list of tuples containing hash prefixes
-                and their respective algorithms.
+        Example:
+            ```python
+            from psengine.identity import IdentityMgr
+
+            identity_mgr = IdentityMgr()
+            creds = identity_mgr.lookup_password(hash_prefix='8e9a96e', algorithm='sha256')
+
+            passwords = [
+                ('995bb852c775d6', 'ntlm'),
+                ('8985b89acb97b011913c8b7f57e298d2', 'md5'),
+            ]
+
+            creds = identity_mgr.lookup_password(passwords=passwords)
+            ```
 
         Raises:
-            ValidationError: if any supplied parameter is of incorrect type.
-            ValueError: if a wrong combination of params is given.
-            IdentityLookupError: if connection error occurs.
-
-        Returns:
-            list[PasswordLookup]: A list of password lookup results.
+            ValidationError: If any supplied parameter is of incorrect type.
+            ValueError: If a wrong combination of parameters is given.
+            IdentityLookupError: If connection error occurs.
         """
         if passwords and (hash_prefix or algorithm):
             msg = 'Specify only hash_prefix with algorithm, or only passwords'
@@ -345,83 +332,67 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentityLookupError)
     def lookup_ip(
         self,
-        ip: Optional[str] = None,
-        range_gte: Optional[str] = None,
-        range_gt: Optional[str] = None,
-        range_lte: Optional[str] = None,
-        range_lt: Optional[str] = None,
-        first_downloaded_gte: Optional[str] = None,
-        latest_downloaded_gte: Optional[str] = None,
-        exfiltration_date_gte: Optional[str] = None,
-        properties: Union[str, list[str], None] = None,
-        breach_name: Optional[str] = None,
-        breach_date: Optional[str] = None,
-        dump_name: Optional[str] = None,
-        dump_date: Optional[str] = None,
-        username_properties: Union[str, list[str], None] = None,
-        authorization_technologies: Union[str, list[str], None] = None,
-        authorization_protocols: Union[str, list[str], None] = None,
-        malware_families: Union[str, list[str], None] = None,
-        organization_id: Optional[str] = None,
-        max_results: Optional[int] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
-        identities_per_page: Optional[int] = Field(
-            ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE
-        ),
-        offset: Optional[str] = None,
-    ) -> list[LeakedIdentity]:
+        ip: Annotated[Optional[str], Doc('A subject IP address.')] = None,
+        range_gte: Annotated[Optional[str], Doc('An IP address lower bound included.')] = None,
+        range_gt: Annotated[Optional[str], Doc('An IP address lower bound excluded.')] = None,
+        range_lte: Annotated[Optional[str], Doc('An IP address upper bound included.')] = None,
+        range_lt: Annotated[Optional[str], Doc('An IP address upper bound excluded.')] = None,
+        first_downloaded_gte: Annotated[
+            Optional[str],
+            Doc('First date when these credentials were received and indexed by Recorded Future.'),
+        ] = None,
+        latest_downloaded_gte: Annotated[
+            Optional[str],
+            Doc('Latest date when these credentials were received and indexed by Recorded Future.'),
+        ] = None,
+        exfiltration_date_gte: Annotated[
+            Optional[str],
+            Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
+        ] = None,
+        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
+        breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
+        breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
+        dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
+        dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
+        username_properties: Annotated[
+            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+        ] = None,
+        authorization_technologies: Annotated[
+            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+        ] = None,
+        authorization_protocols: Annotated[
+            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+        ] = None,
+        malware_families: Annotated[
+            Union[str, list[str], None], Doc('Known infostealer malware families.')
+        ] = None,
+        organization_id: Annotated[
+            Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
+        ] = None,
+        max_results: Annotated[
+            Optional[int], Doc('The maximum number of credentials returned.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
+        identities_per_page: Annotated[
+            Optional[int], Doc('The number of credentials per page for pagination.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
+        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+    ) -> Annotated[list[LeakedIdentity], Doc('A list containing the leaked identity records.')]:
         """Lookup credentials associated with a specified IP address or an IP range.
 
-        Example:
-
-            .. code-block:: python
-                :linenos:
-
-                from psengine.identity import IdentityMgr
-
-                identity_mgr = IdentityMgr()
-                creds = identity_mgr.lookup_ip(ip="8.8.8.8")
-
         Endpoint:
-            ``/identity/ip/lookup``
+            `/identity/ip/lookup`
 
-        Args:
-            ip (str, optional): Subject IP address.
-            range_gte (str, optional): IP address lower bound included.
-            range_gt (str, optional): IP address lower bound excluded.
-            range_lte (str, optional): IP address upper bound included.
-            range_lt (str, optional): IP address upper bound excluded.
-            first_downloaded_gte (Optional[str]): First date when these credentials were received
-                and indexed by Recorded Future.
-            latest_downloaded_gte (Optional[str]): Latest date when these credentials were received
-                and indexed by Recorded Future. It is not unusual for the same credentials to be
-                exposed multiple times, in data from different dumps and/or logs.
-            exfiltration_date_gte (Optional[str]): Date when the infostealer malware exfiltrated
-                data from the victim device. If Recorded Future has received data indicating that
-                the credentials were stolen and exfiltrated repeatedly, then the response will
-                contain several exfiltration dates.
-            properties (Union[str, list[str]], None]): Password properties.
-            breach_name (Optional[str]): The name of a breach.
-            breach_date (Optional[str]): The date of a breach.
-            dump_name (Optional[str]): The name of a database dump.
-            dump_date (Optional[str]): The date of a database dump.
-            username_properties (Union[str, list[str]], None]): Only valid value is 'Email'.
-            authorization_technologies (Union[str, list[str]], None]): Only include credential with
-                these authorization technologies.
-            authorization_protocols (Union[str, list[str]], None]): Only include credentials with
-                these authorization protocols.
-            malware_families (Union[str, list[str]], None]): Known infostealer malware families.
-            organization_id (Optional[str]): The org_id if utilizing a multi-org setup.
-            max_results (Optional[int]): Specifies the maximum number of credentials returned
-                (default: DEFAULT_LIMIT).
-            identities_per_page (Optional[int]): Number of credentials per page for pagination.
-            offset (Optional[str]): Offset token for paginated results.
+        Example:
+            ```python
+            from psengine.identity import IdentityMgr
+
+            identity_mgr = IdentityMgr()
+            creds = identity_mgr.lookup_ip(ip="8.8.8.8")
+            ```
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            IdentityLookupError: if connection error occurs.
-
-        Returns:
-            list[LeakedIdentity]: A list containing the leaked identity records.
+            ValidationError: If any supplied parameter is of incorrect type.
+            IdentityLookupError: If connection error occurs.
         """
         if not (ip or range_gte or range_gt or range_lte or range_lt):
             raise ValueError('Either an IP or a range has to be specified')
@@ -476,93 +447,86 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentityLookupError)
     def lookup_credentials(
         self,
-        subjects: Union[str, list[str], None] = None,
-        subjects_sha1: Union[str, list[str], None] = None,
-        subjects_login: Union[list[dict[str, str]], list[CredentialSearch], None] = None,
-        first_downloaded_gte: Optional[str] = None,
-        latest_downloaded_gte: Optional[str] = None,
-        exfiltration_date_gte: Optional[str] = None,
-        properties: Union[str, list[str], None] = None,
-        breach_name: Optional[str] = None,
-        breach_date: Optional[str] = None,
-        dump_name: Optional[str] = None,
-        dump_date: Optional[str] = None,
-        username_properties: Union[str, list[str], None] = None,
-        authorization_technologies: Union[str, list[str], None] = None,
-        authorization_protocols: Union[str, list[str], None] = None,
-        malware_families: Union[str, list[str], None] = None,
-        organization_id: Optional[str] = None,
-        max_results: Optional[int] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
-        identities_per_page: Optional[int] = Field(
-            ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE
-        ),
-        offset: Optional[str] = None,
-    ) -> list[LeakedIdentity]:
+        subjects: Annotated[
+            Union[str, list[str], None], Doc('An email or a list of emails to be queried.')
+        ] = None,
+        subjects_sha1: Annotated[
+            Union[str, list[str], None],
+            Doc('A SHA1 hash of a username or email to avoid sending the plain subject.'),
+        ] = None,
+        subjects_login: Annotated[
+            Union[list[dict[str, str]], list[CredentialSearch], None],
+            Doc(
+                'Username details when login is not an email (also requires authorization domain).'
+            ),
+        ] = None,
+        first_downloaded_gte: Annotated[
+            Optional[str],
+            Doc('First date when these credentials were received and indexed by Recorded Future.'),
+        ] = None,
+        latest_downloaded_gte: Annotated[
+            Optional[str],
+            Doc('Latest date when these credentials were received and indexed by Recorded Future.'),
+        ] = None,
+        exfiltration_date_gte: Annotated[
+            Optional[str],
+            Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
+        ] = None,
+        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
+        breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
+        breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
+        dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
+        dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
+        username_properties: Annotated[
+            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+        ] = None,
+        authorization_technologies: Annotated[
+            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+        ] = None,
+        authorization_protocols: Annotated[
+            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+        ] = None,
+        malware_families: Annotated[
+            Union[str, list[str], None], Doc('Known infostealer malware families.')
+        ] = None,
+        organization_id: Annotated[
+            Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
+        ] = None,
+        max_results: Annotated[
+            Optional[int], Doc('The maximum number of credentials returned.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
+        identities_per_page: Annotated[
+            Optional[int], Doc('The number of credentials per page for pagination.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
+        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+    ) -> Annotated[list[LeakedIdentity], Doc('A list containing the leaked identity records.')]:
         """Lookup credential data for a set of subjects.
 
-        The subject can be an email, a sha1 or a combination of username/domain. Different types of
-        subjects can be specified at the same time but at least one has to be present.
-
-        Example:
-
-             .. code-block:: python
-                :linenos:
-
-                from psengine.identity import IdentityMgr
-
-                identity_mgr = IdentityMgr()
-                subjects = ["user@domain.com", "admin@domain.com"]
-                creds = identity_mgr.lookup_credentials(subjects=subjects)
-
-                # or lookup from a search result
-                search = identity_mgr.search_credentials(
-                        domains='norsegods.online',
-                        domain_types='Email'
-                )
-                data = identity_mgr.lookup_credentials(subjects_login=search)
+        The subject can be an email, a SHA1 hash, or a combination of username and domain.
+        Different types of subjects can be specified simultaneously, at least one must be present.
 
         Endpoint:
-            ``/identity/credentials/lookup``
+            `/identity/credentials/lookup`
 
-        Args:
-            subjects (Union[str, list[str]], optional): An email (or list of emails) to be queried.
-            subjects_sha1 (Union[str, list[str]], optional): The sha1 hash of a username or email.
-                Utilized so that the actual subject being looked up is hashed and not sent to api.
-            subjects_login (Optional[list[dict[str, str]]]): Username details when the login is a
-                username and not an email address (also requires authorization domain).
-            first_downloaded_gte (Optional[str]): The first date when these credentials were
-                received and indexed by Recorded Future.
-            latest_downloaded_gte (Optional[str]): Latest date when these credentials were received
-                and indexed by Recorded Future. It is not unusual for the same credentials to be
-                exposed multiple times, in data from different dumps and/or logs.
-            exfiltration_date_gte (Optional[str]): Date when the infostealer malware exfiltrated
-                data from the victim device. If Recorded Future has received data indicating that
-                the credentials were stolen and exfiltrated repeatedly, then the response will
-                contain several exfiltration dates.
-            properties (Union[str, list[str]], optional): Password properties.
-            breach_name (Optional[str]): The name of a breach.
-            breach_date (Optional[str]): The date of a breach.
-            dump_name (Optional[str]): The name of a database dump.
-            dump_date (Optional[str]): The date of a database dump.
-            username_properties (Union[str, list[str]], None]): Only valid value is 'Email'.
-            authorization_technologies (Union[str, list[str]], None]): Only include credential with
-                these authorization technologies.
-            authorization_protocols (Union[str, list[str]], None]): Only include credentials with
-                these authorization protocols.
-            malware_families (Union[str, list[str]], None]): Known infostealer malware families.
-            organization_id (Optional[str]): The org_id if utilizing a multi-org setup.
-            max_results (int, optional): Specifies the maximum number of credentials returned
-                (default: DEFAULT_LIMIT).
-            identities_per_page (Optional[int]): Number of credentials per page for pagination.
-            offset (Optional[str]): Offset token for paginated results.
+        Example:
+            ```python
+            from psengine.identity import IdentityMgr
 
+            identity_mgr = IdentityMgr()
+            subjects = ["user@domain.com", "admin@domain.com"]
+            creds = identity_mgr.lookup_credentials(subjects=subjects)
+
+            # Or lookup from a search result
+            search = identity_mgr.search_credentials(
+                domains='norsegods.online',
+                domain_types='Email'
+            )
+            data = identity_mgr.lookup_credentials(subjects_login=search)
+            ```
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            IdentityLookupError: if connection error occurs.
-
-        Returns:
-            list[LeakedIdentity]: A list containing the leaked identity records.
+            ValidationError: If any supplied parameter is of incorrect type.
+            IdentityLookupError: If connection error occurs.
         """
         if not (subjects_sha1 or subjects_login or subjects):
             raise ValueError('At least one subject type has to be provided')
@@ -608,79 +572,68 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentitySearchError)
     def search_credentials(
         self,
-        domains: Union[str, list[str]],
-        domain_types: Union[str, list[str], None] = None,
-        first_downloaded_gte: Optional[str] = None,
-        latest_downloaded_gte: Optional[str] = None,
-        exfiltration_date_gte: Optional[str] = None,
-        properties: Union[str, list[str], None] = None,
-        breach_name: Optional[str] = None,
-        breach_date: Optional[str] = None,
-        dump_name: Optional[str] = None,
-        dump_date: Optional[str] = None,
-        username_properties: Union[str, list[str], None] = None,
-        authorization_technologies: Union[str, list[str], None] = None,
-        authorization_protocols: Union[str, list[str], None] = None,
-        malware_families: Union[str, list[str], None] = None,
-        organization_id: Optional[str] = None,
-        max_results: Optional[int] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
-        identities_per_page: Optional[int] = Field(
-            ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE
-        ),
-        offset: Optional[str] = None,
-    ) -> list[CredentialSearch]:
-        """Search Credential data for a set of domains.
-
-        Example:
-
-             .. code-block:: python
-                :linenos:
-
-                from psengine.identity import IdentityMgr
-
-                identity_mgr = IdentityMgr()
-                domains = ["domain.com"]
-                creds = identity_mgr.search_credentials(domains=domains)
+        domains: Annotated[Union[str, list[str]], Doc('One or more domains to be queried.')],
+        domain_types: Annotated[
+            Union[str, list[str], None],
+            Doc("Domain type filter: 'Email', 'Authorization', or both."),
+        ] = None,
+        first_downloaded_gte: Annotated[
+            Optional[str],
+            Doc('First date when these credentials were received and indexed by Recorded Future.'),
+        ] = None,
+        latest_downloaded_gte: Annotated[
+            Optional[str],
+            Doc('Latest date when these credentials were received and indexed by Recorded Future.'),
+        ] = None,
+        exfiltration_date_gte: Annotated[
+            Optional[str],
+            Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
+        ] = None,
+        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
+        breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
+        breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
+        dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
+        dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
+        username_properties: Annotated[
+            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+        ] = None,
+        authorization_technologies: Annotated[
+            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+        ] = None,
+        authorization_protocols: Annotated[
+            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+        ] = None,
+        malware_families: Annotated[
+            Union[str, list[str], None], Doc('Known infostealer malware families.')
+        ] = None,
+        organization_id: Annotated[
+            Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
+        ] = None,
+        max_results: Annotated[
+            Optional[int], Doc('The maximum number of credentials returned.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
+        identities_per_page: Annotated[
+            Optional[int], Doc('The number of credentials per page for pagination.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
+        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+    ) -> Annotated[list[CredentialSearch], Doc('A list containing the search results.')]:
+        """Search credential data for a set of domains.
 
         Endpoint:
-            ``/identity/credentials/search``
+            `/identity/credentials/search`
 
-        Args:
-            domains (Union[str, list[str]]): A domain or multiple domains to be queried.
-            domain_types (Union[str, list[str]], None]): 'Email', 'Authorization' or both can be
-                specified in the array.
-            first_downloaded_gte (Optional[str]): The first date when these credentials were
-                received and indexed by Recorded Future.
-            latest_downloaded_gte (Optional[str]): Latest date when these credentials were received
-                and indexed by Recorded Future. It is not unusual for the same credentials to be
-                exposed multiple times, in data from different dumps and/or logs.
-            exfiltration_date_gte (Optional[str]): Date when the infostealer malware exfiltrated
-                data from the victim device. If Recorded Future has received data indicating that
-                the credentials were stolen and exfiltrated repeatedly, then the response will
-                contain several exfiltration dates.
-            properties (Union[str, list[str]], None]): Password properties.
-            breach_name (Optional[str]): The name of a breach.
-            breach_date (Optional[str]): The date of a breach.
-            dump_name (Optional[str]): The name of a database dump.
-            dump_date (Optional[str]): The date of a database dump.
-            username_properties (Union[str, list[str]], None]): Only valid value is 'Email'.
-            authorization_technologies (Union[str, list[str]], None]): Only include credential with
-                these authorization technologies.
-            authorization_protocols (Union[str, list[str]], None]): Only include credentials with
-                these authorization protocols.
-            malware_families (Union[str, list[str]], None]): Known infostealer malware families.
-            organization_id (Optional[str]): The org_id if utilizing a multi-org setup.
-            max_results (int, optional): Specifies the maximum number of credentials returned
-                (default: DEFAULT_LIMIT).
-            identities_per_page (Optional[int]): Number of credentials per page for pagination.
-            offset (Optional[str]): Offset token for paginated results.
+        Example:
+            ```python
+            from psengine.identity import IdentityMgr
+
+            identity_mgr = IdentityMgr()
+            domains = ["domain.com"]
+            creds = identity_mgr.search_credentials(domains=domains)
+            ```
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            IdentitySearchError: if connection error occurs.
-
-        Returns:
-            list[SearchResponseIdentity]: A list containing the search results.
+            ValidationError: If any supplied parameter is of incorrect type.
+            IdentitySearchError: If connection error occurs.
         """
         filter_params = locals()
         for param in [
@@ -721,36 +674,33 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentitySearchError)
     def search_dump(
         self,
-        names: Union[str, list[str]],
-        max_results: Optional[int] = Field(le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
-    ) -> DumpSearchOut:
+        names: Annotated[
+            Union[str, list[str]], Doc('The name(s) of a database dump to search for.')
+        ],
+        max_results: Annotated[
+            Optional[int], Doc('Maximum number of dump records to return.')
+        ] = Field(le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
+    ) -> Annotated[
+        DumpSearchOut,
+        Doc('A list containing the dump search results.'),
+    ]:
         """Search if a particular database dump is present.
 
-        Example:
-
-             .. code-block:: python
-                :linenos:
-
-                from psengine.identity import IdentityMgr
-
-                identity_mgr = IdentityMgr()
-                dump_name = "Dump Name"
-                dump_info = identity_mgr.search_dump(names=dump_name)
-
         Endpoint:
-            ``/identity/metadata/dump/search``
+            `/identity/metadata/dump/search`
 
-        Args:
-            names (Union[str, list[str]]): The name(s) of a database dump.
-            max_results (Optional[int]): Specifies the maximum number of dump records returned
-                (default: DEFAULT_LIMIT).
+        Example:
+            ```python
+            from psengine.identity import IdentityMgr
+
+            identity_mgr = IdentityMgr()
+            dump_name = "Dump Name"
+            dump_info = identity_mgr.search_dump(names=dump_name)
+            ```
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            IdentitySearchError: if connection error occurs.
-
-        Returns:
-            DumpSearchOut: A list containing the dump search results.
+            ValidationError: If any supplied parameter is of incorrect type.
+            IdentitySearchError: If connection error occurs.
         """
         data = {
             'names': names,
@@ -770,55 +720,46 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IncidentReportFetchError)
     def fetch_incident_report(
         self,
-        source: str,
-        include_details: bool = True,
-        organization_id: Union[list[str], str, None] = None,
-        offset: Optional[str] = None,
-        max_results: Optional[int] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
-        identities_per_page: Optional[int] = Field(
-            ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE
-        ),
-    ) -> IncidentReportOut:
+        source: Annotated[str, Doc('The raw archive name containing malware log data.')],
+        include_details: Annotated[
+            bool, Doc('Whether to include infected machine details.')
+        ] = True,
+        organization_id: Annotated[
+            Union[list[str], str, None], Doc('The org_id(s) in multi-org setup.')
+        ] = None,
+        offset: Annotated[Optional[str], Doc('Offset token for paginated results.')] = None,
+        max_results: Annotated[
+            Optional[int], Doc('Maximum number of credentials to return.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
+        identities_per_page: Annotated[
+            Optional[int], Doc('Number of credentials per page.')
+        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
+    ) -> Annotated[
+        IncidentReportOut,
+        Doc('A detailed incident report from the specified malware source.'),
+    ]:
         """Provides an exposure incident report for a single malware log.
 
-        This method requests the `/identity/incident/report` endpoint to fetch detailed reports
-        about exposure incidents related to a specific malware log source.
-
         Endpoint:
-            ``/identity/incident/report``
+            `/identity/incident/report`
 
         Example:
             Fetch incident report from a recent detection:
 
-            .. code-block:: python
-                :linenos:
+            ```python
+            from psengine.identity import IdentityMgr
 
-                from psengine.identity import IdentityMgr
+            identity_mgr = IdentityMgr()
+            detections = identity_mgr.fetch_detections(created_gte='7d', max_results=1)
+            recent_detection = detections.detections[0]
 
-                # fetch a recent novel detection
-                identity_mgr = IdentityMgr()
-                detections = identity_mgr.fetch_detections(created_gte='7d', max_results=1)
-                recent_detection = detections.detections[0]
-
-                # fetch incident report for a detection using the source field
-                source = recent_detection.dump.source
-                report = identity_mgr.fetch_incident_report(source=source, include_details=True)
-
-        Args:
-            source (str): The raw archive with malware log data.
-            include_details (bool): Return the machine details of the infected machine.
-            organization_id (Optional[str]): The org_id if utilizing a multi-org setup.
-            offset (Optional[str]): Offset token for paginated results.
-            max_results (int, optional): Specifies the maximum number of credentials returned
-                (default: DEFAULT_LIMIT).
-            identities_per_page (Optional[int]): Number of credentials per page for pagination.
+            source = recent_detection.dump.source
+            report = identity_mgr.fetch_incident_report(source=source, include_details=True)
+            ```
 
         Raises:
-            ValidationError if any supplied parameter is of incorrect type.
-            IncidentReportFetchError: if connection error occurs.
-
-        Returns:
-            IncidentReportOut: A detailed incident report.
+            ValidationError: If any supplied parameter is of incorrect type.
+            IncidentReportFetchError: If connection error occurs.
         """
         data = {
             'source': source,
@@ -860,7 +801,7 @@ class IdentityMgr:
         See lookup_hostname(), lookup_ip(), and/or lookup_credentials() for parameter descriptions.
 
         Raises:
-            ValidationError if any parameter is of incorrect type
+            ValidationError: if any parameter is of incorrect type
 
         Returns:
             FilterIn: Validated search query
