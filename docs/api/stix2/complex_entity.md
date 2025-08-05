@@ -1,0 +1,1 @@
+::: psengine.stix2.complex_entity
