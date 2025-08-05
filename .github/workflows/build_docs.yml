@@ -24,5 +24,7 @@ jobs:
       - name: Set up Python
         run: uv python install 3.12
 
-      - run: uv pip install '.[docs]'
+      - run: |
+          uv venv -p 3.12
+          uv pip install -e '.[docs]'
       - run: uv run mkdocs gh-deploy --force
