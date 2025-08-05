@@ -9,7 +9,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix: 
-        apps: ["analyst_notes", "base_http_client", "classic_alerts", "collective_insights", "config", "detection", "enrichment", "identity", "lists", "markdown", "playbook_alerts", "rf_client", "risklists", "stix2"]
+        apps: [
+          "analyst_notes", 
+          "base_http_client", 
+          "classic_alerts", 
+          "collective_insights", 
+          "config", 
+          "detection", 
+          "enrichment", 
+          "identity", 
+          "lists", 
+          "markdown", 
+          "playbook_alerts", 
+          "rf_client", 
+          "risklists", 
+          "stix2"
+        ]
     env:
       RF_TOKEN: ${{ secrets.RF_TOKEN }}
     
@@ -18,14 +33,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          
-      - name: Install dependencies
+        run: uv python install {{ vars.PYTHON_VERSION }} 
+      
+      - name: Set up venv
         run: |
-          python -m pip install --upgrade pip
-          pip install -e .
-          
+          uv venv -p {{ vars.PYTHON_VERSION }} 
+          uv pip install '.'
+
       - name: Run ${{matrix.apps}}
-        run: python examples/${{matrix.apps}}/run_${{matrix.apps}}.py
+        run: uv run python examples/${{matrix.apps}}/run_${{matrix.apps}}.py
