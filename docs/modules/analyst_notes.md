@@ -14,15 +14,26 @@ When searching for multiple notes, the number of notes returned is not defined b
 ## Examples
 
 **Example 1**: Searching for the last day of analyst notes, downloading and saving the attachments if present.
+
+The `fetch_attachment` method returns a tuple with the attachment content and extension. If the note does not contain an attachment, it will return empty content and extension.
+To limit the number of calls made to the API, you can check if the attribute `attachment` is present, if yes fetch the attachment. 
 ```python 
 --8<-- "docs/examples/analyst_notes/save_attachment.py"
 ```
 
 **Example 2**: Searching for the last day of analyst notes, downloading and saving the markdown representation of the note.
 
-Similarly to the previous example, you can generate the markdown of an analyst note calling the `markdown` method defined for the `AnalystNote` object:
+Similarly to the previous example, you can generate the markdown of an analyst note calling the `markdown` method defined for the `AnalystNote` object.
+In this example we are setting `max_results` to `2` for a shorter output, since we are printing the markdown to console.
+
+To run this example you will first need to add the `rich` package to your virtual environment:
+```bash
+pip install rich
+```
+After that you can run it and see the markdown begin written in the terminal and being saved in the `attachment` directory.
 ```python
 
 --8<-- "docs/examples/analyst_notes/save_markdown.py"
 ```
+The `markdown` method accept different arguments, such as `diamond_model` to add to the markdown the diamond model information, if present. For more information see the API Reference. 
 
