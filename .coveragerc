@@ -5,8 +5,6 @@ branch = True
 [report]
 skip_covered = True
 sort = Cover
-
-[html]
-directory = htmlcov
+show_missing = True
 
 [term]
