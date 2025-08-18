@@ -50,7 +50,8 @@ markdown_extensions:
       guess_lang: false
   - pymdownx.superfences
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:  
+      check_paths: true
   - toc:
       permalink: true
 
@@ -77,9 +78,13 @@ plugins:
             show_symbol_type_heading: true
             show_symbol_type_toc: true
 nav:
-  - index.md
-  - about.md
-  - CHANGELOG.md
+  - Home: index.md
+  - Guidelines: guidelines.md
+  - Learn:
+    - Analyst Notes: modules/analyst_notes.md
+    - Internals: modules/analyst_notes.md
+  - Release History: CHANGELOG.md
+  - Contributing: contributing.md
   - API Documentation:
       - Analyst Notes:
           - Manager: api/analyst_notes/note_mgr.md
