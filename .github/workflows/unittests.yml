@@ -1,0 +1,72 @@
+name: Unit tests with coverage
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        python_version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    name: "Python ${{ matrix.python_version }}"
+
+    runs-on: ubuntu-latest
+
+    env:
+      RF_TOKEN: ${{ secrets.RF_TOKEN }}
+      PS_RF_TOKEN: ${{ secrets.RF_TOKEN }}
+      MIN_COVERAGE: 95
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python_version }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .'[dev]'
+        
+    - name: Run unit tests with coverage
+      run: |
+        pytest --junitxml=pytest.xml \
+               --cov \
+               --cov-report=term \
+               --random-order-bucket=module \
+               tests/ \
+               | tee pytest-coverage.txt
+               
+    - name: Coverage comment (PR only)
+      id: coverage
+      if: github.event_name == 'pull_request'
+      uses: MishaKav/pytest-coverage-comment@main
+      with:
+          pytest-coverage-path: ./pytest-coverage.txt
+          junitxml-path: ./pytest.xml
+          unique-id-for-comment: ${{ matrix.python_version }}
+          title: Coverage for Python ${{ matrix.python_version }}
+          report-only-changed-files: false
+
+    - name: Fail if failures or errors occurred
+      if: ${{ steps.coverage.outputs.failures > 0 || steps.coverage.outputs.errors > 0 }}
+      run: |
+        echo "Unit tests failed with Python ${{ matrix.python_version }}! Review logs from 'Run unit tests with coverage' step"
+        exit 1
+
+    - name: Fail if coverage is below ${{ env.MIN_COVERAGE }}%
+      if: ${{ steps.coverage.outputs.coverage < env.MIN_COVERAGE }}
+      run: |
+        echo "Coverage is below ${{ env.MIN_COVERAGE }}%!"
+        exit 1
