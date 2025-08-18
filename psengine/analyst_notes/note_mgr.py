@@ -308,15 +308,21 @@ class AnalystNoteMgr:
             Fetch and save an attachment from an analyst note:
 
             ```python
-            from psengine.analyst_notes import save_attachment
+            from pathlib import Path
+
+            from psengine.analyst_notes import AnalystNoteMgr, save_attachment
+
+            OUTPUT_DIR = Path(__file__).parent / 'attachments'
+            OUTPUT_DIR.mkdir(exist_ok=True)
 
             # Note with PDF attachment
             attachment, extension = note_mgr.fetch_attachment('tPtLVw')
-            save_attachment('tPtLVw', attachment, extension)
+            save_attachment('tPtLVw', attachment, extension, OUTPUT_DIR)
 
             # Note with YAR attachment
             attachment, extension = note_mgr.fetch_attachment('oJeqDP')
-            save_attachment('oJeqDP', attachment, extension)
+            save_attachment('oJeqDP', attachment, extension, OUTPUT_DIR)
+
             ```
 
         Raises:
