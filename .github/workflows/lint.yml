@@ -5,12 +5,11 @@ on:
   pull_request:
 
 jobs:
-  ruff-lint:
+  lint:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Run ruff check
         uses: astral-sh/ruff-action@v3

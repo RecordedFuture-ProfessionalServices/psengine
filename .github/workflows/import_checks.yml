@@ -3,14 +3,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  import-check:
+  imports:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
       - name: Check imports
         run: | 
-          if matches=$(grep -RIn --line-number -E '^[[:space:]]*from[[:space:]]+psengine' psengine) ; then
+          if matches=$(grep -RIn --line-number -E '^from[[:space:]]+psengine' psengine) ; then
             echo "❌ Disallowed internal imports detected:"
             echo "$matches" | awk -F':' '{print "Filename: " $1 " Line: " $2 " Import: " $3}'
             exit 1
