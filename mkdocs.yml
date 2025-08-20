@@ -44,6 +44,7 @@ theme:
 markdown_extensions:
   - admonition
   - attr_list
+  - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true        
       linenums: true             
@@ -82,6 +83,7 @@ nav:
   - Guidelines: guidelines.md
   - Learn:
     - Analyst Notes: modules/analyst_notes.md
+    - Collective Insights: modules/collective_insights.md
     - Internals: modules/internals.md
   - Release History: CHANGELOG.md
   - Contributing: contributing.md
