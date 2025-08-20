@@ -38,8 +38,12 @@ jobs:
         run: |
           uv venv -p ${{ matrix.python_version }}
           uv pip install '.[dev]'
+      
+      - name: Run tests without config
+        run: |
+          uv run -p ${{ matrix.python_version}} pytest tests_without_config
 
-      - name: Run unit tests with coverage
+      - name: Run standard tests
         run: |
           uv run -p ${{ matrix.python_version}} pytest \
               --junitxml=pytest.xml \
@@ -48,7 +52,7 @@ jobs:
               --random-order-bucket=module \
               -v \
               --md report.md \
-              tests/ \
+              tests/ 
               | tee pytest-coverage.txt
 
       - name: Generate Test Report
