@@ -23,7 +23,6 @@ jobs:
 
     env:
       RF_TOKEN: ${{ secrets.RF_TOKEN }}
-      PS_RF_TOKEN: ${{ secrets.RF_TOKEN }}
       MIN_COVERAGE: 95
     
     steps:
