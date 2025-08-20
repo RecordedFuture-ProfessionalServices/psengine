@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python_version: [ "3.9" ]
+        python_version: ${{ fromJSON(vars.PYTHON_SUPPORTED_VERSIONS) }}
 
     name: "Python ${{ matrix.python_version }}"
 
@@ -38,7 +38,6 @@ jobs:
         run: |
           uv venv -p ${{ matrix.python_version }}
           uv pip install '.[dev]'
-          uv pip install pytest-md
 
       - name: Run unit tests with coverage
         run: |
