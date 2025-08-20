@@ -42,6 +42,7 @@ dev = [
     "pytest==8.3.4",
     "pytest-cov==6.0.0",
     "pytest-mock==3.14.0",
+    "pytest-md==0.2.0",
     "pytest-random-order==1.1.1",
     "pytest-httpdbg==0.8.1",
     "ruff~=0.11.0",

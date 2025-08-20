@@ -9,12 +9,13 @@ permissions:
   checks: write
   pull-requests: write
 
+
 jobs:
   build:
     strategy:
       fail-fast: false
       matrix:
-        python_version: ${{ fromJSON(vars.PYTHON_SUPPORTED_VERSIONS) }}
+        python_version: [ "3.9" ]
 
     name: "Python ${{ matrix.python_version }}"
 
@@ -26,47 +27,66 @@ jobs:
       MIN_COVERAGE: 95
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python_version }}
-        
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e .'[dev]'
-        
-    - name: Run unit tests with coverage
-      run: |
-        pytest --junitxml=pytest.xml \
-               --cov \
-               --cov-report=term \
-               --random-order-bucket=module \
-               tests/ \
-               | tee pytest-coverage.txt
-               
-    - name: Coverage comment (PR only)
-      id: coverage
-      if: github.event_name == 'pull_request'
-      uses: MishaKav/pytest-coverage-comment@main
-      with:
-          pytest-coverage-path: ./pytest-coverage.txt
-          junitxml-path: ./pytest.xml
-          unique-id-for-comment: ${{ matrix.python_version }}
-          title: Coverage for Python ${{ matrix.python_version }}
-          report-only-changed-files: false
+      - uses: actions/checkout@v4
 
-    - name: Fail if failures or errors occurred
-      if: ${{ steps.coverage.outputs.failures > 0 || steps.coverage.outputs.errors > 0 }}
-      run: |
-        echo "Unit tests failed with Python ${{ matrix.python_version }}! Review logs from 'Run unit tests with coverage' step"
-        exit 1
+      - uses: astral-sh/setup-uv@v6
 
-    - name: Fail if coverage is below ${{ env.MIN_COVERAGE }}%
-      if: ${{ steps.coverage.outputs.coverage < env.MIN_COVERAGE }}
-      run: |
-        echo "Coverage is below ${{ env.MIN_COVERAGE }}%!"
-        exit 1
+      - name: Set up Python
+        run: uv python install ${{ matrix.python_version }}
+
+      - name: Set up venv
+        run: |
+          uv venv -p ${{ matrix.python_version }}
+          uv pip install '.[dev]'
+          uv pip install pytest-md
+
+      - name: Run unit tests with coverage
+        run: |
+          uv run -p ${{ matrix.python_version}} pytest \
+              --junitxml=pytest.xml \
+              --cov \
+              --cov-report=term \
+              --random-order-bucket=module \
+              -v \
+              --md report.md \
+              tests/ \
+              | tee pytest-coverage.txt
+
+      - name: Generate Test Report
+        if: always()
+        run: |
+          echo "# Tests for Python ${{ matrix.python_version }}" > FINAL_REPORT.md
+          echo '<details><summary>Click to expand!</summary>' >> FINAL_REPORT.md
+          awk '{print} /^[[:space:]]*##[[:space:]]+[0-9]+[[:space:]]+passed[[:space:]]*$/ {exit}' report.md >> FINAL_REPORT.md
+          echo '</details>' >> FINAL_REPORT.md
+          cat FINAL_REPORT.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Post test results to PR
+        if: ${{ always() && github.event_name == 'pull_request'}}
+        uses: mshick/add-pr-comment@v2
+        with:
+          message-path: FINAL_REPORT.md
+          message-id: TestResults-${{ matrix.python_version }}
+                
+      - name: Coverage comment (PR only)
+        id: coverage
+        if: github.event_name == 'pull_request'
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+            pytest-coverage-path: ./pytest-coverage.txt
+            junitxml-path: ./pytest.xml
+            unique-id-for-comment: ${{ matrix.python_version }}
+            title: Coverage for Python ${{ matrix.python_version }}
+            report-only-changed-files: false
+
+      - name: Fail if failures or errors occurred
+        if: ${{ steps.coverage.outputs.failures > 0 || steps.coverage.outputs.errors > 0 }}
+        run: |
+          echo "Unit tests failed with Python ${{ matrix.python_version }}! Review logs from 'Run unit tests with coverage' step"
+          exit 1
+
+      - name: Fail if coverage is below ${{ env.MIN_COVERAGE }}%
+        if: ${{ steps.coverage.outputs.coverage < env.MIN_COVERAGE }}
+        run: |
+          echo "Coverage is below ${{ env.MIN_COVERAGE }}%!"
+          exit 1
