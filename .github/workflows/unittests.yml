@@ -44,15 +44,32 @@ jobs:
       - name: Run standard tests
         run: |
           uv run -p ${{ matrix.python_version}} pytest \
-              --junitxml=pytest.xml \
               --cov \
               --cov-fail-under=${{ env.MIN_COVERAGE }} \
+              --cov-report=html:htmlcov --cov-report=term-missing --cov-branch \
               --cov-report=term \
               --random-order-bucket=module \
               -v \
               --md report.md \
                tests/ > output.txt
 
+      - name: Upload coverage HTML
+        if: always()
+        id: cov_html
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html-${{ matrix.python_version }}
+          path: htmlcov
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Comment link to coverage HTML
+        if: ${{ always() && github.event_name == 'pull_request' }}
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            Coverage HTML (Python ${{ matrix.python_version }}): ${{ steps.cov_html.outputs.artifact-url }}
+          message-id: CoverageHTML-${{ matrix.python_version }}
 
       - name: Generate Test Report
         if: always()
