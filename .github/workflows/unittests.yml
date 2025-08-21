@@ -47,20 +47,21 @@ jobs:
           uv run -p ${{ matrix.python_version}} pytest \
               --junitxml=pytest.xml \
               --cov \
+              --cov-fail-under=${{ env.MIN_COVERAGE }} \
               --cov-report=term \
               --random-order-bucket=module \
               -v \
               --md report.md \
-              tests/ 
-              | tee pytest-coverage.txt
+               tests/ > output.txt
+
 
       - name: Generate Test Report
         if: always()
         run: |
           echo "# Tests for Python ${{ matrix.python_version }}" > FINAL_REPORT.md
-          echo '<details><summary>Click to expand!</summary>' >> FINAL_REPORT.md
+          echo "## Coverage" >> FINAL_REPORT.md
+          grep 'Required test coverage of' output.txt >> FINAL_REPORT.md
           awk '{print} /^[[:space:]]*##[[:space:]]+[0-9]+[[:space:]]+passed[[:space:]]*$/ {exit}' report.md >> FINAL_REPORT.md
-          echo '</details>' >> FINAL_REPORT.md
           cat FINAL_REPORT.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: Post test results to PR
@@ -69,26 +70,3 @@ jobs:
         with:
           message-path: FINAL_REPORT.md
           message-id: TestResults-${{ matrix.python_version }}
-                
-      - name: Coverage comment (PR only)
-        id: coverage
-        if: github.event_name == 'pull_request'
-        uses: MishaKav/pytest-coverage-comment@main
-        with:
-            pytest-coverage-path: ./pytest-coverage.txt
-            junitxml-path: ./pytest.xml
-            unique-id-for-comment: ${{ matrix.python_version }}
-            title: Coverage for Python ${{ matrix.python_version }}
-            report-only-changed-files: false
-
-      - name: Fail if failures or errors occurred
-        if: ${{ steps.coverage.outputs.failures > 0 || steps.coverage.outputs.errors > 0 }}
-        run: |
-          echo "Unit tests failed with Python ${{ matrix.python_version }}! Review logs from 'Run unit tests with coverage' step"
-          exit 1
-
-      - name: Fail if coverage is below ${{ env.MIN_COVERAGE }}%
-        if: ${{ steps.coverage.outputs.coverage < env.MIN_COVERAGE }}
-        run: |
-          echo "Coverage is below ${{ env.MIN_COVERAGE }}%!"
-          exit 1
