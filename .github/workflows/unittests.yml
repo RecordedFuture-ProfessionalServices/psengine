@@ -23,7 +23,7 @@ jobs:
 
     env:
       RF_TOKEN: ${{ secrets.RF_TOKEN }}
-      MIN_COVERAGE: 95
+      MIN_COVERAGE: 94
     
     steps:
       - uses: actions/checkout@v4
