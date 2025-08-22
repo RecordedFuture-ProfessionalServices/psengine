@@ -3,7 +3,9 @@ name: Spelling
 permissions:
   contents: read
 
-on: [workflow_dispatch]
+on: 
+  workflow_dispatch: 
+  pull_request:
 
 env:
   CLICOLOR: 1
