@@ -60,7 +60,10 @@ docs = [
     "mkdocstrings[python]",
     "griffe-typingdoc",
     "mkdocs-codeinclude-plugin",
+<<<<<<< HEAD
     "markdown-include"
+=======
+>>>>>>> 0cf8f78 (classic alerts doc)
 ]
 
 [build-system]
@@ -83,9 +86,7 @@ packages = [
 "*" = [
     "**/*",
 ]
-
 psengine = ["py.typed"]
-
 
 [tool.setuptools.exclude-package-data]
 "*" = [
