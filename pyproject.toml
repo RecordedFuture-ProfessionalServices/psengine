@@ -43,6 +43,7 @@ docs = [
     "mkdocs-material",
     "mkdocstrings[python]",
     "griffe-typingdoc",
+    "mkdocs-codeinclude-plugin",
 ]
 
 [build-system]
@@ -65,6 +66,7 @@ packages = [
 "*" = [
     "**/*",
 ]
+psengine = ["py.typed"]   
 
 [tool.setuptools.exclude-package-data]
 "*" = [

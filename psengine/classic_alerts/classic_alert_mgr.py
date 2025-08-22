@@ -157,10 +157,11 @@ class ClassicAlertMgr:
             Optional[list[str]],
             Doc(
                 """
-                Fields to include in the search result.
+                Fields to include in the fetch result.
 
                 **Note:**
-                Defaults fields are `id`, `log`, `title`, `rule` which are always retrieved.
+                All fields are collected by default. Specify the fields needed, however the fields 
+                `id`, `log`, `title`, `rule` are always retrieved.
                 Any provided fields are added to these."
                 """
             ),
@@ -216,10 +217,11 @@ class ClassicAlertMgr:
             Optional[list[str]],
             Doc(
                 """
-                Fields to include in the search result.
+                Fields to include in the fetch result.
 
                 **Note:**
-                Defaults fields are `id`, `log`, `title`, `rule` which are always retrieved.
+                All fields are collected by default. Specify the fields needed, however the fields 
+                `id`, `log`, `title`, `rule` are always retrieved.
                 Any provided fields are added to these."
                 """
             ),

@@ -78,11 +78,15 @@ plugins:
             signature_crossrefs: true
             show_symbol_type_heading: true
             show_symbol_type_toc: true
+  - exclude:
+      glob:
+        - "examples/**"
 nav:
   - Home: index.md
   - Guidelines: guidelines.md
   - Learn:
     - Analyst Notes: modules/analyst_notes.md
+    - Classic Alerts: modules/classic_alerts.md
     - Collective Insights: modules/collective_insights.md
     - Internals: modules/internals.md
   - Release History: CHANGELOG.md
