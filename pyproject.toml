@@ -13,10 +13,11 @@ authors = [
 keywords = ['API', 'Recorded Future', 'Cyber Security Engineering', 'Threat Intelligence']
 
 classifiers=[
-        'Development Status :: 5 - Production/Stable',
-        'Programming Language :: Python',
+        "Development Status :: 5 - Production/Stable",
+        "Programming Language :: Python",
         "Intended Audience :: Developers",
-        'Topic :: Security :: Software Development :: Libraries',
+        "Topic :: Security",
+        "Topic :: Software Development :: Libraries",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
@@ -85,4 +86,5 @@ psengine = ["py.typed"]
 "*" = [
     "**/*.pyc",
 ]
+
 
