@@ -13,7 +13,7 @@ jobs:
       version:     ${{ steps.get_version.outputs.version }}
       tag_exists:  ${{ steps.tagcheck.outputs.exists }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with: { fetch-depth: 0 }
 
       - name: Extract version
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: { contents: write }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with: { fetch-depth: 0 }
 
       - name: Export version to env

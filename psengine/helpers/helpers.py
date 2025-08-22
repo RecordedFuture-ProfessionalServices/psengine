@@ -118,9 +118,7 @@ def dump_models(
     )
 
 
-def debug_call(
-    func: Annotated[Callable, Doc('The function to be wrapped with debug logging.')],
-) -> Annotated[Callable, Doc('The wrapped function with debug logging enabled.')]:
+def debug_call(func):
     """Decorator to print debug logs for public methods."""
     original_func = func
     while hasattr(original_func, '__wrapped__'):
