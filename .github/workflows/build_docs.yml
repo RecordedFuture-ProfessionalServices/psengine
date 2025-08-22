@@ -22,11 +22,11 @@ jobs:
       - uses: astral-sh/setup-uv@v6
 
       - name: Set up Python
-        run: uv python install {{ vars.PYTHON_VERSION }} 
+        run: uv python install ${{ vars.PYTHON_VERSION }} 
     
       - name: Set up venv
         run: |
-          uv venv -p {{ vars.PYTHON_VERSION }} 
+          uv venv -p ${{ vars.PYTHON_VERSION }} 
           uv pip install '.[docs]'
 
       - name: Run MKdocs
