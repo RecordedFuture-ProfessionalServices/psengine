@@ -12,6 +12,19 @@ authors = [
 ]
 keywords = ['API', 'Recorded Future', 'Cyber Security Engineering', 'Threat Intelligence']
 
+classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Programming Language :: Python',
+        "Intended Audience :: Developers",
+        'Topic :: Security :: Software Development :: Libraries',
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13"
+]
+
+
 dependencies = [
     "requests>=2.27.1",
     "jsonpath_ng>=1.5.3, <=1.6.1",
@@ -28,6 +41,7 @@ dev = [
     "pytest==8.3.4",
     "pytest-cov==6.0.0",
     "pytest-mock==3.14.0",
+    "pytest-md==0.2.0",
     "pytest-random-order==1.1.1",
     "pytest-httpdbg==0.8.1",
     "ruff~=0.11.0",
@@ -70,18 +84,4 @@ packages = [
 "*" = [
     "**/*.pyc",
 ]
-
-classifiers=[
-        'Development Status :: 5 - Production/Stable',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python',
-        "Intended Audience :: Developers",
-        'Topic :: Security :: Software Development :: Libraries',
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: 3.12",
-        "Programming Language :: Python :: 3.13"
-]
-
 
