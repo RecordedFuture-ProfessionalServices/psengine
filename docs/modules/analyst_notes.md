@@ -25,7 +25,7 @@ See the [**API Reference**](../../api/analyst_notes/note_mgr) for internal detai
 The `fetch_attachment` method returns a tuple with the attachment content and extension. If the note does not contain an attachment, it will return empty content and extension.
 To limit the number of calls made to the API, you can check if the attribute `attachment` is present, if yes fetch the attachment. 
 ```python 
---8<-- "docs/examples/analyst_notes/save_attachment.py"
+--8<-- "docs/examples/analyst_notes/example_1.py"
 ```
 
 #### Example 2: Searching for the last day of analyst notes, downloading and saving the markdown representation of the note.
@@ -40,7 +40,7 @@ pip install rich
 After that you can run it and see the markdown begin written in the terminal and being saved in the `attachment` directory.
 ```python
 
---8<-- "docs/examples/analyst_notes/save_markdown.py"
+--8<-- "docs/examples/analyst_notes/example_2.py"
 ```
 The `markdown` method accept different arguments, such as `diamond_model` to add to the markdown the diamond model information, if present. For more information see the API Reference. 
 
@@ -50,6 +50,6 @@ In this example we use the `search` method with the `topic` argument, which acce
 
 The `save_note` method can be used to save the note as json.
 ```python
---8<-- "docs/examples/analyst_notes/fetch_ransomware.py"
+--8<-- "docs/examples/analyst_notes/example_3.py"
 ```
 
