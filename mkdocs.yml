@@ -89,6 +89,7 @@ nav:
     - Classic Alerts: modules/classic_alerts.md
     - Collective Insights: modules/collective_insights.md
     - Detections: modules/detections.md
+    - Enrichment: modules/enrich.md
     - Internals: modules/internals.md
   - Release History: CHANGELOG.md
   - Contributing: contributing.md
@@ -124,9 +125,9 @@ nav:
           - Errors: api/detection/errors.md
       - Enrichment: 
           - Lookup: 
-              - Manager: api/enrichment/enrich_mgr.md
-              - ADT: api/enrichment/enrich_adt.md
-              - Models: api/enrichment/enrich_models.md
+              - Manager: api/enrichment/lookup_mgr.md
+              - ADT: api/enrichment/lookup_adt.md
+              - Models: api/enrichment/lookup_models.md
           - SOAR: 
               - Manager: api/enrichment/soar_mgr.md
               - ADT: api/enrichment/soar_adt.md
