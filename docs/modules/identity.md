@@ -43,9 +43,9 @@ After running the sample code, the output would look like this:
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
 ┃ Subject                               ┃ Password Properties                                              ┃ Is Password Clear ┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
-│ example@norsegods.online              │ Letter, Number, LowerCase, AtLeast10Characters                   │      ✅ Yes       │
-│ example@norsegods.online              │ Letter, Number, LowerCase, AtLeast10Characters                   │      ✅ Yes       │
-│ example2@norsegods.online             │ Letter, Number, LowerCase, AtLeast10Characters                   │      ✅ Yes       │
+│ example@norsegods.online              │ Letter, Number, LowerCase, AtLeast10Characters                   │         Yes       │
+│ example@norsegods.online              │ Letter, Number, LowerCase, AtLeast10Characters                   │         Yes       │
+│ example2@norsegods.online             │ Letter, Number, LowerCase, AtLeast10Characters                   │         Yes       │
 └───────────────────────────────────────┴──────────────────────────────────────────────────────────────────┴───────────────────┘
 ```
 

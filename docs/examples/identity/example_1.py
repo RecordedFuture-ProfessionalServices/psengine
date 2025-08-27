@@ -19,7 +19,7 @@ if len(credentials):
     for identity in detailed_identities:
         for cred in identity.credentials:
             properties = ', '.join(cred.exposed_secret.details.properties)
-            is_clear = '✅ Yes' if cred.exposed_secret.effectively_clear else '❌ No'
+            is_clear = 'Yes' if cred.exposed_secret.effectively_clear else 'No'
 
             table.add_row(cred.subject, properties, is_clear)
 
