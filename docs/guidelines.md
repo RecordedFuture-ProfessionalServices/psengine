@@ -49,12 +49,12 @@ The Minimum Calls column is indicating the minimum amount of entities (IOCs, ale
 
 ### Model Validation
 
-By default PSEngine uses a custom Pydantic `BaseModel`, which is configured to use `extra=ignore` to discard any new field retured by the Recorded Future API that has not been added to the related model yet. This is a design choice to make sure we always allow the usage of fields where the behaviour is known.
-You can still change this behaviour by setting the `RF_MODEL_EXTRA` envioronment varialbe to `allow` or `forbid`. 
+By default PSEngine uses a custom Pydantic `BaseModel`, which is configured to use `extra=ignore` to discard any new field returned by the Recorded Future API that has not been added to the related model yet. This is a design choice to make sure we always allow the usage of fields where the behaviour is known.
+You can still change this behaviour by setting the `RF_MODEL_EXTRA` environment variable to `allow` or `forbid`. 
 
 In case where the `RF_MODEL_EXTRA` is set to `allow`, no validation will be performed on the new fields, you will be responsible for that.
 
-### Loggging
+### Logging
 
 You can either use `psengine.logger.RFLogger` or use the standard python `logging` module based on the other libraries/SDK that you are using:
 

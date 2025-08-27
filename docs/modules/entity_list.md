@@ -16,7 +16,7 @@ We first use the `EntityListMgr` to find the list that we want to modify, in our
 
 The `domain_watch_list` variable is an object of `EntityList` type, which allows us to add or remove entities from that specific list. We use the `add` method to add an entity, we know the Recorded Future ID, so we can directly pass it to the `add` method. 
 
-Once the entity has been added we check that the result of the add operation is succesful and if it is, we list all the entities in the list with the `entities` method. 
+Once the entity has been added we check that the result of the add operation is successful and if it is, we list all the entities in the list with the `entities` method. 
 
 ```python 
 --8<-- "docs/examples/entity_lists/example_1.py"
@@ -33,7 +33,7 @@ As a last instruction we print the status of the list. The `status` method will 
 
 #### Example 2: Add a domain to your Domain Watch List, without using the Recorded Future ID.
 
-Similarly to example 1, in this case we do not know the Recoreded Future ID of the entity, so we need to modify the `add` invokation by passing a tuple containing the name of the entity, in this case `example2.com` and the type of the entity, `InternetDomainName`. 
+Similarly to example 1, in this case we do not know the Recoreded Future ID of the entity, so we need to modify the `add` invocation by passing a tuple containing the name of the entity, in this case `example2.com` and the type of the entity, `InternetDomainName`. 
 
 The method will use the `EntityMatchMgr`  from the `entity_match` module to attempt to find the id.
 

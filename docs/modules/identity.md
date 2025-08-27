@@ -67,7 +67,7 @@ We did this purposefully to avoid secrets being accidentally leaked again.
 
 To view the clear text password you need to use the `get_secret_value` method of the `clear_text_value` object.
 
-The clear text password can be seen ony if your organization has been configured to see it. 
+The clear text password can be seen only if your organization has been configured to see it. 
 
 ```python 
 --8<-- "docs/examples/identity/example_2.py"

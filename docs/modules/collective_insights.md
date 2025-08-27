@@ -26,7 +26,7 @@ The `create` method only requires the following arguments to be specified:
 - `timestamp`
 
 Every other value can optionally be provided and add more context to the detection.
-In the example we have a detection coming from Symantec. The hash is coming from a Recorded Future Insikt note defined by the id `doc:o6_lui`. The other informations are retrieved by both the note (example the malware type and MITRE codes) or the incident itself. 
+In the example we have a detection coming from Symantec. The hash is coming from a Recorded Future Insikt note defined by the id `doc:o6_lui`. The other information are retrieved by both the note (example the malware type and MITRE codes) or the incident itself. 
 
 In our case the timestamp has been mocked to "now", but in a real scenario it would be taken from the incident.
 

@@ -31,7 +31,7 @@ This example uses the `LookupMgr.lookup` method to get the enrichment data of th
 
 This example uses the `LookupMgr.lookup_bulk` method to enrich two URLs. Note that the `lookup_bulk` is **not** a real bulk enrichment. The real calls are still one per entity, but it is a convenient method when specific fields are needed. 
 
-Here the `links` fields is specified, along with the `max_workers` which determins the number of threads to use. In this case one per call. See the [**Guidelines**](../../guidelines) page to check the recommended amount of threads to use.
+Here the `links` fields is specified, along with the `max_workers` which determines the number of threads to use. In this case one per call. See the [**Guidelines**](../../guidelines) page to check the recommended amount of threads to use.
 
 ```python 
 --8<-- "docs/examples/enrich/example_2.py"
