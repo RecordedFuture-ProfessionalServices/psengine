@@ -17,10 +17,7 @@ When performing enrichment with `LookupMgr` and `fields` is specified, the field
 
 ## Examples
 
-!!! warning
-
-    Below are some examples of usage of the `enrich` module. Consider adding error handling as necessary. All the errors that can be raised by each method or function are specified in the API Reference page.
-
+{! modules/_includes/examples_warning.md !}
 
 #### Example 1: Enrich a vulnerability to get the CVSSv3 information.
 

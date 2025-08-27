@@ -12,10 +12,7 @@ Specifying the type of the entity leads to better results.
 
 ## Examples
 
-!!! warning
-
-    Below are some examples of usage of the `entity_match` module. Consider adding error handling as necessary. All the errors that can be raised by each method or function are specified in the API Reference page.
-
+{! modules/_includes/examples_warning.md !}
 
 #### Example 1: Find the ID of CVE-2022-0847
 

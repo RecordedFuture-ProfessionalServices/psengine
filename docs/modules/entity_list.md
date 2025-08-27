@@ -6,10 +6,7 @@ See the [**API Reference**](../../api/entity_lists/entity_list_mgr) for internal
 
 ## Examples
 
-!!! warning
-
-    Below are some examples of usage of the `entity_lists` module. Consider adding error handling as necessary. All the errors that can be raised by each method or function are specified in the API Reference page.
-
+{! modules/_includes/examples_warning.md !}
 
 #### Example 1a: Add a domain to your Domain Watch List, using the Recorded Future ID.
 

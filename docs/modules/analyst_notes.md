@@ -15,9 +15,7 @@ See the [**API Reference**](../../api/analyst_notes/note_mgr) for internal detai
 
 ## Examples
 
-!!! warning
-
-    Below are some examples of usage of the `analyst_note` module. Consider adding error handling as necessary. All the errors that can be raised by each method or function are specified in the API Reference page.
+{! modules/_includes/examples_warning.md !}
 
 
 #### Example 1: Searching for the last day of analyst notes, downloading and saving the attachments if present.

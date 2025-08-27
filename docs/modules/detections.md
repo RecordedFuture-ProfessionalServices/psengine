@@ -10,9 +10,7 @@ In this module the `fetch` and `search` are exactly the same method. In fact und
 
 ## Examples
 
-!!! warning
-
-    Below are some examples of usage of the `detection` module. Consider adding error handling as necessary. All the errors that can be raised by each method or function are specified in the API Reference page.
+{! modules/_includes/examples_warning.md !}
 
 #### Example 1: Fetch a detection rule and save it to file.
 

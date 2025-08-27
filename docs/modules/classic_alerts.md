@@ -19,10 +19,7 @@ The more fields are requested the slower the action will be, make sure to balanc
 
 ## Examples
 
-!!! warning
-
-    Below are some examples of usage of the `classic_alerts` module. Consider adding error handling as necessary. All the errors that can be raised by each method or function are specified in the API Reference page.
-
+{! modules/_includes/examples_warning.md !}
 
 #### Example 1: Search the latest new alerts and save them as markdown.
 

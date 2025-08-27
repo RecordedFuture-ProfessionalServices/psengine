@@ -14,10 +14,7 @@ See the [**API Reference**](../../api/collective_insights/collective_insightsd) 
 
 ## Examples
 
-!!! warning
-
-    Below are some examples of usage of the `collective_insights` module. Consider adding error handling as necessary. All the errors that can be raised by each method or function are specified in the API Reference page.
-
+{! modules/_includes/examples_warning.md !}
 
 #### Example 1: Submitting a detection of an hash linked to a Wiper malware speciment.
 
