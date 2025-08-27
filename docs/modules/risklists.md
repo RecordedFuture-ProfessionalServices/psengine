@@ -60,7 +60,7 @@ We want to validate and save the risklist without the `EvidenceDetails`, `Source
 
 This example is a bit longer but what we are doing is defining the `TARisklist` model which inherits from `RFBaseModel`. In the `TARiskist` model we define how the fields should be organized based on the needs of our tool. We could have left the fields untouched but it is often required to slightly manipulate some of the data for an easier ingestion.
 
-The whole data manipulation is done using only `pydantic` constructs, like `BeforeValidator`  and `@field_validator`, they are just trasforming the data from one shape to another, specifically from a dictionary to a list of dictionaries and from a JSON-like string to a JSON object respectively.
+The whole data manipulation is done using only `pydantic` constructs, like `BeforeValidator`  and `@field_validator`, they are just transforming the data from one shape to another, specifically from a dictionary to a list of dictionaries and from a JSON-like string to a JSON object respectively.
 
 Once the model is defined we can fetch the risklist, validate the content and save it to file same as the previous examples.
 

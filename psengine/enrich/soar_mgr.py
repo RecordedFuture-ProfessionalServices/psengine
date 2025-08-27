@@ -81,7 +81,7 @@ class SoarMgr:
             ```
 
             Save enriched results to file:
-            ```
+            ```python
             from pathlib import Path
             from json import dumps
             from psengine.enrich import SoarMgr

@@ -34,4 +34,4 @@ In this example we use the `LookupMgr` to enrich 4 IOCs using the `links`, `risk
 
 ```python 
 --8<-- "docs/examples/stix2/example_2.py"
-`
+```
