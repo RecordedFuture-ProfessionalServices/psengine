@@ -6,7 +6,7 @@ PSEngine is a Python package solely built and maintained by the Cyber Security E
 
 ## Installation
 
-PSEngine is a Python package that can be installed using pip. To install PSengine, run the following command:
+PSEngine is a Python package that can be installed using `pip`. To install PSengine, run the following command:
 
 ```bash
 pip install psengine
@@ -15,18 +15,27 @@ pip install psengine
 PSEngine officially supports Python >= 3.9, < 3.14.
 
 
-## Supported Features 
+## Supported Features & Best Practices
 
-PSEngine is ready for the demands of building robust and reliable integrations. It supports the following modules and features:
+PSEngine is ready for the demands of building robust and reliable integrations.
 
-* Collective Insights
+It can easily interact with the following Recorded Future datasets:
+
 * Analyst Notes
+* Collective Insights
 * Classic & Playbook Alerts
-* Risklists
-* On demand IOC enrichment
-* List management
 * Detection Rules
+- Identity Exposures management
+* List management
+* On demand IOC enrichment
+* Risklists
+- STIX conversion
+
+
+And facilitate the development with features like:
+
 * Built-in logging
 * Easy configuration management
+- Markdown creation from certain data types
 * Proxy support
 

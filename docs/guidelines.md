@@ -1,6 +1,7 @@
 This page focus on all the guidelines to follow or be aware of while using PSEngine to build your integration.
 
-## PSEngine Version
+## Versioning
+### PSEngine Version
 
 We follow [SemVer](semver.org) standard and while we try to avoid breaking changes with new minor or patch releases, it is always advised to pin a specific version of PSEngine in your `pyproject.toml`. For example:
 
@@ -11,16 +12,16 @@ dependencies = [
 ```
 And keep the version regularly up to date.
 
-## Feature Deprecation
+#### Feature Deprecation
 
 When a field, feature or endpoint is deprecated, we will add a deprecation warning with a alternative if available. Three minor releases after, it will be removed.
 For example a field marked as deprecated in 2.10.x, will effectively be removed in 2.13.0.
 
-## Python Version
+### Python Version
 
 We support the minimum supported Python version that is not already end of life. Every time a Python version is marked as end of life, we will upgrade the minimum required version, usually within 1/3 months.
 
-## Features
+## PSEngine Features
 
 ### Multithreading
 
