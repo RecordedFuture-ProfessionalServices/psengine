@@ -2,7 +2,7 @@
 
 The `stix2` module allows to use the `RisklistMgr`, `LookupMgr` and `AnalystNoteMgr` and transform their output into STIX2 compatible format.
 
-See the [**API Reference**](../../api/stix2/base_stix_entity) for internal details of the module.
+See the [**API Reference**](../api/stix2/base_stix_entity.md) for internal details of the module.
 
 ## Examples
 

@@ -4,7 +4,7 @@ The `CollectiveInsights` class of the `collective_insights` module allows you to
 
 When using the `collective_insights` module, you have to create an `Insight` object and then submit it. The `CollectiveInsights` class provide access to the modules needed to perform these actions. The examples below will show how to use them. 
 
-See the [**API Reference**](../../api/collective_insights/collective_insightsd) for internal details of the module.
+See the [**API Reference**](../api/collective_insights/collective_insights.md) for internal details of the module.
 
 ## Notes
 

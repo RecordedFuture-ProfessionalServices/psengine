@@ -4,7 +4,7 @@ The `RisklistMgr` class of the `risklists` module allows to fetch risklists. A r
 
 In Recorded Future the concept of "default" risklist means a risklist with usually up to 100.000 indicators with a score from 65 and above.
 
-See the [**API Reference**](../../api/risklists/risklists_mgr) for internal details of the module.
+See the [**API Reference**](../api/risklists/risklist_mgr.md) for internal details of the module.
 
 ## Notes
 

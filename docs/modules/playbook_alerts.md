@@ -2,7 +2,7 @@
 
 The `PlaybookAlertMgr` class of the `playbook_alerts` module allows to fetch and search for playbook alerts that triggered for your organization.
 
-See the [**API Reference**](../../api/playbook_alerts/playbook_alert_mgr) for internal details of the module.
+See the [**API Reference**](../api/playbook_alerts/playbook_alert_mgr.md) for internal details of the module.
 
 ## Notes
 

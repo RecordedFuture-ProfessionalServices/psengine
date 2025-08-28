@@ -2,7 +2,7 @@
 
 The `IdentityMgr` class of the `identity` module allows to interact with the Recorded Future Identity module, to view the latest identity exposures and credential leaks happening in the domains you are monitoring.
 
-See the [**API Reference**](../../api/identity/identity_mgr) for internal details of the module.
+See the [**API Reference**](../api/identity/identity_mgr.md) for internal details of the module.
 
 ## Notes
 

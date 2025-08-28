@@ -2,7 +2,7 @@
 
 The `DetectionMgr` class of the `detection` module allows to search and fetch detections. Detections means Yara, Sigma and Snort detection rules.
 
-See the [**API Reference**](../../api/detection/detection_mgr) for internal details of the module.
+See the [**API Reference**](../api/detection/detection_mgr.md) for internal details of the module.
 
 ## Note
 

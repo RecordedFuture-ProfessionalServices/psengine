@@ -2,7 +2,7 @@
 
 The `EntityMatchMgr` class of the `entity_match` module allows to search for the Recorded Future ID of an entity.
 
-See the [**API Reference**](../../api/entity_match/entity_match_mgr) for internal details of the module.
+See the [**API Reference**](../api/entity_match/entity_match_mgr.md) for internal details of the module.
 
 ## Notes
 

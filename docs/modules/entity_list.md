@@ -2,7 +2,7 @@
 
 The `EntityListMgr` and `EntityList` classes of the `entity_lists` module allows to manage and search the Recorded Future lists. These lists can be Watch List or custom lists, they are specific to your organization and they are the core foundation of the Recorded Future alerts.
 
-See the [**API Reference**](../../api/entity_lists/entity_list_mgr) for internal details of the module.
+See the [**API Reference**](../api/entity_lists/entity_list_mgr.md) for internal details of the module.
 
 ## Examples
 

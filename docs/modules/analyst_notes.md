@@ -6,7 +6,7 @@ An analyst note is a note that is either:
 - written and published by someone in your organization via the Recorded Future portal or the Recorded Future API,
 - written and published by the Recorded Future Insikt team.
 
-See the [**API Reference**](../../api/analyst_notes/note_mgr) for internal details of the module.
+See the [**API Reference**](../api/analyst_notes/note_mgr.md) for internal details of the module.
 
 ## Notes
 

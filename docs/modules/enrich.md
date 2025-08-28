@@ -6,7 +6,7 @@ The `LookupMgr` allows for one by one enrichment of entities, with the possibili
 
 The `SoarMgr` is used for bulk enrichments, the returned payload is the same for each entity type with no possibility of getting specific information for each entity type. It is more generic but allows for quicker enrichment of information like the risk score and risk rules of all the indicators.
 
-See the [**Lookup API Reference**](../../api/enrichment/lookup_mgr) and the [**Soar API Reference**](../../api/enrichment/soar_mgr)  for internal details of the module.
+See the [**Lookup API Reference**](../api/enrichment/lookup_mgr.md) and the [**Soar API Reference**](../api/enrichment/soar_mgr.md)  for internal details of the module.
 
 ## Note
 
