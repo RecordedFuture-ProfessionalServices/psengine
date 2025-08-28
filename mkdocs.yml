@@ -86,7 +86,8 @@ plugins:
 nav:
   - PSEngine: index.md
   - Guidelines: guidelines.md
-  - Learn:
+  - Learn: 
+      - Learn: modules/index.md
       - Analyst Notes: modules/analyst_notes.md
       - Classic Alerts: modules/classic_alerts.md
       - Collective Insights: modules/collective_insights.md
@@ -102,6 +103,7 @@ nav:
   - Release History: CHANGELOG.md
   - Contributing: contributing.md
   - API Documentation:
+      - API Documentation: api/index.md
       - Analyst Notes:
           - Manager: api/analyst_notes/note_mgr.md
           - ADT: api/analyst_notes/note.md
