@@ -21,6 +21,10 @@ When performing enrichment with `LookupMgr` and `fields` is specified, the field
 
 #### Example 1: Enrich a vulnerability to get the CVSSv3 information.
 
+!!! tip
+
+    To replicate this example the token you are using must have Vulnerability Module access. If you don't have it change the entity to enrich in a domain or IP address or use the Example 2 as reference.
+
 This example uses the `LookupMgr.lookup` method to get the enrichment data of the CVE, adding the `cvssv3` field. Before printing the result, it is needed to check if the CVE has been enriched, we do that with the `is_enriched` boolean attribute, and if it is we print the result as JSON. Note that the result is stored under the `content`, which can be an object or a string depending on the API response. If the entity has not been found it will be a string containing a 404 message.
 
 ```python 
@@ -31,7 +35,7 @@ This example uses the `LookupMgr.lookup` method to get the enrichment data of th
 
 This example uses the `LookupMgr.lookup_bulk` method to enrich two URLs. Note that the `lookup_bulk` is **not** a real bulk enrichment. The real calls are still one per entity, but it is a convenient method when specific fields are needed. 
 
-Here the `links` fields is specified, along with the `max_workers` which determines the number of threads to use. In this case one per call. See the [**Guidelines**](../../guidelines) page to check the recommended amount of threads to use.
+Here the `links` fields is specified, along with the `max_workers` which determines the number of threads to use. In this case one per call. See the [**Guidelines**](../guidelines.md) page to check the recommended amount of threads to use.
 
 ```python 
 --8<-- "docs/examples/enrich/example_2.py"

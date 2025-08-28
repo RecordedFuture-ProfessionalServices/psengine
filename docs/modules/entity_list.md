@@ -10,6 +10,10 @@ See the [**API Reference**](../api/entity_lists/entity_list_mgr.md) for internal
 
 #### Example 1a: Add a domain to your Domain Watch List, using the Recorded Future ID.
 
+!!! tip
+    
+    To run this example we are searching for a specific Domain Watch List to populate, which wou will not be able to find. Either change the `owner_name` equality at line 10 to use your organization name, or remove the whole `for` loop and assign to `domain_watch_list` the first element of the `watch_lists` variable.
+
 In this example we start with the entity to add: `idn:example.com`. This syntax (`idn:`) identifies a Recorded Future entity ID for a domain (`InternetDomainName`). 
 
 We first use the `EntityListMgr` to find the list that we want to modify, in our specific case, we have multiple organizations under the same parent organization, hence we have multiple Domain Watch List. In your case you might have only one and the `for` loop shown is not needed. We find the list owned by the organization we want to modify and that (the `domain_watch_list` variable) will become the object that we are going to operate against.
@@ -32,6 +36,10 @@ InternetDomainName: example.com, added 2025-08-27 07:04:31
 As a last instruction we print the status of the list. The `status` method will show the number of entities in the list and if the add/remove operations previously done are completed. This is because add/remove operations might take a few minutes to be processed in the backend, so the list might not be in a `ready` state yet. 
 
 #### Example 2: Add a domain to your Domain Watch List, without using the Recorded Future ID.
+
+!!! tip
+    
+    To run this example we are searching for a specific Domain Watch List to populate, which wou will not be able to find. Either change the `owner_name` equality at line 10 to use your organization name, or remove the whole `for` loop and assign to `domain_watch_list` the first element of the `watch_lists` variable.
 
 Similarly to example 1, in this case we do not know the Recoreded Future ID of the entity, so we need to modify the `add` invocation by passing a tuple containing the name of the entity, in this case `example2.com` and the type of the entity, `InternetDomainName`. 
 

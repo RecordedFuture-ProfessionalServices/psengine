@@ -19,6 +19,10 @@ To use this module you must:
 
 #### Example 1: Find the details of each recently exposed account, and report if the password has been exposed in clear text.
 
+!!! tip
+    To run this example you will need to change the domain queried by `search_credentials` to one of the domains configured in your Recorded Future enterprise. 
+    Your token also needs access to the Identity Module.
+
 In this example we are searching for all workforce accounts of our organization. In this example the domain we are monitoring is `norsegods.online`. We use the `search_credentials` to find the latest credentials being exposed, with the `Email` argument to filter for only the credentials coming from accounts internal to our organization.
 
 If we find any credential we use the `lookup_credentials` with the `subjects_login` set to the result of the `search_credentials` method. This is a convenient way of concatenating the two operations together to find all the details of each leaked identity.
@@ -51,6 +55,10 @@ After running the sample code, the output would look like this:
 
 #### Example 2: View the clear text password of a user that has been exposed.
 
+!!! tip
+    To run this example you will need to change the email queried by `lookup_credentials` to one of the emails that has been compromoised from the domains you are monitoring.
+    Your token also needs access to the Identity Module.
+
 In this example we check if the user `+2@norsegods.online` has a clear text password being leaked, and if yes we print it. The main purpose of this example is to show how to use the clear text password in case it has to be sent to another tool, like Active Directory, Okta etc.
 
 The password saved in `clear_text_value` is not a plain string, if saved as is in a log file, for example with:
@@ -74,6 +82,9 @@ The clear text password can be seen only if your organization has been configure
 ``` 
 
 #### Example 3: Search for an exposed password without sending it.
+
+!!! tip
+    To run this example your token needs access to the Identity Module.
 
 This example focuses on finding if a password has been likely exploited or not. We can use the `lookup_password` method to see:
 

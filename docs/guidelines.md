@@ -3,7 +3,7 @@ This page focus on all the guidelines to follow or be aware of while using PSEng
 ## Versioning
 ### PSEngine Version
 
-We follow [SemVer](semver.org) standard and while we try to avoid breaking changes with new minor or patch releases, it is always advised to pin a specific version of PSEngine in your `pyproject.toml`. For example:
+We follow <https://semver.org> standard and while we try to avoid breaking changes with new minor or patch releases, it is always advised to pin a specific version of PSEngine in your `pyproject.toml`. For example:
 
 ```toml
 dependencies = [

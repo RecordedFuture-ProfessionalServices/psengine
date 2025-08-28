@@ -35,6 +35,10 @@ After the sample code is executed, in the `alerts` directory you should have a f
 
 #### Example 2: From an alert ID fetch the data and related images, save the images to file.
 
+!!! tip
+    To run this example you need to provide a playbook alert ID in the `alert_id` argument at line 11. This can be retrieved by using the `search` or `fetch_bulk` shown in the previous example.
+    If you are using a playbook alert that is not a Domain Abuse type, change the category to match the alert's one.
+
 In this example we assume that we have an alert ID from either another integration, colleague or from the portal, however the steps on this example can be replicated using `fetch_bulk` as well.
 
 We use the `fetch` method to collect the alert, with the `fetch_images` argument set to `True`, so that we will get all the images associated to that alert, if any. 

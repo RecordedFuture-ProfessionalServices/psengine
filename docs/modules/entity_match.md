@@ -27,6 +27,6 @@ In this example we use the `resolve_entity_id` method to find the ID of the CVE.
 In this example we use the `lookup` method to find the entity from the ID. In case of entity not found, the method will return `None` hence why we use the `if` before printing the attribute `name`.
 
 ```python 
---8<-- "docs/examples/entity_match/example_1.py"
+--8<-- "docs/examples/entity_match/example_2.py"
 ``` 
 

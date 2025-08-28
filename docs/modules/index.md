@@ -9,3 +9,4 @@ For example on Linux or MacOS you will do:
 ```bash
 export RF_TOKEN=<your_token>
 ```
+

@@ -33,6 +33,11 @@ To build the markdown for alerts we need all the fields, so you can use the `ALL
 
 #### Example 2: From a list of alert IDs fetch the data and related images, save the images to file.
 
+!!! tip
+
+    To replicate this example you will need to change the `ALERT_IDS` list with one or more ID of alerts that triggered in your enterprise.
+    Either hardcode them, or use the `search` method shown above. For each alert found, the `id_` attribute can be used to return the ID of that alert.
+
 This example starts with the assumption that you have a list of alert IDs retrieved by a search, or a colleague or another integration/security tool. We will use only two alert IDs for demonstration.
 
 In this example we use the `fetch_bulk` method to download the alerts. We use the `max_workers=2` to split the task to two threads for faster performances. 
@@ -45,6 +50,11 @@ The alerts might have an image ID in its payload, which will be collected by the
 ``` 
 
 #### Example 3: Fetch all the hits of an alert, and save the result as JSON file.
+
+!!! tip
+
+    To replicate this example you will need to change the `ALERT_IDS` list with one or more ID of alerts that triggered in your enterprise.
+    Either hardcode them, or use the `search` method shown above. For each alert found, the `id_` attribute can be used to return the ID of that alert.
 
 This example starts with the assumption that you have an alert ID retrieved by a search, or a colleague or another integration/security tool. We will use only two alert IDs for demonstration.
 

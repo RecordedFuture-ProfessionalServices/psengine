@@ -16,7 +16,7 @@ See the [**API Reference**](../api/collective_insights/collective_insights.md) f
 
 {! modules/_includes/examples_warning.md !}
 
-#### Example 1: Submitting a detection of an hash linked to a Wiper malware speciment.
+#### Example 1: Submit a detection of an hash linked to a Wiper malware speciment.
 
 The `create` method only requires the following arguments to be specified:
 
