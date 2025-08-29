@@ -85,7 +85,6 @@ plugins:
         - "examples/**"
 nav:
   - PSEngine: index.md
-  - Guidelines: guidelines.md
   - Learn: 
       - Learn: modules/index.md
       - Analyst Notes: modules/analyst_notes.md
@@ -100,10 +99,11 @@ nav:
       - Risklists: modules/risklists.md
       - STIX2: modules/stix2.md
       - Internals: modules/internals.md
+  - Guidelines: guidelines.md
   - Release History: CHANGELOG.md
   - Contributing: contributing.md
-  - API Documentation:
-      - API Documentation: api/index.md
+  - API Reference:
+      - API Reference: api/index.md
       - Analyst Notes:
           - Manager: api/analyst_notes/note_mgr.md
           - ADT: api/analyst_notes/note.md
