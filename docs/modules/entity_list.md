@@ -12,7 +12,7 @@ See the [**API Reference**](../api/entity_lists/entity_list_mgr.md) for internal
 
 !!! tip
     
-    To run this example we are searching for a specific Domain Watch List to populate, which wou will not be able to find. Either change the `owner_name` equality at line 10 to use your organization name, or remove the whole `for` loop and assign to `domain_watch_list` the first element of the `watch_lists` variable.
+    To run this example we are searching for a specific Domain Watch List to populate, which would will not be able to find. Either change the `owner_name` equality at line 10 to use your organization name, or remove the whole `for` loop and assign to `domain_watch_list` the first element of the `watch_lists` variable.
 
 In this example we start with the entity to add: `idn:example.com`. This syntax (`idn:`) identifies a Recorded Future entity ID for a domain (`InternetDomainName`). 
 
@@ -39,7 +39,7 @@ As a last instruction we print the status of the list. The `status` method will 
 
 !!! tip
     
-    To run this example we are searching for a specific Domain Watch List to populate, which wou will not be able to find. Either change the `owner_name` equality at line 10 to use your organization name, or remove the whole `for` loop and assign to `domain_watch_list` the first element of the `watch_lists` variable.
+    To run this example we are searching for a specific Domain Watch List to populate, which would will not be able to find. Either change the `owner_name` equality at line 10 to use your organization name, or remove the whole `for` loop and assign to `domain_watch_list` the first element of the `watch_lists` variable.
 
 Similarly to example 1, in this case we do not know the Recoreded Future ID of the entity, so we need to modify the `add` invocation by passing a tuple containing the name of the entity, in this case `example2.com` and the type of the entity, `InternetDomainName`. 
 

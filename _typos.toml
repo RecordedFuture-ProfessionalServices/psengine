@@ -1,0 +1,6 @@
+[files]
+extend-exclude = ["tests/*"]
+
+[type.json]
+extend-glob = ["*.json"]
+check-file = false
