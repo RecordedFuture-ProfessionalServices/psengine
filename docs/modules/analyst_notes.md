@@ -42,7 +42,7 @@ After that you can run it and see the markdown begin written in the terminal and
 ```
 The `markdown` method accept different arguments, such as `diamond_model` to add to the markdown the diamond model information, if present. For more information see the API Reference. 
 
-#### Example 3: Download and save notes related to Ransomware Actors and Ransomware Tools written in the last year.
+#### Example 3: Download and save analyst notes related to Ransomware Actors and Ransomware Tools written in the last year.
 
 In this example we use the `search` method with the `topic` argument, which accept either a string or a list of strings by topic id. The list of topic ids can be found in the [Analyst Note API](https://support.recordedfuture.com/hc/en-us/articles/30506669358611-Analyst-Note-API) support article. When performing a search, notes are getting deduplicated, in case you select two or more topics and a note is tagged with both of them.
 
