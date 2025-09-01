@@ -1,5 +1,6 @@
-Link to documentation: <https://recordedfuture-professionalservices.github.io/psengine/>
-Link to Github: <https://github.com/RecordedFuture-ProfessionalServices/psengine>
+**Documentation**: <https://recordedfuture-professionalservices.github.io/psengine/>
+
+**Github**: <https://github.com/RecordedFuture-ProfessionalServices/psengine>
 
 ---
 
