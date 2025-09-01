@@ -2,6 +2,8 @@
 
 **Github**: <https://github.com/RecordedFuture-ProfessionalServices/psengine>
 
+**PyPi**: <https://pypi.org/project/psengine/>
+
 ---
 
 PSEngine is a simple, yet elegant, library for rapid development of integrations with Recorded Future.
@@ -44,4 +46,11 @@ And facilitate the development with features like:
 * Easy configuration management
 - Markdown creation from certain data types
 * Proxy support
+
+## Previous versions and version documentation
+
+PSEngine has been made public from our internal version 2.0.4. Any previous version, including version 1, are not publicly available.
+
+The documentation arrived at version 2.1.1. Older versions are not explicitly documented and changes can be found in the [Release History](./CHANGELOG.md) section.
+
 
