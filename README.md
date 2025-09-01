@@ -1,3 +1,8 @@
+Link to documentation: <https://recordedfuture-professionalservices.github.io/psengine/>
+Link to Github: <https://github.com/RecordedFuture-ProfessionalServices/psengine>
+
+---
+
 PSEngine is a simple, yet elegant, library for rapid development of integrations with Recorded Future.
 
 PSEngine allows you to interact with the Recorded Future API extremely easily. There’s no need to manually build the URLs and query parameters, just use the modules dedicated to individual API endpoints.
