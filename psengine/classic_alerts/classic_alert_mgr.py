@@ -160,7 +160,7 @@ class ClassicAlertMgr:
                 Fields to include in the fetch result.
 
                 **Note:**
-                All fields are collected by default. Specify the fields needed, however the fields 
+                All fields are collected by default. Specify the fields needed, however the fields
                 `id`, `log`, `title`, `rule` are always retrieved.
                 Any provided fields are added to these."
                 """
@@ -220,7 +220,7 @@ class ClassicAlertMgr:
                 Fields to include in the fetch result.
 
                 **Note:**
-                All fields are collected by default. Specify the fields needed, however the fields 
+                All fields are collected by default. Specify the fields needed, however the fields
                 `id`, `log`, `title`, `rule` are always retrieved.
                 Any provided fields are added to these."
                 """
