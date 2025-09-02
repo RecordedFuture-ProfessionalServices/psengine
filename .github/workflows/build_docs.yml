@@ -11,13 +11,22 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
     steps:
       - uses: actions/checkout@v5
 
+      - name: Extract version
+        id: get_version
+        run: |
+          VERSION=$(grep -m1 '^version' pyproject.toml | cut -d '"' -f2 | cut -d '.' -f 1,2)
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+
       - name: Configure Git Credentials
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config user.name docs-bot[bot]
+          git config user.email docs-bot@users.noreply.github.com
 
       - uses: astral-sh/setup-uv@v6
 
@@ -30,4 +39,4 @@ jobs:
           uv pip install '.[docs]'
 
       - name: Run MKdocs
-        run: uv run mkdocs gh-deploy --force
+        run: uv run mike deploy -b gh-pages ${{ env.VERSION }} --update-alias --push
