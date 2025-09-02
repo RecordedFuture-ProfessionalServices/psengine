@@ -105,12 +105,9 @@ max-complexity = 10
     "T201",    # print
 ]
 
-"docs/source/*" = [
-    "D103",   # undocumented-public-function
-    "INP",    # flake8-no-pep420
-    "PTH",    # flake8-use-pathlib
-    "T201",   # print
+"docs/examples/*" = [
     "CPY",     # copyright
+    "T201",    # print
 
 ]
 

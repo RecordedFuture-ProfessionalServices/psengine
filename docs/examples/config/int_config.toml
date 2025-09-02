@@ -1,0 +1,8 @@
+[pba]
+category="domain_abuse"
+statuses=["New"]
+priority="High"
+lookback="-1d"
+
+[enrich]
+fields=["links"]

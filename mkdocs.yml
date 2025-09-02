@@ -4,6 +4,10 @@ repo_url: https://github.com/RecordedFuture-ProfessionalServices/psengine-py
 watch:
   - psengine
 
+extra:
+  version:
+    provider: mike
+
 theme:
   name: material
   palette:
@@ -44,13 +48,17 @@ theme:
 markdown_extensions:
   - admonition
   - attr_list
+  - markdown_include.include:
+      base_path: docs
+  - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true        
       linenums: true             
       guess_lang: false
   - pymdownx.superfences
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:  
+      check_paths: true
   - toc:
       permalink: true
 
@@ -76,11 +84,33 @@ plugins:
             signature_crossrefs: true
             show_symbol_type_heading: true
             show_symbol_type_toc: true
+  - exclude:
+      glob:
+        - "examples/**"
 nav:
-  - index.md
-  - about.md
-  - CHANGELOG.md
-  - API Documentation:
+  - PSEngine: index.md
+  - Learn: 
+      - Learn: modules/index.md
+      - Analyst Notes: modules/analyst_notes.md
+      - Classic Alerts: modules/classic_alerts.md
+      - Collective Insights: modules/collective_insights.md
+      - Detections: modules/detections.md
+      - Enrichment: modules/enrich.md
+      - Entity List: modules/entity_list.md
+      - Entity Match: modules/entity_match.md
+      - Identity: modules/identity.md
+      - Playbook Alerts: modules/playbook_alerts.md
+      - Risklists: modules/risklists.md
+      - STIX2: modules/stix2.md
+      - Config: modules/config.md
+      - Logger: modules/logger.md
+      - Internals: modules/internals.md
+  - Guidelines: guidelines.md
+  - Release History: CHANGELOG.md
+  - Contributing: contributing.md
+  - Workflows: workflows.md
+  - API Reference:
+      - API Reference: api/index.md
       - Analyst Notes:
           - Manager: api/analyst_notes/note_mgr.md
           - ADT: api/analyst_notes/note.md
@@ -112,9 +142,9 @@ nav:
           - Errors: api/detection/errors.md
       - Enrichment: 
           - Lookup: 
-              - Manager: api/enrichment/enrich_mgr.md
-              - ADT: api/enrichment/enrich_adt.md
-              - Models: api/enrichment/enrich_models.md
+              - Manager: api/enrichment/lookup_mgr.md
+              - ADT: api/enrichment/lookup_adt.md
+              - Models: api/enrichment/lookup_models.md
           - SOAR: 
               - Manager: api/enrichment/soar_mgr.md
               - ADT: api/enrichment/soar_adt.md
@@ -171,7 +201,7 @@ nav:
               - PBA Malware Report: api/playbook_alerts/models/pba_malware_report.md
               - PBA Third Party Risk: api/playbook_alerts/models/pba_third_party_risk.md
               - Search Endpoint: api/playbook_alerts/models/search_endpoint.md
-      - Risk Lists:
+      - Risklists:
           - Manager: api/risklists/risklist_mgr.md
           - Models: api/risklists/models.md
           - Constants: api/risklists/constants.md

@@ -47,10 +47,3 @@ And facilitate the development with features like:
 - Markdown creation from certain data types
 * Proxy support
 
-## Previous versions and version documentation
-
-PSEngine has been made public from our internal version 2.0.4. Any previous version, including version 1, are not publicly available.
-
-The documentation arrived at version 2.1.1. Older versions are not explicitly documented and changes can be found in the [Release History](./CHANGELOG.md) section.
-
-
