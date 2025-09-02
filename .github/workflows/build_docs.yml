@@ -11,22 +11,24 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.get_version.outputs.version }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-dept: 0
+          persist-credentials: true
+
+      - name: Fetch gh-pages and git config
+        run: |
+          git fetch origin gh-pages:gh-pages || true
+          git branch --set-upstream-to=origin/gh-pages gh-pages || true
+          git config user.name docs-bot[bot]
+          git config user.email docs-bot@users.noreply.github.com
 
       - name: Extract version
         id: get_version
         run: |
           VERSION=$(grep -m1 '^version' pyproject.toml | cut -d '"' -f2 | cut -d '.' -f 1,2)
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
-
-
-      - name: Configure Git Credentials
-        run: |
-          git config user.name docs-bot[bot]
-          git config user.email docs-bot@users.noreply.github.com
 
       - uses: astral-sh/setup-uv@v6
 
