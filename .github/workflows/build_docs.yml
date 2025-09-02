@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-dept: 0
+          fetch-depth: 0
           persist-credentials: true
 
       - name: Fetch gh-pages and git config
