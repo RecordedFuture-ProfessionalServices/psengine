@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.1.1 - 2025-08-22
+
+### Changed
+
+- Moved typing system to `typing.Annotated` and `typing_extensions.Doc`
+
 ## v2.1.0 - 2025-07-02
 
 ### Added

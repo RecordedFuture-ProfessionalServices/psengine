@@ -6,7 +6,7 @@ import pytest
 from psengine.base_http_client import BaseHTTPClient
 
 MOCK_DIR = Path(__file__).parent / 'mocks'
-RF_TOKEN = 'PS_RF_TOKEN'  # noqa: S105
+RF_TOKEN = 'RF_TOKEN'  # noqa: S105
 
 
 @pytest.fixture

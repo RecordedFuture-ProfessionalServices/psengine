@@ -1,0 +1,20 @@
+name: Imports
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  imports:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check imports
+        run: | 
+          if matches=$(grep -RIn --line-number -E '^from[[:space:]]+psengine' psengine) ; then
+            echo "❌ Disallowed internal imports detected:"
+            echo "$matches" | awk -F':' '{print "Filename: " $1 " Line: " $2 " Import: " $3}'
+            exit 1
+          else
+            echo "✅ No problematic imports found."
+          fi

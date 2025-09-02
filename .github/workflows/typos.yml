@@ -1,0 +1,29 @@
+name: Spelling
+
+permissions:
+  contents: read
+
+on: 
+  workflow_dispatch: 
+  pull_request:
+
+env:
+  CLICOLOR: 1
+
+jobs:
+  spelling:
+    name: Spell Check with Typos
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Spell Check Repo
+      uses: crate-ci/typos@v1.35.5
+      with: 
+        files: | 
+          ./psengine/
+          ./docs/
+          ./examples/
+          README.rst
+
