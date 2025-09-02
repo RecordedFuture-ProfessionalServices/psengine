@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from psengine.risklists import RisklistMgr, DefaultRiskList
+from psengine.risklists import DefaultRiskList, RisklistMgr
 
 OUTPUT_DIR = Path(__file__).parent / 'risklists'
 OUTPUT_DIR.mkdir(exist_ok=True)
