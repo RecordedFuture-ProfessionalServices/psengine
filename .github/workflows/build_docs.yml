@@ -41,4 +41,6 @@ jobs:
           uv pip install '.[docs]'
 
       - name: Run MKdocs
-        run: uv run mike deploy -b gh-pages ${{ env.VERSION }} --update-alias --push
+        run: |
+          uv run mike deploy -b gh-pages "${{ env.VERSION }}" latest --update-aliases --alias-type=copy --push
+          uv run mike set-default -b gh-pages latest --push
