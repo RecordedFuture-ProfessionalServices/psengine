@@ -4,6 +4,10 @@ repo_url: https://github.com/RecordedFuture-ProfessionalServices/psengine-py
 watch:
   - psengine
 
+extra:
+  version:
+    provider: mike
+
 theme:
   name: material
   palette:
