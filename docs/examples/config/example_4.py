@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 from psengine.config import Config, ConfigModel, get_config
 
-CONFIG_PATH = Path(__file__).parent / 'custom_config.toml'
+CONFIG_PATH = Path(__file__).parent / "custom_config.toml"
 
 
 class ComplexValue(BaseModel):
@@ -21,7 +21,9 @@ class IntegrationConfig(ConfigModel):
     complex_value: ComplexValue
 
 
-Config.init(config_class=IntegrationConfig, config_path=CONFIG_PATH)
+Config.init(
+    config_class=IntegrationConfig, config_path=CONFIG_PATH
+)
 config = get_config()
 
 print(config)
