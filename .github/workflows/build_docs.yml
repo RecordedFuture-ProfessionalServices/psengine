@@ -13,11 +13,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
 
-      - name: Configure Git Credentials
+      - name: Fetch gh-pages and git config
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git fetch origin gh-pages:gh-pages || true
+          git branch --set-upstream-to=origin/gh-pages gh-pages || true
+          git config user.name docs-bot[bot]
+          git config user.email docs-bot@users.noreply.github.com
+
+      - name: Extract version
+        id: get_version
+        run: |
+          VERSION=$(grep -m1 '^version' pyproject.toml | cut -d '"' -f2 | cut -d '.' -f 1,2)
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
       - uses: astral-sh/setup-uv@v6
 
@@ -30,4 +41,6 @@ jobs:
           uv pip install '.[docs]'
 
       - name: Run MKdocs
-        run: uv run mkdocs gh-deploy --force
+        run: |
+          uv run mike deploy -b gh-pages "${{ env.VERSION }}" latest --update-aliases --alias-type=copy --push
+          uv run mike set-default -b gh-pages latest --push
