@@ -58,12 +58,16 @@ class Test_EntityMatchMgr:
 
         mocker.patch.object(match_mgr.rf_client, 'request', side_effect=mocks)
         results = match_mgr.resolve_entity_ids(entitylist)
+        ids_by_name = {r.content.name: r.content.id_ for r in results}
+
         assert isinstance(results, list)
         assert all(isinstance(r, ResolvedEntity) for r in results)
         assert len(results) == 3
-        assert results[0].content.id_ == 'I60vfZ'
-        assert results[1].content.id_ == 'en_T6N'
-        assert results[2].content.id_ == 'TzghRB'
+        assert ids_by_name == {
+            'RedGolf': 'I60vfZ',
+            'RedDelta': 'en_T6N',
+            'WannaCry 1.0': 'TzghRB',
+        }
 
     def test_resolve_entity_ids_str(self, match_mgr: EntityMatchMgr, mocker, make_response):
         mock = make_response(
