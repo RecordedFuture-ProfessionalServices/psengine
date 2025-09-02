@@ -136,7 +136,7 @@ We can opt for a quick script using "free" variables around the code, or using t
 
 **Code 1** without the config:
 
-In this example we are hardcoding the values that we need for fetching the alert and enriching the IOCs. This is a perfectly fine code, however in larger applications it might be challanging to maintain if the requirements change.
+In this example we are hardcoding the values that we need for fetching the alert and enriching the IOCs. This is a perfectly fine code, however in larger applications it might be challenging to maintain if the requirements change.
 
 ```python
 --8<-- "docs/examples/config/example_5_1.py"
@@ -156,6 +156,6 @@ The script can be rewritten as below.
 --8<-- "docs/examples/config/example_5_2.py"
 ```
 
-The code itself is defintely longer, however we gain on maintainability, since now a person without development experince or inner understanding of the application can change the config to meet the new requirements. 
+The code itself is definitely longer, however we gain on maintainability, since now a person without development experience or inner understanding of the application can change the config to meet the new requirements. 
 
 

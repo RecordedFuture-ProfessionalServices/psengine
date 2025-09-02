@@ -52,14 +52,14 @@ In this example we have the same code, expect for the logger definition which is
 
 - to log on console and on file under the `logs/` directory in the same location where your script is running
 - to log everything from `INFO` above
-- formatted log entires:
+- formatted log entries:
     ```
     2025-09-01 13:27:21,297 [MainThread] INFO [example_2] <module>:9 - EnrichedIP: 8.8.8.8, Risk Score: 0, Last Seen: 2025-09-01 11:58:39
 
     ```
 - maintain the log propagation for other loggers
 
-All of these parameters can be configured during `RFLogger` initalization.
+All of these parameters can be configured during `RFLogger` initialization.
 
 ```python 
 --8<-- "docs/examples/logger/example_2.py"
