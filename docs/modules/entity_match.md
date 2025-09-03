@@ -8,7 +8,8 @@ See the [**API Reference**](../api/entity_match/entity_match_mgr.md) for interna
 
 In this module the `match` and `resolve_entity_id` method are very similar. `match` will return a list of all the possible matches, while the `resolve_entity_id` is more strict, it will return a single match. 
 
-Specifying the type of the entity leads to better results.
+Specifying the type of the entity leads to better results. 
+
 
 ## Examples
 
@@ -29,4 +30,22 @@ In this example we use the `lookup` method to find the entity from the ID. In ca
 ```python 
 --8<-- "docs/examples/entity_match/example_2.py"
 ``` 
+
+#### Example 3: Dealing with entities not found
+
+In the scenario where you are not specific enough with the entity you are looking for or there are some amiguities, using the `resolve_entity_id` might lead to an entity not found. The method will not raise an error but you need to check the `ResolveEntity.is_found` attribute, as show in the example.
+
+```python
+--8<-- "docs/examples/entity_match/example_3.py"
+```
+
+This example will print:
+
+```python
+{   
+    'content': "Multiple matches found for 'wannacry' of type 'Malware'",
+    'entity': 'wannacry',
+    'is_found': False
+}
+```
 
