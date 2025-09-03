@@ -25,7 +25,7 @@ When performing enrichment with `LookupMgr` and `fields` is specified, the field
 
     To replicate this example the token you are using must have Vulnerability Module access. If you don't have it change the entity to enrich in a domain or IP address or use the Example 2 as reference.
 
-This example uses the `LookupMgr.lookup` method to get the enrichment data of the CVE, adding the `cvssv3` field. Before printing the result, it is needed to check if the CVE has been enriched, we do that with the `is_enriched` boolean attribute, and if it is we print the result as JSON. Note that the result is stored under the `content`, which can be an object or a string depending on the API response. If the entity has not been found it will be a string containing a 404 message.
+This example uses the `LookupMgr.lookup` method to get the enrichment data of the CVE, adding the `cvssv3` field. Before printing the result, it is needed to check if the CVE has been enriched, we do that with the `is_enriched` boolean attribute, and if it is we print the result as JSON. Note that the result is stored under the `content`, which can be an object or a string depending on the API response. If the entity has not been found it will be a string containing a 404 message. More on this in the example 4.
 
 ```python 
 --8<-- "docs/examples/enrich/example_1.py"
@@ -59,3 +59,23 @@ In the last step we create a new file with two columns, `ip` and `score` and we 
 ```python 
 --8<-- "docs/examples/enrich/example_3.py"
 ``` 
+
+#### Example 4: Dealing with 404.
+
+The `SoarMgr.soar` never deals with 404 errors, even if the entities given do not exist it will return the same payload.
+The `LookupMgr.lookup` and `LookupMgr.lookup_bulk` do have to handle HTTP 404 status codes. Both methods do it returning the `EnrichmentData` object with content set to a string and the `is_enriched` set to `False`.
+
+```python
+--8<-- "docs/examples/enrich/example_4.py"
+```
+
+The example will print:
+
+```python
+{   
+    'content': '404 received. Nothing known on this entity',
+    'entity': 'CVE-999',
+    'entity_type': 'vulnerability',
+    'is_enriched': False
+}
+```
