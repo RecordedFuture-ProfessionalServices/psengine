@@ -84,7 +84,7 @@ class RFClient(BaseHTTPClient):
             raise ValueError('Missing Recorded Future API token.')
         if not is_api_token_format_valid(self._api_token):
             raise ValueError(
-                f'Invalid Recorded Future API token.must match regex {RF_TOKEN_VALIDATION_REGEX}'
+                f'Invalid Recorded Future API token: must match regex {RF_TOKEN_VALIDATION_REGEX}'
             )
 
     @debug_call
