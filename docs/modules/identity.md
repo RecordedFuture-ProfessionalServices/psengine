@@ -56,7 +56,7 @@ After running the sample code, the output would look like this:
 #### Example 2: View the clear text password of a user that has been exposed.
 
 !!! tip
-    To run this example you will need to change the email queried by `lookup_credentials` to one of the emails that has been compromoised from the domains you are monitoring.
+    To run this example you will need to change the email queried by `lookup_credentials` to one of the emails that has been compromised from the domains you are monitoring.
     Your token also needs access to the Identity Module.
 
 In this example we check if the user `+2@norsegods.online` has a clear text password being leaked, and if yes we print it. The main purpose of this example is to show how to use the clear text password in case it has to be sent to another tool, like Active Directory, Okta etc.
