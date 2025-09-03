@@ -12,6 +12,8 @@ See the [**API Reference**](../api/collective_insights/collective_insights.md) f
 
 2. The insights submitted requires some fields to be filled with specific values. For example the `detection_type` can be either `sigma`, `yara` or `snort`. To help you there are some constants values defined in `collective_insights.constants`. See a usage example below.
 
+3. The `CollectiveInsights.create` method has a default value of `debug=True` this is used to make sure the whole workflow works, but the indicators are **not** submitted to Recorded Future. In production code, you want to set `debug=False` when you are ready to share the detections with Recorded Future.
+
 ## Examples
 
 {! modules/_includes/examples_warning.md !}
