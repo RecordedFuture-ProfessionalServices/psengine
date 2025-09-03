@@ -15,7 +15,7 @@ See the [**API Reference**](../api/entity_lists/entity_list_mgr.md) for internal
 
 In this example we start with the entity to add: `idn:example.com`. This syntax (`idn:`) identifies a Recorded Future entity ID for a domain (`InternetDomainName`). 
 
-We first use the `EntityListMgr` to find the list that we want to modify. The `search` method returns always a list of `EntityList` objects if at least one Watch List is found, otherwise it will be an emtpy list. Hence why we verify with the `if` statement if the `domain_watch_list` variable has something inside. If it does we extract the first element.
+We first use the `EntityListMgr` to find the list that we want to modify. The `search` method returns always a list of `EntityList` objects if at least one Watch List is found, otherwise it will be an empty list. Hence why we verify with the `if` statement if the `domain_watch_list` variable has something inside. If it does we extract the first element.
 
 The `domain_watch_list` variable is an object of `EntityList` type, which allows us to add or remove entities from that specific list. We use the `add` method to add an entity, we know the Recorded Future ID, so we can directly pass it to the `add` method. 
 
