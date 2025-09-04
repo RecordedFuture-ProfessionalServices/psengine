@@ -8,6 +8,7 @@ domain_watch_list = mgr.search(
 )
 
 if domain_watch_list:
+    domain_watch_list = domain_watch_list[0]
     add_op = domain_watch_list.add(domain)
 
     if add_op.result == "added":
