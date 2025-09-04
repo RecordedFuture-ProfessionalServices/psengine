@@ -2,7 +2,6 @@
 
 The `RisklistMgr` class of the `risklists` module allows you to fetch risklists. A risklist is a file that contains a list of indicators with different levels of maliciousness. These risklists are often used as correlation files in SIEM tools.
 
-
 In Recorded Future, the concept of a "default" risklist means a risklist with usually up to 100,000 indicators with a score from 65 and above.
 
 See the [**API Reference**](../api/risklists/risklist_mgr.md) for internal details of the module.
