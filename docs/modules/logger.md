@@ -1,14 +1,16 @@
-## Introduction 
+## Introduction
 
-The `RFLogger` class of the `rf_logger` module set up a logger for your integration.
+The `RFLogger` class of the `rf_logger` module sets up a logger for your integration.
 
-The logger is built-in in all the Managers classes in PSEngine, which means it is used by default as soon as any form of logging is enabled in your code. 
+The logger is built into all the manager classes in PSEngine, which means it is used by default as soon as any form of logging is enabled in your code.
 
 This could be in three ways:
 
-1. If the SDK you are using have already a logging capability enabled
-2. If you have already enabled logging
-3. Neither point 1 and 2, and you want to use the PSEngine logger.
+- If the SDK you are using already has logging enabled
+- If you have already enabled logging
+- Neither point 1 nor 2, and you want to use the PSEngine logger
+
+Note that it is not required to use either the `RFLogger` or any type of logging for PSEngine to work.
 
 See the [**API Reference**](../api/logger/rf_logger.md) for internal details of the module.
 
@@ -16,17 +18,15 @@ See the [**API Reference**](../api/logger/rf_logger.md) for internal details of 
 
 {! modules/_includes/examples_warning.md !}
 
+#### Example 1: Use a PSEngine module when another SDK has logging enabled
 
-#### Example 1: Use a PSEngine module when another SDK has logging enabled.
+In this example, we create a `Logger` instance from the `logging` standard library to emulate the fact that you might have configured your own logging. In this case, there is nothing else that needs to be done before using PSEngine.
 
-In this example we are creating a `Logger` instance from the `logging` standard library to emulate the fact that you might have configured your own logging. In this case there is nothing else that needs to be done before using PSEngine. 
-
-
-```python 
+```python
 --8<-- "docs/examples/logger/example_1.py"
 ```
 
-If you set the the logging level to `DEBUG` you will see all the internal PSEngine debug logging. 
+If you set the logging level to `DEBUG`, you will see all the internal PSEngine debug logging.
 
 ```
 DEBUG:psengine.base_http_client:Creating an HTTP client session
@@ -44,23 +44,23 @@ DEBUG:psengine.enrich.lookup_mgr:LookupMgr.lookup ended with return value 'Enric
 INFO:__main__:EnrichedIP: 8.8.8.8, Risk Score: 0, Last Seen: 2025-09-01 09:44:16
 ```
 
-Any log entries of higher level, like `ERROR` or `CRITICAL` will be shown as well.
+Any log entries of higher level, like `ERROR` or `CRITICAL`, will be shown as well.
 
 #### Example 2: Use `RFLogger` in combination with another PSEngine module
 
-In this example we have the same code, expect for the logger definition which is via `RFLogger`. The default `RFLogger` behaviours are:
+In this example, we have the same code, except for the logger definition, which is via `RFLogger`. The default `RFLogger` behaviors are:
 
-- to log on console and on file under the `logs/` directory in the same location where your script is running
-- to log everything from `INFO` above
+- to log to the console and to a file under the `logs/` directory in the same location where your script is running
+- to log everything from `INFO` and above
 - formatted log entries:
     ```
     2025-09-01 13:27:21,297 [MainThread] INFO [example_2] <module>:9 - EnrichedIP: 8.8.8.8, Risk Score: 0, Last Seen: 2025-09-01 11:58:39
 
     ```
-- maintain the log propagation for other loggers
+- maintain log propagation for other loggers
 
 All of these parameters can be configured during `RFLogger` initialization.
 
-```python 
+```python
 --8<-- "docs/examples/logger/example_2.py"
 ```

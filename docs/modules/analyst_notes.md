@@ -1,6 +1,6 @@
-## Introduction 
+## Introduction
 
-The `AnalystNoteMgr` class of the `analyst_notes` module allows you to download, search, publish and fetch attachments of analyst notes. 
+The `AnalystNoteMgr` class of the `analyst_notes` module allows you to download, search, publish, and fetch attachments of analyst notes.
 An analyst note is a note that is either:
 
 - written and published by someone in your organization via the Recorded Future portal or the Recorded Future API,
@@ -10,44 +10,47 @@ See the [**API Reference**](../api/analyst_notes/note_mgr.md) for internal detai
 
 ## Notes
 
-1. When searching for multiple notes or fetching a single note by `id_`, the object returned is the same. This is different from most of the Recorded Future API behaviours where a search is a portion of the full object. Which means that you don't have to search for all the new notes and fetch them one by one to get the full details. 
-2. When searching for multiple notes, the number of notes returned is not defined by the `max_results` parameter. The `max_results` defined the maximum number of references from which notes are fetched, up to 1000. Note: The number of notes returned can be lower than this limit if some of the fetched references links to the same analyst note.
+- When searching for multiple notes or fetching a single note by `id_`, the object returned is the same. This is different from most Recorded Future API behaviors, where a search is a portion of the full object. This means you don't have to search for all the new notes and fetch them one by one to get the full details.
+- When searching for multiple notes, the number of notes returned is not defined by the `max_results` parameter. The `max_results` defines the maximum number of references from which notes are fetched, up to 1000. Note: The number of notes returned can be lower than this limit if some of the fetched references link to the same analyst note.
 
 ## Examples
 
 {! modules/_includes/examples_warning.md !}
 
+#### Example 1: Search for the last day of analyst notes, download and save the attachments if present
 
-#### Example 1: Search for the last day of analyst notes, download and save the attachments if present.
+The `fetch_attachment` method returns a tuple with the attachment content and extension. If the note does not contain an attachment, it returns empty content and extension.
+To limit the number of calls made to the API, check if the attribute `attachment` is present; if yes, fetch the attachment.
 
-The `fetch_attachment` method returns a tuple with the attachment content and extension. If the note does not contain an attachment, it will return empty content and extension.
-To limit the number of calls made to the API, you can check if the attribute `attachment` is present, if yes fetch the attachment. 
-```python 
+```python
 --8<-- "docs/examples/analyst_notes/example_1.py"
 ```
 
-#### Example 2: Search for the last day of analyst notes, download and save them as markdown.
+#### Example 2: Search for the last day of analyst notes, download and save them as markdown
 
-Similarly to the previous example, you can generate the markdown of an analyst note calling the `markdown` method defined for the `AnalystNote` object.
-In this example we are setting `max_results` to `2` for a shorter output, since we are printing the markdown to console.
+Similarly to the previous example, you can generate the markdown of an analyst note by calling the `markdown` method defined for the `AnalystNote` object.
+In this example, we set `max_results` to `2` for a shorter output, since we are printing the markdown to the console.
 
-To run this example you will first need to add the `rich` package to your virtual environment:
+To run this example, first add the `rich` package to your virtual environment:
+
 ```bash
 pip install rich
 ```
-After that you can run it and see the markdown begin written in the terminal and being saved in the `attachment` directory.
-```python
 
+After that, you can run it and see the markdown being written in the terminal and saved in the `attachment` directory.
+
+```python
 --8<-- "docs/examples/analyst_notes/example_2.py"
 ```
-The `markdown` method accept different arguments, such as `diamond_model` to add to the markdown the diamond model information, if present. For more information see the API Reference. 
 
-#### Example 3: Download and save analyst notes related to Ransomware Actors and Ransomware Tools written in the last year.
+The `markdown` method accepts different arguments, such as `diamond_model`, to add the diamond model information to the markdown, if present. For more information, see the API Reference.
 
-In this example we use the `search` method with the `topic` argument, which accept either a string or a list of strings by topic id. The list of topic ids can be found in the [Analyst Note API](https://support.recordedfuture.com/hc/en-us/articles/30506669358611-Analyst-Note-API) support article. When performing a search, notes are getting deduplicated, in case you select two or more topics and a note is tagged with both of them.
+#### Example 3: Download and save analyst notes related to Ransomware Actors and Ransomware Tools written in the last year
 
-The `save_note` method can be used to save the note as json.
+In this example, we use the `search` method with the `topic` argument, which accepts either a string or a list of strings by topic ID. The list of topic IDs can be found in the [Analyst Note API](https://support.recordedfuture.com/hc/en-us/articles/30506669358611-Analyst-Note-API) support article. When performing a search, notes are deduplicated in case you select two or more topics and a note is tagged with both of them.
+
+The `save_note` method can be used to save the note as JSON.
+
 ```python
 --8<-- "docs/examples/analyst_notes/example_3.py"
 ```
-
