@@ -1,14 +1,16 @@
 from psengine.entity_lists import EntityListMgr
 
-domain = 'idn:example.com'
+domain = "idn:example.com"
 
 mgr = EntityListMgr()
-domain_watch_list = mgr.search('Domain Watch List', 'domain')
+domain_watch_list = mgr.search(
+    "Domain Watch List", "domain"
+)
 
 if domain_watch_list:
     add_op = domain_watch_list.add(domain)
 
-    if add_op.result == 'added':
+    if add_op.result == "added":
         for entity in domain_watch_list.entities():
             print(entity)
 
