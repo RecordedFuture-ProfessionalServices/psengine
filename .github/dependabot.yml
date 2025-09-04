@@ -6,6 +6,12 @@ updates:
       interval: "weekly"
     ignore:
       - dependency-type: "development"
+    groups:
+      runtime-minors:
+        patterns: ["*"]                 
+        update-types: ["minor", "patch"] 
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
     commit-message:
       prefix: "😨"
     labels:
@@ -15,6 +21,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      gha-minors:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
     commit-message:
       prefix: "😨"
     labels:
