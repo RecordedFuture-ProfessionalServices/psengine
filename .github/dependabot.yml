@@ -4,6 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-type: "development"
     commit-message:
       prefix: "😨"
     labels:
