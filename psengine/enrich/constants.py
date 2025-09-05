@@ -23,7 +23,7 @@ from ..enrich import (
     EnrichedVulnerability,
 )
 
-SOAR_POST_ROWS = 2000
+SOAR_POST_ROWS = 1000
 
 ALLOWED_ENTITIES = Literal[
     'Company',
