@@ -46,3 +46,21 @@ The method uses the `EntityMatchMgr` from the `entity_match` module to attempt t
 ```python
 --8<-- "docs/examples/entity_lists/example_2.py"
 ```
+
+#### Example 3: Remove domains in bulk from your Domain Watch List.
+
+!!! tip
+    In a multi-organization enterprise, you need to find the Watch List of the sub‑org you need to access. You can do that by looking at the `owner_name` attribute of each `EntityList` object.
+
+Similar to the previous examples, here we want to remove multiple domains. We use the `bulk_remove` method to do it.
+
+```python
+--8<-- "docs/examples/entity_lists/example_3.py"
+```
+
+The bulk operations return a dictionary that shows the result of each entity.
+
+```
+{'removed': [], 'unchanged': ['idn:example2.com', 'idn:reddit.com'], 'error': []}
+```
+
