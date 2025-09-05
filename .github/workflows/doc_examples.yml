@@ -1,0 +1,74 @@
+name: Doc Examples
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  run-doc-py:
+    runs-on: ubuntu-latest
+    env:
+      RF_TOKEN: ${{ secrets.RF_TOKEN }}
+    
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install GNU parallel
+        run: sudo apt-get update && sudo apt-get install -y parallel
+
+      - name: Set up Python
+        run: uv python install {{ vars.PYTHON_VERSION }} 
+      
+      - name: Set up venv
+        run: |
+          uv venv -p {{ vars.PYTHON_VERSION }} 
+          uv pip install '.'
+          uv pip install rich
+
+      - name: Run Examples
+        run: |
+            set -euo pipefail
+
+            KNOWN_FAILS=(
+              "./docs/examples/error_handling/example_1a.py"
+              "./docs/examples/error_handling/example_1b.py"
+              "./docs/examples/error_handling/example_3.py"
+
+            )
+
+            KNOWN_FAILS_FILE="$(mktemp)"
+            printf '%s\n' "${KNOWN_FAILS[@]}" > "$KNOWN_FAILS_FILE"
+
+            run_one() {
+              local file="$1"
+              local list_file="$2"
+
+              local safe_log="err-$(echo "$file" | tr '/' '_').log"
+
+              if grep -Fxq -- "$file" "$list_file"; then
+
+                uv run "$file" &> "$safe_log"
+                local rc=$?
+                if [[ $rc -ne 1 ]]; then
+                  echo "$file failed (exit code $rc, expected 1)"
+                  return 1
+                fi
+              else
+                uv run "$file" &> /dev/null
+                local rc=$?
+                if [[ $rc -ne 0 ]]; then
+                  echo "$file failed (exit code $rc)"
+                  return 1
+                fi
+              fi
+            }
+
+            export -f run_one
+            export KNOWN_FAILS_FILE
+
+            find ./docs/examples -type f -name "*.py" -print0 \
+              | parallel -0 --halt now,fail=1 -j 30 run_one {} "$KNOWN_FAILS_FILE"
+
+            echo "All done ✅"
+
+
