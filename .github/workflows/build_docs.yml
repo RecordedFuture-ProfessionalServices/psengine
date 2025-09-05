@@ -1,15 +1,15 @@
-name: Docs
+name: Doc Build
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Doc Examples"]
 
 permissions:
   contents: write
 
 jobs:
   deploy:
+    if: ${{ github.event_name == "workflow_dispatch" || github.event.workflow_run.conclusion == "success"}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -40,7 +40,7 @@ jobs:
           uv venv -p ${{ vars.PYTHON_VERSION }} 
           uv pip install '.[docs]'
 
-      - name: Run MKdocs
+      - name: Run Mike build
         run: |
           uv run mike deploy -b gh-pages "${{ env.VERSION }}" latest --update-aliases --alias-type=copy --push
           uv run mike set-default -b gh-pages latest --push

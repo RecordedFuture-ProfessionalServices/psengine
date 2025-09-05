@@ -1,8 +1,10 @@
 name: Doc Examples
 
-on: 
+on:
   workflow_dispatch:
-
+  push:
+    branches:
+      - main
 jobs:
   run-doc-py:
     runs-on: ubuntu-latest
