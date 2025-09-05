@@ -3,7 +3,7 @@ name: PyPi
 on: 
   workflow_dispatch:
   workflow_run:
-    workflows: ["Doc Examples"]
+    workflows: ["Tag & Release"]
 
 permissions:
   contents: read
