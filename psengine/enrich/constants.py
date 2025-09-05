@@ -26,37 +26,34 @@ from ..enrich import (
 SOAR_POST_ROWS = 2000
 
 ALLOWED_ENTITIES = Literal[
+    'Company',
     'company',
     'company_by_domain',
     'company/by_domain',
-    'domain',
-    'hash',
-    'ip',
-    'malware',
-    'url',
-    'vulnerability',
-    'Company',
     'Organization',
-    'InternetDomainName',
+    'organization',
+    'hash',
     'Hash',
+    'InternetDomainName',
+    'domain',
+    'ip',
     'IpAddress',
     'Malware',
+    'malware',
     'URL',
+    'url',
     'CyberVulnerability',
+    'vulnerability',
 ]
 
 ENTITY_FIELDS = ['entity', 'risk', 'timestamps']
 MALWARE_FIELDS = ['entity', 'timestamps']
 TYPE_MAPPING = {
     'company/by_domain': 'company_by_domain',
-    'Organization': 'company',
-    'Company': 'company',
-    'IpAddress': 'ip',
-    'InternetDomainName': 'domain',
-    'CyberVulnerability': 'vulnerability',
-    'URL': 'url',
-    'Malware': 'malware',
-    'Hash': 'hash',
+    'organization': 'company',
+    'ipaddress': 'ip',
+    'internetdomainname': 'domain',
+    'cybervulnerability': 'vulnerability',
 }
 
 
