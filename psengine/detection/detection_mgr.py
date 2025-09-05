@@ -11,6 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from contextlib import suppress
 import logging
 from typing import Annotated, Optional, Union
 
@@ -20,7 +21,7 @@ from typing_extensions import Doc
 from ..constants import DEFAULT_LIMIT
 from ..endpoints import EP_DETECTION_RULES
 from ..helpers import debug_call
-from ..helpers.helpers import connection_exceptions
+from ..helpers.helpers import TimeHelpers, connection_exceptions
 from ..rf_client import RFClient
 from .detection_rule import DetectionRule, DetectionRuleSearchOut
 from .errors import DetectionRuleFetchError, DetectionRuleSearchError
@@ -51,16 +52,16 @@ class DetectionMgr:
             Optional[list[str]], Doc('List of entities to filter the search.')
         ] = None,
         created_before: Annotated[
-            Optional[str], Doc('Filter for rules created before this date.')
+            Optional[str], Doc('Filter for rules created before this date or relative date.')
         ] = None,
         created_after: Annotated[
-            Optional[str], Doc('Filter for rules created after this date.')
+            Optional[str], Doc('Filter for rules created after this date or relative date.')
         ] = None,
         updated_before: Annotated[
-            Optional[str], Doc('Filter for rules updated before this date.')
+            Optional[str], Doc('Filter for rules updated before this date or relative date.')
         ] = None,
         updated_after: Annotated[
-            Optional[str], Doc('Filter for rules updated after this date.')
+            Optional[str], Doc('Filter for rules updated after this date or relative date.')
         ] = None,
         doc_id: Annotated[Optional[str], Doc('Filter by document ID.')] = None,
         title: Annotated[Optional[str], Doc('Filter by title.')] = None,
@@ -83,6 +84,12 @@ class DetectionMgr:
             DetectionRuleSearchError: If connection error occurs.
         """
         detection_rule = [detection_rule] if isinstance(detection_rule, str) else detection_rule
+
+        created_before = self._convert_time(created_before)
+        created_after = self._convert_time(created_after)
+        updated_before = self._convert_time(updated_before)
+        updated_after = self._convert_time(updated_after)
+
         filters = {
             'types': detection_rule,
             'entities': entities,
@@ -135,3 +142,11 @@ class DetectionMgr:
 
         self.log.info(f'No rule found for id {doc_id}')
         return None
+
+    def _convert_time(self, time):
+        """Convert rel time to date, if fails return time."""
+        if not time:
+            return time
+        with suppress(ValueError):
+            return TimeHelpers.rel_time_to_date(time)
+        return time

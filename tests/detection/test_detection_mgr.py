@@ -1,3 +1,4 @@
+from datetime import datetime
 import re
 from glob import glob
 from pathlib import Path
@@ -60,6 +61,19 @@ def test_spy_called_without_arguments(detection_mgr: DetectionMgr, mocker):
         'offset_key': 'offset',
         'results_path': 'result',
     }
+
+
+def test_spy_called_with_rel_date(detection_mgr: DetectionMgr, mocker):
+    mock_post_request = mocker.patch.object(
+        detection_mgr.rf_client,
+        'request_paged',
+        return_value=MagicMock(json=lambda: {'result': []}),
+    )
+    detection_mgr.search(created_after='-7d')
+    call_args, params = mock_post_request.call_args
+    assert call_args[0] == 'post'
+    assert call_args[1] == EP_DETECTION_RULES
+    assert datetime.fromisoformat(params['data']['filter']['created']['after'])
 
 
 def test_spy_called_pagination_argument(detection_mgr: DetectionMgr, mocker):
