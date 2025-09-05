@@ -6,7 +6,7 @@
 
 ---
 
-PSEngine is a sinple, yet elegant, libarry for rapid development of integrations with Recorded Future.
+PSEngine is a sinple, yet elegant, library for rapid development of integrations with Recorded Future.
 
 PSEngine allows you to interact with the Recorded Future API extremely easily. There’s no need to manually build the URLs and query parameters, just use the modules dedicated to individual API endpoints.
 
