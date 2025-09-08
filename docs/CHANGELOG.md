@@ -1,10 +1,25 @@
 # Changelog
 
+## v2.2.0 - 2025-09-xx
+
+### Added
+
+- `DetectionMgr.search` supports relative dates for `created_` and `updated_` fields.
+
+### Fixed
+
+- `LookupMgr.lookup` support `organization` as entity type.
+
+### Changed
+
+- `SoarMgr.SOAR_POST_ROWS` decreased to `1000` to comply with Product guidelines.
+- `SoarMgr.soar` uses the new v3 endpoint.
+
 ## v2.1.1 - 2025-08-22
 
 ### Changed
 
-- Moved typing system to `typing.Annotated` and `typing_extensions.Doc`
+- Moved typing system to `typing.Annotated` and `typing_extensions.Doc`.
 
 ## v2.1.0 - 2025-07-02
 
