@@ -13,6 +13,7 @@ dependencies = [
 ```
 
 Keep the version regularly up to date.
+Note that only the latest version is actively supported and maintained. If a new major version is released, older versions are no longer supported.
 
 #### Feature Deprecation
 
