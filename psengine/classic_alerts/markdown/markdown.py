@@ -132,9 +132,9 @@ def _process_entities(entities, hit) -> list[list[str]]:
 def _hits_markdown(
     classic_alert: 'ClassicAlert',
     hits,
-    include_fragment_entities: bool = True,
-    include_triggered_by: bool = True,
-    html_tags: bool = False,
+    include_fragment_entities: bool,
+    include_triggered_by: bool,
+    html_tags: bool,
 ) -> list:
     sections = []
     for idx, hit in enumerate(hits):
@@ -202,7 +202,9 @@ def _enriched_entities_markdown(classic_alert: 'ClassicAlert') -> list:
     return results
 
 
-def _target_entities_markdown(classic_alert: 'ClassicAlert', html_tags: bool = False) -> list:
+def _target_entities_markdown(
+    classic_alert: 'ClassicAlert', triggered_by: bool, html_tags: bool = False
+) -> list:
     results = []
     for entity in classic_alert.enriched_entities:
         result = {'title': f'Target {entity.entity.name}'}
@@ -210,6 +212,7 @@ def _target_entities_markdown(classic_alert: 'ClassicAlert', html_tags: bool = F
             classic_alert,
             hits=entity.references,
             include_fragment_entities=False,
+            include_triggered_by=triggered_by,
             html_tags=html_tags,
         )
         if len(result['content']):
@@ -268,7 +271,7 @@ def _add_ai_insights_section(
 
 
 def _add_enriched_entities_sections(
-    md_maker: MarkdownMaker, classic_alert: 'ClassicAlert', html_tags: bool
+    md_maker: MarkdownMaker, classic_alert: 'ClassicAlert', triggered_by: bool, html_tags: bool
 ) -> None:
     """Adds sections related to enriched entities (evidence and references)."""
     if any(x.evidence for x in classic_alert.enriched_entities):
@@ -278,7 +281,7 @@ def _add_enriched_entities_sections(
     if any(x.references for x in classic_alert.enriched_entities):
         md_maker.add_section(
             'Target Entities',
-            _target_entities_markdown(classic_alert, html_tags),
+            _target_entities_markdown(classic_alert, triggered_by, html_tags),
         )
 
 
@@ -350,7 +353,7 @@ def _markdown_alert(
         _add_ai_insights_section(md_maker, classic_alert, ai_insights)
 
         if classic_alert.enriched_entities:
-            _add_enriched_entities_sections(md_maker, classic_alert, html_tags)
+            _add_enriched_entities_sections(md_maker, classic_alert, triggered_by, html_tags)
         else:
             _add_hits_section_if_no_enriched_entities(
                 md_maker, classic_alert, fragment_entities, triggered_by, html_tags
