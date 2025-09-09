@@ -1,5 +1,5 @@
-from datetime import datetime
 import re
+from datetime import datetime
 from glob import glob
 from pathlib import Path
 from unittest.mock import MagicMock
