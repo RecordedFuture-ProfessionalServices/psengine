@@ -5,6 +5,7 @@
 ### Added
 
 - `DetectionMgr.search` supports relative dates for `created_` and `updated_` fields.
+- `ClassicAlert.markdown` does not require `triggered_by` field to be retrieved when not used in markdown.
 
 ### Fixed
 
