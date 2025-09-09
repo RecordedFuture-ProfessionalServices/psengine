@@ -158,7 +158,7 @@ The code itself is longer; however, you gain maintainability since a person with
 
 In this example, you configure a proxy that the `LookupMgr` will use to communicate with the internet. The usage of `client_ssl_verify` is not mandatory, but needed in the example to work with a proxy without certificate.
 
-Similarly to previous examples, you configure the `Config` first, and then intialize the manager. The `https_proxy` argument is used to specify the URL to use as proxy. The manager will automatically pick up this configuration during initalization.
+Similarly to previous examples, you configure the `Config` first, and then initialize the manager. The `https_proxy` argument is used to specify the URL to use as proxy. The manager will automatically pick up this configuration during initialization.
 
 ```python
 --8<-- "docs/examples/config/example_6.py"
