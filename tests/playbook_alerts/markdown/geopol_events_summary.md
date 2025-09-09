@@ -15,143 +15,123 @@ Atoms are used within a program to denote distinguished values.
 
 ### Events
 
-**Coleslaw**
-**When:** Jul 19, 2025, 18:10 UTC  
-**Source:** It is also a garbage-collected runtime system. - https://reality.com/ 
-Haskell features a type system with type inference and lazy evaluation.  
+**Coq Au Vin**
+**When:** Sep 03, 2025, 18:06 UTC  
+**Source:** Do you come here often? - https://yourself.mn/ 
 
 ---
 
-**Milk Steak**
-**When:** Jan 13, 2025, 04:22 UTC  
-**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://greece.sexy/ 
-Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."  
+**Ice Cream Sundae**
+**When:** Oct 16, 2025, 07:34 UTC  
+**Source:** Where are my pants? - https://taxation.catalonia/ 
 
 ---
 
-**Root Beer Float**
-**When:** Jul 02, 2025, 10:48 UTC  
-**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://basement.sports/ 
-Do you have any idea why this is not working?  
+**Suckling Pig**
+**When:** Dec 24, 2025, 10:10 UTC  
+**Source:** Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol." - https://tom.cat/ 
 
 ---
 
-**Chicken nuggets**
-**When:** Jun 28, 2025, 17:52 UTC  
-**Source:** The arguments can be primitive data types or compound data types. - https://russian.museum.post/ 
-Any element of a tuple can be accessed in constant time.  
+**White chocolate cookie**
+**When:** Nov 19, 2025, 17:21 UTC  
+**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://cure.sc/ 
 
 ---
 
-**Toaster Strudel**
-**When:** Aug 13, 2025, 15:40 UTC  
-**Source:** Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s. - https://effective.foundation/ 
-I don't even care.  
+**Wasabi Peas**
+**When:** Jun 14, 2025, 05:07 UTC  
+**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://writer.fishing/ 
 
 ---
 
-**Lorna Doone**
-**When:** Jul 06, 2025, 13:37 UTC  
-**Source:** Where are my pants? - https://ranch.sy/ 
-Ports are created with the built-in function open_port.  
+**Cornish game hen**
+**When:** Jul 31, 2025, 19:41 UTC  
+**Source:** Tuples are containers for a fixed number of Erlang data types. - https://voices.compare/ 
 
 ---
 
-**Russian tea cake**
-**When:** Feb 21, 2025, 09:55 UTC  
-**Source:** Type classes first appeared in the Haskell programming language. - https://viking.mr/ 
-Where are my pants?  
+**Oreo**
+**When:** Apr 27, 2025, 07:57 UTC  
+**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://ohio.wedding/ 
 
 ---
 
-**Risotto**
-**When:** Mar 03, 2025, 01:21 UTC  
-**Source:** Do you have any idea why this is not working? - https://states.com/ 
-The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.  
+**Burnt ends**
+**When:** Aug 16, 2025, 18:40 UTC  
+**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://existing.au/ 
 
 ---
 
-**Eggs Benedict**
-**When:** Jan 05, 2025, 16:44 UTC  
-**Source:** Any element of a tuple can be accessed in constant time. - https://viruses.rio/ 
-She spent her earliest years reading classic literature, and writing poetry.  
+**Ceviche**
+**When:** May 12, 2025, 23:45 UTC  
+**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://row.kyoto/ 
 
 ---
 
-**Salted caramel cookie**
-**When:** Jan 19, 2025, 18:13 UTC  
-**Source:** Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol." - https://fiber.capetown/ 
-Tuples are containers for a fixed number of Erlang data types.  
+**Vegemite on Toast**
+**When:** Aug 20, 2025, 18:42 UTC  
+**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://assuming.fail/ 
 
 ---
 
-**Chicken Alfredo**
-**When:** Nov 01, 2025, 10:07 UTC  
-**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://parameter.coupons/ 
-Any element of a tuple can be accessed in constant time.  
+**Chicken Salad Wrap**
+**When:** Jun 08, 2025, 17:00 UTC  
+**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://eyed.zm/ 
 
 ---
 
-**Veggie Pizza**
-**When:** Sep 08, 2025, 13:17 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://dodge.frl/ 
-She spent her earliest years reading classic literature, and writing poetry.  
+**Macaroni and Cheese**
+**When:** Jun 10, 2025, 22:14 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://photo.tz/ 
 
 ---
 
-**Succotash**
-**When:** Jul 06, 2025, 08:15 UTC  
-**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://gather.nyc/ 
-The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.  
+**Massaman Curry**
+**When:** Jun 16, 2025, 05:55 UTC  
+**Source:** Any element of a tuple can be accessed in constant time. - https://offering.brussels/ 
 
 ---
 
-**Calf's liver and bacon**
-**When:** Sep 09, 2025, 01:25 UTC  
-**Source:** Any element of a tuple can be accessed in constant time. - https://geographical.net/ 
-Erlang is a general-purpose, concurrent, functional programming language.  
+**Smelt**
+**When:** Jun 15, 2025, 02:13 UTC  
+**Source:** The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. - https://nasa.mobi/ 
 
 ---
 
-**Chicken fingers**
-**When:** Nov 16, 2025, 12:04 UTC  
-**Source:** Make me a sandwich. - https://only.aero/ 
-Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.  
+**Spaghetti Bolognese**
+**When:** Mar 06, 2025, 19:42 UTC  
+**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://shock.ec/ 
 
 ---
 
-**Sichuan Hot Pot**
-**When:** Aug 10, 2025, 20:27 UTC  
-**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://geology.org/ 
-The arguments can be primitive data types or compound data types.  
+**Shrimp and Grits**
+**When:** Apr 07, 2025, 16:58 UTC  
+**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://far.com/ 
 
 ---
 
-**Philadelphia cheesesteak**
-**When:** Jan 15, 2025, 00:32 UTC  
-**Source:** Do you come here often? - https://vietnamese.group/ 
-Tuples are containers for a fixed number of Erlang data types.  
+**Squab**
+**When:** Jun 04, 2025, 11:54 UTC  
+**Source:** I don't even care. - https://hobby.name/ 
 
 ---
 
 **Onion ring**
-**When:** Jun 10, 2025, 01:10 UTC  
-**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://interested.tour/ 
-Tuples are containers for a fixed number of Erlang data types.  
+**When:** Sep 25, 2025, 11:08 UTC  
+**Source:** He looked inquisitively at his keyboard and wrote another sentence. - https://grey.iq/ 
 
 ---
 
-**Corn dog**
-**When:** Jul 29, 2025, 02:03 UTC  
-**Source:** It is also a garbage-collected runtime system. - https://unlike.tw/ 
-Do you come here often?  
+**Abalone**
+**When:** Oct 07, 2025, 02:52 UTC  
+**Source:** Tuples are containers for a fixed number of Erlang data types. - https://mother.rio/ 
 
 ---
 
-**Banh Mi Viêt**
-**When:** Sep 04, 2025, 21:19 UTC  
-**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://independence.aero/ 
-Do you have any idea why this is not working?  
+**Porterhouse Steak**
+**When:** Dec 07, 2025, 02:55 UTC  
+**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://clip.flowers/ 
 
 ---
 
