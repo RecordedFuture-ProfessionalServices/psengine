@@ -21,6 +21,21 @@ If you have an environment variable configured, it will overwrite the value set 
 The `Config` class is a singleton, which means that once initialized its values are immutable, and every module will read them. You create the `Config` object via the `init` method. To get the data of the config, use the `get_config` method.
 
 The `Config` class manages a `ConfigModel` class by default, which is a `pydantic.BaseSettings` class that contains attributes of general needs, like proxy settings and HTTP timeout.
+The variables defined in the `ConfigModel` are:
+
+- `platform_id` -> str
+- `app_id` -> str
+- `rf_token` -> `RFToken`
+- `http_proxy` -> str
+- `https_proxy` -> str
+- `client_ssl_verify` -> bool
+- `client_basic_auth` -> (str, str)
+- `client_cert` -> str or (str, str)
+- `client_timeout` -> int
+- `client_retries` -> int
+- `client_backoff_factor` -> int
+- `client_status_forcelist` -> list of int
+- `client_pool_max_size` -> int
 
 !!! warning
     Define the `Config` before initializing the manager in your integration entry point. Once that is done, you can reference the `Config` from anywhere. See the example below.
@@ -51,22 +66,7 @@ This will print `5`.
 
 #### Example 2: Configure a `Config` from environment variables
 
-You can read only variables that are statically defined in the `ConfigModel`. They need to be prefixed with `RF_` and must be of the type specified in the model. The variables are:
-
-- `platform_id` -> str
-- `app_id` -> str
-- `rf_token` -> `RFToken`
-- `http_proxy` -> str
-- `https_proxy` -> str
-- `client_ssl_verify` -> bool
-- `client_basic_auth` -> (str, str)
-- `client_cert` -> str or (str, str)
-- `client_timeout` -> int
-- `client_retries` -> int
-- `client_backoff_factor` -> int
-- `client_status_forcelist` -> list of int
-- `client_pool_max_size` -> int
-
+You can read only environment variables that are statically defined in the `ConfigModel`. They need to be prefixed with `RF_` and must be of the type specified in the model as described in the Introduction section. 
 For example, to set the `app_id` and `platform_id` variables:
 
 ```bash
@@ -153,3 +153,16 @@ The script can be rewritten as below.
 ```
 
 The code itself is longer; however, you gain maintainability since a person without development experience or inner understanding of the application can change the config to meet new requirements.
+
+#### Example 6: Using a proxy
+
+In this example, you configure a proxy that the `LookupMgr` will use to communicate with the internet. The usage of `client_ssl_verify` is not mandatory, but needed in the example to work with a proxy without certificate.
+
+Similarly to previous examples, you configure the `Config` first, and then intialize the manager. The `https_proxy` argument is used to specify the URL to use as proxy. The manager will automatically pick up this configuration during initalization.
+
+```python
+--8<-- "docs/examples/config/example_6.py"
+```
+
+
+
