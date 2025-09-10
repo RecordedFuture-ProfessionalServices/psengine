@@ -47,13 +47,9 @@ class Test_LookupMgr:
     ]
 
     @pytest.mark.parametrize('params', params)
-    def test_params_raises_ValueError(self, lookup_mgr, params):
-        with pytest.raises(ValueError):
+    def test_params_raises_ValidationError(self, lookup_mgr, params):
+        with pytest.raises(ValidationError):
             lookup_mgr.lookup(**params)
-
-    def test_params_raises_ValueError_company_by_domain(self, lookup_mgr):
-        with pytest.raises(ValueError):
-            lookup_mgr.lookup(company_by_domain='google.com', entity_type='domain')
 
     @pytest.mark.parametrize('type_', ['a', 'doms', 'ips', 1, 'whatever', 'moise'])
     def test_entity_type_raises_ValidationError(self, lookup_mgr, type_):

@@ -62,5 +62,5 @@ class Test_MarkdownMaker:
 
     @pytest.mark.parametrize('character_limit', [-1, 0, 5, 10, 12])
     def test_char_limit_too_low_raises_ValueError(self, character_limit):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match='Character limit must be at least 13'):
             MarkdownMaker(addendum='Test Addendum', character_limit=character_limit)

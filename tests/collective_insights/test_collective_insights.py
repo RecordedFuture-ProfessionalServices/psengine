@@ -17,7 +17,7 @@ class Test_CollectiveInsights:
             ci.submit(insight=bad_insight)
 
     def test_submit_raises_ValueError(self, ci: CollectiveInsights):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match='Insight cannot be empty'):
             ci.submit(insight=[])
 
     def test_submit_insight_list(

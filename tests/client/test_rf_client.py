@@ -211,7 +211,7 @@ class Test_RFClient:
     def test_request_paged_bad_results_path_raises_ValueError(self, rf_token):
         rfc = RFClient(api_token=rf_token)
         data = {'name': 'Fancy', 'limit': 10}
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match=r'Invalid results_path: invalid_jsonpath\[\]\[\]\[\]'):
             rfc.request_paged(
                 method='post',
                 url='https://api.recordedfuture.com/threat/actor/search',
@@ -320,9 +320,15 @@ class Test_RFClient:
     def test_is_api_token_valid(self, rf_token):
         with pytest.raises(ValidationError):
             RFClient(api_token=123)
-        with pytest.raises(ValueError):
+        with pytest.raises(
+            ValueError,
+            match=re.escape('Invalid Recorded Future API token.must match regex ^[a-f0-9]{32}$'),
+        ):
             RFClient(api_token='123')  # noqa: S106
-        with pytest.raises(ValueError):
+        with pytest.raises(
+            ValueError,
+            match=re.escape('Invalid Recorded Future API token.must match regex ^[a-f0-9]{32}$'),
+        ):
             RFClient(api_token='opiubouib1o5uiybvuioyv5i---898hg')  # noqa: S106
 
         # Now give it a valid token

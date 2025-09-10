@@ -377,7 +377,7 @@ class Test_PlaybookAlertMgr:
         playbook_mgr.update(alert=p_alert, priority='High', status='InProgress')
 
     def test_update_raises_ValueError(self, playbook_mgr: PlaybookAlertMgr):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match='No update parameters were supplied'):
             playbook_mgr.update('alert', *(None,) * 4)
 
     ### </Update alert>
@@ -495,18 +495,16 @@ class Test_PlaybookAlertMgr:
         assert query.updated_range is None
 
     test_data = [
-        ({'statuses': 1}, ValidationError),
-        ({'category': 123}, ValidationError),
-        ({'priority': {'High': 'Priority'}}, ValidationError),
-        ({'direction': ['asc']}, ValidationError),
-        ({'limit': 'hundred'}, ValidationError),
+        {'statuses': 1},
+        {'category': 123},
+        {'priority': {'High': 'Priority'}},
+        {'direction': ['asc']},
+        {'limit': 'hundred'},
     ]
 
-    @pytest.mark.parametrize(('param', 'error'), test_data)
-    def test_prepare_query_raises_ValidationError(
-        self, playbook_mgr: PlaybookAlertMgr, param, error
-    ):
-        with pytest.raises(error):
+    @pytest.mark.parametrize('param', test_data)
+    def test_prepare_query_raises_ValidationError(self, playbook_mgr: PlaybookAlertMgr, param):
+        with pytest.raises(ValidationError):
             playbook_mgr._prepare_query(**param)
 
     ### </Prepare Query>

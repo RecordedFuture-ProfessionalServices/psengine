@@ -88,5 +88,5 @@ class Test_SoarMgr:
         ]
 
     def test_soar_raise_ValueError(self, soar_mgr):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match='At least one parameter must be used'):
             soar_mgr.soar()
