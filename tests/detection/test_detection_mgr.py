@@ -91,6 +91,45 @@ def test_spy_called_with_type(detection_mgr: DetectionMgr, mocker, types):
     assert params['data']['filter']['types'] == expected
 
 
+def test_spy_called_with_rel_time(detection_mgr: DetectionMgr, mocker):
+    mock_post_request = mocker.patch.object(
+        detection_mgr.rf_client,
+        'request_paged',
+        return_value=MagicMock(json=lambda: {'result': []}),
+    )
+    detection_mgr.search(
+        created_before='-7d', created_after='-2d', updated_before='-3d', updated_after='-1d'
+    )
+    call_args, params = mock_post_request.call_args
+    assert call_args[0] == 'post'
+    assert call_args[1] == EP_DETECTION_RULES
+    assert datetime.fromisoformat(params['data']['filter']['created']['after'])
+    assert datetime.fromisoformat(params['data']['filter']['created']['before'])
+    assert datetime.fromisoformat(params['data']['filter']['updated']['after'])
+    assert datetime.fromisoformat(params['data']['filter']['updated']['before'])
+
+
+def test_spy_called_without_rel_time(detection_mgr: DetectionMgr, mocker):
+    mock_post_request = mocker.patch.object(
+        detection_mgr.rf_client,
+        'request_paged',
+        return_value=MagicMock(json=lambda: {'result': []}),
+    )
+    detection_mgr.search(created_before='-7d')
+    call_args, params = mock_post_request.call_args
+    assert call_args[0] == 'post'
+    assert call_args[1] == EP_DETECTION_RULES
+    assert datetime.fromisoformat(params['data']['filter']['created']['before'])
+    with pytest.raises(KeyError):
+        assert datetime.fromisoformat(params['data']['filter']['updated']['after'])
+
+    with pytest.raises(KeyError):
+        assert datetime.fromisoformat(params['data']['filter']['created']['after'])
+
+    with pytest.raises(KeyError):
+        assert datetime.fromisoformat(params['data']['filter']['updated']['before'])
+
+
 def test_spy_called_pagination_argument(detection_mgr: DetectionMgr, mocker):
     mock_post_request = mocker.patch.object(
         detection_mgr.rf_client,

@@ -83,11 +83,6 @@ class DetectionMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             DetectionRuleSearchError: If connection error occurs.
         """
-        created_before = self._convert_time(created_before)
-        created_after = self._convert_time(created_after)
-        updated_before = self._convert_time(updated_before)
-        updated_after = self._convert_time(updated_after)
-
         filters = {
             'types': detection_rule,
             'entities': entities,
@@ -140,11 +135,3 @@ class DetectionMgr:
 
         self.log.info(f'No rule found for id {doc_id}')
         return None
-
-    def _convert_time(self, time):
-        """Convert rel time to date, if fails return time."""
-        if not time:
-            return time
-        with suppress(ValueError):
-            return TimeHelpers.rel_time_to_date(time)
-        return time

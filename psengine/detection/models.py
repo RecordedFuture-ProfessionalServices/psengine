@@ -35,8 +35,8 @@ class RuleContext(RFBaseModel):
 
 
 class TimeRange(RFBaseModel):
-    after: Optional[datetime] = None
-    before: Optional[datetime] = None
+    after: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = None
+    before: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = None
 
 
 class SearchFilter(RFBaseModel):
