@@ -12,7 +12,6 @@
 ##############################################################################################
 
 import logging
-from contextlib import suppress
 from typing import Annotated, Optional, Union
 
 from pydantic import validate_call
@@ -21,7 +20,7 @@ from typing_extensions import Doc
 from ..constants import DEFAULT_LIMIT
 from ..endpoints import EP_DETECTION_RULES
 from ..helpers import debug_call
-from ..helpers.helpers import TimeHelpers, connection_exceptions
+from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
 from .detection_rule import DetectionRule, DetectionRuleSearchOut
 from .errors import DetectionRuleFetchError, DetectionRuleSearchError

@@ -1,7 +1,6 @@
 import json
 import re
 from pathlib import Path
-from unittest.mock import MagicMock
 
 import pytest
 from pydantic import ValidationError
@@ -24,7 +23,6 @@ from psengine.analyst_notes import (
 from psengine.endpoints import (
     EP_ANALYST_NOTE_PREVIEW,
     EP_ANALYST_NOTE_PUBLISH,
-    EP_ANALYST_NOTE_SEARCH,
 )
 from psengine.errors import WriteFileError
 from tests.analyst_notes.constants import MOCK_DIR
@@ -369,7 +367,7 @@ class Test_AnalystNotesMgr:
         mock = make_response(data)
         mock_request = mocker.patch.object(an_mgr.rf_client, 'request', return_value=mock)
 
-        output = an_mgr.publish(
+        an_mgr.publish(
             title='test pytest',
             text='test related to test.com',
             context_entities=['idn:test.com'],
