@@ -67,11 +67,6 @@ class CollectiveInsights:
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
         """
-        malwares = malwares if isinstance(malwares, list) else [malwares] if malwares else None
-        mitre_codes = (
-            mitre_codes if isinstance(mitre_codes, list) else [mitre_codes] if mitre_codes else None
-        )
-
         incident = {'id': incident_id, 'type': incident_type, 'name': incident_name}
         detection = {
             'id': detection_id,

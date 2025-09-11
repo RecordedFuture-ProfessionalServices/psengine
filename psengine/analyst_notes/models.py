@@ -13,11 +13,12 @@
 
 import logging
 from datetime import datetime
-from typing import Any, Optional, Union
+from typing import Annotated, Any, Optional, Union
 
-from pydantic import Field, ValidationError, field_validator, model_validator
+from pydantic import BeforeValidator, Field, ValidationError, field_validator, model_validator
 
 from ..common_models import IdNameType, IdNameTypeDescription, RFBaseModel
+from ..helpers import Validators
 
 
 class DiamondModel(RFBaseModel):
@@ -198,7 +199,10 @@ class PreviewAttributesIn(RFBaseModel):
     text: str
     note_entities: Optional[list[str]] = []
     context_entities: Optional[list[str]] = []
-    topic: Union[list[str], str, None] = []
+    topic: Annotated[
+        Union[list[str], str, None],
+        BeforeValidator(Validators.convert_str_to_list),
+    ] = []
     labels: Optional[list[str]] = []
     validation_urls: Optional[list[str]] = []
 

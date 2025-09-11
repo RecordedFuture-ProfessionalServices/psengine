@@ -46,7 +46,7 @@ class DetectionMgr:
     def search(
         self,
         detection_rule: Annotated[
-            Union[list[str], str, None], Doc('Types of detection rules to search for.')
+            Union[str, list[str], None], Doc('Types of detection rules to search for.')
         ] = None,
         entities: Annotated[
             Optional[list[str]], Doc('List of entities to filter the search.')
@@ -83,8 +83,6 @@ class DetectionMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             DetectionRuleSearchError: If connection error occurs.
         """
-        detection_rule = [detection_rule] if isinstance(detection_rule, str) else detection_rule
-
         created_before = self._convert_time(created_before)
         created_after = self._convert_time(created_after)
         updated_before = self._convert_time(updated_before)

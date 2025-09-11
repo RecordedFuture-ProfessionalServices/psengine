@@ -165,6 +165,38 @@ class Test_CollectiveInsights:
         assert insight.detection.id_ == 'doc:test'
         assert insight.detection.sub_type.value == 'sigma'
 
+    @pytest.mark.parametrize('malware', ['Cobalt', ['Cobalt', 'Loki'], ['Cobalt'], None])
+    def test_create_malware_validator(self, ci: CollectiveInsights, malware):
+        insight = ci.create(
+            ioc_type='hash',
+            ioc_value='fbee00cb1d1ea4d7e0604436d9a36def71a9f3be804f1e2b8d117fd5d35aeabc',
+            detection_type='detection_rule',
+            detection_id='doc:test',
+            detection_sub_type='sigma',
+            timestamp='2023-01-01T10:00:00Z',
+            malwares=malware,
+        )
+        expected = (malware if isinstance(malware, list) else [malware]) if malware else None
+        assert insight.malwares == expected
+
+    @pytest.mark.parametrize('mitre_codes', ['T123', ['T123', 'T124'], ['T123'], None])
+    def test_create_mitre_codes_validator(self, ci: CollectiveInsights, mitre_codes):
+        insight = ci.create(
+            ioc_type='hash',
+            ioc_value='fbee00cb1d1ea4d7e0604436d9a36def71a9f3be804f1e2b8d117fd5d35aeabc',
+            detection_type='detection_rule',
+            detection_id='doc:test',
+            detection_sub_type='sigma',
+            timestamp='2023-01-01T10:00:00Z',
+            mitre_codes=mitre_codes,
+        )
+        expected = (
+            (mitre_codes if isinstance(mitre_codes, list) else [mitre_codes])
+            if mitre_codes
+            else None
+        )
+        assert insight.mitre_codes == expected
+
     def test_submit_raises_ValidationError_on_bad_response(
         self, insight: Insight, ci: CollectiveInsights, mocker
     ):

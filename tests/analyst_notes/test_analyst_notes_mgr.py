@@ -1,6 +1,7 @@
 import json
 import re
 from pathlib import Path
+from unittest.mock import MagicMock
 
 import pytest
 from pydantic import ValidationError
@@ -19,6 +20,11 @@ from psengine.analyst_notes import (
     AnalystNoteSearchError,
     save_attachment,
     save_note,
+)
+from psengine.endpoints import (
+    EP_ANALYST_NOTE_PREVIEW,
+    EP_ANALYST_NOTE_PUBLISH,
+    EP_ANALYST_NOTE_SEARCH,
 )
 from psengine.errors import WriteFileError
 from tests.analyst_notes.constants import MOCK_DIR
@@ -343,6 +349,37 @@ class Test_AnalystNotesMgr:
         mocker.patch.object(an_mgr.rf_client, 'request', side_effect=excp_obj)
         with pytest.raises(AnalystNotePreviewError):
             an_mgr.preview(title='test pytest', text='test related to test.com')
+
+    @pytest.mark.parametrize('topics', [['TXSFt2'], 'TXSFt2', ['TXSFt2', 'TXSFt3']])
+    def test_preview_topics(self, an_mgr: AnalystNoteMgr, mocker, topics, mock_request):
+        mock = mock_request(MOCK_DIR / 'test_preview_ok.json')
+        mock_request = mocker.patch.object(an_mgr.rf_client, 'request', return_value=mock)
+
+        an_mgr.preview(title='moise', text='moise', topic=topics)
+        expected = topics if isinstance(topics, list) else [topics]
+        call_args, params = mock_request.call_args
+        assert call_args[0] == 'post'
+        assert call_args[1] == EP_ANALYST_NOTE_PREVIEW
+        assert params['data']['attributes']['topic'] == expected
+
+    @pytest.mark.parametrize('topics', [['TXSFt2'], 'TXSFt2', ['TXSFt2', 'TXSFt3']])
+    def test_publish_topics(self, an_mgr: AnalystNoteMgr, mocker, make_response, topics):
+        data = {'note_id': 'doc:vqqO35'}
+
+        mock = make_response(data)
+        mock_request = mocker.patch.object(an_mgr.rf_client, 'request', return_value=mock)
+
+        output = an_mgr.publish(
+            title='test pytest',
+            text='test related to test.com',
+            context_entities=['idn:test.com'],
+            topic=topics,
+        )
+        expected = topics if isinstance(topics, list) else [topics]
+        call_args, params = mock_request.call_args
+        assert call_args[0] == 'post'
+        assert call_args[1] == EP_ANALYST_NOTE_PUBLISH
+        assert params['data']['attributes']['topic'] == expected
 
     def test_publish_ok(self, an_mgr: AnalystNoteMgr, mocker, make_response):
         data = {'note_id': 'doc:vqqO35'}

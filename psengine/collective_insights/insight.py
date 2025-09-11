@@ -13,10 +13,13 @@
 
 from datetime import datetime
 from functools import total_ordering
-from typing import Optional
+from typing import Annotated, Optional
+
+from pydantic import BeforeValidator
 
 from ..common_models import IdNameType, RFBaseModel
 from ..constants import TIMESTAMP_STR
+from ..helpers import Validators
 from .models import (
     RequestDetection,
     RequestIOC,
@@ -59,8 +62,10 @@ class Insight(RFBaseModel):
     timestamp: datetime
     ioc: RequestIOC
     incident: Optional[IdNameType] = None
-    mitre_codes: Optional[list[str]] = None
-    malwares: Optional[list[str]] = None
+    mitre_codes: Annotated[Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)] = (
+        None
+    )
+    malwares: Annotated[Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)] = None
     detection: RequestDetection
 
     def __hash__(self):

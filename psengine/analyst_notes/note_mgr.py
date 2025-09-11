@@ -210,9 +210,6 @@ class AnalystNoteMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             AnalystNotePreviewRequest: If connection error occurs.
         """
-        if topic:
-            topic = topic if isinstance(topic, list) else [topic]
-
         data = {
             'attributes': {
                 'title': title,
@@ -262,9 +259,6 @@ class AnalystNoteMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             AnalystNotePublishError: If connection error occurs.
         """
-        if topic:
-            topic = topic if isinstance(topic, list) else [topic]
-
         data = {
             'attributes': {
                 'title': title,

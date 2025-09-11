@@ -76,6 +76,21 @@ def test_spy_called_with_rel_date(detection_mgr: DetectionMgr, mocker):
     assert datetime.fromisoformat(params['data']['filter']['created']['after'])
 
 
+@pytest.mark.parametrize('types', [['yara'], 'yara', ['yara', 'snort']])
+def test_spy_called_with_type(detection_mgr: DetectionMgr, mocker, types):
+    mock_post_request = mocker.patch.object(
+        detection_mgr.rf_client,
+        'request_paged',
+        return_value=MagicMock(json=lambda: {'result': []}),
+    )
+    detection_mgr.search(detection_rule=types)
+    expected = types if isinstance(types, list) else [types]
+    call_args, params = mock_post_request.call_args
+    assert call_args[0] == 'post'
+    assert call_args[1] == EP_DETECTION_RULES
+    assert params['data']['filter']['types'] == expected
+
+
 def test_spy_called_pagination_argument(detection_mgr: DetectionMgr, mocker):
     mock_post_request = mocker.patch.object(
         detection_mgr.rf_client,

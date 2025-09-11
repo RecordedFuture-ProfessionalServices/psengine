@@ -461,11 +461,13 @@ class Validators:
 
     @staticmethod
     def convert_str_to_list(
-        value: Annotated[Union[str, list], Doc('String or list to convert.')],
-    ) -> Annotated[list, Doc('Converted list with None values removed.')]:
+        value: Annotated[Union[str, list, None], Doc('String or list to convert.')],
+    ) -> Annotated[Union[list, None], Doc('Converted list with None values removed.')]:
         """Convert value from str to list and remove None values."""
-        value = value if isinstance(value, list) else [value]
-        return [v for v in value if v is not None]
+        if value:
+            value = value if isinstance(value, list) else [value]
+            return [v for v in value if v is not None]
+        return value
 
     @staticmethod
     def convert_relative_time(
