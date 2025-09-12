@@ -15,7 +15,7 @@ See the [**API Reference**](../api/classic_alerts/classic_alert_mgr.md) for inte
 - All the methods mentioned in point 1 accept a `fields` parameter to increase or reduce the information retrieved for each alert. The following fields are always requested: `id`, `log`, `title`, `rule`, no matter which `fields` you specify.
     - `search` uses only the required fields by default if the `fields` parameter is not specified.
     - `fetch` and `fetch_bulk` use all the fields if the `fields` parameter is not specified.
-- The more fields are requested the slower the action will be; make sure to balance the number of fields and the amount of alerts to search or fetch. A full list of fields can be found in [**ALL_CA_FIELDS**](../api/classic_alerts/constants.md#psengine.classic_alerts.constants.ALL_CA_FIELDS) in the constants file for this module. 
+- The more fields are requested the slower the action will be; make sure to balance the number of fields and the amount of alerts to search or fetch. A full list of fields can be found in [ALL_CA_FIELDS](../api/classic_alerts/constants.md#psengine.classic_alerts.constants.ALL_CA_FIELDS) in the constants file for this module. 
 
 ## Examples
 
