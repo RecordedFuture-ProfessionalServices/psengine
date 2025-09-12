@@ -10,7 +10,7 @@ PSEngine is a simple, yet elegant, library for rapid development of integrations
 
 PSEngine allows you to interact with the Recorded Future API extremely easily. There’s no need to manually build the URLs and query parameters, just use the modules dedicated to individual API endpoints.
 
-PSEngine is a Python package solely built and maintained by the Recorded Future Cyber Security Engineering team powering a number of high profile integrations, such as: Elastic Search, QRadar, Anomali, Jira, TheHive, etc.
+PSEngine is a Python package solely built and maintained by the Recorded Future Cyber Security Engineering team powering a number of high profile integrations, such as: Elasticsearch, QRadar, Anomali, Google SIEM and SecOps, Jira, TheHive, etc.
 
 ## Installation
 
