@@ -1,6 +1,6 @@
 ## Introduction
 
-The `CollectiveInsights` class of the `collective_insights` module allows you to submit indicators from a detection coming from any of your internal tools to your Recorded Future enterprise. Collective Insights enriches submissions with Recorded Future intelligence to provide your organization's enterprise with enhanced and actionable intelligence.
+The `CollectiveInsights` class of the `collective_insights` module allows you to submit indicators from a detection coming from any of your internal tools to your Recorded Future enterprise. [Collective Insights](https://support.recordedfuture.com/hc/en-us/articles/16725023010067-Get-Started-with-Collective-Insights) enriches submissions with Recorded Future intelligence to provide your organization's enterprise with enhanced and actionable intelligence.
 
 When using the `collective_insights` module, you have to create an `Insight` object and then submit it. The `CollectiveInsights` class provides access to the modules needed to perform these actions. The examples below show how to use them.
 
@@ -16,7 +16,7 @@ See the [**API Reference**](../api/collective_insights/collective_insights.md) f
 
 {! modules/_includes/examples_warning.md !}
 
-#### Example 1: Submit a detection of a hash linked to a Wiper malware specimen
+### Submit a detection for a Wiper malware hash
 
 The `create` method only requires the following arguments to be specified:
 
@@ -25,7 +25,7 @@ The `create` method only requires the following arguments to be specified:
 - `detection_type`
 - `timestamp`
 
-Every other value can optionally be provided and adds more context to the detection. In the example, we have a detection coming from Symantec. The hash is coming from a Recorded Future Insikt note defined by the id `doc:o6_lui`. The other information is retrieved by both the note (for example, the malware type and MITRE codes) and the incident itself.
+Every other value can optionally be provided and adds more context to the detection. In the example below, we have a detection coming from Symantec. The hash is coming from a Recorded Future Insikt note defined by the id `doc:o6_lui`. The other information is retrieved by both the note (for example, the malware type and MITRE codes) and the incident itself.
 
 In our case, the timestamp has been mocked to "now", but in a real scenario it would be taken from the incident.
 

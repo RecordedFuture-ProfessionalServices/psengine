@@ -21,7 +21,7 @@ See the [**API Reference**](../api/classic_alerts/classic_alert_mgr.md) for inte
 
 {! modules/_includes/examples_warning.md !}
 
-#### Example 1: Search the latest new alerts and save them as markdown
+#### Search the latest new alerts and save them as markdown
 
 In order to search for newer alerts you can use the `search` method, with a `-1d` trigger time lookback. To further filter them out you can use the value `New` for the `status`.
 
@@ -31,7 +31,7 @@ To build the markdown for alerts we need all the fields, so you can use the `ALL
 --8<-- "docs/examples/classic_alerts/example_1.py"
 ```
 
-#### Example 2: From a list of alert IDs fetch the data and related images, save the images to file
+#### From a list of alert IDs fetch the data and related images, save the images to file
 
 !!! tip
 
@@ -49,7 +49,7 @@ The alerts might have an image ID in their payload, which will be collected by t
 --8<-- "docs/examples/classic_alerts/example_2.py"
 ```
 
-#### Example 3: Fetch all the hits of an alert, and save the result as a JSON file
+#### Fetch all the hits of an alert, and save the result as a JSON file
 
 !!! tip
 

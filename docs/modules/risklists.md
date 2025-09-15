@@ -9,13 +9,13 @@ See the [**API Reference**](../api/risklists/risklist_mgr.md) for internal detai
 ## Notes
 
 1. The `fetch_risklist` method returns a generator object. If it needs to be saved to a file, you should transform it to a list first. 2. Even though there are CSV-based risklists, PSEngine converts them to JSON.
-3. With this module, fetching custom risklists is possible if any has been built for you.
+3. With this module, fetching custom risklists is possible if any has been built for your enterprise.
 
 ## Examples
 
 {! modules/_includes/examples_warning.md !}
 
-#### Example 1: Fetch and save the default domain risklist as JSON
+#### Fetch and save the default domain risklist as JSON
 
 In this example, we fetch the risklist with the `fetch_risklist` method, giving the arguments of `default` for the type of risklist and `domain` for the type of indicator. Since the file is converted by PSEngine into a JSON-like structure, we can convert the generator to a list and then save it to a file with `json.dumps`.
 
@@ -38,7 +38,7 @@ What will happen is that while the risklist is converted to JSON, it also gets v
 --8<-- "docs/examples/risklists/example_1b.py"
 ```
 
-#### Example 2: Fetch and save a custom risklist as JSON and perform validation
+#### Fetch and save a custom risklist as JSON and perform validation
 
 In this example, we assume that we want to build a script that ingests the Threat Actor–related indicators from the Recorded Future risklist `ta_ip_risklist_v2.csv`.
 

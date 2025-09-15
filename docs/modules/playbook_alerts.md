@@ -1,23 +1,26 @@
 ## Introduction
 
-The `PlaybookAlertMgr` class of the `playbook_alerts` module allows you to fetch and search for playbook alerts that triggered for your organization.
+The `PlaybookAlertMgr` class of the `playbook_alerts` module allows you to search, fetch and update playbook alerts coming from your Recorded Future enterprise.
 
 See the [**API Reference**](../api/playbook_alerts/playbook_alert_mgr.md) for internal details of the module.
 
 ## Notes
 
-The methods `search` and `fetch_bulk` are similar, but they return different results. In the playbook alert data, there is a concept of panels that contain specific information. The `status` panel is the generic one that all the playbook alert types have in common. When you perform a `search`, only the `status` panel is returned.
+The `search` method is used to find alerts based on various parameters and returns only the `status` panel, which provides a brief summary of each alert. If you need the full alert details—including all panels—you must fetch each alert by its ID.
 
-If you want to get all the other panels of each alert, you will have to get the alert ID of each alert and do a fetch. The `fetch_bulk` method hides these steps by implementing an internal `search` and `fetch` for each alert that has been found.
+The `fetch_bulk` method simplifies this process by performing both the search and fetch steps in one function call (multiple API calls under the covers). It returns the complete payload for each alert found, including all available panels.
+
+!!! tip
+    Playbook alert data is organized into panels, each containing specific information. The `status` panel is common to all playbook alert types and provides a brief summary. For example: when you use the `search` method, only the `status` panel is returned.
 
 ## Examples
 
 {! modules/_includes/examples_warning.md !}
 
-#### Example 1: From an alert ID, fetch the data and related images, and save the images to file
+#### Fetch alert data and images by ID, then save images to file
 
 !!! tip
-    To run this example you need to provide a playbook alert ID in the `alert_id` argument at line 11. This can be retrieved by using `search` or `fetch_bulk` shown in the previous example.
+    To run this example you need to provide a playbook alert ID in the `alert_id` argument at line 11. This can be retrieved by using `search` or `fetch_bulk` functions.
     If you are using a playbook alert that is not a Domain Abuse type, change the category to match the alert's.
 
 In this example, we assume that we have an alert ID from either another integration, a colleague, or the portal; however, the steps in this example can be replicated using `fetch_bulk` as well.
@@ -31,7 +34,7 @@ To run this sample, change `alert_id` to an alert ID from your organization.
 --8<-- "docs/examples/playbook_alerts/example_1.py"
 ```
 
-#### Example 2: Search the latest new high-priority third-party risk alerts and save them as Markdown
+#### Find the latest high-priority third-party risk alerts and save them as Markdown
 
 In this example, we show two ways of using the `markdown` method of a playbook alert. The first method uses only the alerts data returned by the `PlaybookAlertMgr` class, and the second combines other modules of `psengine` to enrich the returned data.
 

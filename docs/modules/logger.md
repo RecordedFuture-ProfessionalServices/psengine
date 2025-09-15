@@ -18,7 +18,7 @@ See the [**API Reference**](../api/logger/rf_logger.md) for internal details of 
 
 {! modules/_includes/examples_warning.md !}
 
-#### Example 1: Use a PSEngine module when another SDK has logging enabled
+#### Use a PSEngine module when another SDK has logging enabled
 
 In this example, we create a `Logger` instance from the `logging` standard library to emulate the fact that you might have configured your own logging. In this case, there is nothing else that needs to be done before using PSEngine.
 
@@ -46,7 +46,7 @@ INFO:__main__:EnrichedIP: 8.8.8.8, Risk Score: 0, Last Seen: 2025-09-01 09:44:16
 
 Any log entries of higher level, like `ERROR` or `CRITICAL`, will be shown as well.
 
-#### Example 2: Use `RFLogger` in combination with another PSEngine module
+#### Use `RFLogger` in combination with another PSEngine module
 
 In this example, we have the same code, except for the logger definition, which is via `RFLogger`. The default `RFLogger` behaviors are:
 

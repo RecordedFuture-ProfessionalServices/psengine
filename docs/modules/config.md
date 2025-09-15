@@ -1,27 +1,26 @@
 ## Introduction
 
-The `config` module does not communicate with any Recorded Future dataset; it is used to configure PSEngine and the integration behavior. Its usage is not mandatory in integration development; it is more a convenience if a configuration file is needed.
+The `config` module is used to configure PSEngine and control integration behavior. It does not interact with any Recorded Future datasets, and its use is optional—primarily serving as a convenience when a configuration file is needed.
 
-The `Config` is a class of PSEngine that you can use to retrieve static information from a file or the system's environment variables. The allowed file extensions are:
+Configuration values can be provided in several ways:
 
-- `.toml`
-- `.json`
-- `.env` file
+- Supported file formats: `.toml`, `.json`, or `.env`
+- Environment variables
+- Directly via parameters to the `init` method
 
-If the system cannot use any of those, you can still use environment variables or the parameters of the `init` method (see the example below).
+When loading configuration, PSEngine follows a strict priority:
 
-The config has a strict priority for reading values:
+1. Values passed directly to the `init` method
+2. Values from environment variables
+3. Values from configuration files
 
-1. Values passed via the `init` method are the most important.
-2. Values gathered from environment variables.
-3. Values from any config file.
+If an environment variable is set, it will override the corresponding value in the config file.
 
-If you have an environment variable configured, it will overwrite the value set in the config file.
+The `Config` class is a singleton, meaning its values are immutable once initialized and accessible from any module. You initialize the configuration using the `init` method, and retrieve its data with the `get_config` method.
 
-The `Config` class is a singleton, which means that once initialized its values are immutable, and every module will read them. You create the `Config` object via the `init` method. To get the data of the config, use the `get_config` method.
+By default, the `Config` class manages a `ConfigModel`, which is a `pydantic.BaseSettings` class containing common attributes such as proxy settings and HTTP timeout.
 
-The `Config` class manages a `ConfigModel` class by default, which is a `pydantic.BaseSettings` class that contains attributes of general needs, like proxy settings and HTTP timeout.
-The variables defined in the `ConfigModel` are:
+The variables pre-defined by the `ConfigModel` are:
 
 - `platform_id` -> str
 - `app_id` -> str
@@ -46,7 +45,7 @@ See the [**API Reference**](../api/config/config.md) for internal details of the
 
 {! modules/_includes/examples_warning.md !}
 
-#### Example 1: Read a `Config` from `config.toml`
+#### Read a `Config` from `config.toml`
 
 To run this example, create a `config.toml` file with the following content:
 
@@ -64,7 +63,7 @@ Since you want to print the value of `my_value`, use the `get_config` method to 
 
 This will print `5`.
 
-#### Example 2: Configure a `Config` from environment variables
+#### Configure a `Config` from environment variables
 
 You can read only environment variables that are statically defined in the `ConfigModel`. They need to be prefixed with `RF_` and must be of the type specified in the model as described in the Introduction section. 
 For example, to set the `app_id` and `platform_id` variables:
@@ -82,7 +81,7 @@ Then read the config:
 
 The sample code will print the values defined above.
 
-#### Example 3: Configure a `Config` from Python
+#### Configure a `Config` from Python
 
 You can initialize your config from the `init` method directly:
 
@@ -92,7 +91,7 @@ You can initialize your config from the `init` method directly:
 
 This will print `5`.
 
-#### Example 4: Define your own config
+#### Define your own config
 
 If you want to define your own config in an integration, you can. The steps are:
 
@@ -115,7 +114,7 @@ Place this in the same directory as the example Python code. Once the file confi
 
 Each property can be accessed using dot notation, for example, `config.complex_value.data`.
 
-#### Example 5: Real example
+#### Real example
 
 Assume you are developing an integration that needs to fetch playbook alerts. The current requirements for the alerts to be ingested are:
 
@@ -154,11 +153,11 @@ The script can be rewritten as below.
 
 The code itself is longer; however, you gain maintainability since a person without development experience or inner understanding of the application can change the config to meet new requirements.
 
-#### Example 6: Using a proxy
+#### Using a proxy
 
-In this example, you configure a proxy that the `LookupMgr` will use to communicate with the internet. The usage of `client_ssl_verify` is not mandatory, but needed in the example to work with a proxy without certificate.
+In this example, a proxy is configured for the `LookupMgr` to use when connecting to the Internet. While `client_ssl_verify` is optional, it is included here to allow the example to work with a proxy that does not have a certificate.
 
-Similarly to previous examples, you configure the `Config` first, and then initialize the manager. The `https_proxy` argument is used to specify the URL to use as proxy. The manager will automatically pick up this configuration during initialization.
+As with previous examples, you first set up the `Config`, then initialize the manager. The `https_proxy` argument specifies the proxy URL, and the manager automatically uses this configuration during initialization.
 
 ```python
 --8<-- "docs/examples/config/example_6.py"

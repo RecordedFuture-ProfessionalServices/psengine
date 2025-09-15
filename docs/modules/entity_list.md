@@ -8,14 +8,14 @@ See the [**API Reference**](../api/entity_lists/entity_list_mgr.md) for internal
 
 {! modules/_includes/examples_warning.md !}
 
-#### Example 1: Add a domain to your Domain Watch List using the Recorded Future ID
+#### Add a domain to your Domain Watch List using the Recorded Future ID
 
 !!! tip
     In a multi-organization enterprise, you need to find the Watch List of the sub‑org you need to access. You can do that by looking at the `owner_name` attribute of each `EntityList` object.
 
 In this example, we start with the entity to add: `idn:example.com`. This syntax (`idn:`) identifies a Recorded Future entity ID for a domain (`InternetDomainName`).
 
-We first use the `EntityListMgr` to find the list that we want to modify. The `search` method always returns a list of `EntityList` objects if at least one Watch List is found; otherwise, it returns an empty list. Hence, we verify with an `if` statement whether the `domain_watch_list` variable has something inside. If it does, we extract the first element.
+We first use the `EntityListMgr` to find the list that we want to modify. The `search` method always returns a list of `EntityList` objects if at least one list is found; otherwise, it returns an empty list. Hence, we verify with an `if` statement whether the `domain_watch_list` variable has something inside. If it does, we extract the first element.
 
 The `domain_watch_list` variable is an object of `EntityList` type, which allows us to add or remove entities from that specific list. We use the `add` method to add an entity. We know the Recorded Future ID, so we can directly pass it to the `add` method.
 
@@ -34,20 +34,20 @@ InternetDomainName: example.com, added 2025-08-27 07:04:31
 
 As a last instruction, we print the status of the list. The `status` method shows the number of entities in the list and whether the add/remove operations previously done are completed. This is because add/remove operations might take a few minutes to be processed in the backend, so the list might not be in a `ready` state yet.
 
-#### Example 2: Add a domain to your Domain Watch List without using the Recorded Future ID
+#### Add a domain to your Domain Watch List without using the Recorded Future ID
 
 !!! tip
     In a multi-organization enterprise, you need to find the Watch List of the sub‑org you need to access. You can do that by looking at the `owner_name` attribute of each `EntityList` object.
 
-Similar to Example 1, in this case we do not know the Recorded Future ID of the entity, so we modify the `add` invocation by passing a tuple containing the name of the entity—in this case, `example2.com`—and the type of the entity, `InternetDomainName`.
+As in the previous example, here we do not know the Recorded Future ID of the entity. Instead, we call the `add` method with a tuple containing the entity name (`example2.com`) and its type (`InternetDomainName`).
 
-The method uses the `EntityMatchMgr` from the `entity_match` module to attempt to find the ID.
+The method then uses `EntityMatchMgr` from the `entity_match` module to look up the ID.
 
 ```python
 --8<-- "docs/examples/entity_lists/example_2.py"
 ```
 
-#### Example 3: Remove domains in bulk from your Domain Watch List.
+#### Remove domains in bulk from your Domain Watch List.
 
 !!! tip
     In a multi-organization enterprise, you need to find the Watch List of the sub‑org you need to access. You can do that by looking at the `owner_name` attribute of each `EntityList` object.
