@@ -33,7 +33,7 @@ To run this sample, change `alert_id` to an alert ID from your organization.
 --8<-- "docs/examples/playbook_alerts/example_1.py"
 ```
 
-#### 2: Find the latest high-priority third-party risk alerts and save them as Markdown
+#### 2: Find the latest high-priority third-party risk alerts and save them as markdown
 
 In this example, we show two ways of using the `markdown` method of a playbook alert. The first method uses only the alerts data returned by the `PlaybookAlertMgr` class, and the second combines other modules of `psengine` to enrich the returned data.
 
