@@ -10,13 +10,13 @@ See the [**API Reference**](../api/detection/detection_mgr.md) for internal deta
 
 ## Notes
 
-In this module, the `fetch` and `search` methods are functionally identical. Internally, `fetch` simply calls `search` with the given `doc_id`. The `fetch` method is provided for convenience, making it easier to retrieve a detection rule by its ID.
+- In this module, the `fetch` and `search` methods are functionally identical. Internally, `fetch` simply calls `search` with the given `doc_id`. The `fetch` method is provided for convenience, making it easier to retrieve a detection rule by its ID.
 
 ## Examples
 
 {! modules/_includes/examples_warning.md !}
 
-#### Fetch a detection rule and save it to a file
+#### 1: Fetch a detection rule and save it to a file
 
 This example assumes that you have a detection rule ID either from a previously collected analyst note written by the Recorded Future Insikt Group or from an integration/security tool. We will use only two alert IDs for demonstration.
 Here we have a detection rule with ID `doc:aqofps`, which is a Recorded Future specific ID. After fetching it, you can save it with the `save_rule` helper function, which takes the whole `DetectionRule` object created by the `fetch` method and saves the content of the rule as a file.
@@ -25,7 +25,7 @@ Here we have a detection rule with ID `doc:aqofps`, which is a Recorded Future s
 --8<-- "docs/examples/detection/example_1.py"
 ```
 
-#### Find 10 Yara rules related to Command and Control activities
+#### 2: Find 10 Yara rules related to Command and Control activities
 
 In this example, we use the `search` method to find detection rules based on specific criteria. By setting `detection_rule` to `yara`, we filter for Yara rules only. To further narrow the results to those related to Command and Control activities, we use the MITRE code entity `mitre:T1071`. Each matching rule is then saved to a file.
 
@@ -33,7 +33,7 @@ In this example, we use the `search` method to find detection rules based on spe
 --8<-- "docs/examples/detection/example_2.py"
 ```
 
-#### Find 10 detection rules related to the LogShell CVE-2021-44228 vulnerability
+#### 3: Find 10 detection rules related to the LogShell CVE-2021-44228 vulnerability
 
 This example involves using a different module in combination with the `detection` module. It is very similar to the example above, but in this case we cannot pass the entity `CVE-2021-44228` directly into the list of entities, since this parameter requires the Recorded Future ID of the entity.
 To find it, we need to use the `entity_match` module. Please look at that module’s documentation for more information.

@@ -1,6 +1,6 @@
 ## Introduction
 
-The `config` module is used to configure PSEngine and control integration behavior. It does not interact with any Recorded Future datasets, and its use is optional—primarily serving as a convenience when a configuration file is needed.
+The `config` module is used to configure PSEngine and control integration behavior. It does not interact with any Recorded Future datasets, and its use is optional, primarily serving as a convenience when a configuration file is needed.
 
 Configuration values can be provided in several ways:
 
@@ -45,7 +45,7 @@ See the [**API Reference**](../api/config/config.md) for internal details of the
 
 {! modules/_includes/examples_warning.md !}
 
-#### Read a `Config` from `config.toml`
+#### 1: Read a `Config` from `config.toml`
 
 To run this example, create a `config.toml` file with the following content:
 
@@ -63,7 +63,7 @@ Since you want to print the value of `my_value`, use the `get_config` method to 
 
 This will print `5`.
 
-#### Configure a `Config` from environment variables
+#### 2: Configure a `Config` from environment variables
 
 You can read only environment variables that are statically defined in the `ConfigModel`. They need to be prefixed with `RF_` and must be of the type specified in the model as described in the Introduction section. 
 For example, to set the `app_id` and `platform_id` variables:
@@ -81,7 +81,7 @@ Then read the config:
 
 The sample code will print the values defined above.
 
-#### Configure a `Config` from Python
+#### 3: Configure a `Config` from Python
 
 You can initialize your config from the `init` method directly:
 
@@ -91,7 +91,7 @@ You can initialize your config from the `init` method directly:
 
 This will print `5`.
 
-#### Define your own config
+#### 4: Define your own config
 
 If you want to define your own config in an integration, you can. The steps are:
 
@@ -114,7 +114,7 @@ Place this in the same directory as the example Python code. Once the file confi
 
 Each property can be accessed using dot notation, for example, `config.complex_value.data`.
 
-#### Real example
+#### 5: Real example
 
 Assume you are developing an integration that needs to fetch playbook alerts. The current requirements for the alerts to be ingested are:
 
@@ -153,7 +153,7 @@ The script can be rewritten as below.
 
 The code itself is longer; however, you gain maintainability since a person without development experience or inner understanding of the application can change the config to meet new requirements.
 
-#### Using a proxy
+#### 6: Using a proxy
 
 In this example, a proxy is configured for the `LookupMgr` to use when connecting to the Internet. While `client_ssl_verify` is optional, it is included here to allow the example to work with a proxy that does not have a certificate.
 

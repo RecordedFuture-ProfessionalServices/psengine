@@ -8,7 +8,7 @@ See the [**API Reference**](../api/entity_lists/entity_list_mgr.md) for internal
 
 {! modules/_includes/examples_warning.md !}
 
-#### Add a domain to your Domain Watch List using the Recorded Future ID
+#### 1: Add a domain to your Domain Watch List using the Recorded Future ID
 
 !!! tip
     In a multi-organization enterprise, you need to find the Watch List of the sub‑org you need to access. You can do that by looking at the `owner_name` attribute of each `EntityList` object.
@@ -34,12 +34,12 @@ InternetDomainName: example.com, added 2025-08-27 07:04:31
 
 As a last instruction, we print the status of the list. The `status` method shows the number of entities in the list and whether the add/remove operations previously done are completed. This is because add/remove operations might take a few minutes to be processed in the backend, so the list might not be in a `ready` state yet.
 
-#### Add a domain to your Domain Watch List without using the Recorded Future ID
+#### 2: Add a domain to your Domain Watch List without using the Recorded Future ID
 
 !!! tip
     In a multi-organization enterprise, you need to find the Watch List of the sub‑org you need to access. You can do that by looking at the `owner_name` attribute of each `EntityList` object.
 
-As in the previous example, here we do not know the Recorded Future ID of the entity. Instead, we call the `add` method with a tuple containing the entity name (`example2.com`) and its type (`InternetDomainName`).
+As in example 1, here we do not know the Recorded Future ID of the entity. Instead, we call the `add` method with a tuple containing the entity name (`example2.com`) and its type (`InternetDomainName`).
 
 The method then uses `EntityMatchMgr` from the `entity_match` module to look up the ID.
 
@@ -47,7 +47,7 @@ The method then uses `EntityMatchMgr` from the `entity_match` module to look up 
 --8<-- "docs/examples/entity_lists/example_2.py"
 ```
 
-#### Remove domains in bulk from your Domain Watch List.
+#### 3: Remove domains in bulk from your Domain Watch List.
 
 !!! tip
     In a multi-organization enterprise, you need to find the Watch List of the sub‑org you need to access. You can do that by looking at the `owner_name` attribute of each `EntityList` object.

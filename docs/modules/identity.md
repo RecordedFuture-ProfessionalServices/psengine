@@ -10,13 +10,14 @@ To use this module, you must:
 
 - Have a token with permissions for the Identity module.
 - Ensure the Identity module is configured in your organization.
-- If your organization allows it, you may be able to view passwords in clear text.
+
+Additionally, if your organization allows it, you may be able to view passwords in clear text.
 
 ## Examples
 
 {! modules/_includes/examples_warning.md !}
 
-#### Retrieve details of recently exposed accounts and indicate if the password is in clear text
+#### 1: Retrieve details of recently exposed accounts and indicate if the password is in clear text
 
 !!! tip
     To run this example, you will need to change the domain queried by `search_credentials` to one of the domains configured in your Recorded Future enterprise.
@@ -52,7 +53,7 @@ After running the sample code, the output would look like this:
 └───────────────────────────────────────┴──────────────────────────────────────────────────────────────────┴───────────────────┘
 ```
 
-#### View the clear text password of an exposed user
+#### 2: View the clear text password of an exposed user
 
 !!! tip
     To run this example you will need to change the email queried by `lookup_credentials` to one of the emails that has been compromised from the domains you are monitoring.
@@ -83,7 +84,7 @@ The clear text password can be seen only if your organization has been configure
 --8<-- "docs/examples/identity/example_2.py"
 ```
 
-#### Search for an exposed password without sending it
+#### 3: Search for an exposed password without sending it
 
 !!! tip
     To run this example your token needs access to the Identity Module.

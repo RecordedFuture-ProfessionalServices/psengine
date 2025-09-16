@@ -19,23 +19,23 @@ When using `LookupMgr` for enrichment and specifying the `fields` parameter, you
 
 {! modules/_includes/examples_warning.md !}
 
-#### Enrich a vulnerability to get the CVSSv3 information
+#### 1: Enrich a vulnerability to get the CVSSv3 information
 
 !!! tip
 
-    To replicate this example, the token you are using must have Vulnerability Module access. If you don't have it, change the entity to enrich to a domain or IP address, or use the next example as a reference.
+    To replicate this example, the token you are using must have Vulnerability Module access. If you don't have it, change the entity to enrich to a domain or IP address, or use the example 2 as a reference.
 
-This example uses the `LookupMgr.lookup` method to get the enrichment data of a CVE, adding the `cvssv3` field. Before printing the result, you need to check whether the CVE has been enriched. Do that with the `is_enriched` boolean attribute; if it is, print the result as JSON. Note that the result is stored under `content`, which can be an object or a string depending on the API response. If the entity has not been found, it will be a string containing a 404 message. More on this in [Dealing with 404](#dealing-with-404) example.
+This example uses the `LookupMgr.lookup` method to get the enrichment data of a CVE, adding the `cvssv3` field. Before printing the result, you need to check whether the CVE has been enriched. Do that with the `is_enriched` boolean attribute; if it is, print the result as JSON. Note that the result is stored under `content`, which can be an object or a string depending on the API response. If the entity has not been found, it will be a string containing a 404 message. More on this in example 4.
 
 ```python
 --8<-- "docs/examples/enrich/example_1.py"
 ```
 
-#### Enrich multiple URLs to get the related links. Make the call multithreaded
+#### 2: Enrich multiple URLs to get the related links. Make the call multithreaded
 
 This example demonstrates how to use the `LookupMgr.lookup_bulk` method to enrich two URLs. While `lookup_bulk` simplifies enriching multiple entities of the same type, it still makes individual API calls for each entity rather than true bulk enrichment.
 
-In this case, the `links` field is specified, and `max_workers` controls the number of threads used—here, one per call. For recommendations on thread usage, refer to the [**Guidelines**](../guidelines.md) page.
+In this case, the `links` field is specified, and `max_workers` controls the number of threads used here, one per call. For recommendations on thread usage, refer to the [**Guidelines**](../guidelines.md) page.
 
 ```python
 --8<-- "docs/examples/enrich/example_2.py"
@@ -48,7 +48,7 @@ EnrichedURL: http://www.example.com/1, Risk Score: 0, Last Seen: 2024-06-10 23:5
 EnrichedURL: http://www.example.com/2, Risk Score: 0, Last Seen: 2024-06-10 23:59:59
 ```
 
-#### Bulk enrich a CSV file containing IP addresses and get the risk score. Save the results in a new file
+#### 3: Bulk enrich a CSV file containing IP addresses and get the risk score. Save the results in a new file
 
 This example begins by creating a `to_enrich.csv` file, which is included for demonstration purposes. In a real application, you would simply provide your list of IPs to enrich, and these setup lines of code would not be necessary. The main logic starts with initializing the `SoarMgr`.
 
@@ -60,7 +60,7 @@ Finally, we create a new file with two columns, `ip` and `score`, and save each 
 --8<-- "docs/examples/enrich/example_3.py"
 ```
 
-#### Dealing with 404
+#### 4: Dealing with 404
 
 The `SoarMgr.soar` method never deals with 404 errors; even if the entities given do not exist on the Recorded Future platform, it returns the same payload. The `LookupMgr.lookup` and `LookupMgr.lookup_bulk` methods handle HTTP 404 status codes by returning the `EnrichmentData` object with `content` set to a string and `is_enriched` set to `False`.
 

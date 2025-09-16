@@ -8,14 +8,15 @@ See the [**API Reference**](../api/risklists/risklist_mgr.md) for internal detai
 
 ## Notes
 
-1. The `fetch_risklist` method returns a generator object. If it needs to be saved to a file, you should transform it to a list first. 2. Even though there are CSV-based risklists, PSEngine converts them to JSON.
-3. With this module, fetching custom risklists is possible if any has been built for your enterprise.
+- The `fetch_risklist` method returns a generator object. If it needs to be saved to a file, you should transform it to a list first. 
+- Even though there are CSV-based risklists, PSEngine converts them to JSON.
+- With this module, fetching custom risklists is possible if any has been built for your enterprise.
 
 ## Examples
 
 {! modules/_includes/examples_warning.md !}
 
-#### Fetch and save the default domain risklist as JSON
+#### 1: Fetch and save the default domain risklist as JSON
 
 In this example, we fetch the risklist with the `fetch_risklist` method, giving the arguments of `default` for the type of risklist and `domain` for the type of indicator. Since the file is converted by PSEngine into a JSON-like structure, we can convert the generator to a list and then save it to a file with `json.dumps`.
 
@@ -38,7 +39,7 @@ What will happen is that while the risklist is converted to JSON, it also gets v
 --8<-- "docs/examples/risklists/example_1b.py"
 ```
 
-#### Fetch and save a custom risklist as JSON and perform validation
+#### 2: Fetch and save a custom risklist as JSON and perform validation
 
 In this example, we assume that we want to build a script that ingests the Threat Actor–related indicators from the Recorded Future risklist `ta_ip_risklist_v2.csv`.
 
@@ -60,7 +61,7 @@ We want to validate and save the risklist without the `EvidenceDetails`, `Source
 
 This example is a bit longer, but what we are doing is defining the `TARisklist` model, which inherits from `RFBaseModel`. In the `TARisklist` model, we define how the fields should be organized based on the needs of our tool. We could have left the fields untouched, but it is often required to slightly manipulate some of the data for easier ingestion.
 
-The whole data manipulation is done using only `pydantic` constructs, like `BeforeValidator` and `@field_validator`. They transform the data from one shape to another—specifically, from a dictionary to a list of dictionaries and from a JSON-like string to a JSON object, respectively.
+The whole data manipulation is done using only `pydantic` constructs, like `BeforeValidator` and `@field_validator`. They transform the data from one shape to another, specifically from a dictionary to a list of dictionaries and from a JSON-like string to a JSON object, respectively.
 
 Once the model is defined, we can fetch the risklist, validate the content, and save it to a file, same as the previous examples.
 

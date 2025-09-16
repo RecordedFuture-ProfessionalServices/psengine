@@ -6,18 +6,17 @@ See the [**API Reference**](../api/playbook_alerts/playbook_alert_mgr.md) for in
 
 ## Notes
 
-The `search` method is used to find alerts based on various parameters and returns only the `status` panel, which provides a brief summary of each alert. If you need the full alert details—including all panels—you must fetch each alert by its ID.
+- The `search` method is used to find alerts based on various parameters and returns only the `status` panel, which provides a brief summary of each alert. If you need the full alert details, including all panels, you must fetch each alert by its ID.
 
-The `fetch_bulk` method simplifies this process by performing both the search and fetch steps in one function call (multiple API calls under the covers). It returns the complete payload for each alert found, including all available panels.
+- The `fetch_bulk` method simplifies this process by performing both the search and fetch steps in one function call (multiple API calls under the covers). It returns the complete payload for each alert found, including all available panels.
 
-!!! tip
-    Playbook alert data is organized into panels, each containing specific information. The `status` panel is common to all playbook alert types and provides a brief summary. For example: when you use the `search` method, only the `status` panel is returned.
+- Playbook alert data is organized into panels, each containing specific information. The `status` panel is common to all playbook alert types and provides a brief summary. For example: when you use the `search` method, only the `status` panel is returned.
 
 ## Examples
 
 {! modules/_includes/examples_warning.md !}
 
-#### Fetch alert data and images by ID, then save images to file
+#### 1: Fetch alert data and images by ID, then save images to file
 
 !!! tip
     To run this example you need to provide a playbook alert ID in the `alert_id` argument at line 11. This can be retrieved by using `search` or `fetch_bulk` functions.
@@ -34,7 +33,7 @@ To run this sample, change `alert_id` to an alert ID from your organization.
 --8<-- "docs/examples/playbook_alerts/example_1.py"
 ```
 
-#### Find the latest high-priority third-party risk alerts and save them as Markdown
+#### 2: Find the latest high-priority third-party risk alerts and save them as Markdown
 
 In this example, we show two ways of using the `markdown` method of a playbook alert. The first method uses only the alerts data returned by the `PlaybookAlertMgr` class, and the second combines other modules of `psengine` to enrich the returned data.
 

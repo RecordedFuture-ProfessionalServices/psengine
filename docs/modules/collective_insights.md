@@ -1,6 +1,6 @@
 ## Introduction
 
-The `CollectiveInsights` class of the `collective_insights` module allows you to submit indicators from a detection coming from any of your internal tools to your Recorded Future enterprise. [Collective Insights](https://support.recordedfuture.com/hc/en-us/articles/16725023010067-Get-Started-with-Collective-Insights) enriches submissions with Recorded Future intelligence to provide your organization's enterprise with enhanced and actionable intelligence.
+The `CollectiveInsights` class of the `collective_insights` module allows you to submit indicators from a detection coming from any of your internal tools to your Recorded Future enterprise. Collective Insights enriches submissions with Recorded Future intelligence to provide your organization's enterprise with enhanced and actionable intelligence.
 
 When using the `collective_insights` module, you have to create an `Insight` object and then submit it. The `CollectiveInsights` class provides access to the modules needed to perform these actions. The examples below show how to use them.
 
@@ -8,7 +8,7 @@ See the [**API Reference**](../api/collective_insights/collective_insights.md) f
 
 ## Notes
 
-- There are some limitations around the number of submissions allowed per day; see the [Collective Insight API](https://support.recordedfuture.com/hc/en-us/articles/15847735339923-Collective-Insights-API) documentation.
+- There are some limitations around the number of submissions allowed per day; see the Collective Insight API documentation.
 - The insights submitted require some fields to be filled with specific values. For example, the `detection_type` can be either `sigma`, `yara`, or `snort`. To help you, there are constant values defined in `collective_insights.constants`. See a usage example below.
 - The `CollectiveInsights.create` method has a default value of `debug=True`; this is used to make sure the whole workflow works, but the indicators are not submitted to Recorded Future. In production code, set `debug=False` when you are ready to share the detections with Recorded Future.
 
@@ -16,7 +16,7 @@ See the [**API Reference**](../api/collective_insights/collective_insights.md) f
 
 {! modules/_includes/examples_warning.md !}
 
-### Submit a detection for a Wiper malware hash
+### 1: Submit a detection for a Wiper malware hash
 
 The `create` method only requires the following arguments to be specified:
 
