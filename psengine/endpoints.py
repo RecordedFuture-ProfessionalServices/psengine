@@ -45,6 +45,9 @@ EP_CLASSIC_ALERTS_ID = EP_CLASSIC_ALERTS_V3 + '/alerts/{}'
 EP_RISKLIST = f'{BASE_URL}/{API_VERSION}/' + '{}/risklist'
 EP_FUSION_FILES = CONNECT_API_BASE_URL + '/fusion/files'
 
+EP_FUSION_FILES_V3 = f'{BASE_URL}/fusion/v3/files/'
+EP_FUSION_DIR_V3 = f'{BASE_URL}/fusion/v3/files/directory/'
+
 ###############################################################################
 # Playbook Alert Endpoints
 ###############################################################################
