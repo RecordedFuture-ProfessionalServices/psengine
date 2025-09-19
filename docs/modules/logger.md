@@ -13,7 +13,7 @@ LOG.info('this is a log message')
 
 All modules in PSEngine log messages this way, so logging from PSEngine is available in whichever handler you use. 
 
-Importing and using `RFLogger` is only necessary when you do not already have any other code to output log messages to file or terminal.
+Importing and using `RFLogger` is only necessary when you do not already have any other code to create handlers that output log messages to file or terminal.
 
 See the [**API Reference**](../api/logger/rf_logger.md) for internal details of the module.
 
