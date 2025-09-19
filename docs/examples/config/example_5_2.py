@@ -1,4 +1,4 @@
-from pathlib import Path
+import os
 
 from pydantic import BaseModel
 
@@ -6,7 +6,7 @@ from psengine.config import Config, ConfigModel, get_config
 from psengine.enrich import LookupMgr
 from psengine.playbook_alerts import PlaybookAlertMgr
 
-CONFIG_PATH = Path(__file__).parent / "int_config.toml"
+CONFIG_PATH = os.path.join(os.getcwd(), "int_config.toml")
 
 
 class PBAConfig(BaseModel):

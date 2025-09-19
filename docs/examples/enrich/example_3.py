@@ -1,15 +1,16 @@
 import csv
+import os
 from pathlib import Path
 
 from psengine.enrich import SoarMgr
 
-OUTPUT_DIR = Path(__file__).parent / "enrich"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = os.path.join(os.getcwd(), "enrich")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-to_enrich_file = OUTPUT_DIR / "to_enrich.csv"
+to_enrich_file = Path(os.path.join(OUTPUT_DIR, "to_enrich.csv"))
 to_enrich_file.write_text("ip\n1.1.1.1\n2.2.2.2")
 
-enriched_file = OUTPUT_DIR / "enriched.csv"
+enriched_file = Path(os.path.join(OUTPUT_DIR, "enriched.csv"))
 
 mgr = SoarMgr()
 

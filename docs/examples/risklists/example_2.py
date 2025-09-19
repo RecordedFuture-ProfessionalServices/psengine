@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 from typing import Annotated, Union
 
@@ -7,8 +8,8 @@ from pydantic import BeforeValidator, Field, field_validator
 from psengine.common_models import RFBaseModel
 from psengine.risklists import RisklistMgr
 
-OUTPUT_DIR = Path(__file__).parent / "risklists"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = os.path.join(os.getcwd(), "risklists")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
 class TADetail(RFBaseModel):
@@ -58,7 +59,7 @@ risklist = list(
     )
 )
 
-out_file = OUTPUT_DIR / "ta_risklist_ip.json"
+out_file = Path(os.path.join(OUTPUT_DIR, "ta_risklist_ip.json"))
 out_file.write_text(
     json.dumps(
         [entry.json() for entry in risklist], indent=4

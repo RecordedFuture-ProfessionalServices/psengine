@@ -1,10 +1,10 @@
-from pathlib import Path
+import os
 
 from pydantic import BaseModel
 
 from psengine.config import Config, ConfigModel, get_config
 
-CONFIG_PATH = Path(__file__).parent / "custom_config.toml"
+CONFIG_PATH = os.path.join(os.getcwd(), "custom_config.toml")
 
 
 class ComplexValue(BaseModel):

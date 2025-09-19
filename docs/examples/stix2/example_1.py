@@ -1,13 +1,14 @@
+import os
 from pathlib import Path
 
 from psengine.analyst_notes import AnalystNoteMgr
 from psengine.stix2 import RFBundle
 
-OUTPUT_DIR = Path(__file__).parent / "bundles"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = os.path.join(os.getcwd(), "bundles")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 note_id = "o6_lui"
-out_file = OUTPUT_DIR / f"note_bundle_{note_id}.json"
+out_file = Path(os.path.join(OUTPUT_DIR, f"note_bundle_{note_id}.json"))
 
 note_mgr = AnalystNoteMgr()
 

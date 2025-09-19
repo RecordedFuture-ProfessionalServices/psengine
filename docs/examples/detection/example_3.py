@@ -1,11 +1,11 @@
-from pathlib import Path
+import os
 
 from psengine.detection import DetectionMgr
 from psengine.detection.helpers import save_rule
 from psengine.entity_match import EntityMatchMgr
 
-OUTPUT_DIR = Path(__file__).parent / "rules"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = os.path.join(os.getcwd(), "rules")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 mgr = DetectionMgr()
 entity_mgr = EntityMatchMgr()

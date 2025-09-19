@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from psengine.enrich.lookup_mgr import LookupMgr
@@ -5,8 +6,8 @@ from psengine.enrich.soar_mgr import SoarMgr
 from psengine.playbook_alerts import PlaybookAlertMgr
 from psengine.playbook_alerts.pa_category import PACategory
 
-OUTPUT_DIR = Path(__file__).parent / "alerts"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = os.path.join(os.getcwd(), "alerts")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 pba_mgr = PlaybookAlertMgr()
 soar_mgr = SoarMgr()
@@ -37,5 +38,5 @@ for alert in new_alerts:
         extra_context=extra_context, html_tags=True
     )
 
-    out_file = OUTPUT_DIR / f"{alert.playbook_alert_id}.md"
+    out_file = Path(os.path.join(OUTPUT_DIR, f"{alert.playbook_alert_id}.md"))
     out_file.write_text(markdown)

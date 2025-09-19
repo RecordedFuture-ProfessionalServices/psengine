@@ -1,11 +1,12 @@
 import json
+import os
 from pathlib import Path
 
 from psengine.risklists import RisklistMgr
 from psengine.risklists.models import DefaultRiskList
 
-OUTPUT_DIR = Path(__file__).parent / "risklists"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = os.path.join(os.getcwd(), "risklists")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 mgr = RisklistMgr()
 
@@ -15,8 +16,8 @@ risklist = list(
     )
 )
 
-out_file = (
-    OUTPUT_DIR / "default_domain_risklist_validated.json"
+out_file = Path(
+    os.path.join(OUTPUT_DIR, "default_domain_risklist_validated.json")
 )
 out_file.write_text(
     json.dumps(

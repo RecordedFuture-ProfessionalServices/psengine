@@ -1,4 +1,4 @@
-from psengine.config import Config, get_config
+from psengine.config import Config
 from psengine.enrich import LookupMgr
 
 Config.init(https_proxy='https://localhost:8080', client_ssl_verify=False)

@@ -1,9 +1,9 @@
-from pathlib import Path
+import os
 
 from psengine.analyst_notes import AnalystNoteMgr, save_note
 
-OUTPUT_DIR = Path(__file__).parent / "attachments"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = os.path.join(os.getcwd(), "attachments")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 mgr = AnalystNoteMgr()
 notes = mgr.search(

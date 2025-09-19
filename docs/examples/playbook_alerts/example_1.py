@@ -1,4 +1,4 @@
-from pathlib import Path
+import os
 
 from psengine.playbook_alerts import (
     PACategory,
@@ -6,8 +6,8 @@ from psengine.playbook_alerts import (
 )
 from psengine.playbook_alerts.helpers import save_pba_images
 
-OUTPUT_DIR = Path(__file__).parent / "alerts"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = os.path.join(os.getcwd(), "alerts")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 mgr = PlaybookAlertMgr()
 alert = mgr.fetch(

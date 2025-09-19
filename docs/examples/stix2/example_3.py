@@ -1,4 +1,4 @@
-from pathlib import Path
+import os
 
 from psengine.enrich import LookupMgr
 from psengine.stix2 import (
@@ -6,8 +6,8 @@ from psengine.stix2 import (
     EnrichedIndicator,
 )
 
-OUTPUT_DIR = Path(__file__).parent / "bundles"
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR = os.path.join(os.getcwd(), "bundles")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 mgr = LookupMgr()
 
 iocs = [
