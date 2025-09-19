@@ -35,4 +35,6 @@ In our case, the timestamp has been mocked to "now", but in a real scenario it w
 
 The `create` method returns an `Insight` object, which can be passed to the `submit` method.
 
+To see results from the API without actually submitting anything to the Recorded Future platform, use `debug=True` in your call to `submit`.
+
 The `submit` method takes a single `Insight` or a list of `Insight` objects.
