@@ -42,7 +42,7 @@ It can easily interact with the following Recorded Future datasets and capabilit
 
 And facilitate development with features like:
 
-* Prebuilt log handlers for console and file
+* Pre-built log handlers for console and file
 * Easy configuration management
 * Markdown creation from certain data types
 * Proxy support
