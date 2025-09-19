@@ -15,7 +15,7 @@ See the [**API Reference**](../api/classic_alerts/classic_alert_mgr.md) for inte
 - All the methods mentioned in point 1 accept a `fields` parameter to increase or reduce the information retrieved for each alert. The following fields are always requested: `id`, `log`, `title`, `rule`, no matter which `fields` you specify.
     - `search` uses only the required fields by default if the `fields` parameter is not specified.
     - `fetch` and `fetch_bulk` use all the fields if the `fields` parameter is not specified.
-- The more fields are requested the slower the action will be; make sure to balance the number of fields and the amount of alerts to search or fetch. A full list of fields can be found in [ALL_CA_FIELDS](../api/classic_alerts/constants.md#psengine.classic_alerts.constants.ALL_CA_FIELDS) in the constants file for this module. 
+- The more fields that are requested, the slower the action will be: make sure to balance the number of fields and the amount of alerts to search or fetch. A full list of fields can be found in [ALL_CA_FIELDS](../api/classic_alerts/constants.md#psengine.classic_alerts.constants.ALL_CA_FIELDS) in the constants file for this module. 
 
 ## Examples
 
@@ -23,9 +23,9 @@ See the [**API Reference**](../api/classic_alerts/classic_alert_mgr.md) for inte
 
 #### 1: Search the latest new alerts and save them as markdown
 
-In order to search for newer alerts you can use the `search` method, with a `-1d` trigger time lookback. To further filter them out you can use the value `New` for the `status`.
+To search for new alerts you can use the `search` method, with a `-1d` trigger time lookback. To get only new alerts from the platform, use the value `New` for the `status` parameter.
 
-To build the markdown for alerts we need all the fields, so you can use the `ALL_CA_FIELDS` list to get them all. In the `markdown` method we can specify some options to customize the output.
+To build markdown for alerts we need all available fields, so you can use `ALL_CA_FIELDS` to get them all. In call to `markdown` we can specify some options to customize the output.
 
 ```python
 --8<-- "docs/examples/classic_alerts/example_1.py"
@@ -57,7 +57,8 @@ The alerts might have an image ID in their payload, which will be collected by t
 
 This example starts with the assumption that you have an alert ID retrieved by a search, or a colleague, or another integration/security tool. We will use only two alert IDs for demonstration.
 
-The `fetch_hits` method allows you to download all the "Hits" of an alert, meaning the entities that triggered the alert. The list of `ClassicAlertHit` objects returned by `fetch_hits` is based on how many hits have triggered the alert. If more than one, you will see more than one object that has the same `alert_id` field.
+The `fetch_hits` method allows you to download all the "Hits" of an alert, meaning the entities that triggered the alert. The list of `ClassicAlertHit` objects returned by `fetch_hits` is based on how many hits have triggered the alert. If there are more than one, you will see more than one object that has the same `alert_id` field.
+
 For this reason we first create a dictionary `data` where we group all the hits by `alert_id`. The use of `defaultdict` is mainly to avoid `if`/`else` statements in the `for` loop.
 
 Note that for each `hit` object we use the `json` method. This method is available on any PSEngine-created object and allows you to dump it as a JSON-compatible dictionary.
