@@ -1,18 +1,102 @@
 ## Introduction
 
-The `RFLogger` class of the `rf_logger` module sets up a logger for your integration.
+The `RFLogger` class of the `rf_logger` module provides optional log handling for your integration. This should only be used if your integration client does not already have some log handling capability configured.
 
-The logger is built into all the manager classes in PSEngine, which means it is used by default as soon as any form of logging is enabled in your code.
+If log handling is already configured for your integration, simply log the normal way in each of your python files:
 
-This could be in three ways:
+```
+import logging
 
-- If the SDK you are using already has logging enabled
-- If you have already enabled logging
-- Neither point 1 nor 2, and you want to use the PSEngine logger
+LOG = logging.getLogger(__name__)
+LOG.info('this is a log message')
+```
 
-Note that it is not required to use either the `RFLogger` or any type of logging for PSEngine to work.
+All modules in PSEngine log messages this way, so logging from PSEngine is available in whichever handler you use. 
+
+Importing and using `RFLogger` is only necessary when you do not already have any other code to output log messages to file or terminal.
 
 See the [**API Reference**](../api/logger/rf_logger.md) for internal details of the module.
+
+## Logging Tree Example
+
+The following shows the [logging tree](https://pypi.org/project/logging-tree/) after importing and initializing `RFLogger`. Note the file handlers at the `psengine` module and root levels, and the console handler at the root level. The handlers are what actually output messages to file and the terminal.
+
+```
+>>> from logging_tree import printout
+>>> from psengine.logger import RFLogger
+>>> log = RFLogger().get_logger()
+>>> printout()
+<--""
+   Level WARNING
+   Handler RotatingFile '/Users/pkinsella/git/hub/psengine/docs/logs/root_recfut.log' maxBytes=20971520 backupCount=5
+     Formatter fmt='%(asctime)s,%(msecs)03d [%(threadName)s] %(levelname)s [%(module)s] %(funcName)s:%(lineno)d - %(message)s' datefmt='%Y-%m-%d %H:%M:%S'
+   Handler Stream <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>
+     Formatter fmt='%(asctime)s,%(msecs)03d %(levelname)s [%(module)s] - %(message)s' datefmt='%Y-%m-%d %H:%M:%S'
+   |
+   o<--"asyncio"
+   |   Level NOTSET so inherits level WARNING
+   |
+   o<--"charset_normalizer"
+   |   Level NOTSET so inherits level WARNING
+   |   Handler <NullHandler (NOTSET)>
+   |
+   o<--[concurrent]
+   |   |
+   |   o<--"concurrent.futures"
+   |       Level NOTSET so inherits level WARNING
+   |
+   o<--[dotenv]
+   |   |
+   |   o<--"dotenv.main"
+   |       Level NOTSET so inherits level WARNING
+   |
+   o<--[jsonpath_ng]
+   |   |
+   |   o<--"jsonpath_ng.jsonpath"
+   |   |   Level NOTSET so inherits level WARNING
+   |   |
+   |   o<--"jsonpath_ng.lexer"
+   |   |   Level NOTSET so inherits level WARNING
+   |   |
+   |   o<--"jsonpath_ng.parser"
+   |       Level NOTSET so inherits level WARNING
+   |
+   o<--"psengine"
+   |   Level INFO
+   |   Handler <NullHandler (NOTSET)>
+   |   Handler RotatingFile '/Users/pkinsella/git/hub/psengine/docs/logs/psengine_recfut.log' maxBytes=20971520 backupCount=5
+   |     Formatter fmt='%(asctime)s,%(msecs)03d [%(threadName)s] %(levelname)s [%(module)s] %(funcName)s:%(lineno)d - %(message)s' datefmt='%Y-%m-%d %H:%M:%S'
+   |   |
+   |   o<--"psengine.helpers"
+   |       Level NOTSET so inherits level INFO
+   |
+   o<--"requests"
+   |   Level NOTSET so inherits level WARNING
+   |   Handler <NullHandler (NOTSET)>
+   |
+   o<--"urllib3"
+       Level NOTSET so inherits level WARNING
+       Handler <NullHandler (NOTSET)>
+       |
+       o<--"urllib3.connection"
+       |   Level NOTSET so inherits level WARNING
+       |
+       o<--"urllib3.connectionpool"
+       |   Level NOTSET so inherits level WARNING
+       |
+       o<--"urllib3.poolmanager"
+       |   Level NOTSET so inherits level WARNING
+       |
+       o<--"urllib3.response"
+       |   Level NOTSET so inherits level WARNING
+       |
+       o<--[urllib3.util]
+           |
+           o<--"urllib3.util.retry"
+               Level NOTSET so inherits level WARNING
+```
+
+
 
 ## Examples
 
@@ -20,7 +104,12 @@ See the [**API Reference**](../api/logger/rf_logger.md) for internal details of 
 
 #### 1: Use a PSEngine module when another SDK has logging enabled
 
-In this example, we create a `Logger` instance from the `logging` standard library to emulate the fact that you might have configured your own logging. In this case, there is nothing else that needs to be done before using PSEngine.
+In this example, we create a `Logger` instance from the `logging` standard library to emulate the fact that you might have configured your own logging handler. In this case, there is nothing else that needs to be done before using PSEngine.
+
+!!! tip
+
+    In this example, the call to `logging.basicConfig` creates the necessary handler for you to see output on the terminal. If a handler is not set up, nothing in this example will actually be logged to file or the terminal. Learn more about python log handlers [here](https://docs.python.org/3/howto/logging.html#advanced-logging-tutorial).
+
 
 ```python
 --8<-- "docs/examples/logger/example_1.py"
@@ -44,7 +133,7 @@ DEBUG:psengine.enrich.lookup_mgr:LookupMgr.lookup ended with return value 'Enric
 INFO:__main__:EnrichedIP: 8.8.8.8, Risk Score: 0, Last Seen: 2025-09-01 09:44:16
 ```
 
-Any log entries of higher level, like `ERROR` or `CRITICAL`, will be shown as well.
+Any log entries of a higher level, like `ERROR` or `CRITICAL`, will be shown as well.
 
 #### 2: Use `RFLogger` in combination with another PSEngine module
 
