@@ -1,6 +1,7 @@
 ## Introduction
 
 The `AnalystNoteMgr` class of the `analyst_notes` module allows you to download, search, publish, and fetch attachments of analyst notes.
+
 An analyst note is a note that is either:
 
 - written and published by someone in your organization via the Recorded Future portal or the Recorded Future API,
@@ -19,7 +20,7 @@ See the [**API Reference**](../api/analyst_notes/note_mgr.md) for internal detai
 
 #### 1: Search for analyst notes from the last day and save them as markdown
 
-Similarly to the previous example, you can generate the markdown of an analyst note by calling the `markdown` method defined for the `AnalystNote` object.
+You can generate the markdown of an analyst note by calling the `markdown` method defined for the `AnalystNote` object.
 In this example, we set `max_results` to `2` for a shorter output, since we are printing the markdown to the console.
 
 To run this example, first add the `rich` package to your virtual environment:
@@ -39,6 +40,7 @@ The `markdown` method accepts different arguments, such as `diamond_model`, to a
 #### 2: Search for analyst notes from the last day and save their attachments
 
 The `fetch_attachment` method returns a tuple with the attachment content and extension. If the note does not contain an attachment, it returns empty content and extension.
+
 To limit the number of calls made to the API, check if the attribute `attachment` is present; if yes, fetch the attachment.
 
 ```python
