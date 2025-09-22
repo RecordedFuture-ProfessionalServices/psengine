@@ -1,15 +1,16 @@
-import os
+from pathlib import Path
 
 from psengine.analyst_notes import (
     AnalystNoteMgr,
     save_attachment,
 )
 
-OUTPUT_DIR = os.path.join(os.getcwd(), "attachments")
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+OUTPUT_DIR = Path.cwd() / 'attachments'
+OUTPUT_DIR.mkdir(exist_ok=True)
+
 
 mgr = AnalystNoteMgr()
-notes = mgr.search(published="-1d")
+notes = mgr.search(published='-1d')
 
 for note in notes:
     if note.attributes.attachment:

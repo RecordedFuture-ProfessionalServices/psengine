@@ -2,7 +2,7 @@ from psengine.identity import IdentityMgr
 
 mgr = IdentityMgr()
 
-identities = mgr.lookup_credentials("+2@norsegods.online")
+identities = mgr.lookup_credentials('+2@norsegods.online')
 for identity in identities:
     for cred in identity.credentials:
         if (

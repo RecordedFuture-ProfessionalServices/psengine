@@ -1,2 +1,2 @@
-# this is needed since mkdocs has a short code window
+extend = "../../ruff.toml"
 line-length = 60

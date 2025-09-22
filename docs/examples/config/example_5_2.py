@@ -1,12 +1,11 @@
-import os
-
-from pydantic import BaseModel
+from pathlib import Path
 
 from psengine.config import Config, ConfigModel, get_config
 from psengine.enrich import LookupMgr
 from psengine.playbook_alerts import PlaybookAlertMgr
+from pydantic import BaseModel
 
-CONFIG_PATH = os.path.join(os.getcwd(), "int_config.toml")
+CONFIG_PATH = Path.cwd() / 'int_config.toml'
 
 
 class PBAConfig(BaseModel):
@@ -50,7 +49,7 @@ domains = [
     alert.panel_status.entity_name for alert in alerts
 ]
 enriched_domains = enrich_mgr.lookup_bulk(
-    domains, "domain", fields=config.enrich.fields
+    domains, 'domain', fields=config.enrich.fields
 )
 
 for enriched in enriched_domains:

@@ -7,16 +7,16 @@ enrich_mgr = LookupMgr()
 
 alerts = pba_mgr.fetch_bulk(
     category=PACategory.DOMAIN_ABUSE,
-    statuses=["New"],
-    priority="High",
-    created_from="-1d",
+    statuses=['New'],
+    priority='High',
+    created_from='-1d',
 )
 
 domains = [
     alert.panel_status.entity_name for alert in alerts
 ]
 enriched_domains = enrich_mgr.lookup_bulk(
-    domains, "domain", fields=["links"]
+    domains, 'domain', fields=['links']
 )
 
 for enriched in enriched_domains:

@@ -1,21 +1,20 @@
-from psengine.enrich import LookupMgr, EnrichmentLookupError
+from psengine.enrich import EnrichmentLookupError, LookupMgr
 from pydantic import ValidationError
-
 
 try:
     mgr = LookupMgr()
 except ValueError as ve:
     print(
-        "There might be a token issue check the environment variable.\n",
+        'There might be a token issue check the environment variable.\n',
         ve,
     )
     exit(1)
 
 entities = {
-    "8.8.8.8": "ip",
-    "example.com": "domain",
-    1: "example",
-    "example2.com": "domain",
+    '8.8.8.8': 'ip',
+    'example.com': 'domain',
+    1: 'example',
+    'example2.com': 'domain',
 }
 
 for entity, entity_type in entities.items():
@@ -28,7 +27,7 @@ for entity, entity_type in entities.items():
         continue
     except EnrichmentLookupError as ele:
         print(
-            "There is an authentication issue, or some API issues.\n",
+            'There is an authentication issue, or some API issues.\n',
             ele,
         )
         exit(2)
