@@ -1,10 +1,12 @@
 from pathlib import Path
 
+from psengine.analyst_notes import (
+    AnalystNoteMgr,
+    save_attachment,
+)
 from rich.console import Console
 
-from psengine.analyst_notes import AnalystNoteMgr, save_attachment
-
-OUTPUT_DIR = Path(__file__).parent / 'attachments'
+OUTPUT_DIR = Path.cwd() / 'attachments'
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 mgr = AnalystNoteMgr()

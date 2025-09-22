@@ -10,7 +10,7 @@ PSEngine is a simple, yet elegant, library for rapid development of integrations
 
 PSEngine allows you to interact with the Recorded Future API extremely easily. There’s no need to manually build the URLs and query parameters, just use the modules dedicated to individual API endpoints.
 
-PSEngine is a Python package solely built and maintained by the Cyber Security Engineering team powering a number of high profile integrations, such as: Elasticsearch, QRadar, Anomali, Jira, TheHive, etc.
+PSEngine is a Python package solely built and maintained by the Recorded Future Cyber Security Engineering team powering a number of high profile integrations, such as: Elasticsearch, QRadar, Anomali, Google SIEM and SecOps, Jira, TheHive, etc.
 
 ## Installation
 
@@ -27,29 +27,29 @@ PSEngine officially supports Python >= 3.9, < 3.14.
 
 PSEngine is ready for the demands of building robust and reliable integrations.
 
-It can easily interact with the following Recorded Future datasets:
+It can easily interact with the following Recorded Future datasets and capabilities:
 
 * Analyst Notes
 * Collective Insights
 * Classic & Playbook Alerts
 * Detection Rules
-- Identity Exposures management
+* Identity Exposures
 * List management
 * On demand IOC enrichment
 * Risklists
-- STIX conversion
+* STIX conversion
 
 
-And facilitate the development with features like:
+And facilitate development with features like:
 
-* Built-in logging
+* Pre-built log handlers for console and file
 * Easy configuration management
-- Markdown creation from certain data types
+* Markdown creation from certain data types
 * Proxy support
 
 ## Previous versions and version documentation
 
-PSEngine has been made public from our internal version 2.0.4. Any previous version, including version 1, are not publicly available.
+PSEngine has been made public from our internal version 2.0.4. Previous versions, including version 1, are not publicly available.
 
 The documentation arrived at version 2.1.1. Older versions are not explicitly documented and changes can be found in the [Release History](./CHANGELOG.md) section.
 

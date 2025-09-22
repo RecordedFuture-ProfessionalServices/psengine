@@ -1,5 +1,8 @@
-from psengine.config import Config, get_config
+from pathlib import Path
 
-Config.init(config_path='config.toml')
+from psengine.config import get_config
+
+CONFIG_PATH = Path.cwd() / 'config.toml'
+
 config = get_config()
 print(config.my_value)

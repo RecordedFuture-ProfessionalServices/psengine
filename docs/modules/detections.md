@@ -1,43 +1,45 @@
-## Introduction 
+## Introduction
 
-The `DetectionMgr` class of the `detection` module allows to search and fetch detections. Detections means Yara, Sigma and Snort detection rules.
+The `DetectionMgr` class in the `detection` module enables you to search for and retrieve detection rules. Currently this includes:
+
+- Yara
+- Sigma
+- Snort
 
 See the [**API Reference**](../api/detection/detection_mgr.md) for internal details of the module.
 
-## Note
+## Notes
 
-In this module the `fetch` and `search` are exactly the same method. In fact under the hood the `fetch` method is calling the `search` method with the specified `doc_id`.
+- In this module, the `fetch` and `search` methods are functionally identical. Internally, `fetch` simply calls `search` with the given `doc_id`. The `fetch` method is provided for convenience, making it easier to retrieve a detection rule by its ID.
 
 ## Examples
 
 {! modules/_includes/examples_warning.md !}
 
-#### Example 1: Fetch a detection rule and save it to file.
+#### 1: Fetch a detection rule and save it to a file
 
-This example starts with the assumption that you have detection rule ID either from a previously collected analyst note written by the Recorded Future Insikt Group, or from an integration/security tool. e will use only two alert IDs for demonstration.
-Here we have a detection rule with id `doc:aqofps`, which is a Recorded Future specific ID. After fetching it, we can save it with the `save_rule` helper function, which takes the whole `DetectionRule` object created by the `fetch` method and save the content of the rule as file. 
+This example assumes that you have a detection rule ID either from a previously collected analyst note written by the Recorded Future Insikt Group or from an integration/security tool. We will use only two alert IDs for demonstration.
+Here we have a detection rule with ID `doc:aqofps`, which is a Recorded Future specific ID. After fetching it, you can save it with the `save_rule` helper function, which takes the whole `DetectionRule` object created by the `fetch` method and saves the content of the rule as a file.
 
-```python 
+```python
 --8<-- "docs/examples/detection/example_1.py"
 ```
 
-#### Example 2: Search for the last 10 Yara rules that are related to Command and Control.
+#### 2: Find 10 Yara rules related to Command and Control activities
 
-In this example we use the `search` method which allows you to search detection rules based on certain parameters. In this case we use the `detection_rule` set to `yara` to filter for Yara rules only. To select only rules that are specific to Command and Control activities we use the MITRE code entity `mitre:T1071`.
-We then save each of the notes to file.
+In this example, we use the `search` method to find detection rules based on specific criteria. By setting `detection_rule` to `yara`, we filter for Yara rules only. To further narrow the results to those related to Command and Control activities, we use the MITRE code entity `mitre:T1071`. Each matching rule is then saved to a file.
 
-```python 
+```python
 --8<-- "docs/examples/detection/example_2.py"
 ```
 
-#### Example 3: Search for last 10 detections related to LogShell CVE-2021-44228 vulnerability.
+#### 3: Find 10 detection rules related to the LogShell CVE-2021-44228 vulnerability
 
-This example involves the usage of a different module in combination with the `detection` module. It is very similar to Example 2, but in this case we cannot pass the entity `CVE-2021-44228` directly into the list of entities, since this parameter requires the Recorded Future ID of the entity. 
-To find it we need to use the `entity_match` module. Please look at the documentation of that module for more information.
+This example involves using a different module in combination with the `detection` module. It is very similar to the example above, but in this case we cannot pass the entity `CVE-2021-44228` directly into the list of entities, since this parameter requires the Recorded Future ID of the entity.
+To find it, we need to use the `entity_match` module. Please look at that module’s documentation for more information.
 
+We first search for the CVE ID using the `entity_mgr.match` method. This always returns a list of entities of length less than or equal to `limit`, even if entities are not found. You can safely extract the first element and check its `is_found` attribute to see if the lookup was successful. If yes, you can use the `.content.id_` to filter the detection `search`.
 
-We first search for the CVE id using the `entity_mgr.match` method. This always return a list of entities of length less than or equals to `limit`, even if entities are not found. We can safely extract the first element and check its `is_found` attribute to see if the lookup was successful. If yes we can use the `.content.id_` to filter the detection `search`. 
-
-```python 
+```python
 --8<-- "docs/examples/detection/example_3.py"
-``` 
+```

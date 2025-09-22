@@ -3,8 +3,9 @@ from pathlib import Path
 
 from psengine.enrich import SoarMgr
 
-OUTPUT_DIR = Path(__file__).parent / 'enrich'
+OUTPUT_DIR = Path.cwd() / 'enrich'
 OUTPUT_DIR.mkdir(exist_ok=True)
+
 
 to_enrich_file = OUTPUT_DIR / 'to_enrich.csv'
 to_enrich_file.write_text('ip\n1.1.1.1\n2.2.2.2')

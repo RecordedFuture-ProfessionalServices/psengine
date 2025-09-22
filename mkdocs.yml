@@ -102,13 +102,13 @@ nav:
       - Playbook Alerts: modules/playbook_alerts.md
       - Risklists: modules/risklists.md
       - STIX2: modules/stix2.md
+      - Error Handling: modules/errors.md
       - Config: modules/config.md
       - Logger: modules/logger.md
       - Internals: modules/internals.md
   - Guidelines: guidelines.md
   - Release History: CHANGELOG.md
   - Contributing: contributing.md
-  - Workflows: workflows.md
   - API Reference:
       - API Reference: api/index.md
       - Analyst Notes:

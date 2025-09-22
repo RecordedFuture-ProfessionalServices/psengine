@@ -3,7 +3,7 @@ from pathlib import Path
 from psengine.classic_alerts import ClassicAlertMgr
 from psengine.classic_alerts.helpers import save_images
 
-OUTPUT_DIR = Path(__file__).parent / 'alerts'
+OUTPUT_DIR = Path.cwd() / 'alerts'
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 ALERT_IDS = ['9Z0ts8', '9Z0ttT']
