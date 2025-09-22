@@ -21,14 +21,16 @@ See the [**API Reference**](../api/logger/rf_logger.md) for internal details of 
 
 The following shows the [logging tree](https://pypi.org/project/logging-tree/) after importing and initializing `RFLogger`. Note the file handlers at the `psengine` module and root levels, and the console handler at the root level. The handlers are what actually output messages to file and the terminal.
 
+```python
+--8<-- "docs/examples/logger/log_tree_code.py"
 ```
->>> from logging_tree import printout
->>> from psengine.logger import RFLogger
->>> log = RFLogger().get_logger()
->>> printout()
+
+Prints:
+
+```
 <--""
    Level WARNING
-   Handler RotatingFile '/Users/pkinsella/git/hub/psengine/docs/logs/root_recfut.log' maxBytes=20971520 backupCount=5
+   Handler RotatingFile '/examples/logs/root_recfut.log' maxBytes=20971520 backupCount=5
      Formatter fmt='%(asctime)s,%(msecs)03d [%(threadName)s] %(levelname)s [%(module)s] %(funcName)s:%(lineno)d - %(message)s' datefmt='%Y-%m-%d %H:%M:%S'
    Handler Stream <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>
      Formatter fmt='%(asctime)s,%(msecs)03d %(levelname)s [%(module)s] - %(message)s' datefmt='%Y-%m-%d %H:%M:%S'
@@ -64,7 +66,7 @@ The following shows the [logging tree](https://pypi.org/project/logging-tree/) a
    o<--"psengine"
    |   Level INFO
    |   Handler <NullHandler (NOTSET)>
-   |   Handler RotatingFile '/Users/pkinsella/git/hub/psengine/docs/logs/psengine_recfut.log' maxBytes=20971520 backupCount=5
+   |   Handler RotatingFile '/examples/docs/logs/psengine_recfut.log' maxBytes=20971520 backupCount=5
    |     Formatter fmt='%(asctime)s,%(msecs)03d [%(threadName)s] %(levelname)s [%(module)s] %(funcName)s:%(lineno)d - %(message)s' datefmt='%Y-%m-%d %H:%M:%S'
    |   |
    |   o<--"psengine.helpers"
@@ -95,7 +97,6 @@ The following shows the [logging tree](https://pypi.org/project/logging-tree/) a
            o<--"urllib3.util.retry"
                Level NOTSET so inherits level WARNING
 ```
-
 
 
 ## Examples
