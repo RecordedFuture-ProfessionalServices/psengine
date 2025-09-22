@@ -25,7 +25,7 @@ jobs:
         run: |
           uv venv -p ${{ vars.PYTHON_VERSION }} 
           uv pip install '.'
-          uv pip install rich
+          uv pip install rich logging-tree
 
       - name: Run Examples
         run: |
