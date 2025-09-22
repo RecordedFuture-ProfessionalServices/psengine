@@ -5,7 +5,7 @@ try:
     mgr = LookupMgr()
 except ValueError as ve:
     print(
-        'There might be a token issue check the environment variable.\n',
+        'Possible token issue check environment variable.',
         ve,
     )
     exit(1)
@@ -22,12 +22,12 @@ for entity, entity_type in entities.items():
         enriched_data = mgr.lookup(entity, entity_type)
     except ValidationError:
         print(
-            f'\n\nWARNING: The entity "{entity}", or the entity_type "{entity_type}" are wrong. I will ignore it.\n\n',
+            f'{entity} or {entity_type} type are wrong.',
         )
         continue
     except EnrichmentLookupError as ele:
         print(
-            'There is an authentication issue, or some API issues.\n',
+            'Authentication issue, or some API issues.\n',
             ele,
         )
         exit(2)

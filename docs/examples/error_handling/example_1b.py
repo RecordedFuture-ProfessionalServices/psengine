@@ -1,3 +1,4 @@
 from psengine.enrich import LookupMgr
 
-mgr = LookupMgr(rf_token='moise')
+value = 'moise'
+mgr = LookupMgr(rf_token=value)
