@@ -12,50 +12,25 @@
 ##############################################################################################
 
 import logging
-from datetime import datetime
 from pathlib import Path
-from typing import Annotated, Optional, Union
+from typing import Annotated, Union
 from urllib.parse import quote
 
-from pydantic import Field, validate_call
+from pydantic import validate_call
 from typing_extensions import Doc
 
-from psengine.common_models import RFBaseModel
-from psengine.endpoints import EP_FUSION_DIR_V3, EP_FUSION_FILES_V3
-
+from ..endpoints import EP_FUSION_DIR_V3, EP_FUSION_FILES_V3
 from ..helpers import debug_call
 from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
 from .errors import (
+    FusionDeleteFileError,
     FusionGetFileError,
+    FusionHeadFileError,
     FusionListDirError,
     FusionPostFileError,
 )
-
-
-class FusionFile(RFBaseModel):
-    file_path: str
-    file_content: bytes
-    file_found: bool
-
-
-class FileInfo(RFBaseModel):
-    type_: str = Field(alias='type')
-    name: str
-    path: str
-    format: Optional[str] = None
-    hash: Optional[str] = None
-    created: Optional[datetime] = None
-    size: Optional[int] = None
-    flow: Optional[str] = None
-    owner: Optional[str] = None
-
-
-class FusionDirectory(RFBaseModel):
-    name: str
-    path: str
-    files: list[FileInfo]
-    type_: str = Field(alias='type')
+from .models import FileDeleteOut, FileHeadOut, FileInfoOut, DirectoryListOut, FileGetOut
 
 
 class FusionMgr:
@@ -75,7 +50,7 @@ class FusionMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=FusionGetFileError)
     def get_files(
         self, file_paths: Annotated[Union[str, list[str]], Doc('One or more paths to fetch')]
-    ) -> Annotated[list[FusionFile], Doc('A FusionFile object with name and content of the file')]:
+    ) -> Annotated[list[FileGetOut], Doc('A FusionFile object with name and content of the file')]:
         """Get one or more files.
 
         Endpoint:
@@ -90,34 +65,30 @@ class FusionMgr:
         file_paths = [f'/{p}' if not p.startswith('/') else p for p in file_paths]
 
         for file in file_paths:
-            data = self._get_files(file)
+            data = self._get_file(file)
             if data:
                 returned_files.append(
-                    FusionFile.model_validate(
+                    FileGetOut.model_validate(
                         {'file_path': file, 'file_content': data.content, 'file_found': True}
                     )
                 )
             else:
                 returned_files.append(
-                    FusionFile.model_validate(
+                    FileGetOut.model_validate(
                         {'file_path': file, 'file_content': '', 'file_found': False}
                     )
                 )
 
         return returned_files
 
-    @connection_exceptions(ignore_status_code=[404], exception_to_raise=FusionGetFileError)
-    def _get_files(self, file):
-        return self.rf_client.request('get', EP_FUSION_FILES_V3 + quote(file, safe='.'))
-
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=FusionPostFileError)
-    def post_files(
+    def post_file(
         self,
         file_path: Annotated[Path, Doc('Path of the local file')],
         fusion_path: Annotated[str, Doc('Path of the fusion file')],
-    ) -> Annotated[list[FileInfo], Doc('Info of the file that have been posted')]:
+    ) -> Annotated[list[FileInfoOut], Doc('Info of the file that have been posted')]:
         """Post a file.
 
         Endpoint:
@@ -127,6 +98,10 @@ class FusionMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             FusionPostFileError: If API error occurs.
         """
+        if not file_path.exists():
+            raise FusionPostFileError(f'The file {file_path} does not exist')
+
+        # TODO: permisisons?
         data = file_path.read_bytes()
 
         headers = 'application/octet-stream'
@@ -137,49 +112,73 @@ class FusionMgr:
             content_type_header=headers,
         )
 
-        return FileInfo.model_validate(returned_data)
+        return FileInfoOut.model_validate(returned_data)
 
-    # @debug_call
-    # @validate_call
-    # @connection_exceptions(ignore_status_code=[], exception_to_raise=FusionDeleteFileError)
-    # def delete_files(
-    #     self,
-    #     published: Annotated[Optional[str], Doc('Notes published after a date.')] = None,
-    # ) -> Annotated[list[AnalystNote], Doc('A list of deduplicated AnalystNote objects.')]:
-    #     """Get file.
-    #
-    #     Endpoint:
-    #         `/fusion/v3/files/`
-    #
-    #     Raises:
-    #         ValidationError: If any supplied parameter is of incorrect type.
-    #         FusionDeleteFileError: If API error occurs.
-    #     """
-    #
-    # @debug_call
-    # @validate_call
-    # @connection_exceptions(ignore_status_code=[], exception_to_raise=FusionHeadFileError)
-    # def head_files(
-    #     self,
-    #     published: Annotated[Optional[str], Doc('Notes published after a date.')] = None,
-    # ) -> Annotated[list[AnalystNote], Doc('A list of deduplicated AnalystNote objects.')]:
-    #     """Get file.
-    #
-    #     Endpoint:
-    #         `/fusion/v3/files/`
-    #
-    #     Raises:
-    #         ValidationError: If any supplied parameter is of incorrect type.
-    #         FusionHeadFileError: If API error occurs.
-    #     """
-    #
+    @debug_call
+    @validate_call
+    def delete_files(
+        self, file_paths: Annotated[Union[str, list[str]], Doc('One or more paths to delete')]
+    ) -> Annotated[list[FileDeleteOut], Doc('A list of deleted files.')]:
+        """Delete one or more files.
+
+        Endpoint:
+            `/fusion/v3/files/`
+
+        Raises:
+            ValidationError: If any supplied parameter is of incorrect type.
+            FusionDeleteFileError: If API error occurs.
+        """
+        returned_files = []
+        file_paths = file_paths if isinstance(file_paths, list) else [file_paths]
+        file_paths = [f'/{p}' if not p.startswith('/') else p for p in file_paths]
+
+        for file in file_paths:
+            data = self._delete_file(file)
+            returned_files.append(
+                FileDeleteOut.model_validate({'file_path': file, 'file_deleted': bool(data)})
+            )
+
+        return returned_files
+
+    @debug_call
+    @validate_call
+    def head_files(
+        self, file_paths: Annotated[Union[str, list[str]], Doc('One or more paths to check')]
+    ) -> Annotated[list[FileHeadOut], Doc('List of headers info for the requested files.')]:
+        """Head of one or more files.
+
+        Endpoint:
+            `/fusion/v3/files/`
+
+        Raises:
+            ValidationError: If any supplied parameter is of incorrect type.
+            FusionHeadFileError: If API error occurs.
+        """
+        returned_files = []
+        file_paths = file_paths if isinstance(file_paths, list) else [file_paths]
+        file_paths = [f'/{p}' if not p.startswith('/') else p for p in file_paths]
+
+        for file in file_paths:
+            data = self._head_file(file)
+            if data:
+                returned_files.append(
+                    FileHeadOut.model_validate(
+                        {'file_path': file, 'file_found': True, **data.headers}
+                    )
+                )
+            else:
+                returned_files.append(
+                    FileHeadOut.model_validate({'file_path': file, 'file_found': False})
+                )
+
+        return returned_files
 
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=FusionListDirError)
     def list_dir(
         self, file_path: Annotated[str, Doc('Directory to list')]
-    ) -> Annotated[FusionDirectory, Doc('The tree structure.')]:
+    ) -> Annotated[DirectoryListOut, Doc('The tree structure.')]:
         """Get directory, subdirectory and file informations of a path.
 
         Endpoint:
@@ -190,4 +189,16 @@ class FusionMgr:
             FusionListDirError: If API error occurs.
         """
         data = self.rf_client.request('get', EP_FUSION_DIR_V3 + quote(file_path, safe='.')).json()
-        return FusionDirectory.model_validate(data)
+        return DirectoryListOut.model_validate(data)
+
+    @connection_exceptions(ignore_status_code=[404], exception_to_raise=FusionHeadFileError)
+    def _head_file(self, file):
+        return self.rf_client.request('head', EP_FUSION_FILES_V3 + quote(file, safe='.'))
+
+    @connection_exceptions(ignore_status_code=[404], exception_to_raise=FusionDeleteFileError)
+    def _delete_file(self, file):
+        return self.rf_client.request('delete', EP_FUSION_FILES_V3 + quote(file, safe='.'))
+
+    @connection_exceptions(ignore_status_code=[404], exception_to_raise=FusionGetFileError)
+    def _get_file(self, file):
+        return self.rf_client.request('get', EP_FUSION_FILES_V3 + quote(file, safe='.'))

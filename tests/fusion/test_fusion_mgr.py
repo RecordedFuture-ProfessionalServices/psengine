@@ -1,6 +1,11 @@
+from types import SimpleNamespace
+
 import pytest
 
-from psengine.fusion.fusion_mgr import FusionDirectory, FusionMgr
+from psengine.fusion.errors import (
+    FusionPostFileError,
+)
+from psengine.fusion.fusion_mgr import DirectoryListOut, FusionMgr
 
 
 class TestFusionMgr:
@@ -45,7 +50,7 @@ class TestFusionMgr:
     def test_get_file_not_found(self, fusion_mgr, mocker):
         filepath = '/home/fake/vulns.json'
 
-        mocker.patch.object(fusion_mgr, '_get_files', return_value=None)
+        mocker.patch.object(fusion_mgr, '_get_file', return_value=None)
         data = fusion_mgr.get_files(filepath)[0]
         assert len(data.file_content) == 0
         assert data.file_found is False
@@ -94,4 +99,87 @@ class TestFusionMgr:
         assert data.files[-1].type_ == 'directory'
         assert data.files[0].type_ == 'file'
 
-        assert isinstance(data, FusionDirectory)
+        assert isinstance(data, DirectoryListOut)
+
+    def test_post_file_success(self, tmp_path, fusion_mgr: FusionMgr, mocker):
+        local_file = tmp_path / 'vulns.json'
+        local_file.write_bytes(b'abcdef')
+
+        api_response = {
+            'type': 'file',
+            'name': 'vulns.json',
+            'path': '/home/moise/vulns.json',
+            'format': 'json',
+            'size': 6,
+        }
+        mock_request = mocker.patch.object(
+            fusion_mgr.rf_client, 'request', return_value=api_response
+        )
+
+        out = fusion_mgr.post_file(local_file, '/home/moise/vulns.json')
+
+        assert out.path == '/home/moise/vulns.json'
+        assert out.name == 'vulns.json'
+        assert out.type_ == 'file'
+        assert mock_request.call_args[0][0] == 'post'
+        assert mock_request.call_args[0][1].endswith('%2Fhome%2Fmoise%2Fvulns.json')
+
+    def test_post_file_not_exists_raises(self, tmp_path, fusion_mgr: FusionMgr):
+        missing = tmp_path / 'does_not_exist.json'
+        with pytest.raises(FusionPostFileError):
+            fusion_mgr.post_file(missing, '/home/moise/does_not_exist.json')
+
+    def test_delete_files_single(self, fusion_mgr: FusionMgr, mocker):
+        mocker.patch.object(fusion_mgr, '_delete_file', side_effect=[object(), None])
+
+        single = fusion_mgr.delete_files('home/moise/vulns.json')[0]
+        assert single.file_path == '/home/moise/vulns.json'
+        assert single.file_deleted is True
+
+    def test_delete_files_multiple(self, fusion_mgr: FusionMgr, mocker):
+        mocker.patch.object(fusion_mgr, '_delete_file', side_effect=[object(), None])
+
+        results = fusion_mgr.delete_files(['/home/moise/one.csv', '/home/moise/two.csv'])
+        assert [r.file_deleted for r in results] == [True, False]
+        assert results[0].file_path == '/home/moise/one.csv'
+        assert results[1].file_path == '/home/moise/two.csv'
+
+    def test_head_files_found_and_not_found(self, fusion_mgr: FusionMgr, mocker):
+        head_ok = SimpleNamespace(
+            headers={
+                'content-disposition': 'attachment; filename="vulns.json"',
+                'Content-Length': 6,
+                'content-type': 'application/json',
+                'etag': 'abvef',
+                'last-modified': 'Fri, 14 Mar 2025 10:00:00 GMT',
+            }
+        )
+        mocker.patch.object(fusion_mgr, '_head_file', side_effect=[head_ok, None])
+
+        outs = fusion_mgr.head_files(['/home/moise/vulns.json', '/home/moise/missing.json'])
+
+        assert outs[0].file_path == '/home/moise/vulns.json'
+        assert outs[0].file_found is True
+        assert outs[0].content_length == 6
+        assert outs[0].content_type == 'application/json'
+        assert outs[0].content_disposition.startswith('attachment')
+
+        assert outs[1].file_path == '/home/moise/missing.json'
+        assert outs[1].file_found is False
+        assert outs[1].content_length is None
+        assert outs[1].content_type is None
+
+    def test_get_files_mixed_found_and_missing(self, fusion_mgr: FusionMgr, mocker):
+        get_ok = SimpleNamespace(content=b'abcdef')
+        mocker.patch.object(fusion_mgr, '_get_file', side_effect=[get_ok, None])
+
+        files = ['/home/moise/vulns.json', '/home/moise/missing.json']
+        outs = fusion_mgr.get_files(files)
+
+        assert outs[0].file_path == files[0]
+        assert outs[0].file_content == b'abcdef'
+        assert outs[0].file_found is True
+
+        assert outs[1].file_path == files[1]
+        assert outs[1].file_content == b''
+        assert outs[1].file_found is False

@@ -373,7 +373,7 @@ class RFClient(BaseHTTPClient):
             self.log.error(f'Error during validation: {err}')
             return False
 
-    def _prepare_headers(self, content_type_header):
+    def _prepare_headers(self, content_type_header: str = 'application/json'):
         user_agent = self._get_user_agent_header()
         headers = {
             'User-Agent': user_agent,
