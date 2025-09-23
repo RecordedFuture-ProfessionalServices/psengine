@@ -13,6 +13,7 @@
 
 import logging
 from datetime import datetime
+from pathlib import Path
 from typing import Annotated, Optional, Union
 from urllib.parse import quote
 
@@ -28,6 +29,7 @@ from ..rf_client import RFClient
 from .errors import (
     FusionGetFileError,
     FusionListDirError,
+    FusionPostFileError,
 )
 
 
@@ -37,7 +39,7 @@ class FusionFile(RFBaseModel):
     file_found: bool
 
 
-class File(RFBaseModel):
+class FileInfo(RFBaseModel):
     type_: str = Field(alias='type')
     name: str
     path: str
@@ -52,7 +54,7 @@ class File(RFBaseModel):
 class FusionDirectory(RFBaseModel):
     name: str
     path: str
-    files: list[File]
+    files: list[FileInfo]
     type_: str = Field(alias='type')
 
 
@@ -108,23 +110,35 @@ class FusionMgr:
     def _get_files(self, file):
         return self.rf_client.request('get', EP_FUSION_FILES_V3 + quote(file, safe='.'))
 
-    # @debug_call
-    # @validate_call
-    # @connection_exceptions(ignore_status_code=[], exception_to_raise=FusionPostFileError)
-    # def post_files(
-    #     self,
-    #     published: Annotated[Optional[str], Doc('Notes published after a date.')] = None,
-    # ) -> Annotated[list[AnalystNote], Doc('A list of deduplicated AnalystNote objects.')]:
-    #     """Get file.
-    #
-    #     Endpoint:
-    #         `/fusion/v3/files/`
-    #
-    #     Raises:
-    #         ValidationError: If any supplied parameter is of incorrect type.
-    #         FusionPostFileError: If API error occurs.
-    #     """
-    #
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=FusionPostFileError)
+    def post_files(
+        self,
+        file_path: Annotated[Path, Doc('Path of the local file')],
+        fusion_path: Annotated[str, Doc('Path of the fusion file')],
+    ) -> Annotated[list[FileInfo], Doc('Info of the file that have been posted')]:
+        """Post a file.
+
+        Endpoint:
+            `/fusion/v3/files/`
+
+        Raises:
+            ValidationError: If any supplied parameter is of incorrect type.
+            FusionPostFileError: If API error occurs.
+        """
+        data = file_path.read_bytes()
+
+        headers = 'application/octet-stream'
+        returned_data = self.rf_client.request(
+            'post',
+            EP_FUSION_FILES_V3 + quote(fusion_path, safe='.'),
+            data=data,
+            content_type_header=headers,
+        )
+
+        return FileInfo.model_validate(returned_data)
+
     # @debug_call
     # @validate_call
     # @connection_exceptions(ignore_status_code=[], exception_to_raise=FusionDeleteFileError)
