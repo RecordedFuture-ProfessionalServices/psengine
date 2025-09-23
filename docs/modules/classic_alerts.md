@@ -25,7 +25,8 @@ See the [**API Reference**](../api/classic_alerts/classic_alert_mgr.md) for inte
 
 To search for new alerts you can use the `search` method, with a `-1d` trigger time lookback. To get only new alerts from the platform, use the value `New` for the `status` parameter.
 
-To build markdown for alerts we need all available fields, so you can use `ALL_CA_FIELDS` to get them all. In call to `markdown` we can specify some options to customize the output.
+To build markdown for alerts you only need the `url` field in addition to the fields that are always requested. In the example below, only the minimum information will be retrieved and saved as markdown.
+For the full set of information the `psengine.classic_alerts.ALL_CA_FIELDS` variable can be used as `fields` value.
 
 ```python
 --8<-- "docs/examples/classic_alerts/example_1.py"
