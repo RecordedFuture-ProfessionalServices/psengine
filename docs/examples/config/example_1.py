@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from psengine.config import get_config, Config
+from psengine.config import Config, get_config
 
 CONFIG_PATH = Path(__file__).parent / 'config.toml'
 

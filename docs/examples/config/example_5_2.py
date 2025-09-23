@@ -30,7 +30,9 @@ class IntegrationConfig(ConfigModel):
     enrich: EnrichConfig
 
 
-Config.init(config_class=IntegrationConfig, config_path=CONFIG_PATH)
+Config.init(
+    config_class=IntegrationConfig, config_path=CONFIG_PATH
+)
 config = get_config()
 
 pba_mgr = PlaybookAlertMgr()
@@ -43,8 +45,12 @@ alerts = pba_mgr.fetch_bulk(
     created_from=config.pba.lookback,
 )
 
-domains = [alert.panel_status.entity_name for alert in alerts]
-enriched_domains = enrich_mgr.lookup_bulk(domains, 'domain', fields=config.enrich.fields)
+domains = [
+    alert.panel_status.entity_name for alert in alerts
+]
+enriched_domains = enrich_mgr.lookup_bulk(
+    domains, 'domain', fields=config.enrich.fields
+)
 
 for enriched in enriched_domains:
     print(enriched)
