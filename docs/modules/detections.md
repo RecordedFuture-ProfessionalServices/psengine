@@ -25,15 +25,23 @@ Here we have a detection rule with ID `doc:aqofps`, which is a Recorded Future s
 --8<-- "docs/examples/detection/example_1.py"
 ```
 
-#### 2: Find 10 Yara rules related to Command and Control activities
+#### 2: Find the 10 detection rules published yesterday
 
-In this example, we use the `search` method to find detection rules based on specific criteria. By setting `detection_rule` to `yara`, we filter for Yara rules only. To further narrow the results to those related to Command and Control activities, we use the MITRE code entity `mitre:T1071`. Each matching rule is then saved to a file.
+In this example, we use the `search` method to find detection rules based on specific criteria. We set the `created_after` to a relative date, like `-1d` to fetch the rules that have been released yesterday.
 
 ```python
 --8<-- "docs/examples/detection/example_2.py"
 ```
 
-#### 3: Find 10 detection rules related to the LogShell CVE-2021-44228 vulnerability
+#### 3: Find 10 Yara rules related to Command and Control activities
+
+In this example, we use the `search` method to find detection rules based on specific criteria. By setting `detection_rule` to `yara`, we filter for Yara rules only. To further narrow the results to those related to Command and Control activities, we use the MITRE code entity `mitre:T1071`. Each matching rule is then saved to a file.
+
+```python
+--8<-- "docs/examples/detection/example_3.py"
+```
+
+#### 4: Find 10 detection rules related to the LogShell CVE-2021-44228 vulnerability
 
 This example involves using a different module in combination with the `detection` module. It is very similar to the example above, but in this case we cannot pass the entity `CVE-2021-44228` directly into the list of entities, since this parameter requires the Recorded Future ID of the entity.
 To find it, we need to use the `entity_match` module. Please look at that module’s documentation for more information.
@@ -41,5 +49,5 @@ To find it, we need to use the `entity_match` module. Please look at that module
 We first search for the CVE ID using the `entity_mgr.match` method. This always returns a list of entities of length less than or equal to `limit`, even if entities are not found. You can safely extract the first element and check its `is_found` attribute to see if the lookup was successful. If yes, you can use the `.content.id_` to filter the detection `search`.
 
 ```python
---8<-- "docs/examples/detection/example_3.py"
+--8<-- "docs/examples/detection/example_4.py"
 ```
