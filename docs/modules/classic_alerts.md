@@ -26,11 +26,11 @@ See the [**API Reference**](../api/classic_alerts/classic_alert_mgr.md) for inte
 To search for new alerts you can use the `search` method, with a `-1d` trigger time lookback. To get only new alerts from the platform, use the value `New` for the `status` parameter.
 
 To build markdown for alerts you only need the `url` field in addition to the fields that are always requested. In the example below, only the minimum information will be retrieved and saved as markdown.
-For the full set of information the `psengine.classic_alerts.ALL_CA_FIELDS` variable can be used as `fields` value.
 
 ```python
 --8<-- "docs/examples/classic_alerts/example_1.py"
 ```
+
 
 #### 2: From a list of alert IDs fetch the data and related images, save the images to file
 
