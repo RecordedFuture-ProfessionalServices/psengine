@@ -339,7 +339,7 @@ class Test_ClassicAlert:
             }
         ]
 
-    def test_search__without_all_fields(self):
+    def test_search_without_all_fields(self):
         alert = {
             'id': '9_J5JD',
             'log': {
