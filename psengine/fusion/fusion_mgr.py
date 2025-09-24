@@ -96,12 +96,11 @@ class FusionMgr:
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
-            FusionPostFileError: If API error occurs.
+            FusionPostFileError: If API error occurs or the input file cannot be read.
         """
         if not file_path.exists():
             raise FusionPostFileError(f'The file {file_path} does not exist')
 
-        # TODO: permisisons?
         data = file_path.read_bytes()
 
         headers = 'application/octet-stream'
@@ -110,7 +109,7 @@ class FusionMgr:
             EP_FUSION_FILES_V3 + quote(fusion_path, safe='.'),
             data=data,
             content_type_header=headers,
-        )
+        ).json()
 
         return FileInfoOut.model_validate(returned_data)
 

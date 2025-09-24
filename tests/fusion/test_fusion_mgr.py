@@ -1,3 +1,4 @@
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -128,6 +129,14 @@ class TestFusionMgr:
         missing = tmp_path / 'does_not_exist.json'
         with pytest.raises(FusionPostFileError):
             fusion_mgr.post_file(missing, '/home/moise/does_not_exist.json')
+
+    def test_post_file_permission_denied(self, tmp_path: Path, fusion_mgr: FusionMgr):
+        local_file = tmp_path / 'noread.json'
+        local_file.touch(222)
+        local_file.write_bytes(b'abdjlks')
+
+        with pytest.raises(FusionPostFileError, match=r'.*\[Errno 13\] Permission denied.*'):
+            fusion_mgr.post_file(local_file, '/home/moise/noread.json')
 
     def test_delete_files_single(self, fusion_mgr: FusionMgr, mocker):
         mocker.patch.object(fusion_mgr, '_delete_file', side_effect=[object(), None])
