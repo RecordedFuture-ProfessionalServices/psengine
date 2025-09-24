@@ -162,6 +162,10 @@ nav:
           - ADT: api/entity_match/entity_match.md
           - Models: api/entity_match/models.md
           - Errors: api/entity_match/errors.md
+      - Fusion:
+          - Manager: api/fusion/fusion_mgr.md
+          - Models: api/fusion/models.md
+          - Errors: api/fusion/errors.md
       - Helpers:
           - FileHelpers: api/helpers/file_helpers.md
           - FormattingHelpers: api/helpers/format_helpers.md
