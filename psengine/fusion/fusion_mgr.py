@@ -178,7 +178,7 @@ class FusionMgr:
     def list_dir(
         self, file_path: Annotated[str, Doc('Directory to list')]
     ) -> Annotated[DirectoryListOut, Doc('The tree structure.')]:
-        """Get directory, subdirectory and file informations of a path.
+        """Get directory, subdirectory and file information of a path.
 
         Endpoint:
             `/fusion/v3/files/directory`
