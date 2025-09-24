@@ -12,10 +12,10 @@
 ##############################################################################################
 
 from .errors import (
-    FusionListDirError,
-    FusionHeadFileError,
     FusionDeleteFileError,
-    FusionPostFileError,
     FusionGetFileError,
+    FusionHeadFileError,
+    FusionListDirError,
+    FusionPostFileError,
 )
 from .fusion_mgr import FusionMgr

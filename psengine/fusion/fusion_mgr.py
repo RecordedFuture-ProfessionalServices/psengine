@@ -30,7 +30,7 @@ from .errors import (
     FusionListDirError,
     FusionPostFileError,
 )
-from .models import FileDeleteOut, FileHeadOut, FileInfoOut, DirectoryListOut, FileGetOut
+from .models import DirectoryListOut, FileDeleteOut, FileGetOut, FileHeadOut, FileInfoOut
 
 
 class FusionMgr:

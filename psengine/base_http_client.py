@@ -13,7 +13,7 @@
 
 import json
 import logging
-from typing import Annotated, Any, Union
+from typing import Annotated, Union
 
 from pydantic import validate_call
 from requests import (
