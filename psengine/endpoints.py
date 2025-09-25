@@ -1,7 +1,6 @@
 ##################################### TERMS OF USE ###########################################
 # The following code is provided for demonstration purpose only, and should not be used      #
-# without independent verification. Recorded Future makes no representations or warranties,  #
-# express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #
+# without independent verification. Recorded Future makes no representations or warranties,  # express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #
 # information it may retrieve, and provides it both strictly “as-is” and without assuming    #
 # responsibility for any information it may retrieve. Recorded Future shall not be liable    #
 # for, and you assume all risk of using, the foregoing. By using this code, Customer         #
@@ -114,3 +113,9 @@ EP_IDENTITY_IP_LOOKUP = EP_IDENTITY + 'ip/lookup'
 EP_IDENTITY_CREDENTIALS_SEARCH = EP_IDENTITY + 'credentials/search'
 EP_IDENTITY_CREDENTIALS_LOOKUP = EP_IDENTITY + 'credentials/lookup'
 EP_IDENTITY_DUMP_SEARCH = EP_IDENTITY + 'metadata/dump/search'
+
+###############################################################################
+# Malware Intelligence API Endpoints
+###############################################################################
+EP_MALWARE_INTELLIGENCE = BASE_URL + '/malware-intelligence/v1/'
+EP_MALWARE_INTEL_REPORTS = EP_MALWARE_INTELLIGENCE + 'reports'
