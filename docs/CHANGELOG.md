@@ -6,13 +6,13 @@
 
 - `DetectionMgr.search` supports relative dates for `created_` and `updated_` fields.
 - `ClassicAlert.markdown` does not require `triggered_by` field to be retrieved when not used in markdown.
-- `LookupMgr.lookup` support `organization` as entity type.
+- `LookupMgr.lookup` supports `organization` as entity type.
+- `EnrichmentData` now has a `links` method to facilitate the extraction of links of the needed type from a specific section.
 
 ### Fixed
 
 - `playbook_alert.PBA_GeopoliticsFacility` can now be imported from the module level.
 - `playbook_alert.PBA_GeopoliticsFacility.markdown` properly shows alert events.
-
 
 ### Changed
 

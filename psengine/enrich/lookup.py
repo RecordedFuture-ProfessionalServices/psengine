@@ -291,3 +291,21 @@ class EnrichmentData(RFBaseModel):
             f'Risk Score: {self.content.risk.score}, '
             f'Last Seen: {self.content.timestamps.last_seen.strftime(TIMESTAMP_STR)}'
         )
+
+    def links(self, from_section: str, entity_type: str) -> list[str]:
+        """Retrieve a list of entities from the links attribute of the specific type and section."""
+        results = []
+        if not hasattr(self.content, 'links'):
+            return []
+
+        results.extend(
+            entity.name
+            for hit in self.content.links.hits
+            for section in hit.sections
+            if section.section_id and section.section_id.name == from_section
+            for lst in section.lists
+            for entity in lst.entities
+            if entity.type_ == entity_type
+        )
+
+        return results
