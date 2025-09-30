@@ -120,3 +120,9 @@ EP_IDENTITY_DUMP_SEARCH = EP_IDENTITY + 'metadata/dump/search'
 ###############################################################################
 EP_MALWARE_INTELLIGENCE = BASE_URL + '/malware-intelligence/v1/'
 EP_MALWARE_INTEL_REPORTS = EP_MALWARE_INTELLIGENCE + 'reports'
+
+###############################################################################
+# Risk History API Endpoints
+###############################################################################
+EP_RISK_HISTORY_BASE = BASE_URL + '/risk'
+EP_RISK_HISTORY = EP_RISK_HISTORY_BASE + '/history'
