@@ -19,24 +19,24 @@ class AnalystNoteError(RecordedFutureError):
 
 
 class AnalystNoteLookupError(RecordedFutureError):
-    """Error raise when cannot lookup an analyst note."""
+    """Raised when an analyst note cannot be retrieved."""
 
 
 class AnalystNoteSearchError(RecordedFutureError):
-    """Error raise when cannot search analyst notes."""
+    """Raised when an analyst note cannot be searched."""
 
 
 class AnalystNoteAttachmentError(RecordedFutureError):
-    """Error raise when cannot lookup an analyst note."""
+    """Raised when an analyst note attachment cannot be retrieved."""
 
 
 class AnalystNoteDeleteError(RecordedFutureError):
-    """Error raise when cannot delete an analyst note."""
+    """Raised when an analyst note cannot be deleted."""
 
 
 class AnalystNotePreviewError(RecordedFutureError):
-    """Error raise when cannot post to preview endpoint."""
+    """Raised when an analyst note cannot be previewed."""
 
 
 class AnalystNotePublishError(RecordedFutureError):
-    """Error raise when cannot post to publish endpoint."""
+    """Raised when an analyst note cannot be published."""
