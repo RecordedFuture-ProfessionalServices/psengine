@@ -102,7 +102,7 @@ class TestFusionMgr:
 
         assert isinstance(data, DirectoryListOut)
 
-    def test_post_file_success(self, tmp_path, fusion_mgr: FusionMgr, mocker):
+    def test_post_file_success(self, tmp_path, fusion_mgr: FusionMgr, mocker, make_response):
         local_file = tmp_path / 'vulns.json'
         local_file.write_bytes(b'abcdef')
 
@@ -114,7 +114,7 @@ class TestFusionMgr:
             'size': 6,
         }
         mock_request = mocker.patch.object(
-            fusion_mgr.rf_client, 'request', return_value=api_response
+            fusion_mgr.rf_client, 'request', return_value=make_response(api_response)
         )
 
         out = fusion_mgr.post_file(local_file, '/home/moise/vulns.json')
