@@ -212,6 +212,10 @@ nav:
               - PBA Malware Report: api/playbook_alerts/models/pba_malware_report.md
               - PBA Third Party Risk: api/playbook_alerts/models/pba_third_party_risk.md
               - Search Endpoint: api/playbook_alerts/models/search_endpoint.md
+      - Risk History:
+          - Manager: api/risk_history/risk_history_mgr.md
+          - Models: api/risk_history/models.md
+          - Errors: api/risk_history/errors.md
       - Risklists:
           - Manager: api/risklists/risklist_mgr.md
           - Models: api/risklists/models.md

@@ -55,7 +55,7 @@ class RiskHistory(RFBaseModel):
     risk_rules: Optional[list[RiskRuleHistory]] = None
 
     def __str__(self) -> str:
-        return '{}: Number of risk scores: {}, Number of risk rules: {}'.format(  # noqa: UP032
+        return 'Entity {}: Risk Score Changes: {}, Risk Rule Changes: {}'.format(  # noqa: UP032
             self.entity.name, len(self.scores), len(self.risk_rules)
         )
 

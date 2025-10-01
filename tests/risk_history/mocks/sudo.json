@@ -1,0 +1,2604 @@
+{
+	"data": [
+		{
+			"entity": {
+				"id": "gVd1R",
+				"provided_id": "gVd1R",
+				"type": "Product",
+				"name": "Sudo"
+			},
+			"scores": [
+				{
+					"score": 32,
+					"added": "2024-11-06T23:11:35.833Z",
+					"removed": "2024-12-05T23:11:31.271Z"
+				},
+				{
+					"score": 27,
+					"added": "2024-12-05T23:11:31.271Z",
+					"removed": "2024-12-16T20:26:47.996Z"
+				},
+				{
+					"score": 25,
+					"added": "2024-12-16T20:26:47.996Z",
+					"removed": "2024-12-16T22:09:29.470Z"
+				},
+				{
+					"score": 27,
+					"added": "2024-12-16T22:09:29.470Z",
+					"removed": "2025-02-06T22:19:17.606Z"
+				},
+				{
+					"score": 32,
+					"added": "2025-02-06T22:19:17.606Z",
+					"removed": "2025-04-10T21:13:27.156Z"
+				},
+				{
+					"score": 27,
+					"added": "2025-04-10T21:13:27.156Z",
+					"removed": "2025-07-06T07:16:36.662Z"
+				},
+				{
+					"score": 32,
+					"added": "2025-07-06T07:16:36.662Z",
+					"removed": "2025-07-08T16:15:05.763Z"
+				},
+				{
+					"score": 72,
+					"added": "2025-07-08T16:15:05.763Z",
+					"removed": "2025-07-14T16:18:12.459Z"
+				},
+				{
+					"score": 73,
+					"added": "2025-07-14T16:18:12.459Z",
+					"removed": "2025-07-18T16:11:45.826Z"
+				},
+				{
+					"score": 72,
+					"added": "2025-07-18T16:11:45.826Z",
+					"removed": "2025-08-11T20:20:25.622Z"
+				},
+				{
+					"score": 71,
+					"added": "2025-08-11T20:20:25.622Z",
+					"removed": "2025-08-25T23:23:16.260Z"
+				},
+				{
+					"score": 72,
+					"added": "2025-08-25T23:23:16.260Z",
+					"removed": "2025-09-15T16:09:39.889Z"
+				},
+				{
+					"score": 71,
+					"added": "2025-09-15T16:09:39.889Z",
+					"removed": "2025-09-19T16:08:43.942Z"
+				},
+				{
+					"score": 72,
+					"added": "2025-09-19T16:08:43.942Z",
+					"removed": "2025-09-30T02:18:45.542Z"
+				},
+				{
+					"score": 77,
+					"added": "2025-09-30T02:18:45.542Z",
+					"removed": "2025-09-30T16:28:08.338Z"
+				},
+				{
+					"score": 82,
+					"added": "2025-09-30T16:28:08.338Z"
+				}
+			],
+			"levels": [
+				{
+					"criticality": 2,
+					"added": "2023-06-02T03:02:42.231Z",
+					"removed": "2025-07-08T16:15:05.763Z"
+				},
+				{
+					"criticality": 3,
+					"added": "2025-07-08T16:15:05.763Z"
+				}
+			],
+			"risk_rules": [
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>).",
+					"added": "2025-09-30T16:28:08.338Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>).",
+					"added": "2025-09-30T16:28:08.338Z"
+				},
+				{
+					"risk_id": "attr:88888089-95ae-4e64-8bb9-d8f099026df1",
+					"risk_name": "Susceptible to Actively Exploited Vulnerability",
+					"criticality": 3,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 1 vulnerability that has been exploited recently: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>).",
+					"added": "2025-09-30T16:28:08.338Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>).",
+					"added": "2025-09-30T16:28:08.338Z"
+				},
+				{
+					"risk_id": "attr:c1a7d85b-a4e2-4c8f-9a3a-d63c4700e8b0",
+					"risk_name": "Recently Reported by Insikt Group",
+					"criticality": 3,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: CISA Adds Five Vulnerabilities to KEV Catalog Affecting Adminer, Cisco, Fortra, Libraesva, and Sudo Products. Most recent link (Sep 30, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:-wUyzG",
+					"added": "2025-09-30T02:18:45.542Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>).",
+					"added": "2025-09-29T16:43:54.919Z",
+					"removed": "2025-09-30T16:28:08.338Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>).",
+					"added": "2025-09-29T16:43:54.919Z",
+					"removed": "2025-09-30T16:28:08.338Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>).",
+					"added": "2025-09-29T16:43:54.919Z",
+					"removed": "2025-09-30T16:28:08.338Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 1 vulnerability mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gI8_Q>Sudo 1.9.16</e>).",
+					"added": "2025-09-29T16:43:54.919Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-09-28T16:15:35.399Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-27T16:15:19.421Z",
+					"removed": "2025-09-29T16:43:54.919Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-27T16:15:19.421Z",
+					"removed": "2025-09-29T16:43:54.919Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-09-27T16:15:19.421Z",
+					"removed": "2025-09-28T16:15:35.399Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-27T16:15:19.421Z",
+					"removed": "2025-09-29T16:43:54.919Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-09-26T16:12:32.365Z",
+					"removed": "2025-09-27T16:15:19.421Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-09-25T16:15:05.411Z",
+					"removed": "2025-09-26T16:12:32.365Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-23T16:22:17.297Z",
+					"removed": "2025-09-27T16:15:19.421Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-23T16:22:17.297Z",
+					"removed": "2025-09-27T16:15:19.421Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-23T16:22:17.297Z",
+					"removed": "2025-09-27T16:15:19.421Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: Analysis of <e id=-PVxJA>WhiteCobra</e> Campaign Deploying 24 Malicious Extensions, Sample Available From Recorded Future Malware Intelligence. Most recent link (Sep 16, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:-QYXf_",
+					"added": "2025-09-22T23:23:20.575Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "24 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 24 reports including COOKIE SPIDER Employed ClickFix Malvertising Campaign to Deliver SHAMOS Information Stealer, Samples Available From Recorded Future Malware Intelligence. Most recent link (Aug 25, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:9iL8fx",
+					"added": "2025-09-22T23:23:20.575Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-21T16:23:32.650Z",
+					"removed": "2025-09-23T16:22:17.297Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-09-21T16:23:32.650Z",
+					"removed": "2025-09-25T16:15:05.411Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-20T16:08:54.004Z",
+					"removed": "2025-09-23T16:22:17.297Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-09-20T16:08:54.004Z",
+					"removed": "2025-09-21T16:23:32.650Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-20T16:08:54.004Z",
+					"removed": "2025-09-23T16:22:17.297Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-09-19T16:08:43.942Z",
+					"removed": "2025-09-20T16:08:54.004Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 1 vulnerability mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-19T16:08:43.942Z",
+					"removed": "2025-09-29T16:43:54.919Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 2 reports including Analysis of <e id=-PVxJA>WhiteCobra</e> Campaign Deploying 24 Malicious Extensions, Sample Available From Recorded Future Malware Intelligence. Most recent link (Sep 16, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:-QYXf_",
+					"added": "2025-09-16T18:17:36.060Z",
+					"removed": "2025-09-22T23:23:20.575Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-16T16:31:44.069Z",
+					"removed": "2025-09-20T16:08:54.004Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-09-16T16:31:44.069Z",
+					"removed": "2025-09-19T16:08:43.942Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-16T16:31:44.069Z",
+					"removed": "2025-09-20T16:08:54.004Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-15T16:09:39.889Z",
+					"removed": "2025-09-16T16:31:44.069Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-15T16:09:39.889Z",
+					"removed": "2025-09-16T16:31:44.069Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-15T16:09:39.889Z",
+					"removed": "2025-09-16T16:31:44.069Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-14T16:16:51.563Z",
+					"removed": "2025-09-15T16:09:39.889Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-14T16:16:51.563Z",
+					"removed": "2025-09-15T16:09:39.889Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-14T16:16:51.563Z",
+					"removed": "2025-09-15T16:09:39.889Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-09-13T16:12:33.059Z",
+					"removed": "2025-09-15T16:09:39.889Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-12T16:13:56.277Z",
+					"removed": "2025-09-13T16:12:33.059Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-09-11T16:10:46.360Z",
+					"removed": "2025-09-12T16:13:56.277Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-10T16:12:00.729Z",
+					"removed": "2025-09-14T16:16:51.563Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-10T16:12:00.729Z",
+					"removed": "2025-09-14T16:16:51.563Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-10T16:12:00.729Z",
+					"removed": "2025-09-14T16:16:51.563Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-09T16:10:51.238Z",
+					"removed": "2025-09-10T16:12:00.729Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-09-09T16:10:51.238Z",
+					"removed": "2025-09-11T16:10:46.360Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 1 vulnerability with a strong indication of an exploit actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-08T16:11:39.647Z",
+					"removed": "2025-09-09T16:10:51.238Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-08T16:11:39.647Z",
+					"removed": "2025-09-09T16:10:51.238Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-08T16:11:39.647Z",
+					"removed": "2025-09-10T16:12:00.729Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-08T16:11:39.647Z",
+					"removed": "2025-09-10T16:12:00.729Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-09-07T16:13:37.934Z",
+					"removed": "2025-09-08T16:11:39.647Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-05T16:10:10.002Z",
+					"removed": "2025-09-08T16:11:39.647Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. 1 high or critical severity vulnerability affecting this product has been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-05T16:10:10.002Z",
+					"removed": "2025-09-21T16:23:32.650Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: Recorded Future Vulnerability Analysis. 3 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>, <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-05T16:10:10.002Z",
+					"removed": "2025-09-07T16:13:37.934Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-05T16:10:10.002Z",
+					"removed": "2025-09-08T16:11:39.647Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-05T16:10:10.002Z",
+					"removed": "2025-09-08T16:11:39.647Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-09-04T16:11:46.869Z",
+					"removed": "2025-09-05T16:10:10.002Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-09-03T16:11:01.179Z",
+					"removed": "2025-09-04T16:11:46.869Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-09-01T16:15:13.578Z",
+					"removed": "2025-09-05T16:10:10.002Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-08-31T16:13:23.190Z",
+					"removed": "2025-09-03T16:11:01.179Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-08-30T16:14:51.193Z",
+					"removed": "2025-08-31T16:13:23.190Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-29T17:12:21.850Z",
+					"removed": "2025-09-05T16:10:10.002Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-29T17:12:21.850Z",
+					"removed": "2025-09-05T16:10:10.002Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-29T17:12:21.850Z",
+					"removed": "2025-09-05T16:10:10.002Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-08-28T16:15:41.210Z",
+					"removed": "2025-08-30T16:14:51.193Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-27T16:24:49.500Z",
+					"removed": "2025-08-29T17:12:21.850Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-27T16:24:49.500Z",
+					"removed": "2025-08-29T17:12:21.850Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-08-27T16:24:49.500Z",
+					"removed": "2025-08-28T16:15:41.210Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-27T16:24:49.500Z",
+					"removed": "2025-08-29T17:12:21.850Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-26T16:15:12.240Z",
+					"removed": "2025-08-27T16:24:49.500Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-26T16:15:12.240Z",
+					"removed": "2025-08-27T16:24:49.500Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-08-26T16:15:12.240Z",
+					"removed": "2025-08-27T16:24:49.500Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-26T16:15:12.240Z",
+					"removed": "2025-08-27T16:24:49.500Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: COOKIE SPIDER Employed ClickFix Malvertising Campaign to Deliver SHAMOS Information Stealer, Samples Available From Recorded Future Malware Intelligence. Most recent link (Aug 25, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:9iL8fx",
+					"added": "2025-08-25T23:23:16.260Z",
+					"removed": "2025-09-16T18:17:36.060Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-25T16:17:38.148Z",
+					"removed": "2025-08-26T16:15:12.240Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-25T16:17:38.148Z",
+					"removed": "2025-08-26T16:15:12.240Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-08-25T16:17:38.148Z",
+					"removed": "2025-08-26T16:15:12.240Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-25T16:17:38.148Z",
+					"removed": "2025-08-26T16:15:12.240Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-24T16:16:22.783Z",
+					"removed": "2025-08-25T16:17:38.148Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-24T16:16:22.783Z",
+					"removed": "2025-08-25T16:17:38.148Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-08-24T16:16:22.783Z",
+					"removed": "2025-08-25T16:17:38.148Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-24T16:16:22.783Z",
+					"removed": "2025-08-25T16:17:38.148Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-23T16:17:53.914Z",
+					"removed": "2025-08-24T16:16:22.783Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-23T16:17:53.914Z",
+					"removed": "2025-08-24T16:16:22.783Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-08-23T16:17:53.914Z",
+					"removed": "2025-08-24T16:16:22.783Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-23T16:17:53.914Z",
+					"removed": "2025-08-24T16:16:22.783Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-21T16:14:51.403Z",
+					"removed": "2025-08-23T16:17:53.914Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-21T16:14:51.403Z",
+					"removed": "2025-08-23T16:17:53.914Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-08-21T16:14:51.403Z",
+					"removed": "2025-08-23T16:17:53.914Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-21T16:14:51.403Z",
+					"removed": "2025-08-23T16:17:53.914Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 1 vulnerability mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-20T16:17:41.881Z",
+					"removed": "2025-09-01T16:15:13.578Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-19T16:17:22.255Z",
+					"removed": "2025-08-21T16:14:51.403Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-19T16:17:22.255Z",
+					"removed": "2025-08-21T16:14:51.403Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-19T16:17:22.255Z",
+					"removed": "2025-08-21T16:14:51.403Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-19T16:17:22.255Z",
+					"removed": "2025-08-20T16:17:41.881Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-08-18T16:12:59.967Z",
+					"removed": "2025-08-21T16:14:51.403Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-17T16:14:04.322Z",
+					"removed": "2025-08-19T16:17:22.255Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-17T16:14:04.322Z",
+					"removed": "2025-08-19T16:17:22.255Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-08-17T16:14:04.322Z",
+					"removed": "2025-08-18T16:12:59.967Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-17T16:14:04.322Z",
+					"removed": "2025-08-19T16:17:22.255Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-17T16:14:04.322Z",
+					"removed": "2025-08-19T16:17:22.255Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-16T16:15:04.104Z",
+					"removed": "2025-08-17T16:14:04.322Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-16T16:15:04.104Z",
+					"removed": "2025-08-17T16:14:04.322Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-08-16T16:15:04.104Z",
+					"removed": "2025-08-17T16:14:04.322Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-16T16:15:04.104Z",
+					"removed": "2025-08-17T16:14:04.322Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-16T16:15:04.104Z",
+					"removed": "2025-08-17T16:14:04.322Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-08-15T16:26:01.804Z",
+					"removed": "2025-08-16T16:15:04.104Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-13T16:28:14.302Z",
+					"removed": "2025-08-16T16:15:04.104Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-13T16:28:14.302Z",
+					"removed": "2025-08-16T16:15:04.104Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-13T16:28:14.302Z",
+					"removed": "2025-08-16T16:15:04.104Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-13T16:28:14.302Z",
+					"removed": "2025-08-16T16:15:04.104Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-08-12T16:20:09.073Z",
+					"removed": "2025-08-15T16:26:01.804Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "23 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 23 reports including AMOS Stealer Employs Backdoor Capability for Persistent Access, Sample Available From Recorded Future Malware Intelligence. Most recent link (Jul 14, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:79gzNQ",
+					"added": "2025-08-11T20:20:25.622Z",
+					"removed": "2025-09-22T23:23:20.575Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-08-11T16:20:42.961Z",
+					"removed": "2025-08-12T16:20:09.073Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-10T16:20:26.257Z",
+					"removed": "2025-08-13T16:28:14.302Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-10T16:20:26.257Z",
+					"removed": "2025-08-13T16:28:14.302Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-10T16:20:26.257Z",
+					"removed": "2025-08-13T16:28:14.302Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-10T16:20:26.257Z",
+					"removed": "2025-08-13T16:28:14.302Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-09T16:14:12.644Z",
+					"removed": "2025-08-10T16:20:26.257Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-09T16:14:12.644Z",
+					"removed": "2025-08-10T16:20:26.257Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-08-09T16:14:12.644Z",
+					"removed": "2025-08-11T16:20:42.961Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-09T16:14:12.644Z",
+					"removed": "2025-08-10T16:20:26.257Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-09T16:14:12.644Z",
+					"removed": "2025-08-10T16:20:26.257Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: AMOS Stealer Employs Backdoor Capability for Persistent Access, Sample Available From Recorded Future Malware Intelligence. Most recent link (Jul 14, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:79gzNQ",
+					"added": "2025-08-08T20:20:55.546Z",
+					"removed": "2025-08-11T20:20:25.622Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "22 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 22 reports including Threat Actors Deploy New <e id=j-fmkg>macOS.ZuRu</e> Variant via Trojanized Termius Application, Sample Available from Recorded Future Malware Intelligence. Most recent link (Jul 11, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:73mVEa",
+					"added": "2025-08-08T20:20:55.546Z",
+					"removed": "2025-08-11T20:20:25.622Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-08T16:16:32.097Z",
+					"removed": "2025-08-09T16:14:12.644Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-08T16:16:32.097Z",
+					"removed": "2025-08-09T16:14:12.644Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-08T16:16:32.097Z",
+					"removed": "2025-08-09T16:14:12.644Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-08T16:16:32.097Z",
+					"removed": "2025-08-09T16:14:12.644Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-07T16:19:57.946Z",
+					"removed": "2025-08-08T16:16:32.097Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-07T16:19:57.946Z",
+					"removed": "2025-08-08T16:16:32.097Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-08-07T16:19:57.946Z",
+					"removed": "2025-08-09T16:14:12.644Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-07T16:19:57.946Z",
+					"removed": "2025-08-08T16:16:32.097Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-07T16:19:57.946Z",
+					"removed": "2025-08-08T16:16:32.097Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-06T16:11:41.555Z",
+					"removed": "2025-08-07T16:19:57.946Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-06T16:11:41.555Z",
+					"removed": "2025-08-07T16:19:57.946Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-06T16:11:41.555Z",
+					"removed": "2025-08-07T16:19:57.946Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-06T16:11:41.555Z",
+					"removed": "2025-08-07T16:19:57.946Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-08-03T16:15:47.946Z",
+					"removed": "2025-08-07T16:19:57.946Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 2 reports including AMOS Stealer Employs Backdoor Capability for Persistent Access, Sample Available From Recorded Future Malware Intelligence. Most recent link (Jul 14, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:79gzNQ",
+					"added": "2025-08-03T06:19:10.938Z",
+					"removed": "2025-08-08T20:20:55.546Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "21 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 21 reports including Researchers Disclose CVE-2025-32462 and CVE-2025-32463 in Sudo Affecting Linux and macOS: No Active Exploitation. Most recent link (Jul 06, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:7sJv_R",
+					"added": "2025-08-03T06:19:10.938Z",
+					"removed": "2025-08-08T20:20:55.546Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-02T16:15:12.645Z",
+					"removed": "2025-08-06T16:11:41.555Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-02T16:15:12.645Z",
+					"removed": "2025-08-06T16:11:41.555Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-02T16:15:12.645Z",
+					"removed": "2025-08-06T16:11:41.555Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-02T16:15:12.645Z",
+					"removed": "2025-08-06T16:11:41.555Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-01T16:18:03.797Z",
+					"removed": "2025-08-02T16:15:12.645Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-01T16:18:03.797Z",
+					"removed": "2025-08-02T16:15:12.645Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-01T16:18:03.797Z",
+					"removed": "2025-08-02T16:15:12.645Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-08-01T16:18:03.797Z",
+					"removed": "2025-08-02T16:15:12.645Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-31T16:18:58.982Z",
+					"removed": "2025-08-01T16:18:03.797Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-07-30T16:13:06.523Z",
+					"removed": "2025-08-03T16:15:47.946Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-28T16:16:51.442Z",
+					"removed": "2025-08-01T16:18:03.797Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-28T16:16:51.442Z",
+					"removed": "2025-08-01T16:18:03.797Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-28T16:16:51.442Z",
+					"removed": "2025-08-01T16:18:03.797Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-07-25T16:14:29.798Z",
+					"removed": "2025-07-30T16:13:06.523Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 1 vulnerability mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-25T16:14:29.798Z",
+					"removed": "2025-07-31T16:18:58.982Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-24T16:18:44.829Z",
+					"removed": "2025-07-28T16:16:51.442Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-24T16:18:44.829Z",
+					"removed": "2025-07-28T16:16:51.442Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-24T16:18:44.829Z",
+					"removed": "2025-07-28T16:16:51.442Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-24T16:18:44.829Z",
+					"removed": "2025-07-25T16:14:29.798Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-23T16:15:03.035Z",
+					"removed": "2025-07-24T16:18:44.829Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-23T16:15:03.035Z",
+					"removed": "2025-07-24T16:18:44.829Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-07-23T16:15:03.035Z",
+					"removed": "2025-07-25T16:14:29.798Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-23T16:15:03.035Z",
+					"removed": "2025-07-24T16:18:44.829Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-23T16:15:03.035Z",
+					"removed": "2025-07-24T16:18:44.829Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-21T16:09:55.286Z",
+					"removed": "2025-07-23T16:15:03.035Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-21T16:09:55.286Z",
+					"removed": "2025-07-23T16:15:03.035Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-07-21T16:09:55.286Z",
+					"removed": "2025-07-23T16:15:03.035Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-21T16:09:55.286Z",
+					"removed": "2025-07-23T16:15:03.035Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-21T16:09:55.286Z",
+					"removed": "2025-07-23T16:15:03.035Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-19T16:10:19.905Z",
+					"removed": "2025-07-21T16:09:55.286Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-19T16:10:19.905Z",
+					"removed": "2025-07-21T16:09:55.286Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-19T16:10:19.905Z",
+					"removed": "2025-07-21T16:09:55.286Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-19T16:10:19.905Z",
+					"removed": "2025-07-21T16:09:55.286Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 high or critical severity vulnerabilities affecting this product have been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-18T16:11:45.826Z",
+					"removed": "2025-07-19T16:10:19.905Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-07-18T16:11:45.826Z",
+					"removed": "2025-07-21T16:09:55.286Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-07-15T16:10:58.410Z",
+					"removed": "2025-07-18T16:11:45.826Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-15T16:10:58.410Z",
+					"removed": "2025-07-19T16:10:19.905Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "3 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 3 reports including AMOS Stealer Employs Backdoor Capability for Persistent Access, Sample Available From Recorded Future Malware Intelligence. Most recent link (Jul 14, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:79gzNQ",
+					"added": "2025-07-14T20:21:43.093Z",
+					"removed": "2025-08-03T06:19:10.938Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-14T16:18:12.459Z",
+					"removed": "2025-07-19T16:10:19.905Z"
+				},
+				{
+					"risk_id": "attr:b52d23d1-b786-4317-81a1-0a518457ede8",
+					"risk_name": "Linked to Historical Cyber Exploit",
+					"criticality": 1,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 1 vulnerability mentioned in a historical Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-14T16:18:12.459Z",
+					"removed": "2025-07-15T16:10:58.410Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-14T16:18:12.459Z",
+					"removed": "2025-07-19T16:10:19.905Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 2 reports including Threat Actors Deploy New <e id=j-fmkg>macOS.ZuRu</e> Variant via Trojanized Termius Application, Sample Available from Recorded Future Malware Intelligence. Most recent link (Jul 11, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:73mVEa",
+					"added": "2025-07-11T20:26:18.401Z",
+					"removed": "2025-07-14T20:21:43.093Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-11T16:15:04.522Z",
+					"removed": "2025-07-14T16:18:12.459Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-07-11T16:15:04.522Z",
+					"removed": "2025-07-15T16:10:58.410Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-11T16:15:04.522Z",
+					"removed": "2025-07-14T16:18:12.459Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-10T16:12:21.386Z",
+					"removed": "2025-07-11T16:15:04.522Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-07-10T16:12:21.386Z",
+					"removed": "2025-07-11T16:15:04.522Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-10T16:12:21.386Z",
+					"removed": "2025-07-11T16:15:04.522Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-09T16:10:39.359Z",
+					"removed": "2025-07-10T16:12:21.386Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-07-09T16:10:39.359Z",
+					"removed": "2025-07-10T16:12:21.386Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-09T16:10:39.359Z",
+					"removed": "2025-07-10T16:12:21.386Z"
+				},
+				{
+					"risk_id": "attr:f661cc5c-6438-4364-b781-1bef59f02ef6",
+					"risk_name": "Susceptible to Vulnerability With Exploit in Active Development",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities with a strong indication of exploits actively being developed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-08T16:15:05.763Z",
+					"removed": "2025-07-09T16:10:39.359Z"
+				},
+				{
+					"risk_id": "attr:71f42dd2-ef2d-4214-b562-dcef7d460c01",
+					"risk_name": "Disclosed Vulnerability: High or Critical",
+					"criticality": 3,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. 1 high or critical severity vulnerability affecting this product has been disclosed: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-08T16:15:05.763Z",
+					"removed": "2025-07-18T16:11:45.826Z"
+				},
+				{
+					"risk_id": "attr:ef041455-794b-41a4-b7fb-c5602a29303d",
+					"risk_name": "Linked to Recent Cyber Exploit",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. Product is susceptible to 2 vulnerabilities mentioned in a recent Cyber Exploit event: <e id=5Ex7Rm>CVE-2025-32463</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>), <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-08T16:15:05.763Z",
+					"removed": "2025-07-09T16:10:39.359Z"
+				},
+				{
+					"risk_id": "attr:726b6486-4905-4251-ac6f-0496aad432fd",
+					"risk_name": "Disclosed Vulnerability: Low",
+					"criticality": 1,
+					"evidence": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. 1 low severity vulnerability affecting this product has been disclosed: <e id=5Exaob>CVE-2025-32462</e> (associated with <e id=7gJA4X>Sudo 1.9.14</e>, <e id=7gI8_W>Sudo 1.9.15</e>).",
+					"added": "2025-07-08T16:15:05.763Z",
+					"removed": "2025-07-18T16:11:45.826Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-07-07T16:11:24.112Z",
+					"removed": "2025-07-09T16:10:39.359Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: Researchers Disclose CVE-2025-32462 and CVE-2025-32463 in Sudo Affecting Linux and macOS: No Active Exploitation. Most recent link (Jul 06, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:7sJv_R",
+					"added": "2025-07-06T07:16:36.662Z",
+					"removed": "2025-07-11T20:26:18.401Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-07-05T16:14:35.587Z",
+					"removed": "2025-07-07T16:11:24.112Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-07-01T16:11:47.714Z",
+					"removed": "2025-07-05T16:14:35.587Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-06-29T16:16:48.168Z",
+					"removed": "2025-07-01T16:11:47.714Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-06-28T16:16:55.586Z",
+					"removed": "2025-06-29T16:16:48.168Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-06-26T16:20:58.181Z",
+					"removed": "2025-06-28T16:16:55.586Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-06-25T16:18:50.130Z",
+					"removed": "2025-06-26T16:20:58.181Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-06-24T16:18:12.051Z",
+					"removed": "2025-06-25T16:18:50.130Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-06-22T16:16:09.303Z",
+					"removed": "2025-06-24T16:18:12.051Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-06-20T16:25:24.865Z",
+					"removed": "2025-06-22T16:16:09.303Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-06-19T16:14:03.792Z",
+					"removed": "2025-06-20T16:25:24.865Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-06-18T16:11:45.710Z",
+					"removed": "2025-06-19T16:14:03.792Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-06-12T16:16:50.239Z",
+					"removed": "2025-06-18T16:11:45.710Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-06-05T16:10:45.306Z",
+					"removed": "2025-06-12T16:16:50.239Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-06-03T16:17:01.460Z",
+					"removed": "2025-06-05T16:10:45.306Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-05-31T16:15:32.983Z",
+					"removed": "2025-06-03T16:17:01.460Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-05-30T16:14:43.275Z",
+					"removed": "2025-05-31T16:15:32.983Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-05-28T16:18:43.999Z",
+					"removed": "2025-05-30T16:14:43.275Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-05-27T16:13:58.244Z",
+					"removed": "2025-05-28T16:18:43.999Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-05-22T16:13:34.182Z",
+					"removed": "2025-05-27T16:13:58.244Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-05-16T16:18:03.620Z",
+					"removed": "2025-05-22T16:13:34.182Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-05-15T16:17:55.190Z",
+					"removed": "2025-05-16T16:18:03.620Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-05-13T16:21:21.899Z",
+					"removed": "2025-05-15T16:17:55.190Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-05-11T16:12:40.704Z",
+					"removed": "2025-05-13T16:21:21.899Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-05-09T16:21:20.307Z",
+					"removed": "2025-05-11T16:12:40.704Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-05-07T16:16:33.007Z",
+					"removed": "2025-05-09T16:21:20.307Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-05-04T16:16:53.346Z",
+					"removed": "2025-05-07T16:16:33.007Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-05-03T16:13:20.509Z",
+					"removed": "2025-05-04T16:16:53.346Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-05-02T16:24:20.524Z",
+					"removed": "2025-05-03T16:13:20.509Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-04-29T16:17:45.739Z",
+					"removed": "2025-05-02T16:24:20.524Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-04-24T16:13:24.544Z",
+					"removed": "2025-04-29T16:17:45.739Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-04-23T16:12:28.806Z",
+					"removed": "2025-04-24T16:13:24.544Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-04-21T16:19:08.550Z",
+					"removed": "2025-04-23T16:12:28.806Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-04-20T16:14:23.997Z",
+					"removed": "2025-04-21T16:19:08.550Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-04-17T16:14:59.147Z",
+					"removed": "2025-04-20T16:14:23.997Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-04-13T16:14:56.927Z",
+					"removed": "2025-04-17T16:14:59.147Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-04-11T16:15:59.650Z",
+					"removed": "2025-04-13T16:14:56.927Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "20 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 20 reports including Italian Speaking Threat Actors Exploit Critical Zero-Day RCE Vulnerability (<e id=qYf_Xe>CVE-2023-1389</e>) in <e id=KRApxO>TP-Link Archer</e> Routers to Deploy New <e id=VSB-0P>IoT Botnet</e> Called <e id=4MXBxY>Ballista</e>, Samples Available From Recorded Future Malware Intelligence. Most recent link (Mar 13, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:4Tv9Rm",
+					"added": "2025-04-10T21:13:27.156Z",
+					"removed": "2025-08-03T06:19:10.938Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-04-08T16:18:41.812Z",
+					"removed": "2025-04-11T16:15:59.650Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-04-07T16:18:17.668Z",
+					"removed": "2025-04-08T16:18:41.812Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-04-06T16:18:04.994Z",
+					"removed": "2025-04-07T16:18:17.668Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-04-05T16:16:52.218Z",
+					"removed": "2025-04-06T16:18:04.994Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-04-04T16:15:32.138Z",
+					"removed": "2025-04-05T16:16:52.218Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-04-01T16:19:17.376Z",
+					"removed": "2025-04-04T16:15:32.138Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-03-30T16:15:18.960Z",
+					"removed": "2025-04-01T16:19:17.376Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-03-27T16:23:50.091Z",
+					"removed": "2025-03-30T16:15:18.960Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-03-23T16:20:50.382Z",
+					"removed": "2025-03-27T16:23:50.091Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: Italian Speaking Threat Actors Exploit Critical Zero-Day RCE Vulnerability (<e id=qYf_Xe>CVE-2023-1389</e>) in <e id=KRApxO>TP-Link Archer</e> Routers to Deploy New <e id=VSB-0P>IoT Botnet</e> Called <e id=4MXBxY>Ballista</e>, Samples Available From Recorded Future Malware Intelligence. Most recent link (Mar 13, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:4Tv9Rm",
+					"added": "2025-03-21T17:18:59.210Z",
+					"removed": "2025-04-10T21:13:27.156Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "19 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 19 reports including New Threat Actors “<e id=3izeDT>TA2726</e>” and “<e id=3fmokO>TA2727</e>” Conduct Web Injection Campaigns to Deliver New macOS Malware “<e id=3e_f-W>FrigidStealer</e>”, Sample Available From Recorded Future Malware Intelligence. Most recent link (Feb 21, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:3lwf5P",
+					"added": "2025-03-21T17:18:59.210Z",
+					"removed": "2025-04-10T21:13:27.156Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-03-21T16:24:49.496Z",
+					"removed": "2025-03-23T16:20:50.382Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-03-20T16:15:28.231Z",
+					"removed": "2025-03-21T16:24:49.496Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-03-18T16:17:13.842Z",
+					"removed": "2025-03-20T16:15:28.231Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-03-16T16:18:26.443Z",
+					"removed": "2025-03-18T16:17:13.842Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-03-15T16:14:56.466Z",
+					"removed": "2025-03-16T16:18:26.443Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 2 reports including Italian Speaking Threat Actors Exploit Critical Zero-Day RCE Vulnerability (<e id=qYf_Xe>CVE-2023-1389</e>) in <e id=KRApxO>TP-Link Archer</e> Routers to Deploy New <e id=VSB-0P>IoT Botnet</e> Called <e id=4MXBxY>Ballista</e>, Samples Available From Recorded Future Malware Intelligence. Most recent link (Mar 13, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:4Tv9Rm",
+					"added": "2025-03-13T22:14:30.545Z",
+					"removed": "2025-03-21T17:18:59.210Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-03-13T16:16:06.738Z",
+					"removed": "2025-03-15T16:14:56.466Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-03-12T16:18:03.964Z",
+					"removed": "2025-03-13T16:16:06.738Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-03-07T16:15:01.538Z",
+					"removed": "2025-03-12T16:18:03.964Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: New Threat Actors “<e id=3izeDT>TA2726</e>” and “<e id=3fmokO>TA2727</e>” Conduct Web Injection Campaigns to Deliver New macOS Malware “<e id=3e_f-W>FrigidStealer</e>”, Sample Available From Recorded Future Malware Intelligence. Most recent link (Feb 21, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:3lwf5P",
+					"added": "2025-03-06T22:15:44.431Z",
+					"removed": "2025-03-13T22:14:30.545Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "18 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 18 reports including Analysis of <e id=vr-nSS>AMOS Stealer</e> Shared on X, Available From <e id=ME4QX>Recorded Future</e> Malware Intelligence. Most recent link (Feb 06, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:3Hl6kG",
+					"added": "2025-03-06T22:15:44.431Z",
+					"removed": "2025-03-21T17:18:59.210Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-03-04T16:18:56.041Z",
+					"removed": "2025-03-07T16:15:01.538Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-03-03T16:17:29.839Z",
+					"removed": "2025-03-04T16:18:56.041Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-03-02T16:15:34.060Z",
+					"removed": "2025-03-03T16:17:29.839Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-02-26T16:38:39.991Z",
+					"removed": "2025-03-02T16:15:34.060Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-02-24T16:42:15.899Z",
+					"removed": "2025-02-26T16:38:39.991Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-02-23T16:37:38.679Z",
+					"removed": "2025-02-24T16:42:15.899Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 2 reports including New Threat Actors “<e id=3izeDT>TA2726</e>” and “<e id=3fmokO>TA2727</e>” Conduct Web Injection Campaigns to Deliver New macOS Malware “<e id=3e_f-W>FrigidStealer</e>”, Sample Available From Recorded Future Malware Intelligence. Most recent link (Feb 21, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:3lwf5P",
+					"added": "2025-02-21T19:20:27.648Z",
+					"removed": "2025-03-06T22:15:44.431Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-02-20T16:36:12.545Z",
+					"removed": "2025-02-23T16:37:38.679Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-02-19T05:01:54.799Z",
+					"removed": "2025-02-20T16:36:12.545Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-02-18T04:19:05.240Z",
+					"removed": "2025-02-19T05:01:54.799Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-02-15T04:20:24.765Z",
+					"removed": "2025-02-18T04:19:05.240Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-02-13T04:37:54.036Z",
+					"removed": "2025-02-15T04:20:24.765Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-02-11T04:36:12.031Z",
+					"removed": "2025-02-13T04:37:54.036Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: Analysis of <e id=vr-nSS>AMOS Stealer</e> Shared on X, Available From <e id=ME4QX>Recorded Future</e> Malware Intelligence. Most recent link (Feb 06, 2025): https://app.recordedfuture.com/portal/analyst-note/doc:3Hl6kG",
+					"added": "2025-02-06T22:19:17.606Z",
+					"removed": "2025-02-21T19:20:27.648Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-02-04T04:16:36.792Z",
+					"removed": "2025-02-11T04:36:12.031Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-01-31T04:34:30.426Z",
+					"removed": "2025-02-04T04:16:36.792Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-01-30T04:35:09.523Z",
+					"removed": "2025-01-31T04:34:30.426Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-01-28T04:35:32.779Z",
+					"removed": "2025-01-30T04:35:09.523Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-01-27T04:41:55.927Z",
+					"removed": "2025-01-28T04:35:32.779Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-01-25T04:36:07.115Z",
+					"removed": "2025-01-27T04:41:55.927Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-01-23T04:34:33.605Z",
+					"removed": "2025-01-25T04:36:07.115Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-01-22T04:36:48.527Z",
+					"removed": "2025-01-23T04:34:33.605Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-01-21T04:33:49.142Z",
+					"removed": "2025-01-22T04:36:48.527Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-01-20T04:19:40.199Z",
+					"removed": "2025-01-21T04:33:49.142Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-01-19T04:36:01.566Z",
+					"removed": "2025-01-20T04:19:40.199Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-01-16T04:27:41.859Z",
+					"removed": "2025-01-19T04:36:01.566Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-01-12T04:39:46.544Z",
+					"removed": "2025-01-16T04:27:41.859Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-01-11T04:36:48.085Z",
+					"removed": "2025-01-12T04:39:46.544Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-01-06T04:35:00.576Z",
+					"removed": "2025-01-11T04:36:48.085Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-01-05T04:35:06.069Z",
+					"removed": "2025-01-06T04:35:00.576Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2025-01-04T04:36:46.942Z",
+					"removed": "2025-01-05T04:35:06.069Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2025-01-02T04:35:20.397Z",
+					"removed": "2025-01-04T04:36:46.942Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2024-12-29T04:34:27.883Z",
+					"removed": "2025-01-02T04:35:20.397Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2024-12-28T04:34:12.588Z",
+					"removed": "2024-12-29T04:34:27.883Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2024-12-26T04:28:03.494Z",
+					"removed": "2024-12-28T04:34:12.588Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2024-12-22T04:18:05.151Z",
+					"removed": "2024-12-26T04:28:03.494Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2024-12-20T04:55:22.909Z",
+					"removed": "2024-12-22T04:18:05.151Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2024-12-18T05:28:46.423Z",
+					"removed": "2024-12-20T04:55:22.909Z"
+				},
+				{
+					"risk_id": "attr:689b122a-bdcd-4eab-a32d-b34c789e4729",
+					"risk_name": "Historically Reported by Insikt Group",
+					"criticality": 1,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: <e id=RDR0IT>Exploit</e> Script for <e id=JPv_5Q>Privilege Escalation</e> Vulnerability Affecting Sudo (<e id=po1UQi>CVE-2023-22809</e>), Published on GitHub. Most recent link (Jan 25, 2023): https://app.recordedfuture.com/portal/analyst-note/doc:pu-ROG",
+					"added": "2024-12-16T22:09:29.470Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "17 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 17 reports including Blockchain-Backed <e id=WqrLo2>Supply Chain Attack</e> Targets Developers with Cross-Platform Malware, Samples Available from Recorded Future Malware Intelligence. Most recent link (Nov 07, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:0UNr_0",
+					"added": "2024-12-16T22:09:29.470Z",
+					"removed": "2025-03-06T22:15:44.431Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2024-12-16T04:33:36.912Z",
+					"removed": "2024-12-18T05:28:46.423Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2024-12-14T04:36:43.670Z",
+					"removed": "2024-12-16T04:33:36.912Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2024-12-11T04:32:52.083Z",
+					"removed": "2024-12-14T04:36:43.670Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2024-12-10T04:43:54.854Z",
+					"removed": "2024-12-11T04:32:52.083Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2024-12-07T04:24:16.080Z",
+					"removed": "2024-12-10T04:43:54.854Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2024-12-06T04:29:29.177Z",
+					"removed": "2024-12-07T04:24:16.080Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "17 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 17 reports including Blockchain-Backed <e id=WqrLo2>Supply Chain Attack</e> Targets Developers with Cross-Platform Malware, Samples Available from Recorded Future Malware Intelligence. Most recent link (Nov 07, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:0UNr_0",
+					"added": "2024-12-05T23:11:31.271Z",
+					"removed": "2024-12-16T20:26:47.996Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: Blockchain-Backed <e id=WqrLo2>Supply Chain Attack</e> Targets Developers with Cross-Platform Malware, Samples Available from Recorded Future Malware Intelligence. Most recent link (Nov 07, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:0UNr_0",
+					"added": "2024-12-04T23:12:31.222Z",
+					"removed": "2024-12-05T23:11:31.271Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "16 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 16 reports including <e id=0O6NEF>CRON#TRAP</e> Campaign Uses Custom <e id=ChHV7B>QEMU</e> Instance to Deliver Malware, Samples Available From Recorded Future Malware Intelligence. Most recent link (Nov 06, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:0R_8pt",
+					"added": "2024-12-04T23:12:31.222Z",
+					"removed": "2024-12-05T23:11:31.271Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2024-11-29T04:38:10.215Z",
+					"removed": "2024-12-06T04:29:29.177Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2024-11-26T04:25:34.729Z",
+					"removed": "2024-11-29T04:38:10.215Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7fT0>CVE-2019-19234</e>, <e id=cO7cpQ>CVE-2019-19232</e>.",
+					"added": "2024-11-24T04:35:42.025Z",
+					"removed": "2024-11-26T04:25:34.729Z"
+				},
+				{
+					"risk_id": "attr:a4e25471-9876-4405-b1ce-0848e316db96",
+					"risk_name": "Disclosed Vulnerability: Medium",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: Recorded Future Vulnerability Analysis. 2 medium severity vulnerabilities affecting this product have been disclosed: <e id=cO7cpQ>CVE-2019-19232</e>, <e id=cO7fT0>CVE-2019-19234</e>.",
+					"added": "2024-11-20T04:36:41.446Z",
+					"removed": "2024-11-24T04:35:42.025Z"
+				},
+				{
+					"risk_id": "attr:255c4556-ed01-4915-a02a-cea111a6deaa",
+					"risk_name": "Recently Referenced by Insikt Group",
+					"criticality": 2,
+					"evidence": "2 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 2 reports including Blockchain-Backed <e id=WqrLo2>Supply Chain Attack</e> Targets Developers with Cross-Platform Malware, Samples Available from Recorded Future Malware Intelligence. Most recent link (Nov 07, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:0UNr_0",
+					"added": "2024-11-07T23:11:46.922Z",
+					"removed": "2024-12-04T23:12:31.222Z"
+				},
+				{
+					"risk_id": "attr:689b122a-bdcd-4eab-a32d-b34c789e4729",
+					"risk_name": "Historically Reported by Insikt Group",
+					"criticality": 1,
+					"evidence": "1 sighting on 1 source: <e id=source:VKz42X>Insikt Group</e>. 1 report: <e id=RDR0IT>Exploit</e> Script for <e id=JPv_5Q>Privilege Escalation</e> Vulnerability Affecting Sudo (<e id=po1UQi>CVE-2023-22809</e>), Published on GitHub. Most recent link (Jan 25, 2023): https://app.recordedfuture.com/portal/analyst-note/doc:pu-ROG",
+					"added": "2024-10-28T08:16:43.309Z",
+					"removed": "2024-12-16T20:26:47.996Z"
+				},
+				{
+					"risk_id": "attr:70471017-a359-4059-919b-2e657a078406",
+					"risk_name": "Historically Referenced by Insikt Group",
+					"criticality": 1,
+					"evidence": "15 sightings on 1 source: <e id=source:VKz42X>Insikt Group</e>. 15 reports including New MacOS Variant of the HZ Rat Backdoor Targeting <e id=yLCLtb>DingTalk</e> and <e id=JOFlRu>WeChat</e> Users, Sample Available from Polyswarm. Most recent link (Aug 29, 2024): https://app.recordedfuture.com/portal/analyst-note/doc:yLkbhd",
+					"added": "2024-10-28T08:16:43.309Z",
+					"removed": "2024-12-04T23:12:31.222Z"
+				}
+			]
+		}
+	],
+	"counts": {
+		"returned": 1,
+		"total": 1
+	}
+}

@@ -17,13 +17,12 @@ from typing import Annotated, Optional, Union
 from pydantic import validate_call
 from typing_extensions import Doc
 
-from psengine.endpoints import EP_RISK_HISTORY
-from psengine.helpers.helpers import connection_exceptions
-from psengine.risk_history.errors import RiskHistoryError
-from psengine.risk_history.models import RiskHistoryIn, RiskHistory
-
+from ..endpoints import EP_RISK_HISTORY
 from ..helpers import debug_call
+from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
+from .errors import RiskHistoryError
+from .models import RiskHistory, RiskHistoryIn
 
 
 class RiskHistoryMgr:
