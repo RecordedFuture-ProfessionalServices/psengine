@@ -24,8 +24,7 @@ jobs:
       - name: Set up venv
         run: |
           uv venv -p ${{ vars.PYTHON_VERSION }} 
-          uv pip install '.'
-          uv pip install rich logging-tree
+          uv pip install '.[docs]'
 
       - name: Run Examples
         run: |
