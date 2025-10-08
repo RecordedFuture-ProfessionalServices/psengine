@@ -1,6 +1,6 @@
 # Changelog
 
-## v2.2.0 - 2025-09-24
+## v2.2.0 - 2025-10-08
 
 ### Added
 
@@ -17,7 +17,7 @@
 ### Changed
 
 - `SoarMgr.SOAR_POST_ROWS` decreased to `1000` to comply with Product guidelines.
-- `SoarMgr.soar` uses the new v3 endpoint.
+- `SoarMgr.soar` uses the new v3 SOAR API endpoint.
 
 ## v2.1.1 - 2025-08-22
 
