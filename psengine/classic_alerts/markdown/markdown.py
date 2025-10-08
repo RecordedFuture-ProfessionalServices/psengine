@@ -18,7 +18,7 @@ from typing import TYPE_CHECKING
 from markdown_strings import blockquote, bold, esc_format, link
 
 if TYPE_CHECKING:
-    from ..classic_alerts.classic_alert import ClassicAlert
+    from ...classic_alerts.classic_alert import ClassicAlert
 
 from ...constants import TIMESTAMP_STR, TRUNCATE_COMMENT
 from ...markdown import (

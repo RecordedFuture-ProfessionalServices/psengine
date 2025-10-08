@@ -75,6 +75,13 @@ def test_spy_called_with_rel_date(detection_mgr: DetectionMgr, mocker):
     assert call_args[1] == EP_DETECTION_RULES
     assert datetime.fromisoformat(params['data']['filter']['created']['after'])
 
+    # Date can be without a dash too
+    detection_mgr.search(created_after='7d')
+    call_args, params = mock_post_request.call_args
+    assert call_args[0] == 'post'
+    assert call_args[1] == EP_DETECTION_RULES
+    assert datetime.fromisoformat(params['data']['filter']['created']['after'])
+
 
 @pytest.mark.parametrize('types', [['yara'], 'yara', ['yara', 'snort']])
 def test_spy_called_with_type(detection_mgr: DetectionMgr, mocker, types):
