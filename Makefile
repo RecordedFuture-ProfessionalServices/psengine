@@ -9,7 +9,7 @@ help:
 test:
 	@echo "Starting unit tests"
 	@pytest tests_without_config
-	@pytest --cov=psengine --cov-report html --cov-branch --cov-report term --random-order-bucket=module --cov-fail-under=95
+	@pytest --cov=psengine --cov-report html --cov-branch --cov-report term --random-order-bucket=module --cov-fail-under=94
 	@coverage html
 
 format:

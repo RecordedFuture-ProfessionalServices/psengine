@@ -75,7 +75,7 @@ EP_SEARCH_LIST = EP_LIST + '/search'
 ###############################################################################
 # SOAR Endpoints
 ###############################################################################
-EP_SOAR_ENRICHMENT = CONNECT_API_BASE_URL + '/soar/enrichment'
+EP_SOAR_ENRICHMENT = BASE_URL + '/soar/v3/enrichment'
 
 ###############################################################################
 # Detection Rules API Endpoints

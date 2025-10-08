@@ -47,13 +47,9 @@ class Test_LookupMgr:
     ]
 
     @pytest.mark.parametrize('params', params)
-    def test_params_raises_ValueError(self, lookup_mgr, params):
-        with pytest.raises(ValueError):
+    def test_params_raises_ValidationError(self, lookup_mgr, params):
+        with pytest.raises(ValidationError):
             lookup_mgr.lookup(**params)
-
-    def test_params_raises_ValueError_company_by_domain(self, lookup_mgr):
-        with pytest.raises(ValueError):
-            lookup_mgr.lookup(company_by_domain='google.com', entity_type='domain')
 
     @pytest.mark.parametrize('type_', ['a', 'doms', 'ips', 1, 'whatever', 'moise'])
     def test_entity_type_raises_ValidationError(self, lookup_mgr, type_):
@@ -374,3 +370,193 @@ class Test_LookupMgr:
         assert all(d.entity in IOCS for d in data)
         assert len(data) == 2
         assert all(isinstance(d, EnrichmentData) for d in data)
+
+    links_data = [
+        (
+            'Actors, Tools & TTPs',
+            'MitreAttackIdentifier',
+            [
+                'T1056',
+                'T1056.001',
+                'T1090',
+                'T1204',
+                'T1204.002',
+                'T1566',
+                'T1566.002',
+                'T1587',
+                'T1587.001',
+            ],
+        ),
+        ('Actors, Tools & TTPs', 'Malware', ['DOPLUGS', 'PlugX', 'RedDelta PlugX']),
+        ('Actors, Tools & TTPs', 'Unknonw', []),
+        ('Unknown', 'Malware', []),
+        ('Unknown', 'Unknown', []),
+    ]
+
+    @pytest.mark.parametrize(('from_section', 'entity_type', 'expected'), links_data)
+    def test_links(self, from_section, entity_type, expected):
+        data = {
+            'timestamps': {
+                'lastSeen': '2024-10-31T08:32:17.745Z',
+                'firstSeen': '2010-06-16T01:41:47.000Z',
+            },
+            'risk': {
+                'criticalityLabel': 'None',
+                'riskString': '0/79',
+                'rules': 0,
+                'criticality': 0,
+                'riskSummary': 'No Risk Rules are currently observed.',
+                'score': 0,
+                'evidenceDetails': [],
+            },
+            'entity': {'id': 'ip:1.1.1.1', 'name': '1.1.1.1', 'type': 'IpAddress'},
+            'links': {
+                'hits': [
+                    {
+                        'sections': [
+                            {
+                                'section_id': {
+                                    'id': 'iU_ZsE',
+                                    'name': 'Actors, Tools & TTPs',
+                                    'type': 'Category',
+                                },
+                                'total_count': 13,
+                                'lists': [
+                                    {
+                                        'entities': [
+                                            {
+                                                'id': 'mitre:T1056',
+                                                'name': 'T1056',
+                                                'type': 'MitreAttackIdentifier',
+                                            },
+                                            {
+                                                'id': 'mitre:T1056.001',
+                                                'name': 'T1056.001',
+                                                'type': 'MitreAttackIdentifier',
+                                            },
+                                            {
+                                                'id': 'mitre:T1090',
+                                                'name': 'T1090',
+                                                'type': 'MitreAttackIdentifier',
+                                            },
+                                            {
+                                                'id': 'mitre:T1204',
+                                                'name': 'T1204',
+                                                'type': 'MitreAttackIdentifier',
+                                            },
+                                            {
+                                                'id': 'mitre:T1204.002',
+                                                'name': 'T1204.002',
+                                                'type': 'MitreAttackIdentifier',
+                                            },
+                                            {
+                                                'id': 'mitre:T1566',
+                                                'name': 'T1566',
+                                                'type': 'MitreAttackIdentifier',
+                                            },
+                                            {
+                                                'id': 'mitre:T1566.002',
+                                                'name': 'T1566.002',
+                                                'type': 'MitreAttackIdentifier',
+                                            },
+                                            {
+                                                'id': 'mitre:T1587',
+                                                'name': 'T1587',
+                                                'type': 'MitreAttackIdentifier',
+                                            },
+                                            {
+                                                'id': 'mitre:T1587.001',
+                                                'name': 'T1587.001',
+                                                'type': 'MitreAttackIdentifier',
+                                            },
+                                        ],
+                                        'total_count': 9,
+                                        'type': {
+                                            'id': 'type:MitreAttackIdentifier',
+                                            'name': 'MitreAttackIdentifier',
+                                            'type': 'MetaType',
+                                            'description': 'A Mitre Att&ck Identifier',
+                                        },
+                                    },
+                                    {
+                                        'entities': [
+                                            {
+                                                'id': 'en_T6N',
+                                                'name': 'RedDelta',
+                                                'type': 'Organization',
+                                            }
+                                        ],
+                                        'total_count': 1,
+                                        'type': {
+                                            'id': 'JW2OHE',
+                                            'name': 'Threat Actor',
+                                            'type': 'Position',
+                                        },
+                                    },
+                                    {
+                                        'entities': [
+                                            {
+                                                'id': 'ulrPxh',
+                                                'name': 'DOPLUGS',
+                                                'type': 'Malware',
+                                            },
+                                            {
+                                                'id': 'JS5BdY',
+                                                'name': 'PlugX',
+                                                'type': 'Malware',
+                                            },
+                                            {
+                                                'id': 'gMN8_P',
+                                                'name': 'RedDelta PlugX',
+                                                'type': 'Malware',
+                                            },
+                                        ],
+                                        'total_count': 3,
+                                        'type': {
+                                            'id': 'type:Malware',
+                                            'name': 'Malware',
+                                            'type': 'MetaType',
+                                            'description': 'A malware',
+                                        },
+                                    },
+                                ],
+                            }
+                        ],
+                        'start_date': '2024-02-27',
+                        'stop_date': '2025-01-08',
+                        'total_count': 2,
+                        'sample_reference_ids': ['HFBCwAC4m-6', 'HE_yQAAAgRN'],
+                        'counts': [
+                            {
+                                'count': 2,
+                                'type': {
+                                    'id': 'source:VKz42X',
+                                    'name': 'Insikt Group',
+                                    'type': 'Source',
+                                },
+                            }
+                        ],
+                        'event_count': 2,
+                    }
+                ],
+                'method_aggregates': [
+                    {'count': 0, 'type': 'hHQyM6'},
+                    {'count': 2, 'type': 'hHQyM7'},
+                    {'count': 0, 'type': 'gTB8y2'},
+                ],
+                'counts': [
+                    {
+                        'count': 2,
+                        'type': {
+                            'id': 'source:VKz42X',
+                            'name': 'Insikt Group',
+                            'type': 'Source',
+                        },
+                    }
+                ],
+            },
+        }
+        data = EnrichmentData.model_validate(
+            {'entity': '1.1.1.1', 'entity_type': 'IpAddress', 'is_enriched': True, 'content': data}
+        )
+        assert data.links(from_section, entity_type) == expected

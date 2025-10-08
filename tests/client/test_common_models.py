@@ -14,7 +14,9 @@ def test_common_models_json():
     all_print = note.json(exclude_none=False, exclude_unset=False, auto_exclude_unset=False)
     exclude_id = note.json(exclude={'attributes'})
 
-    with pytest.raises(ValueError):
+    with pytest.raises(
+        ValueError, match='`auto_exclude_unset` is False, `exclude_unset has to be provided`'
+    ):
         note.json(auto_exclude_unset=False)
 
     assert unset_true['external_id'] == ''

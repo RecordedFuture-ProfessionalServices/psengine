@@ -20,12 +20,6 @@ dist/
 *.tgz
 result.xml
 .coverage
-examples/*/psengine
-examples/classic_alerts/alerts
-examples/playbook_alerts/playbook_alerts
-examples/analyst_notes/analyst_notes
-examples/detection/detections
-examples/stix2/stix2
 tests/stix2/tests
 tests/output/*
 virt/
@@ -36,4 +30,12 @@ docs/examples/detection/rules
 docs/examples/enrich/enrich
 docs/examples/risklists/risklists
 docs/examples/stix2/bundles
+
+alerts/
+attachments/
+rules/
+risklists/
+bundles/
+
+
 site/

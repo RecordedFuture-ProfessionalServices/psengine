@@ -26,143 +26,123 @@ The arguments can be primitive data types or compound data types.
 
 ### Events
 
-**Frito Pie**
-**When:** Jul 15, 2025, 05:24 UTC  
-**Source:** Make me a sandwich. - https://forecast.cat/ 
-Ports are created with the built-in function open_port.  
+**Parma Ham**
+**When:** Oct 30, 2025, 14:25 UTC  
+**Source:** Ports are created with the built-in function open_port. - https://frank.ss/ 
 
 ---
 
-**Banh Mi Viêt**
-**When:** Aug 08, 2025, 04:43 UTC  
-**Source:** Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s. - https://donated.moscow/ 
-Tuples are containers for a fixed number of Erlang data types.  
+**Pasta salad**
+**When:** Sep 02, 2025, 13:54 UTC  
+**Source:** Do you come here often? - https://ctrl.gov/ 
 
 ---
 
-**Stuffed peppers**
-**When:** Sep 16, 2025, 11:44 UTC  
-**Source:** She spent her earliest years reading classic literature, and writing poetry. - https://classic.cat/ 
-Haskell features a type system with type inference and lazy evaluation.  
+**Yeung Chow fried rice**
+**When:** May 19, 2025, 01:52 UTC  
+**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://two.coop/ 
 
 ---
 
-**Beef Lo Mein**
-**When:** Mar 04, 2025, 16:25 UTC  
-**Source:** Ports are created with the built-in function open_port. - https://lang.osaka/ 
-Ports are used to communicate with the external world.  
+**Poke**
+**When:** Apr 28, 2025, 16:23 UTC  
+**Source:** He looked inquisitively at his keyboard and wrote another sentence. - https://frost.biz/ 
 
 ---
 
-**Bruschetta**
-**When:** Nov 10, 2025, 21:48 UTC  
-**Source:** I don't even care. - https://lake.af/ 
-Atoms are used within a program to denote distinguished values.  
+**Ice Cream**
+**When:** Jun 22, 2025, 05:52 UTC  
+**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://bid.mc/ 
 
 ---
 
-**Chocolate Brownie**
-**When:** Mar 09, 2025, 09:54 UTC  
-**Source:** Type classes first appeared in the Haskell programming language. - https://golf.feedback/ 
-Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."  
-
----
-
-**Bacon Cheeseburger**
-**When:** May 14, 2025, 11:29 UTC  
-**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://sculpture.info/ 
-Erlang is known for its designs that are well suited for systems.  
-
----
-
-**Popover**
-**When:** Jan 17, 2025, 14:04 UTC  
-**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://preston.sex/ 
-The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.  
-
----
-
-**Cheese Curds**
-**When:** Mar 24, 2025, 08:47 UTC  
-**Source:** She spent her earliest years reading classic literature, and writing poetry. - https://dawn.biz/ 
-Type classes first appeared in the Haskell programming language.  
-
----
-
-**Chicago Deep Dish Pizza**
-**When:** May 05, 2025, 11:53 UTC  
-**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://pal.info/ 
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.  
-
----
-
-**Chicken Liver Pate**
-**When:** Feb 20, 2025, 20:33 UTC  
-**Source:** Type classes first appeared in the Haskell programming language. - https://generic.rip/ 
-It is also a garbage-collected runtime system.  
-
----
-
-**Bull roast**
-**When:** Jan 13, 2025, 03:37 UTC  
-**Source:** Make me a sandwich. - https://timeline.ad/ 
-It is also a garbage-collected runtime system.  
-
----
-
-**American fried rice**
-**When:** Feb 28, 2025, 18:40 UTC  
-**Source:** Do you come here often? - https://volume.mc/ 
-Tuples are containers for a fixed number of Erlang data types.  
-
----
-
-**Bagels and Lox**
-**When:** Jan 12, 2025, 08:01 UTC  
-**Source:** It is also a garbage-collected runtime system. - https://oecd.gov/ 
-Erlang is known for its designs that are well suited for systems.  
-
----
-
-**New York-Style Pizza**
-**When:** Mar 31, 2025, 21:29 UTC  
-**Source:** I don't even care. - https://aspect.nu/ 
-Atoms are used within a program to denote distinguished values.  
-
----
-
-**Creamed eggs on toast**
-**When:** Apr 09, 2025, 04:09 UTC  
-**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://gathering.miami/ 
-The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.  
+**Tamales**
+**When:** Nov 01, 2025, 09:04 UTC  
+**Source:** Do you have any idea why this is not working? - https://marathon.nl/ 
 
 ---
 
 **Jerky**
-**When:** Jul 05, 2025, 22:40 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://minds.coop/ 
-Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.  
+**When:** Apr 01, 2025, 20:05 UTC  
+**Source:** Do you come here often? - https://important.edu/ 
 
 ---
 
-**Hog fry**
-**When:** Sep 07, 2025, 10:51 UTC  
-**Source:** I don't even care. - https://leaders.tg/ 
-Ports are used to communicate with the external world.  
+**Crab Rangoon**
+**When:** Oct 24, 2025, 01:47 UTC  
+**Source:** Atoms are used within a program to denote distinguished values. - https://disclose.biz/ 
 
 ---
 
-**Caviar**
-**When:** Dec 25, 2025, 10:49 UTC  
-**Source:** Haskell features a type system with type inference and lazy evaluation. - https://significant.name/ 
-Tuples are containers for a fixed number of Erlang data types.  
+**Doughnut**
+**When:** Dec 09, 2025, 11:41 UTC  
+**Source:** I don't even care. - https://generations.movie/ 
 
 ---
 
-**Roasted Chickpeas**
-**When:** Aug 04, 2025, 12:09 UTC  
-**Source:** Type classes first appeared in the Haskell programming language. - https://resources.xxx/ 
-The arguments can be primitive data types or compound data types.  
+**Baba Ghanoush**
+**When:** Apr 23, 2025, 10:07 UTC  
+**Source:** Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol." - https://miniature.bar/ 
+
+---
+
+**Poppyseed muffin**
+**When:** Aug 06, 2025, 13:30 UTC  
+**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://matched.doha/ 
+
+---
+
+**Creme Brulee**
+**When:** Jun 21, 2025, 18:33 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://total.date/ 
+
+---
+
+**Gumbo**
+**When:** Jul 17, 2025, 09:46 UTC  
+**Source:** He looked inquisitively at his keyboard and wrote another sentence. - https://experimental.cl/ 
+
+---
+
+**Maple bacon donut**
+**When:** May 16, 2025, 01:29 UTC  
+**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://com.joburg/ 
+
+---
+
+**Chicken Salad Wrap**
+**When:** Aug 31, 2025, 14:38 UTC  
+**Source:** Atoms are used within a program to denote distinguished values. - https://place.mil/ 
+
+---
+
+**Chile Relleno**
+**When:** Jan 22, 2025, 04:15 UTC  
+**Source:** Any element of a tuple can be accessed in constant time. - https://emerging.com/ 
+
+---
+
+**Soft Shell Crab**
+**When:** Jan 02, 2025, 21:00 UTC  
+**Source:** Where are my pants? - https://connection.net/ 
+
+---
+
+**Bao**
+**When:** Jan 13, 2025, 16:52 UTC  
+**Source:** Do you come here often? - https://strange.museum.post/ 
+
+---
+
+**Gyoza**
+**When:** Sep 15, 2025, 17:22 UTC  
+**Source:** Tuples are containers for a fixed number of Erlang data types. - https://indigenous.cl/ 
+
+---
+
+**Corn flakes**
+**When:** Jun 30, 2025, 04:32 UTC  
+**Source:** She spent her earliest years reading classic literature, and writing poetry. - https://healthy.org/ 
 
 ---
 

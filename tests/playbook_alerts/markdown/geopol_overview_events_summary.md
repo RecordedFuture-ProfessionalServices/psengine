@@ -26,143 +26,123 @@ Type classes first appeared in the Haskell programming language.
 
 ### Events
 
-**Deviled crab**
-**When:** Mar 08, 2025, 12:57 UTC  
-**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://smith.smile/ 
-Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."  
+**Frybread**
+**When:** Jun 12, 2025, 04:12 UTC  
+**Source:** The arguments can be primitive data types or compound data types. - https://multi.partners/ 
 
 ---
 
-**Grits**
-**When:** Nov 15, 2025, 01:09 UTC  
-**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://central.ax/ 
-The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.  
+**Fry sauce**
+**When:** Apr 26, 2025, 23:33 UTC  
+**Source:** The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. - https://belarus.int/ 
 
 ---
 
-**Tres Leches Cake**
-**When:** Apr 03, 2025, 15:12 UTC  
-**Source:** Ports are used to communicate with the external world. - https://rapidly.gov/ 
-Haskell features a type system with type inference and lazy evaluation.  
+**Bookbinder Soup**
+**When:** Jun 05, 2025, 21:10 UTC  
+**Source:** Ports are used to communicate with the external world. - https://galaxy.berlin/ 
 
 ---
 
-**Bull roast**
-**When:** Jul 25, 2025, 23:53 UTC  
-**Source:** Do you come here often? - https://dept.capetown/ 
-They are written as strings of consecutive alphanumeric characters, the first character being lowercase.  
+**Gazpacho**
+**When:** Dec 06, 2025, 03:58 UTC  
+**Source:** The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. - https://legend.auction/ 
 
 ---
 
-**Creme Brulee**
-**When:** Feb 04, 2025, 23:30 UTC  
-**Source:** Where are my pants? - https://school.contractors/ 
-Where are my pants?  
+**Montreal Smoked Meat**
+**When:** Sep 06, 2025, 04:21 UTC  
+**Source:** The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. - https://rogers.vision/ 
 
 ---
 
-**Sour cream**
-**When:** Feb 23, 2025, 02:37 UTC  
-**Source:** The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. - https://marsh.com/ 
-Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.  
+**Bruschetta**
+**When:** Sep 06, 2025, 12:37 UTC  
+**Source:** He looked inquisitively at his keyboard and wrote another sentence. - https://macintosh.hu/ 
 
 ---
 
-**Spring Rolls**
-**When:** Oct 06, 2025, 17:14 UTC  
-**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://sort.faith/ 
-Haskell features a type system with type inference and lazy evaluation.  
+**Pumpkin pie**
+**When:** Jul 06, 2025, 03:46 UTC  
+**Source:** Ports are used to communicate with the external world. - https://corresponding.jobs/ 
 
 ---
 
-**Fajita**
-**When:** Aug 24, 2025, 05:16 UTC  
-**Source:** Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s. - https://gui.net/ 
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.  
+**Prawn Pizza**
+**When:** Aug 07, 2025, 10:10 UTC  
+**Source:** It is also a garbage-collected runtime system. - https://circles.jobs/ 
 
 ---
 
-**Cinnamon Roll**
-**When:** Feb 04, 2025, 18:35 UTC  
-**Source:** The arguments can be primitive data types or compound data types. - https://purchase.at/ 
-Erlang is a general-purpose, concurrent, functional programming language.  
+**Maine Lobster**
+**When:** Jan 22, 2025, 13:16 UTC  
+**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://pattern.gov/ 
 
 ---
 
-**Geoduck**
-**When:** Jan 03, 2025, 04:26 UTC  
-**Source:** Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s. - https://extra.org/ 
-He looked inquisitively at his keyboard and wrote another sentence.  
+**Fry sauce**
+**When:** Apr 13, 2025, 09:18 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://approach.er/ 
 
 ---
 
-**Crab Rangoon**
-**When:** Feb 05, 2025, 10:02 UTC  
-**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://the.ls/ 
-I don't even care.  
+**Tin Roof Ice Cream**
+**When:** Nov 07, 2025, 07:09 UTC  
+**Source:** Do you come here often? - https://closed.asia/ 
 
 ---
 
-**Grits**
-**When:** Sep 02, 2025, 08:28 UTC  
-**Source:** The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. - https://copper.abudhabi/ 
-Haskell features a type system with type inference and lazy evaluation.  
+**Chile Relleno**
+**When:** Aug 10, 2025, 02:29 UTC  
+**Source:** I don't even care. - https://charles.bayern/ 
 
 ---
 
-**Blue-plate special**
-**When:** Sep 21, 2025, 09:20 UTC  
-**Source:** Do you come here often? - https://diagram.abudhabi/ 
-He looked inquisitively at his keyboard and wrote another sentence.  
+**Slinger**
+**When:** Dec 30, 2025, 06:48 UTC  
+**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://meets.buzz/ 
 
 ---
 
-**Salted caramel cookie**
-**When:** Apr 29, 2025, 21:54 UTC  
-**Source:** Ports are used to communicate with the external world. - https://chaos.date/ 
-The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.  
+**Oreo**
+**When:** Aug 18, 2025, 23:04 UTC  
+**Source:** Ports are used to communicate with the external world. - https://could.museum.post/ 
 
 ---
 
-**Russian dressing**
-**When:** May 31, 2025, 23:17 UTC  
-**Source:** Ports are created with the built-in function open_port. - https://problem.edu/ 
-Any element of a tuple can be accessed in constant time.  
+**Empanada**
+**When:** Mar 03, 2025, 03:28 UTC  
+**Source:** I don't even care. - https://shannon.budapest/ 
 
 ---
 
-**Flan**
-**When:** Apr 12, 2025, 05:17 UTC  
-**Source:** Any element of a tuple can be accessed in constant time. - https://sustained.sa/ 
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.  
+**Coq Au Vin**
+**When:** Jun 21, 2025, 02:28 UTC  
+**Source:** He looked inquisitively at his keyboard and wrote another sentence. - https://eagles.net/ 
 
 ---
 
-**Ratatouille**
-**When:** Feb 06, 2025, 04:46 UTC  
-**Source:** Type classes first appeared in the Haskell programming language. - https://win.sy/ 
-He looked inquisitively at his keyboard and wrote another sentence.  
+**Ice Cream**
+**When:** Nov 01, 2025, 02:03 UTC  
+**Source:** The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. - https://metals.re/ 
 
 ---
 
-**Pan Seared Scallops**
-**When:** Jan 14, 2025, 13:22 UTC  
-**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://absent.coop/ 
-The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.  
+**Piroshky**
+**When:** Nov 08, 2025, 00:02 UTC  
+**Source:** Tuples are containers for a fixed number of Erlang data types. - https://soonest.bar/ 
 
 ---
 
-**Potato Wedges**
-**When:** Feb 23, 2025, 01:41 UTC  
-**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://simply.mil/ 
-She spent her earliest years reading classic literature, and writing poetry.  
+**London broil**
+**When:** Nov 24, 2025, 03:24 UTC  
+**Source:** Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol." - https://attitudes.gent/ 
 
 ---
 
-**Liver and onions**
-**When:** Apr 28, 2025, 08:20 UTC  
-**Source:** Any element of a tuple can be accessed in constant time. - https://organisms.scholarships/ 
-The arguments can be primitive data types or compound data types.  
+**White chocolate cookie**
+**When:** Nov 28, 2025, 01:45 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://citysearch.sx/ 
 
 ---
 

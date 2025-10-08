@@ -1,14 +1,13 @@
 from pathlib import Path
 
 from psengine.classic_alerts import ClassicAlertMgr
-from psengine.classic_alerts.constants import ALL_CA_FIELDS
 
 OUTPUT_DIR = Path.cwd() / 'alerts'
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 mgr = ClassicAlertMgr()
 alerts = mgr.search(
-    triggered='-1d', status='New', fields=ALL_CA_FIELDS
+    triggered='-1d', status='New', fields=['url']
 )
 
 for alert in alerts:

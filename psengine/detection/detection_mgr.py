@@ -45,22 +45,22 @@ class DetectionMgr:
     def search(
         self,
         detection_rule: Annotated[
-            Union[list[str], str, None], Doc('Types of detection rules to search for.')
+            Union[str, list[str], None], Doc('Types of detection rules to search for.')
         ] = None,
         entities: Annotated[
             Optional[list[str]], Doc('List of entities to filter the search.')
         ] = None,
         created_before: Annotated[
-            Optional[str], Doc('Filter for rules created before this date.')
+            Optional[str], Doc('Filter for rules created before this date or relative date.')
         ] = None,
         created_after: Annotated[
-            Optional[str], Doc('Filter for rules created after this date.')
+            Optional[str], Doc('Filter for rules created after this date or relative date.')
         ] = None,
         updated_before: Annotated[
-            Optional[str], Doc('Filter for rules updated before this date.')
+            Optional[str], Doc('Filter for rules updated before this date or relative date.')
         ] = None,
         updated_after: Annotated[
-            Optional[str], Doc('Filter for rules updated after this date.')
+            Optional[str], Doc('Filter for rules updated after this date or relative date.')
         ] = None,
         doc_id: Annotated[Optional[str], Doc('Filter by document ID.')] = None,
         title: Annotated[Optional[str], Doc('Filter by title.')] = None,
@@ -82,7 +82,6 @@ class DetectionMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             DetectionRuleSearchError: If connection error occurs.
         """
-        detection_rule = [detection_rule] if isinstance(detection_rule, str) else detection_rule
         filters = {
             'types': detection_rule,
             'entities': entities,

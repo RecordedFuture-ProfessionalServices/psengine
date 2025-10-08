@@ -15,143 +15,123 @@ The arguments can be primitive data types or compound data types.
 
 ### Events
 
-**Pizza strips**
-**When:** Feb 11, 2025, 06:39 UTC  
-**Source:** I don't even care. - https://complications.fishing/ 
-I don't even care.  
+**Sweet Potato Fries**
+**When:** Jan 26, 2025, 03:59 UTC  
+**Source:** Any element of a tuple can be accessed in constant time. - https://relax.net/ 
 
 ---
 
-**Oysters Rockefeller**
-**When:** Apr 06, 2025, 04:59 UTC  
-**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://toys.paris/ 
-She spent her earliest years reading classic literature, and writing poetry.  
+**Oreo**
+**When:** Jul 24, 2025, 16:09 UTC  
+**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://domain.pe/ 
 
 ---
 
-**Sausage gravy**
-**When:** Feb 04, 2025, 13:10 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://redhead.company/ 
-Its main implementation is the Glasgow Haskell Compiler.  
+**Albacore Tuna Melt**
+**When:** Oct 02, 2025, 14:51 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://orientation.re/ 
 
 ---
 
-**Chicken nuggets**
-**When:** Aug 20, 2025, 09:02 UTC  
-**Source:** He looked inquisitively at his keyboard and wrote another sentence. - https://apparent.zuerich/ 
-He looked inquisitively at his keyboard and wrote another sentence.  
+**Cheese stuffed crust pizza**
+**When:** Apr 11, 2025, 00:51 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://alone.edu/ 
 
 ---
 
-**Huevos Rancheros**
-**When:** Feb 07, 2025, 05:04 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://postings.org/ 
-Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.  
+**Maine Lobster**
+**When:** Jun 23, 2025, 09:27 UTC  
+**Source:** Tuples are containers for a fixed number of Erlang data types. - https://ing.gh/ 
 
 ---
 
-**Shucked Oysters**
-**When:** Apr 26, 2025, 10:22 UTC  
-**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://west.tui/ 
-The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.  
+**Chicken Salad Wrap**
+**When:** Jan 11, 2025, 21:42 UTC  
+**Source:** Make me a sandwich. - https://afraid.org/ 
 
 ---
 
-**Steak sauce**
-**When:** Dec 04, 2025, 20:02 UTC  
-**Source:** Make me a sandwich. - https://novels.net/ 
-Do you have any idea why this is not working?  
+**Maple bacon donut**
+**When:** Mar 23, 2025, 17:16 UTC  
+**Source:** He looked inquisitively at his keyboard and wrote another sentence. - https://tall.by/ 
 
 ---
 
-**Suckling Pig**
-**When:** Oct 30, 2025, 17:26 UTC  
-**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://dedicated.lt/ 
-Haskell features a type system with type inference and lazy evaluation.  
+**Hot chicken**
+**When:** Apr 13, 2025, 09:03 UTC  
+**Source:** The arguments can be primitive data types or compound data types. - https://community.biz/ 
 
 ---
 
-**Satay**
-**When:** Dec 13, 2025, 13:58 UTC  
-**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://philippines.pr/ 
-In 1989 the building was heavily damaged by fire, but it has since been restored.  
+**Mashed potato**
+**When:** Nov 17, 2025, 12:14 UTC  
+**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://judy.info/ 
 
 ---
 
-**Shrimp and Grits**
-**When:** Jan 29, 2025, 01:43 UTC  
-**Source:** Tuples are containers for a fixed number of Erlang data types. - https://commented.aero/ 
-Tuples are containers for a fixed number of Erlang data types.  
+**Corned beef**
+**When:** Nov 21, 2025, 07:18 UTC  
+**Source:** It is also a garbage-collected runtime system. - https://charms.mil/ 
 
 ---
 
-**Meatloaf**
-**When:** Sep 07, 2025, 23:02 UTC  
-**Source:** Ports are created with the built-in function open_port. - https://soa.org/ 
-Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.  
+**Cheese dog**
+**When:** Aug 01, 2025, 09:37 UTC  
+**Source:** Make me a sandwich. - https://mysql.xxx/ 
 
 ---
 
-**Baba Ghanoush**
-**When:** Sep 25, 2025, 08:18 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://enclosure.biz/ 
-Where are my pants?  
+**Poke**
+**When:** Dec 01, 2025, 15:32 UTC  
+**Source:** Tuples are containers for a fixed number of Erlang data types. - https://powerseller.bn/ 
 
 ---
 
-**Hangtown fry**
-**When:** Oct 08, 2025, 12:15 UTC  
-**Source:** Do you have any idea why this is not working? - https://empty.creditunion/ 
-Erlang is known for its designs that are well suited for systems.  
+**Fried chicken**
+**When:** Jul 30, 2025, 07:30 UTC  
+**Source:** Type classes first appeared in the Haskell programming language. - https://appreciate.int/ 
 
 ---
 
-**Spaghetti Bolognese**
-**When:** Mar 17, 2025, 08:47 UTC  
-**Source:** Atoms are used within a program to denote distinguished values. - https://screenshots.london/ 
-Erlang is known for its designs that are well suited for systems.  
+**Pork and beans**
+**When:** Jul 14, 2025, 07:46 UTC  
+**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://cottages.se/ 
 
 ---
 
-**Schnitzel**
-**When:** Feb 04, 2025, 08:47 UTC  
-**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://fun.how/ 
-Do you have any idea why this is not working?  
+**Crab Rangoon**
+**When:** Aug 24, 2025, 18:14 UTC  
+**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://fee.berlin/ 
 
 ---
 
-**Prawn Pizza**
-**When:** Sep 12, 2025, 10:15 UTC  
-**Source:** Haskell features a type system with type inference and lazy evaluation. - https://introduction.dm/ 
-Do you have any idea why this is not working?  
+**Kobe Beef**
+**When:** Dec 18, 2025, 13:16 UTC  
+**Source:** Make me a sandwich. - https://carrier.name/ 
 
 ---
 
-**Chicharones**
-**When:** Mar 22, 2025, 12:53 UTC  
-**Source:** Haskell features a type system with type inference and lazy evaluation. - https://intend.com/ 
-The arguments can be primitive data types or compound data types.  
+**Pop-Tarts**
+**When:** May 24, 2025, 07:30 UTC  
+**Source:** Ports are created with the built-in function open_port. - https://enjoy.hoteles/ 
 
 ---
 
-**Shrimp and Grits**
-**When:** Jan 06, 2025, 17:14 UTC  
-**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://flying.hu/ 
-It is also a garbage-collected runtime system.  
+**Seafood cocktail**
+**When:** Nov 03, 2025, 21:54 UTC  
+**Source:** Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol." - https://lace.coop/ 
 
 ---
 
-**Lobster Newberg**
-**When:** Nov 08, 2025, 05:51 UTC  
-**Source:** She spent her earliest years reading classic literature, and writing poetry. - https://answering.poker/ 
-Its main implementation is the Glasgow Haskell Compiler.  
+**Tres Leches Cake**
+**When:** Feb 28, 2025, 10:26 UTC  
+**Source:** The arguments can be primitive data types or compound data types. - https://permalink.careers/ 
 
 ---
 
-**Pocky**
-**When:** Jun 13, 2025, 02:21 UTC  
-**Source:** Tuples are containers for a fixed number of Erlang data types. - https://clubs.com/ 
-Make me a sandwich.  
+**Slinger**
+**When:** Feb 27, 2025, 07:03 UTC  
+**Source:** Do you have any idea why this is not working? - https://giants.net/ 
 
 ---
 

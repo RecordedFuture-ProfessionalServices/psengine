@@ -78,3 +78,19 @@ The code above will print:
     'is_enriched': False
 }
 ```
+
+#### 5: Get all the Malware related to an IP address
+
+In this example we enrich an IP with the `links` field. We then use the `links` method to extract a list of all the entities of type `Malware` that are related to the `Actors, Tools & TTPs` section of the `links` payload.
+
+```python
+--8<-- "docs/examples/enrich/example_5.py"
+```
+
+This will print:
+
+```
+DOPLUGS, PlugX, RedDelta PlugX
+```
+
+

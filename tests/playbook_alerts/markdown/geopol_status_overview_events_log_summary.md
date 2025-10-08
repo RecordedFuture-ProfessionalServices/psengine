@@ -26,143 +26,123 @@ Tuples are containers for a fixed number of Erlang data types.
 
 ### Events
 
-**American fried rice**
-**When:** Nov 20, 2025, 04:07 UTC  
-**Source:** Ports are used to communicate with the external world. - https://insight.stroke/ 
-In 1989 the building was heavily damaged by fire, but it has since been restored.  
+**French Onion Soup**
+**When:** Mar 20, 2025, 22:04 UTC  
+**Source:** Where are my pants? - https://vii.giving/ 
 
 ---
 
-**Montreal Smoked Meat**
-**When:** Jun 13, 2025, 13:36 UTC  
-**Source:** Do you come here often? - https://anniversary.yt/ 
-In 1989 the building was heavily damaged by fire, but it has since been restored.  
+**Carne pizzaiola**
+**When:** May 16, 2025, 23:41 UTC  
+**Source:** Atoms are used within a program to denote distinguished values. - https://procedures.buy/ 
 
 ---
 
-**Patty**
-**When:** Oct 13, 2025, 11:45 UTC  
-**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://give.gent/ 
-Do you have any idea why this is not working?  
+**Beignets**
+**When:** Aug 31, 2025, 05:04 UTC  
+**Source:** She spent her earliest years reading classic literature, and writing poetry. - https://background.asia/ 
 
 ---
 
-**Haggis**
-**When:** Dec 04, 2025, 08:52 UTC  
-**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://partly.paris/ 
-Where are my pants?  
+**Prawn Pizza**
+**When:** Jul 27, 2025, 05:30 UTC  
+**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://florists.watch/ 
 
 ---
 
-**Chimichanga**
-**When:** Feb 03, 2025, 00:48 UTC  
-**Source:** Tuples are containers for a fixed number of Erlang data types. - https://repeated.gsla/ 
-Erlang is a general-purpose, concurrent, functional programming language.  
-
----
-
-**Eggo**
-**When:** Feb 26, 2025, 08:59 UTC  
-**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://game.rio/ 
-Haskell features a type system with type inference and lazy evaluation.  
-
----
-
-**Pizza strips**
-**When:** May 18, 2025, 20:23 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://learners.cat/ 
-Ports are used to communicate with the external world.  
-
----
-
-**Chicken Biryani**
-**When:** Feb 16, 2025, 17:31 UTC  
-**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://forbes.coop/ 
-She spent her earliest years reading classic literature, and writing poetry.  
-
----
-
-**Veggie Pizza**
-**When:** Apr 24, 2025, 07:07 UTC  
-**Source:** Ports are created with the built-in function open_port. - https://bahrain.tech/ 
-They are written as strings of consecutive alphanumeric characters, the first character being lowercase.  
-
----
-
-**Potato skins**
-**When:** Dec 22, 2025, 10:48 UTC  
-**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://cet.paris/ 
-Type classes first appeared in the Haskell programming language.  
-
----
-
-**Chicken sandwich**
-**When:** Jul 24, 2025, 22:45 UTC  
-**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://rated.zip/ 
-They are written as strings of consecutive alphanumeric characters, the first character being lowercase.  
-
----
-
-**Fries**
-**When:** Jul 08, 2025, 07:06 UTC  
-**Source:** Make me a sandwich. - https://automation.museum.post/ 
-Type classes first appeared in the Haskell programming language.  
-
----
-
-**Kimchi**
-**When:** Aug 12, 2025, 08:10 UTC  
-**Source:** Haskell features a type system with type inference and lazy evaluation. - https://iceland.name/ 
-Do you come here often?  
-
----
-
-**Vegemite on Toast**
-**When:** Mar 02, 2025, 18:01 UTC  
-**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://portions.fans/ 
-Erlang is known for its designs that are well suited for systems.  
+**Grits**
+**When:** Oct 06, 2025, 07:41 UTC  
+**Source:** Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s. - https://from.as/ 
 
 ---
 
 **Vichyssoise**
-**When:** Jul 15, 2025, 14:58 UTC  
-**Source:** Ports are created with the built-in function open_port. - https://shed.nagoya/ 
-Any element of a tuple can be accessed in constant time.  
+**When:** Apr 09, 2025, 04:38 UTC  
+**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://accompanying.flowers/ 
 
 ---
 
-**Apple sauce**
-**When:** Apr 24, 2025, 14:05 UTC  
-**Source:** Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s. - https://hist.aero/ 
-They are written as strings of consecutive alphanumeric characters, the first character being lowercase.  
+**City chicken**
+**When:** Sep 18, 2025, 01:50 UTC  
+**Source:** The arguments can be primitive data types or compound data types. - https://drug.rip/ 
 
 ---
 
-**Bruschetta**
-**When:** Jan 06, 2025, 20:17 UTC  
-**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://furnishings.yokohama/ 
-Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."  
+**Veggie Pizza**
+**When:** Jun 03, 2025, 07:06 UTC  
+**Source:** I don't even care. - https://impressive.biz/ 
 
 ---
 
-**Fattoush Salad**
-**When:** Jun 13, 2025, 08:18 UTC  
-**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://sao.pf/ 
-The arguments can be primitive data types or compound data types.  
+**Bagels and Lox**
+**When:** Aug 14, 2025, 04:18 UTC  
+**Source:** Atoms are used within a program to denote distinguished values. - https://content.cat/ 
+
+---
+
+**Samosa**
+**When:** Jun 12, 2025, 21:03 UTC  
+**Source:** Ports are used to communicate with the external world. - https://muslims.name/ 
 
 ---
 
 **Sloppy joe**
-**When:** Nov 10, 2025, 20:45 UTC  
-**Source:** Tuples are containers for a fixed number of Erlang data types. - https://clothing.voyage/ 
-Make me a sandwich.  
+**When:** Oct 07, 2025, 08:58 UTC  
+**Source:** She spent her earliest years reading classic literature, and writing poetry. - https://mon.tg/ 
 
 ---
 
-**Turkish Delight**
-**When:** Aug 06, 2025, 18:54 UTC  
-**Source:** It is also a garbage-collected runtime system. - https://current.saarland/ 
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.  
+**Sweet Potato Fries**
+**When:** Dec 05, 2025, 10:41 UTC  
+**Source:** Where are my pants? - https://transsexual.nagoya/ 
+
+---
+
+**Caviar**
+**When:** Jan 01, 2025, 11:17 UTC  
+**Source:** Erlang is known for its designs that are well suited for systems. - https://vector.pk/ 
+
+---
+
+**Creamed eggs on toast**
+**When:** Aug 27, 2025, 10:19 UTC  
+**Source:** Erlang is known for its designs that are well suited for systems. - https://terminal.mobi/ 
+
+---
+
+**Baba Ghanoush**
+**When:** Apr 20, 2025, 21:29 UTC  
+**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://bread.int/ 
+
+---
+
+**Meat Feast Pizza**
+**When:** Oct 03, 2025, 06:52 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://antique.com/ 
+
+---
+
+**Poke**
+**When:** May 28, 2025, 09:32 UTC  
+**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://meant.ax/ 
+
+---
+
+**Soft Shell Crab**
+**When:** Oct 20, 2025, 03:50 UTC  
+**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://cord.tel/ 
+
+---
+
+**Sandwich**
+**When:** Apr 01, 2025, 14:55 UTC  
+**Source:** She spent her earliest years reading classic literature, and writing poetry. - https://typing.gov/ 
+
+---
+
+**Hawaiian Pizza**
+**When:** Jun 21, 2025, 22:48 UTC  
+**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://games.name/ 
 
 ---
 

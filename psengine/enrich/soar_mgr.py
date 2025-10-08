@@ -61,7 +61,7 @@ class SoarMgr:
         vulnerabilities, URLs, and company domains. Uses multithreading if `max_workers` > 0.
 
         Endpoint:
-            `v2/soar/enrichment`
+            `soar/v3/enrichment`
 
         Example:
             Simple bulk enrichment:

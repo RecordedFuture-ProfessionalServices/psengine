@@ -105,5 +105,7 @@ class Test_RFRiskListMgr:
         class MyModel:
             x: int
 
-        with pytest.raises(ValueError):
+        with pytest.raises(
+            ValueError, match='`validate` should be a subclass of Pydantic BaseModel or None'
+        ):
             list(risklist_mgr.fetch_risklist('default', 'ip', validate=MyModel))

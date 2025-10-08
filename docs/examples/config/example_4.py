@@ -20,7 +20,9 @@ class IntegrationConfig(ConfigModel):
     complex_value: ComplexValue
 
 
-Config.init(config_class=IntegrationConfig, config_path=CONFIG_PATH)
+Config.init(
+    config_class=IntegrationConfig, config_path=CONFIG_PATH
+)
 config = get_config()
 
 print(config)

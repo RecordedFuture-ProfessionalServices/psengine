@@ -128,13 +128,17 @@ class Test_Logger:
         assert 'test info' not in captured.err
 
     data = [
-        ('BADLEVEL', ValueError),
-        ('50', ValueError),
-        (['list'], TypeError),
-        (999, ValueError),
+        (
+            'BADLEVEL',
+            ValueError,
+            'level must be one of: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL',
+        ),
+        ('50', ValueError, 'level must be one of: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL'),
+        (['list'], TypeError, ''),
+        (999, ValueError, 'level must be one of: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL'),
     ]
 
-    @pytest.mark.parametrize(('data', 'error'), data)
-    def test_loglevel_error(self, data, error):
-        with pytest.raises(error):
+    @pytest.mark.parametrize(('data', 'error', 'match'), data)
+    def test_loglevel_error(self, data, error, match):
+        with pytest.raises(error, match=match):
             RFLogger(level=data)

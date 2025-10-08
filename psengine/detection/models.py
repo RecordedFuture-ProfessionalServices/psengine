@@ -12,11 +12,12 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional
+from typing import Annotated, Optional
 
-from pydantic import Field
+from pydantic import BeforeValidator, Field
 
 from ..common_models import DetectionRuleType, RFBaseModel
+from ..helpers import Validators
 
 
 class Entity(RFBaseModel):
@@ -34,12 +35,14 @@ class RuleContext(RFBaseModel):
 
 
 class TimeRange(RFBaseModel):
-    after: Optional[datetime] = None
-    before: Optional[datetime] = None
+    after: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = None
+    before: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = None
 
 
 class SearchFilter(RFBaseModel):
-    types: Optional[list[DetectionRuleType]] = None
+    types: Annotated[
+        Optional[list[DetectionRuleType]], BeforeValidator(Validators.convert_str_to_list)
+    ] = None
     entities: Optional[list[str]] = None
     created: Optional[TimeRange] = None
     updated: Optional[TimeRange] = None

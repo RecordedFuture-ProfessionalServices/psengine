@@ -15,143 +15,123 @@ They are written as strings of consecutive alphanumeric characters, the first ch
 
 ### Events
 
-**Poppyseed muffin**
-**When:** Jun 24, 2025, 04:47 UTC  
-**Source:** Do you come here often? - https://travesti.asia/ 
-The arguments can be primitive data types or compound data types.  
+**Surf and turf**
+**When:** Sep 01, 2025, 17:00 UTC  
+**Source:** It is also a garbage-collected runtime system. - https://plate.biz/ 
 
 ---
 
-**Pancakes**
-**When:** May 04, 2025, 10:37 UTC  
-**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://pads.xxx/ 
-She spent her earliest years reading classic literature, and writing poetry.  
+**Gyoza**
+**When:** Aug 13, 2025, 06:24 UTC  
+**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://detailed.asia/ 
 
 ---
 
-**Squab**
-**When:** Nov 03, 2025, 21:15 UTC  
-**Source:** She spent her earliest years reading classic literature, and writing poetry. - https://fifteen.tel/ 
-It is also a garbage-collected runtime system.  
+**Root Beer Float**
+**When:** Feb 21, 2025, 00:52 UTC  
+**Source:** The arguments can be primitive data types or compound data types. - https://bali.info/ 
 
 ---
 
-**Hot chicken**
-**When:** Apr 30, 2025, 05:28 UTC  
-**Source:** Ports are created with the built-in function open_port. - https://gel.br/ 
-Tuples are containers for a fixed number of Erlang data types.  
+**Ribs**
+**When:** Jul 23, 2025, 16:06 UTC  
+**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://surge.th/ 
 
 ---
 
-**Po'Boy**
-**When:** Sep 02, 2025, 04:18 UTC  
-**Source:** Any element of a tuple can be accessed in constant time. - https://edt.sucks/ 
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.  
+**Coleslaw**
+**When:** Dec 24, 2025, 20:29 UTC  
+**Source:** Type classes first appeared in the Haskell programming language. - https://ian.mobi/ 
 
 ---
 
-**Chimichanga**
-**When:** Jan 12, 2025, 15:15 UTC  
-**Source:** Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s. - https://channels.berlin/ 
-The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.  
+**Naan**
+**When:** Jan 25, 2025, 11:08 UTC  
+**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://belt.name/ 
 
 ---
 
-**Scampi**
-**When:** Jan 21, 2025, 18:23 UTC  
-**Source:** Any element of a tuple can be accessed in constant time. - https://clicking.biz/ 
-Atoms are used within a program to denote distinguished values.  
+**Texas Toast**
+**When:** Apr 04, 2025, 09:42 UTC  
+**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://contain.info/ 
 
 ---
 
-**Potato salad**
-**When:** Jul 24, 2025, 08:37 UTC  
-**Source:** Atoms are used within a program to denote distinguished values. - https://fighters.lgbt/ 
-Type classes first appeared in the Haskell programming language.  
+**Toaster Strudel**
+**When:** Oct 28, 2025, 04:20 UTC  
+**Source:** The arguments can be primitive data types or compound data types. - https://bacterial.gold/ 
 
 ---
 
-**Steak Tartare**
-**When:** Nov 06, 2025, 01:01 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://hobbies.info/ 
-I don't even care.  
+**Bi Bim Bap**
+**When:** May 12, 2025, 07:01 UTC  
+**Source:** Any element of a tuple can be accessed in constant time. - https://compiled.community/ 
 
 ---
 
-**Maple Bacon Doughnut**
-**When:** Nov 05, 2025, 00:55 UTC  
-**Source:** Haskell features a type system with type inference and lazy evaluation. - https://restrict.shiksha/ 
-He looked inquisitively at his keyboard and wrote another sentence.  
+**Geoduck**
+**When:** Mar 14, 2025, 07:52 UTC  
+**Source:** Tuples are containers for a fixed number of Erlang data types. - https://ivory.wales/ 
 
 ---
 
-**Chicken French**
-**When:** May 22, 2025, 06:00 UTC  
-**Source:** Any element of a tuple can be accessed in constant time. - https://configured.net/ 
-Tuples are containers for a fixed number of Erlang data types.  
+**Jalapeno Poppers**
+**When:** Mar 16, 2025, 06:48 UTC  
+**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://flows.ga/ 
 
 ---
 
-**Pizza strips**
-**When:** Mar 02, 2025, 21:01 UTC  
-**Source:** I don't even care. - https://migration.aero/ 
-Haskell features a type system with type inference and lazy evaluation.  
+**Home fries**
+**When:** Jul 09, 2025, 21:46 UTC  
+**Source:** It is also a garbage-collected runtime system. - https://fully.com/ 
 
 ---
 
-**Hog fry**
-**When:** Mar 03, 2025, 09:29 UTC  
-**Source:** The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn. - https://grove.pm/ 
-Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.  
+**Maple bacon donut**
+**When:** Dec 09, 2025, 19:12 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://although.biz/ 
 
 ---
 
-**Poutine**
-**When:** Aug 01, 2025, 06:49 UTC  
-**Source:** Do you come here often? - https://retrieval.bar/ 
-She spent her earliest years reading classic literature, and writing poetry.  
+**Spring Rolls**
+**When:** Apr 29, 2025, 05:31 UTC  
+**Source:** Where are my pants? - https://hostels.rw/ 
 
 ---
 
-**Sour cream**
-**When:** Apr 03, 2025, 16:00 UTC  
-**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://appropriate.mu/ 
-They are written as strings of consecutive alphanumeric characters, the first character being lowercase.  
+**Gyros**
+**When:** Jul 16, 2025, 22:25 UTC  
+**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://guam.int/ 
 
 ---
 
-**Onion Rings**
-**When:** Aug 02, 2025, 19:21 UTC  
-**Source:** I don't even care. - https://garage.alsace/ 
-Where are my pants?  
+**Hummus**
+**When:** Mar 24, 2025, 02:30 UTC  
+**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://massive.melbourne/ 
 
 ---
 
-**Tagine**
-**When:** Feb 03, 2025, 20:36 UTC  
-**Source:** Where are my pants? - https://interest.museum.post/ 
-Its main implementation is the Glasgow Haskell Compiler.  
+**Sauteed Morel Mushrooms**
+**When:** Apr 09, 2025, 17:42 UTC  
+**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://happening.gov/ 
 
 ---
 
-**French Onion Soup**
-**When:** Feb 11, 2025, 07:56 UTC  
-**Source:** Haskell features a type system with type inference and lazy evaluation. - https://bradford.zw/ 
-Tuples are containers for a fixed number of Erlang data types.  
+**Maple bacon donut**
+**When:** Aug 05, 2025, 02:09 UTC  
+**Source:** Where are my pants? - https://equipped.mz/ 
 
 ---
 
-**Chicago Hot Dog**
-**When:** Jun 13, 2025, 04:12 UTC  
-**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://bermuda.plumbing/ 
-He looked inquisitively at his keyboard and wrote another sentence.  
+**Drunken chicken**
+**When:** Jan 14, 2025, 13:06 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://tour.com/ 
 
 ---
 
-**Stuffed peppers**
-**When:** Mar 21, 2025, 03:26 UTC  
-**Source:** Do you come here often? - https://hall.edu/ 
-The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.  
+**Lobster roll**
+**When:** May 07, 2025, 18:51 UTC  
+**Source:** Do you come here often? - https://unlikely.za/ 
 
 ---
 

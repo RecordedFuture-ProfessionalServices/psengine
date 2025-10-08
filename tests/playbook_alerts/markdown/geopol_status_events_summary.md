@@ -15,143 +15,123 @@ Erlang is known for its designs that are well suited for systems.
 
 ### Events
 
-**Sausage gravy**
-**When:** Dec 02, 2025, 14:47 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://vertical.org/ 
-The arguments can be primitive data types or compound data types.  
+**Slinger**
+**When:** Jan 04, 2025, 00:30 UTC  
+**Source:** Where are my pants? - https://trends.gov/ 
 
 ---
 
-**Wasabi Peas**
-**When:** Sep 27, 2025, 13:02 UTC  
-**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://ivory.bio/ 
-Do you have any idea why this is not working?  
+**Corn dog**
+**When:** May 24, 2025, 05:09 UTC  
+**Source:** I don't even care. - https://owners.place/ 
 
 ---
 
-**Potatoes O'Brien**
-**When:** Jun 14, 2025, 18:22 UTC  
-**Source:** She spent her earliest years reading classic literature, and writing poetry. - https://brakes.gov/ 
-Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."  
+**Kung Pao Chicken**
+**When:** Nov 25, 2025, 02:21 UTC  
+**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://top.alsace/ 
 
 ---
 
-**Shrimp and Grits**
-**When:** Mar 12, 2025, 05:54 UTC  
-**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://distinct.technology/ 
-The arguments can be primitive data types or compound data types.  
+**Swiss steak**
+**When:** May 07, 2025, 13:42 UTC  
+**Source:** Ports are used to communicate with the external world. - https://argued.cn/ 
 
 ---
 
-**Jell-O**
-**When:** May 28, 2025, 21:16 UTC  
-**Source:** Ports are created with the built-in function open_port. - https://retailers.vc/ 
-Ports are used to communicate with the external world.  
-
----
-
-**Turkish Delight**
-**When:** Aug 24, 2025, 03:16 UTC  
-**Source:** Ports are created with the built-in function open_port. - https://modeling.bs/ 
-Ports are used to communicate with the external world.  
-
----
-
-**French Onion Soup**
-**When:** May 25, 2025, 21:00 UTC  
-**Source:** Do you have any idea why this is not working? - https://analytical.football/ 
-Do you have any idea why this is not working?  
-
----
-
-**Choco pie**
-**When:** Aug 14, 2025, 09:11 UTC  
-**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://jordan.express/ 
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.  
+**Tuna Pizza**
+**When:** Mar 16, 2025, 16:48 UTC  
+**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://ozone.sm/ 
 
 ---
 
 **Piroshky**
-**When:** May 13, 2025, 03:15 UTC  
-**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://isbn.cat/ 
-In 1989 the building was heavily damaged by fire, but it has since been restored.  
+**When:** Jul 07, 2025, 14:36 UTC  
+**Source:** Type classes first appeared in the Haskell programming language. - https://gloves.com/ 
 
 ---
 
-**Osso Buco**
-**When:** Nov 21, 2025, 19:55 UTC  
-**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://dedicated.xxx/ 
-Ports are used to communicate with the external world.  
+**Potato wedges**
+**When:** Oct 20, 2025, 11:46 UTC  
+**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://suicide.taipei/ 
 
 ---
 
-**Macaroni and Cheese**
-**When:** Sep 17, 2025, 13:04 UTC  
-**Source:** Ports are used to communicate with the external world. - https://sec.ca/ 
-It is also a garbage-collected runtime system.  
+**Calf's liver and bacon**
+**When:** Mar 22, 2025, 08:49 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://accounting.school/ 
 
 ---
 
-**Apple butter**
-**When:** Aug 21, 2025, 07:52 UTC  
-**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://refined.com/ 
-She spent her earliest years reading classic literature, and writing poetry.  
+**BBQ Chicken Pizza**
+**When:** Mar 09, 2025, 11:53 UTC  
+**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://seventh.tax/ 
 
 ---
 
-**Meat Feast Pizza**
-**When:** May 24, 2025, 12:20 UTC  
-**Source:** I don't even care. - https://dos.com/ 
-Ports are used to communicate with the external world.  
+**Chicharones**
+**When:** Feb 27, 2025, 05:38 UTC  
+**Source:** The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets. - https://buttons.net/ 
 
 ---
 
-**Hoppin' John**
-**When:** Sep 06, 2025, 14:07 UTC  
-**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://each.cymru/ 
-In 1989 the building was heavily damaged by fire, but it has since been restored.  
+**New York-Style Pizza**
+**When:** May 16, 2025, 17:05 UTC  
+**Source:** I don't even care. - https://rentals.biz/ 
 
 ---
 
-**Scampi**
-**When:** Dec 24, 2025, 21:06 UTC  
-**Source:** Do you have any idea why this is not working? - https://bars.tirol/ 
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.  
+**Stuffed zucchini**
+**When:** Feb 11, 2025, 05:10 UTC  
+**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://textiles.mobi/ 
 
 ---
 
-**Spaghetti and Meatballs**
-**When:** Nov 08, 2025, 19:40 UTC  
-**Source:** Where are my pants? - https://install.zuerich/ 
-Type classes first appeared in the Haskell programming language.  
+**Pulled pork**
+**When:** Sep 05, 2025, 11:06 UTC  
+**Source:** Ports are used to communicate with the external world. - https://premises.rugby/ 
 
 ---
 
-**Ice cream cake**
-**When:** Dec 27, 2025, 14:15 UTC  
-**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://recording.info/ 
-The arguments can be primitive data types or compound data types.  
+**Sushi**
+**When:** Aug 12, 2025, 18:44 UTC  
+**Source:** Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol." - https://cisco.dentist/ 
 
 ---
 
-**Blue-plate special**
-**When:** Sep 21, 2025, 22:50 UTC  
-**Source:** I don't even care. - https://stylish.biz/ 
-The arguments can be primitive data types or compound data types.  
+**Cornish game hen**
+**When:** Apr 30, 2025, 17:37 UTC  
+**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://tube.ec/ 
 
 ---
 
-**Huevos Rancheros**
-**When:** May 01, 2025, 20:58 UTC  
-**Source:** Tuples are containers for a fixed number of Erlang data types. - https://targets.download/ 
-Type classes first appeared in the Haskell programming language.  
+**Fries**
+**When:** Jul 09, 2025, 19:02 UTC  
+**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://spread.wales/ 
 
 ---
 
-**Cheese stuffed crust pizza**
-**When:** Aug 03, 2025, 21:14 UTC  
-**Source:** Do you come here often? - https://manitoba.de/ 
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.  
+**Fajitas**
+**When:** Mar 15, 2025, 14:41 UTC  
+**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://collaboration.ug/ 
+
+---
+
+**Gyros**
+**When:** Oct 07, 2025, 13:55 UTC  
+**Source:** It is also a garbage-collected runtime system. - https://grenada.name/ 
+
+---
+
+**Roasted Bone Marrow**
+**When:** Aug 22, 2025, 18:54 UTC  
+**Source:** He looked inquisitively at his keyboard and wrote another sentence. - https://physics.mobily/ 
+
+---
+
+**Baklava**
+**When:** Sep 02, 2025, 21:46 UTC  
+**Source:** Where are my pants? - https://carb.feedback/ 
 
 ---
 

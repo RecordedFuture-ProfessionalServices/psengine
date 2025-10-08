@@ -324,7 +324,7 @@ class Test_ClassicAlert:
             'type': 'REFERENCE',
         }
         alert_model = ClassicAlert(**raw_alert)
-        hits_md = _hits_markdown(alert_model, alert_model.hits)
+        hits_md = _hits_markdown(alert_model, alert_model.hits, True, True, False)
         assert hits_md is not None
         assert isinstance(hits_md, list)
         assert hits_md == [
@@ -338,3 +338,142 @@ class Test_ClassicAlert:
                 'title': '1. From iOSGods Forum',
             }
         ]
+
+    def test_search_without_all_fields(self):
+        alert = {
+            'id': '9_J5JD',
+            'log': {
+                'note_author': None,
+                'note_date': None,
+                'status_date': None,
+                'triggered': '2025-09-08T14:20:14.909000Z',
+                'status_change_by': None,
+            },
+            'title': 'Vulnerability Risk, New Critical - High: CVE-2025-9751',
+            'url': {
+                'api': 'https://api.recordedfuture.com/v3/alerts/9_J5JD',
+                'portal': 'https://app.recordedfuture.com/live/sc/notification/?id=9_J5JD',
+            },
+            'rule': {
+                'use_case_deprecation': None,
+                'name': 'Vulnerability Risk, New Critical or Pre NVD Watch List Vulnerabilities',
+                'id': 'nZW3KP',
+                'url': {'portal': 'https://app.recordedfuture.com/asld'},
+            },
+            'enriched_entities': [
+                {
+                    'evidence': [
+                        {
+                            'timestamp': '2025-08-31T10:20:38.316000Z',
+                            'mitigation_string': '',
+                            'criticality_label': 'Medium',
+                            'rule': 'Recent Unverified Proof of Concept Available',
+                            'evidence_string': '3 sightings on 1 ',
+                            'criticality': 2,
+                        },
+                        {
+                            'timestamp': '2025-09-08T14:11:07.626000Z',
+                            'mitigation_string': '',
+                            'criticality_label': 'High',
+                            'rule': 'NIST Severity: High',
+                            'evidence_string': '1 sighting on 1 s',
+                            'criticality': 3,
+                        },
+                    ],
+                    'references': [
+                        {
+                            'entities': [
+                                {
+                                    'id': 'url:https://img.shields.io/static/v1?label',
+                                    'name': 'https://img.shields.io/static/v1?label=Ve',
+                                    'type': 'URL',
+                                },
+                            ],
+                            'document': {
+                                'source': {
+                                    'id': 'source:MIKjae',
+                                    'name': 'GitHub',
+                                    'type': 'Source',
+                                },
+                                'title': 'Code change in file 2025/CVE-2025-9751.md on repo cve:',
+                                'url': 'https://github.com/test/cve/commit/4b741f8',
+                                'authors': [
+                                    {
+                                        'id': 'rROI-j',
+                                        'name': 'trickest-workflows',
+                                        'type': 'Username',
+                                    }
+                                ],
+                            },
+                            'fragment': '<i id=HFB_gACE2_L>Code change in file 2025/<e id',
+                            'id': 'HFB_gACE2_L',
+                            'language': 'eng',
+                            'primary_entity': {
+                                'id': '9njxv1',
+                                'name': 'CVE-2025-9751',
+                                'type': 'CyberVulnerability',
+                                'description': 'A weakness has been identified in Campcod',
+                            },
+                        }
+                    ],
+                    'criticality': {
+                        'name': 'High',
+                        'score': 66,
+                        'last_triggered': '2025-09-08T00:00:00Z',
+                        'triggered': '2025-09-08T14:18:04.520000Z',
+                        'level': 3,
+                    },
+                    'entity': {
+                        'id': '9njxv1',
+                        'name': 'CVE-2025-9751',
+                        'type': 'CyberVulnerability',
+                    },
+                },
+                {
+                    'evidence': [
+                        {
+                            'timestamp': '2025-08-31T10:20:37.315000Z',
+                            'mitigation_string': '',
+                            'criticality_label': 'Medium',
+                            'rule': 'Recent Unverified Proof of Concept Available',
+                            'evidence_string': '3 sightings on 1 source: Recorded Future ',
+                            'criticality': 2,
+                        },
+                        {
+                            'timestamp': '2025-09-08T14:11:07.570000Z',
+                            'mitigation_string': '',
+                            'criticality_label': 'High',
+                            'rule': 'NIST Severity: High',
+                            'evidence_string': '1 sighting on 1 source: Recorded ',
+                            'criticality': 3,
+                        },
+                    ],
+                    'references': [],
+                    'criticality': {
+                        'name': 'High',
+                        'score': 66,
+                        'last_triggered': '2025-09-08T00:00:00Z',
+                        'triggered': '2025-09-08T14:18:04.520000Z',
+                        'level': 3,
+                    },
+                    'entity': {
+                        'id': '9nk6Qd',
+                        'name': 'CVE-2025-9750',
+                        'type': 'CyberVulnerability',
+                    },
+                },
+            ],
+        }
+
+        alert = ClassicAlert(**alert)
+        markdown = alert.markdown(ai_insights=False, triggered_by=False, defang_iocs=True)
+
+        assert all(
+            x in markdown
+            for x in (
+                'CVE-2025-9750',
+                'Vulnerability Risk, New Critical - High: CVE-2025-9751',
+                'Rule',
+                'Triggered',
+            )
+        )

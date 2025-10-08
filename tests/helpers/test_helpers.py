@@ -89,7 +89,12 @@ class Test_TimeHelpers:
         if error is None:
             assert TimeHelpers.rel_time_to_date(time)
         else:
-            with pytest.raises(error):
+            with pytest.raises(
+                error,
+                match=re.escape(
+                    f"Invalid relative time '{time}'. Accepted format: [-|][integer][h|d]"
+                ),
+            ):
                 TimeHelpers.rel_time_to_date(time)
 
     @pytest.mark.parametrize(
@@ -134,7 +139,7 @@ class Test_OSHelper:
         assert isinstance(os_info, str)
 
     def test_mkdir_raises_ValueError(self):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match='path cannot be empty'):
             OSHelpers.mkdir('')
 
     def test_mkdir_abs_path_and_access_return_path(self, tmp_path):
@@ -194,7 +199,7 @@ class Test_FileHelpers:
 
     @pytest.mark.parametrize(('as_dict', 'single_column'), [(True, True), (4, [1])])
     def test_read_csv_raises_ValueError(self, csv_filepath, as_dict, single_column):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match='Cannot use as_dict and single_column together'):
             FileHelpers.read_csv(csv_filepath, as_dict=as_dict, single_column=single_column)
 
     def test_read_csv_raises_ReadFileError(self):

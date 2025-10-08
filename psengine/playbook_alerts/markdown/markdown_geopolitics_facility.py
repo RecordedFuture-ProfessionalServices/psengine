@@ -70,11 +70,10 @@ def _add_images(pba: 'PBA_GeopoliticsFacility', md_maker: MarkdownMaker) -> None
 
 def _add_events(pba: 'PBA_GeopoliticsFacility', md_maker: MarkdownMaker) -> None:
     result = []
-    for event in pba.panel_events_summary.events:
+    for event in pba.panel_evidence_summary.events:
         section = [
             f'{bold("When:")} {_format_timestamp(event.time)}  ',
             f'{bold("Source:")} {event.source} - {event.url} ',
-            f'{event.translated_text}  ',
         ]
         title = ', '.join(assessment.name for assessment in event.assessments)
         result.append(bold(title))
@@ -96,7 +95,7 @@ def _geopolitics_facility_markdown(pba: 'PBA_GeopoliticsFacility', md_maker: Mar
     if pba.panel_overview.ai_insights:
         md_maker.add_section('AI Insights', f'{pba.panel_overview.ai_insights}  ')
 
-    if pba.panel_events_summary.events:
+    if pba.panel_evidence_summary.events:
         _add_events(pba, md_maker)
 
         if not md_maker.character_limit:

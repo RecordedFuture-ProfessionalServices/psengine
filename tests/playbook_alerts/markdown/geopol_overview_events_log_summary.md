@@ -26,143 +26,123 @@ Do you have any idea why this is not working?
 
 ### Events
 
-**Soft Shell Crab**
-**When:** Oct 14, 2025, 23:04 UTC  
-**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://honest.gov/ 
-Its main implementation is the Glasgow Haskell Compiler.  
+**Potato wedges**
+**When:** Jul 08, 2025, 01:06 UTC  
+**Source:** I don't even care. - https://disney.aero/ 
 
 ---
 
-**Gyros**
-**When:** Nov 10, 2025, 06:26 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://screw.cy/ 
-Its main implementation is the Glasgow Haskell Compiler.  
+**Buffalo wing**
+**When:** Nov 04, 2025, 03:55 UTC  
+**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://validation.golf/ 
 
 ---
 
-**Sweet Potato Fries**
-**When:** Sep 20, 2025, 11:55 UTC  
-**Source:** Do you come here often? - https://motel.jobs/ 
-The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.  
-
----
-
-**Steak Tartare**
-**When:** Sep 23, 2025, 07:37 UTC  
-**Source:** Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing. - https://para.aero/ 
-In 1989 the building was heavily damaged by fire, but it has since been restored.  
-
----
-
-**Cowboy beans**
-**When:** Feb 16, 2025, 01:42 UTC  
-**Source:** Erlang is known for its designs that are well suited for systems. - https://footage.za/ 
-Erlang is known for its designs that are well suited for systems.  
-
----
-
-**Pickled Okra**
-**When:** May 22, 2025, 13:51 UTC  
-**Source:** Do you come here often? - https://chains.iq/ 
-Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."  
-
----
-
-**Crab Rangoon**
-**When:** Apr 25, 2025, 11:30 UTC  
-**Source:** Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol." - https://regression.tp/ 
-Do you come here often?  
-
----
-
-**Root Beer Float**
-**When:** Feb 04, 2025, 04:17 UTC  
-**Source:** Tuples are containers for a fixed number of Erlang data types. - https://trees.com/ 
-Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."  
-
----
-
-**Maine Lobster**
-**When:** Mar 02, 2025, 23:50 UTC  
-**Source:** Where are my pants? - https://residents.nu/ 
-Its main implementation is the Glasgow Haskell Compiler.  
-
----
-
-**Grilled Snake**
-**When:** Nov 19, 2025, 09:29 UTC  
-**Source:** Ports are used to communicate with the external world. - https://shape.com/ 
-Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."  
-
----
-
-**Scampi**
-**When:** Dec 02, 2025, 07:52 UTC  
-**Source:** Type classes first appeared in the Haskell programming language. - https://threats.info/ 
-Where are my pants?  
+**Bull roast**
+**When:** Aug 06, 2025, 05:41 UTC  
+**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://mission.aw/ 
 
 ---
 
 **Jell-O**
-**When:** Dec 10, 2025, 05:57 UTC  
-**Source:** Make me a sandwich. - https://cookie.edu/ 
-Make me a sandwich.  
+**When:** Jan 05, 2025, 15:55 UTC  
+**Source:** Tuples are containers for a fixed number of Erlang data types. - https://research.biz/ 
 
 ---
 
-**Chicken and waffles**
-**When:** Nov 05, 2025, 19:05 UTC  
-**Source:** Ports are used to communicate with the external world. - https://raymond.edu/ 
-She spent her earliest years reading classic literature, and writing poetry.  
+**Caviar**
+**When:** Jun 22, 2025, 16:56 UTC  
+**Source:** They are written as strings of consecutive alphanumeric characters, the first character being lowercase. - https://packet.name/ 
 
 ---
 
-**Gyros**
-**When:** Sep 07, 2025, 04:24 UTC  
-**Source:** Do you come here often? - https://forest.ni/ 
-Do you come here often?  
+**Chili dog**
+**When:** Oct 12, 2025, 04:22 UTC  
+**Source:** Do you come here often? - https://aye.eu/ 
 
 ---
 
-**Chicharones**
-**When:** Feb 22, 2025, 22:15 UTC  
-**Source:** The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing. - https://festival.dm/ 
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.  
+**Charleston red rice**
+**When:** Aug 30, 2025, 23:05 UTC  
+**Source:** Make me a sandwich. - https://sheet.limited/ 
 
 ---
 
-**Blue cheese dressing**
-**When:** May 01, 2025, 18:14 UTC  
-**Source:** Type classes first appeared in the Haskell programming language. - https://womens.tattoo/ 
-He looked inquisitively at his keyboard and wrote another sentence.  
+**Samosa**
+**When:** Feb 01, 2025, 14:05 UTC  
+**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://relationship.productions/ 
 
 ---
 
-**Carolina style**
-**When:** Aug 28, 2025, 17:07 UTC  
-**Source:** Where are my pants? - https://underwear.vlaanderen/ 
-Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.  
+**Bacon Cheeseburger**
+**When:** Apr 30, 2025, 14:06 UTC  
+**Source:** In 1989 the building was heavily damaged by fire, but it has since been restored. - https://president.biz/ 
 
 ---
 
-**Mulligan stew**
-**When:** Mar 09, 2025, 10:28 UTC  
-**Source:** Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom. - https://lectures.vip/ 
-Any element of a tuple can be accessed in constant time.  
+**Waffle**
+**When:** Feb 04, 2025, 16:16 UTC  
+**Source:** Ports are used to communicate with the external world. - https://spend.xxx/ 
 
 ---
 
-**Polenta**
-**When:** Aug 21, 2025, 10:02 UTC  
-**Source:** Tuples are containers for a fixed number of Erlang data types. - https://invision.museum.post/ 
-Do you come here often?  
+**Fried Green Tomatoes**
+**When:** Oct 04, 2025, 05:32 UTC  
+**Source:** Haskell features a type system with type inference and lazy evaluation. - https://festival.hamburg/ 
 
 ---
 
-**Pemmican**
-**When:** May 31, 2025, 23:48 UTC  
-**Source:** Erlang is a general-purpose, concurrent, functional programming language. - https://clock.tel/ 
-It is also a garbage-collected runtime system.  
+**Oysters Rockefeller**
+**When:** Mar 24, 2025, 05:40 UTC  
+**Source:** Its main implementation is the Glasgow Haskell Compiler. - https://henderson.miami/ 
+
+---
+
+**Bi Bim Bap**
+**When:** Dec 20, 2025, 12:32 UTC  
+**Source:** Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s. - https://happiness.moscow/ 
+
+---
+
+**Albacore Tuna Melt**
+**When:** Oct 01, 2025, 19:14 UTC  
+**Source:** Atoms are used within a program to denote distinguished values. - https://strange.mh/ 
+
+---
+
+**Currywurst**
+**When:** Oct 02, 2025, 05:56 UTC  
+**Source:** Do you have any idea why this is not working? - https://concerns.bzh/ 
+
+---
+
+**Jerky**
+**When:** Jun 28, 2025, 03:57 UTC  
+**Source:** Ports are used to communicate with the external world. - https://genetic.zulu/ 
+
+---
+
+**American fried rice**
+**When:** Jul 13, 2025, 12:30 UTC  
+**Source:** Ports are created with the built-in function open_port. - https://gary.contractors/ 
+
+---
+
+**Empanada**
+**When:** Aug 09, 2025, 08:48 UTC  
+**Source:** Ports are created with the built-in function open_port. - https://brian.name/ 
+
+---
+
+**Ratatouille**
+**When:** Sep 14, 2025, 15:05 UTC  
+**Source:** Any element of a tuple can be accessed in constant time. - https://went.wed/ 
+
+---
+
+**Samosa**
+**When:** Sep 16, 2025, 02:33 UTC  
+**Source:** Atoms are used within a program to denote distinguished values. - https://jury.jobs/ 
 
 ---
 

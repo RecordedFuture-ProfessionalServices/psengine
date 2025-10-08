@@ -72,6 +72,7 @@ class LookupMgr:
         - `malware`
         - `Malware`
         - `Organization`
+        - `organization`
         - `url`
         - `URL`
         - `vulnerability`
@@ -181,6 +182,7 @@ class LookupMgr:
         - `malware`
         - `Malware`
         - `Organization`
+        - `organization`
         - `url`
         - `URL`
         - `vulnerability`
@@ -273,7 +275,7 @@ class LookupMgr:
         entity_type: str,
         fields: list,
     ):
-        entity_type = TYPE_MAPPING.get(entity_type, entity_type)
+        entity_type = TYPE_MAPPING.get(entity_type.lower(), entity_type.lower())
 
         enriched = self._fetch_data(
             entity=entity,

@@ -95,7 +95,7 @@ class Test_ListMgr:
             list_mgr.fetch(('DShield', 'entity'))
         with pytest.raises(ListApiError):
             list_mgr.fetch(('DShield', 'not_a_type'))
-        with pytest.raises(ValueError):
+        with pytest.raises(ValidationError):
             list_mgr.fetch(('DShield', 'entity', 'too_long'))
 
     def test_fetch_list_by_id(self, list_mgr: EntityListMgr, mocker, mock_request):

@@ -137,13 +137,14 @@ class Test_BaseHTTPClient:
             )
 
     def test_call_unknown_http_method_raises_ValueError(self, base_client):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match='Unknown HTTP method: getit'):
             base_client.call(method='getit', url='wow')
 
     def test_call_method_or_url_missing(self, base_client):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValidationError):
             base_client.call(method='get', url=None)
-        with pytest.raises(ValueError):
+
+        with pytest.raises(ValidationError):
             base_client.call(method=None, url='https://httpbin.org/get')
 
     def test_set_urllib_log_level_valid_levels(self, base_client):

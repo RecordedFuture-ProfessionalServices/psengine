@@ -166,7 +166,9 @@ class Test_Config:
         Config.reset_instance()
         path = tmp_path / 'config.moise'
         path.touch()
-        with pytest.raises(ValueError):
+        with pytest.raises(
+            ValueError, match='The config file extension must be .toml or .json or .env'
+        ):
             Config.init(config_path=path)
 
     def test_reset_config(self):

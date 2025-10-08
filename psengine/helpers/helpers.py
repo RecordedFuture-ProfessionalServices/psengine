@@ -46,17 +46,22 @@ VALID_TIME_REGEX = r'^(-?)([1-9]?[0-9]+[dDhH])$'
 IDS = ['ip:', 'idn:', 'url:', 'hash:', 'id:']
 
 
+# Warning: this cannot be annotated with `Doc` since it breaks the IDE autocomplete.
 def connection_exceptions(
     ignore_status_code: list[int], exception_to_raise: RecordedFutureError, on_ignore_return=None
 ):
     """Decorator for handling HTTP related errors.
+
+    !!! warning:
+
+        This decorator should not be used in user code. It is meant for internal PSEngine methods.
 
     Args:
         ignore_status_code (List[int]): list of status codes to be ignored - dont raise exception
         exception_to_raise (Exception): exception to raise in case of error. It should be based on
             the function that is decorated
         on_ignore_return (Any): whatever it is needed to be returned if the ignore_status happens.
-        Defaults to None.
+            Defaults to None.
 
     Raises:
         exception_to_raise
@@ -456,11 +461,13 @@ class Validators:
 
     @staticmethod
     def convert_str_to_list(
-        value: Annotated[Union[str, list], Doc('String or list to convert.')],
-    ) -> Annotated[list, Doc('Converted list with None values removed.')]:
+        value: Annotated[Union[str, list, None], Doc('String or list to convert.')],
+    ) -> Annotated[Union[list, None], Doc('Converted list with None values removed.')]:
         """Convert value from str to list and remove None values."""
-        value = value if isinstance(value, list) else [value]
-        return [v for v in value if v is not None]
+        if value:
+            value = value if isinstance(value, list) else [value]
+            return [v for v in value if v is not None]
+        return value
 
     @staticmethod
     def convert_relative_time(

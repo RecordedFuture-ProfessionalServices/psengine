@@ -204,7 +204,7 @@ class Test_IdentityMgr:
         ids=list(range(len(IP_LOOKUP_FILTER_VALUE_ERROR))),
     )
     def test_lookup_ip_raises_ValueError(self, identity_mgr: IdentityMgr, filters):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match='Either an IP or a range has to be specified'):
             identity_mgr.lookup_ip(**filters)
 
     def test_lookup_ip_raises_IdentityLookupError(self, identity_mgr: IdentityMgr, mocker):
