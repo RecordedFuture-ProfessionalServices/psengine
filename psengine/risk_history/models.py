@@ -16,8 +16,8 @@ from typing import Annotated, Optional
 
 from pydantic import BeforeValidator, Field
 
-from psengine.common_models import RFBaseModel
-from psengine.helpers.helpers import Validators
+from ..common_models import RFBaseModel
+from ..helpers.helpers import Validators
 
 
 class RiskScoreHistory(RFBaseModel):

@@ -16,7 +16,7 @@ from typing import Optional
 
 from pydantic import Field
 
-from psengine.common_models import RFBaseModel
+from ..common_models import RFBaseModel
 
 
 class FileInfoOut(RFBaseModel):
