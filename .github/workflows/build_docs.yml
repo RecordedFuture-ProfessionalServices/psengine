@@ -3,6 +3,8 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows: ["Doc Examples"]
+    types:
+      - completed
 
 permissions:
   contents: write
