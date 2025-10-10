@@ -68,7 +68,11 @@ def _add_exposure(pba: 'PBA_IdentityNovelExposure', md_maker: MarkdownMaker):
     summ = pba.panel_evidence_summary
     result = []
 
-    result.append(_format_field('Identity', pba.panel_status.entity_name))
+    result.append(
+        _format_field(
+            'Identity', pba.panel_evidence_summary.subject or pba.panel_status.entity_name
+        )
+    )
     result.append(_format_password(summ.exposed_secret.details))
     result.append(_format_assessments(summ.assessments))
     if summ.compromised_host.exfiltration_date:
