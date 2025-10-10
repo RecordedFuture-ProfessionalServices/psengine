@@ -102,6 +102,7 @@ nav:
       - Identity: modules/identity.md
       - Malware Intelligence: modules/malware_intel.md
       - Playbook Alerts: modules/playbook_alerts.md
+      - Risk History: modules/risk_history.md
       - Risklists: modules/risklists.md
       - STIX2: modules/stix2.md
       - Error Handling: modules/errors.md
@@ -186,10 +187,10 @@ nav:
           - Constants: api/logger/constants.md
           - Errors: api/logger/errors.md
       - Malware Intelligence:
-        - Manager: api/malware_intel/malware_intel_mgr.md
-        - ADT: api/malware_intel/malware_intel.md
-        - Models: api/malware_intel/models.md
-        - Errors: api/malware_intel/errors.md
+          - Manager: api/malware_intel/malware_intel_mgr.md
+          - ADT: api/malware_intel/malware_intel.md
+          - Models: api/malware_intel/models.md
+          - Errors: api/malware_intel/errors.md
       - Markdown:
           - Markdown: api/markdown/markdown.md
           - Models: api/markdown/models.md
