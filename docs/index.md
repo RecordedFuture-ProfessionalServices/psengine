@@ -33,10 +33,13 @@ It can easily interact with the following Recorded Future datasets and capabilit
 * Collective Insights
 * Classic & Playbook Alerts
 * Detection Rules
-* Identity Exposures
+* Fusion File management
+* Identity Exposures management
 * List management
+* Malware Sandbox reports download
 * On demand IOC enrichment
 * Risklists
+* Risk History
 * STIX conversion
 
 
