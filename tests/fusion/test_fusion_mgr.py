@@ -23,9 +23,9 @@ class TestFusionMgr:
 
         data = fusion_mgr.get_files(filepath)[0]
 
-        assert data.file_path == '/home/moise/vulns.json'
-        assert data.file_content == b'abcdef'
-        assert data.file_found is True
+        assert data.path == '/home/moise/vulns.json'
+        assert data.content == b'abcdef'
+        assert data.exists is True
         assert mock_response.call_args[0] == (
             'get',
             'https://api.recordedfuture.com/fusion/v3/files/%2Fhome%2Fmoise%2Fvulns.json',
@@ -40,9 +40,9 @@ class TestFusionMgr:
         )
         data = fusion_mgr.get_files(filepaths)
         for i, d in enumerate(data):
-            assert d.file_path == filepaths[i]
-            assert d.file_content == b'abcdef'
-            assert d.file_found is True
+            assert d.path == filepaths[i]
+            assert d.content == b'abcdef'
+            assert d.exists is True
             assert mock_response.call_args[0][0] == 'get'
             assert mock_response.call_args[0][1].startswith(
                 'https://api.recordedfuture.com/fusion/v3/files/%2Fhome%2Fmoise%2Fvulns'
@@ -53,8 +53,8 @@ class TestFusionMgr:
 
         mocker.patch.object(fusion_mgr, '_get_file', return_value=None)
         data = fusion_mgr.get_files(filepath)[0]
-        assert len(data.file_content) == 0
-        assert data.file_found is False
+        assert len(data.content) == 0
+        assert data.exists is False
 
     def test_list_path(self, fusion_mgr, mocker, make_response):
         filepath = '/home/moise'
@@ -142,16 +142,16 @@ class TestFusionMgr:
         mocker.patch.object(fusion_mgr, '_delete_file', side_effect=[object(), None])
 
         single = fusion_mgr.delete_files('home/moise/vulns.json')[0]
-        assert single.file_path == '/home/moise/vulns.json'
-        assert single.file_deleted is True
+        assert single.path == '/home/moise/vulns.json'
+        assert single.deleted is True
 
     def test_delete_files_multiple(self, fusion_mgr: FusionMgr, mocker):
         mocker.patch.object(fusion_mgr, '_delete_file', side_effect=[object(), None])
 
         results = fusion_mgr.delete_files(['/home/moise/one.csv', '/home/moise/two.csv'])
-        assert [r.file_deleted for r in results] == [True, False]
-        assert results[0].file_path == '/home/moise/one.csv'
-        assert results[1].file_path == '/home/moise/two.csv'
+        assert [r.deleted for r in results] == [True, False]
+        assert results[0].path == '/home/moise/one.csv'
+        assert results[1].path == '/home/moise/two.csv'
 
     def test_head_files_found_and_not_found(self, fusion_mgr: FusionMgr, mocker):
         head_ok = SimpleNamespace(
@@ -167,14 +167,14 @@ class TestFusionMgr:
 
         outs = fusion_mgr.head_files(['/home/moise/vulns.json', '/home/moise/missing.json'])
 
-        assert outs[0].file_path == '/home/moise/vulns.json'
-        assert outs[0].file_found is True
+        assert outs[0].path == '/home/moise/vulns.json'
+        assert outs[0].exists is True
         assert outs[0].content_length == 6
         assert outs[0].content_type == 'application/json'
         assert outs[0].content_disposition.startswith('attachment')
 
-        assert outs[1].file_path == '/home/moise/missing.json'
-        assert outs[1].file_found is False
+        assert outs[1].path == '/home/moise/missing.json'
+        assert outs[1].exists is False
         assert outs[1].content_length is None
         assert outs[1].content_type is None
 
@@ -185,10 +185,10 @@ class TestFusionMgr:
         files = ['/home/moise/vulns.json', '/home/moise/missing.json']
         outs = fusion_mgr.get_files(files)
 
-        assert outs[0].file_path == files[0]
-        assert outs[0].file_content == b'abcdef'
-        assert outs[0].file_found is True
+        assert outs[0].path == files[0]
+        assert outs[0].content == b'abcdef'
+        assert outs[0].exists is True
 
-        assert outs[1].file_path == files[1]
-        assert outs[1].file_content == b''
-        assert outs[1].file_found is False
+        assert outs[1].path == files[1]
+        assert outs[1].content == b''
+        assert outs[1].exists is False

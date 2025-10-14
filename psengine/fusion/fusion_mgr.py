@@ -69,14 +69,12 @@ class FusionMgr:
             if data:
                 returned_files.append(
                     FileGetOut.model_validate(
-                        {'file_path': file, 'file_content': data.content, 'file_found': True}
+                        {'path': file, 'content': data.content, 'exists': True}
                     )
                 )
             else:
                 returned_files.append(
-                    FileGetOut.model_validate(
-                        {'file_path': file, 'file_content': '', 'file_found': False}
-                    )
+                    FileGetOut.model_validate({'path': file, 'content': '', 'exists': False})
                 )
 
         return returned_files
@@ -134,7 +132,7 @@ class FusionMgr:
         for file in file_paths:
             data = self._delete_file(file)
             returned_files.append(
-                FileDeleteOut.model_validate({'file_path': file, 'file_deleted': bool(data)})
+                FileDeleteOut.model_validate({'path': file, 'deleted': bool(data)})
             )
 
         return returned_files
@@ -161,14 +159,10 @@ class FusionMgr:
             data = self._head_file(file)
             if data:
                 returned_files.append(
-                    FileHeadOut.model_validate(
-                        {'file_path': file, 'file_found': True, **data.headers}
-                    )
+                    FileHeadOut.model_validate({'path': file, 'exists': True, **data.headers})
                 )
             else:
-                returned_files.append(
-                    FileHeadOut.model_validate({'file_path': file, 'file_found': False})
-                )
+                returned_files.append(FileHeadOut.model_validate({'path': file, 'exists': False}))
 
         return returned_files
 

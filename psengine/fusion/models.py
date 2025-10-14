@@ -39,19 +39,19 @@ class DirectoryListOut(RFBaseModel):
 
 
 class FileGetOut(RFBaseModel):
-    file_path: str
-    file_content: bytes
-    file_found: bool
+    path: str
+    content: bytes
+    exists: bool
 
 
 class FileDeleteOut(RFBaseModel):
-    file_path: str
-    file_deleted: bool
+    path: str
+    deleted: bool
 
 
 class FileHeadOut(RFBaseModel):
-    file_path: str
-    file_found: bool
+    path: str
+    exists: bool
     content_disposition: Optional[str] = Field(alias='content-disposition', default=None)
     content_length: Optional[int] = Field(alias='Content-Length', default=None)
     content_type: Optional[str] = Field(alias='content-type', default=None)
