@@ -19,3 +19,4 @@ from .errors import (
     FusionPostFileError,
 )
 from .fusion_mgr import FusionMgr
+from .models import DirectoryListOut, FileDeleteOut, FileGetOut, FileHeadOut, FileInfoOut

@@ -13,3 +13,4 @@
 
 from .errors import RiskHistoryError
 from .risk_history_mgr import RiskHistoryMgr
+from .models import RiskHistory
