@@ -4941,98 +4941,102 @@ The changes are determined by the risk score and risk rules mutations over time.
 <p>In this example you start by fetching all the history for the last 20 days of two entities represented by their ID. To find the entity ID, if not known, you can use the Entity Match module, more information <a href="../entity_match/">here</a>. 
 You then create a table of 4 columns, and a row for each risk change. </p>
 <p>Before adding the data to the table, you convert the datetime values to string. You can use the <code>TIMESTAMP_STR</code> constant defined in <code>psengine.constants</code>.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">psengine.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">TIMESTAMP_STR</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">psengine.risk_history</span><span class="w"> </span><span class="kn">import</span> <span class="n">RiskHistoryMgr</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rich.console</span><span class="w"> </span><span class="kn">import</span> <span class="n">Console</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rich.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">Table</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="n">mgr</span> <span class="o">=</span> <span class="n">RiskHistoryMgr</span><span class="p">()</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">data</span> <span class="o">=</span> <span class="n">mgr</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a>    <span class="n">entities</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gVd1R&#39;</span><span class="p">,</span> <span class="s1">&#39;EJXkx&#39;</span><span class="p">],</span> <span class="n">from_</span><span class="o">=</span><span class="s1">&#39;-20d&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;-1d&#39;</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="p">)</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Score Summary&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s1">&#39;Entity&#39;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s1">&#39;Score&#39;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s1">&#39;Added&#39;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s1">&#39;Removed&#39;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19"></a>
-<a id="__codelineno-0-20" name="__codelineno-0-20"></a>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="n">table_data</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23"></a>    <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">scores</span><span class="p">:</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24"></a>        <span class="n">removed</span> <span class="o">=</span> <span class="p">(</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a>            <span class="n">score</span><span class="o">.</span><span class="n">removed</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26"></a>            <span class="k">if</span> <span class="n">score</span><span class="o">.</span><span class="n">removed</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27"></a>            <span class="k">else</span> <span class="s1">&#39;Not removed&#39;</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28"></a>        <span class="p">)</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29"></a>        <span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30"></a>            <span class="n">entity</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a>            <span class="nb">str</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">score</span><span class="p">),</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32"></a>            <span class="n">score</span><span class="o">.</span><span class="n">added</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">),</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33"></a>            <span class="n">removed</span><span class="p">,</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="p">)</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35"></a>
-<a id="__codelineno-0-36" name="__codelineno-0-36"></a>
-<a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<p>To run this example, first add the <code>rich</code> package to your virtual environment:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>rich
+</code></pre></div></td></tr></table></div>
+<p>Once installed the example can be executed. </p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span>
+<span class="normal"><a href="#__codelineno-1-25">25</a></span>
+<span class="normal"><a href="#__codelineno-1-26">26</a></span>
+<span class="normal"><a href="#__codelineno-1-27">27</a></span>
+<span class="normal"><a href="#__codelineno-1-28">28</a></span>
+<span class="normal"><a href="#__codelineno-1-29">29</a></span>
+<span class="normal"><a href="#__codelineno-1-30">30</a></span>
+<span class="normal"><a href="#__codelineno-1-31">31</a></span>
+<span class="normal"><a href="#__codelineno-1-32">32</a></span>
+<span class="normal"><a href="#__codelineno-1-33">33</a></span>
+<span class="normal"><a href="#__codelineno-1-34">34</a></span>
+<span class="normal"><a href="#__codelineno-1-35">35</a></span>
+<span class="normal"><a href="#__codelineno-1-36">36</a></span>
+<span class="normal"><a href="#__codelineno-1-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">psengine.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">TIMESTAMP_STR</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">psengine.risk_history</span><span class="w"> </span><span class="kn">import</span> <span class="n">RiskHistoryMgr</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rich.console</span><span class="w"> </span><span class="kn">import</span> <span class="n">Console</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rich.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">Table</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">mgr</span> <span class="o">=</span> <span class="n">RiskHistoryMgr</span><span class="p">()</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="n">data</span> <span class="o">=</span> <span class="n">mgr</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>    <span class="n">entities</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gVd1R&#39;</span><span class="p">,</span> <span class="s1">&#39;EJXkx&#39;</span><span class="p">],</span> <span class="n">from_</span><span class="o">=</span><span class="s1">&#39;-20d&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">&#39;-1d&#39;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Score Summary&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s1">&#39;Entity&#39;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s1">&#39;Score&#39;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s1">&#39;Added&#39;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s1">&#39;Removed&#39;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="n">table_data</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a>    <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">scores</span><span class="p">:</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24"></a>        <span class="n">removed</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25"></a>            <span class="n">score</span><span class="o">.</span><span class="n">removed</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26"></a>            <span class="k">if</span> <span class="n">score</span><span class="o">.</span><span class="n">removed</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27"></a>            <span class="k">else</span> <span class="s1">&#39;Not removed&#39;</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28"></a>        <span class="p">)</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29"></a>        <span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30"></a>            <span class="n">entity</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31"></a>            <span class="nb">str</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">score</span><span class="p">),</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32"></a>            <span class="n">score</span><span class="o">.</span><span class="n">added</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">),</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33"></a>            <span class="n">removed</span><span class="p">,</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34"></a>        <span class="p">)</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35"></a>
+<a id="__codelineno-1-36" name="__codelineno-1-36"></a>
+<a id="__codelineno-1-37" name="__codelineno-1-37"></a><span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>The output of the example will be similar to:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
-<span class="normal"><a href="#__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span>
-<span class="normal"><a href="#__codelineno-1-7">7</a></span>
-<span class="normal"><a href="#__codelineno-1-8">8</a></span>
-<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>┏━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a>┃                   Entity ┃ Score ┃               Added ┃             Removed ┃
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a>┡━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a>│ Red Hat Enterprise Linux │    10 │ 2025-09-16 16:30:56 │ 2025-09-27 16:14:20 │
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a>│ Red Hat Enterprise Linux │    81 │ 2025-09-27 16:14:20 │         Not removed │
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a>│                     Sudo │    72 │ 2025-09-19 16:08:43 │ 2025-09-30 02:18:45 │
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a>│                     Sudo │    77 │ 2025-09-30 02:18:45 │ 2025-09-30 16:28:08 │
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>│                     Sudo │    82 │ 2025-09-30 16:28:08 │         Not removed │
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a>└──────────────────────────┴───────┴─────────────────────┴─────────────────────┘
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span>
+<span class="normal"><a href="#__codelineno-2-7">7</a></span>
+<span class="normal"><a href="#__codelineno-2-8">8</a></span>
+<span class="normal"><a href="#__codelineno-2-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>┏━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┓
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>┃                   Entity ┃ Score ┃               Added ┃             Removed ┃
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>┡━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━┩
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>│ Red Hat Enterprise Linux │    10 │ 2025-09-16 16:30:56 │ 2025-09-27 16:14:20 │
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>│ Red Hat Enterprise Linux │    81 │ 2025-09-27 16:14:20 │         Not removed │
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>│                     Sudo │    72 │ 2025-09-19 16:08:43 │ 2025-09-30 02:18:45 │
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a>│                     Sudo │    77 │ 2025-09-30 02:18:45 │ 2025-09-30 16:28:08 │
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a>│                     Sudo │    82 │ 2025-09-30 16:28:08 │         Not removed │
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a>└──────────────────────────┴───────┴─────────────────────┴─────────────────────┘
 </code></pre></div></td></tr></table></div>
 
 
