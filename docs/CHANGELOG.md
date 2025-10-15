@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.3.0 - 2025-10-15
+
+### Added
+
+- `fusion` module for interactions with Fusion Files API.
+- `malware_intel` module for interaction with Malware Intelligence API.
+- `risk_history` module for interaction with Risk History API.
+
+### Fixed
+
+- `PBA_Identity.markdown` fallback to `entity_name` if `subject` is empty.
+
 ## v2.2.0 - 2025-10-08
 
 ### Added
