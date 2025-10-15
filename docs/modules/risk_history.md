@@ -18,6 +18,14 @@ You then create a table of 4 columns, and a row for each risk change.
 
 Before adding the data to the table, you convert the datetime values to string. You can use the `TIMESTAMP_STR` constant defined in `psengine.constants`.
 
+To run this example, first add the `rich` package to your virtual environment:
+
+```bash
+pip install rich
+```
+
+Once installed the example can be executed. 
+
 ```python
 --8<-- "docs/examples/risk_history/example_1.py"
 ```
