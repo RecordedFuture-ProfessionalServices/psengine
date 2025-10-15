@@ -14,29 +14,21 @@
 from ..errors import RecordedFutureError
 
 
-class AnalystNoteError(RecordedFutureError):
-    """Error raise when the init of AnalystNote is failing."""
+class FusionGetFileError(RecordedFutureError):
+    """Error raise when the get file operation fails."""
 
 
-class AnalystNoteLookupError(RecordedFutureError):
-    """Raised when an analyst note cannot be retrieved."""
+class FusionHeadFileError(RecordedFutureError):
+    """Error raise when the head file operation fails."""
 
 
-class AnalystNoteSearchError(RecordedFutureError):
-    """Raised when an analyst note cannot be searched."""
+class FusionPostFileError(RecordedFutureError):
+    """Error raise when the post file operation fails."""
 
 
-class AnalystNoteAttachmentError(RecordedFutureError):
-    """Raised when an analyst note attachment cannot be retrieved."""
+class FusionDeleteFileError(RecordedFutureError):
+    """Error raise when the delete file operation fails."""
 
 
-class AnalystNoteDeleteError(RecordedFutureError):
-    """Raised when an analyst note cannot be deleted."""
-
-
-class AnalystNotePreviewError(RecordedFutureError):
-    """Raised when an analyst note cannot be previewed."""
-
-
-class AnalystNotePublishError(RecordedFutureError):
-    """Raised when an analyst note cannot be published."""
+class FusionListDirError(RecordedFutureError):
+    """Error raise when the list dir operation fails."""

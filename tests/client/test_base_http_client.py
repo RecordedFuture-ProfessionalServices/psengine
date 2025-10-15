@@ -132,7 +132,7 @@ class Test_BaseHTTPClient:
             base_client.call(
                 method='post',
                 url='https://api.recordedfuture.com/threat/actor/search',
-                data='not a dict',
+                data=1,
                 headers={'X-RFToken': rf_token},
             )
 

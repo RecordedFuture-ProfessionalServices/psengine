@@ -11,32 +11,49 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from ..errors import RecordedFutureError
+from datetime import datetime
+from typing import Optional
+
+from pydantic import Field
+
+from ..common_models import RFBaseModel
 
 
-class AnalystNoteError(RecordedFutureError):
-    """Error raise when the init of AnalystNote is failing."""
+class FileInfoOut(RFBaseModel):
+    type_: str = Field(alias='type')
+    name: str
+    path: str
+    format: Optional[str] = None
+    hash: Optional[str] = None
+    created: Optional[datetime] = None
+    size: Optional[int] = None
+    flow: Optional[str] = None
+    owner: Optional[str] = None
 
 
-class AnalystNoteLookupError(RecordedFutureError):
-    """Raised when an analyst note cannot be retrieved."""
+class DirectoryListOut(RFBaseModel):
+    name: str
+    path: str
+    files: list[FileInfoOut]
+    type_: str = Field(alias='type')
 
 
-class AnalystNoteSearchError(RecordedFutureError):
-    """Raised when an analyst note cannot be searched."""
+class FileGetOut(RFBaseModel):
+    path: str
+    content: bytes
+    exists: bool
 
 
-class AnalystNoteAttachmentError(RecordedFutureError):
-    """Raised when an analyst note attachment cannot be retrieved."""
+class FileDeleteOut(RFBaseModel):
+    path: str
+    deleted: bool
 
 
-class AnalystNoteDeleteError(RecordedFutureError):
-    """Raised when an analyst note cannot be deleted."""
-
-
-class AnalystNotePreviewError(RecordedFutureError):
-    """Raised when an analyst note cannot be previewed."""
-
-
-class AnalystNotePublishError(RecordedFutureError):
-    """Raised when an analyst note cannot be published."""
+class FileHeadOut(RFBaseModel):
+    path: str
+    exists: bool
+    content_disposition: Optional[str] = Field(alias='content-disposition', default=None)
+    content_length: Optional[int] = Field(alias='Content-Length', default=None)
+    content_type: Optional[str] = Field(alias='content-type', default=None)
+    etag: Optional[str] = None
+    last_modified: Optional[str] = Field(alias='last-modified', default=None)

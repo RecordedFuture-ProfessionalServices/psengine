@@ -29,21 +29,24 @@ PSEngine is ready for the demands of building robust and reliable integrations.
 
 It can easily interact with the following Recorded Future datasets:
 
-* Analyst Notes
-* Collective Insights
-* Classic & Playbook Alerts
-* Detection Rules
+- Analyst Notes
+- Collective Insights
+- Classic & Playbook Alerts
+- Detection Rules
+- Fusion File management
 - Identity Exposures management
-* List management
-* On demand IOC enrichment
-* Risklists
+- List management
+- Malware Sandbox reports download
+- On demand IOC enrichment
+- Risklists
+- Risk History
 - STIX conversion
 
 
 And facilitate the development with features like:
 
-* Built-in logging
-* Easy configuration management
+- Built-in logging
+- Easy configuration management
 - Markdown creation from certain data types
-* Proxy support
+- Proxy support
 

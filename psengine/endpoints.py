@@ -45,6 +45,9 @@ EP_CLASSIC_ALERTS_ID = EP_CLASSIC_ALERTS_V3 + '/alerts/{}'
 EP_RISKLIST = f'{BASE_URL}/{API_VERSION}/' + '{}/risklist'
 EP_FUSION_FILES = CONNECT_API_BASE_URL + '/fusion/files'
 
+EP_FUSION_FILES_V3 = f'{BASE_URL}/fusion/v3/files/'
+EP_FUSION_DIR_V3 = f'{BASE_URL}/fusion/v3/files/directory/'
+
 ###############################################################################
 # Playbook Alert Endpoints
 ###############################################################################
@@ -111,3 +114,15 @@ EP_IDENTITY_IP_LOOKUP = EP_IDENTITY + 'ip/lookup'
 EP_IDENTITY_CREDENTIALS_SEARCH = EP_IDENTITY + 'credentials/search'
 EP_IDENTITY_CREDENTIALS_LOOKUP = EP_IDENTITY + 'credentials/lookup'
 EP_IDENTITY_DUMP_SEARCH = EP_IDENTITY + 'metadata/dump/search'
+
+###############################################################################
+# Malware Intelligence API Endpoints
+###############################################################################
+EP_MALWARE_INTELLIGENCE = BASE_URL + '/malware-intelligence/v1/'
+EP_MALWARE_INTEL_REPORTS = EP_MALWARE_INTELLIGENCE + 'reports'
+
+###############################################################################
+# Risk History API Endpoints
+###############################################################################
+EP_RISK_HISTORY_BASE = BASE_URL + '/risk'
+EP_RISK_HISTORY = EP_RISK_HISTORY_BASE + '/history'

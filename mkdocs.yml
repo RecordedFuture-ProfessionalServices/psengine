@@ -98,8 +98,11 @@ nav:
       - Enrichment: modules/enrich.md
       - Entity List: modules/entity_list.md
       - Entity Match: modules/entity_match.md
+      - Fusion: modules/fusion.md
       - Identity: modules/identity.md
+      - Malware Intelligence: modules/malware_intel.md
       - Playbook Alerts: modules/playbook_alerts.md
+      - Risk History: modules/risk_history.md
       - Risklists: modules/risklists.md
       - STIX2: modules/stix2.md
       - Error Handling: modules/errors.md
@@ -162,6 +165,10 @@ nav:
           - ADT: api/entity_match/entity_match.md
           - Models: api/entity_match/models.md
           - Errors: api/entity_match/errors.md
+      - Fusion:
+          - Manager: api/fusion/fusion_mgr.md
+          - Models: api/fusion/models.md
+          - Errors: api/fusion/errors.md
       - Helpers:
           - FileHelpers: api/helpers/file_helpers.md
           - FormattingHelpers: api/helpers/format_helpers.md
@@ -179,6 +186,11 @@ nav:
           - Logger: api/logger/rf_logger.md
           - Constants: api/logger/constants.md
           - Errors: api/logger/errors.md
+      - Malware Intelligence:
+          - Manager: api/malware_intel/malware_intel_mgr.md
+          - ADT: api/malware_intel/malware_intel.md
+          - Models: api/malware_intel/models.md
+          - Errors: api/malware_intel/errors.md
       - Markdown:
           - Markdown: api/markdown/markdown.md
           - Models: api/markdown/models.md
@@ -201,6 +213,10 @@ nav:
               - PBA Malware Report: api/playbook_alerts/models/pba_malware_report.md
               - PBA Third Party Risk: api/playbook_alerts/models/pba_third_party_risk.md
               - Search Endpoint: api/playbook_alerts/models/search_endpoint.md
+      - Risk History:
+          - Manager: api/risk_history/risk_history_mgr.md
+          - Models: api/risk_history/models.md
+          - Errors: api/risk_history/errors.md
       - Risklists:
           - Manager: api/risklists/risklist_mgr.md
           - Models: api/risklists/models.md

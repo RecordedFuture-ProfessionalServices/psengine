@@ -11,32 +11,6 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from ..errors import RecordedFutureError
-
-
-class AnalystNoteError(RecordedFutureError):
-    """Error raise when the init of AnalystNote is failing."""
-
-
-class AnalystNoteLookupError(RecordedFutureError):
-    """Raised when an analyst note cannot be retrieved."""
-
-
-class AnalystNoteSearchError(RecordedFutureError):
-    """Raised when an analyst note cannot be searched."""
-
-
-class AnalystNoteAttachmentError(RecordedFutureError):
-    """Raised when an analyst note attachment cannot be retrieved."""
-
-
-class AnalystNoteDeleteError(RecordedFutureError):
-    """Raised when an analyst note cannot be deleted."""
-
-
-class AnalystNotePreviewError(RecordedFutureError):
-    """Raised when an analyst note cannot be previewed."""
-
-
-class AnalystNotePublishError(RecordedFutureError):
-    """Raised when an analyst note cannot be published."""
+from .errors import RiskHistoryError
+from .models import RiskHistory
+from .risk_history_mgr import RiskHistoryMgr

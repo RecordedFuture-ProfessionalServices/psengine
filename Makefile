@@ -1,4 +1,4 @@
-FOLDERS=psengine tests examples docs
+FOLDERS=psengine tests docs
 
 help:
 	@echo "Available targets:"

@@ -97,7 +97,7 @@ class BaseHTTPClient:
         self,
         method: Annotated[str, Doc('An HTTP method.')],
         url: Annotated[str, Doc('A URL to make the request to.')],
-        data: Annotated[Union[dict, list[dict], None], Doc('A request body.')] = None,
+        data: Annotated[Union[dict, list[dict], bytes, None], Doc('A request body.')] = None,
         *,
         params: Annotated[Union[dict, None], Doc('HTTP query parameters.')] = None,
         headers: Annotated[
@@ -124,7 +124,8 @@ class BaseHTTPClient:
         if 'User-Agent' not in headers:
             headers['User-Agent'] = self._get_user_agent_header()
 
-        data = json.dumps(data) if data is not None else None
+        if not isinstance(data, bytes):
+            data = json.dumps(data) if data is not None else None
 
         try:
             response = method_func(

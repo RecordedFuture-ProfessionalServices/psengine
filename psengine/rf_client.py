@@ -95,13 +95,16 @@ class RFClient(BaseHTTPClient):
             str, Doc('An HTTP method, one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.')
         ],
         url: Annotated[str, Doc('A URL to make the request to.')],
-        data: Annotated[Union[dict, list[dict], None], Doc('A request body.')] = None,
+        data: Annotated[Union[dict, list[dict], bytes, None], Doc('A request body.')] = None,
         *,
         params: Annotated[Optional[dict], Doc('HTTP query parameters.')] = None,
         headers: Annotated[
             Optional[dict],
             Doc('If specified, it overrides default headers and does not set the token.'),
         ] = None,
+        content_type_header: Annotated[
+            Optional[str], Doc('Content-Type header value.')
+        ] = 'application/json',
         **kwargs,
     ) -> Annotated[Response, Doc('A requests.Response object.')]:
         """Perform an HTTP request.
@@ -109,7 +112,7 @@ class RFClient(BaseHTTPClient):
         Raises:
             ValidationError: If method is not one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.
         """
-        headers = headers or self._prepare_headers()
+        headers = headers or self._prepare_headers(content_type_header)
 
         return self.call(
             method=method,
@@ -370,11 +373,11 @@ class RFClient(BaseHTTPClient):
             self.log.error(f'Error during validation: {err}')
             return False
 
-    def _prepare_headers(self):
+    def _prepare_headers(self, content_type_header: str = 'application/json'):
         user_agent = self._get_user_agent_header()
         headers = {
             'User-Agent': user_agent,
-            'Content-Type': 'application/json',
+            'Content-Type': content_type_header,
             'accept': 'application/json',
         }
         if self._api_token:

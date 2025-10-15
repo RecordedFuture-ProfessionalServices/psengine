@@ -1,0 +1,34 @@
+## Introduction
+
+The `malware_intel` module allows you to interact with the Recorded Future Malware Intelligence. Currently it is only supported the retrieval of reports from an already known SHA256.
+
+
+See the [**API Reference**](../api/malware_intel/malware_intel_mgr.md) for internal details of the module.
+
+## Notes
+
+- The `reports` method returns at most 10 reports, with the highest sandbox score.
+
+
+## Examples
+
+{! modules/_includes/examples_warning.md !}
+
+#### 1: Search for reports for a specific SHA256 hash
+
+In this example you search for a query that is matching all the reports having a `sha256` as defined in the `sha256` argument. 
+The start and end date are relative to the day in which you run the example. 
+
+```python
+--8<-- "docs/examples/malware_intel/example_1.py"
+```
+
+The output of the example is:
+
+```
+Sandbox Report of: c5455c43f6a295392cf7db66c68f8c725029f88e089ed01e3de858a114f0764f, Score: 10, Task: behavioral2, Submitted: 2025-09-25T16:45:03.000Z
+Sandbox Report of: c5455c43f6a295392cf7db66c68f8c725029f88e089ed01e3de858a114f0764f, Score: 10, Task: behavioral1, Submitted: 2025-09-25T16:45:03.000Z
+Sandbox Report of: c5455c43f6a295392cf7db66c68f8c725029f88e089ed01e3de858a114f0764f, Score: 3, Task: behavioral2, Submitted: 2025-09-25T10:48:25.000Z
+Sandbox Report of: c5455c43f6a295392cf7db66c68f8c725029f88e089ed01e3de858a114f0764f, Score: 3, Task: behavioral1, Submitted: 2025-09-25T10:48:25.000Z
+```
+
