@@ -3183,6 +3183,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#psengine.enrich.lookup.EnrichedVulnerability.cvssv4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;cvssv4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#psengine.enrich.lookup.EnrichedVulnerability.enterprise_lists" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;enterprise_lists
@@ -7253,6 +7262,15 @@
   <a href="#psengine.enrich.lookup.EnrichedVulnerability.cvssv3" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;cvssv3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psengine.enrich.lookup.EnrichedVulnerability.cvssv4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;cvssv4
     </span>
   </a>
   
@@ -11403,6 +11421,29 @@ Inherit behaviours from <code>BaseEnrichedEntity</code>.</p>
 
 
 
+<h4 id="psengine.enrich.lookup.EnrichedVulnerability.cvssv4" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">cvssv4</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#psengine.enrich.lookup.EnrichedVulnerability.cvssv4" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">cvssv4</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;CVSSV4&lt;/span&gt; (&lt;code&gt;psengine.enrich.models.lookup.CVSSV4&lt;/code&gt;)" href="../lookup_models/#psengine.enrich.models.lookup.CVSSV4">CVSSV4</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
 <h4 id="psengine.enrich.lookup.EnrichedVulnerability.enterprise_lists" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">enterprise_lists</span>
 
@@ -12262,9 +12303,7 @@ timestamp.</p>
 
             <details class="quote">
               <summary>Source code in <code>psengine/enrich/lookup.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-225">225</a></span>
-<span class="normal"><a href="#__codelineno-0-226">226</a></span>
-<span class="normal"><a href="#__codelineno-0-227">227</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-227">227</a></span>
 <span class="normal"><a href="#__codelineno-0-228">228</a></span>
 <span class="normal"><a href="#__codelineno-0-229">229</a></span>
 <span class="normal"><a href="#__codelineno-0-230">230</a></span>
@@ -12281,26 +12320,28 @@ timestamp.</p>
 <span class="normal"><a href="#__codelineno-0-241">241</a></span>
 <span class="normal"><a href="#__codelineno-0-242">242</a></span>
 <span class="normal"><a href="#__codelineno-0-243">243</a></span>
-<span class="normal"><a href="#__codelineno-0-244">244</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-225" name="__codelineno-0-225"></a><span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;EnrichmentData&#39;</span><span class="p">):</span>
-<a id="__codelineno-0-226" name="__codelineno-0-226"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
-<a id="__codelineno-0-227" name="__codelineno-0-227"></a>        <span class="k">return</span> <span class="p">(</span>
-<a id="__codelineno-0-228" name="__codelineno-0-228"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-229" name="__codelineno-0-229"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-230" name="__codelineno-0-230"></a>        <span class="p">)</span> <span class="o">==</span> <span class="p">(</span>
-<a id="__codelineno-0-231" name="__codelineno-0-231"></a>            <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-232" name="__codelineno-0-232"></a>            <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-233" name="__codelineno-0-233"></a>        <span class="p">)</span>
-<a id="__codelineno-0-234" name="__codelineno-0-234"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-0-235" name="__codelineno-0-235"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">entity</span>
-<a id="__codelineno-0-236" name="__codelineno-0-236"></a>    <span class="k">return</span> <span class="p">(</span>
-<a id="__codelineno-0-237" name="__codelineno-0-237"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
-<a id="__codelineno-0-238" name="__codelineno-0-238"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-239" name="__codelineno-0-239"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-240" name="__codelineno-0-240"></a>    <span class="p">)</span> <span class="o">==</span> <span class="p">(</span>
-<a id="__codelineno-0-241" name="__codelineno-0-241"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
-<a id="__codelineno-0-242" name="__codelineno-0-242"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-243" name="__codelineno-0-243"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-244" name="__codelineno-0-244"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-244">244</a></span>
+<span class="normal"><a href="#__codelineno-0-245">245</a></span>
+<span class="normal"><a href="#__codelineno-0-246">246</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-227" name="__codelineno-0-227"></a><span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;EnrichmentData&#39;</span><span class="p">):</span>
+<a id="__codelineno-0-228" name="__codelineno-0-228"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
+<a id="__codelineno-0-229" name="__codelineno-0-229"></a>        <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-0-230" name="__codelineno-0-230"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-231" name="__codelineno-0-231"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-232" name="__codelineno-0-232"></a>        <span class="p">)</span> <span class="o">==</span> <span class="p">(</span>
+<a id="__codelineno-0-233" name="__codelineno-0-233"></a>            <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-234" name="__codelineno-0-234"></a>            <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-235" name="__codelineno-0-235"></a>        <span class="p">)</span>
+<a id="__codelineno-0-236" name="__codelineno-0-236"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-0-237" name="__codelineno-0-237"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">entity</span>
+<a id="__codelineno-0-238" name="__codelineno-0-238"></a>    <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-0-239" name="__codelineno-0-239"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+<a id="__codelineno-0-240" name="__codelineno-0-240"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-241" name="__codelineno-0-241"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-242" name="__codelineno-0-242"></a>    <span class="p">)</span> <span class="o">==</span> <span class="p">(</span>
+<a id="__codelineno-0-243" name="__codelineno-0-243"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+<a id="__codelineno-0-244" name="__codelineno-0-244"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-245" name="__codelineno-0-245"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-246" name="__codelineno-0-246"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -12323,9 +12364,7 @@ timestamp.</p>
 
             <details class="quote">
               <summary>Source code in <code>psengine/enrich/lookup.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-246">246</a></span>
-<span class="normal"><a href="#__codelineno-0-247">247</a></span>
-<span class="normal"><a href="#__codelineno-0-248">248</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-248">248</a></span>
 <span class="normal"><a href="#__codelineno-0-249">249</a></span>
 <span class="normal"><a href="#__codelineno-0-250">250</a></span>
 <span class="normal"><a href="#__codelineno-0-251">251</a></span>
@@ -12342,26 +12381,28 @@ timestamp.</p>
 <span class="normal"><a href="#__codelineno-0-262">262</a></span>
 <span class="normal"><a href="#__codelineno-0-263">263</a></span>
 <span class="normal"><a href="#__codelineno-0-264">264</a></span>
-<span class="normal"><a href="#__codelineno-0-265">265</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-246" name="__codelineno-0-246"></a><span class="k">def</span><span class="w"> </span><span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;EnrichmentData&#39;</span><span class="p">):</span>
-<a id="__codelineno-0-247" name="__codelineno-0-247"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
-<a id="__codelineno-0-248" name="__codelineno-0-248"></a>        <span class="k">return</span> <span class="p">(</span>
-<a id="__codelineno-0-249" name="__codelineno-0-249"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-250" name="__codelineno-0-250"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-251" name="__codelineno-0-251"></a>        <span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span>
-<a id="__codelineno-0-252" name="__codelineno-0-252"></a>            <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-253" name="__codelineno-0-253"></a>            <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-254" name="__codelineno-0-254"></a>        <span class="p">)</span>
-<a id="__codelineno-0-255" name="__codelineno-0-255"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-0-256" name="__codelineno-0-256"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">entity</span>
-<a id="__codelineno-0-257" name="__codelineno-0-257"></a>    <span class="k">return</span> <span class="p">(</span>
-<a id="__codelineno-0-258" name="__codelineno-0-258"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
-<a id="__codelineno-0-259" name="__codelineno-0-259"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-260" name="__codelineno-0-260"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-261" name="__codelineno-0-261"></a>    <span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span>
-<a id="__codelineno-0-262" name="__codelineno-0-262"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
-<a id="__codelineno-0-263" name="__codelineno-0-263"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-264" name="__codelineno-0-264"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-<a id="__codelineno-0-265" name="__codelineno-0-265"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-265">265</a></span>
+<span class="normal"><a href="#__codelineno-0-266">266</a></span>
+<span class="normal"><a href="#__codelineno-0-267">267</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-248" name="__codelineno-0-248"></a><span class="k">def</span><span class="w"> </span><span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;EnrichmentData&#39;</span><span class="p">):</span>
+<a id="__codelineno-0-249" name="__codelineno-0-249"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
+<a id="__codelineno-0-250" name="__codelineno-0-250"></a>        <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-0-251" name="__codelineno-0-251"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-252" name="__codelineno-0-252"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-253" name="__codelineno-0-253"></a>        <span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span>
+<a id="__codelineno-0-254" name="__codelineno-0-254"></a>            <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-255" name="__codelineno-0-255"></a>            <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-256" name="__codelineno-0-256"></a>        <span class="p">)</span>
+<a id="__codelineno-0-257" name="__codelineno-0-257"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-0-258" name="__codelineno-0-258"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">entity</span>
+<a id="__codelineno-0-259" name="__codelineno-0-259"></a>    <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-0-260" name="__codelineno-0-260"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+<a id="__codelineno-0-261" name="__codelineno-0-261"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-262" name="__codelineno-0-262"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-263" name="__codelineno-0-263"></a>    <span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span>
+<a id="__codelineno-0-264" name="__codelineno-0-264"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+<a id="__codelineno-0-265" name="__codelineno-0-265"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-266" name="__codelineno-0-266"></a>        <span class="n">other</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<a id="__codelineno-0-267" name="__codelineno-0-267"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -12384,9 +12425,7 @@ timestamp.</p>
 
             <details class="quote">
               <summary>Source code in <code>psengine/enrich/lookup.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-206">206</a></span>
-<span class="normal"><a href="#__codelineno-0-207">207</a></span>
-<span class="normal"><a href="#__codelineno-0-208">208</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-208">208</a></span>
 <span class="normal"><a href="#__codelineno-0-209">209</a></span>
 <span class="normal"><a href="#__codelineno-0-210">210</a></span>
 <span class="normal"><a href="#__codelineno-0-211">211</a></span>
@@ -12401,24 +12440,26 @@ timestamp.</p>
 <span class="normal"><a href="#__codelineno-0-220">220</a></span>
 <span class="normal"><a href="#__codelineno-0-221">221</a></span>
 <span class="normal"><a href="#__codelineno-0-222">222</a></span>
-<span class="normal"><a href="#__codelineno-0-223">223</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-206" name="__codelineno-0-206"></a><span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-207" name="__codelineno-0-207"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
-<a id="__codelineno-0-208" name="__codelineno-0-208"></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span>
-<a id="__codelineno-0-209" name="__codelineno-0-209"></a>            <span class="p">(</span>
-<a id="__codelineno-0-210" name="__codelineno-0-210"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">id_</span><span class="p">,</span>
-<a id="__codelineno-0-211" name="__codelineno-0-211"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-212" name="__codelineno-0-212"></a>            <span class="p">)</span>
-<a id="__codelineno-0-213" name="__codelineno-0-213"></a>        <span class="p">)</span>
-<a id="__codelineno-0-214" name="__codelineno-0-214"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-0-215" name="__codelineno-0-215"></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">)</span>
-<a id="__codelineno-0-216" name="__codelineno-0-216"></a>
-<a id="__codelineno-0-217" name="__codelineno-0-217"></a>    <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span>
-<a id="__codelineno-0-218" name="__codelineno-0-218"></a>        <span class="p">(</span>
-<a id="__codelineno-0-219" name="__codelineno-0-219"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">id_</span><span class="p">,</span>
-<a id="__codelineno-0-220" name="__codelineno-0-220"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
-<a id="__codelineno-0-221" name="__codelineno-0-221"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
-<a id="__codelineno-0-222" name="__codelineno-0-222"></a>        <span class="p">)</span>
-<a id="__codelineno-0-223" name="__codelineno-0-223"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-223">223</a></span>
+<span class="normal"><a href="#__codelineno-0-224">224</a></span>
+<span class="normal"><a href="#__codelineno-0-225">225</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-208" name="__codelineno-0-208"></a><span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-0-209" name="__codelineno-0-209"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
+<a id="__codelineno-0-210" name="__codelineno-0-210"></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span>
+<a id="__codelineno-0-211" name="__codelineno-0-211"></a>            <span class="p">(</span>
+<a id="__codelineno-0-212" name="__codelineno-0-212"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">id_</span><span class="p">,</span>
+<a id="__codelineno-0-213" name="__codelineno-0-213"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-214" name="__codelineno-0-214"></a>            <span class="p">)</span>
+<a id="__codelineno-0-215" name="__codelineno-0-215"></a>        <span class="p">)</span>
+<a id="__codelineno-0-216" name="__codelineno-0-216"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-0-217" name="__codelineno-0-217"></a>        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="p">)</span>
+<a id="__codelineno-0-218" name="__codelineno-0-218"></a>
+<a id="__codelineno-0-219" name="__codelineno-0-219"></a>    <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span>
+<a id="__codelineno-0-220" name="__codelineno-0-220"></a>        <span class="p">(</span>
+<a id="__codelineno-0-221" name="__codelineno-0-221"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">id_</span><span class="p">,</span>
+<a id="__codelineno-0-222" name="__codelineno-0-222"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+<a id="__codelineno-0-223" name="__codelineno-0-223"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="p">,</span>
+<a id="__codelineno-0-224" name="__codelineno-0-224"></a>        <span class="p">)</span>
+<a id="__codelineno-0-225" name="__codelineno-0-225"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -12441,9 +12482,7 @@ timestamp.</p>
 
             <details class="quote">
               <summary>Source code in <code>psengine/enrich/lookup.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-281">281</a></span>
-<span class="normal"><a href="#__codelineno-0-282">282</a></span>
-<span class="normal"><a href="#__codelineno-0-283">283</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-283">283</a></span>
 <span class="normal"><a href="#__codelineno-0-284">284</a></span>
 <span class="normal"><a href="#__codelineno-0-285">285</a></span>
 <span class="normal"><a href="#__codelineno-0-286">286</a></span>
@@ -12453,19 +12492,21 @@ timestamp.</p>
 <span class="normal"><a href="#__codelineno-0-290">290</a></span>
 <span class="normal"><a href="#__codelineno-0-291">291</a></span>
 <span class="normal"><a href="#__codelineno-0-292">292</a></span>
-<span class="normal"><a href="#__codelineno-0-293">293</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-281" name="__codelineno-0-281"></a><span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-282" name="__codelineno-0-282"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
-<a id="__codelineno-0-283" name="__codelineno-0-283"></a>        <span class="k">return</span> <span class="p">(</span>
-<a id="__codelineno-0-284" name="__codelineno-0-284"></a>            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-285" name="__codelineno-0-285"></a>            <span class="sa">f</span><span class="s1">&#39;Last Seen: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
-<a id="__codelineno-0-286" name="__codelineno-0-286"></a>        <span class="p">)</span>
-<a id="__codelineno-0-287" name="__codelineno-0-287"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-0-288" name="__codelineno-0-288"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s1">&#39;</span>
-<a id="__codelineno-0-289" name="__codelineno-0-289"></a>    <span class="k">return</span> <span class="p">(</span>
-<a id="__codelineno-0-290" name="__codelineno-0-290"></a>        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-291" name="__codelineno-0-291"></a>        <span class="sa">f</span><span class="s1">&#39;Risk Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-292" name="__codelineno-0-292"></a>        <span class="sa">f</span><span class="s1">&#39;Last Seen: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
-<a id="__codelineno-0-293" name="__codelineno-0-293"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-293">293</a></span>
+<span class="normal"><a href="#__codelineno-0-294">294</a></span>
+<span class="normal"><a href="#__codelineno-0-295">295</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-283" name="__codelineno-0-283"></a><span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-0-284" name="__codelineno-0-284"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
+<a id="__codelineno-0-285" name="__codelineno-0-285"></a>        <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-0-286" name="__codelineno-0-286"></a>            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-287" name="__codelineno-0-287"></a>            <span class="sa">f</span><span class="s1">&#39;Last Seen: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+<a id="__codelineno-0-288" name="__codelineno-0-288"></a>        <span class="p">)</span>
+<a id="__codelineno-0-289" name="__codelineno-0-289"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-0-290" name="__codelineno-0-290"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s1">&#39;</span>
+<a id="__codelineno-0-291" name="__codelineno-0-291"></a>    <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-0-292" name="__codelineno-0-292"></a>        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-293" name="__codelineno-0-293"></a>        <span class="sa">f</span><span class="s1">&#39;Risk Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-294" name="__codelineno-0-294"></a>        <span class="sa">f</span><span class="s1">&#39;Last Seen: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+<a id="__codelineno-0-295" name="__codelineno-0-295"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -12488,9 +12529,7 @@ timestamp.</p>
 
             <details class="quote">
               <summary>Source code in <code>psengine/enrich/lookup.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-267">267</a></span>
-<span class="normal"><a href="#__codelineno-0-268">268</a></span>
-<span class="normal"><a href="#__codelineno-0-269">269</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-269">269</a></span>
 <span class="normal"><a href="#__codelineno-0-270">270</a></span>
 <span class="normal"><a href="#__codelineno-0-271">271</a></span>
 <span class="normal"><a href="#__codelineno-0-272">272</a></span>
@@ -12500,19 +12539,21 @@ timestamp.</p>
 <span class="normal"><a href="#__codelineno-0-276">276</a></span>
 <span class="normal"><a href="#__codelineno-0-277">277</a></span>
 <span class="normal"><a href="#__codelineno-0-278">278</a></span>
-<span class="normal"><a href="#__codelineno-0-279">279</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-267" name="__codelineno-0-267"></a><span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-268" name="__codelineno-0-268"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
-<a id="__codelineno-0-269" name="__codelineno-0-269"></a>        <span class="k">return</span> <span class="p">(</span>
-<a id="__codelineno-0-270" name="__codelineno-0-270"></a>            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-271" name="__codelineno-0-271"></a>            <span class="sa">f</span><span class="s1">&#39;Last Seen: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
-<a id="__codelineno-0-272" name="__codelineno-0-272"></a>        <span class="p">)</span>
-<a id="__codelineno-0-273" name="__codelineno-0-273"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-0-274" name="__codelineno-0-274"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s1">&#39;</span>
-<a id="__codelineno-0-275" name="__codelineno-0-275"></a>    <span class="k">return</span> <span class="p">(</span>
-<a id="__codelineno-0-276" name="__codelineno-0-276"></a>        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-277" name="__codelineno-0-277"></a>        <span class="sa">f</span><span class="s1">&#39;Risk Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-278" name="__codelineno-0-278"></a>        <span class="sa">f</span><span class="s1">&#39;Last Seen: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
-<a id="__codelineno-0-279" name="__codelineno-0-279"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-279">279</a></span>
+<span class="normal"><a href="#__codelineno-0-280">280</a></span>
+<span class="normal"><a href="#__codelineno-0-281">281</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-269" name="__codelineno-0-269"></a><span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-0-270" name="__codelineno-0-270"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">EnrichedMalware</span><span class="p">):</span>
+<a id="__codelineno-0-271" name="__codelineno-0-271"></a>        <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-0-272" name="__codelineno-0-272"></a>            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-273" name="__codelineno-0-273"></a>            <span class="sa">f</span><span class="s1">&#39;Last Seen: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+<a id="__codelineno-0-274" name="__codelineno-0-274"></a>        <span class="p">)</span>
+<a id="__codelineno-0-275" name="__codelineno-0-275"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-0-276" name="__codelineno-0-276"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s1">&#39;</span>
+<a id="__codelineno-0-277" name="__codelineno-0-277"></a>    <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-0-278" name="__codelineno-0-278"></a>        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-279" name="__codelineno-0-279"></a>        <span class="sa">f</span><span class="s1">&#39;Risk Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">risk</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-280" name="__codelineno-0-280"></a>        <span class="sa">f</span><span class="s1">&#39;Last Seen: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">last_seen</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+<a id="__codelineno-0-281" name="__codelineno-0-281"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -12717,9 +12758,7 @@ timestamp.</p>
 
             <details class="quote">
               <summary>Source code in <code>psengine/enrich/lookup.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-295">295</a></span>
-<span class="normal"><a href="#__codelineno-0-296">296</a></span>
-<span class="normal"><a href="#__codelineno-0-297">297</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-297">297</a></span>
 <span class="normal"><a href="#__codelineno-0-298">298</a></span>
 <span class="normal"><a href="#__codelineno-0-299">299</a></span>
 <span class="normal"><a href="#__codelineno-0-300">300</a></span>
@@ -12733,23 +12772,25 @@ timestamp.</p>
 <span class="normal"><a href="#__codelineno-0-308">308</a></span>
 <span class="normal"><a href="#__codelineno-0-309">309</a></span>
 <span class="normal"><a href="#__codelineno-0-310">310</a></span>
-<span class="normal"><a href="#__codelineno-0-311">311</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-295" name="__codelineno-0-295"></a><span class="k">def</span><span class="w"> </span><span class="nf">links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_section</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">entity_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<a id="__codelineno-0-296" name="__codelineno-0-296"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve a list of entities from the links attribute of the specific type and section.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-297" name="__codelineno-0-297"></a>    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-0-298" name="__codelineno-0-298"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;links&#39;</span><span class="p">):</span>
-<a id="__codelineno-0-299" name="__codelineno-0-299"></a>        <span class="k">return</span> <span class="p">[]</span>
-<a id="__codelineno-0-300" name="__codelineno-0-300"></a>
-<a id="__codelineno-0-301" name="__codelineno-0-301"></a>    <span class="n">results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
-<a id="__codelineno-0-302" name="__codelineno-0-302"></a>        <span class="n">entity</span><span class="o">.</span><span class="n">name</span>
-<a id="__codelineno-0-303" name="__codelineno-0-303"></a>        <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">hits</span>
-<a id="__codelineno-0-304" name="__codelineno-0-304"></a>        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">hit</span><span class="o">.</span><span class="n">sections</span>
-<a id="__codelineno-0-305" name="__codelineno-0-305"></a>        <span class="k">if</span> <span class="n">section</span><span class="o">.</span><span class="n">section_id</span> <span class="ow">and</span> <span class="n">section</span><span class="o">.</span><span class="n">section_id</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">from_section</span>
-<a id="__codelineno-0-306" name="__codelineno-0-306"></a>        <span class="k">for</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">section</span><span class="o">.</span><span class="n">lists</span>
-<a id="__codelineno-0-307" name="__codelineno-0-307"></a>        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">lst</span><span class="o">.</span><span class="n">entities</span>
-<a id="__codelineno-0-308" name="__codelineno-0-308"></a>        <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">type_</span> <span class="o">==</span> <span class="n">entity_type</span>
-<a id="__codelineno-0-309" name="__codelineno-0-309"></a>    <span class="p">)</span>
-<a id="__codelineno-0-310" name="__codelineno-0-310"></a>
-<a id="__codelineno-0-311" name="__codelineno-0-311"></a>    <span class="k">return</span> <span class="n">results</span>
+<span class="normal"><a href="#__codelineno-0-311">311</a></span>
+<span class="normal"><a href="#__codelineno-0-312">312</a></span>
+<span class="normal"><a href="#__codelineno-0-313">313</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-297" name="__codelineno-0-297"></a><span class="k">def</span><span class="w"> </span><span class="nf">links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_section</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">entity_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<a id="__codelineno-0-298" name="__codelineno-0-298"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve a list of entities from the links attribute of the specific type and section.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-299" name="__codelineno-0-299"></a>    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-300" name="__codelineno-0-300"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;links&#39;</span><span class="p">):</span>
+<a id="__codelineno-0-301" name="__codelineno-0-301"></a>        <span class="k">return</span> <span class="p">[]</span>
+<a id="__codelineno-0-302" name="__codelineno-0-302"></a>
+<a id="__codelineno-0-303" name="__codelineno-0-303"></a>    <span class="n">results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+<a id="__codelineno-0-304" name="__codelineno-0-304"></a>        <span class="n">entity</span><span class="o">.</span><span class="n">name</span>
+<a id="__codelineno-0-305" name="__codelineno-0-305"></a>        <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">hits</span>
+<a id="__codelineno-0-306" name="__codelineno-0-306"></a>        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">hit</span><span class="o">.</span><span class="n">sections</span>
+<a id="__codelineno-0-307" name="__codelineno-0-307"></a>        <span class="k">if</span> <span class="n">section</span><span class="o">.</span><span class="n">section_id</span> <span class="ow">and</span> <span class="n">section</span><span class="o">.</span><span class="n">section_id</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">from_section</span>
+<a id="__codelineno-0-308" name="__codelineno-0-308"></a>        <span class="k">for</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">section</span><span class="o">.</span><span class="n">lists</span>
+<a id="__codelineno-0-309" name="__codelineno-0-309"></a>        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">lst</span><span class="o">.</span><span class="n">entities</span>
+<a id="__codelineno-0-310" name="__codelineno-0-310"></a>        <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">type_</span> <span class="o">==</span> <span class="n">entity_type</span>
+<a id="__codelineno-0-311" name="__codelineno-0-311"></a>    <span class="p">)</span>
+<a id="__codelineno-0-312" name="__codelineno-0-312"></a>
+<a id="__codelineno-0-313" name="__codelineno-0-313"></a>    <span class="k">return</span> <span class="n">results</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
