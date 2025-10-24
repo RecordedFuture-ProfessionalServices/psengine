@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.3.1 - 2025-10-24
+
+### Added
+
+- `LookupMgr.lookup` now supports `cvssv4` field for `vulnerability` entity type.
+
 ## v2.3.0 - 2025-10-15
 
 ### Added
