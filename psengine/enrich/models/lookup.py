@@ -236,7 +236,7 @@ class CVSSV4(RFBaseModel):
     modified: Optional[datetime] = None
     vector_string: Optional[str] = Field(alias='vectorString', default=None)
     recovery: Optional[str] = None
-    version: Optional[float] = None
+    version: Optional[str] = None
     threat_severity: Optional[str] = Field(alias='threatSeverity', default=None)
     privileges_required: Optional[str] = Field(alias='privilegesRequired', default=None)
     exploit_maturity: Optional[str] = Field(alias='exploitMaturity', default=None)
