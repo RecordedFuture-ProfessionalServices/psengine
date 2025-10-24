@@ -21,6 +21,7 @@ from .models.base_enriched_entity import BaseEnrichedEntity
 from .models.lookup import (
     CVSS,
     CVSSV3,
+    CVSSV4,
     CVSSRating,
     DnsPortCert,
     EnterpriseList,
@@ -103,6 +104,7 @@ class EnrichedVulnerability(BaseEnrichedEntity):
     cvss: Optional[CVSS] = None
     cvss_ratings: list[CVSSRating] = Field(alias='cvssRatings', default=None)
     cvssv3: Optional[CVSSV3] = None
+    cvssv4: Optional[CVSSV4] = None
     nvd_description: Optional[str] = Field(alias='nvdDescription', default=None)
     nvd_references: Optional[list[NvdReference]] = Field(alias='nvdReferences', default=None)
     raw_risk: Optional[list[RawRisk]] = Field(alias='rawrisk', default=None)
