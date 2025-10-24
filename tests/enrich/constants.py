@@ -52,6 +52,7 @@ FIELDS_ALL_VULNERABILITY = FIELDS_ALL_COMMON + [
     'cvss',
     'cvssRatings',
     'cvssv3',
+    'cvssv4',
     'nvdDescription',
     'nvdReferences',
     'rawRisk',

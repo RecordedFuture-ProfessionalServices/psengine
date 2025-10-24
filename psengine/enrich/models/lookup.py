@@ -206,6 +206,50 @@ class CVSSV3(RFBaseModel):
     availability_impact: Optional[str] = Field(alias='availabilityImpact', default=None)
 
 
+class CVSSV4(RFBaseModel):
+    subsequent_system_integrity: Optional[str] = Field(
+        alias='subsequentSystemIntegrity', default=None
+    )
+    provider_urgency: Optional[str] = Field(alias='providerUrgency', default=None)
+    attack_requirements: Optional[str] = Field(alias='attackRequirements', default=None)
+    vulnerable_system_confidentiality: Optional[str] = Field(
+        alias='vulnerableSystemConfidentiality', default=None
+    )
+    vulnerability_response_effort: Optional[str] = Field(
+        alias='vulnerabilityResponseEffort', default=None
+    )
+    threat_score: Optional[float] = Field(alias='threatScore', default=None)
+    subsequent_system_availability: Optional[str] = Field(
+        alias='subsequentSystemAvailability', default=None
+    )
+    base_severity: Optional[str] = Field(alias='baseSeverity', default=None)
+    base_score: Optional[float] = Field(alias='baseScore', default=None)
+    user_interaction: Optional[str] = Field(alias='userInteraction', default=None)
+    attack_vector: Optional[str] = Field(alias='attackVector', default=None)
+    source: Optional[str] = None
+    vulnerable_system_integrity: Optional[str] = Field(
+        alias='vulnerableSystemIntegrity', default=None
+    )
+    vulnerable_system_availability: Optional[str] = Field(
+        alias='vulnerableSystemAvailability', default=None
+    )
+    modified: Optional[datetime] = None
+    vector_string: Optional[str] = Field(alias='vectorString', default=None)
+    recovery: Optional[str] = None
+    version: Optional[str] = None
+    threat_severity: Optional[str] = Field(alias='threatSeverity', default=None)
+    privileges_required: Optional[str] = Field(alias='privilegesRequired', default=None)
+    exploit_maturity: Optional[str] = Field(alias='exploitMaturity', default=None)
+    safety: Optional[str] = None
+    subsequent_system_confidentiality: Optional[str] = Field(
+        alias='subsequentSystemConfidentiality', default=None
+    )
+    automatable: Optional[str] = None
+    value_density: Optional[str] = Field(alias='valueDensity', default=None)
+    attack_complexity: Optional[str] = Field(alias='attackComplexity', default=None)
+    created: Optional[datetime] = None
+
+
 ###########################################################
 # Raw Risk
 ###########################################################
