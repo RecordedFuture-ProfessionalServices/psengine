@@ -111,7 +111,7 @@ class AnalystNoteMgr:
             'label': label,
             'source': source,
             'serialization': serialization,
-            'taggedText': tagged_text,
+            'tagged_text': tagged_text,
             'limit': min(max_results, notes_per_page),
         }
         data = {key: val for key, val in data.items() if val is not None}
