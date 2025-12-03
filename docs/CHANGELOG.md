@@ -1,6 +1,7 @@
 # Changelog
 
-## v2.3.2 - 2025-12-03
+## v2.4.0 - 2025-12-03
+
 ### Added
 
 - `LookupMgr` now support the `scanner` field  when enriching `ip` entity type.
