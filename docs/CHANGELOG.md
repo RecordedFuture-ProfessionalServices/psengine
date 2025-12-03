@@ -1,6 +1,16 @@
 # Changelog
 
 ## v2.3.1 - 2025-10-24
+### Added
+
+- `LookupMgr` now support the `scanner` field.
+- `EntityMatch.match` now enforce deduplication of returned entities. The deduplication is done by entity ID.
+
+### Fixed
+
+- `AnalystNoteMgr.search` now set the correct `tagged_text` value.
+
+## v2.3.1 - 2025-10-24
 
 ### Added
 

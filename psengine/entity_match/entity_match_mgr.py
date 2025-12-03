@@ -48,7 +48,7 @@ class EntityMatchMgr:
             Optional[Union[list, str]], Doc('Type or list of types of the entity, if known.')
         ] = None,
         limit: Annotated[int, Doc('Maximum number of matches to return.')] = DEFAULT_LIMIT,
-    ) -> Annotated[list[ResolvedEntity], Doc('List of resolved entity matches.')]:
+    ) -> Annotated[list[ResolvedEntity], Doc('List of deduplicated resolved entity matches.')]:
         """Match a text string using the entity match API.
 
         Endpoint:
