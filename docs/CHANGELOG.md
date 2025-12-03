@@ -1,10 +1,10 @@
 # Changelog
 
-## v2.3.1 - 2025-10-24
+## v2.3.2 - 2025-12-03
 ### Added
 
-- `LookupMgr` now support the `scanner` field.
-- `EntityMatch.match` now enforce deduplication of returned entities. The deduplication is done by entity ID.
+- `LookupMgr` now support the `scanner` field  when enriching `ip` entity type.
+- `EntityMatch.match` now enforces deduplication of returned entities. The deduplication is done by entity ID.
 
 ### Fixed
 
