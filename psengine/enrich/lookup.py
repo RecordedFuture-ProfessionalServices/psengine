@@ -33,6 +33,7 @@ from .models.lookup import (
     RawRisk,
     RiskMapping,
     RiskyCIDRPIP,
+    Scanner,
 )
 
 
@@ -47,6 +48,7 @@ class EnrichedIP(BaseEnrichedEntity):
     dns_port_cert: Optional[DnsPortCert] = Field(alias='dnsPortCert', default=None)
     location: Optional[IPLocation] = None
     risky_cidr_ips: Optional[list[RiskyCIDRPIP]] = Field(alias='riskyCIDRIPs', default=None)
+    scanner: Optional[Scanner] = None
 
 
 class EnrichedDomain(BaseEnrichedEntity):
