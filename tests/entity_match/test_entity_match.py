@@ -65,7 +65,7 @@ class Test_EntityMatch:
     def test_str_not_found(self, match_mgr, mocker, make_response):
         mock1 = make_response([])
         mock2 = make_response([])
-        mocker.patch.object(match_mgr.rf_client, 'request', side_effects=[mock1, mock2])
+        mocker.patch.object(match_mgr.rf_client, 'request', side_effect=[mock1, mock2])
 
         models1 = match_mgr.match(entity_name='WannaCry', entity_type='Username')
         models2 = match_mgr.match(entity_name='Test', entity_type='Username')
