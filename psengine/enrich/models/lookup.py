@@ -305,6 +305,45 @@ class DnsPortCert(RFBaseModel):
 
 
 ###########################################################
+# Scanner
+###########################################################
+class Tag(RFBaseModel):
+    verdict_details: Optional[list[str]] = Field(default=None, alias='verdictDetails')
+    entity: list[IdNameType]
+
+
+class Ports(RFBaseModel):
+    tcp: list[int]
+
+
+class Evidence(RFBaseModel):
+    name: str = Field(alias='Name')
+    mitigation_string: str = Field(default=None, alias='MitigationString')
+    evidence_string: str = Field(alias='EvidenceString', default=None)
+    rule: str = Field(alias='Rule')
+    criticality: float = Field(alias='Criticality')
+    timestamp: datetime = Field(alias='Timestamp')
+    criticality_label: str = Field(alias='CriticalityLabel')
+    sources_count: float = Field(alias='SourcesCount')
+    sightings_count: float = Field(alias='SightingsCount')
+    sources: list[str] = Field(alias='Sources')
+
+
+class Scanner(RFBaseModel):
+    last_seen: str = Field(alias='lastSeen')
+    tags: Tag
+    verdict: str
+    scanned_ip_countries: list[str] = Field(alias='scannedIpCountries')
+    rdns: list[str]
+    scanner_country: str = Field(alias='scannerCountry')
+    ports: Ports
+    global_scanner: bool = Field(alias='globalScanner')
+    user_agents: list[str] = Field(alias='userAgents', default=None)
+    web_requests: list[str] = Field(alias='webRequests', default=None)
+    evidence: Optional[list[Evidence]] = []
+
+
+###########################################################
 # NVD
 ###########################################################
 class NvdReference(RFBaseModel):

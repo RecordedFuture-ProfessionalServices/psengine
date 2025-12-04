@@ -48,7 +48,7 @@ class EntityMatchMgr:
             Optional[Union[list, str]], Doc('Type or list of types of the entity, if known.')
         ] = None,
         limit: Annotated[int, Doc('Maximum number of matches to return.')] = DEFAULT_LIMIT,
-    ) -> Annotated[list[ResolvedEntity], Doc('List of resolved entity matches.')]:
+    ) -> Annotated[list[ResolvedEntity], Doc('List of deduplicated resolved entity matches.')]:
         """Match a text string using the entity match API.
 
         Endpoint:
@@ -65,7 +65,7 @@ class EntityMatchMgr:
         response = self.rf_client.request('post', EP_ENTITY_MATCH, data=request_body.json())
         response = [IdNameType.model_validate(d) for d in response.json()]
         return (
-            [ResolvedEntity(entity=d.name, is_found=bool(d.id_), content=d) for d in response]
+            list({ResolvedEntity(entity=d.name, is_found=bool(d.id_), content=d) for d in response})
             if response
             else [ResolvedEntity(entity=entity_name, is_found=False, content='Entity ID not found')]
         )

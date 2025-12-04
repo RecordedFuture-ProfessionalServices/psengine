@@ -1,3 +1,5 @@
+from collections import Counter
+
 import pytest
 from pydantic import ValidationError
 from requests import HTTPError
@@ -227,3 +229,27 @@ class Test_EntityMatchMgr:
         data = match_mgr.lookup_bulk(ids, max_workers=2)
         assert isinstance(data, list)
         assert all(d.id_ in ids for d in data)
+
+    def test_duplicates(self, match_mgr: EntityMatchMgr, mocker, make_response):
+        mock = make_response(
+            [
+                {'id': 'I2Mli_', 'name': 'TransUnion', 'type': 'Company'},
+                {'id': 'JJkDKS', 'name': 'TransUnion CIBIL', 'type': 'Company'},
+                {'id': 'gD1pHd', 'name': 'TransUnion International UK Ltd.', 'type': 'Company'},
+                {
+                    'id': 'KeIm3E',
+                    'name': 'TransUnion Risk and Alternative Data Solutions, Inc.',
+                    'type': 'Company',
+                },
+                {'id': 'UDfMQN', 'name': 'TransUnion Canada', 'type': 'Company'},
+                {'id': 'J05FEN', 'name': 'TransUnion South Africa', 'type': 'Company'},
+                {'id': 'I2Mli_', 'name': 'TransUnion', 'type': 'Company'},
+            ]
+        )
+        mocker.patch.object(match_mgr.rf_client, 'request', return_value=mock)
+        name = 'TransUnion'
+        type_ = 'Company'
+        response = match_mgr.match(name, type_)
+        response = [r.content.id_ for r in response]
+        c = Counter(response)
+        assert c == Counter(['UDfMQN', 'I2Mli_', 'gD1pHd', 'J05FEN', 'KeIm3E', 'JJkDKS'])

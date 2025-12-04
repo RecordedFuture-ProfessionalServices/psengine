@@ -42,6 +42,13 @@ class Test_AnalystNotesMgr:
         note = an_mgr.lookup('tQHD_j')
         assert isinstance(note, AnalystNote)
 
+    def test_lookup_tagged_text(self, an_mgr: AnalystNoteMgr, mock_request, mocker):
+        mock = mock_request(MOCK_DIR / 'note_tQHD_j.json')
+        mock_request = mocker.patch.object(an_mgr.rf_client, 'request', return_value=mock)
+        note = an_mgr.lookup('tQHD_j', tagged_text=True)
+        assert isinstance(note, AnalystNote)
+        assert mock_request.call_args[1] == {'data': {'serialization': 'full', 'tagged_text': True}}
+
     @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
     def test_lookup_raises_AnalystNoteLookupError(self, an_mgr: AnalystNoteMgr, exception, mocker):
         response = Response()
@@ -150,7 +157,7 @@ class Test_AnalystNotesMgr:
         assert all(isinstance(note, AnalystNote) for note in output)
         assert all(note.attributes.title for note in output)
 
-    def test_search_raises_SearchErorr_dueto_KeyError(self, an_mgr: AnalystNoteMgr, mocker):
+    def test_search_raises_SearchError_dueto_KeyError(self, an_mgr: AnalystNoteMgr, mocker):
         mocker.patch.object(
             an_mgr.rf_client,
             'request',

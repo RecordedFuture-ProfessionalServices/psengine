@@ -68,6 +68,13 @@ class ResolvedEntity(RFBaseModel):
 
     This class supports string representation of `ResolvedEntity` instances.
 
+    Hashing:
+        Returns a hash value based on the entity `id_` if found, else the hash of the name.
+
+    Equality:
+        Checks equality between two `ResolvedEntity` instances based on the `id_` if the entity was
+        found else the name.
+
     String Representation:
         Returns a string representation of the `ResolvedEntity` instance including the
         entity match name, type, and ID.
@@ -91,3 +98,13 @@ class ResolvedEntity(RFBaseModel):
         if isinstance(self.content, IdNameType):
             return f'Entity: {self.entity}, Type: {self.content.type_}, ID: {self.content.id_}'
         return f'Entity: {self.entity}, {self.content}'
+
+    def __hash__(self):
+        if hasattr(self.content, 'id_'):
+            return hash(self.content.id_)
+        return hash(self.entity)
+
+    def __eq__(self, other: 'ResolvedEntity'):
+        if hasattr(self.content, 'id_') and hasattr(other.content, 'id_'):
+            return self.content.id_ == other.content.id_
+        return self.entity == other.entity

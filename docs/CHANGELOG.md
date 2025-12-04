@@ -1,5 +1,16 @@
 # Changelog
 
+## v2.4.0 - 2025-12-03
+
+### Added
+
+- `LookupMgr` now support the `scanner` field  when enriching `ip` entity type.
+- `EntityMatch.match` now enforces deduplication of returned entities. The deduplication is done by entity ID.
+
+### Fixed
+
+- `AnalystNoteMgr.search` now set the correct `tagged_text` value.
+
 ## v2.3.1 - 2025-10-24
 
 ### Added

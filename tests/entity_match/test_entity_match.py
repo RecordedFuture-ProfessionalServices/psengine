@@ -50,6 +50,7 @@ class Test_EntityMatch:
         mock_1 = make_response(
             [
                 {'id': 'Ub_GAO', 'name': 'Wannacry', 'type': 'Username'},
+                {'id': 'Ub_GAO', 'name': 'Wannacry', 'type': 'Username'},
                 {'id': 'ub_gao', 'name': 'wannacry', 'type': 'username'},
             ]
         )
@@ -57,7 +58,21 @@ class Test_EntityMatch:
         mocker.patch.object(match_mgr.rf_client, 'request', return_value=mock_1)
 
         models = match_mgr.match(entity_name='WannaCry', entity_type='Username')
-        assert '[Entity: Wannacry, Type: Username, ID: Ub_GAO, Entity: wannacry' in str(models)
+        assert 'Entity: wannacry, Type: username, ID: ub_gao' in str(models)
+        assert 'Entity: Wannacry, Type: Username, ID: Ub_GAO' in str(models)
+        assert str(models).count('Ub_GAO') == 1
+
+    def test_str_not_found(self, match_mgr, mocker, make_response):
+        mock1 = make_response([])
+        mock2 = make_response([])
+        mocker.patch.object(match_mgr.rf_client, 'request', side_effect=[mock1, mock2])
+
+        models1 = match_mgr.match(entity_name='WannaCry', entity_type='Username')
+        models2 = match_mgr.match(entity_name='Test', entity_type='Username')
+        assert str(models1) == '[Entity: WannaCry, Entity ID not found]'
+        assert str(models2) == '[Entity: Test, Entity ID not found]'
+        assert models1 != models2
+        assert len({models1[0], models2[0], models1[0]}) == 2
 
     def test_ordering_EntityLookup(self, match_mgr, mocker, make_response):
         mocks = [make_response(TA), make_response(TA), make_response(MALW)]
