@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.4.1 - 2026-01-15
+
+### Fixed
+
+- `SandboxReport` properly parse static report payload.
+
 ## v2.4.0 - 2025-12-03
 
 ### Added
