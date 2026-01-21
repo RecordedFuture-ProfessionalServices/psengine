@@ -141,9 +141,9 @@ class PlaybookAlertMgr:
         alerts_per_page: Annotated[
             Optional[int], Doc('Number of alerts per page (pagination).')
         ] = Field(ge=1, le=10000, default=ALERTS_PER_PAGE),
-        max_results: Annotated[
-            Optional[int], Doc('Maximum number of alerts to fetch.')
-        ] = DEFAULT_LIMIT,
+        max_results: Annotated[Optional[int], Doc('Maximum number of alerts to fetch.')] = Field(
+            ge=1, le=10_000, default=DEFAULT_LIMIT
+        ),
         order_by: Annotated[
             Optional[str], Doc('Field to order alerts by, e.g. `created` or `updated`.')
         ] = None,
@@ -229,7 +229,7 @@ class PlaybookAlertMgr:
         ),
         max_results: Annotated[
             Optional[int], Doc('Maximum total number of alerts to fetch.')
-        ] = DEFAULT_LIMIT,
+        ] = Field(ge=1, le=10_000, default=DEFAULT_LIMIT),
         order_by: Annotated[
             Optional[str], Doc('Field to order alerts by, e.g. `created` or `updated`.')
         ] = None,
@@ -286,7 +286,7 @@ class PlaybookAlertMgr:
             data=request_body,
             max_results=max_results,
             results_path='data',
-            offset_key='from',
+            offset_key='offset',
         )
 
         # To avoid a breaking change have to reconstruct the SearchResponse model manually
