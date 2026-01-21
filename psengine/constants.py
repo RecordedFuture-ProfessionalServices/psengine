@@ -23,7 +23,7 @@ DEFAULT_MAX_WORKERS = 10
 # Recorded Future API
 #####################
 RF_TOKEN_ENV_VAR = 'RF_TOKEN'  # noqa: S105
-RF_TOKEN_VALIDATION_REGEX = r'^[a-f0-9]{32}$'  # noqa: S105
+RF_TOKEN_VALIDATION_REGEX = r'^([a-f0-9]{32}|[a-z]{32})$'  # noqa: S105
 
 #####################
 # Recorded Future Portal
