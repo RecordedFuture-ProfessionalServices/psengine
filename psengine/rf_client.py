@@ -324,6 +324,9 @@ class RFClient(BaseHTTPClient):
                 with suppress(KeyError):
                     dict_results[str(expr)].extend(self._get_matches(expr, json_response))
 
+        if len(all_results) >= max_results:
+            return all_results[:max_results]
+
         if method.lower() == 'get':
             return self._request_paged_get(
                 url=url,

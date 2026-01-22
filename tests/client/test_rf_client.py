@@ -322,12 +322,12 @@ class Test_RFClient:
             RFClient(api_token=123)
         with pytest.raises(
             ValueError,
-            match=re.escape('Invalid Recorded Future API token: must match regex ^[a-f0-9]{32}$'),
+            match=re.escape('Invalid Recorded Future API token: must match regex ^([a-z0-9]{32})$'),
         ):
             RFClient(api_token='123')  # noqa: S106
         with pytest.raises(
             ValueError,
-            match=re.escape('Invalid Recorded Future API token: must match regex ^[a-f0-9]{32}$'),
+            match=re.escape('Invalid Recorded Future API token: must match regex ^([a-z0-9]{32})$'),
         ):
             RFClient(api_token='opiubouib1o5uiybvuioyv5i---898hg')  # noqa: S106
 
