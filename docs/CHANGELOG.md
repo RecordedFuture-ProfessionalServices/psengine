@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.4.2 - 2026-01-22
+
+### Fixed
+
+- `RFClient.request_paged` added length validation before pagination to prevent over-fetching results.  
+- `PlaybookAlertMgr.search` now properly uses offset-based pagination.  
+- Improved Recorded Future API token validation.  
+
+### Fixed
+
 ## v2.4.1 - 2026-01-15
 
 ### Fixed
