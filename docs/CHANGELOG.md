@@ -7,6 +7,7 @@
 - `RFClient.request_paged` added length validation before pagination to prevent over-fetching results.  
 - `PlaybookAlertMgr.search` now properly uses offset-based pagination.  
 - Improved Recorded Future API token validation.  
+- `MalwareReportMgr.reports` now has `end_date` as optional.
 
 ### Fixed
 
