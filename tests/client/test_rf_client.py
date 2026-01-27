@@ -25,8 +25,24 @@ from tests.client.conftest import MOCK_DIR
 
 def build_incident_report_page(*, credentials, details, next_offset=None):
     """
-    Minimal payload shape for request_paged(results_path=['credentials','details'])
-    that exercises the POST 'next_offset' pagination branch.
+    Build a minimal Incident Report page payload compatible with
+    `RFClient.request_paged(..., results_path=['credentials', 'details'])`
+    using the POST pagination style driven by `next_offset`.
+
+    This is useful for unit-testing the "multiple results keys" aggregation logic
+    without depending on Recorded Future's full API response schema.
+
+    Example:
+        >>> build_incident_report_page(
+        ...     credentials=[{'id': 1}, {'id': 2}],
+        ...     details=[{'id': 'd1'}],
+        ...     next_offset='t1',
+        ... )
+        {
+            'credentials': [{'id': 1}, {'id': 2}],
+            'details': [{'id': 'd1'}],
+            'next_offset': 't1'
+        }
     """
     payload = {
         'credentials': credentials,
@@ -39,8 +55,45 @@ def build_incident_report_page(*, credentials, details, next_offset=None):
 
 def build_counts_page(*, results, returned=None, total=None, root=('data', 'results')):
     """
-    Build a minimal RF-like response with `counts` and results under root path.
-    root=("data","results") corresponds to JSONPath 'data.results'.
+    Build a minimal counts-based page payload compatible with
+    `RFClient.request_paged()` pagination logic.
+
+    The returned dict contains:
+      - `counts.total`: total number of results available server-side
+      - `counts.returned`: number of results in this page
+      - A list of results placed at the given `root` path (default: ('data', 'results'))
+
+    This is useful for unit-testing GET pagination (and POST pagination when
+    the API reports pagination through `counts`) without real endpoint fixtures.
+
+    Args:
+        results: List of items for the current page.
+        returned: Overrides `counts.returned` (defaults to `len(results)`).
+        total: Overrides `counts.total` (defaults to `returned`).
+        root: Tuple describing where the results list should be placed.
+              For example, ('data', 'results') corresponds to JSONPath `data.results`.
+
+    Example (GET-style payload with `results_path='data.results'`):
+        >>> build_counts_page(
+        ...     results=[{'id': 1}, {'id': 2}],
+        ...     total=5,
+        ...     root=('data', 'results'),
+        ... )
+        {
+            'counts': {'returned': 2, 'total': 5},
+            'data': {'results': [{'id': 1}, {'id': 2}]}
+        }
+
+    Example (top-level list payload with `results_path='identities'`):
+        >>> build_counts_page(
+        ...     results=[{'id': 'a'}, {'id': 'b'}],
+        ...     total=10,
+        ...     root=('identities',),
+        ... )
+        {
+            'counts': {'returned': 2, 'total': 10},
+            'identities': [{'id': 'a'}, {'id': 'b'}]
+        }
     """
     returned = len(results) if returned is None else returned
     total = returned if total is None else total
@@ -54,6 +107,34 @@ def build_counts_page(*, results, returned=None, total=None, root=('data', 'resu
 
 
 def build_next_offset_page(*, results, next_offset=None, root=('data', 'results')):
+    """
+    Build a minimal next_offset-based page payload compatible with
+    `RFClient.request_paged()` when pagination is driven by an opaque cursor token.
+
+    The returned dict contains:
+      - A list of results placed at the given `root` path (default: ('data', 'results'))
+      - Optionally `next_offset` (cursor token). When omitted/None, pagination ends.
+
+    This is useful for unit-testing POST pagination where the client must feed the
+    returned token into the next request body (e.g. `data['next_offset'] = ...`).
+
+    Args:
+        results: List of items for the current page.
+        next_offset: Cursor token for the next page. If None, this is the last page.
+        root: Tuple describing where the results list should be placed.
+              For example, ('data', 'results') corresponds to JSONPath `data.results`.
+
+    Example:
+        >>> build_next_offset_page(
+        ...     results=[{'id': 1}, {'id': 2}],
+        ...     next_offset='t1',
+        ...     root=('data', 'results'),
+        ... )
+        {
+            'data': {'results': [{'id': 1}, {'id': 2}]},
+            'next_offset': 't1'
+        }
+    """
     payload = {}
     cur = payload
     for k in root[:-1]:
