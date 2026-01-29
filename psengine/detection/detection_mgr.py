@@ -93,7 +93,7 @@ class DetectionMgr:
         data = {
             'filter': filters,
             'tagged_entities': tagged_entities,
-            'limit': SEARCH_LIMIT,
+            'limit': min(SEARCH_LIMIT, max_results) if max_results else SEARCH_LIMIT,
         }
 
         data = DetectionRuleSearchOut.model_validate(data)

@@ -56,7 +56,7 @@ def test_spy_called_without_arguments(detection_mgr: DetectionMgr, mocker):
     assert call_args[0] == 'post'
     assert call_args[1] == EP_DETECTION_RULES
     assert params == {
-        'data': {'filter': {'created': {}, 'updated': {}}, 'limit': 100},
+        'data': {'filter': {'created': {}, 'updated': {}}, 'limit': 10},
         'max_results': 10,
         'offset_key': 'offset',
         'results_path': 'result',
@@ -148,7 +148,7 @@ def test_spy_called_pagination_argument(detection_mgr: DetectionMgr, mocker):
     assert call_args[0] == 'post'
     assert call_args[1] == EP_DETECTION_RULES
     assert params == {
-        'data': {'filter': {'created': {}, 'updated': {}}, 'limit': 100},
+        'data': {'filter': {'created': {}, 'updated': {}}, 'limit': 10},
         'offset_key': 'offset',
         'results_path': 'result',
         'max_results': 10,

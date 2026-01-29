@@ -118,7 +118,7 @@ class Test_Identity:
 
     def test_adt_validation_credentials(self, identity_mgr: IdentityMgr, mocker, mock_request):
         mock = [
-            mock_request(MOCK_DIR / f'test_adt_validation_credentials_{x}.json') for x in range(4)
+            mock_request(MOCK_DIR / f'test_adt_validation_credentials_{x}.json') for x in range(3)
         ]
         mocker.patch.object(identity_mgr.rf_client, 'request', side_effect=mock)
         search = identity_mgr.search_credentials(domains='norsegods.online', domain_types='Email')
@@ -127,14 +127,11 @@ class Test_Identity:
         assert all(isinstance(d, CredentialSearch) for d in search)
 
     def test_search_credential_adt(self, identity_mgr: IdentityMgr, mocker, mock_request):
-        mock = [
-            mock_request(MOCK_DIR / f'test_search_credential_adt_{x}.json') for x in range(2)
-        ] * 2
+        mock = [mock_request(MOCK_DIR / 'test_search_credential_adt_0.json')] * 2
         mocker.patch.object(identity_mgr.rf_client, 'request', side_effect=mock)
 
         search1 = identity_mgr.search_credentials(domains='norsegods.online', domain_types='Email')
         search2 = identity_mgr.search_credentials(domains='norsegods.online', domain_types='Email')
-
         search = search1 + search2
         search = set(search)
         assert len(search) == len(search1)

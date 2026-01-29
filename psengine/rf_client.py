@@ -184,8 +184,13 @@ class RFClient(BaseHTTPClient):
         **kwargs,
     ):
         if 'next_offset' in json_response:
+            current_len = 0
             while 'next_offset' in json_response:
                 data[offset_key] = json_response['next_offset']
+                data['limit'] = min(data['limit'], max_results - current_len)
+                if data['limit'] <= 0:
+                    break
+
                 json_response = self.request(
                     method=method,
                     url=url,
@@ -202,11 +207,15 @@ class RFClient(BaseHTTPClient):
                     if any(len(v) >= max_results for v in dict_results.values()):
                         dict_results = {k: v[:max_results] for k, v in dict_results.items()}
                         break
+                    current_len = max(len(v) for v in dict_results.values())
+
                 else:
                     all_results += self._get_matches(results_expr, json_response)
-                    if len(all_results) >= max_results:
+                    current_len = len(all_results)
+                    if current_len >= max_results:
                         all_results = all_results[:max_results]
                         break
+
         else:
             seen = json_response['counts']['returned']
             if json_response['counts']['total'] > max_results:
@@ -324,6 +333,9 @@ class RFClient(BaseHTTPClient):
                 with suppress(KeyError):
                     dict_results[str(expr)].extend(self._get_matches(expr, json_response))
 
+        if len(all_results) >= max_results:
+            return all_results[:max_results]
+
         if method.lower() == 'get':
             return self._request_paged_get(
                 url=url,
@@ -340,6 +352,8 @@ class RFClient(BaseHTTPClient):
             )
 
         if method.lower() == 'post':
+            data['limit'] = min(data['limit'], max_results - len(all_results))
+
             return self._request_paged_post(
                 url=url,
                 method=method,
