@@ -5640,7 +5640,7 @@
 <a id="__codelineno-0-93" name="__codelineno-0-93"></a>    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
 <a id="__codelineno-0-94" name="__codelineno-0-94"></a>        <span class="s1">&#39;filter&#39;</span><span class="p">:</span> <span class="n">filters</span><span class="p">,</span>
 <a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="s1">&#39;tagged_entities&#39;</span><span class="p">:</span> <span class="n">tagged_entities</span><span class="p">,</span>
-<a id="__codelineno-0-96" name="__codelineno-0-96"></a>        <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="n">SEARCH_LIMIT</span><span class="p">,</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96"></a>        <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">SEARCH_LIMIT</span><span class="p">,</span> <span class="n">max_results</span><span class="p">)</span> <span class="k">if</span> <span class="n">max_results</span> <span class="k">else</span> <span class="n">SEARCH_LIMIT</span><span class="p">,</span>
 <a id="__codelineno-0-97" name="__codelineno-0-97"></a>    <span class="p">}</span>
 <a id="__codelineno-0-98" name="__codelineno-0-98"></a>
 <a id="__codelineno-0-99" name="__codelineno-0-99"></a>    <span class="n">data</span> <span class="o">=</span> <span class="n">DetectionRuleSearchOut</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
