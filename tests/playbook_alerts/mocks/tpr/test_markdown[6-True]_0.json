@@ -12,6 +12,11 @@
             "updated": "2025-01-09T14:29:50.702Z",
             "case_rule_id": "Do you come here often?",
             "case_rule_label": "The arguments can be primitive data types or compound data types.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Do you come here often?",
             "owner_name": "Do you have any idea why this is not working?",
             "organisation_id": "Ports are created with the built-in function open_port.",

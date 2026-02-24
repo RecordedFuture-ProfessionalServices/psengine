@@ -15,7 +15,7 @@ import contextlib
 from datetime import datetime
 from typing import Optional, Union
 
-from pydantic import model_validator
+from pydantic import model_validator, Field
 
 from ...common_models import RFBaseModel
 from ..models.common_models import ResolvedEntity
@@ -32,6 +32,12 @@ class OwnerOrganisationDetails(RFBaseModel):
     enterprise_name: str
 
 
+class AlertRule(RFBaseModel):
+    id_: str = Field(alias='id')
+    label: str
+    name: str
+
+
 class PanelStatus(RFBaseModel):
     status: str
     priority: str
@@ -42,6 +48,7 @@ class PanelStatus(RFBaseModel):
     updated: datetime
     case_rule_id: Optional[str] = None
     case_rule_label: Optional[str] = None
+    alert_rule: AlertRule
     creator_name: Optional[str] = None
     creator_id: Optional[str] = None
     owner_organisation_details: Optional[OwnerOrganisationDetails] = None

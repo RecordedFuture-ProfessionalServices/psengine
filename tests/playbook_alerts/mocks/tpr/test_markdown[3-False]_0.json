@@ -12,6 +12,11 @@
             "updated": "2025-04-21T23:14:36.145Z",
             "case_rule_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
             "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
             "owner_name": "Haskell features a type system with type inference and lazy evaluation.",
             "organisation_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",

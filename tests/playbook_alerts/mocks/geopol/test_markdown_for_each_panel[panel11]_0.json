@@ -12,6 +12,11 @@
             "updated": "2025-11-21T13:13:46.155Z",
             "case_rule_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
             "case_rule_label": "I don't even care.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "GeoFacility",
+                "name": "Geopolitical Facility"
+            },
             "owner_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
             "owner_name": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
             "organisation_id": "Erlang is a general-purpose, concurrent, functional programming language.",

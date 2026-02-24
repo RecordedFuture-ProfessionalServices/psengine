@@ -12,6 +12,11 @@
             "updated": "2025-12-01T23:43:37.285Z",
             "case_rule_id": "Ports are created with the built-in function open_port.",
             "case_rule_label": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "GeoFacility",
+                "name": "Geopolitical Facility"
+            },
             "owner_id": "He looked inquisitively at his keyboard and wrote another sentence.",
             "owner_name": "The arguments can be primitive data types or compound data types.",
             "organisation_id": "Tuples are containers for a fixed number of Erlang data types.",

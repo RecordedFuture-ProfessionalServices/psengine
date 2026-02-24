@@ -12,6 +12,11 @@
             "updated": "2025-05-24T13:23:49.570Z",
             "case_rule_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
             "case_rule_label": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "MalwareReport",
+                "name": "Custom Alert Name here"
+            },
             "owner_id": "Do you come here often?",
             "owner_name": "Do you come here often?",
             "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",

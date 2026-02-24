@@ -12,6 +12,11 @@
             "updated": "2025-01-03T19:43:35.218Z",
             "case_rule_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
             "case_rule_label": "I don't even care.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "GeoFacility",
+                "name": "Geopolitical Facility"
+            },
             "owner_id": "The arguments can be primitive data types or compound data types.",
             "owner_name": "Ports are created with the built-in function open_port.",
             "organisation_id": "Any element of a tuple can be accessed in constant time.",

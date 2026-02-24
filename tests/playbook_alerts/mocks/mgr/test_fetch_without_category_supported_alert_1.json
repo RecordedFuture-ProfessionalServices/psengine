@@ -14,6 +14,11 @@
             "updated": "2025-06-13T10:46:14.523Z",
             "case_rule_id": "Type classes first appeared in the Haskell programming language.",
             "case_rule_label": "Haskell features a type system with type inference and lazy evaluation.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "RuleNameLabel",
+                "name": "Some Rule Name here"
+            },
             "owner_id": "Its main implementation is the Glasgow Haskell Compiler.",
             "owner_name": "Type classes first appeared in the Haskell programming language.",
             "organisation_id": "Do you have any idea why this is not working?",

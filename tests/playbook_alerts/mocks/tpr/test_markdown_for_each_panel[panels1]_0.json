@@ -12,6 +12,11 @@
             "updated": "2025-10-14T01:55:32.713Z",
             "case_rule_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
             "case_rule_label": "Make me a sandwich.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Haskell features a type system with type inference and lazy evaluation.",
             "owner_name": "Its main implementation is the Glasgow Haskell Compiler.",
             "organisation_id": "Ports are created with the built-in function open_port.",

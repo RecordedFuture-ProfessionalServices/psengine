@@ -14,6 +14,11 @@
             "updated": "2025-05-30T00:28:24.681Z",
             "case_rule_id": "She spent her earliest years reading classic literature, and writing poetry.",
             "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "RuleNameLabel",
+                "name": "Some Rule Name here"
+            },
             "owner_id": "Haskell features a type system with type inference and lazy evaluation.",
             "owner_name": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
             "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",

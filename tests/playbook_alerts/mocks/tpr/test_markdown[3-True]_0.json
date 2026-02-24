@@ -12,6 +12,11 @@
             "updated": "2025-07-03T19:54:40.670Z",
             "case_rule_id": "Atoms are used within a program to denote distinguished values.",
             "case_rule_label": "Make me a sandwich.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
             "owner_name": "Type classes first appeared in the Haskell programming language.",
             "organisation_id": "Atoms are used within a program to denote distinguished values.",

@@ -13,6 +13,11 @@
             "updated": "2025-10-13T12:52:57.909Z",
             "case_rule_id": "Ports are used to communicate with the external world.",
             "case_rule_label": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
             "owner_name": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
             "organisation_id": "Ports are created with the built-in function open_port.",

@@ -12,6 +12,11 @@
             "updated": "2025-01-14T23:11:45.500Z",
             "case_rule_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
             "case_rule_label": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Where are my pants?",
             "owner_name": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
             "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",

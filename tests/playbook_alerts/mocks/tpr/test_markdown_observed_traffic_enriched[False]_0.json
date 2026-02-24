@@ -12,6 +12,11 @@
             "updated": "2025-04-29T13:02:52.670Z",
             "case_rule_id": "Type classes first appeared in the Haskell programming language.",
             "case_rule_label": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Do you have any idea why this is not working?",
             "owner_name": "Any element of a tuple can be accessed in constant time.",
             "organisation_id": "Ports are created with the built-in function open_port.",

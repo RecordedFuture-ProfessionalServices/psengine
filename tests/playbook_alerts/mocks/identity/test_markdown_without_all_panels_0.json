@@ -12,6 +12,11 @@
             "updated": "2025-01-11T08:10:24.034Z",
             "case_rule_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
             "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "owner_id": "The arguments can be primitive data types or compound data types.",
             "owner_name": "Atoms are used within a program to denote distinguished values.",
             "organisation_id": "The arguments can be primitive data types or compound data types.",

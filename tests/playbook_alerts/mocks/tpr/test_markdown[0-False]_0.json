@@ -12,6 +12,11 @@
             "updated": "2025-01-04T05:49:15.042Z",
             "case_rule_id": "Do you come here often?",
             "case_rule_label": "Haskell features a type system with type inference and lazy evaluation.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "It is also a garbage-collected runtime system.",
             "owner_name": "Ports are created with the built-in function open_port.",
             "organisation_id": "I don't even care.",

@@ -12,6 +12,11 @@
             "updated": "2025-02-16T16:49:30.967Z",
             "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
             "case_rule_label": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Ports are created with the built-in function open_port.",
             "owner_name": "He looked inquisitively at his keyboard and wrote another sentence.",
             "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",

@@ -12,6 +12,11 @@
             "updated": "2025-05-14T03:21:28.156Z",
             "case_rule_id": "Haskell features a type system with type inference and lazy evaluation.",
             "case_rule_label": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "owner_id": "Type classes first appeared in the Haskell programming language.",
             "owner_name": "He looked inquisitively at his keyboard and wrote another sentence.",
             "organisation_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",

@@ -12,6 +12,11 @@
             "updated": "2025-02-12T12:51:26.204Z",
             "case_rule_id": "Tuples are containers for a fixed number of Erlang data types.",
             "case_rule_label": "Its main implementation is the Glasgow Haskell Compiler.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "DomainAbuse",
+                "name": "Domain Abuse"
+            },
             "owner_id": "Atoms are used within a program to denote distinguished values.",
             "owner_name": "Type classes first appeared in the Haskell programming language.",
             "organisation_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",

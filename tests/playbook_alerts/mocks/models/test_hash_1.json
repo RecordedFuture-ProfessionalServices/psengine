@@ -13,6 +13,11 @@
                 "updated": "2025-06-24T11:37:06.758Z",
                 "case_rule_id": "Atoms are used within a program to denote distinguished values.",
                 "case_rule_label": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "MalwareReport",
+                    "name": "Custom Alert Name here"
+                },
                 "owner_id": "She spent her earliest years reading classic literature, and writing poetry.",
                 "owner_name": "Make me a sandwich.",
                 "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
@@ -308,6 +313,11 @@
                 "updated": "2025-06-12T11:20:21.579Z",
                 "case_rule_id": "The arguments can be primitive data types or compound data types.",
                 "case_rule_label": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "MalwareReport",
+                    "name": "Custom Alert Name here"
+                },
                 "owner_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "owner_name": "Where are my pants?",
                 "organisation_id": "I don't even care.",
@@ -483,6 +493,11 @@
                 "updated": "2025-08-15T05:47:56.151Z",
                 "case_rule_id": "Do you come here often?",
                 "case_rule_label": "Where are my pants?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "MalwareReport",
+                    "name": "Custom Alert Name here"
+                },
                 "owner_id": "Its main implementation is the Glasgow Haskell Compiler.",
                 "owner_name": "I don't even care.",
                 "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",

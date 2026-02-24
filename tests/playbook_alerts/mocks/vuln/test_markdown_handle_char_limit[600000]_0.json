@@ -12,6 +12,11 @@
             "updated": "2025-06-11T16:34:13.674Z",
             "case_rule_id": "Do you have any idea why this is not working?",
             "case_rule_label": "Haskell features a type system with type inference and lazy evaluation.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "Vulnerability",
+                "name": "Vuln in Tech Stack"
+            },
             "owner_id": "Ports are used to communicate with the external world.",
             "owner_name": "Type classes first appeared in the Haskell programming language.",
             "organisation_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",

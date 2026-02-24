@@ -12,6 +12,11 @@
             "updated": "2025-07-19T08:52:46.108Z",
             "case_rule_id": "Atoms are used within a program to denote distinguished values.",
             "case_rule_label": "Atoms are used within a program to denote distinguished values.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "owner_id": "I don't even care.",
             "owner_name": "Where are my pants?",
             "organisation_id": "Type classes first appeared in the Haskell programming language.",
