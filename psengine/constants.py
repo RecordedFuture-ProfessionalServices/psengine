@@ -17,6 +17,7 @@ import sys
 # Multithreading Defaults
 #####################
 DEFAULT_LIMIT = 10
+ASI_DEFAULT_LIMIT = 50
 DEFAULT_MAX_WORKERS = 10
 
 #####################
@@ -24,6 +25,9 @@ DEFAULT_MAX_WORKERS = 10
 #####################
 RF_TOKEN_ENV_VAR = 'RF_TOKEN'  # noqa: S105
 RF_TOKEN_VALIDATION_REGEX = r'^[a-z0-9]{32}$'  # noqa: S105
+ASI_TOKEN_ENV_VAR = 'RF_ASI_TOKEN'  # noqa: S105
+ASI_TOKEN_VALIDATION_REGEX = r'^[a-zA-Z0-9]{32}'  # noqa: S105
+
 
 #####################
 # Recorded Future Portal
