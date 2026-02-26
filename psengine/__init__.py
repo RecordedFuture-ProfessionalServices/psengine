@@ -13,7 +13,6 @@
 
 import logging
 
-from ._version import __version__ as version
 from .base_http_client import BaseHTTPClient
 from .errors import ReadFileError, RecordedFutureError, WriteFileError
 from .rf_client import RFClient
