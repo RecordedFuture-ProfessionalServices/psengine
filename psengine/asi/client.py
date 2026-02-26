@@ -8,7 +8,7 @@ from requests.models import Response
 from typing_extensions import Doc
 
 from ..base_http_client import BaseHTTPClient
-from ..constants import ASI_DEFAULT_LIMIT, ASI_TOKEN_VALIDATION_REGEX, DEFAULT_LIMIT
+from ..constants import ASI_TOKEN_VALIDATION_REGEX, DEFAULT_LIMIT
 from ..helpers import debug_call
 
 DEFAULT_ASI_BASE_URL = 'https://api.securitytrails.com/v2'
@@ -118,7 +118,7 @@ class ASIClient(BaseHTTPClient):
         ] = None,
         max_results: Annotated[
             int, Doc('The maximum number of results to return.')
-        ] = ASI_DEFAULT_LIMIT,
+        ] = DEFAULT_LIMIT,
         objects_per_page: Annotated[Optional[int], Doc('Requested page size.')] = Field(
             ge=1, le=MAX_ASI_PAGE_SIZE, default=DEFAULT_ASI_PAGE_SIZE
         ),

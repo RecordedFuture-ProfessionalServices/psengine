@@ -17,7 +17,6 @@ import sys
 # Multithreading Defaults
 #####################
 DEFAULT_LIMIT = 10
-ASI_DEFAULT_LIMIT = 50
 DEFAULT_MAX_WORKERS = 10
 
 #####################
