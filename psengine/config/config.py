@@ -197,7 +197,7 @@ class ConfigModel(BaseSettings):
         """
         directory = Path(directory)
         log = logging.getLogger(__name__)
-        data = self.model_dump_json(exclude='rf_token', indent=4)
+        data = self.model_dump_json(exclude=['rf_token', 'asi_token'], indent=4)
         OSHelpers.mkdir(directory)
         config_path = directory / file
         log.info(f'Saving config in {config_path.as_posix()}')
