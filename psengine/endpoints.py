@@ -126,3 +126,10 @@ EP_MALWARE_INTEL_REPORTS = EP_MALWARE_INTELLIGENCE + 'reports'
 ###############################################################################
 EP_RISK_HISTORY_BASE = BASE_URL + '/risk'
 EP_RISK_HISTORY = EP_RISK_HISTORY_BASE + '/history'
+
+################################################################################
+# Attack Surface Intelligence API Endpoints
+################################################################################
+EP_ASI_BASE = 'https://api.securitytrails.com' + '/' + API_VERSION
+EP_ASI_PROJECTS = EP_ASI_BASE + '/projects'
+EP_ASI_ASSETS_SEARCH = f'{EP_ASI_PROJECTS}/{{}}/assets/_search'

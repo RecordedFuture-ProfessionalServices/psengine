@@ -11,63 +11,65 @@ from .int_filter import IntEqFilter, IntInFilter, IntRangeFilter
 from .pagination import Pagination
 from .whois import WHOISRecord
 
-class AssetCountDateRangeFilter(BaseModel):
 
+class AssetCountDateRangeFilter(BaseModel):
     name: str
     asset_count: int
     start: Optional[Union[datetime.date, float]]
     end: Optional[Union[datetime.date, float]]
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetCountEqFilter(BaseModel):
 
+class AssetCountEqFilter(BaseModel):
     name: str
     asset_count: int
     value: Union[int, str]
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetCountValueRangeFilter(BaseModel):
 
+class AssetCountValueRangeFilter(BaseModel):
     name: str
     asset_count: int
     start: int
     end: int
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
+
 class AssetEnrichment(str, Enum):
-    CERTIFICATES = "certificates"
-    CERTIFICATE_CHAIN = "certificate_chain"
-    CUSTOM_TAGS = "custom_tags"
-    DEFENSES = "defenses"
-    DNS_RECORDS = "dns_records"
-    EXPOSURES = "exposures"
-    EXPOSURE_INSTANCE_DETAILS = "exposure_instance_details"
-    IP_METADATA = "ip_metadata"
-    OPEN_TCP_PORTS = "open_tcp_ports"
-    OPEN_UDP_PORTS = "open_udp_ports"
-    WEB_TECHNOLOGIES = "web_technologies"
-    WHOIS = "whois"
+    CERTIFICATES = 'certificates'
+    CERTIFICATE_CHAIN = 'certificate_chain'
+    CUSTOM_TAGS = 'custom_tags'
+    DEFENSES = 'defenses'
+    DNS_RECORDS = 'dns_records'
+    EXPOSURES = 'exposures'
+    EXPOSURE_INSTANCE_DETAILS = 'exposure_instance_details'
+    IP_METADATA = 'ip_metadata'
+    OPEN_TCP_PORTS = 'open_tcp_ports'
+    OPEN_UDP_PORTS = 'open_udp_ports'
+    WEB_TECHNOLOGIES = 'web_technologies'
+    WHOIS = 'whois'
+
 
 class AssetExposureDetailsType0(BaseModel):
-
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
+
 class AssetSortField(str, Enum):
-    ADDED_TO_PROJECT_AT = "added_to_project_at"
-    APEX_DOMAIN = "apex_domain"
-    ASSET_ID = "asset_id"
-    DISCOVERED_AT = "discovered_at"
-    EXPOSURE_SCORE = "exposure_score"
-    LAST_SCANNED_AT = "last_scanned_at"
+    ADDED_TO_PROJECT_AT = 'added_to_project_at'
+    APEX_DOMAIN = 'apex_domain'
+    ASSET_ID = 'asset_id'
+    DISCOVERED_AT = 'discovered_at'
+    EXPOSURE_SCORE = 'exposure_score'
+    LAST_SCANNED_AT = 'last_scanned_at'
+
 
 class AssetState(BaseModel):
-
     added: Optional[str] = None
     errors: Optional[list[str]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetTagResponse(BaseModel):
 
+class AssetTagResponse(BaseModel):
     add_tags: Optional[list[str]] = None
     remove_tags: Optional[list[str]] = None
     assets: Optional[list[str]] = None
@@ -75,25 +77,25 @@ class AssetTagResponse(BaseModel):
     task_ids: Optional[list[str]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetTagAPIResponse(BaseModel):
 
+class AssetTagAPIResponse(BaseModel):
     data: AssetTagResponse
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetWithExposureInstancesDetailsType0(BaseModel):
 
+class AssetWithExposureInstancesDetailsType0(BaseModel):
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class CertificateEntity(BaseModel):
 
+class CertificateEntity(BaseModel):
     common_name: Optional[str] = None
     organization_name: Optional[str] = None
     organizational_unit_name: Optional[str] = None
     country_name: Optional[str] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class Certificate(BaseModel):
 
+class Certificate(BaseModel):
     expires_at: datetime.datetime
     issued_at: datetime.datetime
     sha256: str
@@ -104,36 +106,37 @@ class Certificate(BaseModel):
     signature_algorithm: Optional[str] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ExposureDetailsType0(BaseModel):
 
+class ExposureDetailsType0(BaseModel):
     additional_properties: dict[str, Any] = Field(default_factory=dict)
+
 
 class ExposureInstanceDetailsType0(BaseModel):
-
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ExposureInstance(BaseModel):
 
+class ExposureInstance(BaseModel):
     port_number: int
     url: Optional[str] = None
     details: Optional[ExposureInstanceDetailsType0] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetWithExposureInstances(BaseModel):
 
+class AssetWithExposureInstances(BaseModel):
     asset_id: str
     instances: list[ExposureInstance]
     details: Optional[AssetWithExposureInstancesDetailsType0]
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
+
 class ExposureSeverity(str, Enum):
-    CRITICAL = "critical"
-    INFORMATIONAL = "informational"
-    MODERATE = "moderate"
-    UNKNOWN = "unknown"
+    CRITICAL = 'critical'
+    INFORMATIONAL = 'informational'
+    MODERATE = 'moderate'
+    UNKNOWN = 'unknown'
+
 
 class Exposure(BaseModel):
-
     id: str
     detection_id: Optional[str]
     severity: ExposureSeverity
@@ -142,39 +145,39 @@ class Exposure(BaseModel):
     supports_evidence: Optional[bool] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ExposureSignatureResponseRemediationStepsType0(BaseModel):
 
+class ExposureSignatureResponseRemediationStepsType0(BaseModel):
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class FilterOptionsDateRange(BaseModel):
 
+class FilterOptionsDateRange(BaseModel):
     name: str
     filter_query: list[str]
     filter_path: str
     filters: list[AssetCountDateRangeFilter]
-    filter_type: Optional[str] = "date_range"
+    filter_type: Optional[str] = 'date_range'
     additional_properties: dict[str, Any] = Field(default_factory=dict)
+
 
 class FilterOptionsEq(BaseModel):
-
     name: str
     filter_query: list[str]
     filter_path: str
     filters: list[AssetCountEqFilter]
-    filter_type: Optional[str] = "eq"
+    filter_type: Optional[str] = 'eq'
     additional_properties: dict[str, Any] = Field(default_factory=dict)
+
 
 class FilterOptionsIn(BaseModel):
-
     name: str
     filter_query: list[str]
     filter_path: str
     filters: list[AssetCountEqFilter]
-    filter_type: Optional[str] = "in"
+    filter_type: Optional[str] = 'in'
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetPropertiesFilterOptions(BaseModel):
 
+class AssetPropertiesFilterOptions(BaseModel):
     asset_type: Optional[FilterOptionsEq] = None
     asn: Optional[FilterOptionsIn] = None
     custom_tags: Optional[FilterOptionsIn] = None
@@ -188,71 +191,71 @@ class AssetPropertiesFilterOptions(BaseModel):
     referenced_ip: Optional[FilterOptionsIn] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class CertificatePropertiesFilterOptions(BaseModel):
 
+class CertificatePropertiesFilterOptions(BaseModel):
     certificate_issuer: Optional[FilterOptionsIn] = None
     certificate_expires_at: Optional[FilterOptionsDateRange] = None
     certificate_issued_at: Optional[FilterOptionsDateRange] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class FilterOptionsValueRange(BaseModel):
 
+class FilterOptionsValueRange(BaseModel):
     name: str
     filter_query: list[str]
     filter_path: str
     filters: list[AssetCountValueRangeFilter]
-    filter_type: Optional[str] = "value_range"
+    filter_type: Optional[str] = 'value_range'
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ExposurePropertiesFilterOptions(BaseModel):
 
+class ExposurePropertiesFilterOptions(BaseModel):
     signature_id: Optional[FilterOptionsIn] = None
     severity: Optional[FilterOptionsIn] = None
     asset_exposure_score: Optional[FilterOptionsValueRange] = None
     last_scanned_at: Optional[FilterOptionsDateRange] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class BooleanFilter(BaseModel):
 
+class BooleanFilter(BaseModel):
     eq: bool
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ContainsFilter(BaseModel):
 
+class ContainsFilter(BaseModel):
     contains: str
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class CustomTagPublic(BaseModel):
 
+class CustomTagPublic(BaseModel):
     title: str
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class DateRangeFilter(BaseModel):
 
+class DateRangeFilter(BaseModel):
     start: Optional[datetime.date] = None
     end: Optional[datetime.date] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class EqFilter(BaseModel):
 
+class EqFilter(BaseModel):
     eq: Union[datetime.date, int, str]
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class GeoLocation(BaseModel):
 
+class GeoLocation(BaseModel):
     continent: Optional[str] = None
     country: Optional[str] = None
     city: Optional[str] = None
     country_iso: Optional[str] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class InFilter(BaseModel):
 
+class InFilter(BaseModel):
     in_: list[Union[datetime.date, ExposureSeverity, int, str]]
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class CertificatePropertiesFilter(BaseModel):
 
+class CertificatePropertiesFilter(BaseModel):
     certificate_subject: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
     certificate_subject_alt_name: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
     certificate_sha256: Optional[EqFilter] = None
@@ -262,43 +265,44 @@ class CertificatePropertiesFilter(BaseModel):
     certificate_covers_domain: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ExposurePropertiesFilter(BaseModel):
 
+class ExposurePropertiesFilter(BaseModel):
     severity: Optional[Union[EqFilter, InFilter]] = None
     signature_id: Optional[Union[EqFilter, InFilter]] = None
     asset_exposure_score: Optional[IntRangeFilter] = None
     last_scanned_at: Optional[DateRangeFilter] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class IPMetadata(BaseModel):
 
+class IPMetadata(BaseModel):
     as_number: Optional[int] = None
     owner_name: Optional[str] = None
     registry: Optional[str] = None
     owner_geo: Optional[GeoLocation] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
+
 class MembershipType(str, Enum):
-    EXCLUDE = "exclude"
-    INCLUDE = "include"
+    EXCLUDE = 'exclude'
+    INCLUDE = 'include'
+
 
 class NeqFilter(BaseModel):
-
     neq: Union[datetime.date, int, str]
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class QuickSearchFilter(BaseModel):
 
+class QuickSearchFilter(BaseModel):
     search: str
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class RequireAllFilter(BaseModel):
 
+class RequireAllFilter(BaseModel):
     in_: list[Union[datetime.date, ExposureSeverity, int, str]]
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetPropertiesFilter(BaseModel):
 
+class AssetPropertiesFilter(BaseModel):
     asset_id: Optional[EqFilter] = None
     name: Optional[ContainsFilter] = None
     static_asset: Optional[BooleanFilter] = None
@@ -321,30 +325,31 @@ class AssetPropertiesFilter(BaseModel):
     whois_email: Optional[Union[EmailEqFilter, EmailInFilter]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
+
 class SortDirection(str, Enum):
-    ASC = "asc"
-    DESC = "desc"
+    ASC = 'asc'
+    DESC = 'desc'
+
 
 class TagAssetRequest(BaseModel):
-
     add_tags: Optional[list[str]] = None
     remove_tags: Optional[list[str]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ValidationError(BaseModel):
 
+class ValidationError(BaseModel):
     loc: list[Union[int, str]]
     msg: str
     type_: str
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class HTTPValidationError(BaseModel):
 
+class HTTPValidationError(BaseModel):
     detail: Optional[list[ValidationError]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class VulnerabilityPublic(BaseModel):
 
+class VulnerabilityPublic(BaseModel):
     name: str
     slug: str
     cvss_score: Optional[float]
@@ -355,8 +360,8 @@ class VulnerabilityPublic(BaseModel):
     epss_score: Optional[float] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ExposureSignatureResponse(BaseModel):
 
+class ExposureSignatureResponse(BaseModel):
     id: str
     name: str
     description: Optional[str]
@@ -367,41 +372,41 @@ class ExposureSignatureResponse(BaseModel):
     vulnerabilities: Optional[list[VulnerabilityPublic]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetExposure(BaseModel):
 
+class AssetExposure(BaseModel):
     asset_id: str
     instances: list[ExposureInstance]
     details: Optional[AssetExposureDetailsType0]
     signature: ExposureSignatureResponse
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ExposureAssets(BaseModel):
 
+class ExposureAssets(BaseModel):
     signature: ExposureSignatureResponse
     asset_exposures: list[AssetWithExposureInstances]
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ExposureAssetsListResponse(BaseModel):
 
+class ExposureAssetsListResponse(BaseModel):
     data: ExposureAssets
     meta: ApiMeta
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ExposureSummary(BaseModel):
 
+class ExposureSummary(BaseModel):
     signature: ExposureSignatureResponse
     asset_count: int
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class TechnologyInstance(BaseModel):
 
+class TechnologyInstance(BaseModel):
     seen_at: datetime.datetime
     seen_port: int
     seen_url: Optional[str] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class DefensiveControl(BaseModel):
 
+class DefensiveControl(BaseModel):
     name: str
     vendor: Optional[str] = None
     technology_type: Optional[str] = None
@@ -409,8 +414,8 @@ class DefensiveControl(BaseModel):
     instances: Optional[list[TechnologyInstance]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class TechnologyPropertiesFilter(BaseModel):
 
+class TechnologyPropertiesFilter(BaseModel):
     open_port_number: Optional[Union[IntEqFilter, IntInFilter]] = None
     open_port_service: Optional[Union[EqFilter, InFilter]] = None
     open_port_protocol: Optional[Union[EqFilter, InFilter]] = None
@@ -422,8 +427,8 @@ class TechnologyPropertiesFilter(BaseModel):
     is_responsive: Optional[BooleanFilter] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetFilter(BaseModel):
 
+class AssetFilter(BaseModel):
     asset_properties: Optional[AssetPropertiesFilter] = None
     certificate_properties: Optional[CertificatePropertiesFilter] = None
     exposure_properties: Optional[ExposurePropertiesFilter] = None
@@ -431,22 +436,24 @@ class AssetFilter(BaseModel):
     quick_search: Optional[QuickSearchFilter] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetSearchRequest(BaseModel):
 
+class AssetSearchRequest(BaseModel):
     filter_: Optional[AssetFilter] = None
     pagination: Optional[Pagination] = None
     enrichments: Optional[list[AssetEnrichment]] = None
-    sort: Optional[Union[list[AssetSortField], list[list[Union[AssetSortField, SortDirection]]]]] = None
+    sort: Optional[
+        Union[list[AssetSortField], list[list[Union[AssetSortField, SortDirection]]]]
+    ] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetsFilterRequest(BaseModel):
 
+class AssetsFilterRequest(BaseModel):
     filter_: Optional[AssetFilter] = None
     filter_fields: Optional[list[str]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class TechnologyPropertiesFilterOptions(BaseModel):
 
+class TechnologyPropertiesFilterOptions(BaseModel):
     open_port_number: Optional[FilterOptionsIn] = None
     open_port_service: Optional[FilterOptionsIn] = None
     open_port_protocol: Optional[FilterOptionsIn] = None
@@ -456,16 +463,16 @@ class TechnologyPropertiesFilterOptions(BaseModel):
     is_responsive: Optional[FilterOptionsEq] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class FiltersResponse(BaseModel):
 
+class FiltersResponse(BaseModel):
     asset_properties: AssetPropertiesFilterOptions
     exposure_properties: ExposurePropertiesFilterOptions
     technology_properties: TechnologyPropertiesFilterOptions
     certificate_properties: CertificatePropertiesFilterOptions
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class TechnologyWithInstances(BaseModel):
 
+class TechnologyWithInstances(BaseModel):
     name: str
     vendor: Optional[str] = None
     technology_type: Optional[str] = None
@@ -473,8 +480,8 @@ class TechnologyWithInstances(BaseModel):
     instances: Optional[list[TechnologyInstance]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class PortInstance(BaseModel):
 
+class PortInstance(BaseModel):
     seen_ip: str
     seen_at: datetime.datetime
     service: Optional[str] = None
@@ -484,22 +491,22 @@ class PortInstance(BaseModel):
     defenses: Optional[list[DefensiveControl]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class Port(BaseModel):
 
+class Port(BaseModel):
     port: int
     protocol: str
     instances: Optional[list[PortInstance]] = None
     certificate: Optional[Certificate] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class CertificateInstance(BaseModel):
 
+class CertificateInstance(BaseModel):
     certificate: Certificate
     seen_ports: Optional[list[Port]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ScannedIP(BaseModel):
 
+class ScannedIP(BaseModel):
     ip: str
     last_scanned_at: Optional[datetime.datetime] = None
     whois: Optional[WHOISRecord] = None
@@ -508,12 +515,12 @@ class ScannedIP(BaseModel):
     is_responsive: Optional[bool] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class Asset(BaseModel):
 
+class Asset(BaseModel):
     project_id: str
-    id: str
+    id_: str = Field(alias='id')
     name: str
-    type_: str
+    type_:  str = Field(alias='type')
     discovered_at: Optional[datetime.datetime]
     added_to_project_at: datetime.datetime
     last_scanned_at: Optional[datetime.datetime] = None
@@ -530,8 +537,8 @@ class Asset(BaseModel):
     scanned_ips: Optional[list[ScannedIP]] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class AssetResponse(BaseModel):
 
-    data: Asset
+class AssetResponse(BaseModel):
+    data: list[Asset]
     meta: ApiMeta
     additional_properties: dict[str, Any] = Field(default_factory=dict)

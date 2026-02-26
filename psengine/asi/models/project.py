@@ -6,8 +6,8 @@ from uuid import UUID
 import datetime
 from .api import ApiMeta
 
-class Project(BaseModel):
 
+class Project(BaseModel):
     id: UUID
     title: str
     scanning_enabled: Optional[bool] = None
@@ -16,8 +16,8 @@ class Project(BaseModel):
     max_exposure_score: Optional[int] = None
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
-class ProjectListResponse(BaseModel):
 
+class ProjectListResponse(BaseModel):
     data: list[Project]
     meta: ApiMeta
     additional_properties: dict[str, Any] = Field(default_factory=dict)
