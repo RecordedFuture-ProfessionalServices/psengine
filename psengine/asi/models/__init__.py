@@ -13,7 +13,7 @@ from .core import AssetCountValueRangeFilter
 from .core import AssetEnrichment
 from .core import AssetExposure
 from .core import AssetExposureDetailsType0
-from .core import AssetFilter
+from .core import AssetSearchFilterIn
 from .core import AssetPropertiesFilter
 from .core import AssetPropertiesFilterOptions
 from .core import AssetResponse
@@ -113,7 +113,7 @@ __all__ = (
     'AssetEnrichment',
     'AssetExposure',
     'AssetExposureDetailsType0',
-    'AssetFilter',
+    'AssetSearchFilterIn',
     'AssetPropertiesFilter',
     'AssetPropertiesFilterOptions',
     'AssetResponse',

@@ -143,7 +143,7 @@ class Exposure(BaseModel):
     instances: list[ExposureInstance]
     details: Optional[ExposureDetailsType0] = None
     supports_evidence: Optional[bool] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
+    # additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class ExposureSignatureResponseRemediationStepsType0(BaseModel):
@@ -234,12 +234,10 @@ class CustomTagPublic(BaseModel):
 class DateRangeFilter(BaseModel):
     start: Optional[datetime.date] = None
     end: Optional[datetime.date] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class EqFilter(BaseModel):
     eq: Union[datetime.date, int, str]
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class GeoLocation(BaseModel):
@@ -251,8 +249,7 @@ class GeoLocation(BaseModel):
 
 
 class InFilter(BaseModel):
-    in_: list[Union[datetime.date, ExposureSeverity, int, str]]
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
+    in_: list[Union[datetime.date, ExposureSeverity, int, str]] = Field(alias='in')
 
 
 class CertificatePropertiesFilter(BaseModel):
@@ -271,7 +268,6 @@ class ExposurePropertiesFilter(BaseModel):
     signature_id: Optional[Union[EqFilter, InFilter]] = None
     asset_exposure_score: Optional[IntRangeFilter] = None
     last_scanned_at: Optional[DateRangeFilter] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class IPMetadata(BaseModel):
@@ -298,8 +294,7 @@ class QuickSearchFilter(BaseModel):
 
 
 class RequireAllFilter(BaseModel):
-    in_: list[Union[datetime.date, ExposureSeverity, int, str]]
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
+    in_: list[Union[datetime.date, ExposureSeverity, int, str]] = Field(alias='in')
 
 
 class AssetPropertiesFilter(BaseModel):
@@ -370,7 +365,6 @@ class ExposureSignatureResponse(BaseModel):
     remediation_steps: Optional[ExposureSignatureResponseRemediationStepsType0] = None
     added_at: Optional[datetime.datetime] = None
     vulnerabilities: Optional[list[VulnerabilityPublic]] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class AssetExposure(BaseModel):
@@ -428,17 +422,16 @@ class TechnologyPropertiesFilter(BaseModel):
     additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
-class AssetFilter(BaseModel):
+class AssetSearchFilterIn(BaseModel):
     asset_properties: Optional[AssetPropertiesFilter] = None
     certificate_properties: Optional[CertificatePropertiesFilter] = None
     exposure_properties: Optional[ExposurePropertiesFilter] = None
     technology_properties: Optional[TechnologyPropertiesFilter] = None
     quick_search: Optional[QuickSearchFilter] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class AssetSearchRequest(BaseModel):
-    filter_: Optional[AssetFilter] = None
+    filter_: Optional[AssetSearchFilterIn] = None
     pagination: Optional[Pagination] = None
     enrichments: Optional[list[AssetEnrichment]] = None
     sort: Optional[
@@ -448,9 +441,8 @@ class AssetSearchRequest(BaseModel):
 
 
 class AssetsFilterRequest(BaseModel):
-    filter_: Optional[AssetFilter] = None
+    filter_: Optional[AssetSearchFilterIn] = None
     filter_fields: Optional[list[str]] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class TechnologyPropertiesFilterOptions(BaseModel):
@@ -520,7 +512,7 @@ class Asset(BaseModel):
     project_id: str
     id_: str = Field(alias='id')
     name: str
-    type_:  str = Field(alias='type')
+    type_: str = Field(alias='type')
     discovered_at: Optional[datetime.datetime]
     added_to_project_at: datetime.datetime
     last_scanned_at: Optional[datetime.datetime] = None

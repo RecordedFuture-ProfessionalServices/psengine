@@ -16,3 +16,7 @@ from ..errors import RecordedFutureError
 
 class FetchProjectsError(RecordedFutureError):
     """Raised when fetching projects fails or an exception occurred during the request."""
+
+
+class SearchAssetsError(RecordedFutureError):
+    """Raised when searching assets fails or an exception occurred during the request."""

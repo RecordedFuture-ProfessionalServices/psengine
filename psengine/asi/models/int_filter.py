@@ -17,4 +17,4 @@ class IntInFilter(BaseModel):
 class IntRangeFilter(BaseModel):
     start: Optional[int]
     end: Optional[int]
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
+    # additional_properties: dict[str, Any] = Field(default_factory=dict)
