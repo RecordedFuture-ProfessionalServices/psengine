@@ -5,6 +5,11 @@
     },
     "data": {
         "playbook_alert_id": "task:7fcd943b-7c7e-436f-a391-01f797334bc5",
+        "alert_rule": {
+            "id": "pqc8P6",
+            "label": "identity",
+            "name": "Novel Identity Exposures"
+        },
         "status": "Dismissed",
         "priority": "I don't even care.",
         "reopen": "The arguments can be primitive data types or compound data types.",

@@ -19,6 +19,7 @@ from pydantic import model_validator, Field
 
 from ...common_models import RFBaseModel
 from ..models.common_models import ResolvedEntity
+from .common_models import AlertRule
 
 
 class Organisation(RFBaseModel):
@@ -30,12 +31,6 @@ class OwnerOrganisationDetails(RFBaseModel):
     organisations: list[Organisation]
     enterprise_id: str
     enterprise_name: str
-
-
-class AlertRule(RFBaseModel):
-    id_: str = Field(alias='id')
-    label: str
-    name: str
 
 
 class PanelStatus(RFBaseModel):

@@ -1,84 +1,99 @@
 {
-	"status": {
-		"status_code": "Ok",
-		"status_message": "Playbook alert search successful"
-	},
-	"data": [
-		{
-			"playbook_alert_id": "task:0bd7c7e0-232e-4335-b2a9-71f2fbc4a42d",
-			"status": "New",
-			"priority": "Where are my pants?",
-			"created": "2025-05-14T18:15:12.451Z",
-			"updated": "2025-11-05T07:22:38.586Z",
-			"category": "domain_abuse",
-			"title": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
-			"owner_id": "Erlang is a general-purpose, concurrent, functional programming language.",
-			"owner_name": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
-			"organisation_id": "Where are my pants?",
-			"organisation_name": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
-			"owner_organisation_details": {
-				"organisations": [
-					{
-						"organisation_id": "I don't even care.",
-						"organisation_name": "Erlang is a general-purpose, concurrent, functional programming language."
-					}
-				],
-				"enterprise_id": "Atoms are used within a program to denote distinguished values.",
-				"enterprise_name": "In 1989 the building was heavily damaged by fire, but it has since been restored."
-			},
-			"actions_taken": []
-		},
-		{
-			"playbook_alert_id": "task:cfeccee0-8414-4f6b-9ab1-50577961b8f5",
-			"status": "New",
-			"priority": "Erlang is a general-purpose, concurrent, functional programming language.",
-			"created": "2025-01-18T06:43:41.821Z",
-			"updated": "2025-05-06T17:31:53.037Z",
-			"category": "domain_abuse",
-			"title": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
-			"owner_id": "It is also a garbage-collected runtime system.",
-			"owner_name": "Ports are used to communicate with the external world.",
-			"organisation_id": "Make me a sandwich.",
-			"organisation_name": "She spent her earliest years reading classic literature, and writing poetry.",
-			"owner_organisation_details": {
-				"organisations": [
-					{
-						"organisation_id": "Do you have any idea why this is not working?",
-						"organisation_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
-					}
-				],
-				"enterprise_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
-				"enterprise_name": "Its main implementation is the Glasgow Haskell Compiler."
-			},
-			"actions_taken": []
-		},
-		{
-			"playbook_alert_id": "task:fb3c1739-9821-475c-9234-3a3600ad4804",
-			"status": "New",
-			"priority": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
-			"created": "2025-01-31T04:30:09.394Z",
-			"updated": "2025-02-26T23:40:35.797Z",
-			"category": "domain_abuse",
-			"title": "It is also a garbage-collected runtime system.",
-			"owner_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
-			"owner_name": "Ports are used to communicate with the external world.",
-			"organisation_id": "The arguments can be primitive data types or compound data types.",
-			"organisation_name": "Erlang is a general-purpose, concurrent, functional programming language.",
-			"owner_organisation_details": {
-				"organisations": [
-					{
-						"organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
-						"organisation_name": "Where are my pants?"
-					}
-				],
-				"enterprise_id": "Erlang is a general-purpose, concurrent, functional programming language.",
-				"enterprise_name": "She spent her earliest years reading classic literature, and writing poetry."
-			},
-			"actions_taken": []
-		}
-	],
-	"counts": {
-		"returned": 3,
-		"total": 3
-	}
+    "status": {
+        "status_code": "Ok",
+        "status_message": "Playbook alert search successful"
+    },
+    "data": [
+        {
+            "playbook_alert_id": "task:0bd7c7e0-232e-4335-b2a9-71f2fbc4a42d",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
+            "status": "New",
+            "priority": "Where are my pants?",
+            "created": "2025-05-14T18:15:12.451Z",
+            "updated": "2025-11-05T07:22:38.586Z",
+            "category": "domain_abuse",
+            "title": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "owner_id": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "owner_name": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+            "organisation_id": "Where are my pants?",
+            "organisation_name": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "owner_organisation_details": {
+                "organisations": [
+                    {
+                        "organisation_id": "I don't even care.",
+                        "organisation_name": "Erlang is a general-purpose, concurrent, functional programming language."
+                    }
+                ],
+                "enterprise_id": "Atoms are used within a program to denote distinguished values.",
+                "enterprise_name": "In 1989 the building was heavily damaged by fire, but it has since been restored."
+            },
+            "actions_taken": []
+        },
+        {
+            "playbook_alert_id": "task:cfeccee0-8414-4f6b-9ab1-50577961b8f5",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
+            "status": "New",
+            "priority": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "created": "2025-01-18T06:43:41.821Z",
+            "updated": "2025-05-06T17:31:53.037Z",
+            "category": "domain_abuse",
+            "title": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "owner_id": "It is also a garbage-collected runtime system.",
+            "owner_name": "Ports are used to communicate with the external world.",
+            "organisation_id": "Make me a sandwich.",
+            "organisation_name": "She spent her earliest years reading classic literature, and writing poetry.",
+            "owner_organisation_details": {
+                "organisations": [
+                    {
+                        "organisation_id": "Do you have any idea why this is not working?",
+                        "organisation_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\""
+                    }
+                ],
+                "enterprise_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "enterprise_name": "Its main implementation is the Glasgow Haskell Compiler."
+            },
+            "actions_taken": []
+        },
+        {
+            "playbook_alert_id": "task:fb3c1739-9821-475c-9234-3a3600ad4804",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
+            "status": "New",
+            "priority": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "created": "2025-01-31T04:30:09.394Z",
+            "updated": "2025-02-26T23:40:35.797Z",
+            "category": "domain_abuse",
+            "title": "It is also a garbage-collected runtime system.",
+            "owner_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+            "owner_name": "Ports are used to communicate with the external world.",
+            "organisation_id": "The arguments can be primitive data types or compound data types.",
+            "organisation_name": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "owner_organisation_details": {
+                "organisations": [
+                    {
+                        "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                        "organisation_name": "Where are my pants?"
+                    }
+                ],
+                "enterprise_id": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "enterprise_name": "She spent her earliest years reading classic literature, and writing poetry."
+            },
+            "actions_taken": []
+        }
+    ],
+    "counts": {
+        "returned": 3,
+        "total": 3
+    }
 }

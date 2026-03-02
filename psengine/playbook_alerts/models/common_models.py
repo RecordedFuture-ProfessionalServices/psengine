@@ -29,3 +29,9 @@ class PBAInsiktNote(RFBaseModel):
     published: Optional[datetime] = None
     topic: Optional[str] = None
     fragment: Optional[str] = None
+
+
+class AlertRule(RFBaseModel):
+    id_: str = Field(alias='id')
+    label: str
+    name: Optional[str] = None

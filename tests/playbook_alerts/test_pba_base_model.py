@@ -62,7 +62,7 @@ class Test_BasePlaybookAlert:
         ]
         mocker.patch.object(pba_mgr.rf_client, 'request', side_effect=mocks)
         generic = pba_mgr.fetch('task:af4426fe-7818-4fab-9644-6273182e73eb')
-        generic = PBA_Generic.model_validate(generic.model_dump())
+        generic = PBA_Generic.model_validate(generic.json())
         generic.category = 'moise'
         with pytest.raises(NotImplementedError):
             generic.markdown()
