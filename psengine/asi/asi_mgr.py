@@ -344,13 +344,3 @@ class AttackSurfaceMgr:
             return 'asset_properties', {'apex': filt}
 
         return key, value
-
-    def post_request_paged(self): ...
-
-    def get_request_paged(self):
-        return self.asi_client.request_paged(
-            'get',
-            'https://api.securitytrails.com/v2/projects/3ce6292b-29be-4199-9024-231818e384a4/assets',
-            max_results=300,
-            objects_per_page=30,
-        )
