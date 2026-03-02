@@ -156,7 +156,6 @@ class FilterOptionsDateRange(BaseModel):
     filter_path: str
     filters: list[AssetCountDateRangeFilter]
     filter_type: Optional[str] = 'date_range'
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class FilterOptionsEq(BaseModel):
@@ -165,7 +164,6 @@ class FilterOptionsEq(BaseModel):
     filter_path: str
     filters: list[AssetCountEqFilter]
     filter_type: Optional[str] = 'eq'
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class FilterOptionsIn(BaseModel):
@@ -174,7 +172,6 @@ class FilterOptionsIn(BaseModel):
     filter_path: str
     filters: list[AssetCountEqFilter]
     filter_type: Optional[str] = 'in'
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class AssetPropertiesFilterOptions(BaseModel):
@@ -218,12 +215,10 @@ class ExposurePropertiesFilterOptions(BaseModel):
 
 class BooleanFilter(BaseModel):
     eq: bool
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class ContainsFilter(BaseModel):
     contains: str
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class CustomTagPublic(BaseModel):
@@ -290,7 +285,6 @@ class NeqFilter(BaseModel):
 
 class QuickSearchFilter(BaseModel):
     search: str
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class RequireAllFilter(BaseModel):
@@ -318,7 +312,6 @@ class AssetPropertiesFilter(BaseModel):
     registry: Optional[Union[EqFilter, InFilter]] = None
     whois_email_current: Optional[Union[EmailEqFilter, EmailInFilter]] = None
     whois_email: Optional[Union[EmailEqFilter, EmailInFilter]] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class SortDirection(str, Enum):
@@ -419,7 +412,6 @@ class TechnologyPropertiesFilter(BaseModel):
     technology_name: Optional[Union[EqFilter, InFilter]] = None
     web_technology_name: Optional[Union[EqFilter, InFilter]] = None
     is_responsive: Optional[BooleanFilter] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class AssetSearchFilterIn(BaseModel):
@@ -437,7 +429,6 @@ class AssetSearchRequest(BaseModel):
     sort: Optional[
         Union[list[AssetSortField], list[list[Union[AssetSortField, SortDirection]]]]
     ] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class AssetsFilterRequest(BaseModel):
@@ -453,7 +444,6 @@ class TechnologyPropertiesFilterOptions(BaseModel):
     waf_name: Optional[FilterOptionsIn] = None
     technology_name: Optional[FilterOptionsIn] = None
     is_responsive: Optional[FilterOptionsEq] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class FiltersResponse(BaseModel):
@@ -461,7 +451,6 @@ class FiltersResponse(BaseModel):
     exposure_properties: ExposurePropertiesFilterOptions
     technology_properties: TechnologyPropertiesFilterOptions
     certificate_properties: CertificatePropertiesFilterOptions
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class TechnologyWithInstances(BaseModel):
@@ -505,7 +494,6 @@ class ScannedIP(BaseModel):
     open_ports: Optional[list[Port]] = None
     metadata: Optional[IPMetadata] = None
     is_responsive: Optional[bool] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class Asset(BaseModel):
@@ -527,10 +515,9 @@ class Asset(BaseModel):
     defenses: Optional[list[DefensiveControl]] = None
     exposures: Optional[list[Exposure]] = None
     scanned_ips: Optional[list[ScannedIP]] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
 
 
 class AssetResponse(BaseModel):
     data: list[Asset]
     meta: ApiMeta
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
+    # additional_properties: dict[str, Any] = Field(default_factory=dict)

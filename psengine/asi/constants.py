@@ -10,9 +10,37 @@
 # for having all necessary licenses, permissions, rights, and/or consents to any data        #
 # accessed from any third party API.                                                         #
 ##############################################################################################
-
+from typing import Literal
 
 DEFAULT_ASI_PAGE_SIZE = 50
 MAX_ASI_PAGE_SIZE = 1000
+ASSETS_PER_PAGE = 1000
 
-ASSETS_PER_PAGE = 100
+
+### Fields for Asset Search filters
+AssetType = Literal['ip', 'domain', 'host']
+
+
+EnrichmentType = Literal[
+    'custom_tags',
+    'dns_records',
+    'whois',
+    'ip_metadata',
+    'open_tcp_ports',
+    'open_udp_ports',
+    'web_technologies',
+    'certificates',
+    'certificate_chain',
+    'defenses',
+    'exposures',
+    'exposure_instance_details',
+]
+
+SortByType = Literal[
+    'discovered_at',
+    'added_to_project_at',
+    'last_scanned_at',
+    'exposure_score',
+    'asset_id',
+    'apex_domain',
+]

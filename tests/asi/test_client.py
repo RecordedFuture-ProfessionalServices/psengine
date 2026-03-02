@@ -344,7 +344,9 @@ def test_asi_client_init_rejects_missing_token_from_config(monkeypatch):
     Config.init(asi_token='')
 
     try:
-        with pytest.raises(ValueError, match='Missing Recorded Future Recorded Future ASI API token'):
+        with pytest.raises(
+            ValueError, match='Missing Recorded Future Recorded Future ASI API token'
+        ):
             ASIClient(api_token=None)
     finally:
         Config.reset_instance()
@@ -395,7 +397,9 @@ def test_prepare_headers_without_token_logs_warning(asi_client, mocker, caplog):
 def test_request_uses_prepare_headers_and_forwards_data_params_and_kwargs(asi_client, mocker):
     response = mocker.Mock(spec=Response)
     mock_headers = {'apikey': 'test-key'}
-    prepare_headers_spy = mocker.patch.object(asi_client, '_prepare_headers', return_value=mock_headers)
+    prepare_headers_spy = mocker.patch.object(
+        asi_client, '_prepare_headers', return_value=mock_headers
+    )
     call_spy = mocker.patch.object(asi_client, 'call', return_value=response)
 
     result = asi_client.request(

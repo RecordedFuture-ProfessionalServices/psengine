@@ -160,15 +160,13 @@ class ASIClient(BaseHTTPClient):
             except KeyError:
                 self.log.error(f'Paged request does not contain `data` field:\n{response.text}')
                 raise
+            meta = json_response['meta']
 
             request_params['cursor'] = json_response['meta']['pagination']['next_cursor']
 
             all_results.extend(page_results)
             if len(all_results) >= max_results:
                 break
-
-            meta = json_response['meta']
-
         return {'data': all_results[:max_results], 'meta': meta}
 
     def _initialize_paged_request(
