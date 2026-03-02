@@ -10,10 +10,7 @@ from typing_extensions import Doc
 from ..base_http_client import BaseHTTPClient
 from ..constants import ASI_TOKEN_VALIDATION_REGEX, DEFAULT_LIMIT
 from ..helpers import debug_call
-
-DEFAULT_ASI_BASE_URL = 'https://api.securitytrails.com/v2'
-DEFAULT_ASI_PAGE_SIZE = 50
-MAX_ASI_PAGE_SIZE = 1000
+from .constants import DEFAULT_ASI_PAGE_SIZE, MAX_ASI_PAGE_SIZE
 
 
 @validate_call
@@ -134,8 +131,16 @@ class ASIClient(BaseHTTPClient):
         )
 
         all_results = []
+        meta = None
 
         while len(all_results) < max_results:
+            remaining_results = max_results - len(all_results)
+            if method == 'GET':
+                request_params['limit'] = min(request_params['limit'], remaining_results)
+            else:
+                request_data['pagination']['limit'] = min(
+                    request_data['pagination']['limit'], remaining_results
+                )
             response = self.request(
                 method=method,
                 url=url,
@@ -162,7 +167,9 @@ class ASIClient(BaseHTTPClient):
             if len(all_results) >= max_results:
                 break
 
-        return all_results[:max_results]
+            meta = json_response['meta']
+
+        return {'data': all_results[:max_results], 'meta': meta}
 
     def _initialize_paged_request(
         self,

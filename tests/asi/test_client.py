@@ -47,10 +47,10 @@ def test_request_paged_get_uses_expected_query_params(asi_client, mocker, make_r
         objects_per_page=3,
     )
 
-    assert [x['id'] for x in result] == [1, 2, 3, 4, 5]
+    assert [x['id'] for x in result['data']] == [1, 2, 3, 4, 5]
     assert spy.call_count == 2
     assert captured[0]['params'] == {'query': 'example.com', 'limit': 3}
-    assert captured[1]['params'] == {'query': 'example.com', 'limit': 3, 'cursor': 'cursor-1'}
+    assert captured[1]['params'] == {'query': 'example.com', 'limit': 2, 'cursor': 'cursor-1'}
     assert captured[0]['data'] is None
     assert captured[1]['data'] is None
     assert params == {'query': 'example.com'}
@@ -75,8 +75,8 @@ def test_request_paged_get_keeps_existing_limit(asi_client, mocker, make_respons
         objects_per_page=3,
     )
 
-    assert [x['id'] for x in result] == [1, 2]
-    assert captured[0] == {'query': 'example.com', 'limit': 99}
+    assert [x['id'] for x in result['data']] == [1, 2]
+    assert captured[0] == {'query': 'example.com', 'limit': 2}
     assert params == {'query': 'example.com', 'limit': 99}
 
 
@@ -106,12 +106,12 @@ def test_request_paged_post_uses_expected_data_and_cursor_params(asi_client, moc
         objects_per_page=2,
     )
 
-    assert [x['id'] for x in result] == [1, 2, 3]
+    assert [x['id'] for x in result['data']] == [1, 2, 3]
     assert spy.call_count == 2
     assert captured[0]['params'] == {}
     assert captured[1]['params'] == {'cursor': 'cursor-1'}
     assert captured[0]['data'] == {'filter': {'name': 'example.com'}, 'pagination': {'limit': 2}}
-    assert captured[1]['data'] == {'filter': {'name': 'example.com'}, 'pagination': {'limit': 2}}
+    assert captured[1]['data'] == {'filter': {'name': 'example.com'}, 'pagination': {'limit': 1}}
     assert data == {'filter': {'name': 'example.com'}}
 
 
@@ -141,14 +141,94 @@ def test_request_paged_post_keeps_existing_pagination_limit(asi_client, mocker, 
         objects_per_page=2,
     )
 
-    assert result == [{'id': 1}]
+    assert result == {'data': [{'id': 1}], 'meta': None}
     assert captured[0]['params'] == {'project_id': 'p-1'}
     assert captured[0]['data'] == {
         'filter': {'type': 'domain'},
-        'pagination': {'limit': 77, 'order': 'desc'},
+        'pagination': {'limit': 1, 'order': 'desc'},
     }
     assert data == {'filter': {'type': 'domain'}, 'pagination': {'limit': 77, 'order': 'desc'}}
     assert params == {'project_id': 'p-1'}
+
+
+def test_request_paged_get_uses_remaining_results_for_last_request_limit(
+    asi_client, mocker, make_response
+):
+    params = {'query': 'example.com'}
+    pages = [
+        _build_page(range(1, 11), 'cursor-1'),
+        _build_page(range(11, 21), 'cursor-2'),
+        _build_page(range(21, 31), 'cursor-3'),
+        _build_page(range(31, 34), None),
+    ]
+    responses = iter([make_response(page) for page in pages])
+    captured_params = []
+
+    def call_side_effect(*args, **kwargs):  # noqa: ARG001
+        captured_params.append(deepcopy(kwargs.get('params') or {}))
+        return next(responses)
+
+    mocker.patch.object(asi_client, 'call', side_effect=call_side_effect)
+    request_spy = mocker.spy(asi_client, 'request')
+
+    result = asi_client.request_paged(
+        method='get',
+        url='https://example.test/asi',
+        params=params,
+        max_results=33,
+        objects_per_page=10,
+    )
+
+    assert request_spy.call_count == 4
+    assert [item['limit'] for item in captured_params] == [10, 10, 10, 3]
+    assert [item.get('cursor') for item in captured_params] == [
+        None,
+        'cursor-1',
+        'cursor-2',
+        'cursor-3',
+    ]
+    assert [x['id'] for x in result['data']] == list(range(1, 34))
+
+
+def test_request_paged_post_uses_remaining_results_for_last_request_limit(
+    asi_client, mocker, make_response
+):
+    data = {'filter': {'name': 'example.com'}}
+    pages = [
+        _build_page(range(1, 11), 'cursor-1'),
+        _build_page(range(11, 21), 'cursor-2'),
+        _build_page(range(21, 31), 'cursor-3'),
+        _build_page(range(31, 34), None),
+    ]
+    responses = iter([make_response(page) for page in pages])
+    captured_params = []
+    captured_data = []
+
+    def call_side_effect(*args, **kwargs):  # noqa: ARG001
+        captured_params.append(deepcopy(kwargs.get('params') or {}))
+        captured_data.append(deepcopy(kwargs.get('data') or {}))
+        return next(responses)
+
+    mocker.patch.object(asi_client, 'call', side_effect=call_side_effect)
+    request_spy = mocker.spy(asi_client, 'request')
+
+    result = asi_client.request_paged(
+        method='post',
+        url='https://example.test/asi',
+        data=data,
+        max_results=33,
+        objects_per_page=10,
+    )
+
+    assert request_spy.call_count == 4
+    assert [item['pagination']['limit'] for item in captured_data] == [10, 10, 10, 3]
+    assert [item.get('cursor') for item in captured_params] == [
+        None,
+        'cursor-1',
+        'cursor-2',
+        'cursor-3',
+    ]
+    assert [x['id'] for x in result['data']] == list(range(1, 34))
 
 
 def test_request_paged_forwards_headers_and_kwargs(asi_client, mocker, make_response):
