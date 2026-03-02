@@ -14,7 +14,7 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import Field, HttpUrl
+from pydantic import Field
 
 from ...common_models import RFBaseModel
 from ..models.panel_status import PanelStatus
@@ -28,7 +28,7 @@ class Assessment(RFBaseModel):
 class Event(RFBaseModel):
     text: str = None
     source: str = None
-    url: HttpUrl = None
+    url: str = None
     assessments: list[Assessment] = []
     document_id: str = None
     time: datetime = None
