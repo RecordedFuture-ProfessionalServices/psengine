@@ -42,7 +42,7 @@ MARKDOWN_BY_PBA_TYPE = {
 
 
 def _generic_pba_summary(pba, md_maker: MarkdownMaker):
-    md_maker.add_title(pba.panel_status.case_rule_label)
+    md_maker.add_title(pba.panel_status.alert_rule.name or pba.panel_status.alert_rule.label)
     id_ = pba.playbook_alert_id
     general_info = [
         f'{bold("ID:")} {id_}  ',

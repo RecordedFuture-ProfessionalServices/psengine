@@ -1,4 +1,4 @@
-## Haskell features a type system with type inference and lazy evaluation.
+## Third Party Risk Alert
 
 ### Summary
 

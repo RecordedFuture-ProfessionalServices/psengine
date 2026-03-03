@@ -1,4 +1,4 @@
-## They are written as strings of consecutive alphanumeric characters, the first character being lowercase.
+## Third Party Risk Alert
 
 ### Summary
 

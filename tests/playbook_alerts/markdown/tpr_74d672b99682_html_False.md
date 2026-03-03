@@ -1,4 +1,4 @@
-## The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.
+## Third Party Risk Alert
 
 ### Summary
 

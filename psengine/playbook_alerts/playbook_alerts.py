@@ -127,7 +127,7 @@ class PBA_Generic(RFBaseModel):
         return (
             f'Playbook Alert ID: {self.playbook_alert_id}, '
             f'Updated: {self.panel_status.updated.strftime(TIMESTAMP_STR)}, '
-            f'Category: {self.panel_status.case_rule_label}, '
+            f'Category: {self.panel_status.alert_rule.name or self.panel_status.alert_rule.label}, '
             f'Lookup Status: {self.panel_status.status}'
         )
 
