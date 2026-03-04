@@ -14,7 +14,7 @@ from typing import Literal
 
 DEFAULT_ASI_PAGE_SIZE = 50
 MAX_ASI_PAGE_SIZE = 1000
-ASSETS_PER_PAGE = 1000
+ASSETS_PER_PAGE = 10
 
 
 ### Fields for Asset Search filters

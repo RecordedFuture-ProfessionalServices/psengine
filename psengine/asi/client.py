@@ -162,7 +162,10 @@ class ASIClient(BaseHTTPClient):
                 raise
             meta = json_response['meta']
 
-            request_params['cursor'] = json_response['meta']['pagination']['next_cursor']
+            try:
+                request_params['cursor'] = json_response['meta']['pagination']['next_cursor']
+            except KeyError:
+                break
 
             all_results.extend(page_results)
             if len(all_results) >= max_results:

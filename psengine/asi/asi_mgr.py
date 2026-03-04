@@ -14,25 +14,26 @@
 
 import json
 import logging
-from typing import Optional, Annotated, Literal, Union
+from typing import Annotated, Literal, Optional, Union
+
+from pydantic import AfterValidator, Field, validate_call
 from typing_extensions import Doc
 
-from pydantic import validate_call, AfterValidator, Field
-
-from ..helpers import debug_call, connection_exceptions
+from ..endpoints import EP_ASI_ASSETS_SEARCH, EP_ASI_EXPOSURES, EP_ASI_PROJECTS
+from ..helpers import connection_exceptions, debug_call
 from .client import ASIClient
-from ..endpoints import EP_ASI_PROJECTS, EP_ASI_ASSETS_SEARCH
-
+from .constants import ASSETS_PER_PAGE, AssetType, EnrichmentType, SortByType
+from .errors import FetchProjectsError, SearchAssetsError
+from .asi import ExposureSearchOut
 from .models import (
-    AssetResponse,
     Asset,
+    AssetResponse,
     AssetSearchFilterIn,
     ExposureSeverity,
     ProjectListResponse,
-    AssetSearchRequest,
 )
-from .errors import FetchProjectsError, SearchAssetsError
-from .constants import ASSETS_PER_PAGE, EnrichmentType, SortByType, AssetType
+
+SEVERITY_FILTER = Literal['unknown', 'informational', 'moderate', 'critical']
 
 
 # Raised a ticket for this, if ASI API adds this check, we will remove it from here.
@@ -344,3 +345,60 @@ class AttackSurfaceMgr:
             return 'asset_properties', {'apex': filt}
 
         return key, value
+
+    def search_exposures(
+        self,
+        project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
+        filter_cve_id: Annotated[
+            Optional[str],
+            Doc(
+                'Filter for asset or exposure tied to a vulnerability with the provided CVE. Example CVE-2024-6387.'
+            ),
+        ] = None,
+        filter_cvss_score_gte: Annotated[
+            Optional[str],
+            Doc(
+                'Filter for asset or exposure tied to a vulnerability with the provided CVSS score range. Example 7.5. '
+            ),
+        ] = None,
+        filter_cvss_score_lte: Annotated[
+            Optional[str],
+            Doc(
+                'Filter for asset or exposure tied to a vulnerability with the provided CVSS score range. Example 7.5.'
+            ),
+        ] = None,
+        filter_cwe_id: Annotated[
+            Optional[str],
+            Doc(
+                'Filter for asset or exposure tied to a vulnerability associated with the provided CWE. Example CWE-79.'
+            ),
+        ] = None,
+        filter_severity_exact: Annotated[
+            Optional[SEVERITY_FILTER],
+            Doc('Filter for assets which have an exposure severity matching the provided value.'),
+        ] = None,
+        filter_severity_min: Annotated[
+            Optional[SEVERITY_FILTER],
+            Doc(
+                'Filter for assets which have an exposure severity matching or higher than the provided value.'
+            ),
+        ] = None,
+        exposures_per_page: Annotated[
+            int,
+            Field(ge=1, le=1000),
+            Doc('Number of assets to fetch per page'),
+        ] = ASSETS_PER_PAGE,
+        max_results: Annotated[Optional[int], Doc('Maximum number of assets to fetch')] = 100,
+    ):
+        params = {
+            k: v for k, v in locals().items() if k not in ('self', 'assets_per_page', 'max_results')
+        }
+        data = self.asi_client.request_paged(
+            'GET',
+            EP_ASI_EXPOSURES.format(project_id),
+            params=params,
+            max_results=max_results,
+            objects_per_page=exposures_per_page,
+        )
+        print(data['data'])
+        return ExposureSearchOut.model_validate({'content': data['data'], 'meta': data['meta']})

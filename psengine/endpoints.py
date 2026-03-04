@@ -133,3 +133,4 @@ EP_RISK_HISTORY = EP_RISK_HISTORY_BASE + '/history'
 EP_ASI_BASE = 'https://api.securitytrails.com' + '/' + API_VERSION
 EP_ASI_PROJECTS = EP_ASI_BASE + '/projects'
 EP_ASI_ASSETS_SEARCH = f'{EP_ASI_PROJECTS}/{{}}/assets/_search'
+EP_ASI_EXPOSURES = f'{EP_ASI_PROJECTS}/{{}}/exposures'
