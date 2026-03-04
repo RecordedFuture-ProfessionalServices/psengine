@@ -21,9 +21,14 @@ from typing_extensions import Doc
 
 from psengine.constants import DEFAULT_LIMIT
 
-from ..endpoints import EP_ASI_ASSETS_SEARCH, EP_ASI_EXPOSURES, EP_ASI_PROJECTS
+from ..endpoints import (
+    EP_ASI_ASSETS_SEARCH,
+    EP_ASI_EXPOSURES,
+    EP_ASI_EXPOSURES_BY_SIGNATURE,
+    EP_ASI_PROJECTS,
+)
 from ..helpers import connection_exceptions, debug_call
-from .asi import ExposureSearchOut
+from .asi import ExposureSearchOut, Exposure
 from .client import ASIClient
 from .constants import ASSETS_PER_PAGE, MAX_ASI_PAGE_SIZE, AssetType, EnrichmentType, SortByType
 from .errors import FetchProjectsError, SearchAssetsError, AttackSurfaceExposureSearchError
@@ -412,3 +417,34 @@ class AttackSurfaceMgr:
             objects_per_page=exposures_per_page,
         )
         return ExposureSearchOut.model_validate({'content': data['data'], 'meta': data['meta']})
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(
+        ignore_status_code=[], exception_to_raise=AttackSurfaceExposureSearchError
+    )
+    def fetch_exposures_by_signature(
+        self,
+        project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
+        signature_id: Annotated[str, Doc('The ID of the signature to search assets within')],
+        exposures_per_page: Annotated[
+            int,
+            Field(ge=1, le=MAX_ASI_PAGE_SIZE),
+            Doc('Number of assets to fetch per page'),
+        ] = ASSETS_PER_PAGE,
+        max_results: Annotated[
+            Optional[int], Doc('Maximum number of assets to fetch')
+        ] = DEFAULT_LIMIT,
+    ):
+        params = {
+            k: v for k, v in locals().items() if k not in ('self', 'assets_per_page', 'max_results')
+        }
+        data = self.asi_client.request_paged(
+            'GET',
+            EP_ASI_EXPOSURES_BY_SIGNATURE.format(project_id, signature_id),
+            params=params,
+            max_results=max_results,
+            objects_per_page=exposures_per_page,
+        )
+        # print(data['data'])
+        return Exposure.model_validate(data['data'][0])

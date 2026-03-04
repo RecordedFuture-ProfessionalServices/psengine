@@ -132,6 +132,7 @@ class ASIClient(BaseHTTPClient):
 
         all_results = []
         meta = None
+        value = 'asset_exposures'
 
         while len(all_results) < max_results:
             remaining_results = max_results - len(all_results)
@@ -167,7 +168,10 @@ class ASIClient(BaseHTTPClient):
             except KeyError:
                 break
 
-            all_results.extend(page_results)
+            if isinstance(page_results, list):
+                all_results.extend(page_results)
+            else:
+                all_results.append(page_results)
             if len(all_results) >= max_results:
                 break
         return {'data': all_results[:max_results], 'meta': meta}

@@ -10,6 +10,7 @@ class Exposure(RFBaseModel):
     asset_count: int
     asset_exposures: Optional[list[AssetExposure]] = []
     signature: ExposureSignature
+    meta: Optional[ApiMeta] = None
 
     def __str__(self) -> str:
         msg = 'Name: {}, Id: {}, Severity: {}, Asset Count: {}'

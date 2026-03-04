@@ -134,3 +134,4 @@ EP_ASI_BASE = 'https://api.securitytrails.com' + '/' + API_VERSION
 EP_ASI_PROJECTS = EP_ASI_BASE + '/projects'
 EP_ASI_ASSETS_SEARCH = f'{EP_ASI_PROJECTS}/{{}}/assets/_search'
 EP_ASI_EXPOSURES = f'{EP_ASI_PROJECTS}/{{}}/exposures'
+EP_ASI_EXPOSURES_BY_SIGNATURE = f'{EP_ASI_EXPOSURES}/{{}}'
