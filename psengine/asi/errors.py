@@ -20,3 +20,7 @@ class FetchProjectsError(RecordedFutureError):
 
 class SearchAssetsError(RecordedFutureError):
     """Raised when searching assets fails or an exception occurred during the request."""
+
+
+class AttackSurfaceExposureSearchError(RecordedFutureError):
+    """Raised when searching exposure fails or an exception occurred during the request."""

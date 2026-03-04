@@ -19,12 +19,14 @@ from typing import Annotated, Literal, Optional, Union
 from pydantic import AfterValidator, Field, validate_call
 from typing_extensions import Doc
 
+from psengine.constants import DEFAULT_LIMIT
+
 from ..endpoints import EP_ASI_ASSETS_SEARCH, EP_ASI_EXPOSURES, EP_ASI_PROJECTS
 from ..helpers import connection_exceptions, debug_call
-from .client import ASIClient
-from .constants import ASSETS_PER_PAGE, AssetType, EnrichmentType, SortByType
-from .errors import FetchProjectsError, SearchAssetsError
 from .asi import ExposureSearchOut
+from .client import ASIClient
+from .constants import ASSETS_PER_PAGE, MAX_ASI_PAGE_SIZE, AssetType, EnrichmentType, SortByType
+from .errors import FetchProjectsError, SearchAssetsError, AttackSurfaceExposureSearchError
 from .models import (
     Asset,
     AssetResponse,
@@ -187,10 +189,12 @@ class AttackSurfaceMgr:
         ],
         assets_per_page: Annotated[
             int,
-            Field(ge=1, le=1000),
+            Field(ge=1, le=MAX_ASI_PAGE_SIZE),
             Doc('Number of assets to fetch per page'),
         ] = ASSETS_PER_PAGE,
-        max_results: Annotated[Optional[int], Doc('Maximum number of assets to fetch')] = 100,
+        max_results: Annotated[
+            Optional[int], Doc('Maximum number of assets to fetch')
+        ] = DEFAULT_LIMIT,
     ) -> Annotated[list[Asset], Doc('Response model for ASI assets search')]:
         """Search for assets within an ASI project.
 
@@ -346,6 +350,11 @@ class AttackSurfaceMgr:
 
         return key, value
 
+    @debug_call
+    @validate_call
+    @connection_exceptions(
+        ignore_status_code=[], exception_to_raise=AttackSurfaceExposureSearchError
+    )
     def search_exposures(
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
@@ -385,10 +394,12 @@ class AttackSurfaceMgr:
         ] = None,
         exposures_per_page: Annotated[
             int,
-            Field(ge=1, le=1000),
+            Field(ge=1, le=MAX_ASI_PAGE_SIZE),
             Doc('Number of assets to fetch per page'),
         ] = ASSETS_PER_PAGE,
-        max_results: Annotated[Optional[int], Doc('Maximum number of assets to fetch')] = 100,
+        max_results: Annotated[
+            Optional[int], Doc('Maximum number of assets to fetch')
+        ] = DEFAULT_LIMIT,
     ):
         params = {
             k: v for k, v in locals().items() if k not in ('self', 'assets_per_page', 'max_results')
@@ -400,5 +411,4 @@ class AttackSurfaceMgr:
             max_results=max_results,
             objects_per_page=exposures_per_page,
         )
-        print(data['data'])
         return ExposureSearchOut.model_validate({'content': data['data'], 'meta': data['meta']})

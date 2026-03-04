@@ -290,8 +290,8 @@ class HTTPValidationError(BaseModel):
 class VulnerabilityPublic(BaseModel):
     name: str
     slug: str
-    cvss_score: Optional[float]
-    cvss_metrics: Optional[str]
+    cvss_score: Optional[float] = None
+    cvss_metrics: Optional[str] = None
     references: list[str]
     cve_id: Optional[str] = None
     cwe_ids: Optional[list[Optional[str]]] = None
