@@ -15,7 +15,7 @@ import contextlib
 from datetime import datetime
 from typing import Optional, Union
 
-from pydantic import model_validator, Field
+from pydantic import model_validator
 
 from ...common_models import RFBaseModel
 from ..models.common_models import ResolvedEntity
