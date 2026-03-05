@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, Optional, Union
 import datetime
 from .api import ApiMeta
@@ -354,7 +354,7 @@ class AssetSearchFilterIn(BaseModel):
 
 
 class AssetSearchRequest(BaseModel):
-    filter_: Optional[AssetSearchFilterIn] = None
+    filter_: Optional[AssetSearchFilterIn] = Field(None, alias="filter")
     pagination: Optional[Pagination] = None
     enrichments: Optional[list[AssetEnrichment]] = None
     sort: Optional[

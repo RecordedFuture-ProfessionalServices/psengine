@@ -33,11 +33,11 @@ from .client import ASIClient
 from .constants import ASSETS_PER_PAGE, MAX_ASI_PAGE_SIZE, AssetType, EnrichmentType, SortByType
 from .errors import FetchProjectsError, SearchAssetsError, AttackSurfaceExposureSearchError
 from .models import (
-    Asset,
     AssetResponse,
     AssetSearchFilterIn,
     ExposureSeverity,
     ProjectListResponse,
+    AssetSearchRequest
 )
 
 SEVERITY_FILTER = Literal['unknown', 'informational', 'moderate', 'critical']
@@ -103,14 +103,22 @@ class AttackSurfaceMgr:
                 """Filter on the apex domain of the asset (example: example.com). Pass a single value or a list."""
             ),
         ] = None,
-        # asset_discovered_date:
+        asset_discovered_date: Annotated[
+            Optional[tuple[Optional[str], Optional[str]]],
+            Doc(
+                """Filter on the date (Y-m-d) the asset was discovered by Recorded Future ASI. 
+                This may be different than when the asset was added to the project. 
+                IPv4 addresses will have a fixed point in the past for their discovery date. 
+                Use None for an open-ended bound."""
+            ),
+        ] = None,
         asset_type: Annotated[
             Optional[AssetType],
             Doc(
                 """The type of asset, one of: ip, domain and host(where domain and host represent the same asset type)."""
             ),
         ] = None,
-        # custom_tags:
+        custom_tags: Annotated[Optional[list[str]], Doc('Filter for assets tagged with any of the provided custom tags.')] = None,
         is_static_asset: Annotated[
             Optional[bool],
             Doc(
@@ -200,7 +208,7 @@ class AttackSurfaceMgr:
         max_results: Annotated[
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
-    ) -> Annotated[list[Asset], Doc('Response model for ASI assets search')]:
+    ) -> Annotated[AssetResponse, Doc('Response model for ASI assets search')]:
         """Search for assets within an ASI project.
 
         Does pagination requests on batches of `assets_per_page` up to `max_results`.
@@ -223,24 +231,22 @@ class AttackSurfaceMgr:
         ]:
             filter_params.pop(param)
 
-        body = {
-            'filter': self._lookup_filter(**filter_params).model_dump(
-                by_alias=True, exclude_none=True, mode='json'
-            ),
-            'pagination': {'limit': assets_per_page},
-        }
+        filter_dict = self._lookup_filter(**filter_params)
+        body = {'pagination': {'limit': assets_per_page}}
+        if filter_dict:
+            body['filter'] = filter_dict
 
         if enrichments:
             body['enrichments'] = enrichments
         if sort_by:
             body['sort'] = sort_by
 
-        # data = AssetSearchRequest.model_validate(body)
-        print(json.dumps(body, indent=2))
+        data = AssetSearchRequest.model_validate(body).model_dump_json(by_alias=True, exclude_none=True)
+        print(data)
         response = self.asi_client.request_paged(
             'post', EP_ASI_ASSETS_SEARCH.format(project_id), data=body, max_results=max_results
         )
-        # return [Asset.model_validate(asset) for asset in response]
+
         return AssetResponse.model_validate(response)
 
     @debug_call
@@ -251,6 +257,8 @@ class AttackSurfaceMgr:
         asset_name: Optional[str] = None,
         asset_apex_domain: Optional[Union[str, list[str]]] = None,
         asset_type: Optional[AssetType] = None,
+        asset_discovered_date: Optional[tuple[Optional[str], Optional[str]]] = None,
+        custom_tags: Optional[list[str]] = None,
         is_static_asset: Optional[bool] = None,
         open_port_number: Optional[Union[int, list[int]]] = None,
         open_port_service: Optional[Union[str, list[str]]] = None,
@@ -291,7 +299,9 @@ class AttackSurfaceMgr:
             if not ((isinstance(val, (dict, list))) and len(val) == 0)
         }
 
-        return AssetSearchFilterIn.model_validate(query)
+        return AssetSearchFilterIn.model_validate(query).model_dump(
+            by_alias=True, exclude_none=True, mode='json'
+        )
 
     # TODO - refactor
     def _process_arg(self, key: str, value) -> tuple[str, dict]:
@@ -352,6 +362,13 @@ class AttackSurfaceMgr:
         if key == 'asset_apex_domain':
             filt = {'in': value} if isinstance(value, list) else {'eq': value}
             return 'asset_properties', {'apex': filt}
+        
+        if key == 'asset_discovered_date':
+            return 'asset_properties', {'discovered': {'start': value[0], 'end': value[1]}}
+        
+        if key == 'custom_tags':
+            filt = {'in': value} if isinstance(value, list) else {'eq': value}
+            return 'asset_properties', {'custom_tags': filt}
 
         return key, value
 

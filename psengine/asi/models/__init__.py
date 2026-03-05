@@ -5,6 +5,7 @@ from .core import (
     AssetResponse,
     AssetSearchFilterIn,
     ExposureSeverity,
+    AssetSearchRequest
 )
 
 from .project import ProjectListResponse
