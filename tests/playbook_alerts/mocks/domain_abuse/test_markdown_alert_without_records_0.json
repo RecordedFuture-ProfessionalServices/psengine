@@ -12,6 +12,11 @@
             "updated": "2025-04-05T04:48:57.372Z",
             "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
             "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "DomainAbuse",
+                "name": "Domain Abuse"
+            },
             "owner_id": "It is also a garbage-collected runtime system.",
             "owner_name": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
             "organisation_id": "Make me a sandwich.",

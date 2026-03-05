@@ -12,6 +12,11 @@
             "updated": "2025-08-23T17:52:44.409Z",
             "case_rule_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
             "case_rule_label": "Ports are created with the built-in function open_port.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "CodeRepoLeakage",
+                "name": "Code and Repository Leakage"
+            },
             "owner_id": "Type classes first appeared in the Haskell programming language.",
             "owner_name": "Do you come here often?",
             "organisation_id": "Any element of a tuple can be accessed in constant time.",

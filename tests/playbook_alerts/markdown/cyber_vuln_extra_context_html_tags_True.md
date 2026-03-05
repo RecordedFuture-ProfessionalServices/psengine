@@ -1,4 +1,4 @@
-## Ports are used to communicate with the external world.
+## Vuln in Tech Stack
 
 ### Summary
 

@@ -1,10 +1,11 @@
 [project]
 name = "psengine"
-version = "2.4.2"
+version = "2.4.3"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9, <3.14"
 description = "psengine is a simple, yet elegant, library for rapid development of integrations with Recorded Future."
+
 authors = [
     {name = "Moise Medici", email = "moise.medici@recordedfuture.com"},
     {name = "Patrick Kinsella", email = "patrick.kinsella@recordedfuture.com"},
@@ -77,8 +78,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project.urls]
-Homepage = "https://github.com/RecordedFuture-ProfessionalServices/psengine"
-Changelog = "https://recordedfuture-professionalservices.github.io/psengine/CHANGELOG/"
+Homepage = "https://recordedfuture-professionalservices.github.io/psengine/latest/"
+Changelog = "https://recordedfuture-professionalservices.github.io/psengine/latest/CHANGELOG/"
 
 [tool.setuptools]
 packages = [

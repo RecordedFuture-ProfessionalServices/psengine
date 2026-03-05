@@ -1,4 +1,4 @@
-## Atoms are used within a program to denote distinguished values.
+## Third Party Risk Alert
 
 ### Summary
 

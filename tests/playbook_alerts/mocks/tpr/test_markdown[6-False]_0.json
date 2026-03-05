@@ -12,6 +12,11 @@
             "updated": "2025-02-26T07:03:46.545Z",
             "case_rule_id": "The arguments can be primitive data types or compound data types.",
             "case_rule_label": "Make me a sandwich.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
             "owner_name": "Its main implementation is the Glasgow Haskell Compiler.",
             "organisation_id": "Ports are created with the built-in function open_port.",

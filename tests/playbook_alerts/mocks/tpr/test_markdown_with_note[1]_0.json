@@ -13,6 +13,11 @@
             "updated": "2025-12-03T18:21:22.324Z",
             "case_rule_id": "Type classes first appeared in the Haskell programming language.",
             "case_rule_label": "Do you come here often?",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Ports are used to communicate with the external world.",
             "owner_name": "It is also a garbage-collected runtime system.",
             "organisation_id": "It is also a garbage-collected runtime system.",

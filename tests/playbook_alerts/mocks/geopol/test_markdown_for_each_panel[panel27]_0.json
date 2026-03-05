@@ -12,6 +12,11 @@
             "updated": "2025-08-13T22:48:49.745Z",
             "case_rule_id": "Erlang is known for its designs that are well suited for systems.",
             "case_rule_label": "Do you have any idea why this is not working?",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "GeoFacility",
+                "name": "Geopolitical Facility"
+            },
             "owner_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
             "owner_name": "Type classes first appeared in the Haskell programming language.",
             "organisation_id": "Any element of a tuple can be accessed in constant time.",

@@ -12,6 +12,11 @@
             "updated": "2025-08-11T04:35:33.385Z",
             "case_rule_id": "Tuples are containers for a fixed number of Erlang data types.",
             "case_rule_label": "Do you have any idea why this is not working?",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "DomainAbuse",
+                "name": "Domain Abuse"
+            },
             "owner_id": "Its main implementation is the Glasgow Haskell Compiler.",
             "owner_name": "Tuples are containers for a fixed number of Erlang data types.",
             "organisation_id": "Its main implementation is the Glasgow Haskell Compiler.",

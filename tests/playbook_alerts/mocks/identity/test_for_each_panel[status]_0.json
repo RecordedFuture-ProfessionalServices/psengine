@@ -12,6 +12,11 @@
             "updated": "2025-10-28T04:40:40.400Z",
             "case_rule_id": "Ports are used to communicate with the external world.",
             "case_rule_label": "Haskell features a type system with type inference and lazy evaluation.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "owner_id": "Haskell features a type system with type inference and lazy evaluation.",
             "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
             "organisation_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",

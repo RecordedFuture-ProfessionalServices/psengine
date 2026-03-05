@@ -1,4 +1,4 @@
-## Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.
+## Geopolitical Facility
 
 ### Summary
 

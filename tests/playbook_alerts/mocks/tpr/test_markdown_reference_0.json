@@ -12,6 +12,11 @@
             "updated": "2025-01-31T11:23:05.542Z",
             "case_rule_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
             "case_rule_label": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
             "owner_name": "Where are my pants?",
             "organisation_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",

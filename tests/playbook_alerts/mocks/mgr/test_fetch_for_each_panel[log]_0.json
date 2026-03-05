@@ -14,6 +14,11 @@
             "updated": "2025-12-16T11:28:41.203Z",
             "case_rule_id": "Do you come here often?",
             "case_rule_label": "Make me a sandwich.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "RuleNameLabel",
+                "name": "Some Rule Name here"
+            },
             "owner_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
             "owner_name": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
             "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",

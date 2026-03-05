@@ -19,6 +19,7 @@ from pydantic import Field, model_validator
 
 from ...common_models import RFBaseModel
 from ..models.panel_status import OwnerOrganisationDetails
+from .common_models import AlertRule
 
 
 class DatetimeRange(RFBaseModel):
@@ -33,6 +34,7 @@ class SearchStatus(RFBaseModel):
 
 class SearchData(RFBaseModel):
     playbook_alert_id: str
+    alert_rule: AlertRule
     status: str
     priority: str
     reopen: Optional[str] = None

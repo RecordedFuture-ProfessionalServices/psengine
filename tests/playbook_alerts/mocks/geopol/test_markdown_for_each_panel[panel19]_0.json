@@ -12,6 +12,11 @@
             "updated": "2025-08-29T16:13:00.457Z",
             "case_rule_id": "Make me a sandwich.",
             "case_rule_label": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "GeoFacility",
+                "name": "Geopolitical Facility"
+            },
             "owner_id": "Tuples are containers for a fixed number of Erlang data types.",
             "owner_name": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
             "organisation_id": "Its main implementation is the Glasgow Haskell Compiler.",

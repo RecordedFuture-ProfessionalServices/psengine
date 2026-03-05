@@ -12,6 +12,11 @@
             "updated": "2025-07-03T04:08:39.701Z",
             "case_rule_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
             "case_rule_label": "The arguments can be primitive data types or compound data types.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "owner_id": "Any element of a tuple can be accessed in constant time.",
             "owner_name": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
             "organisation_id": "Make me a sandwich.",

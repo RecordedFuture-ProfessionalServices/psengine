@@ -12,6 +12,11 @@
             "updated": "2025-05-24T10:07:40.105Z",
             "case_rule_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
             "case_rule_label": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "She spent her earliest years reading classic literature, and writing poetry.",
             "owner_name": "Where are my pants?",
             "organisation_id": "Ports are created with the built-in function open_port.",

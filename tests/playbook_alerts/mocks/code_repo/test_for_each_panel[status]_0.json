@@ -12,6 +12,11 @@
             "updated": "2025-09-27T18:49:50.754Z",
             "case_rule_id": "Erlang is known for its designs that are well suited for systems.",
             "case_rule_label": "Ports are used to communicate with the external world.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "CodeRepoLeakage",
+                "name": "Code and Repository Leakage"
+            },
             "owner_id": "Ports are created with the built-in function open_port.",
             "owner_name": "Erlang is a general-purpose, concurrent, functional programming language.",
             "organisation_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",

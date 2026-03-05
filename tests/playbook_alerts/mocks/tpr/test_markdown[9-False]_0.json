@@ -12,6 +12,11 @@
             "updated": "2025-05-30T05:30:12.981Z",
             "case_rule_id": "Where are my pants?",
             "case_rule_label": "Haskell features a type system with type inference and lazy evaluation.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Atoms are used within a program to denote distinguished values.",
             "owner_name": "He looked inquisitively at his keyboard and wrote another sentence.",
             "organisation_id": "Its main implementation is the Glasgow Haskell Compiler.",

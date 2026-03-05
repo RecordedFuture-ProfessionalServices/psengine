@@ -1,4 +1,4 @@
-## Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."
+## Third Party Risk Alert
 
 ### Summary
 

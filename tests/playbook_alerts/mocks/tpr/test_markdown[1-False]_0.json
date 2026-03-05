@@ -12,6 +12,11 @@
             "updated": "2025-11-15T21:24:17.055Z",
             "case_rule_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
             "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
             "owner_name": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
             "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",

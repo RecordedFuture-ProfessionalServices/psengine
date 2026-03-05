@@ -12,6 +12,11 @@
             "updated": "2025-11-29T07:40:41.171Z",
             "case_rule_id": "Do you come here often?",
             "case_rule_label": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
             "owner_name": "She spent her earliest years reading classic literature, and writing poetry.",
             "organisation_id": "Haskell features a type system with type inference and lazy evaluation.",

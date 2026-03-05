@@ -12,6 +12,11 @@
             "updated": "2025-05-17T00:48:57.393Z",
             "case_rule_id": "Do you come here often?",
             "case_rule_label": "Its main implementation is the Glasgow Haskell Compiler.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "RuleNameLabel",
+                "name": "Some Rule Name here"
+            },
             "owner_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
             "owner_name": "Where are my pants?",
             "organisation_id": "It is also a garbage-collected runtime system.",

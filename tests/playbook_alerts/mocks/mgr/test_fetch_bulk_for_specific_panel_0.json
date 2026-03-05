@@ -6,6 +6,11 @@
     "data": [
         {
             "playbook_alert_id": "task:06bdbb0b-c478-4abb-8546-a551cc254ac0",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "status": "New",
             "priority": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
             "created": "2025-03-03T16:33:18.576Z",
@@ -30,6 +35,11 @@
         },
         {
             "playbook_alert_id": "task:ba32b48e-e895-43bb-97cc-26144eeeb0cb",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "status": "New",
             "priority": "Erlang is a general-purpose, concurrent, functional programming language.",
             "created": "2025-10-03T11:04:39.737Z",

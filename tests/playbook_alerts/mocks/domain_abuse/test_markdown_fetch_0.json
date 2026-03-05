@@ -12,6 +12,11 @@
             "updated": "2025-08-05T10:54:22.469Z",
             "case_rule_id": "Make me a sandwich.",
             "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "DomainAbuse",
+                "name": "Domain Abuse"
+            },
             "owner_id": "Any element of a tuple can be accessed in constant time.",
             "owner_name": "Type classes first appeared in the Haskell programming language.",
             "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",

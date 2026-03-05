@@ -12,6 +12,11 @@
             "updated": "2025-05-16T05:18:44.063Z",
             "case_rule_id": "It is also a garbage-collected runtime system.",
             "case_rule_label": "Ports are used to communicate with the external world.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "owner_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
             "owner_name": "The arguments can be primitive data types or compound data types.",
             "organisation_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",

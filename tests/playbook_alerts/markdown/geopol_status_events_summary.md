@@ -1,4 +1,4 @@
-## The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.
+## Geopolitical Facility
 
 ### Summary
 

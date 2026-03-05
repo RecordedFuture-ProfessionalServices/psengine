@@ -13,6 +13,11 @@
                 "updated": "2025-03-26T02:45:09.400Z",
                 "case_rule_id": "He looked inquisitively at his keyboard and wrote another sentence.",
                 "case_rule_label": "Atoms are used within a program to denote distinguished values.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Ports are used to communicate with the external world.",
                 "owner_name": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "organisation_id": "She spent her earliest years reading classic literature, and writing poetry.",
@@ -103,6 +108,11 @@
                 "updated": "2025-03-06T21:00:52.707Z",
                 "case_rule_id": "Ports are used to communicate with the external world.",
                 "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Ports are created with the built-in function open_port.",
                 "owner_name": "Tuples are containers for a fixed number of Erlang data types.",
                 "organisation_id": "It is also a garbage-collected runtime system.",
@@ -215,6 +225,11 @@
                 "updated": "2025-10-18T04:43:10.956Z",
                 "case_rule_id": "Type classes first appeared in the Haskell programming language.",
                 "case_rule_label": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Atoms are used within a program to denote distinguished values.",
                 "owner_name": "Type classes first appeared in the Haskell programming language.",
                 "organisation_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
@@ -308,6 +323,11 @@
                 "updated": "2025-12-26T18:47:09.685Z",
                 "case_rule_id": "Do you come here often?",
                 "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "owner_name": "Ports are used to communicate with the external world.",
                 "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",
@@ -398,6 +418,11 @@
                 "updated": "2025-11-03T02:09:22.717Z",
                 "case_rule_id": "Ports are used to communicate with the external world.",
                 "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The arguments can be primitive data types or compound data types.",
                 "owner_name": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
                 "organisation_id": "Where are my pants?",
@@ -513,6 +538,11 @@
                 "updated": "2025-09-16T10:33:41.156Z",
                 "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "case_rule_label": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Any element of a tuple can be accessed in constant time.",
                 "owner_name": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "organisation_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
@@ -618,6 +648,11 @@
                 "updated": "2025-11-11T20:29:15.709Z",
                 "case_rule_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "case_rule_label": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
                 "owner_name": "Erlang is a general-purpose, concurrent, functional programming language.",
                 "organisation_id": "Tuples are containers for a fixed number of Erlang data types.",
@@ -741,6 +776,11 @@
                 "updated": "2025-08-04T23:01:55.706Z",
                 "case_rule_id": "Atoms are used within a program to denote distinguished values.",
                 "case_rule_label": "Make me a sandwich.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Any element of a tuple can be accessed in constant time.",
                 "owner_name": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "organisation_id": "Its main implementation is the Glasgow Haskell Compiler.",
@@ -853,6 +893,11 @@
                 "updated": "2025-05-26T02:02:29.680Z",
                 "case_rule_id": "It is also a garbage-collected runtime system.",
                 "case_rule_label": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "owner_name": "Make me a sandwich.",
                 "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
@@ -969,6 +1014,11 @@
                 "updated": "2025-09-25T00:41:28.402Z",
                 "case_rule_id": "She spent her earliest years reading classic literature, and writing poetry.",
                 "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Any element of a tuple can be accessed in constant time.",
                 "owner_name": "He looked inquisitively at his keyboard and wrote another sentence.",
                 "organisation_id": "Erlang is a general-purpose, concurrent, functional programming language.",
@@ -1082,6 +1132,11 @@
                 "updated": "2025-05-06T20:41:47.850Z",
                 "case_rule_id": "Ports are created with the built-in function open_port.",
                 "case_rule_label": "Make me a sandwich.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "owner_name": "Do you come here often?",
                 "organisation_id": "Erlang is a general-purpose, concurrent, functional programming language.",
@@ -1182,6 +1237,11 @@
                 "updated": "2025-08-02T09:17:57.638Z",
                 "case_rule_id": "Haskell features a type system with type inference and lazy evaluation.",
                 "case_rule_label": "Do you come here often?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Atoms are used within a program to denote distinguished values.",
                 "owner_name": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "organisation_id": "Make me a sandwich.",
@@ -1283,6 +1343,11 @@
                 "updated": "2025-08-03T22:44:04.865Z",
                 "case_rule_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "case_rule_label": "Haskell features a type system with type inference and lazy evaluation.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "owner_name": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
@@ -1385,6 +1450,11 @@
                 "updated": "2025-03-05T20:08:52.762Z",
                 "case_rule_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "I don't even care.",
                 "owner_name": "The arguments can be primitive data types or compound data types.",
                 "organisation_id": "Erlang is a general-purpose, concurrent, functional programming language.",
@@ -1503,6 +1573,11 @@
                 "updated": "2025-11-27T18:50:57.860Z",
                 "case_rule_id": "Atoms are used within a program to denote distinguished values.",
                 "case_rule_label": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "owner_name": "He looked inquisitively at his keyboard and wrote another sentence.",
                 "organisation_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
@@ -1605,6 +1680,11 @@
                 "updated": "2025-12-27T18:05:07.593Z",
                 "case_rule_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "case_rule_label": "Atoms are used within a program to denote distinguished values.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
                 "owner_name": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "organisation_id": "She spent her earliest years reading classic literature, and writing poetry.",
@@ -1705,6 +1785,11 @@
                 "updated": "2025-03-13T13:44:09.543Z",
                 "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "case_rule_label": "Do you have any idea why this is not working?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is known for its designs that are well suited for systems.",
                 "owner_name": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "organisation_id": "Atoms are used within a program to denote distinguished values.",
@@ -1824,6 +1909,11 @@
                 "updated": "2025-04-04T13:46:23.292Z",
                 "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "case_rule_label": "I don't even care.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is known for its designs that are well suited for systems.",
                 "owner_name": "Tuples are containers for a fixed number of Erlang data types.",
                 "organisation_id": "Where are my pants?",
@@ -1917,6 +2007,11 @@
                 "updated": "2025-04-10T18:06:14.954Z",
                 "case_rule_id": "She spent her earliest years reading classic literature, and writing poetry.",
                 "case_rule_label": "The arguments can be primitive data types or compound data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "I don't even care.",
                 "owner_name": "Do you come here often?",
                 "organisation_id": "Its main implementation is the Glasgow Haskell Compiler.",
@@ -2019,6 +2114,11 @@
                 "updated": "2025-08-28T01:25:09.643Z",
                 "case_rule_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "case_rule_label": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "owner_name": "Its main implementation is the Glasgow Haskell Compiler.",
                 "organisation_id": "Its main implementation is the Glasgow Haskell Compiler.",
@@ -2123,6 +2223,11 @@
                 "updated": "2025-05-21T14:12:50.190Z",
                 "case_rule_id": "Haskell features a type system with type inference and lazy evaluation.",
                 "case_rule_label": "Type classes first appeared in the Haskell programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is known for its designs that are well suited for systems.",
                 "owner_name": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "organisation_id": "Where are my pants?",
@@ -2242,6 +2347,11 @@
                 "updated": "2025-05-16T09:05:27.084Z",
                 "case_rule_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Atoms are used within a program to denote distinguished values.",
                 "owner_name": "Ports are created with the built-in function open_port.",
                 "organisation_id": "Where are my pants?",
@@ -2342,6 +2452,11 @@
                 "updated": "2025-04-04T03:03:23.776Z",
                 "case_rule_id": "Any element of a tuple can be accessed in constant time.",
                 "case_rule_label": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is a general-purpose, concurrent, functional programming language.",
                 "owner_name": "Ports are used to communicate with the external world.",
                 "organisation_id": "Erlang is a general-purpose, concurrent, functional programming language.",
@@ -2444,6 +2559,11 @@
                 "updated": "2025-11-12T06:35:55.696Z",
                 "case_rule_id": "Ports are used to communicate with the external world.",
                 "case_rule_label": "Ports are created with the built-in function open_port.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "It is also a garbage-collected runtime system.",
                 "owner_name": "Its main implementation is the Glasgow Haskell Compiler.",
                 "organisation_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
@@ -2547,6 +2667,11 @@
                 "updated": "2025-06-28T07:14:05.981Z",
                 "case_rule_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "case_rule_label": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "owner_name": "Do you have any idea why this is not working?",
                 "organisation_id": "Haskell features a type system with type inference and lazy evaluation.",
@@ -2652,6 +2777,11 @@
                 "updated": "2025-05-26T19:49:34.839Z",
                 "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "case_rule_label": "Do you have any idea why this is not working?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "owner_name": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "organisation_id": "I don't even care.",
@@ -2756,6 +2886,11 @@
                 "updated": "2025-08-21T11:34:40.692Z",
                 "case_rule_id": "The arguments can be primitive data types or compound data types.",
                 "case_rule_label": "Type classes first appeared in the Haskell programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Haskell features a type system with type inference and lazy evaluation.",
                 "owner_name": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "organisation_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
@@ -2860,6 +2995,11 @@
                 "updated": "2025-06-22T06:21:39.419Z",
                 "case_rule_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "case_rule_label": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "owner_name": "Atoms are used within a program to denote distinguished values.",
                 "organisation_id": "Make me a sandwich.",
@@ -2968,6 +3108,11 @@
                 "updated": "2025-05-07T15:57:12.466Z",
                 "case_rule_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "case_rule_label": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Where are my pants?",
                 "owner_name": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "organisation_id": "Atoms are used within a program to denote distinguished values.",
@@ -3086,6 +3231,11 @@
                 "updated": "2025-02-20T21:28:20.953Z",
                 "case_rule_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "case_rule_label": "Type classes first appeared in the Haskell programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Ports are created with the built-in function open_port.",
                 "owner_name": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "organisation_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
@@ -3204,6 +3354,11 @@
                 "updated": "2025-12-31T17:11:57.696Z",
                 "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "case_rule_label": "Type classes first appeared in the Haskell programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "He looked inquisitively at his keyboard and wrote another sentence.",
                 "owner_name": "Make me a sandwich.",
                 "organisation_id": "Haskell features a type system with type inference and lazy evaluation.",
@@ -3318,6 +3473,11 @@
                 "updated": "2025-12-19T01:27:42.493Z",
                 "case_rule_id": "Erlang is a general-purpose, concurrent, functional programming language.",
                 "case_rule_label": "The arguments can be primitive data types or compound data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "I don't even care.",
                 "owner_name": "Erlang is a general-purpose, concurrent, functional programming language.",
                 "organisation_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
@@ -3433,6 +3593,11 @@
                 "updated": "2025-01-31T12:47:44.856Z",
                 "case_rule_id": "Its main implementation is the Glasgow Haskell Compiler.",
                 "case_rule_label": "Where are my pants?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Haskell features a type system with type inference and lazy evaluation.",
                 "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "organisation_id": "She spent her earliest years reading classic literature, and writing poetry.",
@@ -3551,6 +3716,11 @@
                 "updated": "2025-09-19T01:28:53.323Z",
                 "case_rule_id": "Make me a sandwich.",
                 "case_rule_label": "Its main implementation is the Glasgow Haskell Compiler.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "owner_name": "The arguments can be primitive data types or compound data types.",
                 "organisation_id": "She spent her earliest years reading classic literature, and writing poetry.",
@@ -3670,6 +3840,11 @@
                 "updated": "2025-02-17T08:52:29.947Z",
                 "case_rule_id": "Haskell features a type system with type inference and lazy evaluation.",
                 "case_rule_label": "Erlang is known for its designs that are well suited for systems.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is a general-purpose, concurrent, functional programming language.",
                 "owner_name": "It is also a garbage-collected runtime system.",
                 "organisation_id": "Where are my pants?",
@@ -3786,6 +3961,11 @@
                 "updated": "2025-08-05T16:56:12.921Z",
                 "case_rule_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "case_rule_label": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "I don't even care.",
                 "owner_name": "Erlang is known for its designs that are well suited for systems.",
                 "organisation_id": "It is also a garbage-collected runtime system.",
@@ -3904,6 +4084,11 @@
                 "updated": "2025-07-11T02:22:48.325Z",
                 "case_rule_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "case_rule_label": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is known for its designs that are well suited for systems.",
                 "owner_name": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
                 "organisation_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
@@ -4006,6 +4191,11 @@
                 "updated": "2025-08-20T00:24:24.262Z",
                 "case_rule_id": "Any element of a tuple can be accessed in constant time.",
                 "case_rule_label": "The arguments can be primitive data types or compound data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is known for its designs that are well suited for systems.",
                 "owner_name": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "organisation_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
@@ -4106,6 +4296,11 @@
                 "updated": "2025-08-29T12:49:00.974Z",
                 "case_rule_id": "Atoms are used within a program to denote distinguished values.",
                 "case_rule_label": "Make me a sandwich.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The arguments can be primitive data types or compound data types.",
                 "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
@@ -4199,6 +4394,11 @@
                 "updated": "2025-07-20T03:57:49.275Z",
                 "case_rule_id": "It is also a garbage-collected runtime system.",
                 "case_rule_label": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "It is also a garbage-collected runtime system.",
                 "owner_name": "Tuples are containers for a fixed number of Erlang data types.",
                 "organisation_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
@@ -4301,6 +4501,11 @@
                 "updated": "2025-03-15T12:56:26.870Z",
                 "case_rule_id": "She spent her earliest years reading classic literature, and writing poetry.",
                 "case_rule_label": "Its main implementation is the Glasgow Haskell Compiler.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "owner_name": "I don't even care.",
                 "organisation_id": "She spent her earliest years reading classic literature, and writing poetry.",
@@ -4419,6 +4624,11 @@
                 "updated": "2025-01-25T07:30:35.401Z",
                 "case_rule_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "case_rule_label": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "owner_name": "It is also a garbage-collected runtime system.",
                 "organisation_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
@@ -4544,6 +4754,11 @@
                 "updated": "2025-04-26T22:24:58.048Z",
                 "case_rule_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
                 "case_rule_label": "Type classes first appeared in the Haskell programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Make me a sandwich.",
                 "owner_name": "Ports are created with the built-in function open_port.",
                 "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
@@ -4652,6 +4867,11 @@
                 "updated": "2025-12-26T07:08:28.060Z",
                 "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "case_rule_label": "Do you come here often?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Do you have any idea why this is not working?",
                 "owner_name": "Erlang is known for its designs that are well suited for systems.",
                 "organisation_id": "Do you come here often?",
@@ -4745,6 +4965,11 @@
                 "updated": "2025-11-13T03:44:47.075Z",
                 "case_rule_id": "It is also a garbage-collected runtime system.",
                 "case_rule_label": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The arguments can be primitive data types or compound data types.",
                 "owner_name": "She spent her earliest years reading classic literature, and writing poetry.",
                 "organisation_id": "Any element of a tuple can be accessed in constant time.",
@@ -4838,6 +5063,11 @@
                 "updated": "2025-02-09T23:32:22.904Z",
                 "case_rule_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "case_rule_label": "Tuples are containers for a fixed number of Erlang data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "organisation_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
@@ -4956,6 +5186,11 @@
                 "updated": "2025-10-03T23:01:41.533Z",
                 "case_rule_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "case_rule_label": "Type classes first appeared in the Haskell programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Its main implementation is the Glasgow Haskell Compiler.",
                 "owner_name": "Its main implementation is the Glasgow Haskell Compiler.",
                 "organisation_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
@@ -5059,6 +5294,11 @@
                 "updated": "2025-12-22T02:01:28.167Z",
                 "case_rule_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "case_rule_label": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Type classes first appeared in the Haskell programming language.",
                 "owner_name": "Where are my pants?",
                 "organisation_id": "Atoms are used within a program to denote distinguished values.",
@@ -5161,6 +5401,11 @@
                 "updated": "2025-09-15T06:36:59.778Z",
                 "case_rule_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "case_rule_label": "I don't even care.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "I don't even care.",
                 "owner_name": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",
@@ -5258,6 +5503,11 @@
                 "updated": "2025-02-28T13:04:01.033Z",
                 "case_rule_id": "Haskell features a type system with type inference and lazy evaluation.",
                 "case_rule_label": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "owner_name": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
                 "organisation_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
@@ -5377,6 +5627,11 @@
                 "updated": "2025-01-16T20:39:41.476Z",
                 "case_rule_id": "Any element of a tuple can be accessed in constant time.",
                 "case_rule_label": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is known for its designs that are well suited for systems.",
                 "owner_name": "Type classes first appeared in the Haskell programming language.",
                 "organisation_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
@@ -5496,6 +5751,11 @@
                 "updated": "2025-06-22T22:12:44.057Z",
                 "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "case_rule_label": "She spent her earliest years reading classic literature, and writing poetry.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Make me a sandwich.",
                 "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "organisation_id": "Ports are used to communicate with the external world.",
@@ -5602,6 +5862,11 @@
                 "updated": "2025-01-30T12:52:00.488Z",
                 "case_rule_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
                 "case_rule_label": "Where are my pants?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is known for its designs that are well suited for systems.",
                 "owner_name": "Make me a sandwich.",
                 "organisation_id": "Make me a sandwich.",
@@ -5695,6 +5960,11 @@
                 "updated": "2025-05-18T23:11:40.128Z",
                 "case_rule_id": "Type classes first appeared in the Haskell programming language.",
                 "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "owner_name": "Its main implementation is the Glasgow Haskell Compiler.",
                 "organisation_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
@@ -5787,6 +6057,11 @@
                 "updated": "2025-06-11T18:13:06.564Z",
                 "case_rule_id": "Ports are used to communicate with the external world.",
                 "case_rule_label": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "I don't even care.",
                 "owner_name": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "organisation_id": "Tuples are containers for a fixed number of Erlang data types.",
@@ -5885,6 +6160,11 @@
                 "updated": "2025-08-21T07:55:08.666Z",
                 "case_rule_id": "Where are my pants?",
                 "case_rule_label": "Haskell features a type system with type inference and lazy evaluation.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Its main implementation is the Glasgow Haskell Compiler.",
                 "owner_name": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "organisation_id": "Atoms are used within a program to denote distinguished values.",
@@ -5975,6 +6255,11 @@
                 "updated": "2025-07-24T13:59:19.144Z",
                 "case_rule_id": "Do you come here often?",
                 "case_rule_label": "Tuples are containers for a fixed number of Erlang data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
                 "owner_name": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "organisation_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
@@ -6066,6 +6351,11 @@
                 "updated": "2025-09-06T16:10:11.258Z",
                 "case_rule_id": "Do you have any idea why this is not working?",
                 "case_rule_label": "Make me a sandwich.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Atoms are used within a program to denote distinguished values.",
                 "owner_name": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
                 "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",
@@ -6170,6 +6460,11 @@
                 "updated": "2025-02-24T08:24:05.541Z",
                 "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "case_rule_label": "Tuples are containers for a fixed number of Erlang data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "It is also a garbage-collected runtime system.",
                 "owner_name": "Type classes first appeared in the Haskell programming language.",
                 "organisation_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
@@ -6274,6 +6569,11 @@
                 "updated": "2025-05-07T21:31:03.024Z",
                 "case_rule_id": "I don't even care.",
                 "case_rule_label": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "owner_name": "Its main implementation is the Glasgow Haskell Compiler.",
                 "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
@@ -6390,6 +6690,11 @@
                 "updated": "2025-02-12T21:41:28.214Z",
                 "case_rule_id": "She spent her earliest years reading classic literature, and writing poetry.",
                 "case_rule_label": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "owner_name": "Tuples are containers for a fixed number of Erlang data types.",
                 "organisation_id": "I don't even care.",
@@ -6512,6 +6817,11 @@
                 "updated": "2025-01-05T14:44:34.302Z",
                 "case_rule_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "case_rule_label": "Ports are created with the built-in function open_port.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "owner_name": "Make me a sandwich.",
                 "organisation_id": "I don't even care.",
@@ -6611,6 +6921,11 @@
                 "updated": "2025-01-24T22:20:56.805Z",
                 "case_rule_id": "Atoms are used within a program to denote distinguished values.",
                 "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Its main implementation is the Glasgow Haskell Compiler.",
                 "owner_name": "Where are my pants?",
                 "organisation_id": "Make me a sandwich.",
@@ -6701,6 +7016,11 @@
                 "updated": "2025-01-06T10:02:37.240Z",
                 "case_rule_id": "Haskell features a type system with type inference and lazy evaluation.",
                 "case_rule_label": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Do you have any idea why this is not working?",
                 "owner_name": "She spent her earliest years reading classic literature, and writing poetry.",
                 "organisation_id": "Do you come here often?",
@@ -6792,6 +7112,11 @@
                 "updated": "2025-12-02T12:04:31.010Z",
                 "case_rule_id": "Ports are created with the built-in function open_port.",
                 "case_rule_label": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "owner_name": "I don't even care.",
                 "organisation_id": "Type classes first appeared in the Haskell programming language.",
@@ -6903,6 +7228,11 @@
                 "updated": "2025-06-09T14:09:12.905Z",
                 "case_rule_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "case_rule_label": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Its main implementation is the Glasgow Haskell Compiler.",
                 "owner_name": "He looked inquisitively at his keyboard and wrote another sentence.",
                 "organisation_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
@@ -7000,6 +7330,11 @@
                 "updated": "2025-05-22T14:03:27.303Z",
                 "case_rule_id": "Make me a sandwich.",
                 "case_rule_label": "Type classes first appeared in the Haskell programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "I don't even care.",
                 "owner_name": "Tuples are containers for a fixed number of Erlang data types.",
                 "organisation_id": "Atoms are used within a program to denote distinguished values.",
@@ -7090,6 +7425,11 @@
                 "updated": "2025-06-24T09:21:56.002Z",
                 "case_rule_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "case_rule_label": "Type classes first appeared in the Haskell programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Do you come here often?",
                 "owner_name": "Erlang is known for its designs that are well suited for systems.",
                 "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",
@@ -7193,6 +7533,11 @@
                 "updated": "2025-12-16T14:13:41.843Z",
                 "case_rule_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "case_rule_label": "She spent her earliest years reading classic literature, and writing poetry.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Where are my pants?",
                 "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "organisation_id": "Tuples are containers for a fixed number of Erlang data types.",
@@ -7292,6 +7637,11 @@
                 "updated": "2025-11-25T10:31:08.998Z",
                 "case_rule_id": "I don't even care.",
                 "case_rule_label": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "I don't even care.",
                 "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "organisation_id": "Its main implementation is the Glasgow Haskell Compiler.",
@@ -7385,6 +7735,11 @@
                 "updated": "2025-03-01T08:13:56.419Z",
                 "case_rule_id": "Where are my pants?",
                 "case_rule_label": "Tuples are containers for a fixed number of Erlang data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Any element of a tuple can be accessed in constant time.",
                 "owner_name": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "organisation_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
@@ -7493,6 +7848,11 @@
                 "updated": "2025-09-30T19:49:05.303Z",
                 "case_rule_id": "Any element of a tuple can be accessed in constant time.",
                 "case_rule_label": "He looked inquisitively at his keyboard and wrote another sentence.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Ports are created with the built-in function open_port.",
                 "owner_name": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "organisation_id": "Erlang is a general-purpose, concurrent, functional programming language.",
@@ -7592,6 +7952,11 @@
                 "updated": "2025-01-27T01:16:45.602Z",
                 "case_rule_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "case_rule_label": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "owner_name": "Tuples are containers for a fixed number of Erlang data types.",
                 "organisation_id": "Where are my pants?",
@@ -7696,6 +8061,11 @@
                 "updated": "2025-11-11T05:16:40.966Z",
                 "case_rule_id": "Any element of a tuple can be accessed in constant time.",
                 "case_rule_label": "Make me a sandwich.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "owner_name": "Ports are created with the built-in function open_port.",
                 "organisation_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
@@ -7796,6 +8166,11 @@
                 "updated": "2025-04-27T02:33:41.330Z",
                 "case_rule_id": "Erlang is a general-purpose, concurrent, functional programming language.",
                 "case_rule_label": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Type classes first appeared in the Haskell programming language.",
                 "owner_name": "Ports are used to communicate with the external world.",
                 "organisation_id": "Any element of a tuple can be accessed in constant time.",
@@ -7914,6 +8289,11 @@
                 "updated": "2025-05-23T10:25:24.983Z",
                 "case_rule_id": "Do you have any idea why this is not working?",
                 "case_rule_label": "The arguments can be primitive data types or compound data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Type classes first appeared in the Haskell programming language.",
                 "owner_name": "Its main implementation is the Glasgow Haskell Compiler.",
                 "organisation_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
@@ -8019,6 +8399,11 @@
                 "updated": "2025-09-18T11:29:18.749Z",
                 "case_rule_id": "He looked inquisitively at his keyboard and wrote another sentence.",
                 "case_rule_label": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "It is also a garbage-collected runtime system.",
                 "owner_name": "Any element of a tuple can be accessed in constant time.",
                 "organisation_id": "Type classes first appeared in the Haskell programming language.",
@@ -8134,6 +8519,11 @@
                 "updated": "2025-07-14T17:37:59.887Z",
                 "case_rule_id": "The arguments can be primitive data types or compound data types.",
                 "case_rule_label": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Its main implementation is the Glasgow Haskell Compiler.",
                 "owner_name": "Any element of a tuple can be accessed in constant time.",
                 "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",
@@ -8237,6 +8627,11 @@
                 "updated": "2025-03-03T10:05:40.628Z",
                 "case_rule_id": "Ports are used to communicate with the external world.",
                 "case_rule_label": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Ports are created with the built-in function open_port.",
                 "owner_name": "Erlang is known for its designs that are well suited for systems.",
                 "organisation_id": "The arguments can be primitive data types or compound data types.",
@@ -8356,6 +8751,11 @@
                 "updated": "2025-08-28T22:17:49.123Z",
                 "case_rule_id": "Do you come here often?",
                 "case_rule_label": "Its main implementation is the Glasgow Haskell Compiler.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "owner_name": "Ports are created with the built-in function open_port.",
                 "organisation_id": "Haskell features a type system with type inference and lazy evaluation.",
@@ -8463,6 +8863,11 @@
                 "updated": "2025-11-28T03:11:20.412Z",
                 "case_rule_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "case_rule_label": "Tuples are containers for a fixed number of Erlang data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is a general-purpose, concurrent, functional programming language.",
                 "owner_name": "Make me a sandwich.",
                 "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
@@ -8565,6 +8970,11 @@
                 "updated": "2025-12-23T08:39:04.801Z",
                 "case_rule_id": "Erlang is a general-purpose, concurrent, functional programming language.",
                 "case_rule_label": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
                 "owner_name": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",
@@ -8681,6 +9091,11 @@
                 "updated": "2025-12-20T20:06:24.917Z",
                 "case_rule_id": "Ports are created with the built-in function open_port.",
                 "case_rule_label": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "owner_name": "Where are my pants?",
                 "organisation_id": "Its main implementation is the Glasgow Haskell Compiler.",
@@ -8769,6 +9184,11 @@
                 "updated": "2025-04-29T18:04:44.880Z",
                 "case_rule_id": "Erlang is known for its designs that are well suited for systems.",
                 "case_rule_label": "I don't even care.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Any element of a tuple can be accessed in constant time.",
                 "owner_name": "Atoms are used within a program to denote distinguished values.",
                 "organisation_id": "She spent her earliest years reading classic literature, and writing poetry.",
@@ -8888,6 +9308,11 @@
                 "updated": "2025-12-25T16:46:40.707Z",
                 "case_rule_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "case_rule_label": "Type classes first appeared in the Haskell programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "owner_name": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
                 "organisation_id": "Where are my pants?",
@@ -8995,6 +9420,11 @@
                 "updated": "2025-09-22T02:52:34.771Z",
                 "case_rule_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "case_rule_label": "Where are my pants?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "owner_name": "Where are my pants?",
                 "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
@@ -9103,6 +9533,11 @@
                 "updated": "2025-03-05T09:36:26.772Z",
                 "case_rule_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "case_rule_label": "She spent her earliest years reading classic literature, and writing poetry.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Erlang is known for its designs that are well suited for systems.",
                 "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "organisation_id": "Haskell features a type system with type inference and lazy evaluation.",
@@ -9208,6 +9643,11 @@
                 "updated": "2025-05-31T05:36:33.454Z",
                 "case_rule_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Do you come here often?",
                 "owner_name": "Do you have any idea why this is not working?",
                 "organisation_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
@@ -9323,6 +9763,11 @@
                 "updated": "2025-12-21T20:18:15.953Z",
                 "case_rule_id": "Its main implementation is the Glasgow Haskell Compiler.",
                 "case_rule_label": "Its main implementation is the Glasgow Haskell Compiler.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Type classes first appeared in the Haskell programming language.",
                 "owner_name": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "organisation_id": "Type classes first appeared in the Haskell programming language.",
@@ -9413,6 +9858,11 @@
                 "updated": "2025-06-09T20:32:20.261Z",
                 "case_rule_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "case_rule_label": "The arguments can be primitive data types or compound data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "I don't even care.",
                 "owner_name": "Make me a sandwich.",
                 "organisation_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
@@ -9514,6 +9964,11 @@
                 "updated": "2025-10-17T18:18:58.127Z",
                 "case_rule_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Make me a sandwich.",
                 "owner_name": "Tuples are containers for a fixed number of Erlang data types.",
                 "organisation_id": "It is also a garbage-collected runtime system.",
@@ -9610,6 +10065,11 @@
                 "updated": "2025-06-23T08:23:21.242Z",
                 "case_rule_id": "He looked inquisitively at his keyboard and wrote another sentence.",
                 "case_rule_label": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Do you come here often?",
                 "owner_name": "Make me a sandwich.",
                 "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
@@ -9725,6 +10185,11 @@
                 "updated": "2025-12-03T11:41:51.507Z",
                 "case_rule_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "case_rule_label": "I don't even care.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
                 "owner_name": "Erlang is a general-purpose, concurrent, functional programming language.",
                 "organisation_id": "Type classes first appeared in the Haskell programming language.",
@@ -9837,6 +10302,11 @@
                 "updated": "2025-05-31T11:14:31.192Z",
                 "case_rule_id": "Do you have any idea why this is not working?",
                 "case_rule_label": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "It is also a garbage-collected runtime system.",
                 "owner_name": "Do you have any idea why this is not working?",
                 "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",
@@ -9953,6 +10423,11 @@
                 "updated": "2025-12-05T02:18:47.498Z",
                 "case_rule_id": "Atoms are used within a program to denote distinguished values.",
                 "case_rule_label": "Do you come here often?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Atoms are used within a program to denote distinguished values.",
                 "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "organisation_id": "Ports are used to communicate with the external world.",
@@ -10052,6 +10527,11 @@
                 "updated": "2025-12-02T02:40:06.403Z",
                 "case_rule_id": "It is also a garbage-collected runtime system.",
                 "case_rule_label": "Do you have any idea why this is not working?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "She spent her earliest years reading classic literature, and writing poetry.",
                 "owner_name": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
                 "organisation_id": "Do you come here often?",
@@ -10171,6 +10651,11 @@
                 "updated": "2025-10-15T08:53:01.186Z",
                 "case_rule_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
                 "case_rule_label": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Ports are used to communicate with the external world.",
                 "owner_name": "She spent her earliest years reading classic literature, and writing poetry.",
                 "organisation_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
@@ -10273,6 +10758,11 @@
                 "updated": "2025-11-29T06:36:34.983Z",
                 "case_rule_id": "She spent her earliest years reading classic literature, and writing poetry.",
                 "case_rule_label": "Any element of a tuple can be accessed in constant time.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Any element of a tuple can be accessed in constant time.",
                 "owner_name": "I don't even care.",
                 "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
@@ -10392,6 +10882,11 @@
                 "updated": "2025-08-17T02:42:35.973Z",
                 "case_rule_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
                 "case_rule_label": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "Any element of a tuple can be accessed in constant time.",
                 "owner_name": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",
                 "organisation_id": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
@@ -10511,6 +11006,11 @@
                 "updated": "2025-02-12T03:32:19.910Z",
                 "case_rule_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
                 "case_rule_label": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "identity",
+                    "name": "Novel Identity Exposures"
+                },
                 "owner_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "owner_name": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "organisation_id": "Do you have any idea why this is not working?",

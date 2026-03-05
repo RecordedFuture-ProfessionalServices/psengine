@@ -1,4 +1,4 @@
-## Its main implementation is the Glasgow Haskell Compiler.
+## Geopolitical Facility
 
 ### Summary
 

@@ -14,6 +14,11 @@
             "updated": "2025-01-06T14:04:27.754Z",
             "case_rule_id": "Do you have any idea why this is not working?",
             "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "RuleNameLabel",
+                "name": "Some Rule Name here"
+            },
             "owner_id": "Any element of a tuple can be accessed in constant time.",
             "owner_name": "They are written as strings of consecutive alphanumeric characters, the first character being lowercase.",
             "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",
