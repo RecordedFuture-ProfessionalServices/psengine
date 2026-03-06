@@ -5066,6 +5066,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#psengine.playbook_alerts.playbook_alerts.PreviewAlertOut.alert_rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;alert_rule
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#psengine.playbook_alerts.playbook_alerts.PreviewAlertOut.assignee_id" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;assignee_id
@@ -8106,6 +8115,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#psengine.playbook_alerts.playbook_alerts.PreviewAlertOut.alert_rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;alert_rule
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#psengine.playbook_alerts.playbook_alerts.PreviewAlertOut.assignee_id" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;assignee_id
@@ -8988,7 +9006,7 @@
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="k">return</span> <span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>        <span class="sa">f</span><span class="s1">&#39;Playbook Alert ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">playbook_alert_id</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>        <span class="sa">f</span><span class="s1">&#39;Updated: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">case_rule_label</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="sa">f</span><span class="s1">&#39;Lookup Status: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -9856,7 +9874,7 @@ Supported formats:
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="k">return</span> <span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>        <span class="sa">f</span><span class="s1">&#39;Playbook Alert ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">playbook_alert_id</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>        <span class="sa">f</span><span class="s1">&#39;Updated: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">case_rule_label</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="sa">f</span><span class="s1">&#39;Lookup Status: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -10956,7 +10974,7 @@ Supported formats:
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="k">return</span> <span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>        <span class="sa">f</span><span class="s1">&#39;Playbook Alert ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">playbook_alert_id</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>        <span class="sa">f</span><span class="s1">&#39;Updated: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">case_rule_label</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="sa">f</span><span class="s1">&#39;Lookup Status: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -11817,7 +11835,7 @@ status panel. If timestamps are equal, <code>playbook_alert_id</code> is used as
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="k">return</span> <span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>        <span class="sa">f</span><span class="s1">&#39;Playbook Alert ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">playbook_alert_id</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>        <span class="sa">f</span><span class="s1">&#39;Updated: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">case_rule_label</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="sa">f</span><span class="s1">&#39;Lookup Status: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -12724,7 +12742,7 @@ Supported formats:
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="k">return</span> <span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>        <span class="sa">f</span><span class="s1">&#39;Playbook Alert ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">playbook_alert_id</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>        <span class="sa">f</span><span class="s1">&#39;Updated: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">case_rule_label</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="sa">f</span><span class="s1">&#39;Lookup Status: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -13655,7 +13673,7 @@ Supported formats:
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="k">return</span> <span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>        <span class="sa">f</span><span class="s1">&#39;Playbook Alert ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">playbook_alert_id</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>        <span class="sa">f</span><span class="s1">&#39;Updated: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">case_rule_label</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="sa">f</span><span class="s1">&#39;Lookup Status: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -14451,7 +14469,7 @@ Supported formats:
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="k">return</span> <span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>        <span class="sa">f</span><span class="s1">&#39;Playbook Alert ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">playbook_alert_id</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>        <span class="sa">f</span><span class="s1">&#39;Updated: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">case_rule_label</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="sa">f</span><span class="s1">&#39;Lookup Status: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -15348,7 +15366,7 @@ Supported formats:
 <a id="__codelineno-0-127" name="__codelineno-0-127"></a>    <span class="k">return</span> <span class="p">(</span>
 <a id="__codelineno-0-128" name="__codelineno-0-128"></a>        <span class="sa">f</span><span class="s1">&#39;Playbook Alert ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">playbook_alert_id</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-129" name="__codelineno-0-129"></a>        <span class="sa">f</span><span class="s1">&#39;Updated: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">TIMESTAMP_STR</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span>
-<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">case_rule_label</span><span class="si">}</span><span class="s1">, &#39;</span>
+<a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="sa">f</span><span class="s1">&#39;Category: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">alert_rule</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s1">, &#39;</span>
 <a id="__codelineno-0-131" name="__codelineno-0-131"></a>        <span class="sa">f</span><span class="s1">&#39;Lookup Status: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">panel_status</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span>
 <a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -16039,6 +16057,28 @@ Supported formats:
 
 
 
+<h4 id="psengine.playbook_alerts.playbook_alerts.PreviewAlertOut.alert_rule" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">alert_rule</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+  </span>
+
+<a href="#psengine.playbook_alerts.playbook_alerts.PreviewAlertOut.alert_rule" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="doc-signature highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">alert_rule</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;code class=&quot;doc-symbol doc-symbol-heading doc-symbol-class&quot;&gt;&lt;/code&gt;            &lt;span class=&quot;doc doc-object-name doc-class-name&quot;&gt;AlertRule&lt;/span&gt; (&lt;code&gt;psengine.playbook_alerts.models.common_models.AlertRule&lt;/code&gt;)" href="../models/common_models/#psengine.playbook_alerts.models.common_models.AlertRule">AlertRule</a></span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
 <h4 id="psengine.playbook_alerts.playbook_alerts.PreviewAlertOut.assignee_id" class="doc doc-heading">
 <code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>            <span class="doc doc-object-name doc-attribute-name">assignee_id</span>
 
@@ -16674,21 +16714,21 @@ Supported formats:
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>psengine/playbook_alerts/models/panel_status.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-53">53</a></span>
-<span class="normal"><a href="#__codelineno-0-54">54</a></span>
-<span class="normal"><a href="#__codelineno-0-55">55</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-55">55</a></span>
 <span class="normal"><a href="#__codelineno-0-56">56</a></span>
 <span class="normal"><a href="#__codelineno-0-57">57</a></span>
 <span class="normal"><a href="#__codelineno-0-58">58</a></span>
 <span class="normal"><a href="#__codelineno-0-59">59</a></span>
-<span class="normal"><a href="#__codelineno-0-60">60</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;before&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54"></a><span class="nd">@classmethod</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="k">def</span><span class="w"> </span><span class="nf">rm_deprecated</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove deprecated fields.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57"></a>    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;owner_id&#39;</span><span class="p">,</span> <span class="s1">&#39;owner_name&#39;</span><span class="p">,</span> <span class="s1">&#39;organisation_id&#39;</span><span class="p">,</span> <span class="s1">&#39;organisation_name&#39;</span><span class="p">):</span>
-<a id="__codelineno-0-58" name="__codelineno-0-58"></a>        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59"></a>            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60"></a>    <span class="k">return</span> <span class="n">data</span>
+<span class="normal"><a href="#__codelineno-0-60">60</a></span>
+<span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="nd">@model_validator</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;before&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="nd">@classmethod</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="k">def</span><span class="w"> </span><span class="nf">rm_deprecated</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove deprecated fields.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;owner_id&#39;</span><span class="p">,</span> <span class="s1">&#39;owner_name&#39;</span><span class="p">,</span> <span class="s1">&#39;organisation_id&#39;</span><span class="p">,</span> <span class="s1">&#39;organisation_name&#39;</span><span class="p">):</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60"></a>        <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61"></a>            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="k">return</span> <span class="n">data</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
