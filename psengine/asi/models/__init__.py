@@ -1,6 +1,7 @@
 from .core import (
     AssetExposure,
     ExposureSignature,
+    AssetWithExposure,
     Asset,
     AssetResponse,
     AssetSearchFilterIn,

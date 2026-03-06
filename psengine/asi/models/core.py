@@ -92,7 +92,7 @@ class ExposureInstance(BaseModel):
     url: Optional[str] = None
 
 
-class AssetExposure(BaseModel):
+class AssetWithExposure(BaseModel):
     asset_id: str
     instances: list[ExposureInstance]
 
