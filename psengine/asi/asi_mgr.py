@@ -22,6 +22,7 @@ from psengine.constants import DEFAULT_LIMIT
 
 from ..endpoints import (
     EP_ASI_ASSET,
+    EP_ASI_ASSET_EXPOSURES,
     EP_ASI_ASSETS,
     EP_ASI_ASSETS_SEARCH,
     EP_ASI_EXPOSURES,
@@ -769,6 +770,18 @@ class AttackSurfaceMgr:
             'GET',
             EP_ASI_ASSET.format(project_id, asset_id),
             params=params,
+        ).json()
+
+        return Asset.model_validate(data['data'])
+
+    def fetch_asset_exposures(
+        self,
+        project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
+        asset_id: Annotated[str, Doc('The asset ID to search for.')],
+    ):
+        data = self.asi_client.request(
+            'GET',
+            EP_ASI_ASSET_EXPOSURES.format(project_id, asset_id),
         ).json()
 
         return Asset.model_validate(data['data'])
