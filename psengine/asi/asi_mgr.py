@@ -37,7 +37,7 @@ from .models import (
     AssetSearchFilterIn,
     ExposureSeverity,
     ProjectListResponse,
-    AssetSearchRequest
+    AssetSearchRequest,
 )
 
 SEVERITY_FILTER = Literal['unknown', 'informational', 'moderate', 'critical']
@@ -118,7 +118,10 @@ class AttackSurfaceMgr:
                 """The type of asset, one of: ip, domain and host(where domain and host represent the same asset type)."""
             ),
         ] = None,
-        custom_tags: Annotated[Optional[list[str]], Doc('Filter for assets tagged with any of the provided custom tags.')] = None,
+        custom_tags: Annotated[
+            Optional[list[str]],
+            Doc('Filter for assets tagged with any of the provided custom tags.'),
+        ] = None,
         is_static_asset: Annotated[
             Optional[bool],
             Doc(
@@ -241,7 +244,9 @@ class AttackSurfaceMgr:
         if sort_by:
             body['sort'] = sort_by
 
-        data = AssetSearchRequest.model_validate(body).model_dump_json(by_alias=True, exclude_none=True)
+        data = AssetSearchRequest.model_validate(body).model_dump_json(
+            by_alias=True, exclude_none=True
+        )
         print(data)
         response = self.asi_client.request_paged(
             'post', EP_ASI_ASSETS_SEARCH.format(project_id), data=body, max_results=max_results
@@ -362,10 +367,10 @@ class AttackSurfaceMgr:
         if key == 'asset_apex_domain':
             filt = {'in': value} if isinstance(value, list) else {'eq': value}
             return 'asset_properties', {'apex': filt}
-        
+
         if key == 'asset_discovered_date':
             return 'asset_properties', {'discovered': {'start': value[0], 'end': value[1]}}
-        
+
         if key == 'custom_tags':
             filt = {'in': value} if isinstance(value, list) else {'eq': value}
             return 'asset_properties', {'custom_tags': filt}
@@ -428,10 +433,7 @@ class AttackSurfaceMgr:
             max_results=max_results,
         )
 
-        from pprint import pprint
-
-        pprint(data)
-        return ExposureSearchOut.model_validate({'content': data, 'meta': {}})
+        return ExposureSearchOut.model_validate({'content': data['data'], 'meta': data['meta']})
 
     @debug_call
     @validate_call
@@ -454,6 +456,5 @@ class AttackSurfaceMgr:
             'GET',
             EP_ASI_EXPOSURES_BY_SIGNATURE.format(project_id, signature_id),
             params=params,
-            results_path='data.asset_exposures',
         )
-        return AssetWithExposureSearch.model_validate(data['data'])
+        return AssetWithExposureSearch.model_validate(data['data'][0])
