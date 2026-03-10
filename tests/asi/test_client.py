@@ -9,10 +9,17 @@ from psengine.asi.client import ASIClient, is_api_token_format_valid
 from psengine.config import Config
 
 
-def _build_page(ids, next_cursor) -> dict:
+def _build_page(ids, next_cursor, *, total=None, limit=None) -> dict:
+    page_ids = list(ids)
     return {
-        'data': [{'id': x} for x in ids],
-        'meta': {'pagination': {'next_cursor': next_cursor}},
+        'data': [{'id': x} for x in page_ids],
+        'meta': {
+            'pagination': {
+                'next_cursor': next_cursor,
+                'total': len(page_ids) if total is None else total,
+                'limit': len(page_ids) if limit is None else limit,
+            }
+        },
     }
 
 
@@ -23,8 +30,8 @@ def asi_client():
 
 def test_request_paged_get_uses_expected_query_params(asi_client, mocker, make_response):
     params = {'query': 'example.com'}
-    page1 = _build_page([1, 2, 3], 'cursor-1')
-    page2 = _build_page([4, 5, 6], 'cursor-2')
+    page1 = _build_page([1, 2, 3], 'cursor-1', total=6)
+    page2 = _build_page([4, 5, 6], 'cursor-2', total=6)
     responses = iter([make_response(page1), make_response(page2)])
     captured = []
 
@@ -82,8 +89,8 @@ def test_request_paged_get_keeps_existing_limit(asi_client, mocker, make_respons
 
 def test_request_paged_post_uses_expected_data_and_cursor_params(asi_client, mocker, make_response):
     data = {'filter': {'name': 'example.com'}}
-    page1 = _build_page([1, 2], 'cursor-1')
-    page2 = _build_page([3, 4], 'cursor-2')
+    page1 = _build_page([1, 2], 'cursor-1', total=4)
+    page2 = _build_page([3, 4], 'cursor-2', total=4)
     responses = iter([make_response(page1), make_response(page2)])
     captured = []
 
@@ -141,7 +148,10 @@ def test_request_paged_post_keeps_existing_pagination_limit(asi_client, mocker, 
         objects_per_page=2,
     )
 
-    assert result == {'data': [{'id': 1}], 'meta': None}
+    assert result == {
+        'data': [{'id': 1}],
+        'meta': {'pagination': {'next_cursor': 'cursor-1', 'total': 1, 'limit': 1}},
+    }
     assert captured[0]['params'] == {'project_id': 'p-1'}
     assert captured[0]['data'] == {
         'filter': {'type': 'domain'},
@@ -156,10 +166,10 @@ def test_request_paged_get_uses_remaining_results_for_last_request_limit(
 ):
     params = {'query': 'example.com'}
     pages = [
-        _build_page(range(1, 11), 'cursor-1'),
-        _build_page(range(11, 21), 'cursor-2'),
-        _build_page(range(21, 31), 'cursor-3'),
-        _build_page(range(31, 34), None),
+        _build_page(range(1, 11), 'cursor-1', total=33),
+        _build_page(range(11, 21), 'cursor-2', total=33),
+        _build_page(range(21, 31), 'cursor-3', total=33),
+        _build_page(range(31, 34), None, total=33),
     ]
     responses = iter([make_response(page) for page in pages])
     captured_params = []
@@ -180,7 +190,7 @@ def test_request_paged_get_uses_remaining_results_for_last_request_limit(
     )
 
     assert request_spy.call_count == 4
-    assert [item['limit'] for item in captured_params] == [10, 10, 10, 3]
+    assert [item['limit'] for item in captured_params] == [10, 10, 10, 10]
     assert [item.get('cursor') for item in captured_params] == [
         None,
         'cursor-1',
@@ -195,10 +205,10 @@ def test_request_paged_post_uses_remaining_results_for_last_request_limit(
 ):
     data = {'filter': {'name': 'example.com'}}
     pages = [
-        _build_page(range(1, 11), 'cursor-1'),
-        _build_page(range(11, 21), 'cursor-2'),
-        _build_page(range(21, 31), 'cursor-3'),
-        _build_page(range(31, 34), None),
+        _build_page(range(1, 11), 'cursor-1', total=33),
+        _build_page(range(11, 21), 'cursor-2', total=33),
+        _build_page(range(21, 31), 'cursor-3', total=33),
+        _build_page(range(31, 34), None, total=33),
     ]
     responses = iter([make_response(page) for page in pages])
     captured_params = []
@@ -221,7 +231,7 @@ def test_request_paged_post_uses_remaining_results_for_last_request_limit(
     )
 
     assert request_spy.call_count == 4
-    assert [item['pagination']['limit'] for item in captured_data] == [10, 10, 10, 3]
+    assert [item['pagination']['limit'] for item in captured_data] == [10, 10, 10, 10]
     assert [item.get('cursor') for item in captured_params] == [
         None,
         'cursor-1',
