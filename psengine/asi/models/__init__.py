@@ -1,12 +1,15 @@
 from .core import (
     AssetExposure,
-    ExposureSignature,
-    AssetWithExposure,
-    Asset,
-    AssetResponse,
     AssetSearchFilterIn,
+    AssetSearchRequest,
+    AssetWithExposure,
+    CertificateInstance,
+    DefensiveControl,
+    Exposure,
     ExposureSeverity,
-    AssetSearchRequest
+    ExposureSignature,
+    ScannedIP,
 )
-
+from .dns import DNSRecord
 from .project import ProjectListResponse
+from .whois import WHOISRecord

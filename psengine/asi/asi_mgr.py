@@ -12,7 +12,6 @@
 ##############################################################################################
 
 
-import json
 import logging
 from typing import Annotated, Literal, Optional, Union
 
@@ -22,22 +21,23 @@ from typing_extensions import Doc
 from psengine.constants import DEFAULT_LIMIT
 
 from ..endpoints import (
+    EP_ASI_ASSET,
+    EP_ASI_ASSETS,
     EP_ASI_ASSETS_SEARCH,
     EP_ASI_EXPOSURES,
     EP_ASI_EXPOSURES_BY_SIGNATURE,
     EP_ASI_PROJECTS,
 )
 from ..helpers import connection_exceptions, debug_call
-from .asi import AssetWithExposureSearch, ExposureSearchOut
+from .asi import Asset, AssetResponse, AssetWithExposureSearch, ExposureSearchOut
 from .client import ASIClient
 from .constants import ASSETS_PER_PAGE, MAX_ASI_PAGE_SIZE, AssetType, EnrichmentType, SortByType
 from .errors import AttackSurfaceExposureSearchError, FetchProjectsError, SearchAssetsError
 from .models import (
-    AssetResponse,
     AssetSearchFilterIn,
+    AssetSearchRequest,
     ExposureSeverity,
     ProjectListResponse,
-    AssetSearchRequest,
 )
 
 SEVERITY_FILTER = Literal['unknown', 'informational', 'moderate', 'critical']
@@ -252,7 +252,7 @@ class AttackSurfaceMgr:
             'post', EP_ASI_ASSETS_SEARCH.format(project_id), data=body, max_results=max_results
         )
 
-        return AssetResponse.model_validate(response)
+        return AssetResponse.model_validate({'content': response['data'], 'meta': response['meta']})
 
     @debug_call
     def _lookup_filter(
@@ -423,9 +423,7 @@ class AttackSurfaceMgr:
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
     ):
-        params = {
-            k: v for k, v in locals().items() if k not in ('self', 'assets_per_page', 'max_results')
-        }
+        params = {k: v for k, v in locals().items() if k not in ('self',)}
         data = self.asi_client.request_paged(
             'GET',
             EP_ASI_EXPOSURES.format(project_id),
@@ -458,3 +456,319 @@ class AttackSurfaceMgr:
             params=params,
         )
         return AssetWithExposureSearch.model_validate(data['data'][0])
+
+    def fetch_assets(
+        self,
+        project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
+        sort_by: Annotated[
+            Literal[
+                'discovered_at',
+                'added_to_project_at',
+                'last_scanned_at',
+                'exposure_score',
+                'asset_id',
+                'apex_domain',
+            ],
+            Doc('The field to sort by.'),
+        ] = 'exposure_score',
+        sort_direction: Annotated[
+            Literal['asc', 'desc'],
+            Doc('The direction to sort by.'),
+        ] = 'desc',
+        asset_type: Annotated[
+            Optional[Literal['domain', 'host', 'ip']],
+            Doc('The type of asset, one of: ip, domain, or host.'),
+        ] = None,
+        custom_tags: Annotated[
+            Optional[str],
+            Doc('Filter by custom tags placed on your assets.'),
+        ] = None,
+        custom_tags_strict: Annotated[
+            Optional[str],
+            Doc(
+                'Filter by custom tags placed on your assets. Strict version will return a '
+                'validation error if any of the tags have not been defined on your project.'
+            ),
+        ] = None,
+        has_custom_tags: Annotated[
+            Optional[bool],
+            Doc(
+                'Filter for assets that have at least one custom tag applied. Overrides any '
+                'other custom tag filtering specified.'
+            ),
+        ] = None,
+        added_to_project_before: Annotated[
+            Optional[str],
+            Doc('Filter on the date (YYYY-MM-DD) the asset was added to the project.'),
+        ] = None,
+        added_to_project_after: Annotated[
+            Optional[str],
+            Doc('Filter on the date (YYYY-MM-DD) the asset was added to the project.'),
+        ] = None,
+        discovered_before: Annotated[
+            Optional[str],
+            Doc('Filter on the date (YYYY-MM-DD) the asset was discovered.'),
+        ] = None,
+        discovered_after: Annotated[
+            Optional[str],
+            Doc('Filter on the date (YYYY-MM-DD) the asset was discovered.'),
+        ] = None,
+        apex: Annotated[
+            Optional[str],
+            Doc('Filter on the apex domain of the assets. Example: example.com.'),
+        ] = None,
+        referenced_ip: Annotated[
+            Optional[str],
+            Doc(
+                'Filter on an A or CNAME record pointing to the IP address. Use eq or in for '
+                'exact IP matching. Use contains with a trailing . for CIDR range matching, '
+                'or without for prefix matching.'
+            ),
+        ] = None,
+        referenced_ip_before: Annotated[
+            Optional[str],
+            Doc(
+                'If filtering on a referenced_ip, include additional criteria that the record '
+                'existed during a date range. The reference must have started before this date.'
+            ),
+        ] = None,
+        referenced_ip_after: Annotated[
+            Optional[str],
+            Doc(
+                'If filtering on a referenced_ip, include additional criteria that the record '
+                'existed during a date range. The reference must have existed after this date.'
+            ),
+        ] = None,
+        has_dns_record_type: Annotated[
+            Optional[str],
+            Doc('Filter for assets that have this DNS record type, e.g. A, CNAME, MX.'),
+        ] = None,
+        dns_resolves: Annotated[
+            Optional[bool],
+            Doc(
+                'Filter for assets that in the end resolve to a valid IP currently, either via '
+                'an A or CNAME. IP assets are included when filtering for assets that resolve.'
+            ),
+        ] = None,
+        asn: Annotated[
+            Optional[int],
+            Doc(
+                'Filter for assets which either are, or point to, an IP address announced by '
+                'the provided ASN.'
+            ),
+        ] = None,
+        cname_reference: Annotated[
+            Optional[str],
+            Doc(
+                'Filter on a domain that is referenced by a CNAME record. Only makes sense for '
+                'domain asset types. Treated as a wildcard.'
+            ),
+        ] = None,
+        geo_country_iso: Annotated[
+            Optional[str],
+            Doc(
+                'Filter for assets which either are, or point to, an IP address located in the '
+                'provided ISO country code.'
+            ),
+        ] = None,
+        ip_owner: Annotated[
+            Optional[str],
+            Doc(
+                'Filter for assets which either are, or point to, an IP address owned by the '
+                'provided organization.'
+            ),
+        ] = None,
+        whois_email: Annotated[
+            Optional[str],
+            Doc('Filter for assets where the WHOIS email address matches the provided value.'),
+        ] = None,
+        whois_email_current: Annotated[
+            Optional[str],
+            Doc(
+                'Filter for assets where the WHOIS email address matches the provided value on '
+                'the current WHOIS record.'
+            ),
+        ] = None,
+        open_port_number: Annotated[
+            Optional[int],
+            Doc('Filter for assets which have an open port with the provided number.'),
+        ] = None,
+        open_port_protocol: Annotated[
+            Optional[str],
+            Doc('Filter for assets which have an open port on the provided protocol.'),
+        ] = None,
+        open_port_service: Annotated[
+            Optional[str],
+            Doc(
+                'Filter for assets which have an open port that appears to support the provided '
+                'protocol.'
+            ),
+        ] = None,
+        open_port_technology: Annotated[
+            Optional[str],
+            Doc('Filter for assets which have a specific product listening on an open port.'),
+        ] = None,
+        technology_name: Annotated[
+            Optional[str],
+            Doc('Filter for the name of a technology found on the asset.'),
+        ] = None,
+        web_technology_name: Annotated[
+            Optional[str],
+            Doc(
+                'Filter for the name of a technology specifically associated with web '
+                'resources, such as jQuery or Wordpress.'
+            ),
+        ] = None,
+        certificate_issuer: Annotated[
+            Optional[str],
+            Doc(
+                "Filter where the certificate issuer's common name or organization matches the "
+                'provided value.'
+            ),
+        ] = None,
+        certificate_expires_before: Annotated[
+            Optional[str],
+            Doc('Filter where the certificate expiration date is before the provided value.'),
+        ] = None,
+        certificate_expires_after: Annotated[
+            Optional[str],
+            Doc('Filter where the certificate expiration date is after the provided value.'),
+        ] = None,
+        certificate_issued_before: Annotated[
+            Optional[str],
+            Doc('Filter where the certificate issuance date is before the provided value.'),
+        ] = None,
+        certificate_issued_after: Annotated[
+            Optional[str],
+            Doc('Filter where the certificate issuance date is after the provided value.'),
+        ] = None,
+        certificate_subject: Annotated[
+            Optional[str],
+            Doc('Filter where certificate subject or organizationName matches the value.'),
+        ] = None,
+        certificate_subject_alt_name: Annotated[
+            Optional[str],
+            Doc('Filter where the certificate Subject Alternative Name matches the value.'),
+        ] = None,
+        certificate_sha256: Annotated[
+            Optional[str],
+            Doc('Filter where the certificate public key sha256 value matches the value.'),
+        ] = None,
+        certificate_covers_domain: Annotated[
+            Optional[str],
+            Doc(
+                'Filter where the certificate subject common name or SAN exactly matches or '
+                'wildcard-covers the provided value.'
+            ),
+        ] = None,
+        waf_detected: Annotated[
+            Optional[bool],
+            Doc('Filter for assets where a WAF is detected.'),
+        ] = None,
+        waf_name: Annotated[
+            Optional[str],
+            Doc('Filter for assets where a specific WAF is detected.'),
+        ] = None,
+        is_responsive: Annotated[
+            Optional[bool],
+            Doc(
+                'Filter for assets that are either responsive or not responsive over ICMP and '
+                'port scanning.'
+            ),
+        ] = None,
+        exposure_score_gte: Annotated[
+            Optional[int],
+            Field(ge=0, le=100),
+            Doc('Filter for assets with exposure score greater than or equal to this value.'),
+        ] = None,
+        exposure_score_lte: Annotated[
+            Optional[int],
+            Field(ge=0, le=100),
+            Doc('Filter for assets with exposure score less than or equal to this value.'),
+        ] = None,
+        exposure_severity: Annotated[
+            Optional[Literal['unknown', 'informational', 'moderate', 'critical']],
+            Doc(
+                'Filter for assets with an exposure severity matching or higher than the '
+                'provided value.'
+            ),
+        ] = None,
+        exposure_id: Annotated[
+            Optional[str],
+            Doc('Filter for assets which have an exposure with the provided ASI Signature ID.'),
+        ] = None,
+        additional_fields: Annotated[
+            Optional[
+                list[
+                    Literal[
+                        'custom_tags',
+                        'dns_records',
+                        'whois',
+                        'ip_metadata',
+                        'open_tcp_ports',
+                        'open_udp_ports',
+                        'web_technologies',
+                        'certificates',
+                        'certificate_chain',
+                        'defenses',
+                        'exposures',
+                        'exposure_instance_details',
+                    ]
+                ]
+            ],
+            Doc(
+                'Additional fields to include in the response. May be specified multiple times '
+                'or as a comma-separated list in the raw API.'
+            ),
+        ] = None,
+        max_results: Annotated[
+            Optional[int], Doc('Maximum number of assets to fetch')
+        ] = DEFAULT_LIMIT,
+    ):
+        params = {k: v for k, v in locals().items() if k not in ('self',)}
+        data = self.asi_client.request_paged(
+            'GET',
+            EP_ASI_ASSETS.format(project_id),
+            params=params,
+            max_results=max_results,
+        )
+
+        return AssetResponse.model_validate({'content': data['data'], 'meta': data['meta']})
+
+    def fetch_asset(
+        self,
+        project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
+        asset_id: Annotated[str, Doc('The asset ID to search for.')],
+        additional_fields: Annotated[
+            Optional[
+                list[
+                    Literal[
+                        'custom_tags',
+                        'dns_records',
+                        'whois',
+                        'ip_metadata',
+                        'open_tcp_ports',
+                        'open_udp_ports',
+                        'web_technologies',
+                        'certificates',
+                        'certificate_chain',
+                        'defenses',
+                        'exposures',
+                        'exposure_instance_details',
+                    ]
+                ]
+            ],
+            Doc(
+                'Additional fields to include in the response. May be specified multiple times '
+                'or as a comma-separated list in the raw API.'
+            ),
+        ] = None,
+    ):
+        params = {k: v for k, v in locals().items() if k not in ('self',)}
+        data = self.asi_client.request(
+            'GET',
+            EP_ASI_ASSET.format(project_id, asset_id),
+            params=params,
+        ).json()
+
+        return Asset.model_validate(data['data'])

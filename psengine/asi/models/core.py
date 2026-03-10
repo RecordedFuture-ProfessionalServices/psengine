@@ -423,27 +423,3 @@ class ScannedIP(BaseModel):
     is_responsive: Optional[bool] = None
 
 
-class Asset(BaseModel):
-    project_id: str
-    id_: str = Field(alias='id')
-    name: str
-    type_: str = Field(alias='type')
-    discovered_at: Optional[datetime.datetime]
-    added_to_project_at: datetime.datetime
-    last_scanned_at: Optional[datetime.datetime] = None
-    apex_domain: Optional[str] = None
-    exposure_score: Optional[int] = None
-    is_static_asset: Optional[bool] = False
-    custom_tags: Optional[list[str]] = None
-    resolved_ips: Optional[list[str]] = None
-    dns_records: Optional[list[DNSRecord]] = None
-    whois: Optional[WHOISRecord] = None
-    certificates: Optional[list[CertificateInstance]] = None
-    defenses: Optional[list[DefensiveControl]] = None
-    exposures: Optional[list[Exposure]] = None
-    scanned_ips: Optional[list[ScannedIP]] = None
-
-
-class AssetResponse(BaseModel):
-    data: list[Asset]
-    meta: ApiMeta
