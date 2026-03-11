@@ -1,8 +1,13 @@
-from __future__ import annotations
+from typing import Optional
 
-from pydantic import BaseModel, Field
-from typing import Any, Optional
-from .pagination import PaginationResponse
+from pydantic import BaseModel
+
+
+class PaginationResponse(BaseModel):
+    next_cursor: Optional[str] = None
+    limit: Optional[int] = 50
+    total: Optional[int] = None
+    sort: Optional[list[list[str]]] = None
 
 
 class ApiCount(BaseModel):
@@ -14,4 +19,8 @@ class ApiMeta(BaseModel):
     counts: Optional[ApiCount] = None
     pagination: Optional[PaginationResponse] = None
     request_id: Optional[str] = None
-    additional_properties: dict[str, Any] = Field(default_factory=dict)
+
+
+class Pagination(BaseModel):
+    next_cursor: Optional[str] = None
+    limit: Optional[int] = 50

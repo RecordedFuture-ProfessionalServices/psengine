@@ -1,22 +1,19 @@
 from __future__ import annotations
 
+from datetime import date, datetime
 from enum import Enum
-from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, Optional, Union
-import datetime
-from .api import ApiMeta
-from .dns import DNSRecord
-from .email import EmailEqFilter, EmailInFilter
-from .int_filter import IntEqFilter, IntInFilter, IntRangeFilter
-from .pagination import Pagination
-from .whois import WHOISRecord
+
+from pydantic import BaseModel, Field
+
+from .api import Pagination
 
 
 class AssetCountDateRangeFilter(BaseModel):
     name: str
     asset_count: int
-    start: Optional[Union[datetime.date, float]]
-    end: Optional[Union[datetime.date, float]]
+    start: Optional[Union[date, float]]
+    end: Optional[Union[date, float]]
 
 
 class AssetCountEqFilter(BaseModel):
@@ -77,8 +74,8 @@ class CertificateEntity(BaseModel):
 
 
 class Certificate(BaseModel):
-    expires_at: datetime.datetime
-    issued_at: datetime.datetime
+    expires_at: datetime
+    issued_at: datetime
     sha256: str
     subject: CertificateEntity
     subject_alt_names: Optional[list[str]] = None
@@ -184,12 +181,12 @@ class CustomTagPublic(BaseModel):
 
 
 class DateRangeFilter(BaseModel):
-    start: Optional[datetime.date] = None
-    end: Optional[datetime.date] = None
+    start: Optional[date] = None
+    end: Optional[date] = None
 
 
 class EqFilter(BaseModel):
-    eq: Union[datetime.date, int, str]
+    eq: Union[date, int, str]
 
 
 class GeoLocation(BaseModel):
@@ -200,7 +197,20 @@ class GeoLocation(BaseModel):
 
 
 class InFilter(BaseModel):
-    in_: list[Union[datetime.date, ExposureSeverity, int, str]] = Field(alias='in')
+    in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
+
+
+class IntEqFilter(BaseModel):
+    eq: int
+
+
+class IntInFilter(BaseModel):
+    in_: list[int]
+
+
+class IntRangeFilter(BaseModel):
+    start: Optional[int]
+    end: Optional[int]
 
 
 class CertificatePropertiesFilter(BaseModel):
@@ -233,7 +243,7 @@ class MembershipType(str, Enum):
 
 
 class NeqFilter(BaseModel):
-    neq: Union[datetime.date, int, str]
+    neq: Union[date, int, str]
 
 
 class QuickSearchFilter(BaseModel):
@@ -241,7 +251,15 @@ class QuickSearchFilter(BaseModel):
 
 
 class RequireAllFilter(BaseModel):
-    in_: list[Union[datetime.date, ExposureSeverity, int, str]] = Field(alias='in')
+    in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
+
+
+class EmailEqFilter(BaseModel):
+    eq: str
+
+
+class EmailInFilter(BaseModel):
+    in_: list[str]
 
 
 class AssetPropertiesFilter(BaseModel):
@@ -304,7 +322,7 @@ class ExposureSignature(BaseModel):
     description: Optional[str]
     severity: Optional[ExposureSeverity]
     references: Optional[list[str]]
-    added_at: Optional[datetime.datetime] = None
+    added_at: Optional[datetime] = None
     vulnerabilities: Optional[list[VulnerabilityPublic]] = None
 
 
@@ -320,7 +338,7 @@ class ExposureSummary(BaseModel):
 
 
 class TechnologyInstance(BaseModel):
-    seen_at: datetime.datetime
+    seen_at: datetime
     seen_port: int
     seen_url: Optional[str] = None
 
@@ -354,7 +372,7 @@ class AssetSearchFilterIn(BaseModel):
 
 
 class AssetSearchRequest(BaseModel):
-    filter_: Optional[AssetSearchFilterIn] = Field(None, alias="filter")
+    filter_: Optional[AssetSearchFilterIn] = Field(None, alias='filter')
     pagination: Optional[Pagination] = None
     enrichments: Optional[list[AssetEnrichment]] = None
     sort: Optional[
@@ -394,7 +412,7 @@ class TechnologyWithInstances(BaseModel):
 
 class PortInstance(BaseModel):
     seen_ip: str
-    seen_at: datetime.datetime
+    seen_at: datetime
     service: Optional[str] = None
     technology: Optional[TechnologyWithInstances] = None
     web_technologies: Optional[list[TechnologyWithInstances]] = None
@@ -416,10 +434,39 @@ class CertificateInstance(BaseModel):
 
 class ScannedIP(BaseModel):
     ip: str
-    last_scanned_at: Optional[datetime.datetime] = None
+    last_scanned_at: Optional[datetime] = None
     whois: Optional[WHOISRecord] = None
     open_ports: Optional[list[Port]] = None
     metadata: Optional[IPMetadata] = None
     is_responsive: Optional[bool] = None
 
 
+class WHOISContact(BaseModel):
+    email: Optional[str] = None
+    name: Optional[str] = None
+    organization: Optional[str] = None
+    is_current: Optional[bool] = True
+
+
+class WHOISRecord(BaseModel):
+    registrar: Optional[str] = None
+    expires_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+    created_at: Optional[datetime] = None
+    is_private: Optional[bool] = None
+    is_from_parent: Optional[bool] = False
+    contacts: Optional[list[WHOISContact]] = None
+    name_servers: Optional[list[str]] = None
+
+
+class DNSValue(BaseModel):
+    value: Any
+    last_resolved_at: Optional[datetime]
+    seen_from: Optional[list[str]] = None
+    first_seen_at: Optional[datetime] = None
+
+
+class DNSRecord(BaseModel):
+    record_type: str
+    value: Optional[list[DNSValue]]
+    is_virtual: Optional[bool] = False

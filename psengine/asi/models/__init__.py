@@ -5,11 +5,11 @@ from .core import (
     AssetWithExposure,
     CertificateInstance,
     DefensiveControl,
+    DNSRecord,
     Exposure,
     ExposureSeverity,
     ExposureSignature,
     ScannedIP,
 )
-from .dns import DNSRecord
 from .project import ProjectListResponse
 from .whois import WHOISRecord
