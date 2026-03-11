@@ -10,6 +10,6 @@ from .core import (
     ExposureSeverity,
     ExposureSignature,
     ScannedIP,
+    WHOISRecord,
 )
 from .project import ProjectListResponse
-from .whois import WHOISRecord
