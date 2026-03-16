@@ -51,6 +51,36 @@ def _validate_exposure_score_range(v: tuple[int, int]) -> tuple[int, int]:
     return v
 
 
+_list_or_eq = lambda v: {'in': v} if isinstance(v, list) else {'eq': v}  # noqa: E731
+_range = lambda v: {'start': v[0], 'end': v[1]}  # noqa: E731
+_eq = lambda v: {'eq': v}  # noqa: E731
+_contains = lambda v: {'contains': v}  # noqa: E731
+
+# Maps search_assets() param name -> (filter group, API field name, value transformer)
+# Column layout:
+#   key: (filter group, API field name, value transformer)
+_ASSET_SEARCH_QUERY_MAP: dict[str, tuple[str, str, callable]] = {
+    'quick_search': ('quick_search', 'search', lambda v: v),
+    'asset_id': ('asset_properties', 'asset_id', _eq),
+    'asset_name': ('asset_properties', 'name', _contains),
+    'asset_apex_domain': ('asset_properties', 'apex', _list_or_eq),
+    'asset_discovered_date': ('asset_properties', 'discovered', _range),
+    'asset_type': ('asset_properties', 'type', _eq),
+    'custom_tags': ('asset_properties', 'custom_tags', _list_or_eq),
+    'is_static_asset': ('asset_properties', 'static_asset', _eq),
+    'certificate_issuer': ('certificate_properties', 'certificate_issuer', _list_or_eq),
+    'exposure_last_scanned': ('exposure_properties', 'last_scanned_at', _range),
+    'exposure_score': ('exposure_properties', 'asset_exposure_score', _range),
+    'exposure_severity': ('exposure_properties', 'severity', _list_or_eq),
+    'exposure_signature_id': ('exposure_properties', 'signature_id', _list_or_eq),
+    'is_responsive': ('technology_properties', 'is_responsive', _eq),
+    'open_port_number': ('technology_properties', 'open_port_number', _list_or_eq),
+    'open_port_protocol': ('technology_properties', 'open_port_protocol', _list_or_eq),
+    'open_port_service': ('technology_properties', 'open_port_service', _list_or_eq),
+    'technology_name': ('technology_properties', 'technology_name', _list_or_eq),
+}
+
+
 class AttackSurfaceMgr:
     """Manages requests for Recorded Future SecurityTrails (ASI) API."""
 
@@ -245,12 +275,11 @@ class AttackSurfaceMgr:
         if sort_by:
             body['sort'] = sort_by
 
-        data = AssetSearchRequest.model_validate(body).model_dump_json(
-            by_alias=True, exclude_none=True
+        data = AssetSearchRequest.model_validate(body).model_dump(
+            by_alias=True, exclude_none=True, mode='json'
         )
-        print(data)
         response = self.asi_client.request_paged(
-            'post', EP_ASI_ASSETS_SEARCH.format(project_id), data=body, max_results=max_results
+            'post', EP_ASI_ASSETS_SEARCH.format(project_id), data=data, max_results=max_results
         )
 
         return AssetResponse.model_validate({'content': response['data'], 'meta': response['meta']})
@@ -309,74 +338,11 @@ class AttackSurfaceMgr:
             by_alias=True, exclude_none=True, mode='json'
         )
 
-    # TODO - refactor
     def _process_arg(self, key: str, value) -> tuple[str, dict]:
-        if key == 'exposure_severity':
-            filt = {'in': value} if isinstance(value, list) else {'eq': value}
-            return 'exposure_properties', {'severity': filt}
-
-        if key == 'exposure_signature_id':
-            filt = {'in': value} if isinstance(value, list) else {'eq': value}
-            return 'exposure_properties', {'signature_id': filt}
-
-        if key == 'exposure_score':
-            return 'exposure_properties', {
-                'asset_exposure_score': {'start': value[0], 'end': value[1]}
-            }
-
-        if key == 'exposure_last_scanned':
-            return 'exposure_properties', {'last_scanned_at': {'start': value[0], 'end': value[1]}}
-
-        if key == 'quick_search':
-            return 'quick_search', {'search': value}
-
-        if key == 'open_port_number':
-            filt = {'in': value} if isinstance(value, list) else {'eq': value}
-            return 'technology_properties', {'open_port_number': filt}
-
-        if key == 'open_port_service':
-            filt = {'in': value} if isinstance(value, list) else {'eq': value}
-            return 'technology_properties', {'open_port_service': filt}
-
-        if key == 'open_port_protocol':
-            filt = {'in': value} if isinstance(value, list) else {'eq': value}
-            return 'technology_properties', {'open_port_protocol': filt}
-
-        if key == 'technology_name':
-            filt = {'in': value} if isinstance(value, list) else {'eq': value}
-            return 'technology_properties', {'technology_name': filt}
-
-        if key == 'certificate_issuer':
-            filt = {'in': value} if isinstance(value, list) else {'eq': value}
-            return 'certificate_properties', {'certificate_issuer': filt}
-
-        if key == 'is_responsive':
-            return 'technology_properties', {'is_responsive': {'eq': value}}
-
-        if key == 'asset_id':
-            return 'asset_properties', {'asset_id': {'eq': value}}
-
-        if key == 'asset_name':
-            return 'asset_properties', {'name': {'contains': value}}
-
-        if key == 'is_static_asset':
-            return 'asset_properties', {'static_asset': {'eq': value}}
-
-        if key == 'asset_type':
-            return 'asset_properties', {'type': {'eq': value}}
-
-        if key == 'asset_apex_domain':
-            filt = {'in': value} if isinstance(value, list) else {'eq': value}
-            return 'asset_properties', {'apex': filt}
-
-        if key == 'asset_discovered_date':
-            return 'asset_properties', {'discovered': {'start': value[0], 'end': value[1]}}
-
-        if key == 'custom_tags':
-            filt = {'in': value} if isinstance(value, list) else {'eq': value}
-            return 'asset_properties', {'custom_tags': filt}
-
-        return key, value
+        if key not in _ASSET_SEARCH_QUERY_MAP:
+            return key, value
+        group, field, transform = _ASSET_SEARCH_QUERY_MAP[key]
+        return group, {field: transform(value)}
 
     @debug_call
     @validate_call

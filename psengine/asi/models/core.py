@@ -205,7 +205,7 @@ class IntEqFilter(BaseModel):
 
 
 class IntInFilter(BaseModel):
-    in_: list[int]
+    in_: list[int] = Field(alias='in')
 
 
 class IntRangeFilter(BaseModel):
