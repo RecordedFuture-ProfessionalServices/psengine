@@ -190,7 +190,7 @@ def test_request_paged_get_uses_remaining_results_for_last_request_limit(
     )
 
     assert request_spy.call_count == 4
-    assert [item['limit'] for item in captured_params] == [10, 10, 10, 10]
+    assert [item['limit'] for item in captured_params] == [10, 10, 10, 3]
     assert [item.get('cursor') for item in captured_params] == [
         None,
         'cursor-1',
@@ -231,7 +231,7 @@ def test_request_paged_post_uses_remaining_results_for_last_request_limit(
     )
 
     assert request_spy.call_count == 4
-    assert [item['pagination']['limit'] for item in captured_data] == [10, 10, 10, 10]
+    assert [item['pagination']['limit'] for item in captured_data] == [10, 10, 10, 3]
     assert [item.get('cursor') for item in captured_params] == [
         None,
         'cursor-1',
@@ -298,6 +298,29 @@ def test_request_paged_raises_when_data_key_is_missing(asi_client, mocker, make_
     assert spy.call_count == 1
 
 
+def test_request_paged_keeps_last_page_when_next_cursor_is_missing(
+    asi_client, mocker, make_response
+):
+    page1 = _build_page([1, 2], 'cursor-1', total=4)
+    page2 = {
+        'data': [{'id': 3}, {'id': 4}],
+        'meta': {'pagination': {'total': 4, 'limit': 2}},
+    }
+    responses = iter([make_response(page1), make_response(page2)])
+
+    mocker.patch.object(asi_client, 'request', side_effect=lambda *args, **kwargs: next(responses))
+
+    result = asi_client.request_paged(
+        method='get',
+        url='https://example.test/asi',
+        params={'query': 'example.com'},
+        max_results=4,
+        objects_per_page=2,
+    )
+
+    assert [x['id'] for x in result['data']] == [1, 2, 3, 4]
+
+
 def test_initialize_paged_request_get_copies_params_and_sets_limit(asi_client):
     params = {'query': 'example.com'}
     data = {'a': {'b': 1}}
@@ -337,6 +360,8 @@ def test_initialize_paged_request_post_raises_on_non_dict_pagination(asi_client)
         ('A1' * 16, True),
         ('a' * 31, False),
         ('a' * 31 + '-', False),
+        ('a' * 33, False),
+        ('a' * 32 + '!', False),
     ],
 )
 def test_is_api_token_format_valid(token, expected):

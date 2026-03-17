@@ -1,3 +1,16 @@
+##################################### TERMS OF USE ###########################################
+# The following code is provided for demonstration purpose only, and should not be used      #
+# without independent verification. Recorded Future makes no representations or warranties,  #
+# express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #
+# information it may retrieve, and provides it both strictly “as-is” and without assuming    #
+# responsibility for any information it may retrieve. Recorded Future shall not be liable    #
+# for, and you assume all risk of using, the foregoing. By using this code, Customer         #
+# represents that it is solely responsible for having all necessary licenses, permissions,   #
+# rights, and/or consents to connect to third party APIs, and that it is solely responsible  #
+# for having all necessary licenses, permissions, rights, and/or consents to any data        #
+# accessed from any third party API.                                                         #
+##############################################################################################
+
 import re
 from copy import deepcopy
 from typing import Annotated, Any, Optional, Union
@@ -21,7 +34,7 @@ def is_api_token_format_valid(
 
     The function performs a simple regex check but does not validate the token against the API.
     """
-    return re.match(ASI_TOKEN_VALIDATION_REGEX, token) is not None
+    return re.fullmatch(ASI_TOKEN_VALIDATION_REGEX, token) is not None
 
 
 class ASIClient(BaseHTTPClient):
@@ -166,24 +179,22 @@ class ASIClient(BaseHTTPClient):
                 total = meta['pagination']['total']
                 limit = meta['pagination']['limit']
             except KeyError:
-                self.log.error(
-                    f'Paged request `meta`, does not contain the `total` or `limit` field:\n{response.text}'
-                )
+                msg = 'Paged request `meta`, does not contain the `total` or `limit` field:\n{}'
+                self.log.error(msg.format(response.text))
                 raise
-            current_results += limit
-
-            try:
-                request_params['cursor'] = json_response['meta']['pagination']['next_cursor']
-            except KeyError:
-                break
-
             if isinstance(page_results, list):
                 all_results.extend(page_results)
             else:
                 all_results.append(page_results)
 
-            remaining_results = max_results - min(total, limit)
+            current_results += limit
+            remaining_results = max_results - len(all_results)
             if current_results >= max_results or current_results >= total:
+                break
+
+            try:
+                request_params['cursor'] = json_response['meta']['pagination']['next_cursor']
+            except KeyError:
                 break
         return {'data': all_results[:max_results], 'meta': meta}
 
