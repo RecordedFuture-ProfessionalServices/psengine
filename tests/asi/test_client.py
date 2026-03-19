@@ -325,7 +325,7 @@ def test_request_paged_keeps_last_page_when_next_cursor_is_missing(
     }
     responses = iter([make_response(page1), make_response(page2)])
 
-    mocker.patch.object(asi_client, 'request', side_effect=lambda *args, **kwargs: next(responses))
+    mocker.patch.object(asi_client, 'request', side_effect=lambda *args, **kwargs: next(responses))  # noqa: ARG005
 
     result = asi_client.request_paged(
         method='get',

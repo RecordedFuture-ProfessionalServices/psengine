@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 
+from psengine.asi import AttackSurfaceMgr
 from psengine.classic_alerts import ClassicAlertMgr
 from psengine.config import Config, ConfigModel, get_config
 from psengine.enrich import LookupMgr
-from psengine.asi import AttackSurfaceMgr
 
 
 def test_managers_without_config():

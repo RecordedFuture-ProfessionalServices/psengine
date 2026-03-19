@@ -11,6 +11,7 @@ from psengine.asi.asi import (
     ExposureSearchOut,
     ProjectListOut,
 )
+from psengine.asi.asi_mgr import AttackSurfaceMgr
 from psengine.asi.errors import (
     ASIExposureSearchError,
     ASIFetchAssetError,
@@ -18,7 +19,6 @@ from psengine.asi.errors import (
     ASIFetchProjectsError,
     ASISearchAssetsError,
 )
-from psengine.asi.asi_mgr import AttackSurfaceMgr
 
 DEFAULT_SEARCH_BODY = {'pagination': {'limit': 1000}, 'sort': ['discovered_at']}
 MOCK_DIR = Path(__file__).parent / 'mocks'
