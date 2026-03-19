@@ -78,7 +78,7 @@ class ASIClient(BaseHTTPClient):
         )
         self._api_token = api_token or self.config.asi_token.get_secret_value()
         if not self._api_token:
-            raise ValueError('Missing Recorded Future Recorded Future ASI API token.')
+            raise ValueError('Missing Recorded Future ASI API token.')
         if not is_api_token_format_valid(self._api_token):
             raise ValueError(
                 f'Invalid Recorded Future API token: must match regex {ASI_TOKEN_VALIDATION_REGEX}'
