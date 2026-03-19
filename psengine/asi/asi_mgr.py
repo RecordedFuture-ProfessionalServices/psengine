@@ -30,7 +30,7 @@ from ..endpoints import (
     EP_ASI_PROJECTS,
 )
 from ..helpers import connection_exceptions, debug_call
-from .asi import Asset, AssetResponse, AssetWithExposureSearch, ExposureSearchOut
+from .asi import Asset, AssetResponse, AssetWithExposureSearch, ExposureSearchOut, ProjectListOut
 from .client import ASIClient
 from .constants import ASSETS_PER_PAGE, MAX_ASI_PAGE_SIZE, AssetType, EnrichmentType, SortByType
 from .errors import (
@@ -44,7 +44,6 @@ from .models import (
     AssetSearchFilterIn,
     AssetSearchRequest,
     ExposureSeverity,
-    ProjectListOut,
 )
 
 SEVERITY_FILTER = Literal['unknown', 'informational', 'moderate', 'critical']

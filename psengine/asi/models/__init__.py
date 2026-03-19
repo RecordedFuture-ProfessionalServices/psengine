@@ -25,4 +25,3 @@ from .core import (
     ScannedIP,
     WHOISRecord,
 )
-from .project import ProjectListOut

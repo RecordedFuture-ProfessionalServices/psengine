@@ -1,0 +1,99 @@
+{
+  "data": {
+    "added_to_project_at": "2025-08-27T18:07:07Z",
+    "apex_domain": "zendesk.com",
+    "custom_tags": [],
+    "discovered_at": "2025-08-27T17:39:54Z",
+    "dns_records": [
+      {
+        "is_virtual": false,
+        "record_type": "A",
+        "value": [
+          {
+            "first_seen_at": "2025-08-27T18:05:41Z",
+            "last_resolved_at": "2025-08-27T18:29:01Z",
+            "seen_from": [
+              "us-east"
+            ],
+            "value": "216.198.53.6"
+          },
+          {
+            "first_seen_at": "2025-08-27T18:05:41Z",
+            "last_resolved_at": "2025-08-27T18:29:01Z",
+            "seen_from": [
+              "us-east"
+            ],
+            "value": "216.198.54.6"
+          }
+        ]
+      }
+    ],
+    "exposures": [],
+    "id": "zzzezzzacosmetics.zendesk.com",
+    "is_static_asset": false,
+    "name": "zzzezzzacosmetics.zendesk.com",
+    "project_id": "7c2d06d7-0c4b-4d0d-bc97-f81dcdc276de",
+    "resolved_ips": [
+      "216.198.53.6",
+      "216.198.54.6"
+    ],
+    "scanned_ips": [
+      {
+        "ip": "216.198.53.6",
+        "metadata": {
+          "as_number": 209242,
+          "owner_geo": {
+            "continent": "North America",
+            "country": "United States",
+            "country_iso": "US"
+          },
+          "owner_name": "Cloudflare, Inc.",
+          "registry": "arin"
+        },
+        "open_ports": []
+      },
+      {
+        "ip": "216.198.54.6",
+        "metadata": {
+          "as_number": 209242,
+          "owner_geo": {
+            "continent": "North America",
+            "country": "United States",
+            "country_iso": "US"
+          },
+          "owner_name": "Cloudflare, Inc.",
+          "registry": "arin"
+        },
+        "open_ports": []
+      }
+    ],
+    "type": "domain",
+    "whois": {
+      "contacts": [
+        {
+          "is_current": true,
+          "organization": "Zendesk, Inc."
+        }
+      ],
+      "expires_at": "2027-05-16T00:00:00Z",
+      "is_from_parent": true,
+      "name_servers": [
+        "ns-1858.awsdns-40.co.uk",
+        "ns-444.awsdns-55.com",
+        "ns-754.awsdns-30.net",
+        "ns-1213.awsdns-23.org"
+      ],
+      "registrar": "MarkMonitor, Inc."
+    }
+  },
+  "meta": {
+    "counts": {
+      "returned": 1,
+      "total": 1
+    },
+    "params": {
+      "asset_id": "zzzezzzacosmetics.zendesk.com"
+    },
+    "request_id": "a49a780ba482400a9e242a08d9d726f6"
+  }
+}

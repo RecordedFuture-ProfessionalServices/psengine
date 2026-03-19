@@ -1,8 +1,8 @@
 import pytest
+from psengine.asi.models.project import ProjectListOut
 
 from psengine.asi.asi import Asset, AssetResponse, AssetWithExposureSearch, ExposureSearchOut
 from psengine.asi.asi_mgr import AttackSurfaceMgr
-from psengine.asi.models.project import ProjectListOut
 
 DEFAULT_SEARCH_BODY = {'pagination': {'limit': 1000}, 'sort': ['discovered_at']}
 

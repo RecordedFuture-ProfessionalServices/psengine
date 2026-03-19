@@ -13,6 +13,7 @@
 
 from datetime import datetime
 from typing import Optional
+from uuid import UUID
 
 from pydantic import Field
 
@@ -217,6 +218,67 @@ class AssetResponse(RFBaseModel):
     """
 
     content: list[Asset]
+    meta: ApiMeta
+
+    def __str__(self) -> str:
+        return '\n'.join(str(c) for c in sorted(self.content))
+
+
+class Project(RFBaseModel):
+    """Validate data received from the `/v2/projects` endpoint.
+
+    This class supports hashing, equality comparison, greater-than comparison, and string
+    representation of `Project` instances.
+
+    Hashing:
+        Returns a hash value based on the project `id`.
+
+    Equality:
+        Checks equality between two `Project` instances based on the project `id`.
+
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `Project` instances based on the project
+        title.
+
+    String Representation:
+        Returns a string representation of the `Project` instance including the title, `id`, and
+        whether scanning is enabled.
+
+        ```python
+        >>> print(project)
+        Name: Example Project, Id: 123e4567-e89b-12d3-a456-426614174000, Enabled: True
+        ```
+    """
+
+    id: UUID
+    title: str
+    scanning_enabled: Optional[bool] = None
+    last_scanned_at: Optional[datetime.datetime] = None
+    inserted_at: Optional[datetime.datetime] = None
+    max_exposure_score: Optional[int] = None
+
+    def __str__(self) -> str:
+        msg = 'Name: {}, Id: {}, Enabled: {}'
+        return msg.format(
+            self.title,
+            self.id,
+            self.scanning_enabled or 'False',
+        )
+
+    def __hash__(self) -> int:
+        return hash(self.id)
+
+    def __eq__(self, other: 'Project'):
+        return self.id == other.id
+
+    def __gt__(self, other: 'Project'):
+        return self.title == other.title
+
+
+class ProjectListOut(RFBaseModel):
+    """Validate data received from the `/v2/projects` endpoint."""
+
+    content: list[Project]
     meta: ApiMeta
 
     def __str__(self) -> str:
