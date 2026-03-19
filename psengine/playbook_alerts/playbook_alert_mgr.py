@@ -30,7 +30,6 @@ from ..helpers import TimeHelpers, connection_exceptions, debug_call
 from ..rf_client import RFClient
 from .constants import (
     ALERTS_PER_PAGE,
-    BULK_LOOKUP_BATCH_SIZE,
     PBA_WITH_IMAGES_INST,
     PBA_WITH_IMAGES_TYPE,
     PBA_WITH_IMAGES_VALIDATOR,
@@ -208,7 +207,9 @@ class PlaybookAlertMgr:
             in_cat_alerts = filter(lambda x: x['category'] == cat, alerts)
             in_cat_ids = [x['id'] for x in in_cat_alerts]
             try:
-                fetched_alerts.extend(self._do_bulk(in_cat_ids, cat, fetch_images, panels or []))
+                fetched_alerts.extend(
+                    self._do_bulk(in_cat_ids, cat, fetch_images, panels or [], alerts_per_page)
+                )
             except (PlaybookAlertBulkFetchError, PlaybookAlertRetrieveImageError) as err:  # noqa: PERF203
                 errors += 1
                 self.log.error(err)
@@ -547,7 +548,7 @@ class PlaybookAlertMgr:
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertBulkFetchError)
     def _do_bulk(
-        self, alert_ids: list, category: str, fetch_image: bool, panels: list
+        self, alert_ids: list, category: str, fetch_image: bool, panels: list, alerts_per_page: int
     ) -> list[PLAYBOOK_ALERT_TYPE]:
         """Does bulk fetch (used by bulk() after alert IDs have been sorted by category).
 
@@ -556,6 +557,7 @@ class PlaybookAlertMgr:
             category (str): Category of alert to fetch
             fetch_image (bool): Whether to fetch images for Domain Abuse alerts
             panels (list): List of panels to fetch
+            alerts_per_page (int): Number of alerts to fetch per page for bulk search results
 
         Raises:
             ValidationError: if any supplied parameter is of incorrect type
@@ -576,7 +578,7 @@ class PlaybookAlertMgr:
         self.log.info(f'Fetching {len(alert_ids)} {category} alerts')
 
         results = []
-        for batch in batched(alert_ids, BULK_LOOKUP_BATCH_SIZE):
+        for batch in batched(alert_ids, alerts_per_page):
             data['playbook_alert_ids'] = batch
             response = self.rf_client.request('post', url=CATEGORY_ENDPOINTS[category], data=data)
             results += response.json()['data']

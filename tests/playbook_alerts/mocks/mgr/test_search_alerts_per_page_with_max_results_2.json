@@ -6,6 +6,11 @@
     "data": [
         {
             "playbook_alert_id": "task:33a93c55-17e5-4ae1-b061-5003ef79ee88",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "status": "New",
             "priority": "Haskell features a type system with type inference and lazy evaluation.",
             "created": "2025-08-12T02:07:43.710Z",

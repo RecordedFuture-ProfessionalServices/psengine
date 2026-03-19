@@ -12,6 +12,11 @@
             "updated": "2025-12-10T21:48:04.023Z",
             "case_rule_id": "Atoms are used within a program to denote distinguished values.",
             "case_rule_label": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Ports are created with the built-in function open_port.",
             "owner_name": "He looked inquisitively at his keyboard and wrote another sentence.",
             "organisation_id": "Haskell features a type system with type inference and lazy evaluation.",

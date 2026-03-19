@@ -12,6 +12,11 @@
             "updated": "2025-04-30T11:37:06.068Z",
             "case_rule_id": "It is also a garbage-collected runtime system.",
             "case_rule_label": "I don't even care.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "owner_id": "It is also a garbage-collected runtime system.",
             "owner_name": "Atoms are used within a program to denote distinguished values.",
             "organisation_id": "Ports are created with the built-in function open_port.",

@@ -19,6 +19,7 @@ from pydantic import model_validator
 
 from ...common_models import RFBaseModel
 from ..models.common_models import ResolvedEntity
+from .common_models import AlertRule
 
 
 class Organisation(RFBaseModel):
@@ -42,6 +43,7 @@ class PanelStatus(RFBaseModel):
     updated: datetime
     case_rule_id: Optional[str] = None
     case_rule_label: Optional[str] = None
+    alert_rule: AlertRule
     creator_name: Optional[str] = None
     creator_id: Optional[str] = None
     owner_organisation_details: Optional[OwnerOrganisationDetails] = None

@@ -1,4 +1,4 @@
-## Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.
+## Geopolitical Facility
 
 ### Summary
 

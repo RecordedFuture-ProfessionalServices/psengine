@@ -12,6 +12,11 @@
             "updated": "2025-09-23T03:17:25.211Z",
             "case_rule_id": "Ports are used to communicate with the external world.",
             "case_rule_label": "I don't even care.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
             "owner_name": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
             "organisation_id": "Type classes first appeared in the Haskell programming language.",

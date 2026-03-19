@@ -12,6 +12,11 @@
             "updated": "2025-07-06T12:21:40.314Z",
             "case_rule_id": "Erlang is known for its designs that are well suited for systems.",
             "case_rule_label": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Do you have any idea why this is not working?",
             "owner_name": "Haskell features a type system with type inference and lazy evaluation.",
             "organisation_id": "Tuples are containers for a fixed number of Erlang data types.",

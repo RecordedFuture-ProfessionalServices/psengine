@@ -12,6 +12,11 @@
             "updated": "2025-07-25T16:10:11.147Z",
             "case_rule_id": "Tuples are containers for a fixed number of Erlang data types.",
             "case_rule_label": "Where are my pants?",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Erlang is known for its designs that are well suited for systems.",
             "owner_name": "Ports are used to communicate with the external world.",
             "organisation_id": "The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.",

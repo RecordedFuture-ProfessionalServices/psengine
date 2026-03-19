@@ -12,6 +12,11 @@
             "updated": "2025-04-06T22:12:27.915Z",
             "case_rule_id": "Haskell features a type system with type inference and lazy evaluation.",
             "case_rule_label": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "GeoFacility",
+                "name": "Geopolitical Facility"
+            },
             "owner_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
             "owner_name": "Haskell features a type system with type inference and lazy evaluation.",
             "organisation_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",

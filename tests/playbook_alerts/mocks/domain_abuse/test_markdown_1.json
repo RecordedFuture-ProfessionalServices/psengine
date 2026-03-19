@@ -13,6 +13,11 @@
                 "updated": "2025-08-09T14:37:46.089Z",
                 "case_rule_id": "I don't even care.",
                 "case_rule_label": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "Ports are used to communicate with the external world.",
                 "owner_name": "Erlang is known for its designs that are well suited for systems.",
                 "organisation_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
@@ -209,6 +214,11 @@
                 "updated": "2025-06-16T17:58:03.974Z",
                 "case_rule_id": "Atoms are used within a program to denote distinguished values.",
                 "case_rule_label": "Its main implementation is the Glasgow Haskell Compiler.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "owner_name": "Atoms are used within a program to denote distinguished values.",
                 "organisation_id": "Tuples are containers for a fixed number of Erlang data types.",
@@ -394,6 +404,11 @@
                 "updated": "2025-03-13T09:07:05.581Z",
                 "case_rule_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
                 "case_rule_label": "Tuples are containers for a fixed number of Erlang data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "Haskell features a type system with type inference and lazy evaluation.",
                 "owner_name": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "organisation_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
@@ -588,6 +603,11 @@
                 "updated": "2025-09-04T05:27:07.047Z",
                 "case_rule_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
                 "case_rule_label": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "Erlang is known for its designs that are well suited for systems.",
                 "owner_name": "It is also a garbage-collected runtime system.",
                 "organisation_id": "Do you have any idea why this is not working?",
@@ -894,6 +914,11 @@
                 "updated": "2025-04-06T04:35:56.387Z",
                 "case_rule_id": "I don't even care.",
                 "case_rule_label": "Tuples are containers for a fixed number of Erlang data types.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "It is also a garbage-collected runtime system.",
                 "owner_name": "Haskell features a type system with type inference and lazy evaluation.",
                 "organisation_id": "Haskell features a type system with type inference and lazy evaluation.",
@@ -1018,6 +1043,11 @@
                 "updated": "2025-01-19T15:53:58.586Z",
                 "case_rule_id": "Where are my pants?",
                 "case_rule_label": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "Ports are created with the built-in function open_port.",
                 "owner_name": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "organisation_id": "Type classes first appeared in the Haskell programming language.",
@@ -1248,6 +1278,11 @@
                 "updated": "2025-06-30T07:00:48.279Z",
                 "case_rule_id": "Do you have any idea why this is not working?",
                 "case_rule_label": "Erlang is a general-purpose, concurrent, functional programming language.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "Haskell features a type system with type inference and lazy evaluation.",
                 "owner_name": "Type classes first appeared in the Haskell programming language.",
                 "organisation_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
@@ -1439,6 +1474,11 @@
                 "updated": "2025-09-29T14:35:14.590Z",
                 "case_rule_id": "Ports are used to communicate with the external world.",
                 "case_rule_label": "Where are my pants?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.",
                 "owner_name": "Haskell features a type system with type inference and lazy evaluation.",
                 "organisation_id": "Messages can be sent to and received from ports, but these messages must obey the so-called \"port protocol.\"",
@@ -1559,6 +1599,11 @@
                 "updated": "2025-03-27T21:27:45.466Z",
                 "case_rule_id": "Its main implementation is the Glasgow Haskell Compiler.",
                 "case_rule_label": "Do you have any idea why this is not working?",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "Do you have any idea why this is not working?",
                 "owner_name": "Initially composing light-hearted and irreverent works, he also wrote serious, sombre and religious pieces beginning in the 1930s.",
                 "organisation_id": "Erlang is known for its designs that are well suited for systems.",
@@ -1672,6 +1717,11 @@
                 "updated": "2025-02-17T06:56:07.154Z",
                 "case_rule_id": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "case_rule_label": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
+                "alert_rule": {
+                    "id": "pqc8P6",
+                    "label": "DomainAbuse",
+                    "name": "Domain Abuse"
+                },
                 "owner_id": "Tuples are containers for a fixed number of Erlang data types.",
                 "owner_name": "Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.",
                 "organisation_id": "Do you come here often?",

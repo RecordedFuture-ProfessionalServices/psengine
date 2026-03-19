@@ -12,6 +12,11 @@
             "updated": "2025-11-10T23:27:01.638Z",
             "case_rule_id": "Ports are created with the built-in function open_port.",
             "case_rule_label": "The arguments can be primitive data types or compound data types.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "identity",
+                "name": "Novel Identity Exposures"
+            },
             "owner_id": "Do you come here often?",
             "owner_name": "Erlang is a general-purpose, concurrent, functional programming language.",
             "organisation_id": "Atoms are used within a program to denote distinguished values.",

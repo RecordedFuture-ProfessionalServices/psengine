@@ -12,6 +12,11 @@
             "updated": "2025-01-18T01:45:09.747Z",
             "case_rule_id": "Any element of a tuple can be accessed in constant time.",
             "case_rule_label": "Do you have any idea why this is not working?",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "DomainAbuse",
+                "name": "Domain Abuse"
+            },
             "owner_id": "He looked inquisitively at his keyboard and wrote another sentence.",
             "owner_name": "She spent her earliest years reading classic literature, and writing poetry.",
             "organisation_id": "Any element of a tuple can be accessed in constant time.",

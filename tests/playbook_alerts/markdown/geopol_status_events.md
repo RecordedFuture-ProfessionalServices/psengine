@@ -1,4 +1,4 @@
-## In 1989 the building was heavily damaged by fire, but it has since been restored.
+## Geopolitical Facility
 
 ### Summary
 

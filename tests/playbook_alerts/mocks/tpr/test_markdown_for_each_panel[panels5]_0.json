@@ -12,6 +12,11 @@
             "updated": "2025-02-12T11:21:20.674Z",
             "case_rule_id": "The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.",
             "case_rule_label": "Do you have any idea why this is not working?",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "ThirdParty",
+                "name": "Third Party Risk Alert"
+            },
             "owner_id": "Where are my pants?",
             "owner_name": "The arguments can be primitive data types or compound data types.",
             "organisation_id": "The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.",

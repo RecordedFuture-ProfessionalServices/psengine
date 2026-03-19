@@ -12,6 +12,11 @@
             "updated": "2025-02-11T23:47:03.894Z",
             "case_rule_id": "Atoms are used within a program to denote distinguished values.",
             "case_rule_label": "Ports are used to communicate with the external world.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "GeoFacility",
+                "name": "Geopolitical Facility"
+            },
             "owner_id": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
             "owner_name": "I don't even care.",
             "organisation_id": "Tuples are containers for a fixed number of Erlang data types.",

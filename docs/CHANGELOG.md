@@ -8,6 +8,23 @@
 
 - `psengine.asi` implements Attack Surface handling via `ASIMgr`.
 
+## v2.4.3 - 2026-03-03
+
+### Added
+
+- `PanelStatus` and `SearchData` now include an `alert_rule` field exposing the new `AlertRule` model (`id`, `label`, `name`).
+
+### Changed
+
+- Playbook alert markdown titles and string representations now use `alert_rule.name` (falling back to `alert_rule.label`) instead of `case_rule_label`.
+
+### Fixed
+
+- `PlaybookAlertMgr.fetch_bulk()` now correctly respects the `alerts_per_page` parameter for bulk lookup batching instead of using a hardcoded internal constant.
+- `PBA_GeopoliticsFacility` event `url` field no longer fails validation when the URL format does not conform to strict HTTP URL requirements.
+
+
+
 ## v2.4.2 - 2026-01-29
 
 ### Fixed

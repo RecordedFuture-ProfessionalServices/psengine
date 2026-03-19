@@ -12,6 +12,11 @@
             "updated": "2025-08-01T18:56:09.590Z",
             "case_rule_id": "Erlang is a general-purpose, concurrent, functional programming language.",
             "case_rule_label": "Erlang is a general-purpose, concurrent, functional programming language.",
+            "alert_rule": {
+                "id": "pqc8P6",
+                "label": "RuleNameLabel",
+                "name": "Some Rule Name here"
+            },
             "owner_id": "Ports are created with the built-in function open_port.",
             "owner_name": "Make me a sandwich.",
             "organisation_id": "He looked inquisitively at his keyboard and wrote another sentence.",

@@ -1,4 +1,4 @@
-## The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.
+## Third Party Risk Alert
 
 ### Summary
 

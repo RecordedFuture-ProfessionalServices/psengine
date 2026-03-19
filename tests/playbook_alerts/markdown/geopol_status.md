@@ -1,4 +1,4 @@
-## It is also a garbage-collected runtime system.
+## Geopolitical Facility
 
 ### Summary
 

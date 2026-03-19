@@ -11,6 +11,6 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from ._version import __version__
+from importlib.metadata import version
 
-SDK_ID = f'psengine-py/{__version__}'
+SDK_ID = f'psengine-py/{version("psengine")}'
