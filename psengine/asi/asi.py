@@ -253,8 +253,8 @@ class Project(RFBaseModel):
     id: UUID
     title: str
     scanning_enabled: Optional[bool] = None
-    last_scanned_at: Optional[datetime.datetime] = None
-    inserted_at: Optional[datetime.datetime] = None
+    last_scanned_at: Optional[datetime] = None
+    inserted_at: Optional[datetime] = None
     max_exposure_score: Optional[int] = None
 
     def __str__(self) -> str:

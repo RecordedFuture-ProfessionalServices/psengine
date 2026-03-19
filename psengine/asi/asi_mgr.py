@@ -114,7 +114,7 @@ class AttackSurfaceMgr:
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
-            FetchProjectsError: If API error occurs.
+            ASIFetchProjectsError: If an API or connection error occurs.
         """
         params = {}
         if sort_direction:
@@ -271,6 +271,7 @@ class AttackSurfaceMgr:
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
             ValueError: If `exposure_score` start is greater than end.
+            ASISearchAssetsError: If an API or connection error occurs.
         """
         if sort_by is None:
             sort_by = ['discovered_at']
@@ -420,7 +421,7 @@ class AttackSurfaceMgr:
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
-            AttackSurfaceExposureSearchError: If API error occurs.
+            ASIExposureSearchError: If an API or connection error occurs.
         """
         params = {k: v for k, v in locals().items() if k not in ('self',)}
         data = self.asi_client.request_paged(
@@ -452,7 +453,7 @@ class AttackSurfaceMgr:
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
-            AttackSurfaceExposureSearchError: If API error occurs.
+            ASIFetchExposureError: If an API or connection error occurs.
         """
         params = {
             k: v for k, v in locals().items() if k not in ('self', 'assets_per_page', 'max_results')
@@ -745,6 +746,7 @@ class AttackSurfaceMgr:
 
         Raises:
             ValidationError: If response data does not match the `AssetResponse` model.
+            ASIFetchAssetError: If an API or connection error occurs.
         """
         params = {k: v for k, v in locals().items() if k not in ('self',)}
         data = self.asi_client.request_paged(
@@ -795,6 +797,7 @@ class AttackSurfaceMgr:
 
         Raises:
             ValidationError: If response data does not match the `Asset` model.
+            ASIFetchAssetError: If an API or connection error occurs.
         """
         params = {k: v for k, v in locals().items() if k not in ('self',)}
         data = self.asi_client.request(
@@ -820,6 +823,7 @@ class AttackSurfaceMgr:
 
         Raises:
             ValidationError: If response data does not match the `Asset` model.
+            ASIFetchAssetError: If an API or connection error occurs.
         """
         data = self.asi_client.request(
             'GET',

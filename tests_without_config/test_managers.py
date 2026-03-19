@@ -3,12 +3,14 @@ from pydantic import BaseModel
 from psengine.classic_alerts import ClassicAlertMgr
 from psengine.config import Config, ConfigModel, get_config
 from psengine.enrich import LookupMgr
+from psengine.asi import AttackSurfaceMgr
 
 
 def test_managers_without_config():
     """This test is made to verify that Managers can be init without a config."""
     LookupMgr()
     ClassicAlertMgr()
+    AttackSurfaceMgr()
 
 
 def test_custom_int_config():

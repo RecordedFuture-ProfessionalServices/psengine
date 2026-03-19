@@ -1,10 +1,27 @@
-import pytest
-from psengine.asi.models.project import ProjectListOut
+from pathlib import Path
 
-from psengine.asi.asi import Asset, AssetResponse, AssetWithExposureSearch, ExposureSearchOut
+import pytest
+from requests.exceptions import HTTPError
+
+from psengine.asi.asi import (
+    Asset,
+    AssetResponse,
+    AssetWithExposureSearch,
+    ExposureSearchOut,
+    ProjectListOut,
+)
+from psengine.asi.errors import (
+    ASIExposureSearchError,
+    ASIFetchAssetError,
+    ASIFetchExposureError,
+    ASIFetchProjectsError,
+    ASISearchAssetsError,
+)
 from psengine.asi.asi_mgr import AttackSurfaceMgr
 
 DEFAULT_SEARCH_BODY = {'pagination': {'limit': 1000}, 'sort': ['discovered_at']}
+MOCK_DIR = Path(__file__).parent / 'mocks'
+PROJECT_ID = '7c2d06d7-0c4b-4d0d-bc97-f81dcdc276de'
 
 
 def _meta_payload() -> dict:
@@ -61,6 +78,24 @@ def test_fetch_projects_returns_project_list_response(
     assert isinstance(result, ProjectListOut)
 
 
+def test_fetch_projects_validates_projects_mock(asi_mgr: AttackSurfaceMgr, mocker, mock_request):
+    mocker.patch.object(
+        asi_mgr.asi_client,
+        'request',
+        return_value=mock_request(MOCK_DIR / 'asi_projects.json'),
+    )
+
+    result = asi_mgr.fetch_projects()
+
+    assert isinstance(result, ProjectListOut)
+    assert len(result.content) == 3
+    assert str(result.content[0].id) == '3ce6292b-29be-4199-9024-231818e384a4'
+    assert result.content[0].title == 'Partner Shared Demo'
+    assert result.content[0].max_exposure_score == 99
+    assert result.meta.counts.total == 3
+    assert result.meta.request_id == '08209248cc2b46139709f15588bcf04b'
+
+
 def test_search_assets_returns_asset_response(asi_mgr: AttackSurfaceMgr, mocker):
     mocker.patch.object(
         asi_mgr.asi_client,
@@ -71,6 +106,28 @@ def test_search_assets_returns_asset_response(asi_mgr: AttackSurfaceMgr, mocker)
     result = asi_mgr.search_assets(project_id='project-1')
 
     assert isinstance(result, AssetResponse)
+
+
+def test_search_assets_validates_search_mock(asi_mgr: AttackSurfaceMgr, mocker, mock_request):
+    mock_request_spy = mocker.patch.object(
+        asi_mgr.asi_client,
+        'request',
+        return_value=mock_request(MOCK_DIR / 'asi_search.json'),
+    )
+
+    result = asi_mgr.search_assets(project_id=PROJECT_ID, max_results=100)
+
+    assert isinstance(result, AssetResponse)
+    assert len(result.content) == 100
+    assert (
+        result.content[0].id_ == 'z3nab-a7d897-cca7c8cdafa5a6f9bd85ebf2f62d2c33107f07.zendesk.com'
+    )
+    assert result.content[0].apex_domain == 'zendesk.com'
+    assert result.content[0].type_ == 'domain'
+    assert result.content[2].resolved_ips is None
+    assert result.meta.counts.returned == 100
+    assert result.meta.pagination.total == 1711
+    assert mock_request_spy.call_count == 1
 
 
 _search_assets_data = [
@@ -246,6 +303,25 @@ def test_search_exposures_returns_exposure_search_out(asi_mgr: AttackSurfaceMgr,
     assert isinstance(result, ExposureSearchOut)
 
 
+def test_search_exposures_validates_exposures_mock(asi_mgr: AttackSurfaceMgr, mocker, mock_request):
+    mock_request_spy = mocker.patch.object(
+        asi_mgr.asi_client,
+        'request',
+        return_value=mock_request(MOCK_DIR / 'asi_exposures.json'),
+    )
+
+    result = asi_mgr.search_exposures(project_id=PROJECT_ID, max_results=100)
+
+    assert isinstance(result, ExposureSearchOut)
+    assert len(result.content) == 100
+    assert result.content[0].asset_count == 116
+    assert result.content[0].signature.id == 'low-security-cipher-list'
+    assert result.content[0].signature.severity.value == 'critical'
+    assert result.meta.counts.total == 287
+    assert result.meta.pagination.limit == 100
+    assert mock_request_spy.call_count == 1
+
+
 def test_fetch_exposures_by_signature_returns_asset_with_exposure_search(
     asi_mgr: AttackSurfaceMgr, mocker
 ):
@@ -263,6 +339,30 @@ def test_fetch_exposures_by_signature_returns_asset_with_exposure_search(
     assert isinstance(result, AssetWithExposureSearch)
 
 
+def test_fetch_exposures_by_signature_validates_signature_mock(
+    asi_mgr: AttackSurfaceMgr, mocker, mock_request
+):
+    mock_request_spy = mocker.patch.object(
+        asi_mgr.asi_client,
+        'request',
+        return_value=mock_request(MOCK_DIR / 'asi_exposure_signature.json'),
+    )
+
+    result = asi_mgr.fetch_exposures_by_signature(
+        project_id=PROJECT_ID,
+        signature_id='CVE-2022-2551',
+        max_results=5,
+    )
+
+    assert isinstance(result, AssetWithExposureSearch)
+    assert result.signature.id == 'CVE-2022-2551'
+    assert result.signature.severity.value == 'critical'
+    assert len(result.asset_exposures) == 5
+    assert result.asset_exposures[0].asset_id == 'staff.basij.sharif.edu'
+    assert result.signature.vulnerabilities[0].cvss_score == 9.8
+    assert mock_request_spy.call_count == 1
+
+
 def test_fetch_assets_returns_asset_response(asi_mgr: AttackSurfaceMgr, mocker):
     mocker.patch.object(
         asi_mgr.asi_client,
@@ -275,6 +375,25 @@ def test_fetch_assets_returns_asset_response(asi_mgr: AttackSurfaceMgr, mocker):
     assert isinstance(result, AssetResponse)
 
 
+def test_fetch_assets_validates_assets_mock(asi_mgr: AttackSurfaceMgr, mocker, mock_request):
+    mock_request_spy = mocker.patch.object(
+        asi_mgr.asi_client,
+        'request',
+        return_value=mock_request(MOCK_DIR / 'asi_assets.json'),
+    )
+
+    result = asi_mgr.fetch_assets(project_id=PROJECT_ID, max_results=50)
+
+    assert isinstance(result, AssetResponse)
+    assert len(result.content) == 50
+    assert result.content[0].id_ == 'zzzezzzacosmetics.zendesk.com'
+    assert result.content[0].resolved_ips == ['216.198.54.6', '216.198.53.6']
+    assert result.content[0].apex_domain == 'zendesk.com'
+    assert result.meta.counts.returned == 50
+    assert result.meta.pagination.total == 1711
+    assert mock_request_spy.call_count == 1
+
+
 def test_fetch_asset_returns_asset(asi_mgr: AttackSurfaceMgr, mocker, make_response):
     mocker.patch.object(
         asi_mgr.asi_client,
@@ -285,3 +404,84 @@ def test_fetch_asset_returns_asset(asi_mgr: AttackSurfaceMgr, mocker, make_respo
     result = asi_mgr.fetch_asset(project_id='project-1', asset_id='asset-1')
 
     assert isinstance(result, Asset)
+
+
+def test_fetch_asset_validates_asset_mock(asi_mgr: AttackSurfaceMgr, mocker, mock_request):
+    mocker.patch.object(
+        asi_mgr.asi_client,
+        'request',
+        return_value=mock_request(MOCK_DIR / 'asi_asset.json'),
+    )
+
+    result = asi_mgr.fetch_asset(
+        project_id=PROJECT_ID,
+        asset_id='zzzezzzacosmetics.zendesk.com',
+    )
+
+    assert isinstance(result, Asset)
+    assert result.id_ == 'zzzezzzacosmetics.zendesk.com'
+    assert result.apex_domain == 'zendesk.com'
+    assert len(result.dns_records) == 1
+    assert result.dns_records[0].record_type == 'A'
+    assert len(result.scanned_ips) == 2
+    assert result.scanned_ips[0].metadata.owner_name == 'Cloudflare, Inc.'
+    assert result.whois.registrar == 'MarkMonitor, Inc.'
+
+
+@pytest.mark.parametrize(
+    ('method_name', 'client_method_name', 'kwargs', 'expected_error'),
+    [
+        ('fetch_projects', 'request', {}, ASIFetchProjectsError),
+        ('search_assets', 'request_paged', {'project_id': PROJECT_ID}, ASISearchAssetsError),
+        (
+            'search_exposures',
+            'request_paged',
+            {'project_id': PROJECT_ID},
+            ASIExposureSearchError,
+        ),
+        (
+            'fetch_exposures_by_signature',
+            'request_paged',
+            {'project_id': PROJECT_ID, 'signature_id': 'sig-1'},
+            ASIFetchExposureError,
+        ),
+        ('fetch_assets', 'request_paged', {'project_id': PROJECT_ID}, ASIFetchAssetError),
+        (
+            'fetch_asset',
+            'request',
+            {'project_id': PROJECT_ID, 'asset_id': 'asset-1'},
+            ASIFetchAssetError,
+        ),
+        (
+            'fetch_asset_exposures',
+            'request',
+            {'project_id': PROJECT_ID, 'asset_id': 'asset-1'},
+            ASIFetchAssetError,
+        ),
+    ],
+    ids=[
+        'fetch_projects',
+        'search_assets',
+        'search_exposures',
+        'fetch_exposures_by_signature',
+        'fetch_assets',
+        'fetch_asset',
+        'fetch_asset_exposures',
+    ],
+)
+def test_methods_reraise_http_error_as_asi_error(
+    asi_mgr: AttackSurfaceMgr,
+    mocker,
+    method_name: str,
+    client_method_name: str,
+    kwargs: dict,
+    expected_error: type[Exception],
+):
+    mocker.patch.object(
+        asi_mgr.asi_client,
+        client_method_name,
+        side_effect=HTTPError('error'),
+    )
+
+    with pytest.raises(expected_error, match='error'):
+        getattr(asi_mgr, method_name)(**kwargs)
