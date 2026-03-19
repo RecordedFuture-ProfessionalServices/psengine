@@ -17,9 +17,6 @@ from uuid import UUID
 
 from pydantic import Field
 
-from psengine.asi.models.api import ApiMeta
-from psengine.asi.models.core import AssetWithExposure
-
 from ..common_models import RFBaseModel
 from .models import (
     AssetExposure,
@@ -31,6 +28,8 @@ from .models import (
     ScannedIP,
     WHOISRecord,
 )
+from .models.api import ApiMeta
+from .models.core import AssetWithExposure
 
 
 class AssetWithExposureSearch(RFBaseModel):

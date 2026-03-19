@@ -18,8 +18,7 @@ from typing import Annotated, Literal, Optional, Union
 from pydantic import AfterValidator, Field, validate_call
 from typing_extensions import Doc
 
-from psengine.constants import DEFAULT_LIMIT
-
+from ..constants import DEFAULT_LIMIT
 from ..endpoints import (
     EP_ASI_ASSET,
     EP_ASI_ASSET_EXPOSURES,
