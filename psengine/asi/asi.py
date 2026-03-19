@@ -13,7 +13,6 @@
 
 from datetime import datetime
 from typing import Optional
-from uuid import UUID
 
 from pydantic import Field
 
@@ -249,7 +248,7 @@ class Project(RFBaseModel):
         ```
     """
 
-    id: UUID
+    id: str
     title: str
     scanning_enabled: Optional[bool] = None
     last_scanned_at: Optional[datetime] = None
