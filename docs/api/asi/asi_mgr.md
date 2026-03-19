@@ -1,4 +1,4 @@
-::: psengine.analyst_notes.note_mgr.AnalystNoteMgr
+::: psengine.asi.asi_mgr.AttackSurfaceMgr
     options: 
         members:
             - __init__

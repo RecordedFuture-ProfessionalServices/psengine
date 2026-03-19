@@ -460,9 +460,7 @@ def test_asi_client_init_rejects_missing_token_from_config(monkeypatch):
     Config.init(asi_token='')
 
     try:
-        with pytest.raises(
-            ValueError, match='Missing Recorded Future Recorded Future ASI API token'
-        ):
+        with pytest.raises(ValueError, match='Missing Recorded Future ASI API token'):
             ASIClient(api_token=None)
     finally:
         Config.reset_instance()

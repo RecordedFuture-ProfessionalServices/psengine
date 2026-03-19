@@ -19,7 +19,9 @@ from pydantic import Field
 
 from ..common_models import RFBaseModel
 from .models import (
+    ApiMeta,
     AssetExposure,
+    AssetWithExposure,
     CertificateInstance,
     DefensiveControl,
     DNSRecord,
@@ -28,8 +30,6 @@ from .models import (
     ScannedIP,
     WHOISRecord,
 )
-from .models.api import ApiMeta
-from .models.core import AssetWithExposure
 
 
 class AssetWithExposureSearch(RFBaseModel):

@@ -11,15 +11,36 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-
 from datetime import date, datetime
 from enum import Enum
 from typing import Any, Optional, Union
 
 from pydantic import Field
 
-from ...common_models import RFBaseModel
-from .api import Pagination
+from ..common_models import RFBaseModel
+
+
+class PaginationResponse(RFBaseModel):
+    next_cursor: Optional[str] = None
+    limit: Optional[int] = 50
+    total: Optional[int] = None
+    sort: Optional[list[list[str]]] = None
+
+
+class ApiCount(RFBaseModel):
+    returned: int
+    total: Optional[int] = None
+
+
+class ApiMeta(RFBaseModel):
+    counts: Optional[ApiCount] = None
+    pagination: Optional[PaginationResponse] = None
+    request_id: Optional[str] = None
+
+
+class Pagination(RFBaseModel):
+    next_cursor: Optional[str] = None
+    limit: Optional[int] = 50
 
 
 class AssetCountDateRangeFilter(RFBaseModel):
