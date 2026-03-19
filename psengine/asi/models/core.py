@@ -16,9 +16,9 @@ from datetime import date, datetime
 from enum import Enum
 from typing import Any, Optional, Union
 
-from pydantic import  Field
-from ...common_models import RFBaseModel
+from pydantic import Field
 
+from ...common_models import RFBaseModel
 from .api import Pagination
 
 

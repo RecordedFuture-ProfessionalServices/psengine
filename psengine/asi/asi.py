@@ -33,6 +33,33 @@ from .models import (
 
 
 class AssetWithExposureSearch(RFBaseModel):
+    """Validate data received from the `/v2/projects/{project_id}/exposures/{signature_id}`
+    endpoint.
+
+    This class supports hashing, equality comparison, greater-than comparison, and string
+    representation of `AssetWithExposureSearch` instances.
+
+    Hashing:
+        Returns a hash value based on the exposure signature `id`.
+
+    Equality:
+        Checks equality between two `AssetWithExposureSearch` instances based on the exposure
+        signature `id`.
+
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `AssetWithExposureSearch` instances based on
+        the signature severity and `id`.
+
+    String Representation:
+        Returns a string representation of the `AssetWithExposureSearch` instance including the
+        signature name, `id`, and severity.
+
+        ```python
+        >>> print(asset_with_exposure)
+        Name: Exposed Service, Id: exp-123, Severity: critical
+        ```
+    """
+
     asset_exposures: Optional[list[AssetWithExposure]] = []
     signature: ExposureSignature
     meta: Optional[ApiMeta] = None
@@ -59,6 +86,32 @@ class AssetWithExposureSearch(RFBaseModel):
 
 
 class ExposureSearch(RFBaseModel):
+    """Validate data received from the `/v2/projects/{project_id}/exposures` endpoint.
+
+    This class supports hashing, equality comparison, greater-than comparison, and string
+    representation of `ExposureSearch` instances.
+
+    Hashing:
+        Returns a hash value based on the exposure signature `id`.
+
+    Equality:
+        Checks equality between two `ExposureSearch` instances based on the exposure signature
+        `id`.
+
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `ExposureSearch` instances based on the
+        signature severity, asset count, and `id`.
+
+    String Representation:
+        Returns a string representation of the `ExposureSearch` instance including the signature
+        name, `id`, severity, and asset count.
+
+        ```python
+        >>> print(exposure)
+        Name: Exposed Service, Id: exp-123, Severity: critical, Asset Count: 42
+        ```
+    """
+
     asset_count: int
     asset_exposures: Optional[list[AssetExposure]] = []
     signature: ExposureSignature
@@ -87,6 +140,8 @@ class ExposureSearch(RFBaseModel):
 
 
 class ExposureSearchOut(RFBaseModel):
+    """Validate data received from the `/v2/projects/{project_id}/exposures` endpoint."""
+
     content: list[ExposureSearch]
     meta: ApiMeta
 
@@ -95,6 +150,34 @@ class ExposureSearchOut(RFBaseModel):
 
 
 class Asset(RFBaseModel):
+    """Validate data received from the `/v2/projects/{project_id}/assets`,
+    `/v2/projects/{project_id}/assets/{asset_id}`,
+    `/v2/projects/{project_id}/assets/{asset_id}/exposures`, and
+    `/v2/projects/{project_id}/assets/_search` endpoints.
+
+    This class supports hashing, equality comparison, greater-than comparison, and string
+    representation of `Asset` instances.
+
+    Hashing:
+        Returns a hash value based on the asset `id_` and `project_id`.
+
+    Equality:
+        Checks equality between two `Asset` instances based on the asset `id_` and `project_id`.
+
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `Asset` instances based on the exposure
+        score and `id_`.
+
+    String Representation:
+        Returns a string representation of the `Asset` instance including the name, type, and
+        exposure score.
+
+        ```python
+        >>> print(asset)
+        Name: example.com, Type: domain, Exposure Score: 85
+        ```
+    """
+
     project_id: str
     id_: str = Field(alias='id')
     name: str
@@ -129,6 +212,10 @@ class Asset(RFBaseModel):
 
 
 class AssetResponse(RFBaseModel):
+    """Validate data received from the `/v2/projects/{project_id}/assets` and
+    `/v2/projects/{project_id}/assets/_search` endpoints.
+    """
+
     content: list[Asset]
     meta: ApiMeta
 

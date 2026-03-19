@@ -14,13 +14,21 @@
 from ..errors import RecordedFutureError
 
 
-class FetchProjectsError(RecordedFutureError):
+class ASIFetchProjectsError(RecordedFutureError):
     """Raised when fetching projects fails or an exception occurred during the request."""
 
 
-class SearchAssetsError(RecordedFutureError):
+class ASISearchAssetsError(RecordedFutureError):
     """Raised when searching assets fails or an exception occurred during the request."""
 
 
-class AttackSurfaceExposureSearchError(RecordedFutureError):
+class ASIFetchAssetError(RecordedFutureError):
+    """Raised when fetching asset fails or an exception occurred during the request."""
+
+
+class ASIExposureSearchError(RecordedFutureError):
     """Raised when searching exposure fails or an exception occurred during the request."""
+
+
+class ASIFetchExposureError(RecordedFutureError):
+    """Raised when fetching exposure fails or an exception occurred during the request."""

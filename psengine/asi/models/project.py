@@ -16,7 +16,6 @@ from typing import Optional
 from uuid import UUID
 
 from ...common_models import RFBaseModel
-
 from .api import ApiMeta
 
 

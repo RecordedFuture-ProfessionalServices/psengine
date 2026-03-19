@@ -33,7 +33,13 @@ from ..helpers import connection_exceptions, debug_call
 from .asi import Asset, AssetResponse, AssetWithExposureSearch, ExposureSearchOut
 from .client import ASIClient
 from .constants import ASSETS_PER_PAGE, MAX_ASI_PAGE_SIZE, AssetType, EnrichmentType, SortByType
-from .errors import AttackSurfaceExposureSearchError, FetchProjectsError, SearchAssetsError
+from .errors import (
+    ASIExposureSearchError,
+    ASIFetchAssetError,
+    ASIFetchExposureError,
+    ASIFetchProjectsError,
+    ASISearchAssetsError,
+)
 from .models import (
     AssetSearchFilterIn,
     AssetSearchRequest,
@@ -95,13 +101,22 @@ class AttackSurfaceMgr:
 
     @debug_call
     @validate_call
-    @connection_exceptions(ignore_status_code=[], exception_to_raise=FetchProjectsError)
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ASIFetchProjectsError)
     def fetch_projects(
         self,
         sort_direction: Annotated[
             Optional[Literal['asc', 'desc']], Doc('Sort direction for the projects')
         ] = 'asc',
     ) -> Annotated[ProjectListOut, Doc('List of ASI Project models')]:
+        """Fetch ASI projects.
+
+        Endpoint:
+            `v2/projects`
+
+        Raises:
+            ValidationError: If any supplied parameter is of incorrect type.
+            FetchProjectsError: If API error occurs.
+        """
         params = {}
         if sort_direction:
             params['sort_direction'] = sort_direction
@@ -113,7 +128,7 @@ class AttackSurfaceMgr:
 
     @debug_call
     @validate_call
-    @connection_exceptions(ignore_status_code=[], exception_to_raise=SearchAssetsError)
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ASISearchAssetsError)
     def search_assets(
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
@@ -350,34 +365,36 @@ class AttackSurfaceMgr:
 
     @debug_call
     @validate_call
-    @connection_exceptions(
-        ignore_status_code=[], exception_to_raise=AttackSurfaceExposureSearchError
-    )
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ASIExposureSearchError)
     def search_exposures(
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
         filter_cve_id: Annotated[
             Optional[str],
             Doc(
-                'Filter for asset or exposure tied to a vulnerability with the provided CVE. Example CVE-2024-6387.'
+                """Filter for asset or exposure tied to a vulnerability with the provided CVE.
+                Example CVE-2024-6387."""
             ),
         ] = None,
         filter_cvss_score_gte: Annotated[
             Optional[str],
             Doc(
-                'Filter for asset or exposure tied to a vulnerability with the provided CVSS score range. Example 7.5. '
+                """Filter for asset or exposure tied to a vulnerability with the provided CVSS
+                score range. Example 7.5. """
             ),
         ] = None,
         filter_cvss_score_lte: Annotated[
             Optional[str],
             Doc(
-                'Filter for asset or exposure tied to a vulnerability with the provided CVSS score range. Example 7.5.'
+                """Filter for asset or exposure tied to a vulnerability with the provided CVSS
+                score range. Example 7.5."""
             ),
         ] = None,
         filter_cwe_id: Annotated[
             Optional[str],
             Doc(
-                'Filter for asset or exposure tied to a vulnerability associated with the provided CWE. Example CWE-79.'
+                """Filter for asset or exposure tied to a vulnerability associated with
+                the provided CWE. Example CWE-79."""
             ),
         ] = None,
         filter_severity_exact: Annotated[
@@ -387,13 +404,25 @@ class AttackSurfaceMgr:
         filter_severity_min: Annotated[
             Optional[SEVERITY_FILTER],
             Doc(
-                'Filter for assets which have an exposure severity matching or higher than the provided value.'
+                """Filter for assets which have an exposure severity matching or higher than the
+                provided value."""
             ),
         ] = None,
         max_results: Annotated[
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
     ):
+        """Search for exposures within an ASI project.
+
+        Does pagination requests on batches of the API default page size up to `max_results`.
+
+        Endpoint:
+            `v2/projects/{project_id}/exposures`
+
+        Raises:
+            ValidationError: If any supplied parameter is of incorrect type.
+            AttackSurfaceExposureSearchError: If API error occurs.
+        """
         params = {k: v for k, v in locals().items() if k not in ('self',)}
         data = self.asi_client.request_paged(
             'GET',
@@ -406,9 +435,7 @@ class AttackSurfaceMgr:
 
     @debug_call
     @validate_call
-    @connection_exceptions(
-        ignore_status_code=[], exception_to_raise=AttackSurfaceExposureSearchError
-    )
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ASIFetchExposureError)
     def fetch_exposures_by_signature(
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
@@ -417,6 +444,17 @@ class AttackSurfaceMgr:
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
     ):
+        """Fetch assets by exposure signature within an ASI project.
+
+        Does pagination requests on batches of the API default page size up to `max_results`.
+
+        Endpoint:
+            `v2/projects/{project_id}/exposures/{signature_id}`
+
+        Raises:
+            ValidationError: If any supplied parameter is of incorrect type.
+            AttackSurfaceExposureSearchError: If API error occurs.
+        """
         params = {
             k: v for k, v in locals().items() if k not in ('self', 'assets_per_page', 'max_results')
         }
@@ -428,6 +466,9 @@ class AttackSurfaceMgr:
         )
         return AssetWithExposureSearch.model_validate(data['data'][0])
 
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ASIFetchAssetError)
     def fetch_assets(
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
@@ -696,6 +737,16 @@ class AttackSurfaceMgr:
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
     ):
+        """Fetch assets within an ASI project.
+
+        Does pagination requests on batches of the API default page size up to `max_results`.
+
+        Endpoint:
+            `v2/projects/{project_id}/assets`
+
+        Raises:
+            ValidationError: If response data does not match the `AssetResponse` model.
+        """
         params = {k: v for k, v in locals().items() if k not in ('self',)}
         data = self.asi_client.request_paged(
             'GET',
@@ -706,6 +757,9 @@ class AttackSurfaceMgr:
 
         return AssetResponse.model_validate({'content': data['data'], 'meta': data['meta']})
 
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ASIFetchAssetError)
     def fetch_asset(
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
@@ -735,6 +789,14 @@ class AttackSurfaceMgr:
             ),
         ] = None,
     ):
+        """Fetch a single asset within an ASI project.
+
+        Endpoint:
+            `v2/projects/{project_id}/assets/{asset_id}`
+
+        Raises:
+            ValidationError: If response data does not match the `Asset` model.
+        """
         params = {k: v for k, v in locals().items() if k not in ('self',)}
         data = self.asi_client.request(
             'GET',
@@ -744,11 +806,22 @@ class AttackSurfaceMgr:
 
         return Asset.model_validate(data['data'])
 
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ASIFetchAssetError)
     def fetch_asset_exposures(
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
         asset_id: Annotated[str, Doc('The asset ID to search for.')],
     ):
+        """Fetch exposures for a single asset within an ASI project.
+
+        Endpoint:
+            `v2/projects/{project_id}/assets/{asset_id}/exposures`
+
+        Raises:
+            ValidationError: If response data does not match the `Asset` model.
+        """
         data = self.asi_client.request(
             'GET',
             EP_ASI_ASSET_EXPOSURES.format(project_id, asset_id),
