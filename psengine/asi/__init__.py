@@ -11,5 +11,5 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from .client import ASIClient
 from .asi_mgr import AttackSurfaceMgr
+from .client import ASIClient

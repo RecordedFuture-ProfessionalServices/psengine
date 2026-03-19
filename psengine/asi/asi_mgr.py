@@ -38,7 +38,7 @@ from .models import (
     AssetSearchFilterIn,
     AssetSearchRequest,
     ExposureSeverity,
-    ProjectListResponse,
+    ProjectListOut,
 )
 
 SEVERITY_FILTER = Literal['unknown', 'informational', 'moderate', 'critical']
@@ -101,13 +101,15 @@ class AttackSurfaceMgr:
         sort_direction: Annotated[
             Optional[Literal['asc', 'desc']], Doc('Sort direction for the projects')
         ] = 'asc',
-    ) -> Annotated[ProjectListResponse, Doc('List of ASI Project models')]:
+    ) -> Annotated[ProjectListOut, Doc('List of ASI Project models')]:
         params = {}
         if sort_direction:
             params['sort_direction'] = sort_direction
 
         response = self.asi_client.request('get', EP_ASI_PROJECTS, params=params).json()
-        return ProjectListResponse.model_validate(response)
+        return ProjectListOut.model_validate(
+            {'content': response['data'], 'meta': response['meta']}
+        )
 
     @debug_call
     @validate_call
@@ -122,7 +124,8 @@ class AttackSurfaceMgr:
         asset_id: Annotated[
             Optional[str],
             Doc(
-                """Filter for the specific asset, which will be either a IP or domain value (examples: 192.88.99.2 or www.example.com)."""
+                """Filter for the specific asset, which will be either a IP or domain value
+                (examples: 192.88.99.2 or www.example.com)."""
             ),
         ] = None,
         asset_name: Annotated[
@@ -131,22 +134,24 @@ class AttackSurfaceMgr:
         asset_apex_domain: Annotated[
             Optional[Union[str, list[str]]],
             Doc(
-                """Filter on the apex domain of the asset (example: example.com). Pass a single value or a list."""
+                """Filter on the apex domain of the asset (example: example.com).
+                Pass a single value or a list."""
             ),
         ] = None,
         asset_discovered_date: Annotated[
             Optional[tuple[Optional[str], Optional[str]]],
             Doc(
-                """Filter on the date (Y-m-d) the asset was discovered by Recorded Future ASI. 
-                This may be different than when the asset was added to the project. 
-                IPv4 addresses will have a fixed point in the past for their discovery date. 
+                """Filter on the date (Y-m-d) the asset was discovered by Recorded Future ASI.
+                This may be different than when the asset was added to the project.
+                IPv4 addresses will have a fixed point in the past for their discovery date.
                 Use None for an open-ended bound."""
             ),
         ] = None,
         asset_type: Annotated[
             Optional[AssetType],
             Doc(
-                """The type of asset, one of: ip, domain and host(where domain and host represent the same asset type)."""
+                """The type of asset, one of: ip, domain and host
+                (where domain and host represent the same asset type)."""
             ),
         ] = None,
         custom_tags: Annotated[
@@ -156,7 +161,8 @@ class AttackSurfaceMgr:
         is_static_asset: Annotated[
             Optional[bool],
             Doc(
-                """Filter for assets that are static, meaning they have a consistent IP address or domain name over time."""
+                """Filter for assets that are static, meaning they have a consistent IP address or
+                domain name over time."""
             ),
         ] = None,
         exposure_severity: Annotated[
@@ -194,46 +200,44 @@ class AttackSurfaceMgr:
         open_port_service: Annotated[
             Optional[Union[str, list[str]]],
             Doc(
-                """Filter for assets which have an open port with the provided service (e.g. http, 
+                """Filter for assets which have an open port with the provided service (e.g. http,
                 ftp, rdp)."""
             ),
         ] = None,
         open_port_protocol: Annotated[
             Optional[Union[str, list[str]]],
             Doc(
-                """Filter for assets which have an open port with the provided protocol (e.g. tcp, 
+                """Filter for assets which have an open port with the provided protocol (e.g. tcp,
                 udp)."""
             ),
         ] = None,
         technology_name: Annotated[
             Optional[Union[str, list[str]]],
             Doc(
-                """Filter for the name of a technology found on the asset. Could be directly 
-                attached to the port (nginx, etc) or a web technology (e.g. 'jQuery', 
+                """Filter for the name of a technology found on the asset. Could be directly
+                attached to the port (nginx, etc) or a web technology (e.g. 'jQuery',
                 'Wordpress'))."""
             ),
         ] = None,
         certificate_issuer: Annotated[
             Optional[Union[str, list[str]]],
             Doc(
-                """Filter where the certificate (or in the chain) issuer's common name 
+                """Filter where the certificate (or in the chain) issuer's common name
                 or organization matches the provided value"""
             ),
         ] = None,
         is_responsive: Annotated[
             Optional[bool],
             Doc(
-                """Filter for assets that are unresponsive over ICMP and no ports are open. 
-                This is a boolean filter, so it will return assets that are either responsive 
+                """Filter for assets that are unresponsive over ICMP and no ports are open.
+                This is a boolean filter, so it will return assets that are either responsive
                 or not responsive."""
             ),
         ] = None,
         enrichments: Annotated[
             list[EnrichmentType], Doc('List of enrichments to apply to the assets')
         ] = None,
-        sort_by: Annotated[list[SortByType], Doc('List of fields to sort the assets by')] = [
-            'discovered_at'
-        ],
+        sort_by: Annotated[list[SortByType], Doc('List of fields to sort the assets by')] = None,
         assets_per_page: Annotated[
             int,
             Field(ge=1, le=MAX_ASI_PAGE_SIZE),
@@ -254,6 +258,8 @@ class AttackSurfaceMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             ValueError: If `exposure_score` start is greater than end.
         """
+        if sort_by is None:
+            sort_by = ['discovered_at']
         filter_params = locals()
         for param in [
             'self',
@@ -334,9 +340,7 @@ class AttackSurfaceMgr:
             if not ((isinstance(val, (dict, list))) and len(val) == 0)
         }
 
-        return AssetSearchFilterIn.model_validate(query).model_dump(
-            by_alias=True, exclude_none=True, mode='json'
-        )
+        return AssetSearchFilterIn.model_validate(query).json()
 
     def _process_arg(self, key: str, value) -> tuple[str, dict]:
         if key not in _ASSET_SEARCH_QUERY_MAP:

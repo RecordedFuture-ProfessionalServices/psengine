@@ -1,28 +1,41 @@
-from __future__ import annotations
+##################################### TERMS OF USE ###########################################
+# The following code is provided for demonstration purpose only, and should not be used      #
+# without independent verification. Recorded Future makes no representations or warranties,  #
+# express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #
+# information it may retrieve, and provides it both strictly “as-is” and without assuming    #
+# responsibility for any information it may retrieve. Recorded Future shall not be liable    #
+# for, and you assume all risk of using, the foregoing. By using this code, Customer         #
+# represents that it is solely responsible for having all necessary licenses, permissions,   #
+# rights, and/or consents to connect to third party APIs, and that it is solely responsible  #
+# for having all necessary licenses, permissions, rights, and/or consents to any data        #
+# accessed from any third party API.                                                         #
+##############################################################################################
+
 
 from datetime import date, datetime
 from enum import Enum
 from typing import Any, Optional, Union
 
-from pydantic import BaseModel, Field
+from pydantic import  Field
+from ...common_models import RFBaseModel
 
 from .api import Pagination
 
 
-class AssetCountDateRangeFilter(BaseModel):
+class AssetCountDateRangeFilter(RFBaseModel):
     name: str
     asset_count: int
     start: Optional[Union[date, float]]
     end: Optional[Union[date, float]]
 
 
-class AssetCountEqFilter(BaseModel):
+class AssetCountEqFilter(RFBaseModel):
     name: str
     asset_count: int
     value: Union[int, str]
 
 
-class AssetCountValueRangeFilter(BaseModel):
+class AssetCountValueRangeFilter(RFBaseModel):
     name: str
     asset_count: int
     start: int
@@ -53,12 +66,12 @@ class AssetSortField(str, Enum):
     LAST_SCANNED_AT = 'last_scanned_at'
 
 
-class AssetState(BaseModel):
+class AssetState(RFBaseModel):
     added: Optional[str] = None
     errors: Optional[list[str]] = None
 
 
-class AssetTagResponse(BaseModel):
+class AssetTagResponse(RFBaseModel):
     add_tags: Optional[list[str]] = None
     remove_tags: Optional[list[str]] = None
     assets: Optional[list[str]] = None
@@ -66,30 +79,30 @@ class AssetTagResponse(BaseModel):
     task_ids: Optional[list[str]] = None
 
 
-class CertificateEntity(BaseModel):
+class CertificateEntity(RFBaseModel):
     common_name: Optional[str] = None
     organization_name: Optional[str] = None
     organizational_unit_name: Optional[str] = None
     country_name: Optional[str] = None
 
 
-class Certificate(BaseModel):
+class Certificate(RFBaseModel):
     expires_at: datetime
     issued_at: datetime
     sha256: str
     subject: CertificateEntity
     subject_alt_names: Optional[list[str]] = None
     issuer: Optional[CertificateEntity] = None
-    chain: Optional[list[Certificate]] = None
+    chain: Optional[list['Certificate']] = None
     signature_algorithm: Optional[str] = None
 
 
-class ExposureInstance(BaseModel):
+class ExposureInstance(RFBaseModel):
     port_number: int
     url: Optional[str] = None
 
 
-class AssetWithExposure(BaseModel):
+class AssetWithExposure(RFBaseModel):
     asset_id: str
     instances: list[ExposureInstance]
 
@@ -101,7 +114,7 @@ class ExposureSeverity(str, Enum):
     UNKNOWN = 'unknown'
 
 
-class Exposure(BaseModel):
+class Exposure(RFBaseModel):
     id: str
     detection_id: Optional[str]
     severity: ExposureSeverity
@@ -109,7 +122,7 @@ class Exposure(BaseModel):
     supports_evidence: Optional[bool] = None
 
 
-class FilterOptionsDateRange(BaseModel):
+class FilterOptionsDateRange(RFBaseModel):
     name: str
     filter_query: list[str]
     filter_path: str
@@ -117,7 +130,7 @@ class FilterOptionsDateRange(BaseModel):
     filter_type: Optional[str] = 'date_range'
 
 
-class FilterOptionsEq(BaseModel):
+class FilterOptionsEq(RFBaseModel):
     name: str
     filter_query: list[str]
     filter_path: str
@@ -125,7 +138,7 @@ class FilterOptionsEq(BaseModel):
     filter_type: Optional[str] = 'eq'
 
 
-class FilterOptionsIn(BaseModel):
+class FilterOptionsIn(RFBaseModel):
     name: str
     filter_query: list[str]
     filter_path: str
@@ -133,7 +146,7 @@ class FilterOptionsIn(BaseModel):
     filter_type: Optional[str] = 'in'
 
 
-class AssetPropertiesFilterOptions(BaseModel):
+class AssetPropertiesFilterOptions(RFBaseModel):
     asset_type: Optional[FilterOptionsEq] = None
     asn: Optional[FilterOptionsIn] = None
     custom_tags: Optional[FilterOptionsIn] = None
@@ -147,13 +160,13 @@ class AssetPropertiesFilterOptions(BaseModel):
     referenced_ip: Optional[FilterOptionsIn] = None
 
 
-class CertificatePropertiesFilterOptions(BaseModel):
+class CertificatePropertiesFilterOptions(RFBaseModel):
     certificate_issuer: Optional[FilterOptionsIn] = None
     certificate_expires_at: Optional[FilterOptionsDateRange] = None
     certificate_issued_at: Optional[FilterOptionsDateRange] = None
 
 
-class FilterOptionsValueRange(BaseModel):
+class FilterOptionsValueRange(RFBaseModel):
     name: str
     filter_query: list[str]
     filter_path: str
@@ -161,59 +174,59 @@ class FilterOptionsValueRange(BaseModel):
     filter_type: Optional[str] = 'value_range'
 
 
-class ExposurePropertiesFilterOptions(BaseModel):
+class ExposurePropertiesFilterOptions(RFBaseModel):
     signature_id: Optional[FilterOptionsIn] = None
     severity: Optional[FilterOptionsIn] = None
     asset_exposure_score: Optional[FilterOptionsValueRange] = None
     last_scanned_at: Optional[FilterOptionsDateRange] = None
 
 
-class BooleanFilter(BaseModel):
+class BooleanFilter(RFBaseModel):
     eq: bool
 
 
-class ContainsFilter(BaseModel):
+class ContainsFilter(RFBaseModel):
     contains: str
 
 
-class CustomTagPublic(BaseModel):
+class CustomTagPublic(RFBaseModel):
     title: str
 
 
-class DateRangeFilter(BaseModel):
+class DateRangeFilter(RFBaseModel):
     start: Optional[date] = None
     end: Optional[date] = None
 
 
-class EqFilter(BaseModel):
+class EqFilter(RFBaseModel):
     eq: Union[date, int, str]
 
 
-class GeoLocation(BaseModel):
+class GeoLocation(RFBaseModel):
     continent: Optional[str] = None
     country: Optional[str] = None
     city: Optional[str] = None
     country_iso: Optional[str] = None
 
 
-class InFilter(BaseModel):
+class InFilter(RFBaseModel):
     in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
 
 
-class IntEqFilter(BaseModel):
+class IntEqFilter(RFBaseModel):
     eq: int
 
 
-class IntInFilter(BaseModel):
+class IntInFilter(RFBaseModel):
     in_: list[int] = Field(alias='in')
 
 
-class IntRangeFilter(BaseModel):
+class IntRangeFilter(RFBaseModel):
     start: Optional[int]
     end: Optional[int]
 
 
-class CertificatePropertiesFilter(BaseModel):
+class CertificatePropertiesFilter(RFBaseModel):
     certificate_subject: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
     certificate_subject_alt_name: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
     certificate_sha256: Optional[EqFilter] = None
@@ -223,14 +236,14 @@ class CertificatePropertiesFilter(BaseModel):
     certificate_covers_domain: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
 
 
-class ExposurePropertiesFilter(BaseModel):
+class ExposurePropertiesFilter(RFBaseModel):
     severity: Optional[Union[EqFilter, InFilter]] = None
     signature_id: Optional[Union[EqFilter, InFilter]] = None
     asset_exposure_score: Optional[IntRangeFilter] = None
     last_scanned_at: Optional[DateRangeFilter] = None
 
 
-class IPMetadata(BaseModel):
+class IPMetadata(RFBaseModel):
     as_number: Optional[int] = None
     owner_name: Optional[str] = None
     registry: Optional[str] = None
@@ -242,27 +255,27 @@ class MembershipType(str, Enum):
     INCLUDE = 'include'
 
 
-class NeqFilter(BaseModel):
+class NeqFilter(RFBaseModel):
     neq: Union[date, int, str]
 
 
-class QuickSearchFilter(BaseModel):
+class QuickSearchFilter(RFBaseModel):
     search: str
 
 
-class RequireAllFilter(BaseModel):
+class RequireAllFilter(RFBaseModel):
     in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
 
 
-class EmailEqFilter(BaseModel):
+class EmailEqFilter(RFBaseModel):
     eq: str
 
 
-class EmailInFilter(BaseModel):
+class EmailInFilter(RFBaseModel):
     in_: list[str]
 
 
-class AssetPropertiesFilter(BaseModel):
+class AssetPropertiesFilter(RFBaseModel):
     asset_id: Optional[EqFilter] = None
     name: Optional[ContainsFilter] = None
     static_asset: Optional[BooleanFilter] = None
@@ -290,22 +303,22 @@ class SortDirection(str, Enum):
     DESC = 'desc'
 
 
-class TagAssetRequest(BaseModel):
+class TagAssetRequest(RFBaseModel):
     add_tags: Optional[list[str]] = None
     remove_tags: Optional[list[str]] = None
 
 
-class ValidationError(BaseModel):
+class ValidationError(RFBaseModel):
     loc: list[Union[int, str]]
     msg: str
     type_: str
 
 
-class HTTPValidationError(BaseModel):
+class HTTPValidationError(RFBaseModel):
     detail: Optional[list[ValidationError]] = None
 
 
-class VulnerabilityPublic(BaseModel):
+class VulnerabilityPublic(RFBaseModel):
     name: str
     slug: str
     cvss_score: Optional[float] = None
@@ -316,7 +329,7 @@ class VulnerabilityPublic(BaseModel):
     epss_score: Optional[float] = None
 
 
-class ExposureSignature(BaseModel):
+class ExposureSignature(RFBaseModel):
     id: str
     name: str
     description: Optional[str]
@@ -326,24 +339,24 @@ class ExposureSignature(BaseModel):
     vulnerabilities: Optional[list[VulnerabilityPublic]] = None
 
 
-class AssetExposure(BaseModel):
+class AssetExposure(RFBaseModel):
     asset_id: str
     instances: list[ExposureInstance]
     signature: ExposureSignature
 
 
-class ExposureSummary(BaseModel):
+class ExposureSummary(RFBaseModel):
     signature: ExposureSignature
     asset_count: int
 
 
-class TechnologyInstance(BaseModel):
+class TechnologyInstance(RFBaseModel):
     seen_at: datetime
     seen_port: int
     seen_url: Optional[str] = None
 
 
-class DefensiveControl(BaseModel):
+class DefensiveControl(RFBaseModel):
     name: str
     vendor: Optional[str] = None
     technology_type: Optional[str] = None
@@ -351,7 +364,7 @@ class DefensiveControl(BaseModel):
     instances: Optional[list[TechnologyInstance]] = None
 
 
-class TechnologyPropertiesFilter(BaseModel):
+class TechnologyPropertiesFilter(RFBaseModel):
     open_port_number: Optional[Union[IntEqFilter, IntInFilter]] = None
     open_port_service: Optional[Union[EqFilter, InFilter]] = None
     open_port_protocol: Optional[Union[EqFilter, InFilter]] = None
@@ -363,7 +376,7 @@ class TechnologyPropertiesFilter(BaseModel):
     is_responsive: Optional[BooleanFilter] = None
 
 
-class AssetSearchFilterIn(BaseModel):
+class AssetSearchFilterIn(RFBaseModel):
     asset_properties: Optional[AssetPropertiesFilter] = None
     certificate_properties: Optional[CertificatePropertiesFilter] = None
     exposure_properties: Optional[ExposurePropertiesFilter] = None
@@ -371,7 +384,7 @@ class AssetSearchFilterIn(BaseModel):
     quick_search: Optional[QuickSearchFilter] = None
 
 
-class AssetSearchRequest(BaseModel):
+class AssetSearchRequest(RFBaseModel):
     filter_: Optional[AssetSearchFilterIn] = Field(None, alias='filter')
     pagination: Optional[Pagination] = None
     enrichments: Optional[list[AssetEnrichment]] = None
@@ -380,12 +393,12 @@ class AssetSearchRequest(BaseModel):
     ] = None
 
 
-class AssetsFilterRequest(BaseModel):
+class AssetsFilterRequest(RFBaseModel):
     filter_: Optional[AssetSearchFilterIn] = None
     filter_fields: Optional[list[str]] = None
 
 
-class TechnologyPropertiesFilterOptions(BaseModel):
+class TechnologyPropertiesFilterOptions(RFBaseModel):
     open_port_number: Optional[FilterOptionsIn] = None
     open_port_service: Optional[FilterOptionsIn] = None
     open_port_protocol: Optional[FilterOptionsIn] = None
@@ -395,14 +408,14 @@ class TechnologyPropertiesFilterOptions(BaseModel):
     is_responsive: Optional[FilterOptionsEq] = None
 
 
-class FiltersResponse(BaseModel):
+class FiltersResponse(RFBaseModel):
     asset_properties: AssetPropertiesFilterOptions
     exposure_properties: ExposurePropertiesFilterOptions
     technology_properties: TechnologyPropertiesFilterOptions
     certificate_properties: CertificatePropertiesFilterOptions
 
 
-class TechnologyWithInstances(BaseModel):
+class TechnologyWithInstances(RFBaseModel):
     name: str
     vendor: Optional[str] = None
     technology_type: Optional[str] = None
@@ -410,7 +423,7 @@ class TechnologyWithInstances(BaseModel):
     instances: Optional[list[TechnologyInstance]] = None
 
 
-class PortInstance(BaseModel):
+class PortInstance(RFBaseModel):
     seen_ip: str
     seen_at: datetime
     service: Optional[str] = None
@@ -420,35 +433,35 @@ class PortInstance(BaseModel):
     defenses: Optional[list[DefensiveControl]] = None
 
 
-class Port(BaseModel):
+class Port(RFBaseModel):
     port: int
     protocol: str
     instances: Optional[list[PortInstance]] = None
     certificate: Optional[Certificate] = None
 
 
-class CertificateInstance(BaseModel):
+class CertificateInstance(RFBaseModel):
     certificate: Certificate
     seen_ports: Optional[list[Port]] = None
 
 
-class ScannedIP(BaseModel):
+class ScannedIP(RFBaseModel):
     ip: str
     last_scanned_at: Optional[datetime] = None
-    whois: Optional[WHOISRecord] = None
+    whois: Optional['WHOISRecord'] = None
     open_ports: Optional[list[Port]] = None
     metadata: Optional[IPMetadata] = None
     is_responsive: Optional[bool] = None
 
 
-class WHOISContact(BaseModel):
+class WHOISContact(RFBaseModel):
     email: Optional[str] = None
     name: Optional[str] = None
     organization: Optional[str] = None
     is_current: Optional[bool] = True
 
 
-class WHOISRecord(BaseModel):
+class WHOISRecord(RFBaseModel):
     registrar: Optional[str] = None
     expires_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
@@ -459,14 +472,14 @@ class WHOISRecord(BaseModel):
     name_servers: Optional[list[str]] = None
 
 
-class DNSValue(BaseModel):
+class DNSValue(RFBaseModel):
     value: Any
     last_resolved_at: Optional[datetime]
     seen_from: Optional[list[str]] = None
     first_seen_at: Optional[datetime] = None
 
 
-class DNSRecord(BaseModel):
+class DNSRecord(RFBaseModel):
     record_type: str
     value: Optional[list[DNSValue]]
     is_virtual: Optional[bool] = False

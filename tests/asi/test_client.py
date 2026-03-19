@@ -298,6 +298,23 @@ def test_request_paged_raises_when_data_key_is_missing(asi_client, mocker, make_
     assert spy.call_count == 1
 
 
+def test_request_paged_raises_when_meta_pagination_fields_are_missing(
+    asi_client, mocker, make_response
+):
+    payload = {'data': [{'id': 1}], 'meta': {'pagination': {}}}
+    spy = mocker.patch.object(asi_client, 'request', return_value=make_response(payload))
+
+    with pytest.raises(KeyError):
+        asi_client.request_paged(
+            method='get',
+            url='https://example.test/asi',
+            params={'query': 'example.com'},
+            max_results=1,
+        )
+
+    assert spy.call_count == 1
+
+
 def test_request_paged_keeps_last_page_when_next_cursor_is_missing(
     asi_client, mocker, make_response
 ):
@@ -319,6 +336,58 @@ def test_request_paged_keeps_last_page_when_next_cursor_is_missing(
     )
 
     assert [x['id'] for x in result['data']] == [1, 2, 3, 4]
+
+
+def test_request_paged_stops_when_next_cursor_is_missing_before_total(
+    asi_client, mocker, make_response
+):
+    page = {'data': [{'id': 1}, {'id': 2}], 'meta': {'pagination': {'total': 4, 'limit': 2}}}
+    spy = mocker.patch.object(asi_client, 'request', return_value=make_response(page))
+
+    result = asi_client.request_paged(
+        method='get',
+        url='https://example.test/asi',
+        params={'query': 'example.com'},
+        max_results=4,
+        objects_per_page=2,
+    )
+
+    assert [x['id'] for x in result['data']] == [1, 2]
+    assert spy.call_count == 1
+
+
+def test_request_paged_wraps_single_object_data_in_result_list(asi_client, mocker, make_response):
+    payload = {
+        'data': {'id': 1},
+        'meta': {'pagination': {'next_cursor': None, 'total': 1, 'limit': 1}},
+    }
+    mocker.patch.object(asi_client, 'request', return_value=make_response(payload))
+
+    result = asi_client.request_paged(
+        method='get',
+        url='https://example.test/asi',
+        params={'query': 'example.com'},
+        max_results=1,
+    )
+
+    assert result == {
+        'data': [{'id': 1}],
+        'meta': {'pagination': {'next_cursor': None, 'total': 1, 'limit': 1}},
+    }
+
+
+def test_request_paged_returns_empty_when_max_results_is_zero(asi_client, mocker):
+    spy = mocker.patch.object(asi_client, 'request')
+
+    result = asi_client.request_paged(
+        method='get',
+        url='https://example.test/asi',
+        params={'query': 'example.com'},
+        max_results=0,
+    )
+
+    assert result == {'data': [], 'meta': None}
+    spy.assert_not_called()
 
 
 def test_initialize_paged_request_get_copies_params_and_sets_limit(asi_client):
@@ -351,6 +420,18 @@ def test_initialize_paged_request_post_raises_on_non_dict_pagination(asi_client)
             data={'pagination': 'invalid'},
             limit=25,
         )
+
+
+def test_initialize_paged_request_post_creates_body_when_data_is_none(asi_client):
+    request_params, request_data = asi_client._initialize_paged_request(
+        method='POST',
+        params=None,
+        data=None,
+        limit=25,
+    )
+
+    assert request_params == {}
+    assert request_data == {'pagination': {'limit': 25}}
 
 
 @pytest.mark.parametrize(

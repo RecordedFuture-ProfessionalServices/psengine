@@ -2,7 +2,7 @@ import pytest
 
 from psengine.asi.asi import Asset, AssetResponse, AssetWithExposureSearch, ExposureSearchOut
 from psengine.asi.asi_mgr import AttackSurfaceMgr
-from psengine.asi.models.project import ProjectListResponse
+from psengine.asi.models.project import ProjectListOut
 
 DEFAULT_SEARCH_BODY = {'pagination': {'limit': 1000}, 'sort': ['discovered_at']}
 
@@ -58,7 +58,7 @@ def test_fetch_projects_returns_project_list_response(
 
     result = asi_mgr.fetch_projects()
 
-    assert isinstance(result, ProjectListResponse)
+    assert isinstance(result, ProjectListOut)
 
 
 def test_search_assets_returns_asset_response(asi_mgr: AttackSurfaceMgr, mocker):
@@ -107,9 +107,7 @@ _search_assets_data = [
         {
             **DEFAULT_SEARCH_BODY,
             'filter': {
-                'asset_properties': {
-                    'discovered': {'start': '2024-01-01', 'end': '2024-12-31'}
-                },
+                'asset_properties': {'discovered': {'start': '2024-01-01', 'end': '2024-12-31'}},
                 'exposure_properties': {
                     'asset_exposure_score': {'start': 10, 'end': 80},
                     'last_scanned_at': {'start': '2024-06-01', 'end': '2024-12-31'},
@@ -208,7 +206,7 @@ _search_assets_data = [
 
 
 @pytest.mark.parametrize(
-    'search_kwargs, expected_body',
+    ('search_kwargs', 'expected_body'),
     _search_assets_data,
     ids=range(len(_search_assets_data)),
 )
