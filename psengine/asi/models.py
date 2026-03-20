@@ -185,16 +185,14 @@ class GeoLocation(RFBaseModel):
 
 class CertificatePropertiesFilter(RFBaseModel):
     certificate_subject: Optional[Union[ContainsFilter, EqFilter[str], InFilter[str]]] = None
-    certificate_subject_alt_name: Optional[
-        Union[ContainsFilter, EqFilter[str], InFilter[str]]
-    ] = None
+    certificate_subject_alt_name: Optional[Union[ContainsFilter, EqFilter[str], InFilter[str]]] = (
+        None
+    )
     certificate_sha256: Optional[EqFilter[str]] = None
     certificate_expires_at: Optional[RangeFilter[date]] = None
     certificate_issued_at: Optional[RangeFilter[date]] = None
     certificate_issuer: Optional[Union[EqFilter[str], InFilter[str]]] = None
-    certificate_covers_domain: Optional[
-        Union[ContainsFilter, EqFilter[str], InFilter[str]]
-    ] = None
+    certificate_covers_domain: Optional[Union[ContainsFilter, EqFilter[str], InFilter[str]]] = None
 
 
 class ExposurePropertiesFilter(RFBaseModel):
@@ -225,9 +223,7 @@ class AssetPropertiesFilter(RFBaseModel):
     valid_record_type: Optional[Union[EqFilter[str], InFilter[str], NeqFilter[str]]] = None
     dns_resolves: Optional[EqFilter[bool]] = None
     custom_tags: Optional[Union[EqFilter[str], InFilter[str], RequireAllFilter[str]]] = None
-    custom_tags_strict: Optional[
-        Union[EqFilter[str], InFilter[str], RequireAllFilter[str]]
-    ] = None
+    custom_tags_strict: Optional[Union[EqFilter[str], InFilter[str], RequireAllFilter[str]]] = None
     asn: Optional[Union[EqFilter[int], InFilter[int]]] = None
     ip_geo_country_iso: Optional[Union[EqFilter[str], InFilter[str]]] = None
     ip_owner: Optional[Union[EqFilter[str], InFilter[str]]] = None
