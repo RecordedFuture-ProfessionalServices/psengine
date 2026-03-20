@@ -133,26 +133,6 @@ class Pagination(RFBaseModel):
     limit: Optional[int] = 50
 
 
-class AssetCountDateRangeFilter(RFBaseModel):
-    name: str
-    asset_count: int
-    start: Optional[Union[date, float]]
-    end: Optional[Union[date, float]]
-
-
-class AssetCountEqFilter(RFBaseModel):
-    name: str
-    asset_count: int
-    value: Union[int, str]
-
-
-class AssetCountValueRangeFilter(RFBaseModel):
-    name: str
-    asset_count: int
-    start: int
-    end: int
-
-
 class CertificateEntity(RFBaseModel):
     common_name: Optional[str] = None
     organization_name: Optional[str] = None
@@ -203,11 +183,6 @@ class AssetExposure(RFBaseModel):
     signature: ExposureSignature
 
 
-class ExposureSummary(RFBaseModel):
-    signature: ExposureSignature
-    asset_count: int
-
-
 class AssetWithExposure(RFBaseModel):
     asset_id: str
     details: Any
@@ -221,65 +196,6 @@ class Exposure(RFBaseModel):
     severity: ExposureSeverity
     instances: list[ExposureInstance]
     supports_evidence: Optional[bool] = None
-
-
-class FilterOptionsDateRange(RFBaseModel):
-    name: str
-    filter_query: list[str]
-    filter_path: str
-    filters: list[AssetCountDateRangeFilter]
-    filter_type: Optional[str] = 'date_range'
-
-
-class FilterOptionsEq(RFBaseModel):
-    name: str
-    filter_query: list[str]
-    filter_path: str
-    filters: list[AssetCountEqFilter]
-    filter_type: Optional[str] = 'eq'
-
-
-class FilterOptionsIn(RFBaseModel):
-    name: str
-    filter_query: list[str]
-    filter_path: str
-    filters: list[AssetCountEqFilter]
-    filter_type: Optional[str] = 'in'
-
-
-class AssetPropertiesFilterOptions(RFBaseModel):
-    asset_type: Optional[FilterOptionsEq] = None
-    asn: Optional[FilterOptionsIn] = None
-    custom_tags: Optional[FilterOptionsIn] = None
-    added_to_project: Optional[FilterOptionsDateRange] = None
-    discovered: Optional[FilterOptionsDateRange] = None
-    apex: Optional[FilterOptionsIn] = None
-    static_asset: Optional[FilterOptionsEq] = None
-    ip_geo_country_iso: Optional[FilterOptionsIn] = None
-    ip_owner: Optional[FilterOptionsIn] = None
-    registry: Optional[FilterOptionsIn] = None
-    referenced_ip: Optional[FilterOptionsIn] = None
-
-
-class CertificatePropertiesFilterOptions(RFBaseModel):
-    certificate_issuer: Optional[FilterOptionsIn] = None
-    certificate_expires_at: Optional[FilterOptionsDateRange] = None
-    certificate_issued_at: Optional[FilterOptionsDateRange] = None
-
-
-class FilterOptionsValueRange(RFBaseModel):
-    name: str
-    filter_query: list[str]
-    filter_path: str
-    filters: list[AssetCountValueRangeFilter]
-    filter_type: Optional[str] = 'value_range'
-
-
-class ExposurePropertiesFilterOptions(RFBaseModel):
-    signature_id: Optional[FilterOptionsIn] = None
-    severity: Optional[FilterOptionsIn] = None
-    asset_exposure_score: Optional[FilterOptionsValueRange] = None
-    last_scanned_at: Optional[FilterOptionsDateRange] = None
 
 
 class GeoLocation(RFBaseModel):
@@ -377,28 +293,6 @@ class AssetSearchRequest(RFBaseModel):
     sort: Optional[
         Union[list[AssetSortField], list[list[Union[AssetSortField, SortDirection]]]]
     ] = None
-
-
-class AssetsFilterRequest(RFBaseModel):
-    filter_: Optional[AssetSearchFilterIn] = None
-    filter_fields: Optional[list[str]] = None
-
-
-class TechnologyPropertiesFilterOptions(RFBaseModel):
-    open_port_number: Optional[FilterOptionsIn] = None
-    open_port_service: Optional[FilterOptionsIn] = None
-    open_port_protocol: Optional[FilterOptionsIn] = None
-    waf_detected: Optional[FilterOptionsEq] = None
-    waf_name: Optional[FilterOptionsIn] = None
-    technology_name: Optional[FilterOptionsIn] = None
-    is_responsive: Optional[FilterOptionsEq] = None
-
-
-class FiltersResponse(RFBaseModel):
-    asset_properties: AssetPropertiesFilterOptions
-    exposure_properties: ExposurePropertiesFilterOptions
-    technology_properties: TechnologyPropertiesFilterOptions
-    certificate_properties: CertificatePropertiesFilterOptions
 
 
 class TechnologyWithInstances(RFBaseModel):
