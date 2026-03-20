@@ -20,6 +20,96 @@ from pydantic import Field
 from ..common_models import RFBaseModel
 
 
+class SortDirection(str, Enum):
+    ASC = 'asc'
+    DESC = 'desc'
+
+
+class ExposureSeverity(str, Enum):
+    CRITICAL = 'critical'
+    INFORMATIONAL = 'informational'
+    MODERATE = 'moderate'
+    UNKNOWN = 'unknown'
+
+
+class AssetEnrichment(str, Enum):
+    CERTIFICATES = 'certificates'
+    CERTIFICATE_CHAIN = 'certificate_chain'
+    CUSTOM_TAGS = 'custom_tags'
+    DEFENSES = 'defenses'
+    DNS_RECORDS = 'dns_records'
+    EXPOSURES = 'exposures'
+    EXPOSURE_INSTANCE_DETAILS = 'exposure_instance_details'
+    IP_METADATA = 'ip_metadata'
+    OPEN_TCP_PORTS = 'open_tcp_ports'
+    OPEN_UDP_PORTS = 'open_udp_ports'
+    WEB_TECHNOLOGIES = 'web_technologies'
+    WHOIS = 'whois'
+
+
+class AssetSortField(str, Enum):
+    ADDED_TO_PROJECT_AT = 'added_to_project_at'
+    APEX_DOMAIN = 'apex_domain'
+    ASSET_ID = 'asset_id'
+    DISCOVERED_AT = 'discovered_at'
+    EXPOSURE_SCORE = 'exposure_score'
+    LAST_SCANNED_AT = 'last_scanned_at'
+
+
+class NeqFilter(RFBaseModel):
+    neq: Union[date, int, str]
+
+
+class QuickSearchFilter(RFBaseModel):
+    search: str
+
+
+class RequireAllFilter(RFBaseModel):
+    in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
+
+
+class EmailEqFilter(RFBaseModel):
+    eq: str
+
+
+class EmailInFilter(RFBaseModel):
+    in_: list[str]
+
+
+class InFilter(RFBaseModel):
+    in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
+
+
+class IntEqFilter(RFBaseModel):
+    eq: int
+
+
+class IntInFilter(RFBaseModel):
+    in_: list[int] = Field(alias='in')
+
+
+class IntRangeFilter(RFBaseModel):
+    start: Optional[int]
+    end: Optional[int]
+
+
+class BooleanFilter(RFBaseModel):
+    eq: bool
+
+
+class ContainsFilter(RFBaseModel):
+    contains: str
+
+
+class DateRangeFilter(RFBaseModel):
+    start: Optional[date] = None
+    end: Optional[date] = None
+
+
+class EqFilter(RFBaseModel):
+    eq: Union[date, int, str]
+
+
 class PaginationResponse(RFBaseModel):
     next_cursor: Optional[str] = None
     limit: Optional[int] = 50
@@ -63,43 +153,6 @@ class AssetCountValueRangeFilter(RFBaseModel):
     end: int
 
 
-class AssetEnrichment(str, Enum):
-    CERTIFICATES = 'certificates'
-    CERTIFICATE_CHAIN = 'certificate_chain'
-    CUSTOM_TAGS = 'custom_tags'
-    DEFENSES = 'defenses'
-    DNS_RECORDS = 'dns_records'
-    EXPOSURES = 'exposures'
-    EXPOSURE_INSTANCE_DETAILS = 'exposure_instance_details'
-    IP_METADATA = 'ip_metadata'
-    OPEN_TCP_PORTS = 'open_tcp_ports'
-    OPEN_UDP_PORTS = 'open_udp_ports'
-    WEB_TECHNOLOGIES = 'web_technologies'
-    WHOIS = 'whois'
-
-
-class AssetSortField(str, Enum):
-    ADDED_TO_PROJECT_AT = 'added_to_project_at'
-    APEX_DOMAIN = 'apex_domain'
-    ASSET_ID = 'asset_id'
-    DISCOVERED_AT = 'discovered_at'
-    EXPOSURE_SCORE = 'exposure_score'
-    LAST_SCANNED_AT = 'last_scanned_at'
-
-
-class AssetState(RFBaseModel):
-    added: Optional[str] = None
-    errors: Optional[list[str]] = None
-
-
-class AssetTagResponse(RFBaseModel):
-    add_tags: Optional[list[str]] = None
-    remove_tags: Optional[list[str]] = None
-    assets: Optional[list[str]] = None
-    complete: Optional[bool] = False
-    task_ids: Optional[list[str]] = None
-
-
 class CertificateEntity(RFBaseModel):
     common_name: Optional[str] = None
     organization_name: Optional[str] = None
@@ -123,16 +176,43 @@ class ExposureInstance(RFBaseModel):
     url: Optional[str] = None
 
 
-class AssetWithExposure(RFBaseModel):
+class VulnerabilityPublic(RFBaseModel):
+    name: str
+    slug: str
+    cvss_score: Optional[float] = None
+    cvss_metrics: Optional[str] = None
+    references: list[str]
+    cve_id: Optional[str] = None
+    cwe_ids: Optional[list[Optional[str]]] = None
+    epss_score: Optional[float] = None
+
+
+class ExposureSignature(RFBaseModel):
+    id: str
+    name: str
+    description: Optional[str]
+    severity: Optional[ExposureSeverity]
+    references: Optional[list[str]]
+    added_at: Optional[datetime] = None
+    vulnerabilities: Optional[list[VulnerabilityPublic]] = None
+
+
+class AssetExposure(RFBaseModel):
     asset_id: str
     instances: list[ExposureInstance]
+    signature: ExposureSignature
 
 
-class ExposureSeverity(str, Enum):
-    CRITICAL = 'critical'
-    INFORMATIONAL = 'informational'
-    MODERATE = 'moderate'
-    UNKNOWN = 'unknown'
+class ExposureSummary(RFBaseModel):
+    signature: ExposureSignature
+    asset_count: int
+
+
+class AssetWithExposure(RFBaseModel):
+    asset_id: str
+    details: Any
+    instances: list[ExposureInstance]
+    signature: Optional[ExposureSignature] = None
 
 
 class Exposure(RFBaseModel):
@@ -202,49 +282,11 @@ class ExposurePropertiesFilterOptions(RFBaseModel):
     last_scanned_at: Optional[FilterOptionsDateRange] = None
 
 
-class BooleanFilter(RFBaseModel):
-    eq: bool
-
-
-class ContainsFilter(RFBaseModel):
-    contains: str
-
-
-class CustomTagPublic(RFBaseModel):
-    title: str
-
-
-class DateRangeFilter(RFBaseModel):
-    start: Optional[date] = None
-    end: Optional[date] = None
-
-
-class EqFilter(RFBaseModel):
-    eq: Union[date, int, str]
-
-
 class GeoLocation(RFBaseModel):
     continent: Optional[str] = None
     country: Optional[str] = None
     city: Optional[str] = None
     country_iso: Optional[str] = None
-
-
-class InFilter(RFBaseModel):
-    in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
-
-
-class IntEqFilter(RFBaseModel):
-    eq: int
-
-
-class IntInFilter(RFBaseModel):
-    in_: list[int] = Field(alias='in')
-
-
-class IntRangeFilter(RFBaseModel):
-    start: Optional[int]
-    end: Optional[int]
 
 
 class CertificatePropertiesFilter(RFBaseModel):
@@ -271,31 +313,6 @@ class IPMetadata(RFBaseModel):
     owner_geo: Optional[GeoLocation] = None
 
 
-class MembershipType(str, Enum):
-    EXCLUDE = 'exclude'
-    INCLUDE = 'include'
-
-
-class NeqFilter(RFBaseModel):
-    neq: Union[date, int, str]
-
-
-class QuickSearchFilter(RFBaseModel):
-    search: str
-
-
-class RequireAllFilter(RFBaseModel):
-    in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
-
-
-class EmailEqFilter(RFBaseModel):
-    eq: str
-
-
-class EmailInFilter(RFBaseModel):
-    in_: list[str]
-
-
 class AssetPropertiesFilter(RFBaseModel):
     asset_id: Optional[EqFilter] = None
     name: Optional[ContainsFilter] = None
@@ -317,58 +334,6 @@ class AssetPropertiesFilter(RFBaseModel):
     registry: Optional[Union[EqFilter, InFilter]] = None
     whois_email_current: Optional[Union[EmailEqFilter, EmailInFilter]] = None
     whois_email: Optional[Union[EmailEqFilter, EmailInFilter]] = None
-
-
-class SortDirection(str, Enum):
-    ASC = 'asc'
-    DESC = 'desc'
-
-
-class TagAssetRequest(RFBaseModel):
-    add_tags: Optional[list[str]] = None
-    remove_tags: Optional[list[str]] = None
-
-
-class ValidationError(RFBaseModel):
-    loc: list[Union[int, str]]
-    msg: str
-    type_: str
-
-
-class HTTPValidationError(RFBaseModel):
-    detail: Optional[list[ValidationError]] = None
-
-
-class VulnerabilityPublic(RFBaseModel):
-    name: str
-    slug: str
-    cvss_score: Optional[float] = None
-    cvss_metrics: Optional[str] = None
-    references: list[str]
-    cve_id: Optional[str] = None
-    cwe_ids: Optional[list[Optional[str]]] = None
-    epss_score: Optional[float] = None
-
-
-class ExposureSignature(RFBaseModel):
-    id: str
-    name: str
-    description: Optional[str]
-    severity: Optional[ExposureSeverity]
-    references: Optional[list[str]]
-    added_at: Optional[datetime] = None
-    vulnerabilities: Optional[list[VulnerabilityPublic]] = None
-
-
-class AssetExposure(RFBaseModel):
-    asset_id: str
-    instances: list[ExposureInstance]
-    signature: ExposureSignature
-
-
-class ExposureSummary(RFBaseModel):
-    signature: ExposureSignature
-    asset_count: int
 
 
 class TechnologyInstance(RFBaseModel):

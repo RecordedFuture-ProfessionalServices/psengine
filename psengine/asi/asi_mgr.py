@@ -442,7 +442,7 @@ class AttackSurfaceMgr:
         max_results: Annotated[
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
-    ):
+    ) -> AssetWithExposureSearch:
         """Fetch assets by exposure signature within an ASI project.
 
         Does pagination requests on batches of the API default page size up to `max_results`.

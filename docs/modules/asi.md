@@ -59,9 +59,19 @@ Name: www.theology.bsu.by, Type: domain, Exposure Score: 99
 www.theology.bsu.by has open ports: 21, 25, 80, 110, 143, 443, 465, 587, 993, 1500, 2200, 2525, 10050, 1501                                                                                 
 ```
 
-#### 3: Get exposures from a signature
+#### 3: Get all the assets that are exposed to WordPress CVE-2022-2551
 
 ```python
 --8<-- "docs/examples/asi/example_3.py"
+```
+
+The output is:
+
+```
+staff.basij.sharif.edu is affected, at http://staff.basij.sharif.edu:80/wp-content/plugins/duplicator/readme.txt
+negociosdev.ucab.edu.ve is affected, at https://negociosdev.ucab.edu.ve:443/wp-content/plugins/duplicator/readme.txt
+imt.ucv.ve is affected, at http://imt.ucv.ve:80/wp-content/plugins/duplicator/readme.txt
+deneb.ucv.ve is affected, at http://deneb.ucv.ve:80/wp-content/plugins/duplicator/readme.txt
+basij.sharif.ir is affected, at http://basij.sharif.ir:80/wp-content/plugins/duplicator/readme.txt
 ```
 
