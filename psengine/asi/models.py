@@ -13,7 +13,7 @@
 
 from datetime import date, datetime
 from enum import Enum
-from typing import Any, Optional, Union
+from typing import Any, Generic, Optional, TypeVar, Union
 
 from pydantic import Field
 
@@ -56,58 +56,36 @@ class AssetSortField(str, Enum):
     LAST_SCANNED_AT = 'last_scanned_at'
 
 
-class NeqFilter(RFBaseModel):
-    neq: Union[date, int, str]
+FilterValueT = TypeVar('FilterValueT')
+
+
+class NeqFilter(RFBaseModel, Generic[FilterValueT]):
+    neq: FilterValueT
 
 
 class QuickSearchFilter(RFBaseModel):
     search: str
 
 
-class RequireAllFilter(RFBaseModel):
-    in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
+class RequireAllFilter(RFBaseModel, Generic[FilterValueT]):
+    in_: list[FilterValueT] = Field(alias='in')
 
 
-class EmailEqFilter(RFBaseModel):
-    eq: str
+class EqFilter(RFBaseModel, Generic[FilterValueT]):
+    eq: FilterValueT
 
 
-class EmailInFilter(RFBaseModel):
-    in_: list[str]
-
-
-class InFilter(RFBaseModel):
-    in_: list[Union[date, ExposureSeverity, int, str]] = Field(alias='in')
-
-
-class IntEqFilter(RFBaseModel):
-    eq: int
-
-
-class IntInFilter(RFBaseModel):
-    in_: list[int] = Field(alias='in')
-
-
-class IntRangeFilter(RFBaseModel):
-    start: Optional[int]
-    end: Optional[int]
-
-
-class BooleanFilter(RFBaseModel):
-    eq: bool
+class InFilter(RFBaseModel, Generic[FilterValueT]):
+    in_: list[FilterValueT] = Field(alias='in')
 
 
 class ContainsFilter(RFBaseModel):
     contains: str
 
 
-class DateRangeFilter(RFBaseModel):
-    start: Optional[date] = None
-    end: Optional[date] = None
-
-
-class EqFilter(RFBaseModel):
-    eq: Union[date, int, str]
+class RangeFilter(RFBaseModel, Generic[FilterValueT]):
+    start: Optional[FilterValueT] = None
+    end: Optional[FilterValueT] = None
 
 
 class PaginationResponse(RFBaseModel):
@@ -206,20 +184,24 @@ class GeoLocation(RFBaseModel):
 
 
 class CertificatePropertiesFilter(RFBaseModel):
-    certificate_subject: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
-    certificate_subject_alt_name: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
-    certificate_sha256: Optional[EqFilter] = None
-    certificate_expires_at: Optional[DateRangeFilter] = None
-    certificate_issued_at: Optional[DateRangeFilter] = None
-    certificate_issuer: Optional[Union[EqFilter, InFilter]] = None
-    certificate_covers_domain: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
+    certificate_subject: Optional[Union[ContainsFilter, EqFilter[str], InFilter[str]]] = None
+    certificate_subject_alt_name: Optional[
+        Union[ContainsFilter, EqFilter[str], InFilter[str]]
+    ] = None
+    certificate_sha256: Optional[EqFilter[str]] = None
+    certificate_expires_at: Optional[RangeFilter[date]] = None
+    certificate_issued_at: Optional[RangeFilter[date]] = None
+    certificate_issuer: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    certificate_covers_domain: Optional[
+        Union[ContainsFilter, EqFilter[str], InFilter[str]]
+    ] = None
 
 
 class ExposurePropertiesFilter(RFBaseModel):
-    severity: Optional[Union[EqFilter, InFilter]] = None
-    signature_id: Optional[Union[EqFilter, InFilter]] = None
-    asset_exposure_score: Optional[IntRangeFilter] = None
-    last_scanned_at: Optional[DateRangeFilter] = None
+    severity: Optional[Union[EqFilter[ExposureSeverity], InFilter[ExposureSeverity]]] = None
+    signature_id: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    asset_exposure_score: Optional[RangeFilter[int]] = None
+    last_scanned_at: Optional[RangeFilter[date]] = None
 
 
 class IPMetadata(RFBaseModel):
@@ -230,26 +212,28 @@ class IPMetadata(RFBaseModel):
 
 
 class AssetPropertiesFilter(RFBaseModel):
-    asset_id: Optional[EqFilter] = None
+    asset_id: Optional[EqFilter[str]] = None
     name: Optional[ContainsFilter] = None
-    static_asset: Optional[BooleanFilter] = None
-    apex: Optional[Union[EqFilter, InFilter]] = None
-    added_to_project: Optional[DateRangeFilter] = None
-    discovered: Optional[DateRangeFilter] = None
-    asset_type: Optional[EqFilter] = None
-    referenced_ip: Optional[Union[ContainsFilter, EqFilter, InFilter]] = None
-    cname_reference: Optional[Union[ContainsFilter, EqFilter]] = None
-    referenced_ip_at: Optional[DateRangeFilter] = None
-    valid_record_type: Optional[Union[EqFilter, InFilter, NeqFilter]] = None
-    dns_resolves: Optional[BooleanFilter] = None
-    custom_tags: Optional[Union[EqFilter, InFilter, RequireAllFilter]] = None
-    custom_tags_strict: Optional[Union[EqFilter, InFilter, RequireAllFilter]] = None
-    asn: Optional[Union[IntEqFilter, IntInFilter]] = None
-    ip_geo_country_iso: Optional[Union[EqFilter, InFilter]] = None
-    ip_owner: Optional[Union[EqFilter, InFilter]] = None
-    registry: Optional[Union[EqFilter, InFilter]] = None
-    whois_email_current: Optional[Union[EmailEqFilter, EmailInFilter]] = None
-    whois_email: Optional[Union[EmailEqFilter, EmailInFilter]] = None
+    static_asset: Optional[EqFilter[bool]] = None
+    apex: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    added_to_project: Optional[RangeFilter[date]] = None
+    discovered: Optional[RangeFilter[date]] = None
+    asset_type: Optional[EqFilter[str]] = None
+    referenced_ip: Optional[Union[ContainsFilter, EqFilter[str], InFilter[str]]] = None
+    cname_reference: Optional[Union[ContainsFilter, EqFilter[str]]] = None
+    referenced_ip_at: Optional[RangeFilter[date]] = None
+    valid_record_type: Optional[Union[EqFilter[str], InFilter[str], NeqFilter[str]]] = None
+    dns_resolves: Optional[EqFilter[bool]] = None
+    custom_tags: Optional[Union[EqFilter[str], InFilter[str], RequireAllFilter[str]]] = None
+    custom_tags_strict: Optional[
+        Union[EqFilter[str], InFilter[str], RequireAllFilter[str]]
+    ] = None
+    asn: Optional[Union[EqFilter[int], InFilter[int]]] = None
+    ip_geo_country_iso: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    ip_owner: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    registry: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    whois_email_current: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    whois_email: Optional[Union[EqFilter[str], InFilter[str]]] = None
 
 
 class TechnologyInstance(RFBaseModel):
@@ -267,15 +251,15 @@ class DefensiveControl(RFBaseModel):
 
 
 class TechnologyPropertiesFilter(RFBaseModel):
-    open_port_number: Optional[Union[IntEqFilter, IntInFilter]] = None
-    open_port_service: Optional[Union[EqFilter, InFilter]] = None
-    open_port_protocol: Optional[Union[EqFilter, InFilter]] = None
-    open_port_technology: Optional[Union[EqFilter, InFilter]] = None
-    waf_detected: Optional[BooleanFilter] = None
-    waf_name: Optional[Union[EqFilter, InFilter]] = None
-    technology_name: Optional[Union[EqFilter, InFilter]] = None
-    web_technology_name: Optional[Union[EqFilter, InFilter]] = None
-    is_responsive: Optional[BooleanFilter] = None
+    open_port_number: Optional[Union[EqFilter[int], InFilter[int]]] = None
+    open_port_service: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    open_port_protocol: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    open_port_technology: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    waf_detected: Optional[EqFilter[bool]] = None
+    waf_name: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    technology_name: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    web_technology_name: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    is_responsive: Optional[EqFilter[bool]] = None
 
 
 class AssetSearchFilterIn(RFBaseModel):
