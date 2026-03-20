@@ -410,7 +410,7 @@ class AttackSurfaceMgr:
         max_results: Annotated[
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
-    ):
+    ) -> Annotated[ExposureSearchOut, Doc('Response model for ASI exposures search')]:
         """Search for exposures within an ASI project.
 
         Does pagination requests on batches of the API default page size up to `max_results`.
@@ -442,7 +442,9 @@ class AttackSurfaceMgr:
         max_results: Annotated[
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
-    ) -> AssetWithExposureSearch:
+    ) -> Annotated[
+        AssetWithExposureSearch, Doc('ASI asset with exposure details for the requested signature')
+    ]:
         """Fetch assets by exposure signature within an ASI project.
 
         Does pagination requests on batches of the API default page size up to `max_results`.
@@ -735,7 +737,7 @@ class AttackSurfaceMgr:
         max_results: Annotated[
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
-    ):
+    ) -> Annotated[AssetResponse, Doc('Response model for ASI assets list')]:
         """Fetch assets within an ASI project.
 
         Does pagination requests on batches of the API default page size up to `max_results`.
@@ -788,7 +790,7 @@ class AttackSurfaceMgr:
                 'or as a comma-separated list in the raw API.'
             ),
         ] = None,
-    ):
+    ) -> Annotated[Asset, Doc('ASI asset model for the requested asset')]:
         """Fetch a single asset within an ASI project.
 
         Endpoint:
@@ -814,7 +816,7 @@ class AttackSurfaceMgr:
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
         asset_id: Annotated[str, Doc('The asset ID to search for.')],
-    ):
+    ) -> Annotated[Asset, Doc('ASI asset model including exposures for the requested asset')]:
         """Fetch exposures for a single asset within an ASI project.
 
         Endpoint:
