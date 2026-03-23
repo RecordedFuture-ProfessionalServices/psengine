@@ -87,7 +87,9 @@ def test_request_paged_get_keeps_existing_limit(asi_client, mocker, make_respons
     assert params == {'query': 'example.com', 'limit': 99}
 
 
-def test_request_paged_post_uses_expected_data_and_cursor_params(asi_client, mocker, make_response):
+def test_request_paged_post_uses_expected_data_and_next_cursor_body(
+    asi_client, mocker, make_response
+):
     data = {'filter': {'name': 'example.com'}}
     page1 = _build_page([1, 2], 'cursor-1', total=4)
     page2 = _build_page([3, 4], 'cursor-2', total=4)
@@ -116,9 +118,12 @@ def test_request_paged_post_uses_expected_data_and_cursor_params(asi_client, moc
     assert [x['id'] for x in result['data']] == [1, 2, 3]
     assert spy.call_count == 2
     assert captured[0]['params'] == {}
-    assert captured[1]['params'] == {'cursor': 'cursor-1'}
+    assert captured[1]['params'] == {}
     assert captured[0]['data'] == {'filter': {'name': 'example.com'}, 'pagination': {'limit': 2}}
-    assert captured[1]['data'] == {'filter': {'name': 'example.com'}, 'pagination': {'limit': 1}}
+    assert captured[1]['data'] == {
+        'filter': {'name': 'example.com'},
+        'pagination': {'limit': 1, 'next_cursor': 'cursor-1'},
+    }
     assert data == {'filter': {'name': 'example.com'}}
 
 
@@ -232,7 +237,8 @@ def test_request_paged_post_uses_remaining_results_for_last_request_limit(
 
     assert request_spy.call_count == 4
     assert [item['pagination']['limit'] for item in captured_data] == [10, 10, 10, 3]
-    assert [item.get('cursor') for item in captured_params] == [
+    assert captured_params == [{}, {}, {}, {}]
+    assert [item['pagination'].get('next_cursor') for item in captured_data] == [
         None,
         'cursor-1',
         'cursor-2',

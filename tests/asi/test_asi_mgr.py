@@ -1,4 +1,6 @@
+from copy import deepcopy
 from pathlib import Path
+from typing import Optional
 
 import pytest
 from pydantic import ValidationError
@@ -25,15 +27,15 @@ MOCK_DIR = Path(__file__).parent / 'mocks'
 PROJECT_ID = '7c2d06d7-0c4b-4d0d-bc97-f81dcdc276de'
 
 
-def _meta_payload() -> dict:
-    return {'pagination': {'limit': 1, 'total': 1, 'next_cursor': None}}
+def _meta_payload(*, limit: int = 1, total: int = 1, next_cursor: Optional[str] = None) -> dict:
+    return {'pagination': {'limit': limit, 'total': total, 'next_cursor': next_cursor}}
 
 
-def _asset_payload() -> dict:
+def _asset_payload(*, asset_id: str = 'asset-1', name: str = 'example.com') -> dict:
     return {
         'project_id': 'project-1',
-        'id': 'asset-1',
-        'name': 'example.com',
+        'id': asset_id,
+        'name': name,
         'type': 'domain',
         'discovered_at': None,
         'added_to_project_at': '2024-01-01T00:00:00Z',
@@ -108,6 +110,50 @@ class Test_ASI:
         result = asi_mgr.search_assets(project_id='project-1')
 
         assert isinstance(result, AssetResponse)
+
+    def test_search_assets_uses_next_cursor_in_post_body_for_pagination(
+        self, asi_mgr: AttackSurfaceMgr, mocker, make_response
+    ):
+        responses = iter(
+            [
+                make_response(
+                    {
+                        'data': [_asset_payload()],
+                        'meta': _meta_payload(total=2, next_cursor='cursor-1'),
+                    }
+                ),
+                make_response(
+                    {
+                        'data': [_asset_payload(asset_id='asset-2', name='example.org')],
+                        'meta': _meta_payload(total=2),
+                    }
+                ),
+            ]
+        )
+        captured = []
+
+        def side_effect(*args, **kwargs):  # noqa: ARG001
+            captured.append(
+                {
+                    'method': kwargs['method'],
+                    'params': deepcopy(kwargs.get('params')),
+                    'data': deepcopy(kwargs.get('data')),
+                }
+            )
+            return next(responses)
+
+        mocker.patch.object(asi_mgr.asi_client, 'request', side_effect=side_effect)
+
+        result = asi_mgr.search_assets(project_id='project-1', assets_per_page=1, max_results=2)
+
+        assert [asset.id_ for asset in result.content] == ['asset-1', 'asset-2']
+        assert [call['method'] for call in captured] == ['POST', 'POST']
+        assert [call['params'] for call in captured] == [{}, {}]
+        assert captured[0]['data'] == {'pagination': {'limit': 1}, 'sort': ['discovered_at']}
+        assert captured[1]['data'] == {
+            'pagination': {'limit': 1, 'next_cursor': 'cursor-1'},
+            'sort': ['discovered_at'],
+        }
 
     def test_search_assets_validates_search_mock(
         self, asi_mgr: AttackSurfaceMgr, mocker, mock_request

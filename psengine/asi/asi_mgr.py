@@ -410,6 +410,7 @@ class AttackSurfaceMgr:
         max_results: Annotated[
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
+        exposures_per_page: Annotated[Optional[int], Doc('Results per page')] = DEFAULT_LIMIT,
     ) -> Annotated[ExposureSearchOut, Doc('Response model for ASI exposures search')]:
         """Search for exposures within an ASI project.
 
@@ -422,12 +423,17 @@ class AttackSurfaceMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             ASIExposureSearchError: If an API or connection error occurs.
         """
-        params = {k: v for k, v in locals().items() if k not in ('self',)}
+        params = {
+            k: v
+            for k, v in locals().items()
+            if k not in ('self', 'max_results', 'exposures_per_page')
+        }
         data = self.asi_client.request_paged(
             'GET',
             EP_ASI_EXPOSURES.format(project_id),
             params=params,
             max_results=max_results,
+            objects_per_page=exposures_per_page,
         )
 
         return ExposureSearchOut.model_validate({'content': data['data'], 'meta': data['meta']})
@@ -442,6 +448,7 @@ class AttackSurfaceMgr:
         max_results: Annotated[
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
+        exposures_per_page: Annotated[Optional[int], Doc('Results per page')] = DEFAULT_LIMIT,
     ) -> Annotated[
         AssetWithExposureSearch, Doc('ASI asset with exposure details for the requested signature')
     ]:
@@ -457,13 +464,16 @@ class AttackSurfaceMgr:
             ASIFetchExposureError: If an API or connection error occurs.
         """
         params = {
-            k: v for k, v in locals().items() if k not in ('self', 'assets_per_page', 'max_results')
+            k: v
+            for k, v in locals().items()
+            if k not in ('self', 'max_results', 'exposures_per_page')
         }
         params['limit'] = max_results
         data = self.asi_client.request_paged(
             'GET',
             EP_ASI_EXPOSURES_BY_SIGNATURE.format(project_id, signature_id),
             params=params,
+            objects_per_page=exposures_per_page,
         )
         return AssetWithExposureSearch.model_validate(data['data'][0])
 
@@ -737,6 +747,7 @@ class AttackSurfaceMgr:
         max_results: Annotated[
             Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
+        assets_per_page: Annotated[Optional[int], Doc('Results per page')] = DEFAULT_LIMIT,
     ) -> Annotated[AssetResponse, Doc('Response model for ASI assets list')]:
         """Fetch assets within an ASI project.
 
@@ -749,12 +760,15 @@ class AttackSurfaceMgr:
             ValidationError: If response data does not match the `AssetResponse` model.
             ASIFetchAssetError: If an API or connection error occurs.
         """
-        params = {k: v for k, v in locals().items() if k not in ('self',)}
+        params = {
+            k: v for k, v in locals().items() if k not in ('self', 'max_results', 'assets_per_page')
+        }
         data = self.asi_client.request_paged(
             'GET',
             EP_ASI_ASSETS.format(project_id),
             params=params,
             max_results=max_results,
+            objects_per_page=assets_per_page,
         )
 
         return AssetResponse.model_validate({'content': data['data'], 'meta': data['meta']})

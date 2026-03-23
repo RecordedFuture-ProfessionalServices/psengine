@@ -167,6 +167,7 @@ class ASIClient(BaseHTTPClient):
                     method=method,
                     url=url,
                     headers=headers,
+                    params=request_params,
                     data=request_data,
                     **kwargs,
                 )
@@ -200,11 +201,16 @@ class ASIClient(BaseHTTPClient):
                 break
 
             try:
-                request_data['pagination']['next_cursor'] = json_response['meta']['pagination'][
-                    'next_cursor'
-                ]
+                next_cursor = json_response['meta']['pagination']['next_cursor']
             except KeyError:
                 break
+            if next_cursor is None:
+                break
+
+            if method == 'GET':
+                request_params['cursor'] = next_cursor
+            else:
+                request_data['pagination']['next_cursor'] = next_cursor
 
         return {'data': all_results[:max_results], 'meta': meta}
 
