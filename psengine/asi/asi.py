@@ -78,7 +78,7 @@ class AssetWithExposureSearch(RFBaseModel):
         return self.signature.id == other.signature.id
 
     def __gt__(self, other: 'AssetWithExposureSearch'):
-        return (self.signature.severity.value, self.signature.id) == (
+        return (self.signature.severity.value, self.signature.id) > (
             other.signature.severity.value,
             other.signature.id,
         )
@@ -131,7 +131,7 @@ class ExposureSearch(RFBaseModel):
         return self.signature.id == other.signature.id
 
     def __gt__(self, other: 'ExposureSearch'):
-        return (self.signature.severity.value, self.asset_count, self.signature.id) == (
+        return (self.signature.severity.value, self.asset_count, self.signature.id) > (
             other.signature.severity.value,
             other.asset_count,
             other.signature.id,
@@ -270,7 +270,7 @@ class Project(RFBaseModel):
         return self.id == other.id
 
     def __gt__(self, other: 'Project'):
-        return self.title == other.title
+        return self.title > other.title
 
 
 class ProjectListOut(RFBaseModel):
