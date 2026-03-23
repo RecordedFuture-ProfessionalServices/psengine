@@ -207,7 +207,7 @@ class Asset(RFBaseModel):
         return (self.id_, self.project_id) == (other.id_, other.project_id)
 
     def __gt__(self, other: 'Asset'):
-        return (self.exposure_score or 0, self.id_) == (self.exposure_score or 0, self.id_)
+        return (self.exposure_score or 0, self.id_) > (other.exposure_score or 0, other.id_)
 
 
 class AssetResponse(RFBaseModel):
