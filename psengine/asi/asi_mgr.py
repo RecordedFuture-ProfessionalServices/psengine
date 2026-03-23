@@ -468,11 +468,11 @@ class AttackSurfaceMgr:
             for k, v in locals().items()
             if k not in ('self', 'max_results', 'exposures_per_page')
         }
-        params['limit'] = max_results
         data = self.asi_client.request_paged(
             'GET',
             EP_ASI_EXPOSURES_BY_SIGNATURE.format(project_id, signature_id),
             params=params,
+            max_results=max_results,
             objects_per_page=exposures_per_page,
         )
         return AssetWithExposureSearch.model_validate(data['data'][0])
