@@ -201,7 +201,7 @@ class Asset(RFBaseModel):
         return msg.format(self.name, self.type_, self.exposure_score or 'N/A')
 
     def __hash__(self) -> int:
-        return hash(self.id_, self.project_id)
+        return hash((self.id_, self.project_id))
 
     def __eq__(self, other: 'Asset'):
         return (self.id_, self.project_id) == (other.id_, other.project_id)
