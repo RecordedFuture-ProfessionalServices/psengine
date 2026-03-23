@@ -115,7 +115,7 @@ class ASIClient(BaseHTTPClient):
 
     @debug_call
     @validate_call
-    def request_paged(
+    def request_paged(  # noqa: C901
         self,
         method: Annotated[str, Doc('An HTTP method. Supports GET and POST.')],
         url: Annotated[str, Doc('A URL or API path to make the request to.')],
@@ -174,14 +174,14 @@ class ASIClient(BaseHTTPClient):
 
             try:
                 json_response = response.json()
+                page_results = json_response['data']
             except JSONDecodeError:
                 self.log.error(f'Paged request does not contain valid JSON:\n{response.text}')
                 raise
-            try:
-                page_results = json_response['data']
             except KeyError:
                 self.log.error(f'Paged request does not contain `data` field:\n{response.text}')
                 raise
+
             try:
                 meta = json_response['meta']
                 total = meta['pagination']['total']
@@ -190,6 +190,7 @@ class ASIClient(BaseHTTPClient):
                 msg = 'Paged request `meta`, does not contain the `total` or `limit` field:\n{}'
                 self.log.error(msg.format(response.text))
                 raise
+
             if isinstance(page_results, list):
                 all_results.extend(page_results)
             else:
@@ -204,6 +205,7 @@ class ASIClient(BaseHTTPClient):
                 next_cursor = json_response['meta']['pagination']['next_cursor']
             except KeyError:
                 break
+
             if next_cursor is None:
                 break
 
