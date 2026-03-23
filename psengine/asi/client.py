@@ -151,18 +151,25 @@ class ASIClient(BaseHTTPClient):
         while len(all_results) < max_results:
             if method == 'GET':
                 request_params['limit'] = min(request_params['limit'], remaining_results)
+                response = self.request(
+                    method=method,
+                    url=url,
+                    headers=headers,
+                    params=request_params,
+                    **kwargs,
+                )
+
             else:
                 request_data['pagination']['limit'] = min(
                     request_data['pagination']['limit'], remaining_results
                 )
-            response = self.request(
-                method=method,
-                url=url,
-                headers=headers,
-                data=request_data,
-                params=request_params,
-                **kwargs,
-            )
+                response = self.request(
+                    method=method,
+                    url=url,
+                    headers=headers,
+                    data=request_data,
+                    **kwargs,
+                )
 
             try:
                 json_response = response.json()
@@ -193,9 +200,12 @@ class ASIClient(BaseHTTPClient):
                 break
 
             try:
-                request_params['cursor'] = json_response['meta']['pagination']['next_cursor']
+                request_data['pagination']['next_cursor'] = json_response['meta']['pagination'][
+                    'next_cursor'
+                ]
             except KeyError:
                 break
+
         return {'data': all_results[:max_results], 'meta': meta}
 
     def _initialize_paged_request(
