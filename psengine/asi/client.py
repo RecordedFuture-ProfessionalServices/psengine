@@ -133,8 +133,41 @@ class ASIClient(BaseHTTPClient):
             ge=1, le=MAX_ASI_PAGE_SIZE, default=DEFAULT_ASI_PAGE_SIZE
         ),
         **kwargs,
-    ) -> Annotated[list[Any], Doc('Paged records merged into a single list.')]:
-        """Perform a paged request using ASI cursor-based pagination."""
+    ) -> Annotated[
+        dict[str, Any],
+        Doc(
+            """
+            Paged records merged into a single dictionary.
+
+            The `data` field contains records aggregated from all fetched pages.
+
+            The `meta` field is copied from the last fetched page.
+
+            Example response structure:
+
+            ```json
+            {
+                "data": [
+                    {"id": "record-1"},
+                    {"id": "record-2"}
+                ],
+                "meta": {
+                    "pagination": {
+                        "limit": 100,
+                        "total": 248,
+                        "next_cursor": eyJ0eXBlIjogInNlY...
+                    }
+                }
+            }
+            ```
+            """
+        ),
+    ]:
+        """Perform a paged request using ASI cursor-based pagination.
+
+        Automatically handles cursor-based pagination internally, aggregating all pages
+        up to `max_results`.
+        """
         method = method.upper()
         if method not in ('GET', 'POST'):
             raise ValueError('Invalid method for paged request. Must be GET or POST')
