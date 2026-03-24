@@ -146,7 +146,7 @@ class VulnerabilityPublic(RFBaseModel):
 
 
 class ExposureSignature(RFBaseModel):
-    id: str
+    id_: str = Field(alias='id')
     name: str
     description: Optional[str]
     severity: Optional[ExposureSeverity]
@@ -169,7 +169,7 @@ class AssetWithExposure(RFBaseModel):
 
 
 class Exposure(RFBaseModel):
-    id: str
+    id_: str = Field(alias='id')
     detection_id: Optional[str]
     severity: ExposureSeverity
     instances: list[ExposureInstance]

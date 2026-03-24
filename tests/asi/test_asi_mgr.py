@@ -94,7 +94,7 @@ class Test_ASI:
 
         assert isinstance(result, ProjectListOut)
         assert len(result.content) == 3
-        assert str(result.content[0].id) == '3ce6292b-29be-4199-9024-231818e384a4'
+        assert str(result.content[0].id_) == '3ce6292b-29be-4199-9024-231818e384a4'
         assert result.content[0].title == 'Partner Shared Demo'
         assert result.content[0].max_exposure_score == 99
         assert result.meta.counts.total == 3
@@ -378,7 +378,7 @@ class Test_ASI:
         assert isinstance(result, ExposureSearchOut)
         assert len(result.content) == 100
         assert result.content[0].asset_count == 116
-        assert result.content[0].signature.id == 'low-security-cipher-list'
+        assert result.content[0].signature.id_ == 'low-security-cipher-list'
         assert result.content[0].signature.severity.value == 'critical'
         assert result.meta.counts.total == 287
         assert result.meta.pagination.limit == 100
@@ -416,7 +416,7 @@ class Test_ASI:
         )
 
         assert isinstance(result, AssetWithExposureSearch)
-        assert result.signature.id == 'CVE-2022-2551'
+        assert result.signature.id_ == 'CVE-2022-2551'
         assert result.signature.severity.value == 'critical'
         assert len(result.asset_exposures) == 5
         assert result.asset_exposures[0].asset_id == 'staff.basij.sharif.edu'

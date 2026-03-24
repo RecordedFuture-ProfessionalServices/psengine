@@ -67,20 +67,20 @@ class AssetWithExposureSearch(RFBaseModel):
         msg = 'Name: {}, Id: {}, Severity: {}'
         return msg.format(
             self.signature.name,
-            self.signature.id,
+            self.signature.id_,
             self.signature.severity.value,
         )
 
     def __hash__(self) -> int:
-        return hash(self.signature.id)
+        return hash(self.signature.id_)
 
     def __eq__(self, other: 'AssetWithExposureSearch'):
-        return self.signature.id == other.signature.id
+        return self.signature.id_ == other.signature.id_
 
     def __gt__(self, other: 'AssetWithExposureSearch'):
-        return (self.signature.severity.value, self.signature.id) > (
+        return (self.signature.severity.value, self.signature.id_) > (
             other.signature.severity.value,
-            other.signature.id,
+            other.signature.id_,
         )
 
 
@@ -119,22 +119,22 @@ class ExposureSearch(RFBaseModel):
         msg = 'Name: {}, Id: {}, Severity: {}, Asset Count: {}'
         return msg.format(
             self.signature.name,
-            self.signature.id,
+            self.signature.id_,
             self.signature.severity.value,
             self.asset_count,
         )
 
     def __hash__(self) -> int:
-        return hash(self.signature.id)
+        return hash(self.signature.id_)
 
     def __eq__(self, other: 'ExposureSearch'):
-        return self.signature.id == other.signature.id
+        return self.signature.id_ == other.signature.id_
 
     def __gt__(self, other: 'ExposureSearch'):
-        return (self.signature.severity.value, self.asset_count, self.signature.id) > (
+        return (self.signature.severity.value, self.asset_count, self.signature.id_) > (
             other.signature.severity.value,
             other.asset_count,
-            other.signature.id,
+            other.signature.id_,
         )
 
 
@@ -248,7 +248,7 @@ class Project(RFBaseModel):
         ```
     """
 
-    id: str
+    id_: str = Field(alias='id')
     title: str
     scanning_enabled: Optional[bool] = None
     last_scanned_at: Optional[datetime] = None
@@ -259,15 +259,15 @@ class Project(RFBaseModel):
         msg = 'Name: {}, Id: {}, Enabled: {}'
         return msg.format(
             self.title,
-            self.id,
+            self.id_,
             self.scanning_enabled or 'False',
         )
 
     def __hash__(self) -> int:
-        return hash(self.id)
+        return hash(self.id_)
 
     def __eq__(self, other: 'Project'):
-        return self.id == other.id
+        return self.id_ == other.id_
 
     def __gt__(self, other: 'Project'):
         return self.title > other.title
