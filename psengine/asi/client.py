@@ -139,12 +139,18 @@ class ASIClient(BaseHTTPClient):
             """
             Paged records merged into a single dictionary.
 
+            """
+        ),
+    ]:
+        """Perform a paged request using ASI cursor-based pagination.
+
+        Automatically handles cursor-based pagination internally, aggregating all pages
+        up to `max_results`.
+
+        Example response structure:
             The `data` field contains records aggregated from all fetched pages.
 
             The `meta` field is copied from the last fetched page.
-
-            Example response structure:
-
             ```json
             {
                 "data": [
@@ -160,13 +166,7 @@ class ASIClient(BaseHTTPClient):
                 }
             }
             ```
-            """
-        ),
-    ]:
-        """Perform a paged request using ASI cursor-based pagination.
 
-        Automatically handles cursor-based pagination internally, aggregating all pages
-        up to `max_results`.
         """
         method = method.upper()
         if method not in ('GET', 'POST'):
