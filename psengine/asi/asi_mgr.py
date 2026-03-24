@@ -438,6 +438,7 @@ class AttackSurfaceMgr:
             objects_per_page=exposures_per_page,
         )
 
+        # TODO - data is under 'content' - intentional? should just match api response I think (other funcs do it too)
         return ExposureSearchOut.model_validate({'content': data['data'], 'meta': data['meta']})
 
     @debug_call
@@ -849,4 +850,5 @@ class AttackSurfaceMgr:
             EP_ASI_ASSET_EXPOSURES.format(project_id, asset_id),
         ).json()
 
+        # TODO - returned data is a list of assets, validation error
         return Asset.model_validate(data['data'])
