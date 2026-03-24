@@ -376,14 +376,16 @@ class AttackSurfaceMgr:
             ),
         ] = None,
         filter_cvss_score_gte: Annotated[
-            Optional[str],
+            Optional[float],
+            Field(ge=0, le=10),
             Doc(
                 """Filter for asset or exposure tied to a vulnerability with the provided CVSS
                 score range. Example 7.5. """
             ),
         ] = None,
         filter_cvss_score_lte: Annotated[
-            Optional[str],
+            Optional[float],
+            Field(ge=0, le=10),
             Doc(
                 """Filter for asset or exposure tied to a vulnerability with the provided CVSS
                 score range. Example 7.5."""
@@ -426,7 +428,7 @@ class AttackSurfaceMgr:
         params = {
             k: v
             for k, v in locals().items()
-            if k not in ('self', 'max_results', 'exposures_per_page')
+            if k not in ('self', 'max_results', 'exposures_per_page', 'project_id')
         }
         data = self.asi_client.request_paged(
             'GET',
@@ -466,7 +468,7 @@ class AttackSurfaceMgr:
         params = {
             k: v
             for k, v in locals().items()
-            if k not in ('self', 'max_results', 'exposures_per_page')
+            if k not in ('self', 'max_results', 'exposures_per_page', 'project_id', 'signature_id')
         }
         data = self.asi_client.request_paged(
             'GET',
@@ -761,7 +763,9 @@ class AttackSurfaceMgr:
             ASIFetchAssetError: If an API or connection error occurs.
         """
         params = {
-            k: v for k, v in locals().items() if k not in ('self', 'max_results', 'assets_per_page')
+            k: v
+            for k, v in locals().items()
+            if k not in ('self', 'max_results', 'assets_per_page', 'project_id')
         }
         data = self.asi_client.request_paged(
             'GET',
@@ -814,7 +818,7 @@ class AttackSurfaceMgr:
             ValidationError: If response data does not match the `Asset` model.
             ASIFetchAssetError: If an API or connection error occurs.
         """
-        params = {k: v for k, v in locals().items() if k not in ('self',)}
+        params = {k: v for k, v in locals().items() if k not in ('self', 'project_id', 'asset_id')}
         data = self.asi_client.request(
             'GET',
             EP_ASI_ASSET.format(project_id, asset_id),
