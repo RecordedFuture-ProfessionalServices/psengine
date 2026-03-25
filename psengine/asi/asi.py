@@ -32,7 +32,7 @@ from .models import (
 
 
 class AssetWithExposureSearch(RFBaseModel):
-    """Validate data received from the `/v2/projects/{project_id}/exposures/{signature_id}`
+    """Validate data received from the `/projects/{project_id}/exposures/{signature_id}`
     endpoint.
 
     This class supports hashing, equality comparison, greater-than comparison, and string
@@ -85,7 +85,7 @@ class AssetWithExposureSearch(RFBaseModel):
 
 
 class ExposureSearch(RFBaseModel):
-    """Validate data received from the `/v2/projects/{project_id}/exposures` endpoint.
+    """Validate data received from the `/projects/{project_id}/exposures` endpoint.
 
     This class supports hashing, equality comparison, greater-than comparison, and string
     representation of `ExposureSearch` instances.
@@ -139,20 +139,20 @@ class ExposureSearch(RFBaseModel):
 
 
 class ExposureSearchOut(RFBaseModel):
-    """Validate data received from the `/v2/projects/{project_id}/exposures` endpoint."""
+    """Validate data received from the `/projects/{project_id}/exposures` endpoint."""
 
-    content: list[ExposureSearch]
+    data: list[ExposureSearch]
     meta: ApiMeta
 
     def __str__(self) -> str:
-        return '\n'.join(str(c) for c in sorted(self.content))
+        return '\n'.join(str(c) for c in sorted(self.data))
 
 
 class Asset(RFBaseModel):
-    """Validate data received from the `/v2/projects/{project_id}/assets`,
-    `/v2/projects/{project_id}/assets/{asset_id}`,
-    `/v2/projects/{project_id}/assets/{asset_id}/exposures`, and
-    `/v2/projects/{project_id}/assets/_search` endpoints.
+    """Validate data received from the `/projects/{project_id}/assets`,
+    `/projects/{project_id}/assets/{asset_id}`,
+    `/projects/{project_id}/assets/{asset_id}/exposures`, and
+    `/projects/{project_id}/assets/_search` endpoints.
 
     This class supports hashing, equality comparison, greater-than comparison, and string
     representation of `Asset` instances.
@@ -211,19 +211,19 @@ class Asset(RFBaseModel):
 
 
 class AssetResponse(RFBaseModel):
-    """Validate data received from the `/v2/projects/{project_id}/assets` and
-    `/v2/projects/{project_id}/assets/_search` endpoints.
+    """Validate data received from the `/projects/{project_id}/assets` and
+    `/projects/{project_id}/assets/_search` endpoints.
     """
 
-    content: list[Asset]
+    data: list[Asset]
     meta: ApiMeta
 
     def __str__(self) -> str:
-        return '\n'.join(str(c) for c in sorted(self.content))
+        return '\n'.join(str(c) for c in sorted(self.data, reverse=True))
 
 
 class Project(RFBaseModel):
-    """Validate data received from the `/v2/projects` endpoint.
+    """Validate data received from the `/projects` endpoint.
 
     This class supports hashing, equality comparison, greater-than comparison, and string
     representation of `Project` instances.
@@ -274,10 +274,17 @@ class Project(RFBaseModel):
 
 
 class ProjectListOut(RFBaseModel):
-    """Validate data received from the `/v2/projects` endpoint."""
+    """Validate data received from the `/projects` endpoint."""
 
-    content: list[Project]
+    data: list[Project]
     meta: ApiMeta
 
     def __str__(self) -> str:
-        return '\n'.join(str(c) for c in sorted(self.content))
+        return '\n'.join(str(c) for c in sorted(self.data))
+
+
+class AssetExposuresOut(RFBaseModel):
+    """Validate data received from the `/projects/{project_id}/assets/{asset_id}/exposures`."""
+
+    data: list[AssetWithExposure]
+    meta: ApiMeta

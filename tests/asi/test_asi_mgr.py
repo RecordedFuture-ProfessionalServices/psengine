@@ -93,10 +93,10 @@ class Test_ASI:
         result = asi_mgr.fetch_projects()
 
         assert isinstance(result, ProjectListOut)
-        assert len(result.content) == 3
-        assert str(result.content[0].id_) == '3ce6292b-29be-4199-9024-231818e384a4'
-        assert result.content[0].title == 'Partner Shared Demo'
-        assert result.content[0].max_exposure_score == 99
+        assert len(result.data) == 3
+        assert str(result.data[0].id_) == '3ce6292b-29be-4199-9024-231818e384a4'
+        assert result.data[0].title == 'Partner Shared Demo'
+        assert result.data[0].max_exposure_score == 99
         assert result.meta.counts.total == 3
         assert result.meta.request_id == '08209248cc2b46139709f15588bcf04b'
 
@@ -146,7 +146,7 @@ class Test_ASI:
 
         result = asi_mgr.search_assets(project_id='project-1', assets_per_page=1, max_results=2)
 
-        assert [asset.id_ for asset in result.content] == ['asset-1', 'asset-2']
+        assert [asset.id_ for asset in result.data] == ['asset-1', 'asset-2']
         assert [call['method'] for call in captured] == ['POST', 'POST']
         assert [call['params'] for call in captured] == [{}, {}]
         assert captured[0]['data'] == {'pagination': {'limit': 1}, 'sort': ['discovered_at']}
@@ -167,14 +167,13 @@ class Test_ASI:
         result = asi_mgr.search_assets(project_id=PROJECT_ID, max_results=100)
 
         assert isinstance(result, AssetResponse)
-        assert len(result.content) == 100
+        assert len(result.data) == 100
         assert (
-            result.content[0].id_
-            == 'z3nab-a7d897-cca7c8cdafa5a6f9bd85ebf2f62d2c33107f07.zendesk.com'
+            result.data[0].id_ == 'z3nab-a7d897-cca7c8cdafa5a6f9bd85ebf2f62d2c33107f07.zendesk.com'
         )
-        assert result.content[0].apex_domain == 'zendesk.com'
-        assert result.content[0].type_ == 'domain'
-        assert result.content[2].resolved_ips is None
+        assert result.data[0].apex_domain == 'zendesk.com'
+        assert result.data[0].type_ == 'domain'
+        assert result.data[2].resolved_ips is None
         assert result.meta.counts.returned == 100
         assert result.meta.pagination.total == 1711
         assert mock_request_spy.call_count == 1
@@ -376,10 +375,10 @@ class Test_ASI:
         result = asi_mgr.search_exposures(project_id=PROJECT_ID, max_results=100)
 
         assert isinstance(result, ExposureSearchOut)
-        assert len(result.content) == 100
-        assert result.content[0].asset_count == 116
-        assert result.content[0].signature.id_ == 'low-security-cipher-list'
-        assert result.content[0].signature.severity.value == 'critical'
+        assert len(result.data) == 100
+        assert result.data[0].asset_count == 116
+        assert result.data[0].signature.id_ == 'low-security-cipher-list'
+        assert result.data[0].signature.severity.value == 'critical'
         assert result.meta.counts.total == 287
         assert result.meta.pagination.limit == 100
         assert mock_request_spy.call_count == 1
@@ -446,10 +445,10 @@ class Test_ASI:
         result = asi_mgr.fetch_assets(project_id=PROJECT_ID, max_results=50)
 
         assert isinstance(result, AssetResponse)
-        assert len(result.content) == 50
-        assert result.content[0].id_ == 'zzzezzzacosmetics.zendesk.com'
-        assert result.content[0].resolved_ips == ['216.198.54.6', '216.198.53.6']
-        assert result.content[0].apex_domain == 'zendesk.com'
+        assert len(result.data) == 50
+        assert result.data[0].id_ == 'zzzezzzacosmetics.zendesk.com'
+        assert result.data[0].resolved_ips == ['216.198.54.6', '216.198.53.6']
+        assert result.data[0].apex_domain == 'zendesk.com'
         assert result.meta.counts.returned == 50
         assert result.meta.pagination.total == 1711
         assert mock_request_spy.call_count == 1

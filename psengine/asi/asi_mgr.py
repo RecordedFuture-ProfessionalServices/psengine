@@ -29,7 +29,14 @@ from ..endpoints import (
     EP_ASI_PROJECTS,
 )
 from ..helpers import connection_exceptions, debug_call
-from .asi import Asset, AssetResponse, AssetWithExposureSearch, ExposureSearchOut, ProjectListOut
+from .asi import (
+    Asset,
+    AssetExposuresOut,
+    AssetResponse,
+    AssetWithExposureSearch,
+    ExposureSearchOut,
+    ProjectListOut,
+)
 from .client import ASIClient
 from .constants import ASSETS_PER_PAGE, MAX_ASI_PAGE_SIZE, AssetType, EnrichmentType, SortByType
 from .errors import (
@@ -120,9 +127,7 @@ class AttackSurfaceMgr:
             params['sort_direction'] = sort_direction
 
         response = self.asi_client.request('get', EP_ASI_PROJECTS, params=params).json()
-        return ProjectListOut.model_validate(
-            {'content': response['data'], 'meta': response['meta']}
-        )
+        return ProjectListOut.model_validate({'data': response['data'], 'meta': response['meta']})
 
     @debug_call
     @validate_call
@@ -302,7 +307,7 @@ class AttackSurfaceMgr:
             'post', EP_ASI_ASSETS_SEARCH.format(project_id), data=data, max_results=max_results
         )
 
-        return AssetResponse.model_validate({'content': response['data'], 'meta': response['meta']})
+        return AssetResponse.model_validate({'data': response['data'], 'meta': response['meta']})
 
     @debug_call
     def _lookup_filter(
@@ -438,8 +443,7 @@ class AttackSurfaceMgr:
             objects_per_page=exposures_per_page,
         )
 
-        # TODO - data is under 'content' - intentional? should just match api response I think (other funcs do it too)
-        return ExposureSearchOut.model_validate({'content': data['data'], 'meta': data['meta']})
+        return ExposureSearchOut.model_validate({'data': data['data'], 'meta': data['meta']})
 
     @debug_call
     @validate_call
@@ -776,7 +780,7 @@ class AttackSurfaceMgr:
             objects_per_page=assets_per_page,
         )
 
-        return AssetResponse.model_validate({'content': data['data'], 'meta': data['meta']})
+        return AssetResponse.model_validate({'data': data['data'], 'meta': data['meta']})
 
     @debug_call
     @validate_call
@@ -835,7 +839,9 @@ class AttackSurfaceMgr:
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
         asset_id: Annotated[str, Doc('The asset ID to search for.')],
-    ) -> Annotated[Asset, Doc('ASI asset model including exposures for the requested asset')]:
+    ) -> Annotated[
+        AssetExposuresOut, Doc('ASI asset model including exposures for the requested asset')
+    ]:
         """Fetch exposures for a single asset within an ASI project.
 
         Endpoint:
@@ -845,10 +851,11 @@ class AttackSurfaceMgr:
             ValidationError: If response data does not match the `Asset` model.
             ASIFetchAssetError: If an API or connection error occurs.
         """
-        data = self.asi_client.request(
+        response = self.asi_client.request(
             'GET',
             EP_ASI_ASSET_EXPOSURES.format(project_id, asset_id),
         ).json()
 
-        # TODO - returned data is a list of assets, validation error
-        return Asset.model_validate(data['data'])
+        return AssetExposuresOut.model_validate(
+            {'data': response['data'], 'meta': response['meta']}
+        )
