@@ -31,6 +31,7 @@ from pydantic_settings import (
 from typing_extensions import Doc
 
 from ..constants import (
+    ASI_TOKEN_ENV_VAR,
     BACKOFF_FACTOR,
     POOL_MAX_SIZE,
     REQUEST_TIMEOUT,
@@ -91,6 +92,7 @@ class ConfigModel(BaseSettings):
     platform_id: Optional[str] = Field(default=None, pattern=PLAT_REGEX, examples=['Splunk/8.0.0'])
     app_id: Optional[str] = Field(default=None, pattern=APP_ID_REGEX, examples=['get-alerts/1.0.0'])
     rf_token: Optional[RFToken] = Field(default=os.environ.get(RF_TOKEN_ENV_VAR, ''))
+    asi_token: Optional[RFToken] = Field(default=os.environ.get(ASI_TOKEN_ENV_VAR, ''))
     http_proxy: Optional[str] = None
     https_proxy: Optional[str] = None
     client_ssl_verify: Optional[bool] = SSL_VERIFY
@@ -195,7 +197,7 @@ class ConfigModel(BaseSettings):
         """
         directory = Path(directory)
         log = logging.getLogger(__name__)
-        data = self.model_dump_json(exclude='rf_token', indent=4)
+        data = self.model_dump_json(exclude=['rf_token', 'asi_token'], indent=4)
         OSHelpers.mkdir(directory)
         config_path = directory / file
         log.info(f'Saving config in {config_path.as_posix()}')

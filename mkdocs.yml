@@ -92,6 +92,7 @@ nav:
   - Learn: 
       - Learn: modules/index.md
       - Analyst Notes: modules/analyst_notes.md
+      - Attack Surface Intelligence: modules/asi.md
       - Classic Alerts: modules/classic_alerts.md
       - Collective Insights: modules/collective_insights.md
       - Detections: modules/detections.md
@@ -121,6 +122,13 @@ nav:
           - Helpers: api/analyst_notes/helpers.md
           - Constants: api/analyst_notes/constants.md
           - Errors: api/analyst_notes/errors.md
+      - Attack Surface Intelligence:
+          - Manager: api/asi/asi_mgr.md
+          - ADT: api/asi/asi.md
+          - Models: api/asi/models.md
+          - Client: api/asi/client.md
+          - Constants: api/asi/constants.md
+          - Errors: api/asi/errors.md
       - Classic Alerts:
           - Manager: api/classic_alerts/classic_alert_mgr.md
           - ADT: api/classic_alerts/classic_alert.md

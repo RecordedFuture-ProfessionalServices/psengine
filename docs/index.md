@@ -31,6 +31,7 @@ PSEngine is ready for the demands of building robust and reliable integrations.
 It can easily interact with the following Recorded Future datasets:
 
 - Analyst Notes
+- Attack Surface Intelligence
 - Collective Insights
 - Classic & Playbook Alerts
 - Detection Rules

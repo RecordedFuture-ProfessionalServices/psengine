@@ -1,0 +1,108 @@
+{
+  "data": {
+    "asset_exposures": [
+      {
+        "asset_id": "staff.basij.sharif.edu",
+        "details": {
+          "extractions": "1.3.24 | 1.3.24 | 1.3.24",
+          "target": "http://staff.basij.sharif.edu:80/wp-content/plugins/duplicator/readme.txt"
+        },
+        "instances": []
+      },
+      {
+        "asset_id": "negociosdev.ucab.edu.ve",
+        "details": {
+          "extractions": "1.3.24 | 1.3.24 | 1.3.24",
+          "target": "https://negociosdev.ucab.edu.ve:443/wp-content/plugins/duplicator/readme.txt"
+        },
+        "instances": []
+      },
+      {
+        "asset_id": "imt.ucv.ve",
+        "details": {
+          "extractions": "1.3.40.1 | 1.3.40.1 | 1.3.40.1",
+          "target": "http://imt.ucv.ve:80/wp-content/plugins/duplicator/readme.txt"
+        },
+        "instances": []
+      },
+      {
+        "asset_id": "deneb.ucv.ve",
+        "details": {
+          "extractions": "1.3.40.1 | 1.3.40.1 | 1.3.40.1",
+          "target": "http://deneb.ucv.ve:80/wp-content/plugins/duplicator/readme.txt"
+        },
+        "instances": []
+      },
+      {
+        "asset_id": "basij.sharif.ir",
+        "details": {
+          "extractions": "1.3.24 | 1.3.24 | 1.3.24",
+          "target": "http://basij.sharif.ir:80/wp-content/plugins/duplicator/readme.txt"
+        },
+        "instances": []
+      }
+    ],
+    "signature": {
+      "added_at": "2022-09-04T00:00:00Z",
+      "description": "The vulnerability in the Duplicator WordPress plugin allows unauthenticated users to download full site backups by accessing the main installer endpoint. This occurs because the plugin exposes the backup URL to anyone who visits this endpoint after an administrator has run the installer script. Threat actors can exploit this by simply navigating to the endpoint and downloading the backup, which may contain sensitive data such as database credentials, user information, and site configurations. This exposure poses a significant risk as it could lead to unauthorized access and data breaches. The vulnerability is particularly dangerous because it does not require any authentication or special privileges to exploit.",
+      "id": "CVE-2022-2551",
+      "name": "CVE-2022-2551 - Duplicator – WordPress Migration Plugin <= 1.4.7 - Unauthenticated Backup Download",
+      "references": [
+        "https://app.recordedfuture.com/live/sc/entity/?name=CVE-2022-2551",
+        "https://www.wordfence.com/threat-intel/vulnerabilities/id/b5136409-d843-4774-afe7-211a23f65da9",
+        "https://www.wordfence.com/threat-intel/vulnerabilities/id/b5136409-d843-4774-afe7-211a23f65da9?source=api-prod"
+      ],
+      "remediation_steps": {
+        "actions": [
+          {
+            "text": "Update the Duplicator plugin to version 1.4.8 or later to patch the vulnerability. Upgrading to the latest version ensures that all known vulnerabilities with available patches are addressed."
+          },
+          {
+            "text": "Remove any existing installer files from the server to prevent unauthorized access to backup URLs."
+          },
+          {
+            "text": "Regularly review and delete old backups from the server, ensuring they are securely stored elsewhere before deletion."
+          },
+          {
+            "text": "Implement access controls using .htaccess or similar methods to restrict access to the backup directory, ensuring only authorized users can view or download backups."
+          },
+          {
+            "text": "Monitor server logs for repeated access attempts to the installer endpoint and take appropriate action if suspicious activity is detected."
+          }
+        ],
+        "type": "number"
+      },
+      "severity": "critical",
+      "vulnerabilities": [
+        {
+          "cve_id": "CVE-2022-2551",
+          "cvss_score": 9.8,
+          "cwe_ids": [],
+          "name": "Duplicator – WordPress Migration Plugin <= 1.4.7 - Unauthenticated Backup Download",
+          "references": [
+            "https://app.recordedfuture.com/live/sc/entity/?name=CVE-2022-2551",
+            "https://www.wordfence.com/threat-intel/vulnerabilities/id/b5136409-d843-4774-afe7-211a23f65da9?source=api-prod"
+          ],
+          "slug": "cve-2022-2551"
+        }
+      ]
+    }
+  },
+  "meta": {
+    "pagination": {
+      "limit": 100,
+      "next_cursor": "eyJ0eXBlIjogInNlYXJjaF9hZnRlciIsICJzb3J0IjogWzk5LCAiYmFzaWouc2hhcmlmLmlyIl19",
+      "sort": [
+        [
+          "exposure_score",
+          "desc"
+        ]
+      ],
+      "total": 5
+    },
+    "params": {
+      "signature_id": "CVE-2022-2551"
+    },
+    "request_id": "f617d85a83314af5aa6447dad9e35924"
+  }
+}

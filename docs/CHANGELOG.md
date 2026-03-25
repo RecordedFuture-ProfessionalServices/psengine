@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.5.0 - 
+
+- `psengine.asi` now supports Attack Surface (ASI) via the `AttackSurfaceMgr` class. 
+
+### Added
+
+- `psengine.asi` implements Attack Surface handling via `ASIMgr`.
 
 ## v2.4.3 - 2026-03-03
 

@@ -139,9 +139,10 @@ class Test_Config:
 
     def test_valid_token(self):
         Config.reset_instance()
-        Config.init(rf_token='a' * 32)
+        Config.init(rf_token='a' * 32, asi_token='b' * 32)
         gc = get_config()
         assert gc.rf_token.get_secret_value() == 'a' * 32
+        assert gc.asi_token.get_secret_value() == 'b' * 32
 
     def test_invalid_token_raises_ValidationError(self):
         Config.reset_instance()
@@ -151,7 +152,7 @@ class Test_Config:
     def test_save_config(self, tmp_path):
         Config.reset_instance()
         config_dir = tmp_path / 'config'
-        config_path = tmp_path / 'config' / 'config.json'
+        config_path = config_dir / 'config.json'
         Config.init(rf_token='a' * 32, moise='moise', client_retries=9)
 
         gc = get_config()
