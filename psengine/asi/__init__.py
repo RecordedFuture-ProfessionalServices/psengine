@@ -11,5 +11,19 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from .asi import (
+    Asset,
+    AssetExposuresOut,
+    AssetResponse,
+    AssetWithExposureSearch,
+    ExposureSearchOut,
+    ProjectListOut,
+)
 from .asi_mgr import AttackSurfaceMgr
-from .client import ASIClient
+from .errors import (
+    ASIExposureSearchError,
+    ASIFetchAssetError,
+    ASIFetchExposureError,
+    ASIFetchProjectsError,
+    ASISearchAssetsError,
+)
