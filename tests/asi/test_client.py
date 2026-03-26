@@ -445,8 +445,10 @@ def test_initialize_paged_request_post_creates_body_when_data_is_none(asi_client
     [
         ('a' * 32, True),
         ('A1' * 16, True),
+        ('a' * 31 + '-', True),
+        ('a' * 31 + '_', True),
+        ('a' * 30 + '_-', True),
         ('a' * 31, False),
-        ('a' * 31 + '-', False),
         ('a' * 33, False),
         ('a' * 32 + '!', False),
     ],
