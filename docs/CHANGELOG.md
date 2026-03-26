@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.5.1 - 2026-03-26
+
+### Fixed
+
+- ASI token validation regex has been fixed to match tokens containing `_` and `-`.
+
 ## v2.5.0 - 2026-03-25
 
 - `psengine.asi` now supports Attack Surface (ASI) via the `AttackSurfaceMgr` class. 
