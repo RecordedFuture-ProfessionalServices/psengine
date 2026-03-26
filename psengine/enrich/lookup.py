@@ -11,7 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 from functools import total_ordering
-from typing import Optional, Union
+from typing import Optional
 
 from pydantic import Field
 
@@ -133,15 +133,15 @@ class EnrichedCompany(BaseEnrichedEntity):
     risk_mapping: Optional[list[RiskMapping]] = Field(alias='riskMapping', default=None)
 
 
-_EnrichmentObjectType = Union[
-    EnrichedCompany,
-    EnrichedDomain,
-    EnrichedIP,
-    EnrichedHash,
-    EnrichedMalware,
-    EnrichedURL,
-    EnrichedVulnerability,
-]
+_EnrichmentObjectType = (
+    EnrichedCompany
+    | EnrichedDomain
+    | EnrichedIP
+    | EnrichedHash
+    | EnrichedMalware
+    | EnrichedURL
+    | EnrichedVulnerability
+)
 
 
 @total_ordering
