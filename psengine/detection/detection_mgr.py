@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -45,7 +45,7 @@ class DetectionMgr:
     def search(
         self,
         detection_rule: Annotated[
-            Union[str, list[str], None], Doc('Types of detection rules to search for.')
+            str | list[str] | None, Doc('Types of detection rules to search for.')
         ] = None,
         entities: Annotated[
             Optional[list[str]], Doc('List of entities to filter the search.')

@@ -13,7 +13,7 @@
 
 import re
 from copy import deepcopy
-from typing import Annotated, Any, Optional, Union
+from typing import Annotated, Any, Optional
 
 from pydantic import Field, validate_call
 from requests.exceptions import JSONDecodeError
@@ -43,17 +43,17 @@ class ASIClient(BaseHTTPClient):
     def __init__(
         self,
         api_token: Annotated[
-            Union[str, None],
+            str | None,
             Doc('A Recorded Future ASI API key.'),
         ] = None,
         http_proxy: Annotated[str, Doc('An HTTP proxy URL.')] = None,
         https_proxy: Annotated[str, Doc('An HTTPS proxy URL.')] = None,
         verify: Annotated[
-            Union[str, bool],
+            str | bool,
             Doc('An SSL verification flag or path to CA bundle.'),
         ] = None,
         auth: Annotated[tuple[str, str], Doc('Basic Auth credentials.')] = None,
-        cert: Annotated[Union[str, tuple[str, str], None], Doc('Client certificates.')] = None,
+        cert: Annotated[str | tuple[str, str] | None, Doc('Client certificates.')] = None,
         timeout: Annotated[int, Doc('A request timeout. Defaults to 120.')] = None,
         retries: Annotated[int, Doc('A number of retries. Defaults to 5.')] = None,
         backoff_factor: Annotated[int, Doc('A backoff factor. Defaults to 1.')] = None,
@@ -92,7 +92,7 @@ class ASIClient(BaseHTTPClient):
             str, Doc('An HTTP method, one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.')
         ],
         url: Annotated[str, Doc('A URL or API path to make the request to.')],
-        data: Annotated[Union[dict, list[dict], bytes, None], Doc('A request body.')] = None,
+        data: Annotated[dict | list[dict] | bytes | None, Doc('A request body.')] = None,
         *,
         params: Annotated[Optional[dict], Doc('HTTP query parameters.')] = None,
         headers: Annotated[
@@ -255,7 +255,7 @@ class ASIClient(BaseHTTPClient):
         params: Optional[dict],
         data: Optional[dict],
         limit: Optional[int],
-    ) -> tuple[dict, Union[dict, list[dict], bytes, None]]:
+    ) -> tuple[dict, dict | list[dict] | bytes | None]:
         request_params = deepcopy(params) if params else {}
         request_data = deepcopy(data)
 

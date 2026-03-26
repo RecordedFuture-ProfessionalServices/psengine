@@ -15,7 +15,7 @@ import logging
 import time
 from datetime import datetime
 from functools import total_ordering
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import ConfigDict, Field, validate_call
 from typing_extensions import Doc
@@ -160,7 +160,7 @@ class EntityList(RFBaseModel):
     def add(
         self,
         entity: Annotated[
-            Union[str, tuple[str, str]], Doc('ID or (name, type) tuple of the entity to add.')
+            str | tuple[str, str], Doc('ID or (name, type) tuple of the entity to add.')
         ],
         context: Annotated[Optional[dict], Doc('Context object for the entity.')] = None,
     ) -> Annotated[
@@ -182,7 +182,7 @@ class EntityList(RFBaseModel):
     def remove(
         self,
         entity: Annotated[
-            Union[str, tuple[str, str]], Doc('ID or (name, type) tuple of the entity to remove.')
+            str | tuple[str, str], Doc('ID or (name, type) tuple of the entity to remove.')
         ],
     ) -> Annotated[
         ListEntityOperationResponse, Doc('Response from the `list/{id}/entity/remove` endpoint.')
@@ -203,7 +203,7 @@ class EntityList(RFBaseModel):
     def bulk_add(
         self,
         entities: Annotated[
-            list[Union[str, tuple[str, str]]],
+            list[str | tuple[str, str]],
             Doc('List of entity string IDs or (name, type) tuples to add.'),
         ],
     ) -> Annotated[
@@ -238,7 +238,7 @@ class EntityList(RFBaseModel):
     def bulk_remove(
         self,
         entities: Annotated[
-            list[Union[str, tuple[str, str]]],
+            list[str | tuple[str, str]],
             Doc('List of entity string IDs or (name, type) tuples to remove.'),
         ],
     ) -> Annotated[
@@ -346,7 +346,7 @@ class EntityList(RFBaseModel):
     def _bulk_op(
         self,
         entities: Annotated[
-            list[Union[str, tuple[str, str]]],
+            list[str | tuple[str, str]],
             Doc('List of entity string IDs or (name, type) tuples to process.'),
         ],
         operation: Annotated[
@@ -405,7 +405,7 @@ class EntityList(RFBaseModel):
     def _list_op(
         self,
         entity: Annotated[
-            Union[str, tuple[str, str]], Doc('ID or (name, type) tuple of the entity to process.')
+            str | tuple[str, str], Doc('ID or (name, type) tuple of the entity to process.')
         ],
         op_name: Annotated[str, Doc("Operation to perform. Must be 'added' or 'removed'.")],
         context: Annotated[Optional[dict], Doc('Optional context object for the entity.')] = None,

@@ -205,7 +205,7 @@ class EnrichmentData(RFBaseModel):
     entity: str
     entity_type: Optional[str]
     is_enriched: bool
-    content: Union[str, _EnrichmentObjectType]
+    content: str | _EnrichmentObjectType
 
     def __hash__(self):
         if isinstance(self.content, EnrichedMalware):

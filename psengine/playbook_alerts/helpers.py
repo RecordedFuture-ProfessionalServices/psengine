@@ -12,7 +12,7 @@
 ##############################################################################################
 import logging
 from pathlib import Path
-from typing import Annotated, Union
+from typing import Annotated
 
 from typing_extensions import Doc
 
@@ -27,7 +27,7 @@ LOG = logging.getLogger('psengine.playbook_alerts.helpers')
 @debug_call
 def save_pba_images(
     playbook_alerts: Annotated[
-        Union[PBA_DomainAbuse, list[PBA_DomainAbuse]],
+        PBA_DomainAbuse | list[PBA_DomainAbuse],
         Doc('Domain Abuse alert or a list of Domain Abuse alerts.'),
     ],
     output_directory: Annotated[
@@ -61,7 +61,7 @@ def save_pba_images(
 def _save_image(
     file_name: str,
     image_bytes: bytes,
-    output_directory: Union[str, Path] = DEFAULT_ALERTS_OUTPUT_DIR,
+    output_directory: str | Path = DEFAULT_ALERTS_OUTPUT_DIR,
 ) -> None:
     """Save image to disk as a .png file.
 

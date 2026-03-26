@@ -12,7 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional, Union
+from typing import Optional
 
 from pydantic import Field
 
@@ -130,7 +130,7 @@ class WhoisAttribute(RFBaseModel):
     provider: str
     entity: str
     attribute: str
-    value: Union[ValueServer, ValueLocation]
+    value: ValueServer | ValueLocation
     added: datetime = None
     removed: Optional[datetime] = None
 

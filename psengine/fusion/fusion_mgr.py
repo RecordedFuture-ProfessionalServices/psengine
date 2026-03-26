@@ -13,7 +13,7 @@
 
 import logging
 from pathlib import Path
-from typing import Annotated, Union
+from typing import Annotated
 from urllib.parse import quote
 
 from pydantic import validate_call
@@ -49,7 +49,7 @@ class FusionMgr:
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=FusionGetFileError)
     def get_files(
-        self, file_paths: Annotated[Union[str, list[str]], Doc('One or more paths to fetch')]
+        self, file_paths: Annotated[str | list[str], Doc('One or more paths to fetch')]
     ) -> Annotated[list[FileGetOut], Doc('A FusionFile object with name and content of the file')]:
         """Get one or more files.
 
@@ -114,7 +114,7 @@ class FusionMgr:
     @debug_call
     @validate_call
     def delete_files(
-        self, file_paths: Annotated[Union[str, list[str]], Doc('One or more paths to delete')]
+        self, file_paths: Annotated[str | list[str], Doc('One or more paths to delete')]
     ) -> Annotated[list[FileDeleteOut], Doc('A list of deleted files.')]:
         """Delete one or more files.
 
@@ -140,7 +140,7 @@ class FusionMgr:
     @debug_call
     @validate_call
     def head_files(
-        self, file_paths: Annotated[Union[str, list[str]], Doc('One or more paths to check')]
+        self, file_paths: Annotated[str | list[str], Doc('One or more paths to check')]
     ) -> Annotated[list[FileHeadOut], Doc('List of headers info for the requested files.')]:
         """Head of one or more files.
 

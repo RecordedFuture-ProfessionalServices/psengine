@@ -101,7 +101,7 @@ def _add_dns_records(pba: 'PBA_DomainAbuse', md_maker: MarkdownMaker):
         ]
         for record in pba.panel_evidence_summary.resolved_record_list
     ]
-    md_maker.iocs_to_defang.extend(list(zip(*records))[0])
+    md_maker.iocs_to_defang.extend(list(zip(*records, strict=False))[0])
 
     records.sort(key=lambda x: x[1], reverse=True)
     records.insert(0, ['Entity', 'Risk Score', 'Criticality', 'Record Type', 'Context'])

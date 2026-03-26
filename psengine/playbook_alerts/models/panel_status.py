@@ -13,7 +13,7 @@
 
 import contextlib
 from datetime import datetime
-from typing import Optional, Union
+from typing import Optional
 
 from pydantic import model_validator
 
@@ -50,7 +50,7 @@ class PanelStatus(RFBaseModel):
     entity_id: Optional[str] = None
     entity_name: Optional[str] = None
     actions_taken: list[str]
-    targets: Optional[list[Union[ResolvedEntity, str]]] = []
+    targets: Optional[list[ResolvedEntity | str]] = []
 
     @model_validator(mode='before')
     @classmethod

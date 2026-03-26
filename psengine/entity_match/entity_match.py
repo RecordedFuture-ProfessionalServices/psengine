@@ -11,7 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Optional, Union
+from typing import Optional
 
 from pydantic import Field
 
@@ -87,7 +87,7 @@ class ResolvedEntity(RFBaseModel):
 
     entity: str
     is_found: bool
-    content: Union[str, IdNameType]
+    content: str | IdNameType
 
     def __str__(self):
         if isinstance(self.content, IdNameType):

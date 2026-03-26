@@ -13,7 +13,7 @@
 
 import logging
 from pathlib import Path
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -30,7 +30,7 @@ LOG = logging.getLogger('psengine.detection.helpers')
 def save_rule(
     rule: Annotated[DetectionRule, Doc('Single detection rule to write.')],
     output_directory: Annotated[
-        Optional[Union[str, Path]],
+        Optional[str | Path],
         Doc('Path to write to. If not provided, the current working directory will be used.'),
     ] = None,
 ):

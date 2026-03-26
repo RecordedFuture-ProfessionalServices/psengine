@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 import pydantic
 import requests
@@ -148,21 +148,21 @@ class PlaybookAlertMgr:
         ] = None,
         direction: Annotated[Optional[str], Doc('Sort direction: `asc` or `desc`.')] = None,
         entity: Annotated[
-            Union[str, list, None], Doc('Entity or list of entities to filter alerts by.')
+            str | list | None, Doc('Entity or list of entities to filter alerts by.')
         ] = None,
         statuses: Annotated[
-            Union[str, list, None],
+            str | list | None,
             Doc("Status or list of statuses to filter alerts by, e.g. `['New', 'Closed']`."),
         ] = None,
         priority: Annotated[
-            Union[str, list, None], Doc("Priority or list of priorities, e.g. `['High', 'Low']`.")
+            str | list | None, Doc("Priority or list of priorities, e.g. `['High', 'Low']`.")
         ] = None,
         category: Annotated[
-            Union[PACategory, list[PACategory], None],
+            PACategory | list[PACategory] | None,
             Doc('Category or list of categories to filter alerts by.'),
         ] = None,
         assignee: Annotated[
-            Union[str, list, None], Doc('Assignee or list of uhashes to filter by.')
+            str | list | None, Doc('Assignee or list of uhashes to filter by.')
         ] = None,
         created_from: Annotated[
             Optional[str], Doc('Start of created date range (ISO or relative, e.g. `-3d`).')
@@ -236,20 +236,20 @@ class PlaybookAlertMgr:
         ] = None,
         direction: Annotated[Optional[str], Doc('Sort direction, either `asc` or `desc`.')] = None,
         entity: Annotated[
-            Union[str, list, None], Doc('Entity or list of entities to filter alerts by.')
+            str | list | None, Doc('Entity or list of entities to filter alerts by.')
         ] = None,
         statuses: Annotated[
-            Union[str, list, None], Doc('Status or list of statuses to filter alerts by.')
+            str | list | None, Doc('Status or list of statuses to filter alerts by.')
         ] = None,
         priority: Annotated[
-            Union[str, list, None], Doc('Priority or list of priorities to filter alerts by.')
+            str | list | None, Doc('Priority or list of priorities to filter alerts by.')
         ] = None,
         category: Annotated[
-            Union[PACategory, list[PACategory], None],
+            PACategory | list[PACategory] | None,
             Doc('Category or list of categories to filter alerts by.'),
         ] = None,
         assignee: Annotated[
-            Union[str, list, None],
+            str | list | None,
             Doc('Assignee or list of assignees (uhashes) to filter alerts by.'),
         ] = None,
         created_from: Annotated[
@@ -308,7 +308,7 @@ class PlaybookAlertMgr:
     def update(
         self,
         alert: Annotated[
-            Union[PLAYBOOK_ALERT_TYPE, str], Doc('Playbook alert ADT or alert ID to update.')
+            PLAYBOOK_ALERT_TYPE | str, Doc('Playbook alert ADT or alert ID to update.')
         ],
         priority: Annotated[
             Optional[str], Doc("Updated alert priority (e.g. 'High', 'Low').")
@@ -360,11 +360,11 @@ class PlaybookAlertMgr:
         max_results: Optional[int] = DEFAULT_LIMIT,
         order_by: Optional[str] = None,
         direction: Optional[str] = None,
-        entity: Union[str, list, None] = None,
-        statuses: Union[str, list, None] = None,
-        priority: Union[str, list, None] = None,
-        category: Union[str, list, None] = None,
-        assignee: Union[str, list, None] = None,
+        entity: str | list | None = None,
+        statuses: str | list | None = None,
+        priority: str | list | None = None,
+        category: str | list | None = None,
+        assignee: str | list | None = None,
         created_from: Optional[str] = None,
         created_until: Optional[str] = None,
         updated_from: Optional[str] = None,
@@ -597,8 +597,8 @@ class PlaybookAlertMgr:
     def _process_arg(
         self,
         attr: str,
-        value: Union[int, str, list],
-    ) -> tuple[str, Union[str, list]]:
+        value: int | str | list,
+    ) -> tuple[str, str | list]:
         """Return attribute and value normalized based on type of value.
 
         Args:

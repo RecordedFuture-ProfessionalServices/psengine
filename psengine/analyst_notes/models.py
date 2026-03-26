@@ -13,7 +13,7 @@
 
 import logging
 from datetime import datetime
-from typing import Annotated, Any, Optional, Union
+from typing import Annotated, Any, Optional
 
 from pydantic import BeforeValidator, Field, ValidationError, field_validator, model_validator
 
@@ -80,7 +80,7 @@ class EnvironmentalIssueEvent(PositionEvent):
 
 class ManMadeDisasterEvent(PositionEvent):
     facility: list[IdNameTypeDescription]
-    manmade_disaster: Union[list[IdNameTypeDescription], list[str]]
+    manmade_disaster: list[IdNameTypeDescription] | list[str]
 
 
 class MilitaryManeuverEvent(PositionEvent):
@@ -180,7 +180,7 @@ class Attributes(RFBaseModel):
     validated_on: Optional[datetime] = None
     note_entities: Optional[list[IdNameTypeDescription]] = []
     context_entities: Optional[list[IdNameTypeDescription]] = []
-    topic: Optional[Union[list[IdNameTypeDescription], IdNameTypeDescription]] = []
+    topic: Optional[list[IdNameTypeDescription] | IdNameTypeDescription] = []
     labels: Optional[list[IdNameTypeDescription]] = []
     validation_urls: Optional[list[IdNameTypeDescription]] = []
     diamond_model: Optional[list[DiamondModel]] = []
@@ -200,7 +200,7 @@ class PreviewAttributesIn(RFBaseModel):
     note_entities: Optional[list[str]] = []
     context_entities: Optional[list[str]] = []
     topic: Annotated[
-        Union[list[str], str, None],
+        list[str] | str | None,
         BeforeValidator(Validators.convert_str_to_list),
     ] = []
     labels: Optional[list[str]] = []

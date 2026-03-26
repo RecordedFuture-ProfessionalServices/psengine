@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -45,7 +45,7 @@ class EntityListMgr:
     def fetch(
         self,
         list_: Annotated[
-            Union[str, tuple[str, str]], Doc('List string ID or tuple of (name, type).')
+            str | tuple[str, str], Doc('List string ID or tuple of (name, type).')
         ],
     ) -> Annotated[EntityList, Doc('RFList object for the given list ID.')]:
         """Get a list by its ID. Use this method to retrieve list info.
@@ -138,7 +138,7 @@ class EntityListMgr:
         ]
 
     @debug_call
-    def _resolve_list_id(self, list_: Union[str, tuple[str, str]]) -> str:
+    def _resolve_list_id(self, list_: str | tuple[str, str]) -> str:
         """Resolves a list name to a list ID.
 
         Args:

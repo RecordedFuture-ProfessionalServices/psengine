@@ -13,7 +13,7 @@
 
 import logging
 from itertools import chain
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import Field, validate_call
 from typing_extensions import Doc
@@ -65,7 +65,7 @@ class ClassicAlertMgr:
             Doc('Filter on status, such as: `New`, `Resolved`, `Pending`, `Dismissed`.'),
         ] = None,
         rule_id: Annotated[
-            Union[str, list[str], None], Doc('Filter by a specific Alert Rule ID.')
+            str | list[str] | None, Doc('Filter by a specific Alert Rule ID.')
         ] = None,
         freetext: Annotated[Optional[str], Doc('Filter by a freetext search.')] = None,
         tagged_text: Annotated[
@@ -291,7 +291,7 @@ class ClassicAlertMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=AlertFetchError)
     def fetch_hits(
         self,
-        ids: Annotated[Union[str, list[str]], Doc('One or more alert IDs to fetch.')],
+        ids: Annotated[str | list[str], Doc('One or more alert IDs to fetch.')],
         tagged_text: Annotated[
             Optional[bool],
             Doc('Entities in the alert title and message body will be marked up with entity IDs.'),
@@ -366,7 +366,7 @@ class ClassicAlertMgr:
     def fetch_rules(
         self,
         freetext: Annotated[
-            Union[str, list[str], None], Doc('Filter by a freetext search.')
+            str | list[str] | None, Doc('Filter by a freetext search.')
         ] = None,
         max_results: Annotated[
             int, Doc('Maximum number of rules to return. Maximum 1000.')
@@ -426,7 +426,7 @@ class ClassicAlertMgr:
     @validate_call
     def update_status(
         self,
-        ids: Annotated[Union[str, list[str]], Doc('One or more alert IDs.')],
+        ids: Annotated[str | list[str], Doc('One or more alert IDs.')],
         status: Annotated[str, Doc('Status to update to.')],
     ):
         """Update the status of one or several alerts.

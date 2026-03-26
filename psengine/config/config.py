@@ -16,7 +16,7 @@ import os
 import re
 from copy import deepcopy
 from pathlib import Path
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import Field, Secret, field_validator, validate_call
 from pydantic_settings import (
@@ -86,7 +86,7 @@ class ConfigModel(BaseSettings):
         ```
     """
 
-    config_path: Union[str, Path, None] = None
+    config_path: str | Path | None = None
     model_config = SettingsConfigDict(arbitrary_types_allowed=True, extra='allow', frozen=True)
 
     platform_id: Optional[str] = Field(default=None, pattern=PLAT_REGEX, examples=['Splunk/8.0.0'])
@@ -97,7 +97,7 @@ class ConfigModel(BaseSettings):
     https_proxy: Optional[str] = None
     client_ssl_verify: Optional[bool] = SSL_VERIFY
     client_basic_auth: Optional[tuple[str, str]] = None
-    client_cert: Optional[Union[str, tuple[str, str]]] = None
+    client_cert: Optional[str | tuple[str, str]] = None
     client_timeout: Optional[int] = REQUEST_TIMEOUT
     client_retries: Optional[int] = RETRY_TOTAL
     client_backoff_factor: Optional[int] = BACKOFF_FACTOR
@@ -186,9 +186,9 @@ class ConfigModel(BaseSettings):
     def save_config(
         self,
         directory: Annotated[
-            Union[str, Path], Doc('The directory to save the config file into.')
+            str | Path, Doc('The directory to save the config file into.')
         ] = Path(ROOT_DIR) / 'config',
-        file: Annotated[Union[str, Path], Doc('The name of the config file.')] = 'config.json',
+        file: Annotated[str | Path, Doc('The name of the config file.')] = 'config.json',
     ):
         """Write the current values in `Config` to the specified file as JSON.
 
@@ -217,7 +217,7 @@ class Config:
     _instance = None
 
     @classmethod
-    def _get_instance(cls) -> Union[ConfigModel, None]:
+    def _get_instance(cls) -> ConfigModel | None:
         """Get instance of `Config`.
 
         `get_config()` should be used instead of calling this method directly

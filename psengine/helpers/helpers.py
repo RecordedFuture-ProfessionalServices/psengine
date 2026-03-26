@@ -18,12 +18,12 @@ import os
 import platform
 import re
 import sys
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 from inspect import getmodule, isclass, signature
 from pathlib import Path
-from typing import Annotated, Callable, Optional, Union
+from typing import Annotated, Optional
 
 from dateutil.parser import parse as date_parse
 from pydantic import BaseModel
@@ -111,7 +111,7 @@ def connection_exceptions(
 
 def dump_models(
     models: Annotated[
-        Union[BaseModel, list[BaseModel]],
+        BaseModel | list[BaseModel],
         Doc('A Pydantic model or list of models to serialize.'),
     ],
 ) -> Annotated[list[str], Doc('List of models serialized as JSON strings.')]:
@@ -281,7 +281,7 @@ class OSHelpers:
 
     @staticmethod
     def mkdir(
-        path: Annotated[Union[str, Path], Doc('Path to directory to create.')],
+        path: Annotated[str | Path, Doc('Path to directory to create.')],
     ) -> Annotated[Path, Doc('Path to the directory created.')]:
         """Safely create a directory.
 
@@ -313,7 +313,7 @@ class FileHelpers:
 
     @staticmethod
     def read_csv(
-        csv_file: Annotated[Union[str, Path], Doc('Path to CSV file.')],
+        csv_file: Annotated[str | Path, Doc('Path to CSV file.')],
         as_dict: Annotated[bool, Doc('Return rows as dictionaries keyed by header.')] = False,
         single_column: Annotated[bool, Doc('Return only first column values as strings.')] = False,
     ) -> Annotated[list, Doc('List of rows from the CSV file.')]:
@@ -383,7 +383,7 @@ class FileHelpers:
     @staticmethod
     def write_file(
         to_write: Annotated[str, Doc('Content to write to file.')],
-        output_directory: Annotated[Union[str, Path], Doc('Directory to write the file into.')],
+        output_directory: Annotated[str | Path, Doc('Directory to write the file into.')],
         fname: Annotated[str, Doc('Name of the file to write.')],
     ) -> Annotated[Path, Doc('Path to the file written.')]:
         """Write string content to a file.
@@ -461,8 +461,8 @@ class Validators:
 
     @staticmethod
     def convert_str_to_list(
-        value: Annotated[Union[str, list, None], Doc('String or list to convert.')],
-    ) -> Annotated[Union[list, None], Doc('Converted list with None values removed.')]:
+        value: Annotated[str | list | None, Doc('String or list to convert.')],
+    ) -> Annotated[list | None, Doc('Converted list with None values removed.')]:
         """Convert value from str to list and remove None values."""
         if value:
             value = value if isinstance(value, list) else [value]
@@ -483,9 +483,9 @@ class Validators:
     @staticmethod
     def check_uhash_prefix(
         value: Annotated[
-            Union[str, list], Doc('String or list of strings to check for uhash prefix.')
+            str | list, Doc('String or list of strings to check for uhash prefix.')
         ],
-    ) -> Annotated[Union[str, list], Doc("String or list with 'uhash:' prefix ensured.")]:
+    ) -> Annotated[str | list, Doc("String or list with 'uhash:' prefix ensured.")]:
         """Validate that all fields start with 'uhash:' and add it if missing."""
         uhash = 'uhash:'
         if isinstance(value, str):

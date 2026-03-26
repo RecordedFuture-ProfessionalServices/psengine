@@ -13,7 +13,7 @@
 
 
 import logging
-from typing import Annotated, Literal, Optional, Union
+from typing import Annotated, Literal, Optional
 
 from pydantic import AfterValidator, Field, validate_call
 from typing_extensions import Doc
@@ -150,7 +150,7 @@ class AttackSurfaceMgr:
             Optional[str], Doc("""Filter on the name of the asset(IP address or domain).""")
         ] = None,
         asset_apex_domain: Annotated[
-            Optional[Union[str, list[str]]],
+            Optional[str | list[str]],
             Doc(
                 """Filter on the apex domain of the asset (example: example.com).
                 Pass a single value or a list."""
@@ -184,12 +184,12 @@ class AttackSurfaceMgr:
             ),
         ] = None,
         exposure_severity: Annotated[
-            Optional[Union[ExposureSeverity, list[ExposureSeverity]]],
+            Optional[ExposureSeverity | list[ExposureSeverity]],
             Doc("""Filter assets by exposure severity.
             Pass a single value or a list to match any of the provided severities."""),
         ] = None,
         exposure_signature_id: Annotated[
-            Optional[Union[str, list[str]]],
+            Optional[str | list[str]],
             Doc("""Filter assets by ASI Signature ID. Pass a single ID or a list.
             Some signatures align with CVEs, e.g. "cve-2024-6387" or "cve-OpenSSH"."""),
         ] = None,
@@ -210,27 +210,27 @@ class AttackSurfaceMgr:
             Use None for an open-ended bound."""),
         ] = None,
         open_port_number: Annotated[
-            Optional[Union[int, list[int]]],
+            Optional[int | list[int]],
             Doc(
                 """Filter for assets which have an open port with the provided number (e.g. 80)."""
             ),
         ] = None,
         open_port_service: Annotated[
-            Optional[Union[str, list[str]]],
+            Optional[str | list[str]],
             Doc(
                 """Filter for assets which have an open port with the provided service (e.g. http,
                 ftp, rdp)."""
             ),
         ] = None,
         open_port_protocol: Annotated[
-            Optional[Union[str, list[str]]],
+            Optional[str | list[str]],
             Doc(
                 """Filter for assets which have an open port with the provided protocol (e.g. tcp,
                 udp)."""
             ),
         ] = None,
         technology_name: Annotated[
-            Optional[Union[str, list[str]]],
+            Optional[str | list[str]],
             Doc(
                 """Filter for the name of a technology found on the asset. Could be directly
                 attached to the port (nginx, etc) or a web technology (e.g. 'jQuery',
@@ -238,7 +238,7 @@ class AttackSurfaceMgr:
             ),
         ] = None,
         certificate_issuer: Annotated[
-            Optional[Union[str, list[str]]],
+            Optional[str | list[str]],
             Doc(
                 """Filter where the certificate (or in the chain) issuer's common name
                 or organization matches the provided value"""
@@ -315,19 +315,19 @@ class AttackSurfaceMgr:
         quick_search: Optional[str] = None,
         asset_id: Optional[str] = None,
         asset_name: Optional[str] = None,
-        asset_apex_domain: Optional[Union[str, list[str]]] = None,
+        asset_apex_domain: Optional[str | list[str]] = None,
         asset_type: Optional[AssetType] = None,
         asset_discovered_date: Optional[tuple[Optional[str], Optional[str]]] = None,
         custom_tags: Optional[list[str]] = None,
         is_static_asset: Optional[bool] = None,
-        open_port_number: Optional[Union[int, list[int]]] = None,
-        open_port_service: Optional[Union[str, list[str]]] = None,
-        open_port_protocol: Optional[Union[str, list[str]]] = None,
-        technology_name: Optional[Union[str, list[str]]] = None,
-        certificate_issuer: Optional[Union[str, list[str]]] = None,
+        open_port_number: Optional[int | list[int]] = None,
+        open_port_service: Optional[str | list[str]] = None,
+        open_port_protocol: Optional[str | list[str]] = None,
+        technology_name: Optional[str | list[str]] = None,
+        certificate_issuer: Optional[str | list[str]] = None,
         is_responsive: Optional[bool] = None,
-        exposure_severity: Optional[Union[ExposureSeverity, list[ExposureSeverity]]] = None,
-        exposure_signature_id: Optional[Union[str, list[str]]] = None,
+        exposure_severity: Optional[ExposureSeverity | list[ExposureSeverity]] = None,
+        exposure_signature_id: Optional[str | list[str]] = None,
         exposure_score: Optional[
             Annotated[
                 tuple[Annotated[int, Field(ge=0, le=100)], Annotated[int, Field(ge=0, le=100)]],

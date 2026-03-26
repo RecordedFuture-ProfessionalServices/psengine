@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 from urllib.parse import quote
 
 from pydantic import Field, validate_call
@@ -45,7 +45,7 @@ class EntityMatchMgr:
         self,
         entity_name: Annotated[str, Doc('Name of the entity.')],
         entity_type: Annotated[
-            Optional[Union[list, str]], Doc('Type or list of types of the entity, if known.')
+            Optional[list | str], Doc('Type or list of types of the entity, if known.')
         ] = None,
         limit: Annotated[int, Doc('Maximum number of matches to return.')] = DEFAULT_LIMIT,
     ) -> Annotated[list[ResolvedEntity], Doc('List of deduplicated resolved entity matches.')]:
@@ -116,7 +116,7 @@ class EntityMatchMgr:
     def resolve_entity_ids(
         self,
         entities: Annotated[
-            Union[list[str], list[tuple[str, str]]],
+            list[str] | list[tuple[str, str]],
             Doc('List of entity names or (name, type) tuples.'),
         ],
         limit: Annotated[

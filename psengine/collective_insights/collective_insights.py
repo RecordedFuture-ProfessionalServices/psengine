@@ -13,7 +13,7 @@
 
 import json
 import logging
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -55,10 +55,10 @@ class CollectiveInsights:
         incident_name: Annotated[Optional[str], Doc('The name of the incident.')] = None,
         incident_type: Annotated[Optional[str], Doc('The type of the incident.')] = None,
         mitre_codes: Annotated[
-            Union[list[str], str, None], Doc('MITRE ATT&CK technique or tactic codes.')
+            list[str] | str | None, Doc('MITRE ATT&CK technique or tactic codes.')
         ] = None,
         malwares: Annotated[
-            Union[list[str], str, None], Doc('Associated malware family or names.')
+            list[str] | str | None, Doc('Associated malware family or names.')
         ] = None,
         **kwargs,
     ) -> Annotated[Insight, Doc('The created Insight object.')]:
@@ -105,7 +105,7 @@ class CollectiveInsights:
     def submit(
         self,
         insight: Annotated[
-            Union[Insight, list[Insight]], Doc('A detection or list of detections to submit.')
+            Insight | list[Insight], Doc('A detection or list of detections to submit.')
         ],
         debug: Annotated[
             bool, Doc('Whether the submission should appear in the SecOPS dashboard.')

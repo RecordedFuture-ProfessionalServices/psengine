@@ -12,7 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional, Union
+from typing import Optional
 
 from pydantic import Field
 
@@ -111,7 +111,7 @@ class ReferenceCount(RFBaseModel):
 
 class Metric(RFBaseModel):
     type_: str = Field(alias='type')
-    value: Union[int, float]
+    value: int | float
 
 
 ###########################################################
@@ -280,8 +280,8 @@ class Certificate(RFBaseModel):
 
 class ForwardDNS(RFBaseModel):
     hostname: Optional[str] = None
-    last_seen: Union[datetime, None] = Field(alias='lastSeen')
-    first_seen: Union[datetime, None] = Field(alias='firstSeen')
+    last_seen: datetime | None = Field(alias='lastSeen')
+    first_seen: datetime | None = Field(alias='firstSeen')
 
 
 class DNS(RFBaseModel):
@@ -291,11 +291,11 @@ class DNS(RFBaseModel):
 
 class Port(RFBaseModel):
     name: Optional[str] = None
-    version: Union[str, None]
+    version: str | None
     port: int
-    extra_info: Union[str, None] = Field(alias='extraInfo')
+    extra_info: str | None = Field(alias='extraInfo')
     protocol: str
-    product: Union[str, None]
+    product: str | None
 
 
 class DnsPortCert(RFBaseModel):

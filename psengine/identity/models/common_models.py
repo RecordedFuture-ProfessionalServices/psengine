@@ -13,7 +13,7 @@
 
 from datetime import datetime
 from enum import Enum
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import AfterValidator, BeforeValidator, Field, field_validator, model_validator
 from pydantic.networks import IPvAnyAddress
@@ -141,7 +141,7 @@ class Compromise(RFBaseModel):
     timezone: Optional[str] = None
     computer_name: Optional[str] = None
     uac: Optional[str] = None
-    antivirus: Union[str, list[str], None] = None
+    antivirus: str | list[str] | None = None
 
 
 class Breach(RFBaseModel):

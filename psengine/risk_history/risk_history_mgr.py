@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -42,7 +42,7 @@ class RiskHistoryMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=RiskHistoryError)
     def search(
         self,
-        entities: Annotated[Union[str, list[str]], Doc('Entities to search.')],
+        entities: Annotated[str | list[str], Doc('Entities to search.')],
         from_: Annotated[Optional[str], Doc('ISO8691 date or relative date like -1d')] = None,
         to: Annotated[Optional[str], Doc('ISO8691 date or relative date like -1d')] = None,
     ) -> Annotated[list[RiskHistory], Doc('A list of history information.')]:

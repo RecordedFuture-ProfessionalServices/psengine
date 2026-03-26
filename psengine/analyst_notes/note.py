@@ -12,7 +12,7 @@
 ##############################################################################################
 
 from functools import total_ordering
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import Field
 from typing_extensions import Doc
@@ -169,7 +169,7 @@ class AnalystNoteSearchIn(RFBaseModel):
     entity: Optional[str] = None
     author: Optional[str] = None
     title: Optional[str] = None
-    topic: Union[list[str], str, None] = []
+    topic: list[str] | str | None = []
     label: Optional[str] = None
     source: Optional[str] = None
     serialization: str = None

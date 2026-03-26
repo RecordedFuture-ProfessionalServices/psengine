@@ -13,7 +13,7 @@
 
 import json
 import logging
-from typing import Annotated, Union
+from typing import Annotated
 
 from pydantic import validate_call
 from requests import (
@@ -51,10 +51,10 @@ class BaseHTTPClient:
         http_proxy: Annotated[str, Doc('An HTTP proxy URL.')] = None,
         https_proxy: Annotated[str, Doc('An HTTPS proxy URL.')] = None,
         verify: Annotated[
-            Union[str, bool], Doc('An SSL verification flag or path to CA bundle.')
+            str | bool, Doc('An SSL verification flag or path to CA bundle.')
         ] = SSL_VERIFY,
         auth: Annotated[tuple[str, str], Doc('Basic Auth credentials.')] = None,
-        cert: Annotated[Union[str, tuple[str, str], None], Doc('Client certificates.')] = None,
+        cert: Annotated[str | tuple[str, str] | None, Doc('Client certificates.')] = None,
         timeout: Annotated[int, Doc('A request timeout.')] = REQUEST_TIMEOUT,
         retries: Annotated[int, Doc('A number of retries.')] = RETRY_TOTAL,
         backoff_factor: Annotated[int, Doc('A backoff factor.')] = BACKOFF_FACTOR,
@@ -97,11 +97,11 @@ class BaseHTTPClient:
         self,
         method: Annotated[str, Doc('An HTTP method.')],
         url: Annotated[str, Doc('A URL to make the request to.')],
-        data: Annotated[Union[dict, list[dict], bytes, None], Doc('A request body.')] = None,
+        data: Annotated[dict | list[dict] | bytes | None, Doc('A request body.')] = None,
         *,
-        params: Annotated[Union[dict, None], Doc('HTTP query parameters.')] = None,
+        params: Annotated[dict | None, Doc('HTTP query parameters.')] = None,
         headers: Annotated[
-            Union[dict, None],
+            dict | None,
             Doc('If specified, overrides default headers and does not set the token.'),
         ] = None,
         **kwargs,

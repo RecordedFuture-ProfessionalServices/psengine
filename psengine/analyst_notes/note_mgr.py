@@ -14,7 +14,7 @@
 import logging
 import re
 from itertools import chain
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import Field, validate_call
 from typing_extensions import Doc
@@ -70,7 +70,7 @@ class AnalystNoteMgr:
         entity: Annotated[Optional[str], Doc('An entity the note refers to, RF ID.')] = None,
         author: Annotated[Optional[str], Doc('An author of the note, RF ID.')] = None,
         title: Annotated[Optional[str], Doc('A title of the note.')] = None,
-        topic: Annotated[Optional[Union[str, list]], Doc('A topic of the note, RF ID.')] = None,
+        topic: Annotated[Optional[str | list], Doc('A topic of the note, RF ID.')] = None,
         label: Annotated[Optional[str], Doc('A label of the note, by name.')] = None,
         source: Annotated[Optional[str], Doc('The source of the note.')] = None,
         serialization: Annotated[
@@ -190,7 +190,7 @@ class AnalystNoteMgr:
         title: Annotated[str, Doc('The title of the note.')],
         text: Annotated[str, Doc('The text of the note.')],
         published: Annotated[Optional[str], Doc('The date when the note was published.')] = None,
-        topic: Annotated[Union[str, list[str], None], Doc('The topic of the note.')] = None,
+        topic: Annotated[str | list[str] | None, Doc('The topic of the note.')] = None,
         context_entities: Annotated[
             Optional[list[str]], Doc('The context entities of the note.')
         ] = None,
@@ -237,7 +237,7 @@ class AnalystNoteMgr:
         title: Annotated[str, Doc('The title of the note.')],
         text: Annotated[str, Doc('The text of the note.')],
         published: Annotated[Optional[str], Doc('The date when the note was published.')] = None,
-        topic: Annotated[Union[str, list[str], None], Doc('The topic of the note.')] = None,
+        topic: Annotated[str | list[str] | None, Doc('The topic of the note.')] = None,
         context_entities: Annotated[
             Optional[list[str]], Doc('The context entities of the note.')
         ] = None,

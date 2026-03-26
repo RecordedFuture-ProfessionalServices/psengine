@@ -13,7 +13,7 @@
 
 import logging
 from contextlib import suppress
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 from pydantic import Field, validate_call
 from typing_extensions import Doc
@@ -78,7 +78,7 @@ class IdentityMgr:
     def fetch_detections(
         self,
         domains: Annotated[
-            Union[str, list[str], None], Doc('A domain or a list of domains to filter.')
+            str | list[str] | None, Doc('A domain or a list of domains to filter.')
         ] = None,
         created_gte: Annotated[
             Optional[str],
@@ -94,7 +94,7 @@ class IdentityMgr:
             Optional[str], Doc('A detection type to filter by ("workforce", "external").')
         ] = None,
         organization_id: Annotated[
-            Union[list[str], str, None],
+            list[str] | str | None,
             Doc('Organization ID or a list of IDs for multi-org filtering.'),
         ] = None,
         include_enterprise_level: Annotated[
@@ -176,22 +176,22 @@ class IdentityMgr:
             Optional[str],
             Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
         ] = None,
-        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
+        properties: Annotated[str | list[str] | None, Doc('Password properties.')] = None,
         breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
         breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
         dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
         dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
         username_properties: Annotated[
-            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+            str | list[str] | None, Doc("Username properties. Only valid value is 'Email'.")
         ] = None,
         authorization_technologies: Annotated[
-            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+            str | list[str] | None, Doc('Authorization technologies to filter by.')
         ] = None,
         authorization_protocols: Annotated[
-            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+            str | list[str] | None, Doc('Authorization protocols to filter by.')
         ] = None,
         malware_families: Annotated[
-            Union[str, list[str], None], Doc('Known infostealer malware families.')
+            str | list[str] | None, Doc('Known infostealer malware families.')
         ] = None,
         organization_id: Annotated[
             Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
@@ -349,22 +349,22 @@ class IdentityMgr:
             Optional[str],
             Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
         ] = None,
-        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
+        properties: Annotated[str | list[str] | None, Doc('Password properties.')] = None,
         breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
         breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
         dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
         dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
         username_properties: Annotated[
-            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+            str | list[str] | None, Doc("Username properties. Only valid value is 'Email'.")
         ] = None,
         authorization_technologies: Annotated[
-            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+            str | list[str] | None, Doc('Authorization technologies to filter by.')
         ] = None,
         authorization_protocols: Annotated[
-            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+            str | list[str] | None, Doc('Authorization protocols to filter by.')
         ] = None,
         malware_families: Annotated[
-            Union[str, list[str], None], Doc('Known infostealer malware families.')
+            str | list[str] | None, Doc('Known infostealer malware families.')
         ] = None,
         organization_id: Annotated[
             Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
@@ -448,14 +448,14 @@ class IdentityMgr:
     def lookup_credentials(
         self,
         subjects: Annotated[
-            Union[str, list[str], None], Doc('An email or a list of emails to be queried.')
+            str | list[str] | None, Doc('An email or a list of emails to be queried.')
         ] = None,
         subjects_sha1: Annotated[
-            Union[str, list[str], None],
+            str | list[str] | None,
             Doc('A SHA1 hash of a username or email to avoid sending the plain subject.'),
         ] = None,
         subjects_login: Annotated[
-            Union[list[dict[str, str]], list[CredentialSearch], None],
+            list[dict[str, str]] | list[CredentialSearch] | None,
             Doc(
                 'Username details when login is not an email (also requires authorization domain).'
             ),
@@ -472,22 +472,22 @@ class IdentityMgr:
             Optional[str],
             Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
         ] = None,
-        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
+        properties: Annotated[str | list[str] | None, Doc('Password properties.')] = None,
         breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
         breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
         dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
         dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
         username_properties: Annotated[
-            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+            str | list[str] | None, Doc("Username properties. Only valid value is 'Email'.")
         ] = None,
         authorization_technologies: Annotated[
-            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+            str | list[str] | None, Doc('Authorization technologies to filter by.')
         ] = None,
         authorization_protocols: Annotated[
-            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+            str | list[str] | None, Doc('Authorization protocols to filter by.')
         ] = None,
         malware_families: Annotated[
-            Union[str, list[str], None], Doc('Known infostealer malware families.')
+            str | list[str] | None, Doc('Known infostealer malware families.')
         ] = None,
         organization_id: Annotated[
             Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
@@ -572,9 +572,9 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentitySearchError)
     def search_credentials(
         self,
-        domains: Annotated[Union[str, list[str]], Doc('One or more domains to be queried.')],
+        domains: Annotated[str | list[str], Doc('One or more domains to be queried.')],
         domain_types: Annotated[
-            Union[str, list[str], None],
+            str | list[str] | None,
             Doc("Domain type filter: 'Email', 'Authorization', or both."),
         ] = None,
         first_downloaded_gte: Annotated[
@@ -589,22 +589,22 @@ class IdentityMgr:
             Optional[str],
             Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
         ] = None,
-        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
+        properties: Annotated[str | list[str] | None, Doc('Password properties.')] = None,
         breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
         breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
         dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
         dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
         username_properties: Annotated[
-            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+            str | list[str] | None, Doc("Username properties. Only valid value is 'Email'.")
         ] = None,
         authorization_technologies: Annotated[
-            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+            str | list[str] | None, Doc('Authorization technologies to filter by.')
         ] = None,
         authorization_protocols: Annotated[
-            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+            str | list[str] | None, Doc('Authorization protocols to filter by.')
         ] = None,
         malware_families: Annotated[
-            Union[str, list[str], None], Doc('Known infostealer malware families.')
+            str | list[str] | None, Doc('Known infostealer malware families.')
         ] = None,
         organization_id: Annotated[
             Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
@@ -675,7 +675,7 @@ class IdentityMgr:
     def search_dump(
         self,
         names: Annotated[
-            Union[str, list[str]], Doc('The name(s) of a database dump to search for.')
+            str | list[str], Doc('The name(s) of a database dump to search for.')
         ],
         max_results: Annotated[
             Optional[int], Doc('Maximum number of dump records to return.')
@@ -725,7 +725,7 @@ class IdentityMgr:
             bool, Doc('Whether to include infected machine details.')
         ] = True,
         organization_id: Annotated[
-            Union[list[str], str, None], Doc('The org_id(s) in multi-org setup.')
+            list[str] | str | None, Doc('The org_id(s) in multi-org setup.')
         ] = None,
         offset: Annotated[Optional[str], Doc('Offset token for paginated results.')] = None,
         max_results: Annotated[
@@ -786,15 +786,15 @@ class IdentityMgr:
         first_downloaded_gte: Optional[str] = None,
         latest_downloaded_gte: Optional[str] = None,
         exfiltration_date_gte: Optional[str] = None,
-        properties: Union[str, list[str], None] = None,
+        properties: str | list[str] | None = None,
         breach_name: Optional[str] = None,
         breach_date: Optional[str] = None,
         dump_name: Optional[str] = None,
         dump_date: Optional[str] = None,
-        username_properties: Union[str, list[str], None] = None,
-        authorization_technologies: Union[str, list[str], None] = None,
-        authorization_protocols: Union[str, list[str], None] = None,
-        malware_families: Union[str, list[str], None] = None,
+        username_properties: str | list[str] | None = None,
+        authorization_technologies: str | list[str] | None = None,
+        authorization_protocols: str | list[str] | None = None,
+        malware_families: str | list[str] | None = None,
     ) -> FilterIn:
         """Create a query for filtering identity searches.
 
@@ -824,7 +824,7 @@ class IdentityMgr:
 
         return FilterIn.model_validate(query)
 
-    def _process_arg(self, attr: str, value: Union[int, str, list]) -> tuple[str, Union[str, list]]:
+    def _process_arg(self, attr: str, value: int | str | list) -> tuple[str, str | list]:
         """Return attribute and value normalized based on type of value."""
         if attr.startswith(('breach_', 'dump_')):
             prop_field = attr.split('_')[0] + '_properties'
