@@ -260,14 +260,15 @@ class BaseHTTPClient:
 
     def _get_user_agent_header(self):
         os_info = OSHelpers.os_platform()
-        app_id = self.config.app_id or 'app_id unknown'
-        platform_id = self.config.platform_id or 'platform_id unknown'
+        app_id = self.config.app_id or 'app_id/0.0.0'
+        platform_id = self.config.platform_id
         user_agent_list = []
 
         user_agent_list.append(app_id)
         if os_info is not None:
             user_agent_list.append(f'({os_info})')
         user_agent_list.append(SDK_ID)
-        user_agent_list.append(platform_id)
+        if platform_id:
+            user_agent_list.append(platform_id)
 
         return ' '.join(user_agent_list)

@@ -612,7 +612,7 @@ class Test_RFClient:
         headers = client._prepare_headers()
 
         expected_headers = {
-            'User-Agent': 'app_id unknown (Linux) SDK_ID platform_id unknown',
+            'User-Agent': 'app_id/0.0.0 (Linux) SDK_ID',
             'Content-Type': 'application/json',
             'accept': 'application/json',
             'X-RFToken': rf_token,
@@ -629,7 +629,7 @@ class Test_RFClient:
         headers = rfc._prepare_headers()
 
         expected_headers = {
-            'User-Agent': 'app_id unknown (Linux) SDK_ID platform_id unknown',
+            'User-Agent': 'app_id/0.0.0 (Linux) SDK_ID',
             'Content-Type': 'application/json',
             'accept': 'application/json',
         }
