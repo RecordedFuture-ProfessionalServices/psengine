@@ -674,9 +674,7 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentitySearchError)
     def search_dump(
         self,
-        names: Annotated[
-            str | list[str], Doc('The name(s) of a database dump to search for.')
-        ],
+        names: Annotated[str | list[str], Doc('The name(s) of a database dump to search for.')],
         max_results: Annotated[
             Optional[int], Doc('Maximum number of dump records to return.')
         ] = Field(le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),

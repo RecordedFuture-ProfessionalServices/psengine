@@ -185,9 +185,10 @@ class ConfigModel(BaseSettings):
     @validate_call
     def save_config(
         self,
-        directory: Annotated[
-            str | Path, Doc('The directory to save the config file into.')
-        ] = Path(ROOT_DIR) / 'config',
+        directory: Annotated[str | Path, Doc('The directory to save the config file into.')] = Path(
+            ROOT_DIR
+        )
+        / 'config',
         file: Annotated[str | Path, Doc('The name of the config file.')] = 'config.json',
     ):
         """Write the current values in `Config` to the specified file as JSON.

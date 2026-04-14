@@ -482,9 +482,7 @@ class Validators:
 
     @staticmethod
     def check_uhash_prefix(
-        value: Annotated[
-            str | list, Doc('String or list of strings to check for uhash prefix.')
-        ],
+        value: Annotated[str | list, Doc('String or list of strings to check for uhash prefix.')],
     ) -> Annotated[str | list, Doc("String or list with 'uhash:' prefix ensured.")]:
         """Validate that all fields start with 'uhash:' and add it if missing."""
         uhash = 'uhash:'

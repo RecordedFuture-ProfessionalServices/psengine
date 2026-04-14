@@ -408,9 +408,7 @@ class RFClient(BaseHTTPClient):
         except AttributeError:
             return str(path)
 
-    def _get_matches(
-        self, results_expr: jsonpath_ng.jsonpath.Fields, results: list | dict
-    ) -> list:
+    def _get_matches(self, results_expr: jsonpath_ng.jsonpath.Fields, results: list | dict) -> list:
         """Get matches from results.
 
         Args:

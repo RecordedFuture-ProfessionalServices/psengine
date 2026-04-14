@@ -62,9 +62,7 @@ def save_note(
     )
 
 
-def _save_attachment(
-    note_id: str, data: bytes | str, ext: str, output_directory: str
-) -> None:
+def _save_attachment(note_id: str, data: bytes | str, ext: str, output_directory: str) -> None:
     """Save attachment from bytes or note itself from json.
 
     Raises:

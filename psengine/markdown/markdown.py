@@ -146,9 +146,7 @@ class MarkdownMaker:
     def add_section(
         self,
         title: Annotated[str, Doc('Title of the section to add.')],
-        content: Annotated[
-            list[dict] | list[str] | str, Doc('Content to include in the section.')
-        ],
+        content: Annotated[list[dict] | list[str] | str, Doc('Content to include in the section.')],
     ) -> None:
         """Add a section to the markdown."""
         self.sections.append(self.validate_section(title, content))

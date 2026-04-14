@@ -44,9 +44,7 @@ class EntityListMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
     def fetch(
         self,
-        list_: Annotated[
-            str | tuple[str, str], Doc('List string ID or tuple of (name, type).')
-        ],
+        list_: Annotated[str | tuple[str, str], Doc('List string ID or tuple of (name, type).')],
     ) -> Annotated[EntityList, Doc('RFList object for the given list ID.')]:
         """Get a list by its ID. Use this method to retrieve list info.
 

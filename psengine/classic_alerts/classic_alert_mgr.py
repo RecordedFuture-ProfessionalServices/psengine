@@ -365,9 +365,7 @@ class ClassicAlertMgr:
     @validate_call
     def fetch_rules(
         self,
-        freetext: Annotated[
-            str | list[str] | None, Doc('Filter by a freetext search.')
-        ] = None,
+        freetext: Annotated[str | list[str] | None, Doc('Filter by a freetext search.')] = None,
         max_results: Annotated[
             int, Doc('Maximum number of rules to return. Maximum 1000.')
         ] = Field(default=DEFAULT_LIMIT, ge=1, le=1000),

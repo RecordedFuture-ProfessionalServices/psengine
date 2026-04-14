@@ -185,9 +185,7 @@ class GeoLocation(RFBaseModel):
 
 class CertificatePropertiesFilter(RFBaseModel):
     certificate_subject: Optional[ContainsFilter | EqFilter[str] | InFilter[str]] = None
-    certificate_subject_alt_name: Optional[ContainsFilter | EqFilter[str] | InFilter[str]] = (
-        None
-    )
+    certificate_subject_alt_name: Optional[ContainsFilter | EqFilter[str] | InFilter[str]] = None
     certificate_sha256: Optional[EqFilter[str]] = None
     certificate_expires_at: Optional[RangeFilter[date]] = None
     certificate_issued_at: Optional[RangeFilter[date]] = None
@@ -270,9 +268,7 @@ class AssetSearchRequest(RFBaseModel):
     filter_: Optional[AssetSearchFilterIn] = Field(None, alias='filter')
     pagination: Optional[Pagination] = None
     enrichments: Optional[list[AssetEnrichment]] = None
-    sort: Optional[
-        list[AssetSortField] | list[list[AssetSortField | SortDirection]]
-    ] = None
+    sort: Optional[list[AssetSortField] | list[list[AssetSortField | SortDirection]]] = None
 
 
 class TechnologyWithInstances(RFBaseModel):
