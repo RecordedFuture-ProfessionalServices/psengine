@@ -20,7 +20,7 @@ import re
 import sys
 from collections.abc import Callable, Iterable
 from concurrent.futures import ThreadPoolExecutor
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from inspect import getmodule, isclass, signature
 from pathlib import Path
 from typing import Annotated
@@ -192,7 +192,7 @@ class TimeHelpers:
                 f"Invalid relative time '{relative_time}'. Accepted format: [-|][integer][h|d]",
             )
         relative_time = match.groups()[-1]
-        time_now = datetime.now(UTC)
+        time_now = datetime.now(timezone.utc)
         digit = int(re.findall(r'^\d+', relative_time)[0])
         if relative_time.endswith('d'):
             subtracted = (time_now - timedelta(days=digit)).strftime('%Y-%m-%dT%H:%M')

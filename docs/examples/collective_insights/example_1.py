@@ -1,4 +1,4 @@
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 from psengine.collective_insights import (
     DETECTION_SUB_TYPE_SIGMA,
@@ -9,7 +9,7 @@ from psengine.collective_insights import (
 
 ci = CollectiveInsights()
 
-now = datetime.now(UTC).isoformat()[:-3] + 'Z'
+now = datetime.now(timezone.utc).isoformat()[:-3] + 'Z'
 
 insight1 = ci.create(
     ioc_value='fbee00cb1d1ea4d7e0604436d9a36def71a9f3be804f1e2b8d117fd5d35aeabc',
