@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.6.0 - 
+
+### Added
+
+- Added support for Python 3.14
+
+### Removed
+
+- Removed support for Python 3.9
+
 ## v2.5.1 - 2026-03-26
 
 ### Fixed
