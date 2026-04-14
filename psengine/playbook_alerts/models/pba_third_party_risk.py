@@ -64,8 +64,7 @@ class Evidence(RFBaseModel):
     data: list
 
     @model_validator(mode='after')
-    @classmethod
-    def check_data_type(cls, evidence: 'Evidence'):
+    def check_data_type(self):
         """Check if evidence type is supported and validate it."""
         type_mapping = {
             'ip_rule': IpRule,
@@ -75,12 +74,12 @@ class Evidence(RFBaseModel):
             'hosts_communication': ObservedNetworkTraffic,
             'summary_string': SummaryString,
         }
-        evidence.data = [
+        self.data = [
             model.model_validate(obj)
-            for obj in evidence.data
-            if (model := type_mapping.get(evidence.type_))
+            for obj in self.data
+            if (model := type_mapping.get(self.type_))
         ]
-        return evidence
+        return self
 
 
 class TPRAssessment(RFBaseModel):

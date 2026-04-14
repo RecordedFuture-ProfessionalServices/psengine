@@ -94,12 +94,11 @@ class PasswordHash(RFBaseModel):
     hash_prefix: str | None = None
 
     @model_validator(mode='after')
-    @classmethod
-    def check_hash_fields_present(cls, data):
+    def check_hash_fields_present(self):
         """Validates at least one of hash or hash_prefix is supplied."""
-        if not (data.hash_ or data.hash_prefix):
+        if not (self.hash_ or self.hash_prefix):
             raise ValueError('One of `hash` or `hash_prefix` must be supplied')
-        return data
+        return self
 
 
 class Cookie(RFBaseModel):
