@@ -12,7 +12,6 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional
 
 from pydantic import Field, model_validator
 
@@ -22,16 +21,16 @@ from ..models.panel_status import PanelStatus
 
 
 class TPRPanelStatus(PanelStatus):
-    risk_score: Optional[int] = None
-    entity_criticality: Optional[str] = None
-    targets: Optional[list[ResolvedEntity]] = []
+    risk_score: int | None = None
+    entity_criticality: str | None = None
+    targets: list[ResolvedEntity] | None = []
 
 
 class ObservedNetworkTraffic(RFBaseModel):
     recent_timestamp: datetime
-    malware_family: Optional[str] = None
-    client_ip_address: Optional[str] = None
-    malware_ip_address: Optional[str] = None
+    malware_family: str | None = None
+    client_ip_address: str | None = None
+    malware_ip_address: str | None = None
 
 
 class SummaryString(RFBaseModel):
@@ -40,11 +39,11 @@ class SummaryString(RFBaseModel):
 
 
 class Reference(RFBaseModel):
-    title: Optional[str] = None
-    fragment: Optional[str] = None
+    title: str | None = None
+    fragment: str | None = None
     published: datetime
-    document_url: Optional[str] = None
-    source: Optional[str] = None
+    document_url: str | None = None
+    source: str | None = None
 
 
 class IpRule(RFBaseModel):
@@ -92,4 +91,4 @@ class TPRAssessment(RFBaseModel):
 
 
 class TPRPanelEvidence(RFBaseModel):
-    assessments: Optional[list[TPRAssessment]] = []
+    assessments: list[TPRAssessment] | None = []

@@ -15,7 +15,7 @@ import logging
 import time
 from datetime import datetime
 from functools import total_ordering
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import ConfigDict, Field, validate_call
 from typing_extensions import Doc
@@ -66,7 +66,7 @@ class ListEntity(RFBaseModel):
     """Validate data received from `/{listId}/entities` endpoint."""
 
     entity: IdNameType
-    context: Optional[dict] = None
+    context: dict | None = None
     status: str
     added: datetime
 
@@ -99,8 +99,8 @@ class EntityList(RFBaseModel):
     updated: datetime
     owner_id: str
     owner_name: str
-    organisation_id: Optional[str] = None
-    organisation_name: Optional[str] = None
+    organisation_id: str | None = None
+    organisation_name: str | None = None
     owner_organisation_details: OwnerOrganisationDetails = Field(
         default_factory=OwnerOrganisationDetails
     )
@@ -162,7 +162,7 @@ class EntityList(RFBaseModel):
         entity: Annotated[
             str | tuple[str, str], Doc('ID or (name, type) tuple of the entity to add.')
         ],
-        context: Annotated[Optional[dict], Doc('Context object for the entity.')] = None,
+        context: Annotated[dict | None, Doc('Context object for the entity.')] = None,
     ) -> Annotated[
         ListEntityOperationResponse, Doc('Response from the `list/{id}/entity/add` endpoint.')
     ]:
@@ -408,7 +408,7 @@ class EntityList(RFBaseModel):
             str | tuple[str, str], Doc('ID or (name, type) tuple of the entity to process.')
         ],
         op_name: Annotated[str, Doc("Operation to perform. Must be 'added' or 'removed'.")],
-        context: Annotated[Optional[dict], Doc('Optional context object for the entity.')] = None,
+        context: Annotated[dict | None, Doc('Optional context object for the entity.')] = None,
     ) -> Annotated[
         ListEntityOperationResponse,
         Doc('Response from the `list/{id}/entity/[add|remove]` endpoint.'),

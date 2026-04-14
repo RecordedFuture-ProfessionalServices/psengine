@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -43,8 +43,8 @@ class RiskHistoryMgr:
     def search(
         self,
         entities: Annotated[str | list[str], Doc('Entities to search.')],
-        from_: Annotated[Optional[str], Doc('ISO8691 date or relative date like -1d')] = None,
-        to: Annotated[Optional[str], Doc('ISO8691 date or relative date like -1d')] = None,
+        from_: Annotated[str | None, Doc('ISO8691 date or relative date like -1d')] = None,
+        to: Annotated[str | None, Doc('ISO8691 date or relative date like -1d')] = None,
     ) -> Annotated[list[RiskHistory], Doc('A list of history information.')]:
         """Search for the risk history of one or more entities.
 

@@ -11,7 +11,6 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 from functools import total_ordering
-from typing import Optional
 
 from pydantic import Field
 
@@ -40,15 +39,15 @@ from .models.lookup import (
 class EnrichedIP(BaseEnrichedEntity):
     """IP Enriched by `/v2/ip/{ip}` endpoint. Inherit behaviours from `BaseEnrichedEntity`."""
 
-    risk: Optional[EntityRisk] = None
-    links: Optional[Links] = None
-    enterprise_lists: Optional[list[EnterpriseList]] = Field(alias='enterpriseLists', default=None)
-    threat_list: Optional[list[IdNameTypeDescription]] = Field(alias='threatLists', default=None)
-    risk_mapping: Optional[list[RiskMapping]] = Field(alias='riskMapping', default=None)
-    dns_port_cert: Optional[DnsPortCert] = Field(alias='dnsPortCert', default=None)
-    location: Optional[IPLocation] = None
-    risky_cidr_ips: Optional[list[RiskyCIDRPIP]] = Field(alias='riskyCIDRIPs', default=None)
-    scanner: Optional[Scanner] = None
+    risk: EntityRisk | None = None
+    links: Links | None = None
+    enterprise_lists: list[EnterpriseList] | None = Field(alias='enterpriseLists', default=None)
+    threat_list: list[IdNameTypeDescription] | None = Field(alias='threatLists', default=None)
+    risk_mapping: list[RiskMapping] | None = Field(alias='riskMapping', default=None)
+    dns_port_cert: DnsPortCert | None = Field(alias='dnsPortCert', default=None)
+    location: IPLocation | None = None
+    risky_cidr_ips: list[RiskyCIDRPIP] | None = Field(alias='riskyCIDRIPs', default=None)
+    scanner: Scanner | None = None
 
 
 class EnrichedDomain(BaseEnrichedEntity):
@@ -56,11 +55,11 @@ class EnrichedDomain(BaseEnrichedEntity):
     Inherit behaviours from `BaseEnrichedEntity`.
     """
 
-    risk: Optional[EntityRisk] = None
-    links: Optional[Links] = None
-    enterprise_lists: Optional[list[EnterpriseList]] = Field(alias='enterpriseLists', default=None)
-    threat_lists: Optional[list[IdNameTypeDescription]] = Field(alias='threatLists', default=None)
-    risk_mapping: Optional[list[RiskMapping]] = Field(alias='riskMapping', default=None)
+    risk: EntityRisk | None = None
+    links: Links | None = None
+    enterprise_lists: list[EnterpriseList] | None = Field(alias='enterpriseLists', default=None)
+    threat_lists: list[IdNameTypeDescription] | None = Field(alias='threatLists', default=None)
+    risk_mapping: list[RiskMapping] | None = Field(alias='riskMapping', default=None)
 
 
 class EnrichedURL(BaseEnrichedEntity):
@@ -68,10 +67,10 @@ class EnrichedURL(BaseEnrichedEntity):
     Inherit behaviours from `BaseEnrichedEntity`.
     """
 
-    risk: Optional[EntityRisk] = None
-    links: Optional[Links] = None
-    enterprise_lists: Optional[list[EnterpriseList]] = Field(alias='enterpriseLists', default=None)
-    risk_mapping: Optional[list[RiskMapping]] = Field(alias='riskMapping', default=None)
+    risk: EntityRisk | None = None
+    links: Links | None = None
+    enterprise_lists: list[EnterpriseList] | None = Field(alias='enterpriseLists', default=None)
+    risk_mapping: list[RiskMapping] | None = Field(alias='riskMapping', default=None)
 
 
 class EnrichedHash(BaseEnrichedEntity):
@@ -79,13 +78,13 @@ class EnrichedHash(BaseEnrichedEntity):
     Inherit behaviours from `BaseEnrichedEntity`.
     """
 
-    risk: Optional[EntityRisk] = None
-    links: Optional[Links] = None
-    enterprise_lists: Optional[list[EnterpriseList]] = Field(alias='enterpriseLists', default=None)
-    threat_list: Optional[list[IdNameTypeDescription]] = Field(alias='threatLists', default=None)
-    risk_mapping: Optional[list[RiskMapping]] = Field(alias='riskMapping', default=None)
-    hash_algorithm: Optional[str] = Field(alias='hashAlgorithm', default=None)
-    file_hashes: Optional[list[str]] = Field(alias='fileHashes', default=None)
+    risk: EntityRisk | None = None
+    links: Links | None = None
+    enterprise_lists: list[EnterpriseList] | None = Field(alias='enterpriseLists', default=None)
+    threat_list: list[IdNameTypeDescription] | None = Field(alias='threatLists', default=None)
+    risk_mapping: list[RiskMapping] | None = Field(alias='riskMapping', default=None)
+    hash_algorithm: str | None = Field(alias='hashAlgorithm', default=None)
+    file_hashes: list[str] | None = Field(alias='fileHashes', default=None)
 
 
 class EnrichedVulnerability(BaseEnrichedEntity):
@@ -93,24 +92,24 @@ class EnrichedVulnerability(BaseEnrichedEntity):
     Inherit behaviours from `BaseEnrichedEntity`.
     """
 
-    risk: Optional[EntityRisk] = None
-    links: Optional[Links] = None
-    enterprise_lists: Optional[list[EnterpriseList]] = Field(alias='enterpriseLists', default=None)
-    threat_list: Optional[list[IdNameTypeDescription]] = Field(alias='threatLists', default=None)
-    risk_mapping: Optional[list[RiskMapping]] = Field(alias='riskMapping', default=None)
-    common_names: Optional[list[str]] = Field(alias='commonNames', default=None)
-    lifecycle_stage: Optional[str] = Field(alias='lifecycleStage', default=None)
-    linked_malware: Optional[LinkedMalware] = Field(alias='linkedMalware', default=None)
-    cpe: Optional[list[str]] = None
-    cpe_22_uri: Optional[list[str]] = Field(alias='cpe22uri', default=None)
-    cvss: Optional[CVSS] = None
+    risk: EntityRisk | None = None
+    links: Links | None = None
+    enterprise_lists: list[EnterpriseList] | None = Field(alias='enterpriseLists', default=None)
+    threat_list: list[IdNameTypeDescription] | None = Field(alias='threatLists', default=None)
+    risk_mapping: list[RiskMapping] | None = Field(alias='riskMapping', default=None)
+    common_names: list[str] | None = Field(alias='commonNames', default=None)
+    lifecycle_stage: str | None = Field(alias='lifecycleStage', default=None)
+    linked_malware: LinkedMalware | None = Field(alias='linkedMalware', default=None)
+    cpe: list[str] | None = None
+    cpe_22_uri: list[str] | None = Field(alias='cpe22uri', default=None)
+    cvss: CVSS | None = None
     cvss_ratings: list[CVSSRating] = Field(alias='cvssRatings', default=None)
-    cvssv3: Optional[CVSSV3] = None
-    cvssv4: Optional[CVSSV4] = None
-    nvd_description: Optional[str] = Field(alias='nvdDescription', default=None)
-    nvd_references: Optional[list[NvdReference]] = Field(alias='nvdReferences', default=None)
-    raw_risk: Optional[list[RawRisk]] = Field(alias='rawrisk', default=None)
-    related_links: Optional[list[str]] = Field(alias='relatedLinks', default=None)
+    cvssv3: CVSSV3 | None = None
+    cvssv4: CVSSV4 | None = None
+    nvd_description: str | None = Field(alias='nvdDescription', default=None)
+    nvd_references: list[NvdReference] | None = Field(alias='nvdReferences', default=None)
+    raw_risk: list[RawRisk] | None = Field(alias='rawrisk', default=None)
+    related_links: list[str] | None = Field(alias='relatedLinks', default=None)
 
 
 class EnrichedMalware(BaseEnrichedEntity):
@@ -118,8 +117,8 @@ class EnrichedMalware(BaseEnrichedEntity):
     Inherit behaviours from `BaseEnrichedEntity`.
     """
 
-    links: Optional[Links] = None
-    categories: Optional[list[IdNameType]] = None
+    links: Links | None = None
+    categories: list[IdNameType] | None = None
 
 
 class EnrichedCompany(BaseEnrichedEntity):
@@ -127,10 +126,10 @@ class EnrichedCompany(BaseEnrichedEntity):
     Inherit behaviours from `BaseEnrichedEntity`.
     """
 
-    risk: Optional[EntityRisk] = None
-    curated: Optional[bool] = None
-    threat_list: Optional[list[IdNameTypeDescription]] = Field(alias='threatLists', default=None)
-    risk_mapping: Optional[list[RiskMapping]] = Field(alias='riskMapping', default=None)
+    risk: EntityRisk | None = None
+    curated: bool | None = None
+    threat_list: list[IdNameTypeDescription] | None = Field(alias='threatLists', default=None)
+    risk_mapping: list[RiskMapping] | None = Field(alias='riskMapping', default=None)
 
 
 _EnrichmentObjectType = (
@@ -203,7 +202,7 @@ class EnrichmentData(RFBaseModel):
     """
 
     entity: str
-    entity_type: Optional[str]
+    entity_type: str | None
     is_enriched: bool
     content: str | _EnrichmentObjectType
 

@@ -13,7 +13,7 @@
 
 import logging
 from itertools import chain
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import Field, validate_call
 from typing_extensions import Doc
@@ -58,27 +58,25 @@ class ClassicAlertMgr:
     def search(
         self,
         triggered: Annotated[
-            Optional[str], Doc('Filter on triggered time. Format: -1d or [2017-07-30,2017-07-31].')
+            str | None, Doc('Filter on triggered time. Format: -1d or [2017-07-30,2017-07-31].')
         ] = None,
         status: Annotated[
-            Optional[str],
+            str | None,
             Doc('Filter on status, such as: `New`, `Resolved`, `Pending`, `Dismissed`.'),
         ] = None,
         rule_id: Annotated[
             str | list[str] | None, Doc('Filter by a specific Alert Rule ID.')
         ] = None,
-        freetext: Annotated[Optional[str], Doc('Filter by a freetext search.')] = None,
+        freetext: Annotated[str | None, Doc('Filter by a freetext search.')] = None,
         tagged_text: Annotated[
-            Optional[bool], Doc('Entities in the alert title and message body will be marked up.')
+            bool | None, Doc('Entities in the alert title and message body will be marked up.')
         ] = None,
         order_by: Annotated[
-            Optional[str], Doc('Sort by a specific field, such as: `triggered`.')
+            str | None, Doc('Sort by a specific field, such as: `triggered`.')
         ] = None,
-        direction: Annotated[
-            Optional[str], Doc('Sort direction, such as: `asc` or `desc`.')
-        ] = None,
+        direction: Annotated[str | None, Doc('Sort direction, such as: `asc` or `desc`.')] = None,
         fields: Annotated[
-            Optional[list[str]],
+            list[str] | None,
             Doc(
                 """
                 Fields to include in the search result.
@@ -90,10 +88,10 @@ class ClassicAlertMgr:
             ),
         ] = REQUIRED_CA_FIELDS,
         max_results: Annotated[
-            Optional[int], Doc('Maximum number of records to return. Maximum 1000.')
+            int | None, Doc('Maximum number of records to return. Maximum 1000.')
         ] = Field(ge=1, le=1000, default=DEFAULT_LIMIT),
         max_workers: Annotated[
-            Optional[int],
+            int | None,
             Doc(
                 """
                 Number of workers to use for concurrent fetches.
@@ -102,7 +100,7 @@ class ClassicAlertMgr:
             ),
         ] = Field(ge=0, le=50, default=0),
         alerts_per_page: Annotated[
-            Optional[int], Doc('Number of items to retrieve per page.')
+            int | None, Doc('Number of items to retrieve per page.')
         ] = Field(ge=1, le=1000, default=ALERTS_PER_PAGE),
     ) -> Annotated[list[ClassicAlert], Doc('List of ClassicAlert models.')]:
         """Search for triggered alerts.
@@ -154,7 +152,7 @@ class ClassicAlertMgr:
         self,
         id_: Annotated[str, Doc('The alert ID to be fetched.')] = Field(min_length=4),
         fields: Annotated[
-            Optional[list[str]],
+            list[str] | None,
             Doc(
                 """
                 Fields to include in the fetch result.
@@ -167,7 +165,7 @@ class ClassicAlertMgr:
             ),
         ] = ALL_CA_FIELDS,
         tagged_text: Annotated[
-            Optional[bool],
+            bool | None,
             Doc('Entities in the alert title and message body will be marked up with entity IDs.'),
         ] = None,
     ) -> Annotated[ClassicAlert, Doc('ClassicAlert model.')]:
@@ -214,7 +212,7 @@ class ClassicAlertMgr:
         self,
         ids: Annotated[list[str], Doc('Alert IDs that should be fetched.')],
         fields: Annotated[
-            Optional[list[str]],
+            list[str] | None,
             Doc(
                 """
                 Fields to include in the fetch result.
@@ -227,12 +225,10 @@ class ClassicAlertMgr:
             ),
         ] = ALL_CA_FIELDS,
         tagged_text: Annotated[
-            Optional[bool],
+            bool | None,
             Doc('Entities in the alert title and message body will be marked up with entity IDs.'),
         ] = None,
-        max_workers: Annotated[
-            Optional[int], Doc('Number of workers to multithread requests.')
-        ] = 0,
+        max_workers: Annotated[int | None, Doc('Number of workers to multithread requests.')] = 0,
     ) -> Annotated[list[ClassicAlert], Doc('List of ClassicAlert models.')]:
         """Fetch multiple alerts.
 
@@ -293,7 +289,7 @@ class ClassicAlertMgr:
         self,
         ids: Annotated[str | list[str], Doc('One or more alert IDs to fetch.')],
         tagged_text: Annotated[
-            Optional[bool],
+            bool | None,
             Doc('Entities in the alert title and message body will be marked up with entity IDs.'),
         ] = None,
     ) -> Annotated[list[ClassicAlertHit], Doc('List of ClassicAlertHit models.')]:
@@ -443,8 +439,8 @@ class ClassicAlertMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=NoRulesFoundError)
     def _fetch_rules(
         self,
-        freetext: Optional[str] = None,
-        max_results: Optional[int] = Field(default=DEFAULT_LIMIT, ge=1, le=1000),
+        freetext: str | None = None,
+        max_results: int | None = Field(default=DEFAULT_LIMIT, ge=1, le=1000),
     ) -> list[AlertRuleOut]:
         data = {}
 
@@ -463,7 +459,7 @@ class ClassicAlertMgr:
 
     def _search(
         self,
-        rule_id: Optional[str] = None,
+        rule_id: str | None = None,
         *,
         triggered,
         status,

@@ -15,7 +15,7 @@ import re
 from collections import defaultdict
 from contextlib import suppress
 from json.decoder import JSONDecodeError
-from typing import Annotated, Optional
+from typing import Annotated
 
 import jsonpath_ng
 from jsonpath_ng.exceptions import JsonPathParserError
@@ -97,13 +97,13 @@ class RFClient(BaseHTTPClient):
         url: Annotated[str, Doc('A URL to make the request to.')],
         data: Annotated[dict | list[dict] | bytes | None, Doc('A request body.')] = None,
         *,
-        params: Annotated[Optional[dict], Doc('HTTP query parameters.')] = None,
+        params: Annotated[dict | None, Doc('HTTP query parameters.')] = None,
         headers: Annotated[
-            Optional[dict],
+            dict | None,
             Doc('If specified, it overrides default headers and does not set the token.'),
         ] = None,
         content_type_header: Annotated[
-            Optional[str], Doc('Content-Type header value.')
+            str | None, Doc('Content-Type header value.')
         ] = 'application/json',
         **kwargs,
     ) -> Annotated[Response, Doc('A requests.Response object.')]:

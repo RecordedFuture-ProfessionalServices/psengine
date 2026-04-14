@@ -12,7 +12,6 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional
 
 from pydantic import Field
 
@@ -23,7 +22,7 @@ from ...common_models import IdNameType, IdNameTypeDescription, RFBaseModel
 # Enterprise Lists
 ###########################################################
 class EnterpriseList(RFBaseModel):
-    added: Optional[datetime]
+    added: datetime | None
     list_: IdNameTypeDescription = Field(alias='list')
 
 
@@ -33,9 +32,9 @@ class RiskyCIDRPIP(RFBaseModel):
 
 
 class AIInsights(RFBaseModel):
-    comment: Optional[str] = None
-    text: Optional[str] = None
-    number_of_references: Optional[int] = Field(alias='numberOfReferences', default=None)
+    comment: str | None = None
+    text: str | None = None
+    number_of_references: int | None = Field(alias='numberOfReferences', default=None)
 
 
 class EvidenceDetails(RFBaseModel):
@@ -73,7 +72,7 @@ class RiskMappingCategory(RFBaseModel):
 
 class RiskMapping(RFBaseModel):
     rule: str
-    categories: Optional[list[RiskMappingCategory]] = None
+    categories: list[RiskMappingCategory] | None = None
 
 
 class RelatedEntity(RFBaseModel):
@@ -87,16 +86,16 @@ class RelatedEntities(RFBaseModel):
 
 
 class GeoLocation(RFBaseModel):
-    continent: Optional[str] = None
-    country: Optional[str] = None
-    city: Optional[str] = None
+    continent: str | None = None
+    country: str | None = None
+    city: str | None = None
 
 
 class IPLocation(RFBaseModel):
-    organization: Optional[str]
+    organization: str | None
     cidr: IdNameType
     location: GeoLocation
-    asn: Optional[str] = None
+    asn: str | None = None
 
 
 class Timestamps(RFBaseModel):
@@ -131,7 +130,7 @@ class LinksList(RFBaseModel):
 class SectionHits(RFBaseModel):
     section_id: IdNameType
     total_count: int
-    lists: Optional[list[LinksList]] = None
+    lists: list[LinksList] | None = None
 
 
 class Hits(RFBaseModel):
@@ -167,16 +166,16 @@ class LinkedMalware(RFBaseModel):
 # CVSS
 ###########################################################
 class CVSS(RFBaseModel):
-    access_vector: Optional[str] = Field(alias='accessVector', default=None)
-    last_modified: Optional[datetime] = Field(alias='lastModified', default=None)
-    published: Optional[datetime] = None
-    score: Optional[float] = None
-    availability: Optional[str] = None
-    authentication: Optional[str] = None
-    access_complexity: Optional[str] = Field(alias='accessComplexity', default=None)
-    integrity: Optional[str] = None
-    confidentiality: Optional[str] = None
-    version: Optional[str] = None
+    access_vector: str | None = Field(alias='accessVector', default=None)
+    last_modified: datetime | None = Field(alias='lastModified', default=None)
+    published: datetime | None = None
+    score: float | None = None
+    availability: str | None = None
+    authentication: str | None = None
+    access_complexity: str | None = Field(alias='accessComplexity', default=None)
+    integrity: str | None = None
+    confidentiality: str | None = None
+    version: str | None = None
 
 
 class CVSSRating(RFBaseModel):
@@ -188,66 +187,62 @@ class CVSSRating(RFBaseModel):
 
 
 class CVSSV3(RFBaseModel):
-    scope: Optional[str] = None
-    exploitability_score: Optional[float] = Field(alias='exploitabilityScore', default=None)
-    modified: Optional[datetime] = None
-    base_severity: Optional[str] = Field(alias='baseSeverity', default=None)
-    base_score: Optional[float] = Field(alias='baseScore', default=None)
-    privileges_required: Optional[str] = Field(alias='privilegesRequired', default=None)
-    user_interaction: Optional[str] = Field(alias='userInteraction', default=None)
-    impact_score: Optional[float] = Field(alias='impactScore', default=None)
-    attack_vector: Optional[str] = Field(alias='attackVector', default=None)
-    integrity_impact: Optional[str] = Field(alias='integrityImpact', default=None)
-    confidentiality_impact: Optional[str] = Field(alias='confidentialityImpact', default=None)
-    vector_string: Optional[str] = Field(alias='vectorString', default=None)
-    version: Optional[str] = None
-    attack_complexity: Optional[str] = Field(alias='attackComplexity', default=None)
-    created: Optional[datetime] = None
-    availability_impact: Optional[str] = Field(alias='availabilityImpact', default=None)
+    scope: str | None = None
+    exploitability_score: float | None = Field(alias='exploitabilityScore', default=None)
+    modified: datetime | None = None
+    base_severity: str | None = Field(alias='baseSeverity', default=None)
+    base_score: float | None = Field(alias='baseScore', default=None)
+    privileges_required: str | None = Field(alias='privilegesRequired', default=None)
+    user_interaction: str | None = Field(alias='userInteraction', default=None)
+    impact_score: float | None = Field(alias='impactScore', default=None)
+    attack_vector: str | None = Field(alias='attackVector', default=None)
+    integrity_impact: str | None = Field(alias='integrityImpact', default=None)
+    confidentiality_impact: str | None = Field(alias='confidentialityImpact', default=None)
+    vector_string: str | None = Field(alias='vectorString', default=None)
+    version: str | None = None
+    attack_complexity: str | None = Field(alias='attackComplexity', default=None)
+    created: datetime | None = None
+    availability_impact: str | None = Field(alias='availabilityImpact', default=None)
 
 
 class CVSSV4(RFBaseModel):
-    subsequent_system_integrity: Optional[str] = Field(
-        alias='subsequentSystemIntegrity', default=None
-    )
-    provider_urgency: Optional[str] = Field(alias='providerUrgency', default=None)
-    attack_requirements: Optional[str] = Field(alias='attackRequirements', default=None)
-    vulnerable_system_confidentiality: Optional[str] = Field(
+    subsequent_system_integrity: str | None = Field(alias='subsequentSystemIntegrity', default=None)
+    provider_urgency: str | None = Field(alias='providerUrgency', default=None)
+    attack_requirements: str | None = Field(alias='attackRequirements', default=None)
+    vulnerable_system_confidentiality: str | None = Field(
         alias='vulnerableSystemConfidentiality', default=None
     )
-    vulnerability_response_effort: Optional[str] = Field(
+    vulnerability_response_effort: str | None = Field(
         alias='vulnerabilityResponseEffort', default=None
     )
-    threat_score: Optional[float] = Field(alias='threatScore', default=None)
-    subsequent_system_availability: Optional[str] = Field(
+    threat_score: float | None = Field(alias='threatScore', default=None)
+    subsequent_system_availability: str | None = Field(
         alias='subsequentSystemAvailability', default=None
     )
-    base_severity: Optional[str] = Field(alias='baseSeverity', default=None)
-    base_score: Optional[float] = Field(alias='baseScore', default=None)
-    user_interaction: Optional[str] = Field(alias='userInteraction', default=None)
-    attack_vector: Optional[str] = Field(alias='attackVector', default=None)
-    source: Optional[str] = None
-    vulnerable_system_integrity: Optional[str] = Field(
-        alias='vulnerableSystemIntegrity', default=None
-    )
-    vulnerable_system_availability: Optional[str] = Field(
+    base_severity: str | None = Field(alias='baseSeverity', default=None)
+    base_score: float | None = Field(alias='baseScore', default=None)
+    user_interaction: str | None = Field(alias='userInteraction', default=None)
+    attack_vector: str | None = Field(alias='attackVector', default=None)
+    source: str | None = None
+    vulnerable_system_integrity: str | None = Field(alias='vulnerableSystemIntegrity', default=None)
+    vulnerable_system_availability: str | None = Field(
         alias='vulnerableSystemAvailability', default=None
     )
-    modified: Optional[datetime] = None
-    vector_string: Optional[str] = Field(alias='vectorString', default=None)
-    recovery: Optional[str] = None
-    version: Optional[str] = None
-    threat_severity: Optional[str] = Field(alias='threatSeverity', default=None)
-    privileges_required: Optional[str] = Field(alias='privilegesRequired', default=None)
-    exploit_maturity: Optional[str] = Field(alias='exploitMaturity', default=None)
-    safety: Optional[str] = None
-    subsequent_system_confidentiality: Optional[str] = Field(
+    modified: datetime | None = None
+    vector_string: str | None = Field(alias='vectorString', default=None)
+    recovery: str | None = None
+    version: str | None = None
+    threat_severity: str | None = Field(alias='threatSeverity', default=None)
+    privileges_required: str | None = Field(alias='privilegesRequired', default=None)
+    exploit_maturity: str | None = Field(alias='exploitMaturity', default=None)
+    safety: str | None = None
+    subsequent_system_confidentiality: str | None = Field(
         alias='subsequentSystemConfidentiality', default=None
     )
-    automatable: Optional[str] = None
-    value_density: Optional[str] = Field(alias='valueDensity', default=None)
-    attack_complexity: Optional[str] = Field(alias='attackComplexity', default=None)
-    created: Optional[datetime] = None
+    automatable: str | None = None
+    value_density: str | None = Field(alias='valueDensity', default=None)
+    attack_complexity: str | None = Field(alias='attackComplexity', default=None)
+    created: datetime | None = None
 
 
 ###########################################################
@@ -267,30 +262,30 @@ class Validity(RFBaseModel):
 
 
 class Issuer(RFBaseModel):
-    organization: Optional[str] = None
-    location: Optional[str] = None
+    organization: str | None = None
+    location: str | None = None
 
 
 class Certificate(RFBaseModel):
-    subject: Optional[str] = None
+    subject: str | None = None
     validity: Validity
     issuer: Issuer
     seen_on_port: list[int] = Field(alias='seenOnPort')
 
 
 class ForwardDNS(RFBaseModel):
-    hostname: Optional[str] = None
+    hostname: str | None = None
     last_seen: datetime | None = Field(alias='lastSeen')
     first_seen: datetime | None = Field(alias='firstSeen')
 
 
 class DNS(RFBaseModel):
     forward_dns: list[ForwardDNS] = Field(alias='forwardDns')
-    reverse_dns: Optional[str] = Field(alias='reverseDns', default=None)
+    reverse_dns: str | None = Field(alias='reverseDns', default=None)
 
 
 class Port(RFBaseModel):
-    name: Optional[str] = None
+    name: str | None = None
     version: str | None
     port: int
     extra_info: str | None = Field(alias='extraInfo')
@@ -299,16 +294,16 @@ class Port(RFBaseModel):
 
 
 class DnsPortCert(RFBaseModel):
-    certificates: Optional[list[Certificate]] = None
-    dns: Optional[DNS] = None
-    ports: Optional[list[Port]] = None
+    certificates: list[Certificate] | None = None
+    dns: DNS | None = None
+    ports: list[Port] | None = None
 
 
 ###########################################################
 # Scanner
 ###########################################################
 class Tag(RFBaseModel):
-    verdict_details: Optional[list[str]] = Field(default=None, alias='verdictDetails')
+    verdict_details: list[str] | None = Field(default=None, alias='verdictDetails')
     entity: list[IdNameType]
 
 
@@ -340,7 +335,7 @@ class Scanner(RFBaseModel):
     global_scanner: bool = Field(alias='globalScanner')
     user_agents: list[str] = Field(alias='userAgents', default=None)
     web_requests: list[str] = Field(alias='webRequests', default=None)
-    evidence: Optional[list[Evidence]] = []
+    evidence: list[Evidence] | None = []
 
 
 ###########################################################

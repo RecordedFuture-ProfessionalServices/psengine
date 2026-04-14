@@ -11,7 +11,6 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Optional
 
 from pydantic import Field
 
@@ -23,7 +22,7 @@ class EntityMatchIn(RFBaseModel):
     """Model to validate data sent to `entity-match/match` endpoint."""
 
     name: str
-    type_: Optional[list[str]] = Field(alias='type', default=[])
+    type_: list[str] | None = Field(alias='type', default=[])
     limit: int = Field(default=10)
 
 

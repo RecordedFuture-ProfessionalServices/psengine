@@ -12,7 +12,6 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional
 
 from pydantic import Field, HttpUrl
 
@@ -22,31 +21,31 @@ from ..models.panel_status import PanelStatus
 
 
 class CodeRepoPanelStatus(PanelStatus):
-    risk_score: Optional[int] = None
-    entity_criticality: Optional[str] = None
-    targets: Optional[list[ResolvedEntity]] = []
+    risk_score: int | None = None
+    entity_criticality: str | None = None
+    targets: list[ResolvedEntity] | None = []
 
 
 class Repository(RFBaseModel):
     id_: str = Field(alias='id', default=None)
-    name: Optional[str] = None
-    owner: Optional[ResolvedEntity] = None
+    name: str | None = None
+    owner: ResolvedEntity | None = None
 
 
 class Assessment(RFBaseModel):
     id_: str = Field(alias='id')
-    title: Optional[str] = None
-    value: Optional[str] = None
+    title: str | None = None
+    value: str | None = None
 
 
 class Evidence(RFBaseModel):
     assessments: list[Assessment]
     targets: list[ResolvedEntity]
-    url: Optional[HttpUrl] = None
+    url: HttpUrl | None = None
     content: str
     published: datetime
 
 
 class CodeRepoPanelEvidence(RFBaseModel):
-    repository: Optional[Repository] = Field(default_factory=Repository)
-    evidence: Optional[list[Evidence]] = []
+    repository: Repository | None = Field(default_factory=Repository)
+    evidence: list[Evidence] | None = []

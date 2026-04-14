@@ -11,7 +11,6 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Optional
 
 from pydantic import Field
 
@@ -28,11 +27,11 @@ class Organisation(RFBaseModel):
 
 
 class OwnerOrganisationDetails(RFBaseModel):
-    owner_id: Optional[str] = None
-    owner_name: Optional[str] = None
-    organisations: Optional[list[Organisation]] = []
-    enterprise_id: Optional[str] = None
-    enterprise_name: Optional[str] = None
+    owner_id: str | None = None
+    owner_name: str | None = None
+    organisations: list[Organisation] | None = []
+    enterprise_id: str | None = None
+    enterprise_name: str | None = None
 
 
 class CreateRequestModel(RFBaseModel):
@@ -45,9 +44,9 @@ class CreateRequestModel(RFBaseModel):
 class SearchInModel(RFBaseModel):
     """Validate data sent to `/search` endpoint."""
 
-    name: Optional[str] = None
+    name: str | None = None
     type_: str = Field(alias='type', default=None)
-    limit: Optional[int] = None
+    limit: int | None = None
 
 
 class InfoRequestModel(RFBaseModel):
@@ -72,7 +71,7 @@ class AddEntityRequestModel(RFBaseModel):
     """Validate data sent to `/{listId}/entity/add` endpoint."""
 
     entity: EntityID
-    context: Optional[dict] = None
+    context: dict | None = None
 
 
 class RemoveEntityRequestModel(RFBaseModel):

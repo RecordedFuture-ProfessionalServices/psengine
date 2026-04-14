@@ -12,7 +12,6 @@
 ##############################################################################################
 
 from functools import total_ordering
-from typing import Optional
 
 from pydantic import Field
 
@@ -75,12 +74,12 @@ class SOAREnrichedEntity(RFBaseModel):
 class SOAREnrichIn(RFBaseModel):
     """Model used to validate payload sent to SOAR enrichment endpoint."""
 
-    ip: Optional[list[str]] = None
-    domain: Optional[list[str]] = None
-    url: Optional[list[str]] = None
-    hash_: Optional[list[str]] = Field(alias='hash', default=None)
-    vulnerability: Optional[list[str]] = None
-    companybydomain: Optional[list[str]] = None
+    ip: list[str] | None = None
+    domain: list[str] | None = None
+    url: list[str] | None = None
+    hash_: list[str] | None = Field(alias='hash', default=None)
+    vulnerability: list[str] | None = None
+    companybydomain: list[str] | None = None
 
 
 class SOAREnrichOut(RFBaseModel):
@@ -88,4 +87,4 @@ class SOAREnrichOut(RFBaseModel):
 
     entity: str
     is_enriched: bool
-    content: Optional[SOAREnrichedEntity] = None
+    content: SOAREnrichedEntity | None = None

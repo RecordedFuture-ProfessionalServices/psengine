@@ -1,6 +1,5 @@
 from copy import deepcopy
 from pathlib import Path
-from typing import Optional
 
 import pytest
 from pydantic import ValidationError
@@ -27,7 +26,7 @@ MOCK_DIR = Path(__file__).parent / 'mocks'
 PROJECT_ID = '7c2d06d7-0c4b-4d0d-bc97-f81dcdc276de'
 
 
-def _meta_payload(*, limit: int = 1, total: int = 1, next_cursor: Optional[str] = None) -> dict:
+def _meta_payload(*, limit: int = 1, total: int = 1, next_cursor: str | None = None) -> dict:
     return {'pagination': {'limit': limit, 'total': total, 'next_cursor': next_cursor}}
 
 

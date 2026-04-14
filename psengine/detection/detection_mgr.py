@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -33,7 +33,7 @@ class DetectionMgr:
 
     def __init__(
         self,
-        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
     ):
         """Initialize the `DetectionMgr` object."""
         self.log = logging.getLogger(__name__)
@@ -47,28 +47,26 @@ class DetectionMgr:
         detection_rule: Annotated[
             str | list[str] | None, Doc('Types of detection rules to search for.')
         ] = None,
-        entities: Annotated[
-            Optional[list[str]], Doc('List of entities to filter the search.')
-        ] = None,
+        entities: Annotated[list[str] | None, Doc('List of entities to filter the search.')] = None,
         created_before: Annotated[
-            Optional[str], Doc('Filter for rules created before this date or relative date.')
+            str | None, Doc('Filter for rules created before this date or relative date.')
         ] = None,
         created_after: Annotated[
-            Optional[str], Doc('Filter for rules created after this date or relative date.')
+            str | None, Doc('Filter for rules created after this date or relative date.')
         ] = None,
         updated_before: Annotated[
-            Optional[str], Doc('Filter for rules updated before this date or relative date.')
+            str | None, Doc('Filter for rules updated before this date or relative date.')
         ] = None,
         updated_after: Annotated[
-            Optional[str], Doc('Filter for rules updated after this date or relative date.')
+            str | None, Doc('Filter for rules updated after this date or relative date.')
         ] = None,
-        doc_id: Annotated[Optional[str], Doc('Filter by document ID.')] = None,
-        title: Annotated[Optional[str], Doc('Filter by title.')] = None,
+        doc_id: Annotated[str | None, Doc('Filter by document ID.')] = None,
+        title: Annotated[str | None, Doc('Filter by title.')] = None,
         tagged_entities: Annotated[
-            Optional[bool], Doc('Whether to filter by tagged entities.')
+            bool | None, Doc('Whether to filter by tagged entities.')
         ] = None,
         max_results: Annotated[
-            Optional[int], Doc('Limit the total number of results returned.')
+            int | None, Doc('Limit the total number of results returned.')
         ] = DEFAULT_LIMIT,
     ) -> Annotated[
         list[DetectionRule], Doc('A list of detection rules matching the search criteria.')
@@ -114,7 +112,7 @@ class DetectionMgr:
     def fetch(
         self,
         doc_id: Annotated[str, Doc('Detection rule ID to look up.')],
-    ) -> Annotated[Optional[DetectionRule], Doc('The detection rule found for the given ID.')]:
+    ) -> Annotated[DetectionRule | None, Doc('The detection rule found for the given ID.')]:
         """Fetch a detection rule based on its ID.
 
         Endpoint:

@@ -13,7 +13,7 @@
 
 from datetime import datetime
 from functools import total_ordering
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import AfterValidator, BeforeValidator, Field, field_validator
 
@@ -64,16 +64,16 @@ class Detection(RFBaseModel):
     """
 
     id_: str = Field(alias='id')
-    organization_id: Annotated[
-        Optional[list[str]], BeforeValidator(Validators.check_uhash_prefix)
-    ] = None
+    organization_id: Annotated[list[str] | None, BeforeValidator(Validators.check_uhash_prefix)] = (
+        None
+    )
     novel: bool
     type_: str = Field(alias='type')
     subject: str
     password: Password
-    authorization_service: Optional[AuthorizationService] = None
+    authorization_service: AuthorizationService | None = None
     cookies: list[Cookie]
-    malware_family: Optional[IdName] = None
+    malware_family: IdName | None = None
     dump: DumpSearchOut
     created: datetime
 
@@ -125,7 +125,7 @@ class CredentialSearch(RFBaseModel):
     """
 
     login: str
-    login_sha1: Optional[str] = None  # This is used only by CredentialLookupIn.subject_login
+    login_sha1: str | None = None  # This is used only by CredentialLookupIn.subject_login
     domain: str
 
     def __hash__(self):
@@ -249,10 +249,10 @@ class Credential(RFBaseModel):
     first_downloaded: datetime
     latest_downloaded: datetime
     exposed_secret: SecretDetails
-    compromise: Optional[dict[str, datetime]] = None
-    malware_family: Optional[IdName] = None
-    authorization_service: Optional[AuthorizationService] = None
-    cookies: Optional[list[Cookie]] = None
+    compromise: dict[str, datetime] | None = None
+    malware_family: IdName | None = None
+    authorization_service: AuthorizationService | None = None
+    cookies: list[Cookie] | None = None
 
     def __hash__(self):
         hashes = ', '.join(sorted(a.hash_ or a.hash_prefix for a in self.exposed_secret.hashes))
@@ -316,15 +316,15 @@ class DetectionsIn(RFBaseModel):
     """Model for payload sent to POST `/identity/detections` endpoint."""
 
     organization_id: Annotated[
-        Optional[list[str]],
+        list[str] | None,
         BeforeValidator(Validators.convert_str_to_list),
         AfterValidator(Validators.check_uhash_prefix),
     ] = []
-    include_enterprise_level: Optional[bool] = None
-    filter: Optional[DetectionsFilterIn] = Field(default_factory=DetectionsFilterIn)
+    include_enterprise_level: bool | None = None
+    filter: DetectionsFilterIn | None = Field(default_factory=DetectionsFilterIn)
     limit: int
-    offset: Optional[str] = None
-    created: Optional[DetectionsCreated] = Field(default_factory=DetectionsCreated)
+    offset: str | None = None
+    created: DetectionsCreated | None = Field(default_factory=DetectionsCreated)
 
 
 class IncidentReportIn(IdentityOrgIn):
@@ -337,7 +337,7 @@ class IncidentReportIn(IdentityOrgIn):
 class IncidentReportOut(RFBaseModel):
     """Model for payload received by POST `/identity/incident/report` endpoint."""
 
-    details: Optional[IncidentReportDetails] = None
+    details: IncidentReportDetails | None = None
     credentials: list[IncidentReportCredentials]
 
     @field_validator('details', mode='before')
@@ -359,19 +359,19 @@ class HostnameLookupIn(BaseIdentityIn):
 class IPLookupIn(BaseIdentityIn):
     """Model for payload sent to POST `/identity/ip/lookup` endpoint."""
 
-    ip: Optional[str] = None
-    range_: Optional[IPRange] = Field(alias='range', default=None)
+    ip: str | None = None
+    range_: IPRange | None = Field(alias='range', default=None)
 
 
 class CredentialsLookupIn(BaseIdentityIn):
     """Model for payload sent to POST `/identity/credentials/lookup` endpoint."""
 
-    subjects: Annotated[Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)] = None
-    subjects_sha1: Annotated[
-        Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)
-    ] = None
-    subjects_login: Optional[list[CredentialSearch]] = None
-    filter: Optional[FilterIn] = None
+    subjects: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    subjects_sha1: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = (
+        None
+    )
+    subjects_login: list[CredentialSearch] | None = None
+    filter: FilterIn | None = None
 
 
 class CredentialsSearchIn(BaseIdentityIn):
@@ -379,14 +379,14 @@ class CredentialsSearchIn(BaseIdentityIn):
 
     domains: Annotated[list[str], BeforeValidator(Validators.convert_str_to_list)]
     domain_types: Annotated[
-        Optional[list[DomainTypes]], BeforeValidator(Validators.convert_str_to_list)
+        list[DomainTypes] | None, BeforeValidator(Validators.convert_str_to_list)
     ] = None
 
-    filter: Optional[FilterIn] = None
+    filter: FilterIn | None = None
 
 
 class DumpSearchIn(RFBaseModel):
     """Model for payload sent to POST `/identity/metadata/dump/search` endpoint."""
 
     names: Annotated[list[str], BeforeValidator(Validators.convert_str_to_list)]
-    limit: Optional[int] = None
+    limit: int | None = None

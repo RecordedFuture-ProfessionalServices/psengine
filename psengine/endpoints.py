@@ -23,10 +23,8 @@ API_VERSION = 'v2'
 BASE_URL = 'https://api.recordedfuture.com'
 CONNECT_API_BASE_URL = BASE_URL + '/' + API_VERSION
 
-BASE_URL = environ.get('RF_BASE_URL') if environ.get('RF_BASE_URL') else BASE_URL
-CONNECT_API_BASE_URL = (
-    environ.get('RF_BASE_URL') if environ.get('RF_BASE_URL') else CONNECT_API_BASE_URL
-)
+BASE_URL = environ.get('RF_BASE_URL') or BASE_URL
+CONNECT_API_BASE_URL = environ.get('RF_BASE_URL') or CONNECT_API_BASE_URL
 
 ###############################################################################
 # Classic Alerts Endpoints V3

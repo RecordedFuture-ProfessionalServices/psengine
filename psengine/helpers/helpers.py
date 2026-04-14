@@ -23,7 +23,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
 from inspect import getmodule, isclass, signature
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 from dateutil.parser import parse as date_parse
 from pydantic import BaseModel
@@ -274,7 +274,7 @@ class OSHelpers:
 
     @staticmethod
     def os_platform() -> Annotated[
-        Optional[str], Doc('OS platform info string, or None if unavailable.')
+        str | None, Doc('OS platform info string, or None if unavailable.')
     ]:
         """Get the OS platform information, for example: `macOS-13.0-x86_64-i386-64bit`."""
         return platform.platform(aliased=True, terse=False) or None

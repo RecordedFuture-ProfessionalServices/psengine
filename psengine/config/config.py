@@ -16,7 +16,7 @@ import os
 import re
 from copy import deepcopy
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import Field, Secret, field_validator, validate_call
 from pydantic_settings import (
@@ -89,20 +89,20 @@ class ConfigModel(BaseSettings):
     config_path: str | Path | None = None
     model_config = SettingsConfigDict(arbitrary_types_allowed=True, extra='allow', frozen=True)
 
-    platform_id: Optional[str] = Field(default=None, pattern=PLAT_REGEX, examples=['Splunk/8.0.0'])
-    app_id: Optional[str] = Field(default=None, pattern=APP_ID_REGEX, examples=['get-alerts/1.0.0'])
-    rf_token: Optional[RFToken] = Field(default=os.environ.get(RF_TOKEN_ENV_VAR, ''))
-    asi_token: Optional[RFToken] = Field(default=os.environ.get(ASI_TOKEN_ENV_VAR, ''))
-    http_proxy: Optional[str] = None
-    https_proxy: Optional[str] = None
-    client_ssl_verify: Optional[bool] = SSL_VERIFY
-    client_basic_auth: Optional[tuple[str, str]] = None
-    client_cert: Optional[str | tuple[str, str]] = None
-    client_timeout: Optional[int] = REQUEST_TIMEOUT
-    client_retries: Optional[int] = RETRY_TOTAL
-    client_backoff_factor: Optional[int] = BACKOFF_FACTOR
-    client_status_forcelist: Optional[list[int]] = STATUS_FORCELIST
-    client_pool_max_size: Optional[int] = POOL_MAX_SIZE
+    platform_id: str | None = Field(default=None, pattern=PLAT_REGEX, examples=['Splunk/8.0.0'])
+    app_id: str | None = Field(default=None, pattern=APP_ID_REGEX, examples=['get-alerts/1.0.0'])
+    rf_token: RFToken | None = Field(default=os.environ.get(RF_TOKEN_ENV_VAR, ''))
+    asi_token: RFToken | None = Field(default=os.environ.get(ASI_TOKEN_ENV_VAR, ''))
+    http_proxy: str | None = None
+    https_proxy: str | None = None
+    client_ssl_verify: bool | None = SSL_VERIFY
+    client_basic_auth: tuple[str, str] | None = None
+    client_cert: str | tuple[str, str] | None = None
+    client_timeout: int | None = REQUEST_TIMEOUT
+    client_retries: int | None = RETRY_TOTAL
+    client_backoff_factor: int | None = BACKOFF_FACTOR
+    client_status_forcelist: list[int] | None = STATUS_FORCELIST
+    client_pool_max_size: int | None = POOL_MAX_SIZE
 
     @classmethod
     def settings_customise_sources(

@@ -11,7 +11,6 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Optional
 
 from pydantic import AnyUrl, Field, IPvAnyAddress
 
@@ -32,9 +31,9 @@ class AuthorizationService(RFBaseModel):
 
 class ExposedSecretDetails(RFBaseModel):
     properties: list[str]
-    rank: Optional[str] = None
-    clear_text_value: Optional[ClearTextPassword] = None
-    clear_text_hint: Optional[str] = None
+    rank: str | None = None
+    clear_text_value: ClearTextPassword | None = None
+    clear_text_hint: str | None = None
 
 
 class SecretDetails(RFBaseModel):
@@ -49,7 +48,7 @@ class IdentityDetails(RFBaseModel):
 
 
 class IPRange(RFBaseModel):
-    gte: Optional[IPvAnyAddress] = None
-    gt: Optional[IPvAnyAddress] = None
-    lte: Optional[IPvAnyAddress] = None
-    lt: Optional[IPvAnyAddress] = None
+    gte: IPvAnyAddress | None = None
+    gt: IPvAnyAddress | None = None
+    lte: IPvAnyAddress | None = None
+    lt: IPvAnyAddress | None = None

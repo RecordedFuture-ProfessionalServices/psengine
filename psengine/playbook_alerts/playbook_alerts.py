@@ -15,7 +15,7 @@ import re
 from collections import defaultdict
 from functools import total_ordering
 from itertools import chain
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import Field, NonNegativeInt, PositiveInt, model_validator
 from typing_extensions import Doc
@@ -95,8 +95,8 @@ class PBA_Generic(RFBaseModel):
     """
 
     playbook_alert_id: str
-    panel_log_v2: Optional[list[PanelLogV2]] = []
-    panel_status: Optional[PanelStatus] = Field(default_factory=PanelStatus)
+    panel_log_v2: list[PanelLogV2] | None = []
+    panel_status: PanelStatus | None = Field(default_factory=PanelStatus)
 
     category: str = 'unmapped_alert'
 
@@ -135,12 +135,12 @@ class PBA_Generic(RFBaseModel):
         self,
         html_tags: Annotated[bool, Doc('Include HTML tags in the markdown output.')] = False,
         character_limit: Annotated[
-            Optional[int],
+            int | None,
             Doc('Character limit for the markdown output.'),
         ] = None,
         defang_iocs: Annotated[bool, Doc('Defang IOCs in markdown output.')] = False,
         extra_context: Annotated[
-            Optional[list],
+            list | None,
             Doc(
                 """
                 List of context models used by supported PBA classes when rendering markdown.
@@ -183,8 +183,8 @@ class PBA_CodeRepoLeakage(PBA_Generic):
 
     category: str = PACategory.CODE_REPO_LEAKAGE.value
 
-    panel_status: Optional[CodeRepoPanelStatus] = Field(default_factory=CodeRepoPanelStatus)
-    panel_evidence_summary: Optional[CodeRepoPanelEvidence] = Field(
+    panel_status: CodeRepoPanelStatus | None = Field(default_factory=CodeRepoPanelStatus)
+    panel_evidence_summary: CodeRepoPanelEvidence | None = Field(
         default_factory=CodeRepoPanelEvidence
     )
 
@@ -208,8 +208,8 @@ class PBA_ThirdPartyRisk(PBA_Generic):
 
     category: str = PACategory.THIRD_PARTY_RISK.value
 
-    panel_status: Optional[TPRPanelStatus] = Field(default_factory=TPRPanelStatus)
-    panel_evidence_summary: Optional[TPRPanelEvidence] = Field(default_factory=TPRPanelEvidence)
+    panel_status: TPRPanelStatus | None = Field(default_factory=TPRPanelStatus)
+    panel_evidence_summary: TPRPanelEvidence | None = Field(default_factory=TPRPanelEvidence)
 
     @property
     def log_third_party_assessment_changes(self) -> list:
@@ -315,10 +315,10 @@ class PBA_CyberVulnerability(PBA_Generic):
 
     category: str = PACategory.CYBER_VULNERABILITY.value
 
-    panel_status: Optional[CyberVulnerabilityPanelStatus] = Field(
+    panel_status: CyberVulnerabilityPanelStatus | None = Field(
         default_factory=CyberVulnerabilityPanelStatus
     )
-    panel_evidence_summary: Optional[CyberVulnerabilityPanelEvidence] = Field(
+    panel_evidence_summary: CyberVulnerabilityPanelEvidence | None = Field(
         default_factory=CyberVulnerabilityPanelEvidence
     )
 
@@ -349,8 +349,8 @@ class PBA_IdentityNovelExposure(PBA_Generic):
 
     category: str = PACategory.IDENTITY_NOVEL_EXPOSURES.value
 
-    panel_status: Optional[IdentityPanelStatus] = Field(default_factory=IdentityPanelStatus)
-    panel_evidence_summary: Optional[IdentityPanelEvidence] = Field(
+    panel_status: IdentityPanelStatus | None = Field(default_factory=IdentityPanelStatus)
+    panel_evidence_summary: IdentityPanelEvidence | None = Field(
         default_factory=IdentityPanelEvidence
     )
 
@@ -374,19 +374,19 @@ class PBA_DomainAbuse(PBA_Generic):
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
-    _images: Optional[dict] = {}
+    _images: dict | None = {}
 
     category: str = PACategory.DOMAIN_ABUSE.value
 
-    panel_action: Optional[list[PanelAction]] = []
-    panel_status: Optional[DomainAbusePanelStatus] = Field(default_factory=DomainAbusePanelStatus)
-    panel_evidence_summary: Optional[DomainAbusePanelEvidenceSummary] = Field(
+    panel_action: list[PanelAction] | None = []
+    panel_status: DomainAbusePanelStatus | None = Field(default_factory=DomainAbusePanelStatus)
+    panel_evidence_summary: DomainAbusePanelEvidenceSummary | None = Field(
         default_factory=DomainAbusePanelEvidenceSummary
     )
-    panel_evidence_dns: Optional[DomainAbusePanelEvidenceDns] = Field(
+    panel_evidence_dns: DomainAbusePanelEvidenceDns | None = Field(
         default_factory=DomainAbusePanelEvidenceDns
     )
-    panel_evidence_whois: Optional[DomainAbusePanelEvidenceWhois] = Field(
+    panel_evidence_whois: DomainAbusePanelEvidenceWhois | None = Field(
         default_factory=DomainAbusePanelEvidenceWhois
     )
 
@@ -484,15 +484,13 @@ class PBA_GeopoliticsFacility(PBA_Generic):
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
-    _images: Optional[dict] = {}
+    _images: dict | None = {}
     category: str = PACategory.GEOPOLITICS_FACILITY.value
 
-    panel_status: Optional[GeopolPanelStatus] = Field(default_factory=GeopolPanelStatus)
-    panel_evidence_summary: Optional[GeopolPanelEvidence] = Field(
-        default_factory=GeopolPanelEvidence
-    )
-    panel_overview: Optional[GeopolPanelOverview] = Field(default_factory=GeopolPanelOverview)
-    panel_events_summary: Optional[GeopolPanelEvents] = Field(default_factory=GeopolPanelEvents)
+    panel_status: GeopolPanelStatus | None = Field(default_factory=GeopolPanelStatus)
+    panel_evidence_summary: GeopolPanelEvidence | None = Field(default_factory=GeopolPanelEvidence)
+    panel_overview: GeopolPanelOverview | None = Field(default_factory=GeopolPanelOverview)
+    panel_events_summary: GeopolPanelEvents | None = Field(default_factory=GeopolPanelEvents)
 
     @property
     def image_ids(self) -> list[str]:
@@ -556,14 +554,12 @@ class PBA_MalwareReport(PBA_Generic):
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
-    _images: Optional[dict] = {}
+    _images: dict | None = {}
 
     category: str = PACategory.MALWARE_REPORT.value
 
-    panel_status: Optional[MalwareReportPanelStatus] = Field(
-        default_factory=MalwareReportPanelStatus
-    )
-    panel_evidence_summary: Optional[MalwareReportPanelEvidence] = Field(
+    panel_status: MalwareReportPanelStatus | None = Field(default_factory=MalwareReportPanelStatus)
+    panel_evidence_summary: MalwareReportPanelEvidence | None = Field(
         default_factory=MalwareReportPanelEvidence
     )
 
@@ -571,17 +567,17 @@ class PBA_MalwareReport(PBA_Generic):
 class SearchIn(RFBaseModel):
     """Model for payload sent to `/search` endpoint."""
 
-    from_: Optional[NonNegativeInt] = Field(alias='from', default=None)
-    limit: Optional[PositiveInt] = DEFAULT_LIMIT
-    order_by: Optional[str] = None
-    direction: Optional[str] = None
-    entity: Optional[list] = None
-    statuses: Optional[list[str]] = None
-    priority: Optional[list[str]] = None
-    category: Optional[list[str]] = None
-    assignee: Optional[list[str]] = None
-    created_range: Optional[DatetimeRange] = None
-    updated_range: Optional[DatetimeRange] = None
+    from_: NonNegativeInt | None = Field(alias='from', default=None)
+    limit: PositiveInt | None = DEFAULT_LIMIT
+    order_by: str | None = None
+    direction: str | None = None
+    entity: list | None = None
+    statuses: list[str] | None = None
+    priority: list[str] | None = None
+    category: list[str] | None = None
+    assignee: list[str] | None = None
+    created_range: DatetimeRange | None = None
+    updated_range: DatetimeRange | None = None
 
 
 class PreviewAlertOut(PanelStatus):
@@ -595,10 +591,10 @@ class PreviewAlertOut(PanelStatus):
 class UpdateAlertIn(RFBaseModel):
     """Model for payload sent to PUT `/common/{playbook_alert_id}` endpoint."""
 
-    priority: Optional[str] = None
-    status: Optional[str] = None
-    assignee: Optional[str] = None
-    log_entry: Optional[str] = None
-    reopen: Optional[str] = None
-    added_actions_taken: Optional[list[str]] = None
-    removed_actions_taken: Optional[list[str]] = None
+    priority: str | None = None
+    status: str | None = None
+    assignee: str | None = None
+    log_entry: str | None = None
+    reopen: str | None = None
+    added_actions_taken: list[str] | None = None
+    removed_actions_taken: list[str] | None = None
