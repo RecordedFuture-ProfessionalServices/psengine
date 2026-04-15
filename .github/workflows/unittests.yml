@@ -34,10 +34,8 @@ jobs:
         run: uv python install ${{ matrix.python_version }}
 
       - name: Set up venv
-        run: |
-          uv venv -p ${{ matrix.python_version }}
-          uv pip install '.[dev]'
-      
+        run: uv sync 
+
       - name: Run tests without config
         run: |
           uv run -p ${{ matrix.python_version}} pytest tests_without_config
