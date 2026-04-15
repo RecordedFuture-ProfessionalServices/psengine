@@ -6,6 +6,9 @@
 
 - Added support for Python 3.14
 - `PlaybookAlertMgr.search` now supports filter for a single or a list of organisations.
+- `TimeHelpers.rel_time_to_date` now supports a starting time from where the math begins. If not specified it will be the UTC execution time.
+- `TimeHelpers.rel_time_to_date` now supports increment calculation, with `+1h`.
+- `TimeHelpers.rel_time_to_date` now supports increment or decrement of minutes with `+10m` or `-10m`.
 
 ### Removed
 
