@@ -1,0 +1,17 @@
+from ..endpoints import BASE_URL
+
+# API Base for Links
+LINKS_BASE_URL = f"{BASE_URL}/links"
+
+# Search Endpoints
+EP_LINKS_SEARCH = f"{LINKS_BASE_URL}/search"
+
+# Metadata Endpoints
+LINKS_METADATA_URL = f"{LINKS_BASE_URL}/metadata"
+EP_LINKS_METADATA_SECTIONS = f"{LINKS_METADATA_URL}/sections"
+EP_LINKS_METADATA_EVENTS = f"{LINKS_METADATA_URL}/events"
+EP_LINKS_METADATA_ENTITIES = f"{LINKS_METADATA_URL}/entities"
+
+# Module Defaults
+DEFAULT_LINKS_LIMIT = 100
+MAX_TIMEFRAME_DAYS = 90
