@@ -27,10 +27,9 @@ from pydantic import (
 )
 from typing_extensions import Doc
 
-from psengine.helpers.helpers import Validators
-
 from ..common_models import RFBaseModel
 from ..constants import DEFAULT_LIMIT, TIMESTAMP_STR
+from ..helpers.helpers import Validators
 from ..playbook_alerts.markdown.markdown import _markdown_playbook_alert
 from .models import (
     CodeRepoPanelEvidence,
