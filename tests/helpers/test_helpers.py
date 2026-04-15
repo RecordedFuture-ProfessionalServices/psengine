@@ -59,8 +59,8 @@ class Test_TimeHelpers:
             ('30H', True),
             ('-300h', True),
             ('58H', True),
-            ('+1D', False),
-            ('+7d', False),
+            ('+1D', True),
+            ('+7d', True),
             ('1hour', False),
             ('1HOUR', False),
             ('tendays', False),
@@ -80,6 +80,19 @@ class Test_TimeHelpers:
         assert new_time == '2024-01-22T12:55'
 
     @pytest.mark.parametrize(
+        ('rel_time', 'start', 'expected'),
+        [
+            ('1h', '2022-12-31 00:00:00', '2022-12-30T23:00'),
+            ('-1h', '2022-12-31 00:00:00', '2022-12-30T23:00'),
+            ('+1h', '2022-12-31 23:00:00', '2023-01-01T00:00'),
+            ('+1d', '2023-12-31 23:20:00', '2024-01-01T23:20'),
+        ],
+    )
+    def test_rel_time_to_date_start_time_increment(self, rel_time, start, expected):
+        new_time = TimeHelpers.rel_time_to_date(rel_time, start)
+        assert new_time == expected
+
+    @pytest.mark.parametrize(
         ('time', 'error'),
         [
             ('1h', None),
@@ -96,7 +109,7 @@ class Test_TimeHelpers:
             with pytest.raises(
                 error,
                 match=re.escape(
-                    f"Invalid relative time '{time}'. Accepted format: [-|][integer][h|d]"
+                    f"Invalid relative time '{time}'. Accepted format: [-|+]?[integer][h|d]"
                 ),
             ):
                 TimeHelpers.rel_time_to_date(time)

@@ -14,6 +14,7 @@ import csv
 import functools
 import json
 import logging
+import operator
 import os
 import platform
 import re
@@ -42,7 +43,7 @@ from ..constants import ROOT_DIR, TIMESTAMP_STR
 from ..errors import ReadFileError, RecordedFutureError, WriteFileError
 
 LOG = logging.getLogger('psengine.helpers')
-VALID_TIME_REGEX = r'^(-?)([1-9]?[0-9]+[dDhH])$'
+VALID_TIME_REGEX = r'^([-+]?)([1-9]?[0-9]+[dDhH])$'
 IDS = ['ip:', 'idn:', 'url:', 'hash:', 'id:']
 
 
@@ -182,37 +183,47 @@ class TimeHelpers:
     ) -> Annotated[str, Doc("Formatted date string in ISO format, e.g., '2022-08-08T13:11'.")]:
         """Convert a relative time to a date.
 
+        `relative_time` specification:
+            - `1h` means 1 hour ago
+            - `-1h` means 1 hour ago
+            - `+1h` means 1 hour in the future
+
         Example:
             ```python
             rel_time_to_date("1h")  # returns ISO datetime string ~1 hour ago
             rel_time_to_date("1d")  # returns ISO datetime string ~1 day ago
-            rel_time_to_date("1h", "2022-01-22 22:12:20") # returns an hour ago from the specified
+            rel_time_to_date("1h", "2022-01-22 22:12:20") # returns 1 hour ago from the specified
+            rel_time_to_date("+1h", "2022-01-22 22:14:20") # returns 1 hour after from the specified
             ```
 
         Raises:
-            ValueError: If the relative time is invalid.
+            ValueError: If `relative_time` is invalid.
         """
         logger = logging.getLogger(__name__)
         match = re.match(VALID_TIME_REGEX, relative_time)
         if match is None:
             raise ValueError(
-                f"Invalid relative time '{relative_time}'. Accepted format: [-|][integer][h|d]",
+                f"Invalid relative time '{relative_time}'. Accepted format: [-|+]?[integer][h|d]",
             )
-        relative_time = match.groups()[-1]
-        time_now = (
+        start_time = (
             datetime.strptime(start_time, TIMESTAMP_STR)
             if start_time
             else datetime.now(timezone.utc)
         )
+
+        sign = match.groups()[0]
+        operation = operator.add if sign == '+' else operator.sub
+
+        relative_time = match.groups()[-1]
         digit = int(re.findall(r'^\d+', relative_time)[0])
         if relative_time.endswith('d'):
-            subtracted = (time_now - timedelta(days=digit)).strftime('%Y-%m-%dT%H:%M')
+            result = (operation(start_time, timedelta(days=digit))).strftime('%Y-%m-%dT%H:%M')
         else:
-            subtracted = (time_now - timedelta(hours=digit)).strftime('%Y-%m-%dT%H:%M')
-        logger.debug(f'UTC Time now: {time_now}')
-        logger.debug(f'Relative time -{relative_time} to date: {subtracted}')
+            result = (operation(start_time, timedelta(hours=digit))).strftime('%Y-%m-%dT%H:%M')
+        logger.debug(f'UTC Time now: {start_time}')
+        logger.debug(f'Relative time {sign}{relative_time} to date: {result}')
 
-        return subtracted
+        return result
 
     @staticmethod
     def is_rel_time_valid(
