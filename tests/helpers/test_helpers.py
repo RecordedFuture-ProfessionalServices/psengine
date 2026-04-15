@@ -75,6 +75,10 @@ class Test_TimeHelpers:
     def test_is_rel_time_valid(self, time, expected):
         assert TimeHelpers.is_rel_time_valid(time) is expected
 
+    def test_rel_time_to_date_start_time(self):
+        new_time = TimeHelpers.rel_time_to_date('1h', '2024-01-22 13:55:21')
+        assert new_time == '2024-01-22T12:55'
+
     @pytest.mark.parametrize(
         ('time', 'error'),
         [

@@ -38,7 +38,7 @@ from requests.exceptions import (
 from typing_extensions import Doc
 
 from ..common_models import RFBaseModel
-from ..constants import ROOT_DIR
+from ..constants import ROOT_DIR, TIMESTAMP_STR
 from ..errors import ReadFileError, RecordedFutureError, WriteFileError
 
 LOG = logging.getLogger('psengine.helpers')
@@ -173,6 +173,12 @@ class TimeHelpers:
         relative_time: Annotated[
             str, Doc("Relative time string like '7d', '3h'. Minutes not supported.")
         ],
+        start_time: Annotated[
+            str | None,
+            Doc(
+                'Defined starting time in format %Y-%m-%d %H:%M:%S, if none it will be the run time'
+            ),
+        ] = None,
     ) -> Annotated[str, Doc("Formatted date string in ISO format, e.g., '2022-08-08T13:11'.")]:
         """Convert a relative time to a date.
 
@@ -180,6 +186,7 @@ class TimeHelpers:
             ```python
             rel_time_to_date("1h")  # returns ISO datetime string ~1 hour ago
             rel_time_to_date("1d")  # returns ISO datetime string ~1 day ago
+            rel_time_to_date("1h", "2022-01-22 22:12:20") # returns an hour ago from the specified
             ```
 
         Raises:
@@ -192,7 +199,11 @@ class TimeHelpers:
                 f"Invalid relative time '{relative_time}'. Accepted format: [-|][integer][h|d]",
             )
         relative_time = match.groups()[-1]
-        time_now = datetime.now(timezone.utc)
+        time_now = (
+            datetime.strptime(start_time, TIMESTAMP_STR)
+            if start_time
+            else datetime.now(timezone.utc)
+        )
         digit = int(re.findall(r'^\d+', relative_time)[0])
         if relative_time.endswith('d'):
             subtracted = (time_now - timedelta(days=digit)).strftime('%Y-%m-%dT%H:%M')
