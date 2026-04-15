@@ -17,8 +17,17 @@ from functools import total_ordering
 from itertools import chain
 from typing import Annotated
 
-from pydantic import Field, NonNegativeInt, PositiveInt, model_validator
+from pydantic import (
+    AfterValidator,
+    BeforeValidator,
+    Field,
+    NonNegativeInt,
+    PositiveInt,
+    model_validator,
+)
 from typing_extensions import Doc
+
+from psengine.helpers.helpers import Validators
 
 from ..common_models import RFBaseModel
 from ..constants import DEFAULT_LIMIT, TIMESTAMP_STR
@@ -571,11 +580,16 @@ class SearchIn(RFBaseModel):
     limit: PositiveInt | None = DEFAULT_LIMIT
     order_by: str | None = None
     direction: str | None = None
-    entity: list | None = None
-    statuses: list[str] | None = None
-    priority: list[str] | None = None
-    category: list[str] | None = None
-    assignee: list[str] | None = None
+    entity: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    statuses: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    priority: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    category: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    assignee: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    organisation: Annotated[
+        list[str] | None,
+        BeforeValidator(Validators.convert_str_to_list),
+        AfterValidator(Validators.check_uhash_prefix),
+    ] = None
     created_range: DatetimeRange | None = None
     updated_range: DatetimeRange | None = None
 

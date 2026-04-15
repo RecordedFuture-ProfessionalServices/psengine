@@ -5,6 +5,7 @@
 ### Added
 
 - Added support for Python 3.14
+- `PlaybookAlertMgr.search` now supports filter for a single or a list of organisations.
 
 ### Removed
 

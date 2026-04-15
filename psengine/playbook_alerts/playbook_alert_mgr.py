@@ -226,7 +226,7 @@ class PlaybookAlertMgr:
     def search(
         self,
         alerts_per_page: Annotated[int | None, Doc('Number of alerts per page.')] = Field(
-            ge=1, le=10000, default=ALERTS_PER_PAGE
+            ge=1, le=10_000, default=ALERTS_PER_PAGE
         ),
         max_results: Annotated[int | None, Doc('Maximum total number of alerts to fetch.')] = Field(
             ge=1, le=10_000, default=DEFAULT_LIMIT
@@ -251,6 +251,10 @@ class PlaybookAlertMgr:
         assignee: Annotated[
             str | list | None,
             Doc('Assignee or list of assignees (uhashes) to filter alerts by.'),
+        ] = None,
+        organisation: Annotated[
+            str | list | None,
+            Doc('Org or list of Orgs (uhashes) to filter alerts by.'),
         ] = None,
         created_from: Annotated[
             str | None, Doc('Start of created date range (ISO or relative, e.g. `-7d`).')
@@ -361,6 +365,7 @@ class PlaybookAlertMgr:
         priority: str | list | None = None,
         category: str | list | None = None,
         assignee: str | list | None = None,
+        organisation: str | list | None = None,
         created_from: str | None = None,
         created_until: str | None = None,
         updated_from: str | None = None,
@@ -376,7 +381,6 @@ class PlaybookAlertMgr:
         Returns:
             SearchIn: Validated search query
         """
-        params = {key: val for key, val in locals().items() if val and key != 'self'}
         query = {
             'created_range': {},
             'updated_range': {},
@@ -388,12 +392,16 @@ class PlaybookAlertMgr:
         if not category:
             query['category'] = [cat.value for cat in PACategory]
 
-        for arg in params:
-            key, value = self._process_arg(arg, params[arg])
-            if isinstance(value, dict):
-                query[key].update(value)
+        params = {key: val for key, val in locals().items() if val and key != 'self'}
+        for arg, val in params.items():
+            if arg in ['created_from', 'created_until', 'updated_from', 'updated_until']:
+                key, value = self._process_time_arg(arg, val)
+                if isinstance(value, dict):
+                    query[key].update(value)
+                else:
+                    query[key] = value
             else:
-                query[key] = value
+                query[arg] = val
 
         query = {
             key: val
@@ -590,7 +598,7 @@ class PlaybookAlertMgr:
 
         return p_alerts
 
-    def _process_arg(
+    def _process_time_arg(
         self,
         attr: str,
         value: int | str | list,
@@ -604,14 +612,8 @@ class PlaybookAlertMgr:
         Returns:
             tuple (str, Union[str, list]): canonicalized query attributes
         """
-        list_or_str_args = ['entity', 'statuses', 'priority', 'category', 'assignee']
-        if attr in ['created_from', 'created_until', 'updated_from', 'updated_until']:
-            range_field = attr.split('_')[0] + '_range'
-            query_key = 'from' if attr.endswith('from') else 'until'
-            if TimeHelpers.is_rel_time_valid(value):
-                return range_field, {query_key: TimeHelpers.rel_time_to_date(value)}
-            return range_field, {query_key: value}
-        if attr in list_or_str_args and isinstance(value, str):
-            return attr, [value]
-
-        return attr, value
+        range_field = attr.split('_')[0] + '_range'
+        query_key = 'from' if attr.endswith('from') else 'until'
+        if TimeHelpers.is_rel_time_valid(value):
+            return range_field, {query_key: TimeHelpers.rel_time_to_date(value)}
+        return range_field, {query_key: value}
