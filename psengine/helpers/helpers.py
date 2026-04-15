@@ -43,7 +43,7 @@ from ..constants import ROOT_DIR, TIMESTAMP_STR
 from ..errors import ReadFileError, RecordedFutureError, WriteFileError
 
 LOG = logging.getLogger('psengine.helpers')
-VALID_TIME_REGEX = r'^([-+]?)([1-9]?[0-9]+[dDhH])$'
+VALID_TIME_REGEX = r'^([-+]?)([1-9]?[0-9]+[dDhHmM])$'
 IDS = ['ip:', 'idn:', 'url:', 'hash:', 'id:']
 
 
@@ -171,9 +171,7 @@ class TimeHelpers:
 
     @staticmethod
     def rel_time_to_date(
-        relative_time: Annotated[
-            str, Doc("Relative time string like '7d', '3h'. Minutes not supported.")
-        ],
+        relative_time: Annotated[str, Doc("Relative time string like '7d', '3h', '4m' (minutes).")],
         start_time: Annotated[
             str | None,
             Doc(
@@ -192,6 +190,7 @@ class TimeHelpers:
             ```python
             rel_time_to_date("1h")  # returns ISO datetime string ~1 hour ago
             rel_time_to_date("1d")  # returns ISO datetime string ~1 day ago
+            rel_time_to_date("+10m")  # returns ISO datetime string 10 minutes in the future
             rel_time_to_date("1h", "2022-01-22 22:12:20") # returns 1 hour ago from the specified
             rel_time_to_date("+1h", "2022-01-22 22:14:20") # returns 1 hour after from the specified
             ```
@@ -203,7 +202,7 @@ class TimeHelpers:
         match = re.match(VALID_TIME_REGEX, relative_time)
         if match is None:
             raise ValueError(
-                f"Invalid relative time '{relative_time}'. Accepted format: [-|+]?[integer][h|d]",
+                f"Invalid relative time '{relative_time}'. Accepted format: [-|+]?[integer][h|d|m]",
             )
         start_time = (
             datetime.strptime(start_time, TIMESTAMP_STR)
@@ -218,8 +217,11 @@ class TimeHelpers:
         digit = int(re.findall(r'^\d+', relative_time)[0])
         if relative_time.endswith('d'):
             result = (operation(start_time, timedelta(days=digit))).strftime('%Y-%m-%dT%H:%M')
-        else:
+        elif relative_time.endswith('h'):
             result = (operation(start_time, timedelta(hours=digit))).strftime('%Y-%m-%dT%H:%M')
+        else:
+            result = (operation(start_time, timedelta(minutes=digit))).strftime('%Y-%m-%dT%H:%M')
+
         logger.debug(f'UTC Time now: {start_time}')
         logger.debug(f'Relative time {sign}{relative_time} to date: {result}')
 

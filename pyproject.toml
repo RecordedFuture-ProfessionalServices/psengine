@@ -54,6 +54,7 @@ dev = [
     "pytest-httpdbg==0.10.1",
     "ruff~=0.15.8",
     "mimesis>=19.1.0",
+    "freezegun>=1.5.5",
 ]
 
 docs = [
