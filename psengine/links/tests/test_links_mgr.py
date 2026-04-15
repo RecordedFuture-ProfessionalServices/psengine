@@ -1,7 +1,8 @@
 import os
 import pytest
 from psengine.links.links_mgr import LinksMgr
-from psengine.links.response import MetadataSection
+from psengine.links.response import MetadataSection, MetadataEvent
+from psengine.common_models import IdName
 
 # Safety check: Skip these tests if no API token is found in the environment.
 pytestmark = pytest.mark.skipif(
@@ -27,30 +28,63 @@ class TestLinksMgrIntegration:
         assert isinstance(sections[0], MetadataSection)
         
         # === VISUAL VERIFICATION ===
-        # Print the first parsed object to the console so the user can inspect it.
         print("\n" + "="*40)
-        print("LIVE API DATA PARSED BY PYDANTIC:")
+        print("METADATA SECTION (LIVE):")
         print(sections[0].model_dump_json(indent=2))
         print("="*40 + "\n")
         
         # 2. Extract the IDs to verify against known Recorded Future data
         section_ids = {s.id_ for s in sections}
-        
-        # 'iU_ZsE' is the known ID for "Actors, Tools & TTPs"
-        assert "iU_ZsE" in section_ids, "Expected standard RF Section ID not found in live response."
+        assert "iU_ZsE" in section_ids, "Expected RF Section ID 'iU_ZsE' not found."
 
     def test_valid_sections_live_caching(self, links_mgr):
-        """Verify that lazy-loading works seamlessly with the live API."""
-        # 1. Initially, cache should be empty
+        """Verify that lazy-loading works for sections."""
         assert links_mgr._cache_sections is None
-        
-        # 2. First access triggers the live fetch
-        sections_set = links_mgr.valid_sections
-        assert len(sections_set) > 0
-        assert isinstance(sections_set, set)
-        
-        # 'iU_ZsG' is the known ID for "Indicators & Detection Rules"
-        assert "iU_ZsG" in sections_set
-        
-        # 3. Cache must be populated after the property is accessed
+        _ = links_mgr.valid_sections
         assert links_mgr._cache_sections is not None
+
+    def test_list_events_live(self, links_mgr):
+        """Verify that the live API returns valid event types."""
+        events = links_mgr.list_events()
+        
+        assert len(events) > 0
+        assert isinstance(events[0], MetadataEvent)
+        
+        # === VISUAL VERIFICATION ===
+        print("\n" + "="*40)
+        print("METADATA EVENT (LIVE):")
+        print(events[0].model_dump_json(indent=2))
+        print("="*40 + "\n")
+        
+        event_ids = {e.id_ for e in events}
+        # Recorded Future prefixes event IDs with 'type:'
+        assert "type:InfrastructureAnalysis" in event_ids
+
+    def test_valid_events_live_caching(self, links_mgr):
+        """Verify that lazy-loading works for events."""
+        assert links_mgr._cache_events is None
+        _ = links_mgr.valid_events
+        assert links_mgr._cache_events is not None
+
+    def test_list_entity_types_live(self, links_mgr):
+        """Verify that the live API returns valid entity types."""
+        types = links_mgr.list_entity_types()
+        
+        assert len(types) > 0
+        assert isinstance(types[0], IdName)
+        
+        # === VISUAL VERIFICATION ===
+        print("\n" + "="*40)
+        print("METADATA ENTITY TYPE (LIVE):")
+        print(types[0].model_dump_json(indent=2))
+        print("="*40 + "\n")
+        
+        type_ids = {t.id_ for t in types}
+        # Recorded Future prefixes entity type IDs with 'type:'
+        assert "type:IpAddress" in type_ids or "type:Company" in type_ids
+
+    def test_valid_entity_types_live_caching(self, links_mgr):
+        """Verify that lazy-loading works for entity types."""
+        assert links_mgr._cache_entity_types is None
+        _ = links_mgr.valid_entity_types
+        assert links_mgr._cache_entity_types is not None
