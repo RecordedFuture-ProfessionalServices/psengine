@@ -9,6 +9,7 @@
 - `TimeHelpers.rel_time_to_date` now supports a starting time from where the math begins. If not specified it will be the UTC execution time.
 - `TimeHelpers.rel_time_to_date` now supports increment calculation, with `+1h`.
 - `TimeHelpers.rel_time_to_date` now supports increment or decrement of minutes with `+10m` or `-10m`.
+- Added `malware_intel.AutoYaraMgr` and `malware_intel.AutoSigmaMgr` managers to interact with auto-yara and auto-sigma APIs.
 
 ### Removed
 
