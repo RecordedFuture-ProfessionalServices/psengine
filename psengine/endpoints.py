@@ -118,6 +118,11 @@ EP_IDENTITY_DUMP_SEARCH = EP_IDENTITY + 'metadata/dump/search'
 ###############################################################################
 EP_MALWARE_INTELLIGENCE = BASE_URL + '/malware-intelligence/v1/'
 EP_MALWARE_INTEL_REPORTS = EP_MALWARE_INTELLIGENCE + 'reports'
+EP_AUTO_YARA = EP_MALWARE_INTELLIGENCE + 'auto-yara/'
+EP_AUTO_YARA_JOBS = EP_AUTO_YARA + 'jobs'
+EP_AUTO_YARA_JOB_ID = EP_AUTO_YARA_JOBS + '/{}'
+EP_AUTO_YARA_JOB_ID_RETRY = EP_AUTO_YARA_JOB_ID + '/retry'
+EP_AUTO_YARA_JOBS_EDIT = EP_AUTO_YARA_JOBS + 'edit'
 
 ###############################################################################
 # Risk History API Endpoints
