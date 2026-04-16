@@ -14,7 +14,7 @@ from .constants import (
     EP_LINKS_METADATA_SECTIONS,
     EP_LINKS_SEARCH,
 )
-from .errors import LinksMetadataError, LinksSearchError
+from .errors import LinksMetadataError, LinksSearchError, LinksValidationError
 from .requests import LinksFilterObjects, LinksLimitsObjects, LinksSearchIn
 from .response import (
     MetadataEntityTypesResponse,
@@ -41,6 +41,35 @@ class LinksMgr:
         self._cache_sections: Optional[set[str]] = None
         self._cache_entity_types: Optional[set[str]] = None
         self._cache_events: Optional[set[str]] = None
+
+    def _validate_filters(self, filters: LinksFilterObjects) -> None:
+        """Domain validation for search filters against live caches"""
+        # Section validation
+        if filters.sections:
+            invalid_sections = [s for s in filters.sections if s not in self.valid_sections]
+            if invalid_sections:
+                raise LinksValidationError(f"Invalid section IDs: {invalid_sections}")
+
+        # Entity type validation
+        if filters.entity_types:
+            invalid_types = [t for t in filters.entity_types if t not in self.valid_entity_types]
+            if invalid_types:
+                raise LinksValidationError(f"Invalid entity types: {invalid_types}")
+
+        # Source validation
+        valid_sources = ["technical", "insikt"]
+        if filters.sources:
+            for source in filters.sources:
+                if source not in valid_sources:
+                    raise LinksValidationError(f"Invalid source: {source}. Valid sources are: {', '.join(valid_sources)}")
+
+        # Timeframe validation done with Pydantic
+
+        # Event validation
+        if filters.technical and filters.technical.events:
+            invalid_events = [e for e in filters.technical.events if e not in self.valid_events]
+            if invalid_events:
+                raise LinksValidationError(f"Invalid event IDs: {invalid_events}")
 
     @property
     @debug_call
@@ -116,3 +145,27 @@ class LinksMgr:
 
         validated = MetadataEntityTypesResponse.model_validate(response.json())
         return validated.data
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=LinksSearchError)
+    def search(
+        self,
+        entities: Annotated[list[str], Doc('List of Recorded Future entity IDs to search for links against')],
+        filters: Annotated[Optional[LinksFilterObjects], Doc('Filter objects for the search')] = None,
+        limits: Annotated[Optional[LinksLimitsObjects], Doc('Limits objects for the search')] = None,
+    ) -> Annotated[LinksSearchResponse, Doc('The structured search results')]:
+        """Perform a Link search using the provided parameters."""
+        if filters:
+            self._validate_filters(filters)
+
+        payload = LinksSearchIn(entities=entities, filters=filters, limits=limits)
+
+        self.log.info(f"Executing links search for {len(entities)} entities.")
+        response = self.rf_client.request(
+            method='POST',
+            url=EP_LINKS_SEARCH,
+            data=payload.model_dump(exclude_none=True,by_alias=True)
+        )
+
+        return LinksSearchResponse.model_validate(response.json())

@@ -46,9 +46,6 @@ class FilterTechnical(RFBaseModel):
                     f"Timeframe must be between 1 and 90 days. Received {v}")
         return v
 
-    # TODO - Add validation to events so that it maps to the cache for the links_mgr
-    #  class
-
 
 class LinksFilterObjects(RFBaseModel):
     """Objects in the fields data parameter of links"""
