@@ -123,6 +123,12 @@ EP_AUTO_YARA_JOBS = EP_AUTO_YARA + 'jobs'
 EP_AUTO_YARA_JOB_ID = EP_AUTO_YARA_JOBS + '/{}'
 EP_AUTO_YARA_JOB_ID_RETRY = EP_AUTO_YARA_JOB_ID + '/retry'
 EP_AUTO_YARA_JOBS_EDIT = EP_AUTO_YARA_JOBS + '/edit'
+EP_AUTO_SIGMA = EP_MALWARE_INTELLIGENCE + 'auto-sigma/'
+EP_AUTO_SIGMA_JOBS = EP_AUTO_SIGMA + 'jobs'
+EP_AUTO_SIGMA_GET_JOBS = EP_AUTO_SIGMA + 'get_jobs'
+EP_AUTO_SIGMA_JOB_ID = EP_AUTO_SIGMA_JOBS + '/{}'
+EP_AUTO_SIGMA_JOB_ID_RULE_ID = EP_AUTO_SIGMA_JOB_ID + '/{}'
+EP_AUTO_SIGMA_JOB_ID_RETRY = EP_AUTO_SIGMA_JOB_ID + '/retry'
 
 ###############################################################################
 # Risk History API Endpoints
