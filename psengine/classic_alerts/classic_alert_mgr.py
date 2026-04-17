@@ -168,6 +168,7 @@ class ClassicAlertMgr:
             bool | None,
             Doc('Entities in the alert title and message body will be marked up with entity IDs.'),
         ] = None,
+        fetch_images: Annotated[bool | None, Doc('Fetch images for alerts.')] = False,
     ) -> Annotated[ClassicAlert, Doc('ClassicAlert model.')]:
         """Fetch a specific alert.
 
@@ -192,6 +193,7 @@ class ClassicAlertMgr:
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
             AlertFetchError: If a fetch of the alert via the API fails.
+            AlertImageFetchError: If a fetch of the alert image via the API fails.
         """
         params = {}
         params['fields'] = set((fields or []) + REQUIRED_CA_FIELDS)
@@ -204,7 +206,10 @@ class ClassicAlertMgr:
         response = self.rf_client.request(
             'get', url=EP_CLASSIC_ALERTS_ID.format(id_), params=params
         ).json()
-        return ClassicAlert.model_validate(response.get('data'))
+        alert = ClassicAlert.model_validate(response.get('data'))
+        if fetch_images:
+            self.fetch_all_images(alert)
+        return alert
 
     @debug_call
     @validate_call
@@ -228,6 +233,7 @@ class ClassicAlertMgr:
             bool | None,
             Doc('Entities in the alert title and message body will be marked up with entity IDs.'),
         ] = None,
+        fetch_images: Annotated[bool | None, Doc('Fetch images for alerts.')] = False,
         max_workers: Annotated[int | None, Doc('Number of workers to multithread requests.')] = 0,
     ) -> Annotated[list[ClassicAlert], Doc('List of ClassicAlert models.')]:
         """Fetch multiple alerts.
@@ -266,6 +272,7 @@ class ClassicAlertMgr:
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
             AlertFetchError: If a fetch of the alert via the API fails.
+            AlertImageFetchError: If a fetch of the alert image via the API fails.
         """
         self.log.info(f'Fetching alerts: {ids}')
         results = []
@@ -276,9 +283,10 @@ class ClassicAlertMgr:
                 iterator=ids,
                 fields=fields,
                 tagged_text=tagged_text,
+                fetch_images=fetch_images,
             )
         else:
-            results = [self.fetch(id_, fields, tagged_text) for id_ in ids]
+            results = [self.fetch(id_, fields, tagged_text, fetch_images) for id_ in ids]
 
         return results
 
@@ -351,6 +359,7 @@ class ClassicAlertMgr:
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
+            AlertImageFetchError: If a fetch of the alert image via the API fails.
         """
         for hit in alert.hits:
             for entity in hit.entities:
