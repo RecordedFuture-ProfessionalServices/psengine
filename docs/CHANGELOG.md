@@ -10,6 +10,7 @@
 - `TimeHelpers.rel_time_to_date` now supports increment calculation, with `+1h`.
 - `TimeHelpers.rel_time_to_date` now supports increment or decrement of minutes with `+10m` or `-10m`.
 - Added `malware_intel.AutoYaraMgr` and `malware_intel.AutoSigmaMgr` managers to interact with auto-yara and auto-sigma APIs.
+- `ClassicAlertMgr.fetch` and `ClassicAlertMgr.fetch_bulk` now allow to fetch images directly via the `fetch_images` argument. Defaults to `False`.
 
 ### Removed
 
