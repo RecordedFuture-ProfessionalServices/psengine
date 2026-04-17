@@ -12,6 +12,10 @@
 - Added `malware_intel.AutoYaraMgr` and `malware_intel.AutoSigmaMgr` managers to interact with auto-yara and auto-sigma APIs.
 - `ClassicAlertMgr.fetch` and `ClassicAlertMgr.fetch_bulk` now allow to fetch images directly via the `fetch_images` argument. Defaults to `False`.
 
+### Fixed
+
+- `playbook_alerts.helpers.save_pba_images` now allow for all alert types that support images.
+
 ### Removed
 
 - Removed support for Python 3.9
