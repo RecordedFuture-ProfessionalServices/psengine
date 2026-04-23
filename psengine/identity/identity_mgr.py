@@ -720,15 +720,9 @@ class IdentityMgr:
         include_details: Annotated[
             bool, Doc('Whether to include infected machine details.')
         ] = True,
-        organization_id: Annotated[
-            list[str] | str | None, Doc('The org_id(s) in multi-org setup.')
-        ] = None,
-        offset: Annotated[str | None, Doc('Offset token for paginated results.')] = None,
+        organization_id: Annotated[str | None, Doc('The org_id in multi-org setup.')] = None,
         max_results: Annotated[int | None, Doc('Maximum number of credentials to return.')] = Field(
             ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT
-        ),
-        identities_per_page: Annotated[int | None, Doc('Number of credentials per page.')] = Field(
-            ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE
         ),
     ) -> Annotated[
         IncidentReportOut,
@@ -761,8 +755,7 @@ class IdentityMgr:
             'source': source,
             'include_details': include_details,
             'organization_id': organization_id,
-            'limit': min(max_results, identities_per_page),
-            'offset': offset,
+            'limit': max_results,
         }
         payload = IncidentReportIn.model_validate(data).json()
         self.log.info(f'Fetching incident report with filters: {payload}')
@@ -772,6 +765,7 @@ class IdentityMgr:
             data=payload,
             max_results=max_results or DEFAULT_LIMIT,
             results_path=['credentials', 'details'],
+            offset_key='offset',
         )
 
         return IncidentReportOut.model_validate(resp)

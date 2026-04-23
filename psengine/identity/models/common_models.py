@@ -21,6 +21,7 @@ from pydantic.networks import IPvAnyAddress
 from ...common_models import IdName, RFBaseModel
 from ...constants import DEFAULT_LIMIT
 from ...helpers import Validators
+from ..constants import MAXIMUM_IDENTITIES
 
 
 class DetectionType(Enum):
@@ -205,7 +206,7 @@ class FilterIn(RFBaseModel):
 
 
 class BaseIdentityIn(RFBaseModel):
-    limit: int | None = Field(default=DEFAULT_LIMIT, gt=0, le=500)
+    limit: int | None = Field(default=DEFAULT_LIMIT, gt=0, le=MAXIMUM_IDENTITIES)
     offset: str | None = None
 
 
