@@ -21,18 +21,22 @@ from ..common_models import IdNameType, IdNameTypeDescription, RFBaseModel
 from ..helpers import Validators
 
 
+class NoteEntity(IdNameTypeDescription):
+    is_threat_actor: bool | None = None
+
+
 class DiamondModel(RFBaseModel):
     start: datetime | None = None
     stop: datetime | None = None
-    malicious_infrastructure: list[IdNameTypeDescription] | None = []
-    capabilities: list[IdNameTypeDescription] | None = []
-    adversary: list[IdNameTypeDescription] | None = []
-    target: list[IdNameTypeDescription] | None = []
+    malicious_infrastructure: list[NoteEntity] | None = []
+    capabilities: list[NoteEntity] | None = []
+    adversary: list[NoteEntity] | None = []
+    target: list[NoteEntity] | None = []
 
 
 class Query(RFBaseModel):
     title: str
-    url: IdNameTypeDescription | None = None
+    url: NoteEntity | None = None
 
 
 class Position(RFBaseModel):
@@ -43,35 +47,35 @@ class Position(RFBaseModel):
 class PositionEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    location: list[IdNameTypeDescription] | None = []
+    location: list[NoteEntity] | None = []
     event_positions: list[Position] | None = []
 
 
 class CyberAttackEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    adversary: list[IdNameTypeDescription] | None = []
-    target: list[IdNameTypeDescription] | None = []
-    capabilities: list[IdNameTypeDescription] = []
-    malicious_infrastructure: list[IdNameTypeDescription] | None = []
-    operation: list[IdNameTypeDescription] | None = []
+    adversary: list[NoteEntity] | None = []
+    target: list[NoteEntity] | None = []
+    capabilities: list[NoteEntity] = []
+    malicious_infrastructure: list[NoteEntity] | None = []
+    operation: list[NoteEntity] | None = []
 
 
 class ArmedConflictEvent(PositionEvent):
-    attacker: list[IdNameTypeDescription] | None = []
-    target: list[IdNameTypeDescription] | None = []
+    attacker: list[NoteEntity] | None = []
+    target: list[NoteEntity] | None = []
 
 
 class ArmsPurchaseSaleEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    arms_seller: list[IdNameTypeDescription] | None = []
-    arms_purchaser: list[IdNameTypeDescription] | None = []
+    arms_seller: list[NoteEntity] | None = []
+    arms_purchaser: list[NoteEntity] | None = []
 
 
 class DiseaseOutbreakEvent(PositionEvent):
-    disease: list[IdNameTypeDescription] | None = []
-    facility: list[IdNameTypeDescription] | None = []
+    disease: list[NoteEntity] | None = []
+    facility: list[NoteEntity] | None = []
 
 
 class EnvironmentalIssueEvent(PositionEvent):
@@ -79,16 +83,16 @@ class EnvironmentalIssueEvent(PositionEvent):
 
 
 class ManMadeDisasterEvent(PositionEvent):
-    facility: list[IdNameTypeDescription]
-    manmade_disaster: list[IdNameTypeDescription] | list[str]
+    facility: list[NoteEntity]
+    manmade_disaster: list[NoteEntity] | list[str]
 
 
 class MilitaryManeuverEvent(PositionEvent):
-    actors: list[IdNameTypeDescription] | None = []
+    actors: list[NoteEntity] | None = []
 
 
 class NaturalDisasterEvent(PositionEvent):
-    natural_disaster: list[IdNameTypeDescription]
+    natural_disaster: list[NoteEntity]
 
 
 class NuclearMaterialTransactionEvent(PositionEvent):
@@ -100,24 +104,24 @@ class NuclearMaterialTransactionEvent(PositionEvent):
 class PersonThreatEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    threatened: list[IdNameTypeDescription]
-    actor: list[IdNameTypeDescription] | None = []
+    threatened: list[NoteEntity]
+    actor: list[NoteEntity] | None = []
 
 
 class ProtestEvent(RFBaseModel):
-    protest_target: list[IdNameTypeDescription] | None = []
+    protest_target: list[NoteEntity] | None = []
 
 
 class MalwareAnalysisEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    malware: list[IdNameTypeDescription]
-    attacker: list[IdNameTypeDescription] | None = []
-    malicious_infrastructure: list[IdNameTypeDescription] | None = []
-    ttp: list[IdNameTypeDescription] | None = []
-    target: list[IdNameTypeDescription] | None = []
-    exploit: list[IdNameTypeDescription] | None = []
-    hash_: list[IdNameTypeDescription] | None = Field(alias='hash', default=[])
+    malware: list[NoteEntity]
+    attacker: list[NoteEntity] | None = []
+    malicious_infrastructure: list[NoteEntity] | None = []
+    ttp: list[NoteEntity] | None = []
+    target: list[NoteEntity] | None = []
+    exploit: list[NoteEntity] | None = []
+    hash_: list[NoteEntity] | None = Field(alias='hash', default=[])
 
 
 ATTRIBUTES_MAPPING = {
@@ -178,11 +182,11 @@ class Attributes(RFBaseModel):
     attachment: str | None = None
     events: list[NoteEvent] | None = []
     validated_on: datetime | None = None
-    note_entities: list[IdNameTypeDescription] | None = []
-    context_entities: list[IdNameTypeDescription] | None = []
-    topic: list[IdNameTypeDescription] | IdNameTypeDescription | None = []
-    labels: list[IdNameTypeDescription] | None = []
-    validation_urls: list[IdNameTypeDescription] | None = []
+    note_entities: list[NoteEntity] | None = []
+    context_entities: list[NoteEntity] | None = []
+    topic: list[NoteEntity] | NoteEntity | None = []
+    labels: list[NoteEntity] | None = []
+    validation_urls: list[NoteEntity] | None = []
     diamond_model: list[DiamondModel] | None = []
     recommended_queries: list[Query] | None = []
     header_image: IdNameType | None = None
@@ -210,11 +214,11 @@ class PreviewAttributesIn(RFBaseModel):
 class PreviewAttributesOut(RFBaseModel):
     title: str
     text: str
-    note_entities: list[IdNameTypeDescription] | None = []
-    context_entities: list[IdNameTypeDescription] | None = []
-    topic: list[IdNameTypeDescription] | None = []
-    labels: list[IdNameTypeDescription] | None = []
-    validation_urls: list[IdNameTypeDescription] | None = []
+    note_entities: list[NoteEntity] | None = []
+    context_entities: list[NoteEntity] | None = []
+    topic: list[NoteEntity] | None = []
+    labels: list[NoteEntity] | None = []
+    validation_urls: list[NoteEntity] | None = []
 
 
 class RequestAttachment(RFBaseModel):
