@@ -15,6 +15,11 @@
 ### Fixed
 
 - `playbook_alerts.helpers.save_pba_images` now allow for all alert types that support images.
+- `IdentityMgr.fetch_incident_report` now support a single string `organization_id` field. 
+
+### Changed
+
+- `IdentityMgr` methods now support 1000 maximum identities returned instead of 500.
 
 ### Removed
 
