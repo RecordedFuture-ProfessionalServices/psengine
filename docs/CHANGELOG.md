@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.5.2 - 2026-04-27
+
+### Fixed
+- When parsing any Playbook Alert object the `panel_log_v2.[].added.[].url` field no longer fails validation when the URL format does not conform to strict HTTP URL requirements.
+
 ## v2.5.1 - 2026-03-26
 
 ### Fixed
