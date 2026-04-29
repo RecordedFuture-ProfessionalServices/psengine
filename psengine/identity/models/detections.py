@@ -12,7 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import BeforeValidator, Field
 
@@ -26,29 +26,29 @@ from .common_models import (
 
 
 class DetectionsCreated(RFBaseModel):
-    gte: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = None
-    lt: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = None
+    gte: Annotated[datetime | None, BeforeValidator(Validators.convert_relative_time)] = None
+    lt: Annotated[datetime | None, BeforeValidator(Validators.convert_relative_time)] = None
 
 
 class AuthorizationService(RFBaseModel):
-    url: Optional[str] = None
-    domain: Optional[str] = None
-    fqdn: Optional[str] = None
-    technology: Optional[list[Technology]] = None
-    protocols: Optional[list[str]] = None
+    url: str | None = None
+    domain: str | None = None
+    fqdn: str | None = None
+    technology: list[Technology] | None = None
+    protocols: list[str] | None = None
 
 
 class Password(RFBaseModel):
-    type_: Optional[str] = Field(default=None, alias='type')
-    hashes: Optional[list[PasswordHash]] = None
-    properties: Optional[list[str]] = None
-    cleartext_hint: Optional[str] = None
-    cleartext: Optional[str] = None
+    type_: str | None = Field(default=None, alias='type')
+    hashes: list[PasswordHash] | None = None
+    properties: list[str] | None = None
+    cleartext_hint: str | None = None
+    cleartext: str | None = None
 
 
 class DetectionsFilterIn(RFBaseModel):
-    novel_only: Optional[bool] = None
-    cookies: Optional[str] = None
-    domains: Annotated[Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)] = []
-    detection_type: Optional[DetectionType] = None
-    created: Optional[DetectionsCreated] = None
+    novel_only: bool | None = None
+    cookies: str | None = None
+    domains: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = []
+    detection_type: DetectionType | None = None
+    created: DetectionsCreated | None = None

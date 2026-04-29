@@ -13,7 +13,7 @@
 
 import os
 from enum import Enum
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field, Secret
 from typing_extensions import Doc
@@ -67,18 +67,18 @@ class IdName(RFBaseModel):
 
 class IdNameType(RFBaseModel):
     id_: str = Field(alias='id', default=None)
-    name: Optional[str] = None
+    name: str | None = None
     type_: str = Field(alias='type', default=None)
 
 
 class IdOptionalNameType(RFBaseModel):
     id_: str = Field(alias='id', default=None)
-    name: Optional[str] = None
+    name: str | None = None
     type_: str = Field(alias='type', default=None)
 
 
 class IdNameTypeDescription(IdNameType):
-    description: Optional[str] = None
+    description: str | None = None
 
 
 class IOCType(Enum):

@@ -197,8 +197,11 @@ nav:
           - Errors: api/logger/errors.md
       - Malware Intelligence:
           - Manager: api/malware_intel/malware_intel_mgr.md
+          - Auto Yara Manager: api/malware_intel/auto_yara_mgr.md
+          - Auto Sigma Manager: api/malware_intel/auto_sigma_mgr.md
           - ADT: api/malware_intel/malware_intel.md
           - Models: api/malware_intel/models.md
+          - Helpers: api/malware_intel/helpers.md
           - Errors: api/malware_intel/errors.md
       - Markdown:
           - Markdown: api/markdown/markdown.md

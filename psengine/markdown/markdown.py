@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import html
-from typing import Annotated, Union
+from typing import Annotated
 
 import markdown_strings
 from markdown_strings import header
@@ -117,7 +117,7 @@ class MarkdownMaker:
         """Add title to the markdown."""
         self.title = title
 
-    def validate_section(self, title: str, content: Union[list[dict], list[str], str]) -> Section:
+    def validate_section(self, title: str, content: list[dict] | list[str] | str) -> Section:
         """Recursive function to validate a section and its content.
 
         Args:
@@ -146,9 +146,7 @@ class MarkdownMaker:
     def add_section(
         self,
         title: Annotated[str, Doc('Title of the section to add.')],
-        content: Annotated[
-            Union[list[dict], list[str], str], Doc('Content to include in the section.')
-        ],
+        content: Annotated[list[dict] | list[str] | str, Doc('Content to include in the section.')],
     ) -> None:
         """Add a section to the markdown."""
         self.sections.append(self.validate_section(title, content))

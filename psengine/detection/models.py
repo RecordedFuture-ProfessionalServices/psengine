@@ -12,7 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import BeforeValidator, Field
 
@@ -22,29 +22,29 @@ from ..helpers import Validators
 
 class Entity(RFBaseModel):
     id_: str = Field(alias='id', default=None)
-    name: Optional[str] = None
+    name: str | None = None
     type_: str = Field(alias='type', default=None)
 
-    display_name: Optional[str] = None
+    display_name: str | None = None
 
 
 class RuleContext(RFBaseModel):
     entities: list[Entity]
     content: str
-    file_name: Optional[str] = None
+    file_name: str | None = None
 
 
 class TimeRange(RFBaseModel):
-    after: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = None
-    before: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = None
+    after: Annotated[datetime | None, BeforeValidator(Validators.convert_relative_time)] = None
+    before: Annotated[datetime | None, BeforeValidator(Validators.convert_relative_time)] = None
 
 
 class SearchFilter(RFBaseModel):
     types: Annotated[
-        Optional[list[DetectionRuleType]], BeforeValidator(Validators.convert_str_to_list)
+        list[DetectionRuleType] | None, BeforeValidator(Validators.convert_str_to_list)
     ] = None
-    entities: Optional[list[str]] = None
-    created: Optional[TimeRange] = None
-    updated: Optional[TimeRange] = None
-    doc_id: Optional[str] = None
-    title: Optional[str] = None
+    entities: list[str] | None = None
+    created: TimeRange | None = None
+    updated: TimeRange | None = None
+    doc_id: str | None = None
+    title: str | None = None

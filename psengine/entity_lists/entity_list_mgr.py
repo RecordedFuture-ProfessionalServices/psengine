@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional, Union
+from typing import Annotated
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -32,7 +32,7 @@ class EntityListMgr:
 
     def __init__(
         self,
-        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
     ) -> None:
         """Initialize the `EntityListMgr` object."""
         self.log = logging.getLogger(__name__)
@@ -44,9 +44,7 @@ class EntityListMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
     def fetch(
         self,
-        list_: Annotated[
-            Union[str, tuple[str, str]], Doc('List string ID or tuple of (name, type).')
-        ],
+        list_: Annotated[str | tuple[str, str], Doc('List string ID or tuple of (name, type).')],
     ) -> Annotated[EntityList, Doc('RFList object for the given list ID.')]:
         """Get a list by its ID. Use this method to retrieve list info.
 
@@ -104,8 +102,8 @@ class EntityListMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
     def search(
         self,
-        list_name: Annotated[Optional[str], Doc('List name to search.')] = None,
-        list_type: Annotated[Optional[str], Doc('List type to filter by. Ignored if None.')] = None,
+        list_name: Annotated[str | None, Doc('List name to search.')] = None,
+        list_type: Annotated[str | None, Doc('List type to filter by. Ignored if None.')] = None,
         max_results: Annotated[int, Doc('Maximum number of lists to return.')] = DEFAULT_LIMIT,
     ) -> Annotated[list[EntityList], Doc('List of EntityList objects from `list/search`.')]:
         """Search lists.
@@ -138,7 +136,7 @@ class EntityListMgr:
         ]
 
     @debug_call
-    def _resolve_list_id(self, list_: Union[str, tuple[str, str]]) -> str:
+    def _resolve_list_id(self, list_: str | tuple[str, str]) -> str:
         """Resolves a list name to a list ID.
 
         Args:

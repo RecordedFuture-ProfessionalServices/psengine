@@ -177,13 +177,13 @@ class Test_BaseHTTPClient:
         mocker.patch('psengine.base_http_client.SDK_ID', sdk_id)
 
         user_agent = base_client._get_user_agent_header()
-        assert user_agent == 'app_id unknown (Linux) SDK_ID platform_id unknown'
+        assert user_agent == 'app_id/0.0.0 (Linux) SDK_ID'
 
         mocker.patch('psengine.helpers.OSHelpers.os_platform', return_value=None)
         mocker.patch('psengine.base_http_client.SDK_ID', sdk_id)
 
         user_agent = base_client._get_user_agent_header()
-        assert user_agent == 'app_id unknown SDK_ID platform_id unknown'
+        assert user_agent == 'app_id/0.0.0 SDK_ID'
 
     def test_cert_auth(self, tests_dir, mocker, mock_request):
         client = BaseHTTPClient(

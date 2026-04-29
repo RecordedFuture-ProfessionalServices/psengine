@@ -14,7 +14,7 @@
 import logging
 import re
 from itertools import chain
-from typing import Annotated, Optional, Union
+from typing import Annotated
 
 from pydantic import Field, validate_call
 from typing_extensions import Doc
@@ -66,23 +66,23 @@ class AnalystNoteMgr:
     @validate_call
     def search(
         self,
-        published: Annotated[Optional[str], Doc('Notes published after a date.')] = None,
-        entity: Annotated[Optional[str], Doc('An entity the note refers to, RF ID.')] = None,
-        author: Annotated[Optional[str], Doc('An author of the note, RF ID.')] = None,
-        title: Annotated[Optional[str], Doc('A title of the note.')] = None,
-        topic: Annotated[Optional[Union[str, list]], Doc('A topic of the note, RF ID.')] = None,
-        label: Annotated[Optional[str], Doc('A label of the note, by name.')] = None,
-        source: Annotated[Optional[str], Doc('The source of the note.')] = None,
+        published: Annotated[str | None, Doc('Notes published after a date.')] = None,
+        entity: Annotated[str | None, Doc('An entity the note refers to, RF ID.')] = None,
+        author: Annotated[str | None, Doc('An author of the note, RF ID.')] = None,
+        title: Annotated[str | None, Doc('A title of the note.')] = None,
+        topic: Annotated[str | list | None, Doc('A topic of the note, RF ID.')] = None,
+        label: Annotated[str | None, Doc('A label of the note, by name.')] = None,
+        source: Annotated[str | None, Doc('The source of the note.')] = None,
         serialization: Annotated[
-            Optional[str], Doc('An entity serializer (id, min, full, raw).')
+            str | None, Doc('An entity serializer (id, min, full, raw).')
         ] = None,
-        tagged_text: Annotated[Optional[bool], Doc('Should the text contain tags.')] = None,
+        tagged_text: Annotated[bool | None, Doc('Should the text contain tags.')] = None,
         max_results: Annotated[
-            Optional[int],
+            int | None,
             Doc('The maximum number of references (not notes), max 1000.'),
         ] = Field(ge=1, le=1000, default=DEFAULT_LIMIT),
         notes_per_page: Annotated[
-            Optional[int], Doc('The number of notes for each paged request.')
+            int | None, Doc('The number of notes for each paged request.')
         ] = Field(ge=1, le=1000, default=NOTES_PER_PAGE),
     ) -> Annotated[list[AnalystNote], Doc('A list of deduplicated AnalystNote objects.')]:
         """Execute a search for the analyst notes based on the parameters provided.
@@ -189,16 +189,16 @@ class AnalystNoteMgr:
         self,
         title: Annotated[str, Doc('The title of the note.')],
         text: Annotated[str, Doc('The text of the note.')],
-        published: Annotated[Optional[str], Doc('The date when the note was published.')] = None,
-        topic: Annotated[Union[str, list[str], None], Doc('The topic of the note.')] = None,
+        published: Annotated[str | None, Doc('The date when the note was published.')] = None,
+        topic: Annotated[str | list[str] | None, Doc('The topic of the note.')] = None,
         context_entities: Annotated[
-            Optional[list[str]], Doc('The context entities of the note.')
+            list[str] | None, Doc('The context entities of the note.')
         ] = None,
-        note_entities: Annotated[Optional[list[str]], Doc('The note entities of the note.')] = None,
+        note_entities: Annotated[list[str] | None, Doc('The note entities of the note.')] = None,
         validation_urls: Annotated[
-            Optional[list[str]], Doc('The validation URLs of the note.')
+            list[str] | None, Doc('The validation URLs of the note.')
         ] = None,
-        source: Annotated[Optional[str], Doc('The source of the note.')] = None,
+        source: Annotated[str | None, Doc('The source of the note.')] = None,
     ) -> Annotated[AnalystNotePreviewOut, Doc('The note that will be created.')]:
         """Preview of the AnalystNote. It does not create a note; it just returns how the note
         will look.
@@ -236,18 +236,18 @@ class AnalystNoteMgr:
         self,
         title: Annotated[str, Doc('The title of the note.')],
         text: Annotated[str, Doc('The text of the note.')],
-        published: Annotated[Optional[str], Doc('The date when the note was published.')] = None,
-        topic: Annotated[Union[str, list[str], None], Doc('The topic of the note.')] = None,
+        published: Annotated[str | None, Doc('The date when the note was published.')] = None,
+        topic: Annotated[str | list[str] | None, Doc('The topic of the note.')] = None,
         context_entities: Annotated[
-            Optional[list[str]], Doc('The context entities of the note.')
+            list[str] | None, Doc('The context entities of the note.')
         ] = None,
-        note_entities: Annotated[Optional[list[str]], Doc('The note entities of the note.')] = None,
+        note_entities: Annotated[list[str] | None, Doc('The note entities of the note.')] = None,
         validation_urls: Annotated[
-            Optional[list[str]], Doc('The validation URLs of the note.')
+            list[str] | None, Doc('The validation URLs of the note.')
         ] = None,
-        source: Annotated[Optional[str], Doc('The source of the note.')] = None,
+        source: Annotated[str | None, Doc('The source of the note.')] = None,
         note_id: Annotated[
-            Optional[str], Doc('The ID of the note. Use if you want to modify an existing note.')
+            str | None, Doc('The ID of the note. Use if you want to modify an existing note.')
         ] = None,
     ) -> Annotated[AnalystNotePublishOut, Doc('The published note.')]:
         """Publish data. This method creates a note and returns its ID.

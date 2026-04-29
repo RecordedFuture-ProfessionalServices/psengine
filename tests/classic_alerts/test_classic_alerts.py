@@ -82,8 +82,57 @@ PARAMS_TEST_DATA = [
     ('0oxjSZ', {'ai_insights': False, 'owner_org': False, 'fragment_entities': False}),
 ]
 
+IMAGE_BYTES_BY_ID = {
+    'img:ZzD761qE1lG7NQ78y1YvZZYh3aIUMnm3WNJGFaQn': b'abcd',
+    'img:KR15PL4OH8khYa9cP5jeYV64clkBAXmkep2bxLa7': b'abcde',
+}
+
 
 class Test_ClassicAlert:
+    def test_fetch_downloads_images_when_requested(
+        self, ca_mgr: ClassicAlertMgr, mocker, mock_request, make_binary_response
+    ):
+        mocks = [
+            mock_request(MOCK_DIR / 'test_fetch_all_images_finds_images.json'),
+            *[
+                make_binary_response(bytes_, {'Content-Disposition': 'filename=abc.png'})
+                for bytes_ in IMAGE_BYTES_BY_ID.values()
+            ],
+        ]
+        request_mock = mocker.patch.object(ca_mgr.rf_client, 'request', side_effect=mocks)
+
+        alert = ca_mgr.fetch('xOTsae', fetch_images=True)
+
+        assert alert.images == IMAGE_BYTES_BY_ID
+        assert request_mock.call_count == len(mocks)
+        assert [call_[1]['params']['id'] for call_ in request_mock.call_args_list[1:]] == list(
+            IMAGE_BYTES_BY_ID
+        )
+
+    def test_fetch_bulk_downloads_images_when_requested(
+        self, ca_mgr: ClassicAlertMgr, mocker, mock_request, make_binary_response
+    ):
+        mocks = [
+            mock_request(MOCK_DIR / 'test_fetch_all_images_finds_images.json'),
+            *[
+                make_binary_response(bytes_, {'Content-Disposition': 'filename=abc.png'})
+                for bytes_ in IMAGE_BYTES_BY_ID.values()
+            ],
+            mock_request(MOCK_DIR / 'test_fetch_all_images_finds_no_images.json'),
+        ]
+        request_mock = mocker.patch.object(ca_mgr.rf_client, 'request', side_effect=mocks)
+
+        alerts = ca_mgr.fetch_bulk(['xOTsae', 'xPtXPZ'], fetch_images=True)
+
+        assert alerts[0].images == IMAGE_BYTES_BY_ID
+        assert alerts[1].images == {}
+        assert request_mock.call_count == len(mocks)
+        assert [
+            call_[1]['params']['id']
+            for call_ in request_mock.call_args_list
+            if call_[1].get('params', {}).get('id')
+        ] == list(IMAGE_BYTES_BY_ID)
+
     @pytest.mark.parametrize('alert_id', ALERT_IDS)
     def test_markdown(self, ca_mgr: ClassicAlertMgr, alert_id: str, request, mocker, mock_request):
         nodeid = request.node.nodeid

@@ -42,7 +42,7 @@ This example starts with the assumption that you have a list of alert IDs retrie
 
 In this example we use the `fetch_bulk` method to download the alerts. We use `max_workers=2` to split the task into two threads for better performance.
 
-The alerts might have an image ID in their payload, which will be collected by the `fetch_all_images` method. This method does not return the images but saves them in an `images` property of the alert object. If you need to access these images programmatically you can do that with `alert.images`.
+The alerts might have an image ID in their payload, which will be collected when the `fetch_images` argument is set to `True`. This argument does not return the images but saves them in an `images` property of the alert object. If you need to access these images programmatically you can do that with `alert.images`.
 
 `save_images` will save in `OUTPUT_DIR` a `.png` file for each image called `img:<image_id>.png`.
 

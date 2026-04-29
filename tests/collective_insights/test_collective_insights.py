@@ -87,7 +87,7 @@ class Test_CollectiveInsights:
         with pytest.raises(CollectiveInsightsError):
             ci.submit(insight)
 
-    @pytest.mark.parametrize('value', [['uhash:1234'], None, ['a', 'b']], ids=lambda v: str(v))
+    @pytest.mark.parametrize('value', [['uhash:1234'], None, ['a', 'b']], ids=str)
     def test_prepare_ci_request_organization_ids(
         self,
         value,

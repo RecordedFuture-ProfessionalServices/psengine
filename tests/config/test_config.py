@@ -74,7 +74,7 @@ class Test_Config:
     def test_config_from_dotenv(self, tmp_path):
         Config.reset_instance()
         path = tmp_path / '.env'
-        dotenv_data = """client_retries = 2
+        dotenv_data = """rf_client_retries = 2
         moise = 'moise'
         """
         path.write_text(dotenv_data)
