@@ -81,7 +81,9 @@ jobs:
         with:
           ref: ${{ needs.release.outputs.version }}
           fetch-depth: 0
-
+          
+      - uses: astral-sh/setup-uv@v6
+      
       - name: Build release distributions
         run: |
           uv python install ${{ vars.PYTHON_VERSION }} 
