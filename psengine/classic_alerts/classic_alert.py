@@ -15,7 +15,7 @@
 from datetime import datetime
 from functools import total_ordering
 from itertools import chain
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import Field, field_validator
 from typing_extensions import Doc
@@ -72,17 +72,17 @@ class ClassicAlert(RFBaseModel):
     id_: str = Field(alias='id')
     log: AlertLog
     title: str
-    review: Optional[AlertReview] = None
-    owner_organisation_details: Optional[OwnerOrganisationDetails] = None
-    url: Optional[AlertURL] = None
-    rule: Optional[AlertDeprecation] = None
-    hits: Optional[list[ClassicAlertHit]] = None
-    enriched_entities: Optional[list[EnrichedEntity]] = None
-    ai_insights: Optional[AlertAiInsight] = None
+    review: AlertReview | None = None
+    owner_organisation_details: OwnerOrganisationDetails | None = None
+    url: AlertURL | None = None
+    rule: AlertDeprecation | None = None
+    hits: list[ClassicAlertHit] | None = None
+    enriched_entities: list[EnrichedEntity] | None = None
+    ai_insights: AlertAiInsight | None = None
     type_: str = Field(alias='type', default=None)
-    triggered_by: Optional[list[TriggeredBy]] = None
+    triggered_by: list[TriggeredBy] | None = None
 
-    _images: Optional[dict] = {}
+    _images: dict | None = {}
 
     @field_validator('triggered_by', mode='before')
     @classmethod
@@ -206,7 +206,7 @@ class ClassicAlert(RFBaseModel):
         fragment_entities: Annotated[bool, Doc('Include fragment entities.')] = True,
         triggered_by: Annotated[bool, Doc('Include triggered by.')] = True,
         html_tags: Annotated[bool, Doc('Include HTML tags in the markdown.')] = False,
-        character_limit: Annotated[Optional[int], Doc('Character limit for the markdown.')] = None,
+        character_limit: Annotated[int | None, Doc('Character limit for the markdown.')] = None,
         defang_iocs: Annotated[bool, Doc('Defang IOCs in hits.')] = False,
     ) -> Annotated[str, Doc('Markdown representation of the alert.')]:
         """Return a markdown string representation of the `ClassicAlert` instance.

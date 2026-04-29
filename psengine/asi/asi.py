@@ -12,7 +12,6 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional
 
 from pydantic import Field
 
@@ -59,9 +58,9 @@ class AssetWithExposureSearch(RFBaseModel):
         ```
     """
 
-    asset_exposures: Optional[list[AssetWithExposure]] = []
+    asset_exposures: list[AssetWithExposure] | None = []
     signature: ExposureSignature
-    meta: Optional[ApiMeta] = None
+    meta: ApiMeta | None = None
 
     def __str__(self) -> str:
         msg = 'Name: {}, Id: {}, Severity: {}'
@@ -112,7 +111,7 @@ class ExposureSearch(RFBaseModel):
     """
 
     asset_count: int
-    asset_exposures: Optional[list[AssetExposure]] = []
+    asset_exposures: list[AssetExposure] | None = []
     signature: ExposureSignature
 
     def __str__(self) -> str:
@@ -181,20 +180,20 @@ class Asset(RFBaseModel):
     id_: str = Field(alias='id')
     name: str
     type_: str = Field(alias='type')
-    discovered_at: Optional[datetime]
+    discovered_at: datetime | None
     added_to_project_at: datetime
-    last_scanned_at: Optional[datetime] = None
-    apex_domain: Optional[str] = None
-    exposure_score: Optional[int] = None
-    is_static_asset: Optional[bool] = False
-    custom_tags: Optional[list[str]] = None
-    resolved_ips: Optional[list[str]] = None
-    dns_records: Optional[list[DNSRecord]] = None
-    whois: Optional[WHOISRecord] = None
-    certificates: Optional[list[CertificateInstance]] = None
-    defenses: Optional[list[DefensiveControl]] = None
-    exposures: Optional[list[Exposure]] = None
-    scanned_ips: Optional[list[ScannedIP]] = None
+    last_scanned_at: datetime | None = None
+    apex_domain: str | None = None
+    exposure_score: int | None = None
+    is_static_asset: bool | None = False
+    custom_tags: list[str] | None = None
+    resolved_ips: list[str] | None = None
+    dns_records: list[DNSRecord] | None = None
+    whois: WHOISRecord | None = None
+    certificates: list[CertificateInstance] | None = None
+    defenses: list[DefensiveControl] | None = None
+    exposures: list[Exposure] | None = None
+    scanned_ips: list[ScannedIP] | None = None
 
     def __str__(self) -> str:
         msg = 'Name: {}, Type: {}, Exposure Score: {}'
@@ -250,10 +249,10 @@ class Project(RFBaseModel):
 
     id_: str = Field(alias='id')
     title: str
-    scanning_enabled: Optional[bool] = None
-    last_scanned_at: Optional[datetime] = None
-    inserted_at: Optional[datetime] = None
-    max_exposure_score: Optional[int] = None
+    scanning_enabled: bool | None = None
+    last_scanned_at: datetime | None = None
+    inserted_at: datetime | None = None
+    max_exposure_score: int | None = None
 
     def __str__(self) -> str:
         msg = 'Name: {}, Id: {}, Enabled: {}'

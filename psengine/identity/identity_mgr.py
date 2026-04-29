@@ -13,7 +13,7 @@
 
 import logging
 from contextlib import suppress
-from typing import Annotated, Optional, Union
+from typing import Annotated
 
 from pydantic import Field, validate_call
 from typing_extensions import Doc
@@ -61,7 +61,7 @@ class IdentityMgr:
 
     def __init__(
         self,
-        rf_token: Annotated[Optional[str], Doc('A Recorded Future API token.')] = None,
+        rf_token: Annotated[str | None, Doc('A Recorded Future API token.')] = None,
     ) -> None:
         """Initializes the `IdentityMgr` object.
 
@@ -78,38 +78,38 @@ class IdentityMgr:
     def fetch_detections(
         self,
         domains: Annotated[
-            Union[str, list[str], None], Doc('A domain or a list of domains to filter.')
+            str | list[str] | None, Doc('A domain or a list of domains to filter.')
         ] = None,
         created_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc(
                 'A timestamp to return detections created on or after it (e.g., "7d" or ISO 8601).'
             ),
         ] = None,
         created_lt: Annotated[
-            Optional[str], Doc('A timestamp to return detections created before it.')
+            str | None, Doc('A timestamp to return detections created before it.')
         ] = None,
-        cookies: Annotated[Optional[str], Doc('A filter by cookie type.')] = None,
+        cookies: Annotated[str | None, Doc('A filter by cookie type.')] = None,
         detection_type: Annotated[
-            Optional[str], Doc('A detection type to filter by ("workforce", "external").')
+            str | None, Doc('A detection type to filter by ("workforce", "external").')
         ] = None,
         organization_id: Annotated[
-            Union[list[str], str, None],
+            list[str] | str | None,
             Doc('Organization ID or a list of IDs for multi-org filtering.'),
         ] = None,
         include_enterprise_level: Annotated[
-            Optional[bool], Doc('Whether to include enterprise-level detections.')
+            bool | None, Doc('Whether to include enterprise-level detections.')
         ] = None,
         novel_only: Annotated[
-            Optional[bool], Doc('If True, only return novel (previously unseen) detections.')
+            bool | None, Doc('If True, only return novel (previously unseen) detections.')
         ] = None,
         max_results: Annotated[
-            Optional[int], Doc('The maximum number of detections returned.')
+            int | None, Doc('The maximum number of detections returned.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
         detections_per_page: Annotated[
-            Optional[int], Doc('The number of detections per page for pagination.')
+            int | None, Doc('The number of detections per page for pagination.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
-        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+        offset: Annotated[str | None, Doc('An offset token for paginated results.')] = None,
     ) -> Annotated[Detections, Doc('A structured response containing the detection records.')]:
         """Fetch latest detections.
 
@@ -165,44 +165,44 @@ class IdentityMgr:
         self,
         hostname: Annotated[str, Doc('The hostname of a compromised machine.')],
         first_downloaded_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('First date when these credentials were received and indexed by Recorded Future.'),
         ] = None,
         latest_downloaded_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('Latest date when these credentials were received and indexed by Recorded Future.'),
         ] = None,
         exfiltration_date_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
         ] = None,
-        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
-        breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
-        breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
-        dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
-        dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
+        properties: Annotated[str | list[str] | None, Doc('Password properties.')] = None,
+        breach_name: Annotated[str | None, Doc('The name of a breach.')] = None,
+        breach_date: Annotated[str | None, Doc('The date of a breach.')] = None,
+        dump_name: Annotated[str | None, Doc('The name of a database dump.')] = None,
+        dump_date: Annotated[str | None, Doc('The date of a database dump.')] = None,
         username_properties: Annotated[
-            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+            str | list[str] | None, Doc("Username properties. Only valid value is 'Email'.")
         ] = None,
         authorization_technologies: Annotated[
-            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+            str | list[str] | None, Doc('Authorization technologies to filter by.')
         ] = None,
         authorization_protocols: Annotated[
-            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+            str | list[str] | None, Doc('Authorization protocols to filter by.')
         ] = None,
         malware_families: Annotated[
-            Union[str, list[str], None], Doc('Known infostealer malware families.')
+            str | list[str] | None, Doc('Known infostealer malware families.')
         ] = None,
         organization_id: Annotated[
-            Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
+            str | None, Doc('An organization ID if utilizing a multi-org setup.')
         ] = None,
         max_results: Annotated[
-            Optional[int], Doc('The maximum number of credential records returned.')
+            int | None, Doc('The maximum number of credential records returned.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
         identities_per_page: Annotated[
-            Optional[int], Doc('The number of credentials per page for pagination.')
+            int | None, Doc('The number of credentials per page for pagination.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
-        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+        offset: Annotated[str | None, Doc('An offset token for paginated results.')] = None,
     ) -> Annotated[list[LeakedIdentity], Doc('A list containing the leaked identity records.')]:
         """Return credentials for a given hostname.
 
@@ -262,13 +262,11 @@ class IdentityMgr:
     def lookup_password(
         self,
         hash_prefix: Annotated[
-            Optional[str], Doc('The prefix of the password hash to be looked up.')
+            str | None, Doc('The prefix of the password hash to be looked up.')
         ] = None,
-        algorithm: Annotated[
-            Optional[str], Doc('The algorithm used for the password hash.')
-        ] = None,
+        algorithm: Annotated[str | None, Doc('The algorithm used for the password hash.')] = None,
         passwords: Annotated[
-            Optional[list[tuple[str, str]]],
+            list[tuple[str, str]] | None,
             Doc('A list of tuples containing hash prefixes and their respective algorithms.'),
         ] = None,
     ) -> Annotated[list[PasswordLookup], Doc('A list of password lookup results.')]:
@@ -332,50 +330,50 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentityLookupError)
     def lookup_ip(
         self,
-        ip: Annotated[Optional[str], Doc('A subject IP address.')] = None,
-        range_gte: Annotated[Optional[str], Doc('An IP address lower bound included.')] = None,
-        range_gt: Annotated[Optional[str], Doc('An IP address lower bound excluded.')] = None,
-        range_lte: Annotated[Optional[str], Doc('An IP address upper bound included.')] = None,
-        range_lt: Annotated[Optional[str], Doc('An IP address upper bound excluded.')] = None,
+        ip: Annotated[str | None, Doc('A subject IP address.')] = None,
+        range_gte: Annotated[str | None, Doc('An IP address lower bound included.')] = None,
+        range_gt: Annotated[str | None, Doc('An IP address lower bound excluded.')] = None,
+        range_lte: Annotated[str | None, Doc('An IP address upper bound included.')] = None,
+        range_lt: Annotated[str | None, Doc('An IP address upper bound excluded.')] = None,
         first_downloaded_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('First date when these credentials were received and indexed by Recorded Future.'),
         ] = None,
         latest_downloaded_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('Latest date when these credentials were received and indexed by Recorded Future.'),
         ] = None,
         exfiltration_date_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
         ] = None,
-        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
-        breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
-        breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
-        dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
-        dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
+        properties: Annotated[str | list[str] | None, Doc('Password properties.')] = None,
+        breach_name: Annotated[str | None, Doc('The name of a breach.')] = None,
+        breach_date: Annotated[str | None, Doc('The date of a breach.')] = None,
+        dump_name: Annotated[str | None, Doc('The name of a database dump.')] = None,
+        dump_date: Annotated[str | None, Doc('The date of a database dump.')] = None,
         username_properties: Annotated[
-            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+            str | list[str] | None, Doc("Username properties. Only valid value is 'Email'.")
         ] = None,
         authorization_technologies: Annotated[
-            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+            str | list[str] | None, Doc('Authorization technologies to filter by.')
         ] = None,
         authorization_protocols: Annotated[
-            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+            str | list[str] | None, Doc('Authorization protocols to filter by.')
         ] = None,
         malware_families: Annotated[
-            Union[str, list[str], None], Doc('Known infostealer malware families.')
+            str | list[str] | None, Doc('Known infostealer malware families.')
         ] = None,
         organization_id: Annotated[
-            Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
+            str | None, Doc('An organization ID if utilizing a multi-org setup.')
         ] = None,
         max_results: Annotated[
-            Optional[int], Doc('The maximum number of credentials returned.')
+            int | None, Doc('The maximum number of credentials returned.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
         identities_per_page: Annotated[
-            Optional[int], Doc('The number of credentials per page for pagination.')
+            int | None, Doc('The number of credentials per page for pagination.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
-        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+        offset: Annotated[str | None, Doc('An offset token for paginated results.')] = None,
     ) -> Annotated[list[LeakedIdentity], Doc('A list containing the leaked identity records.')]:
         """Lookup credentials associated with a specified IP address or an IP range.
 
@@ -448,57 +446,57 @@ class IdentityMgr:
     def lookup_credentials(
         self,
         subjects: Annotated[
-            Union[str, list[str], None], Doc('An email or a list of emails to be queried.')
+            str | list[str] | None, Doc('An email or a list of emails to be queried.')
         ] = None,
         subjects_sha1: Annotated[
-            Union[str, list[str], None],
+            str | list[str] | None,
             Doc('A SHA1 hash of a username or email to avoid sending the plain subject.'),
         ] = None,
         subjects_login: Annotated[
-            Union[list[dict[str, str]], list[CredentialSearch], None],
+            list[dict[str, str]] | list[CredentialSearch] | None,
             Doc(
                 'Username details when login is not an email (also requires authorization domain).'
             ),
         ] = None,
         first_downloaded_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('First date when these credentials were received and indexed by Recorded Future.'),
         ] = None,
         latest_downloaded_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('Latest date when these credentials were received and indexed by Recorded Future.'),
         ] = None,
         exfiltration_date_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
         ] = None,
-        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
-        breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
-        breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
-        dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
-        dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
+        properties: Annotated[str | list[str] | None, Doc('Password properties.')] = None,
+        breach_name: Annotated[str | None, Doc('The name of a breach.')] = None,
+        breach_date: Annotated[str | None, Doc('The date of a breach.')] = None,
+        dump_name: Annotated[str | None, Doc('The name of a database dump.')] = None,
+        dump_date: Annotated[str | None, Doc('The date of a database dump.')] = None,
         username_properties: Annotated[
-            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+            str | list[str] | None, Doc("Username properties. Only valid value is 'Email'.")
         ] = None,
         authorization_technologies: Annotated[
-            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+            str | list[str] | None, Doc('Authorization technologies to filter by.')
         ] = None,
         authorization_protocols: Annotated[
-            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+            str | list[str] | None, Doc('Authorization protocols to filter by.')
         ] = None,
         malware_families: Annotated[
-            Union[str, list[str], None], Doc('Known infostealer malware families.')
+            str | list[str] | None, Doc('Known infostealer malware families.')
         ] = None,
         organization_id: Annotated[
-            Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
+            str | None, Doc('An organization ID if utilizing a multi-org setup.')
         ] = None,
         max_results: Annotated[
-            Optional[int], Doc('The maximum number of credentials returned.')
+            int | None, Doc('The maximum number of credentials returned.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
         identities_per_page: Annotated[
-            Optional[int], Doc('The number of credentials per page for pagination.')
+            int | None, Doc('The number of credentials per page for pagination.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
-        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+        offset: Annotated[str | None, Doc('An offset token for paginated results.')] = None,
     ) -> Annotated[list[LeakedIdentity], Doc('A list containing the leaked identity records.')]:
         """Lookup credential data for a set of subjects.
 
@@ -572,50 +570,50 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentitySearchError)
     def search_credentials(
         self,
-        domains: Annotated[Union[str, list[str]], Doc('One or more domains to be queried.')],
+        domains: Annotated[str | list[str], Doc('One or more domains to be queried.')],
         domain_types: Annotated[
-            Union[str, list[str], None],
+            str | list[str] | None,
             Doc("Domain type filter: 'Email', 'Authorization', or both."),
         ] = None,
         first_downloaded_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('First date when these credentials were received and indexed by Recorded Future.'),
         ] = None,
         latest_downloaded_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('Latest date when these credentials were received and indexed by Recorded Future.'),
         ] = None,
         exfiltration_date_gte: Annotated[
-            Optional[str],
+            str | None,
             Doc('Date when the infostealer malware exfiltrated data from the victim device.'),
         ] = None,
-        properties: Annotated[Union[str, list[str], None], Doc('Password properties.')] = None,
-        breach_name: Annotated[Optional[str], Doc('The name of a breach.')] = None,
-        breach_date: Annotated[Optional[str], Doc('The date of a breach.')] = None,
-        dump_name: Annotated[Optional[str], Doc('The name of a database dump.')] = None,
-        dump_date: Annotated[Optional[str], Doc('The date of a database dump.')] = None,
+        properties: Annotated[str | list[str] | None, Doc('Password properties.')] = None,
+        breach_name: Annotated[str | None, Doc('The name of a breach.')] = None,
+        breach_date: Annotated[str | None, Doc('The date of a breach.')] = None,
+        dump_name: Annotated[str | None, Doc('The name of a database dump.')] = None,
+        dump_date: Annotated[str | None, Doc('The date of a database dump.')] = None,
         username_properties: Annotated[
-            Union[str, list[str], None], Doc("Username properties. Only valid value is 'Email'.")
+            str | list[str] | None, Doc("Username properties. Only valid value is 'Email'.")
         ] = None,
         authorization_technologies: Annotated[
-            Union[str, list[str], None], Doc('Authorization technologies to filter by.')
+            str | list[str] | None, Doc('Authorization technologies to filter by.')
         ] = None,
         authorization_protocols: Annotated[
-            Union[str, list[str], None], Doc('Authorization protocols to filter by.')
+            str | list[str] | None, Doc('Authorization protocols to filter by.')
         ] = None,
         malware_families: Annotated[
-            Union[str, list[str], None], Doc('Known infostealer malware families.')
+            str | list[str] | None, Doc('Known infostealer malware families.')
         ] = None,
         organization_id: Annotated[
-            Optional[str], Doc('An organization ID if utilizing a multi-org setup.')
+            str | None, Doc('An organization ID if utilizing a multi-org setup.')
         ] = None,
         max_results: Annotated[
-            Optional[int], Doc('The maximum number of credentials returned.')
+            int | None, Doc('The maximum number of credentials returned.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
         identities_per_page: Annotated[
-            Optional[int], Doc('The number of credentials per page for pagination.')
+            int | None, Doc('The number of credentials per page for pagination.')
         ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
-        offset: Annotated[Optional[str], Doc('An offset token for paginated results.')] = None,
+        offset: Annotated[str | None, Doc('An offset token for paginated results.')] = None,
     ) -> Annotated[list[CredentialSearch], Doc('A list containing the search results.')]:
         """Search credential data for a set of domains.
 
@@ -674,11 +672,9 @@ class IdentityMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=IdentitySearchError)
     def search_dump(
         self,
-        names: Annotated[
-            Union[str, list[str]], Doc('The name(s) of a database dump to search for.')
-        ],
+        names: Annotated[str | list[str], Doc('The name(s) of a database dump to search for.')],
         max_results: Annotated[
-            Optional[int], Doc('Maximum number of dump records to return.')
+            int | None, Doc('Maximum number of dump records to return.')
         ] = Field(le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
     ) -> Annotated[
         DumpSearchOut,
@@ -724,16 +720,10 @@ class IdentityMgr:
         include_details: Annotated[
             bool, Doc('Whether to include infected machine details.')
         ] = True,
-        organization_id: Annotated[
-            Union[list[str], str, None], Doc('The org_id(s) in multi-org setup.')
-        ] = None,
-        offset: Annotated[Optional[str], Doc('Offset token for paginated results.')] = None,
-        max_results: Annotated[
-            Optional[int], Doc('Maximum number of credentials to return.')
-        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT),
-        identities_per_page: Annotated[
-            Optional[int], Doc('Number of credentials per page.')
-        ] = Field(ge=1, le=MAXIMUM_IDENTITIES, default=DETECTIONS_PER_PAGE),
+        organization_id: Annotated[str | None, Doc('The org_id in multi-org setup.')] = None,
+        max_results: Annotated[int | None, Doc('Maximum number of credentials to return.')] = Field(
+            ge=1, le=MAXIMUM_IDENTITIES, default=DEFAULT_LIMIT
+        ),
     ) -> Annotated[
         IncidentReportOut,
         Doc('A detailed incident report from the specified malware source.'),
@@ -765,8 +755,7 @@ class IdentityMgr:
             'source': source,
             'include_details': include_details,
             'organization_id': organization_id,
-            'limit': min(max_results, identities_per_page),
-            'offset': offset,
+            'limit': max_results,
         }
         payload = IncidentReportIn.model_validate(data).json()
         self.log.info(f'Fetching incident report with filters: {payload}')
@@ -776,6 +765,7 @@ class IdentityMgr:
             data=payload,
             max_results=max_results or DEFAULT_LIMIT,
             results_path=['credentials', 'details'],
+            offset_key='offset',
         )
 
         return IncidentReportOut.model_validate(resp)
@@ -783,18 +773,18 @@ class IdentityMgr:
     @debug_call
     def _lookup_filter(
         self,
-        first_downloaded_gte: Optional[str] = None,
-        latest_downloaded_gte: Optional[str] = None,
-        exfiltration_date_gte: Optional[str] = None,
-        properties: Union[str, list[str], None] = None,
-        breach_name: Optional[str] = None,
-        breach_date: Optional[str] = None,
-        dump_name: Optional[str] = None,
-        dump_date: Optional[str] = None,
-        username_properties: Union[str, list[str], None] = None,
-        authorization_technologies: Union[str, list[str], None] = None,
-        authorization_protocols: Union[str, list[str], None] = None,
-        malware_families: Union[str, list[str], None] = None,
+        first_downloaded_gte: str | None = None,
+        latest_downloaded_gte: str | None = None,
+        exfiltration_date_gte: str | None = None,
+        properties: str | list[str] | None = None,
+        breach_name: str | None = None,
+        breach_date: str | None = None,
+        dump_name: str | None = None,
+        dump_date: str | None = None,
+        username_properties: str | list[str] | None = None,
+        authorization_technologies: str | list[str] | None = None,
+        authorization_protocols: str | list[str] | None = None,
+        malware_families: str | list[str] | None = None,
     ) -> FilterIn:
         """Create a query for filtering identity searches.
 
@@ -824,7 +814,7 @@ class IdentityMgr:
 
         return FilterIn.model_validate(query)
 
-    def _process_arg(self, attr: str, value: Union[int, str, list]) -> tuple[str, Union[str, list]]:
+    def _process_arg(self, attr: str, value: int | str | list) -> tuple[str, str | list]:
         """Return attribute and value normalized based on type of value."""
         if attr.startswith(('breach_', 'dump_')):
             prop_field = attr.split('_')[0] + '_properties'

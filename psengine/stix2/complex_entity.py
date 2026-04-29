@@ -11,7 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 from datetime import datetime
-from typing import Annotated, Union
+from typing import Annotated
 
 import stix2
 from typing_extensions import Doc
@@ -324,7 +324,7 @@ class IndicatorEntity(BaseStixEntity):
 
     def _generate_observable(
         self,
-    ) -> Union[stix2.IPv6Address, stix2.IPv4Address, stix2.DomainName, stix2.File, stix2.URL]:
+    ) -> stix2.IPv6Address | stix2.IPv4Address | stix2.DomainName | stix2.File | stix2.URL:
         """Creates stix2 observable."""
         uuid = generate_uuid(name=self.name)
         if self.type == 'IpAddress':

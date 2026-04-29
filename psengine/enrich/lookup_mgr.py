@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional
+from typing import Annotated
 from urllib.parse import quote
 
 from pydantic import validate_call
@@ -38,7 +38,7 @@ class LookupMgr:
 
     def __init__(
         self,
-        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
     ):
         """Initialize the `LookupMgr` object."""
         self.log = logging.getLogger(__name__)
@@ -51,7 +51,7 @@ class LookupMgr:
         entity: Annotated[str, Doc('Name or Recorded Future ID of the entity.')],
         entity_type: Annotated[ALLOWED_ENTITIES, Doc('Type of the entity to enrich.')],
         fields: Annotated[
-            Optional[list[str]], Doc('Optional additional fields for enrichment.')
+            list[str] | None, Doc('Optional additional fields for enrichment.')
         ] = None,
     ) -> Annotated[EnrichmentData, Doc('An object containing the enriched entity details.')]:
         """Perform lookup of an entity based on its ID or name.
@@ -156,9 +156,7 @@ class LookupMgr:
         fields: Annotated[
             list[str], Doc('Optional additional fields for enrichment.')
         ] = ENTITY_FIELDS,
-        max_workers: Annotated[
-            Optional[int], Doc('Number of workers to multithread requests.')
-        ] = 0,
+        max_workers: Annotated[int | None, Doc('Number of workers to multithread requests.')] = 0,
     ) -> Annotated[
         list[EnrichmentData], Doc('A list of objects containing the enriched entity details.')
     ]:

@@ -14,7 +14,7 @@
 import json
 import logging
 from pathlib import Path
-from typing import Annotated, Union
+from typing import Annotated
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -30,9 +30,9 @@ LOG = logging.getLogger('psengine.analyst_notes.helpers')
 @validate_call
 def save_attachment(
     note_id: Annotated[str, Doc('The ID of the AnalystNote.')],
-    data: Annotated[Union[bytes, str], Doc('The data returned from `fetch_attachment`.')],
+    data: Annotated[bytes | str, Doc('The data returned from `fetch_attachment`.')],
     ext: Annotated[str, Doc('The extension of the attachment, returned by `fetch_attachment`.')],
-    output_directory: Annotated[Union[str, Path], Doc('The directory to save the file into.')],
+    output_directory: Annotated[str | Path, Doc('The directory to save the file into.')],
 ) -> None:
     """Save a YARA, Sigma, Snort, or PDF attachment to a file.
 
@@ -48,7 +48,7 @@ def save_attachment(
 @validate_call
 def save_note(
     note: Annotated[AnalystNote, Doc('The note to save.')],
-    output_directory: Annotated[Union[str, Path], Doc('The directory to save the file into.')],
+    output_directory: Annotated[str | Path, Doc('The directory to save the file into.')],
 ) -> None:
     """Save an `AnalystNote` object to a file named with the note ID."""
     output_directory = (
@@ -62,9 +62,7 @@ def save_note(
     )
 
 
-def _save_attachment(
-    note_id: str, data: Union[bytes, str], ext: str, output_directory: str
-) -> None:
+def _save_attachment(note_id: str, data: bytes | str, ext: str, output_directory: str) -> None:
     """Save attachment from bytes or note itself from json.
 
     Raises:

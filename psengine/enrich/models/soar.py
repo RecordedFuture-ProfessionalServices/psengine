@@ -12,7 +12,6 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional
 
 from pydantic import Field, model_validator
 
@@ -20,7 +19,7 @@ from ...common_models import RFBaseModel
 
 
 class ScoreCount(RFBaseModel):
-    count: Optional[int] = None
+    count: int | None = None
     max_count: int = Field(alias='maxCount')
 
 
@@ -47,10 +46,10 @@ class Evidence(RFBaseModel):
 
 
 class RiskRule(ScoreCount):
-    score: Optional[int] = None
+    score: int | None = None
     summary: list
     most_critical: str = Field(alias='mostCritical')
-    evidence: Optional[list[Evidence]] = None
+    evidence: list[Evidence] | None = None
 
     @model_validator(mode='before')
     @classmethod
@@ -125,10 +124,10 @@ class RiskRule(ScoreCount):
 
 
 class Context(RFBaseModel):
-    phishing: Optional[ScoreRule] = None
-    public: Optional[Public] = None
-    c2: Optional[ScoreRule] = None
-    malware: Optional[ScoreRule] = None
+    phishing: ScoreRule | None = None
+    public: Public | None = None
+    c2: ScoreRule | None = None
+    malware: ScoreRule | None = None
 
 
 class Risk(RFBaseModel):

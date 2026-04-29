@@ -12,7 +12,6 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional
 
 from pydantic import Field, HttpUrl
 
@@ -20,10 +19,10 @@ from ..common_models import IdName, IdNameType, IdNameTypeDescription, RFBaseMod
 
 
 class AlertReview(RFBaseModel):
-    assignee: Optional[str] = None
-    note: Optional[str] = None
+    assignee: str | None = None
+    note: str | None = None
     status_in_portal: str
-    status: Optional[str] = None
+    status: str | None = None
 
 
 class Organisation(RFBaseModel):
@@ -32,11 +31,11 @@ class Organisation(RFBaseModel):
 
 
 class OwnerOrganisationDetails(RFBaseModel):
-    organisations: Optional[list[Organisation]] = []
-    enterprise_id: Optional[str] = None
-    enterprise_name: Optional[str] = None
-    owner_id: Optional[str] = None
-    owner_name: Optional[str] = None
+    organisations: list[Organisation] | None = []
+    enterprise_id: str | None = None
+    enterprise_name: str | None = None
+    owner_id: str | None = None
+    owner_name: str | None = None
 
 
 class AlertURL(RFBaseModel):
@@ -54,30 +53,30 @@ class PortalURL(RFBaseModel):
 
 
 class AlertDeprecation(RFBaseModel):
-    use_case_deprecation: Optional[str] = None
+    use_case_deprecation: str | None = None
     name: str
     id_: str = Field(alias='id')
     url: PortalURL
 
 
 class AlertDocument(RFBaseModel):
-    source: Optional[IdNameType] = None
-    title: Optional[str] = None
-    url: Optional[str] = None
+    source: IdNameType | None = None
+    title: str | None = None
+    url: str | None = None
     authors: list[IdNameType]
 
 
 class AlertAiInsight(RFBaseModel):
-    comment: Optional[str] = None
-    text: Optional[str] = None
+    comment: str | None = None
+    text: str | None = None
 
 
 class AlertLog(RFBaseModel):
-    note_author: Optional[str] = None
-    note_date: Optional[datetime] = None
-    status_date: Optional[datetime] = None
+    note_author: str | None = None
+    note_date: datetime | None = None
+    status_date: datetime | None = None
     triggered: datetime
-    status_change_by: Optional[str] = None
+    status_change_by: str | None = None
 
 
 class AlertSummary(RFBaseModel):
@@ -95,7 +94,7 @@ class AlertCounts(RFBaseModel):
 
 class NotificationSettings(RFBaseModel):
     email_subscribers: list[IdName]
-    mobile_subsribers: Optional[list[IdName]] = None
+    mobile_subsribers: list[IdName] | None = None
 
 
 class Evidence(RFBaseModel):
@@ -109,7 +108,7 @@ class Evidence(RFBaseModel):
 
 class EntityCriticality(RFBaseModel):
     name: str
-    score: Optional[int] = None
+    score: int | None = None
     last_triggered: datetime
     triggered: datetime
     level: int
@@ -120,13 +119,13 @@ class ClassicAlertHit(RFBaseModel):
 
     entities: list[IdNameTypeDescription]
     document: AlertDocument
-    fragment: Optional[str] = None
+    fragment: str | None = None
     id_: str = Field(alias='id')
-    language: Optional[str] = None
-    primary_entity: Optional[IdNameTypeDescription] = None
-    analyst_note: Optional[AlertAnalystNote] = None
-    alert_id: Optional[str] = None
-    index: Optional[int] = None
+    language: str | None = None
+    primary_entity: IdNameTypeDescription | None = None
+    analyst_note: AlertAnalystNote | None = None
+    alert_id: str | None = None
+    index: int | None = None
 
 
 class EnrichedEntity(RFBaseModel):
@@ -138,4 +137,4 @@ class EnrichedEntity(RFBaseModel):
 
 class TriggeredBy(RFBaseModel):
     reference_id: str
-    triggered_by_strings: Optional[list[str]] = None
+    triggered_by_strings: list[str] | None = None

@@ -39,8 +39,7 @@ jobs:
     
       - name: Set up venv
         run: |
-          uv venv -p ${{ vars.PYTHON_VERSION }} 
-          uv pip install '.[docs]'
+          uv sync --group docs --no-default-groups
 
       - name: Run Mike build
         run: |

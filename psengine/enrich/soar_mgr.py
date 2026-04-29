@@ -13,7 +13,7 @@
 
 import logging
 from itertools import chain
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -31,7 +31,7 @@ class SoarMgr:
 
     def __init__(
         self,
-        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
     ):
         """Initialize the `SoarMgr` object."""
         self.log = logging.getLogger(__name__)
@@ -41,19 +41,17 @@ class SoarMgr:
     @debug_call
     def soar(
         self,
-        ip: Annotated[Optional[list[str]], Doc('List of IP addresses to enrich.')] = None,
-        domain: Annotated[Optional[list[str]], Doc('List of domains to enrich.')] = None,
-        hash_: Annotated[Optional[list[str]], Doc('List of file hashes to enrich.')] = None,
+        ip: Annotated[list[str] | None, Doc('List of IP addresses to enrich.')] = None,
+        domain: Annotated[list[str] | None, Doc('List of domains to enrich.')] = None,
+        hash_: Annotated[list[str] | None, Doc('List of file hashes to enrich.')] = None,
         vulnerability: Annotated[
-            Optional[list[str]], Doc('List of vulnerabilities to enrich.')
+            list[str] | None, Doc('List of vulnerabilities to enrich.')
         ] = None,
-        url: Annotated[Optional[list[str]], Doc('List of URLs to enrich.')] = None,
+        url: Annotated[list[str] | None, Doc('List of URLs to enrich.')] = None,
         companybydomain: Annotated[
-            Optional[list[str]], Doc('List of company domains to enrich.')
+            list[str] | None, Doc('List of company domains to enrich.')
         ] = None,
-        max_workers: Annotated[
-            Optional[int], Doc('Number of workers to multithread requests.')
-        ] = 0,
+        max_workers: Annotated[int | None, Doc('Number of workers to multithread requests.')] = 0,
     ) -> Annotated[list[SOAREnrichOut], Doc('A list of enriched data for the provided IOCs.')]:
         """Enrich multiple types of IOCs via the SOAR API.
 

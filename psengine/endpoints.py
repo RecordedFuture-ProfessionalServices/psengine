@@ -23,10 +23,8 @@ API_VERSION = 'v2'
 BASE_URL = 'https://api.recordedfuture.com'
 CONNECT_API_BASE_URL = BASE_URL + '/' + API_VERSION
 
-BASE_URL = environ.get('RF_BASE_URL') if environ.get('RF_BASE_URL') else BASE_URL
-CONNECT_API_BASE_URL = (
-    environ.get('RF_BASE_URL') if environ.get('RF_BASE_URL') else CONNECT_API_BASE_URL
-)
+BASE_URL = environ.get('RF_BASE_URL') or BASE_URL
+CONNECT_API_BASE_URL = environ.get('RF_BASE_URL') or CONNECT_API_BASE_URL
 
 ###############################################################################
 # Classic Alerts Endpoints V3
@@ -120,6 +118,17 @@ EP_IDENTITY_DUMP_SEARCH = EP_IDENTITY + 'metadata/dump/search'
 ###############################################################################
 EP_MALWARE_INTELLIGENCE = BASE_URL + '/malware-intelligence/v1/'
 EP_MALWARE_INTEL_REPORTS = EP_MALWARE_INTELLIGENCE + 'reports'
+EP_AUTO_YARA = EP_MALWARE_INTELLIGENCE + 'auto-yara/'
+EP_AUTO_YARA_JOBS = EP_AUTO_YARA + 'jobs'
+EP_AUTO_YARA_JOB_ID = EP_AUTO_YARA_JOBS + '/{}'
+EP_AUTO_YARA_JOB_ID_RETRY = EP_AUTO_YARA_JOB_ID + '/retry'
+EP_AUTO_YARA_JOBS_EDIT = EP_AUTO_YARA_JOBS + '/edit'
+EP_AUTO_SIGMA = EP_MALWARE_INTELLIGENCE + 'auto-sigma/'
+EP_AUTO_SIGMA_JOBS = EP_AUTO_SIGMA + 'jobs'
+EP_AUTO_SIGMA_GET_JOBS = EP_AUTO_SIGMA + 'get_jobs'
+EP_AUTO_SIGMA_JOB_ID = EP_AUTO_SIGMA_JOBS + '/{}'
+EP_AUTO_SIGMA_JOB_ID_RULE_ID = EP_AUTO_SIGMA_JOB_ID + '/{}'
+EP_AUTO_SIGMA_JOB_ID_RETRY = EP_AUTO_SIGMA_JOB_ID + '/retry'
 
 ###############################################################################
 # Risk History API Endpoints
