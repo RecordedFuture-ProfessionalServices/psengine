@@ -12,7 +12,6 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Optional
 
 from pydantic import Field, model_validator
 
@@ -122,8 +121,8 @@ class DomainAbuseWhoisChange(ChangeType):
 
 
 class LogotypeInScreenshot(RFBaseModel):
-    logotype_id: Optional[str] = None
-    screenshot_id: Optional[str] = None
+    logotype_id: str | None = None
+    screenshot_id: str | None = None
     url: str
 
 
@@ -173,7 +172,7 @@ class UrlAssessment(MaliciousAssessment):
 
 
 class MaliciousUrlRecord(RFBaseModel):
-    url: Optional[str] = None
+    url: str | None = None
     assessments: list[UrlAssessment]
 
 
