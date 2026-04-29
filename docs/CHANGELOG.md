@@ -25,6 +25,7 @@
 ### Removed
 
 - Removed support for Python 3.9
+
 ## v2.5.2 - 2026-04-27
 
 ### Fixed
