@@ -11,12 +11,11 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Annotated, Any, Literal, Optional, Union
+from typing import Any, Literal, Optional, Union
 
 from pydantic import Field
 
 from ..common_models import IdName, IdNameType, RFBaseModel
-
 
 ###########################################################
 # Metadata Response Models (For Metadata Endpoints)
@@ -28,7 +27,10 @@ class MetadataSection(IdName):
 
     description: Optional[str] = Field(
         default=None,
-        description="Includes an 'id' which is a filter value ID to use in the Links Search requests and a 'name' which is a human-readable name",
+        description=(
+            "Includes an 'id' which is a filter value ID to use in the Links "
+            "Search requests and a 'name' which is a human-readable name"
+        ),
     )
 
 
@@ -36,7 +38,10 @@ class MetadataSectionsResponse(RFBaseModel):
     """Response wrapper for GET /links/metadata/sections."""
 
     data: list[MetadataSection] = Field(
-        description="The response contains a small array of section objects, each with an id (used as filter value in Links: Search) and a human-readable name."
+        description=(
+            'The response contains a small array of section objects, each with '
+            'an id (used as filter value in Links: Search) and a human-readable name.'
+        )
     )
 
 
@@ -45,7 +50,10 @@ class MetadataEvent(IdName):
 
     description: Optional[str] = Field(
         default=None,
-        description="Includes an 'id' which is a filter value ID to use in the Links Search requests and a 'name' which is a human-readable name",
+        description=(
+            "Includes an 'id' which is a filter value ID to use in the Links "
+            "Search requests and a 'name' which is a human-readable name"
+        ),
     )
 
 
@@ -53,7 +61,9 @@ class MetadataEventsResponse(RFBaseModel):
     """Response wrapper for GET /links/metadata/events."""
 
     data: list[MetadataEvent] = Field(
-        description='Returns event type objects. Use the id field as the filter value in Links Search.'
+        description=(
+            'Returns event type objects. Use the id field as the filter value in Links Search.'
+        )
     )
 
 
@@ -61,7 +71,10 @@ class MetadataEntityTypesResponse(RFBaseModel):
     """Response wrapper for GET /links/metadata/entities."""
 
     data: list[IdName] = Field(
-        description='Returns the complete set of supported entity types. Use the id field as the filter value.'
+        description=(
+            'Returns the complete set of supported entity types. Use the id '
+            'field as the filter value.'
+        )
     )
 
 
@@ -76,7 +89,9 @@ class RiskAttribute(RFBaseModel):
     id_: Literal['risk_score', 'risk_level'] = Field(
         alias='id', description='risk_score or risk_level'
     )
-    value: Optional[Union[float, str]] = Field(default=None, description='Value 0 to 99 or level string')
+    value: Optional[Union[float, str]] = Field(
+        default=None, description='Value 0 to 99 or level string'
+    )
 
 
 class CriticalityAttribute(RFBaseModel):
@@ -120,14 +135,11 @@ EntityAttribute = Union[
 
 
 class LinkedEntity(IdNameType):
-    """
-    An entity connected to the search target.
+    """An entity connected to the search target.
     Inherits id_ (alias 'id'), name, and type_ (alias 'type') from IdNameType.
     """
 
-    source: Optional[str] = Field(
-        default=None, description="Link source: 'technical' or 'insikt'."
-    )
+    source: Optional[str] = Field(default=None, description="Link source: 'technical' or 'insikt'.")
     section: Optional[str] = Field(default=None, description='The Link category section ID.')
     attributes: list[EntityAttribute] = Field(
         default_factory=list, description='Array of entity-specific risk and context attributes.'

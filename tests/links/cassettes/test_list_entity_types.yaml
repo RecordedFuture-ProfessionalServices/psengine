@@ -1,0 +1,43 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - app_id unknown (macOS-26.3.1-arm64-arm-64bit) psengine-py/2.5.1 platform_id
+        unknown
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.recordedfuture.com/links/metadata/entities
+  response:
+    body:
+      string: '{"data":[{"id":"type:AttackVector","name":"AttackVector"},{"id":"type:Company","name":"Company"},{"id":"type:CyberVulnerability","name":"CyberVulnerability"},{"id":"type:FileContent","name":"FileContent"},{"id":"type:Hash","name":"Hash"},{"id":"type:InternetDomainName","name":"InternetDomainName"},{"id":"type:IpAddress","name":"IpAddress"},{"id":"type:Malware","name":"Malware"},{"id":"type:MalwareCategory","name":"MalwareCategory"},{"id":"type:MalwareSignature","name":"MalwareSignature"},{"id":"type:MitreAttackIdentifier","name":"MitreAttackIdentifier"},{"id":"type:Organization","name":"Organization"},{"id":"type:Person","name":"Person"},{"id":"type:Username","name":"Username"}]}'
+    headers:
+      CF-RAY:
+      - 9f2f820beedcb22d-ATL
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Apr 2026 17:22:12 GMT
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '688'
+    status:
+      code: 200
+      message: OK
+version: 1
