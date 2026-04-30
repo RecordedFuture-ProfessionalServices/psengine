@@ -17,9 +17,8 @@ from typing import Annotated
 
 from pydantic import BeforeValidator, Field
 
-from psengine.helpers.helpers import Validators
-
 from ..common_models import IdName, RFBaseModel
+from ..helpers.helpers import Validators
 from .models import EntityAttributes, LogEntry, ThreatActorAttributes
 
 
