@@ -12,11 +12,12 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated
+from typing import Annotated, Literal
 
-from pydantic import validate_call
+from pydantic import Field, validate_call
 from typing_extensions import Doc
 
+from ..constants import DEFAULT_LIMIT
 from ..endpoints import (
     EP_ACTOR_SEARCH,
     EP_CATEGORIES,
@@ -37,11 +38,12 @@ from .models import ThreatMapType
 from .threat_map import (
     EntityCategory,
     ThreatActorProfile,
-    ThreatActorSearchOut,
     ThreatMap,
-    ThreatMapFetchOut,
+    ThreatMapFetchIn,
     ThreatMapInfo,
 )
+
+MAP_TYPE = Literal['actors', 'malware']
 
 
 class ThreatMapMgr:
@@ -78,7 +80,7 @@ class ThreatMapMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ThreatMapCategoriesError)
     def fetch_entity_categories(
         self,
-        map_type: Annotated[str, Doc('Type of threat map.')],
+        map_type: Annotated[MAP_TYPE, Doc('Type of threat map.')],
     ) -> Annotated[list[EntityCategory], Doc('A list of threat map taxonomy categories.')]:
         """Fetch the entity category taxonomy used to filter threat maps.
 
@@ -104,7 +106,10 @@ class ThreatMapMgr:
         ] = None,
         max_results: Annotated[
             int | None, Doc('Limit the total number of results returned.')
-        ] = 1000,
+        ] = DEFAULT_LIMIT,
+        actors_per_page: Annotated[
+            int | None, Doc('The number of threat actors per page for pagination.')
+        ] = Field(ge=1, le=10_000, default=DEFAULT_LIMIT),
     ) -> Annotated[
         list[ThreatActorProfile], Doc('A list of threat actors matching the search criteria.')
     ]:
@@ -117,16 +122,17 @@ class ThreatMapMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             ThreatActorSearchError: If connection error occurs.
         """
-        if max_results is None:
-            max_results = 1000
-        data = ThreatActorSearchOut.model_validate({'name': name, 'limit': max_results}).json()
+        data = {
+            'name': name,
+            'limit': min(max_results or DEFAULT_LIMIT, actors_per_page or DEFAULT_LIMIT),
+        }
         search_response = self.rf_client.request_paged(
             method='post',
             url=EP_ACTOR_SEARCH,
             data=data,
             results_path='data',
             offset_key='offset',
-            max_results=max_results,
+            max_results=max_results or DEFAULT_LIMIT,
         )
         return [ThreatActorProfile.model_validate(ta) for ta in search_response]
 
@@ -135,7 +141,7 @@ class ThreatMapMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ThreatMapFetchError)
     def fetch_map(
         self,
-        map_type: Annotated[str, Doc('Type of threat map.')],
+        map_type: Annotated[MAP_TYPE, Doc('Type of threat map.')],
         org_id: Annotated[str | None, Doc('Organization ID.')] = None,
         malware: Annotated[str | list[str] | None, Doc('Filter by malware entity ID(s).')] = None,
         actors: Annotated[str | list[str] | None, Doc('Filter by threat actor ID(s).')] = None,
@@ -158,13 +164,10 @@ class ThreatMapMgr:
         else:
             body['malware'] = malware
 
-        body = {k: ([v] if isinstance(v, str) else v) for k, v in body.items()}
+        url = (
+            EP_THREAT_MAP_ORG.format(org_id, map_type) if org_id else EP_THREAT_MAP.format(map_type)
+        )
 
-        if org_id is not None:
-            url = EP_THREAT_MAP_ORG.format(org_id, map_type)
-        else:
-            url = EP_THREAT_MAP.format(map_type)
-
-        data = ThreatMapFetchOut.model_validate(body).json()
+        data = ThreatMapFetchIn.model_validate(body).json()
         map_response = self.rf_client.request(method='post', url=url, data=data).json()['data']
         return ThreatMap.model_validate(map_response)

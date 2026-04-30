@@ -6,5 +6,4 @@ actors = mgr.search_threat_actor(
 )
 
 for actor in actors:
-    print(actor.attributes.name)
-    print(actor.attributes.alias)
+    print(actor)

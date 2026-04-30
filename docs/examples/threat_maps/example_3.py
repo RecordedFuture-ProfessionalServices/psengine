@@ -5,11 +5,9 @@ malware_map = mgr.fetch_map(
     map_type='malware', categories=['0fK7b', 'RTkDB2']
 )
 
-filtered_malwares = [
-    malware
-    for malware in malware_map.threat_map
-    if malware.opportunity >= 65
-    and malware.prevalence >= 65
-]
-
-print('\n'.join([str(mal) for mal in filtered_malwares]))
+for malware in malware_map.threat_map:
+    if (
+        malware.opportunity >= 65
+        and malware.prevalence >= 65
+    ):
+        print(malware)

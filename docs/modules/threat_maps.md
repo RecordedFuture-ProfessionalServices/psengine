@@ -27,9 +27,18 @@ In this example, we use the `search_threat_actor` method to find threat actors b
 --8<-- "docs/examples/threat_maps/example_2.py"
 ```
 
+The code will output:
+
+```
+ID: QCwdoU Name: Lazarus Group, Common Names: Diamond Sleet, Cyber Warfare Guidance Unit
+ID: TyZBlf Name: Lazarus
+ID: idrp3c Name: Fancy Lazarus
+ID: sMJUDp Name: lazaruscore
+```
+
 #### 3: Fetch malware threat map with categories and filter by scores
 
-This example assumes that you have the malware category IDs from the `fetch_entity_categories` method. We use the `fetch_map` method to fetch the primary organization's malware threat map. By setting `map_type` to `malware`, we fetch the malware threat map only. To further narrow the results to those related to Rootkit and Linux Malware categories, we use the category IDs: `["0fK7b", "RTkDB2"]`. Once the map is returned we then filter for targeted entities based on opportunity and prevalence axis scores.
+This example assumes that you have the malware category IDs from the `fetch_entity_categories` method. We use the `fetch_map` method to fetch the primary organization's malware threat map. By setting `map_type` to `malware`, we fetch the malware threat map only. To further narrow the results to those related to Rootkit and Linux Malware categories, we use the category IDs: `["0fK7b", "RTkDB2"]`. Once the map is returned we then filter for targeted entities based on opportunity and prevalence score. 
 
 ```python
 --8<-- "docs/examples/threat_maps/example_3.py"

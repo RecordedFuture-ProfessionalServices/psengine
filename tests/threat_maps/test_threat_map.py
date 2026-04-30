@@ -5,10 +5,9 @@ import pytest
 from psengine.threat_maps import (
     EntityCategory,
     ThreatActorProfile,
-    ThreatActorSearchOut,
     ThreatMap,
     ThreatMapEntity,
-    ThreatMapFetchOut,
+    ThreatMapFetchIn,
     ThreatMapInfo,
     ThreatMapMgr,
 )
@@ -121,17 +120,6 @@ class Test_ThreatMap_Models:
         }
         ThreatActorProfile.model_validate(payload)
 
-    @pytest.mark.parametrize('name', ['name', None])
-    @pytest.mark.parametrize('limit', [1, 100, 10000])
-    @pytest.mark.parametrize('offset', ['offset', None])
-    def test_validate_threat_actor_search(self, name, limit, offset):
-        payload = {
-            'name': name,
-            'limit': limit,
-            'offset': offset,
-        }
-        ThreatActorSearchOut.model_validate(payload)
-
     @pytest.mark.parametrize('malware', [['id'], None])
     @pytest.mark.parametrize('actors', [['id'], None])
     @pytest.mark.parametrize('categories', [['id'], None])
@@ -144,7 +132,7 @@ class Test_ThreatMap_Models:
             'watchlists': watchlists,
         }
 
-        ThreatMapFetchOut.model_validate(payload)
+        ThreatMapFetchIn.model_validate(payload)
 
     params = [
         ('actors', 'actor'),

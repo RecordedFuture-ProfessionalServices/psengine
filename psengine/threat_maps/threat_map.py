@@ -12,13 +12,18 @@
 ##############################################################################################
 
 from datetime import datetime
+from functools import total_ordering
+from typing import Annotated
 
-from pydantic import Field
+from pydantic import BeforeValidator, Field
+
+from psengine.helpers.helpers import Validators
 
 from ..common_models import IdName, RFBaseModel
 from .models import EntityAttributes, LogEntry, ThreatActorAttributes
 
 
+@total_ordering
 class ThreatMapEntity(RFBaseModel):
     """Model to validate data received from the `threat/map/{type}` endpoint.
 
@@ -26,10 +31,14 @@ class ThreatMapEntity(RFBaseModel):
     instances.
 
     Hashing:
-        Defines uniqueness of an `ThreatMapEntity` object by the entity ID.
+        Defines uniqueness of a `ThreatMapEntity` object by the entity ID.
 
     Equality:
         Validates equality between two `ThreatMapEntity` objects based on the entity ID.
+
+    Greater-than Comparison:
+        Defines a greater-than comparison between two `ThreatMapEntity` instances based on
+        `opportunity`, `intent` and `prevalence`. Lastly on `id_`
 
     String Representation:
         Returns a string representation of the `ThreatMapEntity` instance including the
@@ -39,6 +48,10 @@ class ThreatMapEntity(RFBaseModel):
         >>> print(entity)
         Entity Name: BlueDelta, ID: L37nw-, Opportunity: 65, Intent: 65'
         ```
+    Ordering:
+        The ordering of `ThreatMapEntity` instances is determined primarily by the `opportunity`
+        score followed by the `intent` and `prevalence`.
+        If two instances have the same scores, the `id_` is used as a last criterion.
     """
 
     id_: str = Field(alias='id')
@@ -56,6 +69,14 @@ class ThreatMapEntity(RFBaseModel):
     def __eq__(self, other: 'ThreatMapEntity'):
         return self.id_ == other.id_
 
+    def __gt__(self, other: 'ThreatMapEntity'):
+        return (self.opportunity, self.intent or 0, self.prevalence or 0, self.id_) > (
+            other.opportunity or 0,
+            other.intent or 0,
+            other.prevalence or 0,
+            other.id_,
+        )
+
     def __str__(self):
         key = 'intent' if self.intent is not None else 'prevalence'
         score = getattr(self, key)
@@ -72,8 +93,7 @@ class ThreatMap(RFBaseModel):
     date: datetime = Field(description='Threat map generation timestamp')
 
     def __str__(self):
-        data = '\n'.join(str(entity) for entity in self.threat_map)
-        return f'[{data}]'
+        return '\n'.join(str(entity) for entity in sorted(self.threat_map))
 
 
 class ThreatMapInfo(RFBaseModel):
@@ -100,19 +120,16 @@ class ThreatActorProfile(RFBaseModel):
     type_: str = Field(alias='type')
     attributes: ThreatActorAttributes
 
-
-class ThreatActorSearchOut(RFBaseModel):
-    """Model to validate `/threat/actor/search` endpoint payload sent."""
-
-    name: str | None = None
-    limit: int = Field(ge=1, le=10000, default=1000)
-    offset: str | None = None
+    def __str__(self):
+        attr = self.attributes
+        common = f', Common Names: {", ".join(attr.common_names)}' if attr.common_names else ''
+        return f'ID: {self.id_} Name: {attr.name}' + common
 
 
-class ThreatMapFetchOut(RFBaseModel):
+class ThreatMapFetchIn(RFBaseModel):
     """Model to validate `threat/map/{org}/{type}` endpoint payload sent."""
 
-    malware: list[str] | None = None
-    actors: list[str] | None = None
-    categories: list[str] | None = None
-    watchlists: list[str] | None = None
+    malware: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    actors: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    categories: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    watchlists: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None

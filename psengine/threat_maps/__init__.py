@@ -22,10 +22,9 @@ from .threat_map import (
     EntityCategory,
     ThreatActorAttributes,
     ThreatActorProfile,
-    ThreatActorSearchOut,
     ThreatMap,
     ThreatMapEntity,
-    ThreatMapFetchOut,
+    ThreatMapFetchIn,
     ThreatMapInfo,
 )
 from .threat_map_mgr import ThreatMapMgr
