@@ -17,9 +17,9 @@ from typing import Annotated
 from pydantic import validate_call
 from typing_extensions import Doc
 
-from psengine.helpers import debug_call
-from psengine.helpers.helpers import connection_exceptions
-from psengine.rf_client import RFClient
+from ..helpers import debug_call
+from ..helpers.helpers import connection_exceptions
+from ..rf_client import RFClient
 
 from ..endpoints import (
     EP_ACTOR_SEARCH,
