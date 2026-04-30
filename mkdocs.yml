@@ -106,6 +106,7 @@ nav:
       - Risk History: modules/risk_history.md
       - Risklists: modules/risklists.md
       - STIX2: modules/stix2.md
+      - Threat Maps: modules/threat_maps.md
       - Error Handling: modules/errors.md
       - Config: modules/config.md
       - Logger: modules/logger.md
@@ -240,6 +241,11 @@ nav:
           - Helpers: api/stix2/helpers.md
           - Constants: api/stix2/constants.md
           - Errors: api/stix2/errors.md
+      - Threat Maps:
+          - Manager: api/threat_maps/threat_map_mgr.md
+          - ADT: api/threat_maps/threat_map.md
+          - Models: api/threat_maps/models.md
+          - Errors: api/threat_maps/errors.md
       - Client:
           - Client: api/client/rf_client.md
           - Base HTTP Client: api/client/base_client.md

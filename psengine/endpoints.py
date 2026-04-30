@@ -138,3 +138,13 @@ EP_ASI_ASSET_EXPOSURES = f'{EP_ASI_ASSETS}/{{}}/exposures'
 EP_ASI_ASSETS_SEARCH = f'{EP_ASI_ASSETS}/_search'
 EP_ASI_EXPOSURES = f'{EP_ASI_PROJECTS}/{{}}/exposures'
 EP_ASI_EXPOSURES_BY_SIGNATURE = f'{EP_ASI_EXPOSURES}/{{}}'
+
+################################################################################
+# Threat Map API Endpoints
+################################################################################
+EP_THREAT_MAPS_BASE = BASE_URL + '/threat'
+EP_THREAT_MAPS_LIST = EP_THREAT_MAPS_BASE + "/maps"
+EP_THREAT_MAP = EP_THREAT_MAPS_BASE + f"/map/{{}}"
+EP_THREAT_MAP_ORG = EP_THREAT_MAPS_BASE + f"/map/{{}}/{{}}"
+EP_ACTOR_SEARCH = EP_THREAT_MAPS_BASE + "/actor/search"
+EP_CATEGORIES = EP_THREAT_MAPS_BASE + f"/{{}}/categories"
