@@ -11,7 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from psengine.errors import RecordedFutureError
+from ..errors import RecordedFutureError
 
 
 class ThreatMapsError(RecordedFutureError):

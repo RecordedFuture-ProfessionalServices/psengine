@@ -15,8 +15,7 @@ from datetime import datetime
 
 from pydantic import Field
 
-from psengine.common_models import IdName, RFBaseModel
-
+from ..common_models import IdName, RFBaseModel
 from .models import EntityAttributes, LogEntry, ThreatActorAttributes
 
 

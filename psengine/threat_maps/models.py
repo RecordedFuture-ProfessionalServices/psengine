@@ -14,7 +14,7 @@
 from datetime import datetime
 from enum import Enum
 
-from psengine.common_models import IdName, RFBaseModel
+from ..common_models import IdName, RFBaseModel
 
 
 class ThreatMapAxis(Enum):

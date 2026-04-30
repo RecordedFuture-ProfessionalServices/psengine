@@ -17,10 +17,6 @@ from typing import Annotated
 from pydantic import validate_call
 from typing_extensions import Doc
 
-from ..helpers import debug_call
-from ..helpers.helpers import connection_exceptions
-from ..rf_client import RFClient
-
 from ..endpoints import (
     EP_ACTOR_SEARCH,
     EP_CATEGORIES,
@@ -28,6 +24,9 @@ from ..endpoints import (
     EP_THREAT_MAP_ORG,
     EP_THREAT_MAPS_LIST,
 )
+from ..helpers import debug_call
+from ..helpers.helpers import connection_exceptions
+from ..rf_client import RFClient
 from .errors import (
     ThreatActorSearchError,
     ThreatMapCategoriesError,
