@@ -14,8 +14,8 @@ jobs:
       RF_ASI_TOKEN: ${{ secrets.RF_ASI_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v5
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
 
       - name: Install GNU parallel
         run: sudo apt-get update && sudo apt-get install -y parallel

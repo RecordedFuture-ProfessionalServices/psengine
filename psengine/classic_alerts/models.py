@@ -94,7 +94,7 @@ class AlertCounts(RFBaseModel):
 
 class NotificationSettings(RFBaseModel):
     email_subscribers: list[IdName]
-    mobile_subsribers: list[IdName] | None = None
+    mobile_subscribers: list[IdName] | None = None
 
 
 class Evidence(RFBaseModel):

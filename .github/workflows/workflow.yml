@@ -13,7 +13,7 @@ jobs:
       version:     ${{ steps.get_version.outputs.version }}
       tag_exists:  ${{ steps.tagcheck.outputs.exists }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with: { fetch-depth: 0 }
 
       - name: Extract version
@@ -82,7 +82,7 @@ jobs:
           ref: ${{ needs.release.outputs.version }}
           fetch-depth: 0
           
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v7
       
       - name: Build release distributions
         run: |

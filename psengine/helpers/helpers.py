@@ -325,10 +325,10 @@ class OSHelpers:
         try:
             path.mkdir(parents=True, exist_ok=True)
         except PermissionError as err:
-            raise WriteFileError(f'Directory {path} is not writeable') from err
-        # In case it already exists, check if it is writeable
+            raise WriteFileError(f'Directory {path} is not writable') from err
+        # In case it already exists, check if it is writable
         if not os.access(path, os.W_OK):
-            raise WriteFileError(f'Directory {path} is not writeable')
+            raise WriteFileError(f'Directory {path} is not writable')
         return path
 
 

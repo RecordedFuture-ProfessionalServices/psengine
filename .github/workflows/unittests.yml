@@ -27,8 +27,8 @@ jobs:
       MIN_COVERAGE: 94
     
     steps:
-      - uses: actions/checkout@v5
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
 
       - name: Set up Python
         run: uv python install ${{ matrix.python_version }}
@@ -55,7 +55,7 @@ jobs:
       - name: Upload coverage HTML
         if: always()
         id: cov_html
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-html-${{ matrix.python_version }}
           path: htmlcov
@@ -64,7 +64,7 @@ jobs:
 
       - name: Comment link to coverage HTML
         if: ${{ always() && github.event_name == 'pull_request' }}
-        uses: mshick/add-pr-comment@v2
+        uses: mshick/add-pr-comment@v3
         with:
           message: |
             Coverage HTML (Python ${{ matrix.python_version }}): ${{ steps.cov_html.outputs.artifact-url }}
@@ -81,7 +81,7 @@ jobs:
 
       - name: Post test results to PR
         if: ${{ always() && github.event_name == 'pull_request'}}
-        uses: mshick/add-pr-comment@v2
+        uses: mshick/add-pr-comment@v3
         with:
           message-path: FINAL_REPORT.md
           message-id: TestResults-${{ matrix.python_version }}
