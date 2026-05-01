@@ -7,7 +7,8 @@ from requests.models import Response
 from typing_extensions import Doc
 
 from ..base_http_client import BaseHTTPClient
-from ..constants import DEFAULT_LIMIT, SANDBOX_TOKEN_VALIDATION_REGEX
+from .constants import DEFAULT_PAGE_LIMIT
+from ..constants import SANDBOX_TOKEN_VALIDATION_REGEX
 from ..helpers import debug_call
 
 SAMPLES_PER_PAGE = 50
@@ -127,7 +128,7 @@ class SandboxClient(BaseHTTPClient):
         content_type_header: Annotated[
             Optional[str], Doc('Content-Type header value.')
         ] = 'application/json',
-        max_samples: int = DEFAULT_LIMIT,
+        max_samples: int = DEFAULT_PAGE_LIMIT,
         samples_per_page: Annotated[
             Optional[int], Doc('The number of samples per page for pagination.')
         ] = Field(ge=1, le=MAXIMUM_SAMPLES, default=SAMPLES_PER_PAGE),

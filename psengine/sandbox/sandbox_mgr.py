@@ -16,8 +16,8 @@ from typing import Optional, Union
 
 from pydantic import validate_call
 
-from psengine.constants import DEFAULT_LIMIT
-from psengine.sandbox.sandbox import SampleSummary, SearchIn, SearchResult
+from .constants import DEFAULT_PAGE_LIMIT
+from .sandbox import SampleSummary, SearchIn, SearchResult
 
 from ..helpers import debug_call
 from .client import SandboxClient
@@ -59,7 +59,7 @@ class SandboxMgr:
         wallet: Optional[Union[list[str], str]] = None,
         analysis_time: Optional[Union[list[str], str]] = None,
         query: Optional[str] = None,
-        max_results: Optional[int] = DEFAULT_LIMIT,
+        max_results: Optional[int] = DEFAULT_PAGE_LIMIT,
     ):
         # TODO: write about the id constraints
         params = {p: v for p, v in locals().items() if p not in ('self', 'query', 'max_results')}

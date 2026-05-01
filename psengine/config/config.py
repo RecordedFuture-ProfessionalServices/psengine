@@ -39,6 +39,7 @@ from ..constants import (
     RF_TOKEN_ENV_VAR,
     RF_TOKEN_VALIDATION_REGEX,
     ROOT_DIR,
+    SANDBOX_TOKEN_ENV_VAR,
     SSL_VERIFY,
     STATUS_FORCELIST,
 )
@@ -93,6 +94,7 @@ class ConfigModel(BaseSettings):
     app_id: str | None = Field(default=None, pattern=APP_ID_REGEX, examples=['get-alerts/1.0.0'])
     rf_token: RFToken | None = Field(default=os.environ.get(RF_TOKEN_ENV_VAR, ''))
     asi_token: RFToken | None = Field(default=os.environ.get(ASI_TOKEN_ENV_VAR, ''))
+    sandbox_token: RFToken | None = Field(default=os.environ.get(SANDBOX_TOKEN_ENV_VAR, ''))
     http_proxy: str | None = None
     https_proxy: str | None = None
     client_ssl_verify: bool | None = SSL_VERIFY
