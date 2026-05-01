@@ -225,7 +225,7 @@ class IndicatorEntity(BaseStixEntity):
         """
         if not create_indicator and not create_obs:
             raise STIX2TransformError(
-                'Inidcator must create at least one of "Observable" or "Indicator"',
+                'Indicator must create at least one of "Observable" or "Indicator"',
             )
 
         type_ = CONVERTED_TYPES.get(type_, type_)
