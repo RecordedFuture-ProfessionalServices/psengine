@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.7.0 - 2026-05-01
+
+- Added support for Threat Map and Malware Map via the `ThreatMapMgr`.
+
 ## v2.6.0 - 2026-04-29
 
 ### Added
