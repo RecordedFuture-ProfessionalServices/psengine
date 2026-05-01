@@ -105,3 +105,16 @@ class SearchResult(RFBaseModel):
     completed: datetime
     sha256: Optional[str] = None
     url: Optional[str] = None
+
+
+class SandboxUser(RFBaseModel):
+    """Sandbox user record returned by user-management endpoints."""
+
+    id_: str = Field(alias='id', default=None)
+    company_id: str
+    email: str = None
+    name: str
+    first_name: str
+    last_name: str
+    created_at: datetime
+    role: str

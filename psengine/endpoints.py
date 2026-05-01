@@ -147,3 +147,61 @@ EP_ASI_ASSET_EXPOSURES = f'{EP_ASI_ASSETS}/{{}}/exposures'
 EP_ASI_ASSETS_SEARCH = f'{EP_ASI_ASSETS}/_search'
 EP_ASI_EXPOSURES = f'{EP_ASI_PROJECTS}/{{}}/exposures'
 EP_ASI_EXPOSURES_BY_SIGNATURE = f'{EP_ASI_EXPOSURES}/{{}}'
+
+###############################################################################
+# Recorded Future Sandbox API Base URLs and Endpoints
+###############################################################################
+SANDBOX_API_VERSION = 'v0'
+
+# Sandbox base URLs by region
+SANDBOX_BASE_URLS = {
+    'eu': 'https://sandbox.recordedfuture.com/api/' + SANDBOX_API_VERSION,
+    'usa': 'https://us-sandbox.recordedfuture.com/api/' + SANDBOX_API_VERSION,
+    'apj': 'https://apj-sandbox.recordedfuture.com/api/' + SANDBOX_API_VERSION,
+    'public': 'https://tria.ge/api/' + SANDBOX_API_VERSION,
+    'private': 'https://private.tria.ge/api/' + SANDBOX_API_VERSION,
+}
+
+# Sandbox Sample Endpoints (using {base_url} as placeholder)
+EP_SANDBOX_SAMPLES = '{base_url}/samples'
+EP_SANDBOX_SAMPLES_ID = '{base_url}/samples/{sample_id}'
+EP_SANDBOX_SAMPLES_SUMMARY = '{base_url}/samples/{sample_id}/summary'
+EP_SANDBOX_SAMPLES_SAMPLE = '{base_url}/samples/{sample_id}/sample'
+EP_SANDBOX_SAMPLES_OVERVIEW = '{base_url}/samples/{sample_id}/overview.json'
+EP_SANDBOX_SAMPLES_PROFILE = '{base_url}/samples/{sample_id}/profile'
+EP_SANDBOX_SAMPLES_REPORTS_STATIC = '{base_url}/samples/{sample_id}/reports/static'
+EP_SANDBOX_SAMPLES_TASK_REPORT = '{base_url}/samples/{sample_id}/{task_id}/report_triage.json'
+EP_SANDBOX_SAMPLES_EVENTS = '{base_url}/samples/{sample_id}/events'
+EP_SANDBOX_EVENTS = '{base_url}/samples/events'
+EP_SANDBOX_SAMPLES_KERNEL_MONITOR = '{base_url}/samples/{sample_id}/{task_id}/logs/onemon.json'
+EP_SANDBOX_SAMPLES_PCAP = '{base_url}/samples/{sample_id}/{task_id}/dump.pcap'
+EP_SANDBOX_SAMPLES_PCAPNG = '{base_url}/samples/{sample_id}/{task_id}/dump.pcapng'
+EP_SANDBOX_SAMPLES_FILES = '{base_url}/samples/{sample_id}/{task_id}/files/{file_name}'
+EP_SANDBOX_SAMPLES_URLSCAN_REPORT = '{base_url}/samples/{sample_id}/urlscan1/report_urlscan.json'
+EP_SANDBOX_SAMPLES_URLSCAN_SCREENSHOT = '{base_url}/samples/{sample_id}/urlscan1/screenshot.png'
+EP_SANDBOX_SAMPLES_MAGIC = '{base_url}/samples/{sample_id}/magic'
+
+# Sandbox Search Endpoints
+EP_SANDBOX_SEARCH = '{base_url}/search'
+
+# Sandbox Profile Endpoints
+EP_SANDBOX_PROFILES = '{base_url}/profiles'
+EP_SANDBOX_PROFILES_ID = '{base_url}/profiles/{profile_id}'
+
+# Sandbox Resources and Geolocations Endpoints
+EP_SANDBOX_RESOURCES = '{base_url}/resources'
+EP_SANDBOX_GEOLOCATIONS = '{base_url}/geolocations'
+
+# Sandbox YARA Endpoints
+EP_SANDBOX_YARA = '{base_url}/yara'
+EP_SANDBOX_YARA_NAME = '{base_url}/yara/{name}'
+
+# Sandbox User Management Endpoints
+EP_SANDBOX_USERS = '{base_url}/users'
+EP_SANDBOX_USERS_ID = '{base_url}/users/{user_id}'
+EP_SANDBOX_USERS_APIKEYS = '{base_url}/users/{user_id}/apikeys'
+EP_SANDBOX_USERS_APIKEYS_NAME = '{base_url}/users/{user_id}/apikeys/{name}'
+
+# Sandbox Organisation Settings Endpoints
+EP_SANDBOX_ORG_SETTINGS = '{base_url}/org/settings'
+EP_SANDBOX_ORG_SETTINGS_MAGIC = '{base_url}/org/settings/magic'
