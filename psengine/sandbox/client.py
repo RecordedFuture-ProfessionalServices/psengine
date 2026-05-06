@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import re
-from typing import Annotated, Optional, Union
+from typing import Annotated
 
 from pydantic import Field, validate_call
 from requests.exceptions import JSONDecodeError
@@ -40,6 +40,8 @@ def is_api_token_format_valid(
 
 
 class SandboxClient(BaseHTTPClient):
+    """Recorded Future Sandbox API client."""
+
     # TODO: add the other base URLS as well
     def __init__(
         self,
