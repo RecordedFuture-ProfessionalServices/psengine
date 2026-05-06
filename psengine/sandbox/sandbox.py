@@ -1,3 +1,16 @@
+##################################### TERMS OF USE ###########################################
+# The following code is provided for demonstration purpose only, and should not be used      #
+# without independent verification. Recorded Future makes no representations or warranties,  #
+# express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #
+# information it may retrieve, and provides it both strictly “as-is” and without assuming    #
+# responsibility for any information it may retrieve. Recorded Future shall not be liable    #
+# for, and you assume all risk of using, the foregoing. By using this code, Customer         #
+# represents that it is solely responsible for having all necessary licenses, permissions,   #
+# rights, and/or consents to connect to third party APIs, and that it is solely responsible  #
+# for having all necessary licenses, permissions, rights, and/or consents to any data        #
+# accessed from any third party API.                                                         #
+##############################################################################################
+
 from datetime import datetime
 from typing import Optional, Union
 
@@ -20,9 +33,9 @@ class SampleSummary(RFBaseModel):
     created: datetime
     completed: datetime
     score: int
-    sha256: Optional[str] = None
-    org_id: Optional[str] = None
-    meta: Optional[Meta] = None
+    sha256: str | None = None
+    org_id: str | None = None
+    meta: Meta | None = None
 
     # Keys normalized to e.g. "static1", "behavioral1", ...
     tasks: dict[str, Task] = Field(default_factory=dict)
@@ -43,14 +56,14 @@ class SearchQuery(RFBaseModel):
 class SearchIn(RFBaseModel):
     model_config = ConfigDict(extra='forbid')
 
-    file_hash: Optional[Union[list[str], str]] = None
-    family: Optional[Union[list[str], str]] = None
-    tag: Optional[Union[list[str], str]] = None
-    botnet: Optional[Union[list[str], str]] = None
-    platform: Optional[Union[list[str], str]] = None
-    extracted_c2_data: Optional[Union[list[str], str]] = None
-    wallet: Optional[Union[list[str], str]] = None
-    analysis_time: Optional[str] = None
+    file_hash: list[str] | str | None = None
+    family: list[str] | str | None = None
+    tag: list[str] | str | None = None
+    botnet: list[str] | str | None = None
+    platform: list[str] | str | None = None
+    extracted_c2_data: list[str] | str | None = None
+    wallet: list[str] | str | None = None
+    analysis_time: str | None = None
 
     @field_validator(
         'file_hash',
@@ -100,11 +113,11 @@ class SearchResult(RFBaseModel):
     id_: str = Field(alias='id')
     status: str
     kind: str
-    filename: Optional[str] = None
+    filename: str | None = None
     submitted: datetime
     completed: datetime
-    sha256: Optional[str] = None
-    url: Optional[str] = None
+    sha256: str | None = None
+    url: str | None = None
 
 
 class SandboxUser(RFBaseModel):

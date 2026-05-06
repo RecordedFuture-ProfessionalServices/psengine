@@ -1,3 +1,16 @@
+##################################### TERMS OF USE ###########################################
+# The following code is provided for demonstration purpose only, and should not be used      #
+# without independent verification. Recorded Future makes no representations or warranties,  #
+# express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #
+# information it may retrieve, and provides it both strictly “as-is” and without assuming    #
+# responsibility for any information it may retrieve. Recorded Future shall not be liable    #
+# for, and you assume all risk of using, the foregoing. By using this code, Customer         #
+# represents that it is solely responsible for having all necessary licenses, permissions,   #
+# rights, and/or consents to connect to third party APIs, and that it is solely responsible  #
+# for having all necessary licenses, permissions, rights, and/or consents to any data        #
+# accessed from any third party API.                                                         #
+##############################################################################################
+
 from typing import Annotated, Literal, Optional, Union
 
 from pydantic import ConfigDict, Field
@@ -16,7 +29,7 @@ class TaskBase(RFBaseModel):
 class StaticTask(TaskBase):
     model_config = ConfigDict(extra='forbid')
     kind: Literal['static']
-    score: Optional[int] = None
+    score: int | None = None
 
 
 class BehavioralTask(TaskBase):
@@ -28,11 +41,11 @@ class BehavioralTask(TaskBase):
     target: str
     backend: str
     resource: str
-    platform: Optional[str] = None
-    os: Optional[str] = None
-    queue_id: Optional[int] = None
-    timeout: Optional[int] = None
-    sigs: Optional[int] = None
+    platform: str | None = None
+    os: str | None = None
+    queue_id: int | None = None
+    timeout: int | None = None
+    sigs: int | None = None
 
 
 class UrlscanTask(TaskBase):
@@ -41,10 +54,10 @@ class UrlscanTask(TaskBase):
     score: int
 
 
-Task = Annotated[Union[BehavioralTask, StaticTask, UrlscanTask], Field(discriminator='kind')]
+Task = Annotated[BehavioralTask | StaticTask | UrlscanTask, Field(discriminator='kind')]
 
 
 class Meta(RFBaseModel):
     model_config = ConfigDict(extra='forbid')
-    channel: Optional[str] = None
-    rforg: Optional[str] = None
+    channel: str | None = None
+    rforg: str | None = None

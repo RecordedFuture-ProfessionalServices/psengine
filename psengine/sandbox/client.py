@@ -1,3 +1,16 @@
+##################################### TERMS OF USE ###########################################
+# The following code is provided for demonstration purpose only, and should not be used      #
+# without independent verification. Recorded Future makes no representations or warranties,  #
+# express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #
+# information it may retrieve, and provides it both strictly “as-is” and without assuming    #
+# responsibility for any information it may retrieve. Recorded Future shall not be liable    #
+# for, and you assume all risk of using, the foregoing. By using this code, Customer         #
+# represents that it is solely responsible for having all necessary licenses, permissions,   #
+# rights, and/or consents to connect to third party APIs, and that it is solely responsible  #
+# for having all necessary licenses, permissions, rights, and/or consents to any data        #
+# accessed from any third party API.                                                         #
+##############################################################################################
+
 import re
 from typing import Annotated, Optional, Union
 
@@ -7,9 +20,9 @@ from requests.models import Response
 from typing_extensions import Doc
 
 from ..base_http_client import BaseHTTPClient
-from .constants import DEFAULT_PAGE_LIMIT
 from ..constants import SANDBOX_TOKEN_VALIDATION_REGEX
 from ..helpers import debug_call
+from .constants import DEFAULT_PAGE_LIMIT
 
 SAMPLES_PER_PAGE = 50
 MAXIMUM_SAMPLES = 200
@@ -31,17 +44,17 @@ class SandboxClient(BaseHTTPClient):
     def __init__(
         self,
         api_token: Annotated[
-            Union[str, None],
+            str | None,
             Doc('The Sandbox API token. Defaults to SANDBOX_TOKEN environment variable.'),
         ] = None,
         http_proxy: Annotated[str, Doc('An HTTP proxy URL.')] = None,
         https_proxy: Annotated[str, Doc('An HTTPS proxy URL.')] = None,
         verify: Annotated[
-            Union[str, bool],
+            str | bool,
             Doc('An SSL verification flag or path to CA bundle.'),
         ] = None,
         auth: Annotated[tuple[str, str], Doc('Basic Auth credentials.')] = None,
-        cert: Annotated[Union[str, tuple[str, str], None], Doc('Client certificates.')] = None,
+        cert: Annotated[str | tuple[str, str] | None, Doc('Client certificates.')] = None,
         timeout: Annotated[int, Doc('A request timeout. Defaults to 120.')] = None,
         retries: Annotated[int, Doc('A number of retries. Defaults to 5.')] = None,
         backoff_factor: Annotated[int, Doc('A backoff factor. Defaults to 1.')] = None,
@@ -82,15 +95,15 @@ class SandboxClient(BaseHTTPClient):
             str, Doc('An HTTP method, one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.')
         ],
         url: Annotated[str, Doc('A URL to make the request to.')],
-        data: Annotated[Union[dict, list[dict], bytes, None], Doc('A request body.')] = None,
+        data: Annotated[dict | list[dict] | bytes | None, Doc('A request body.')] = None,
         *,
-        params: Annotated[Optional[dict], Doc('HTTP query parameters.')] = None,
+        params: Annotated[dict | None, Doc('HTTP query parameters.')] = None,
         headers: Annotated[
-            Optional[dict],
+            dict | None,
             Doc('If specified, it overrides default headers and does not set the token.'),
         ] = None,
         content_type_header: Annotated[
-            Optional[str], Doc('Content-Type header value.')
+            str | None, Doc('Content-Type header value.')
         ] = 'application/json',
         **kwargs,
     ) -> Annotated[Response, Doc('A requests.Response object.')]:
@@ -118,19 +131,19 @@ class SandboxClient(BaseHTTPClient):
             str, Doc('An HTTP method, one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.')
         ],
         url: Annotated[str, Doc('A URL to make the request to.')],
-        data: Annotated[Union[dict, list[dict], bytes, None], Doc('A request body.')] = None,
+        data: Annotated[dict | list[dict] | bytes | None, Doc('A request body.')] = None,
         *,
-        params: Annotated[Optional[dict], Doc('HTTP query parameters.')] = None,
+        params: Annotated[dict | None, Doc('HTTP query parameters.')] = None,
         headers: Annotated[
-            Optional[dict],
+            dict | None,
             Doc('If specified, it overrides default headers and does not set the token.'),
         ] = None,
         content_type_header: Annotated[
-            Optional[str], Doc('Content-Type header value.')
+            str | None, Doc('Content-Type header value.')
         ] = 'application/json',
         max_samples: int = DEFAULT_PAGE_LIMIT,
         samples_per_page: Annotated[
-            Optional[int], Doc('The number of samples per page for pagination.')
+            int | None, Doc('The number of samples per page for pagination.')
         ] = Field(ge=1, le=MAXIMUM_SAMPLES, default=SAMPLES_PER_PAGE),
         **kwargs,
     ) -> Annotated[Response, Doc('A requests.Response object.')]:

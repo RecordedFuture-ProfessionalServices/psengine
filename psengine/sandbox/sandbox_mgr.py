@@ -12,25 +12,24 @@
 ##############################################################################################
 
 import logging
-from typing import Any, Optional, Union, Annotated, Literal, cast
+from typing import Annotated, Literal, cast
 
 from pydantic import Field, validate_call
 from typing_extensions import Doc
 
-from .constants import DEFAULT_PAGE_LIMIT
-from .sandbox import SampleSummary, SandboxUser, SearchIn, SearchResult
-
-from ..helpers import debug_call
-from .client import SandboxClient
 from ..endpoints import (
-    SANDBOX_BASE_URLS,
     EP_SANDBOX_SAMPLES_SUMMARY,
     EP_SANDBOX_SEARCH,
     EP_SANDBOX_USERS,
-    EP_SANDBOX_USERS_ID,
     EP_SANDBOX_USERS_APIKEYS,
     EP_SANDBOX_USERS_APIKEYS_NAME,
+    EP_SANDBOX_USERS_ID,
+    SANDBOX_BASE_URLS,
 )
+from ..helpers import debug_call
+from .client import SandboxClient
+from .constants import DEFAULT_PAGE_LIMIT
+from .sandbox import SampleSummary, SearchIn, SearchResult
 
 SandboxChoice = Literal['eu', 'usa', 'apj', 'public', 'private']
 
@@ -50,7 +49,7 @@ class SandboxMgr:
     def __init__(
         self,
         api_token: Annotated[
-            Optional[str],
+            str | None,
             Doc('The Sandbox API token. Defaults to SANDBOX_TOKEN environment variable.'),
         ] = None,
         sandbox_choice: Annotated[
@@ -75,16 +74,16 @@ class SandboxMgr:
 
     def search(
         self,
-        file_hash: Optional[Union[list[str], str]] = None,
-        family: Optional[Union[list[str], str]] = None,
-        tag: Optional[Union[list[str], str]] = None,
-        botnet: Optional[Union[list[str], str]] = None,
-        platform: Optional[Union[list[str], str]] = None,
-        extracted_c2_data: Optional[Union[list[str], str]] = None,
-        wallet: Optional[Union[list[str], str]] = None,
-        analysis_time: Optional[Union[list[str], str]] = None,
-        query: Optional[str] = None,
-        max_results: Optional[int] = DEFAULT_PAGE_LIMIT,
+        file_hash: list[str] | str | None = None,
+        family: list[str] | str | None = None,
+        tag: list[str] | str | None = None,
+        botnet: list[str] | str | None = None,
+        platform: list[str] | str | None = None,
+        extracted_c2_data: list[str] | str | None = None,
+        wallet: list[str] | str | None = None,
+        analysis_time: list[str] | str | None = None,
+        query: str | None = None,
+        max_results: int | None = DEFAULT_PAGE_LIMIT,
     ):
         # TODO: write about the id constraints
         params = {p: v for p, v in locals().items() if p not in ('self', 'query', 'max_results')}
