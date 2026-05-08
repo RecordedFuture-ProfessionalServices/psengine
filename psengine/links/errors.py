@@ -11,46 +11,16 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from datetime import datetime
-from enum import Enum
-
-from ..common_models import IdName, RFBaseModel
+from ..errors import RecordedFutureError
 
 
-class ThreatMapAxis(Enum):
-    opportunity = 'opportunity'
-    intent = 'intent'
+class LinksError(RecordedFutureError):
+    """Base class for all exceptions raised by the Links module."""
 
 
-class ThreatMapType(Enum):
-    actors = 'actors'
-    malware = 'malware'
-
-    @property
-    def category_slug(self) -> str:
-        """Return the URL slug used by the categories endpoint.
-
-        The map endpoint uses `actors`/`malware` (this enum's value), but the
-        categories endpoint uses the singular `actor`/`malware` — see api.md.
-        """
-        return 'actor' if self is ThreatMapType.actors else 'malware'
+class LinksSearchError(LinksError):
+    """Error raised when a Links search request fails."""
 
 
-class LogEntry(RFBaseModel):
-    watchlist: IdName | None = None
-    entity: IdName
-    severity: int
-    axis: str
-    date: datetime
-
-
-class EntityAttributes(RFBaseModel):
-    name: str
-    alias: list[str] = []
-
-
-class ThreatActorAttributes(RFBaseModel):
-    name: str
-    common_names: list[str] = []
-    alias: list[str] = []
-    categories: list[IdName] = []
+class LinksMetadataError(LinksError):
+    """Error raised when fetching or validating Links metadata fails."""

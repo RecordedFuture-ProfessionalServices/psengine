@@ -12,7 +12,7 @@
 ##############################################################################################
 
 from functools import total_ordering
-from typing import Annotated
+from typing import Annotated, Optional, Union
 
 from pydantic import Field
 from typing_extensions import Doc
@@ -57,7 +57,7 @@ class AnalystNote(RFBaseModel):
         criterion.
     """
 
-    external_id: str | None = None
+    external_id: Optional[str] = None
     source: IdNameTypeDescription
     attributes: Attributes
     id_: str = Field(alias='id')
@@ -78,7 +78,7 @@ class AnalystNote(RFBaseModel):
         )
 
     @property
-    def detection_rule_type(self) -> str | None:
+    def detection_rule_type(self) -> Optional[str]:
         """Returns the attachment type if present, else None. It checks for specific types like
         `sigma rule`, `yara rule`, and `snort rule` in the topics of the note.
         """
@@ -113,7 +113,7 @@ class AnalystNote(RFBaseModel):
             bool, Doc('Defang URLs or other malicious indicators.')
         ] = False,
         character_limit: Annotated[
-            int | None,
+            Optional[int],
             Doc('Limit the output to a specified number of characters.'),
         ] = None,
     ) -> Annotated[str, Doc('The generated markdown string.')]:
@@ -132,7 +132,7 @@ class AnalystNotePreviewIn(RFBaseModel):
     """Validate data sent to `/preview` endpoint."""
 
     attributes: PreviewAttributesIn
-    source: str | None
+    source: Optional[str]
     tagged_text: bool = False
     serialization: str = 'full'
 
@@ -148,12 +148,12 @@ class AnalystNotePublishIn(AnalystNotePreviewIn):
     """Validate data sent to `/publish` endpoint."""
 
     attributes: PreviewAttributesIn
-    source: str | None = None
+    source: Optional[str] = None
     tagged_text: bool = False
     serialization: str = 'full'
-    note_id: str | None = None
+    note_id: Optional[str] = None
     resolve_entities: bool = True
-    attachment_content_details: RequestAttachment | None = None
+    attachment_content_details: Optional[RequestAttachment] = None
 
 
 class AnalystNotePublishOut(RFBaseModel):
@@ -165,14 +165,14 @@ class AnalystNotePublishOut(RFBaseModel):
 class AnalystNoteSearchIn(RFBaseModel):
     """Validate data sent to `/search` endpoint."""
 
-    published: str | None = None
-    entity: str | None = None
-    author: str | None = None
-    title: str | None = None
-    topic: list[str] | str | None = []
-    label: str | None = None
-    source: str | None = None
+    published: Optional[str] = None
+    entity: Optional[str] = None
+    author: Optional[str] = None
+    title: Optional[str] = None
+    topic: Union[list[str], str, None] = []
+    label: Optional[str] = None
+    source: Optional[str] = None
     serialization: str = None
     tagged_text: bool = None
     limit: int = NOTES_PER_PAGE
-    from_: str | None = Field(alias='from', default=None)
+    from_: Optional[str] = Field(alias='from', default=None)

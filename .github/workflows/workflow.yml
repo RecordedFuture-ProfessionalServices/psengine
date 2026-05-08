@@ -13,7 +13,7 @@ jobs:
       version:     ${{ steps.get_version.outputs.version }}
       tag_exists:  ${{ steps.tagcheck.outputs.exists }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v5
         with: { fetch-depth: 0 }
 
       - name: Extract version
@@ -81,14 +81,15 @@ jobs:
         with:
           ref: ${{ needs.release.outputs.version }}
           fetch-depth: 0
-          
-      - uses: astral-sh/setup-uv@v7
-      
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
       - name: Build release distributions
         run: |
-          uv python install ${{ vars.PYTHON_VERSION }} 
-          uv build
-
+          python -m pip install --upgrade pip build
+          python -m build
 
       - name: Publish release distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

@@ -12,7 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
-from typing import Annotated
+from typing import Annotated, Optional
 
 from pydantic import BeforeValidator, Field
 
@@ -22,37 +22,37 @@ from ..helpers.helpers import Validators
 
 class RiskScoreHistory(RFBaseModel):
     score: int
-    added: datetime | None = None
-    removed: datetime | None = None
+    added: Optional[datetime] = None
+    removed: Optional[datetime] = None
 
 
 class RiskLevelHistory(RFBaseModel):
     criticality: int
-    added: datetime | None = None
-    removed: datetime | None = None
+    added: Optional[datetime] = None
+    removed: Optional[datetime] = None
 
 
 class RiskRuleHistory(RFBaseModel):
-    risk_id: str | None = None
+    risk_id: Optional[str] = None
     risk_name: str
     criticality: int
     evidence: str
-    added: datetime | None = None
-    removed: datetime | None = None
+    added: Optional[datetime] = None
+    removed: Optional[datetime] = None
 
 
 class Entity(RFBaseModel):
     id: str
-    provided_id: str | None = None
+    provided_id: Optional[str] = None
     type: str
     name: str
 
 
 class RiskHistory(RFBaseModel):
-    entity: Entity | None = None
-    scores: list[RiskScoreHistory] | None = None
-    levels: list[RiskLevelHistory] | None = None
-    risk_rules: list[RiskRuleHistory] | None = None
+    entity: Optional[Entity] = None
+    scores: Optional[list[RiskScoreHistory]] = None
+    levels: Optional[list[RiskLevelHistory]] = None
+    risk_rules: Optional[list[RiskRuleHistory]] = None
 
     def __str__(self) -> str:
         return 'Entity {}: Risk Score Changes: {}, Risk Rule Changes: {}'.format(  # noqa: UP032
@@ -62,7 +62,7 @@ class RiskHistory(RFBaseModel):
 
 class RiskHistoryIn(RFBaseModel):
     entities: Annotated[list[str], BeforeValidator(Validators.convert_str_to_list)]
-    from_: Annotated[datetime | None, BeforeValidator(Validators.convert_relative_time)] = Field(
+    from_: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = Field(
         None, alias='from'
     )
-    to: Annotated[datetime | None, BeforeValidator(Validators.convert_relative_time)] = None
+    to: Annotated[Optional[datetime], BeforeValidator(Validators.convert_relative_time)] = None

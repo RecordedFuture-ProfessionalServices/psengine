@@ -12,6 +12,7 @@
 ##############################################################################################
 
 from enum import Enum
+from typing import Optional
 
 from pydantic import Field, model_validator
 
@@ -45,15 +46,15 @@ class RequestOptions(RFBaseModel):
 class RequestIOC(RFBaseModel):
     type_: IOCType = Field(alias='type')
     value: str
-    source_type: str | None = None
-    field: str | None = None
+    source_type: Optional[str] = None
+    field: Optional[str] = None
 
 
 class RequestDetection(RFBaseModel):
-    id_: str | None = Field(alias='id', default=None)
-    name: str | None = None
+    id_: Optional[str] = Field(alias='id', default=None)
+    name: Optional[str] = None
     type_: DetectionType = Field(alias='type')
-    sub_type: DetectionRuleType | None = None
+    sub_type: Optional[DetectionRuleType] = None
 
     @model_validator(mode='before')
     @classmethod
@@ -77,4 +78,4 @@ class RequestDetection(RFBaseModel):
 class SubmissionResult(RFBaseModel):
     status: str
     debug: bool
-    summary: ResponseSummary | None = None
+    summary: Optional[ResponseSummary] = None

@@ -10,8 +10,7 @@ PSEngine is a simple, yet elegant, library for rapid development of integrations
 
 PSEngine allows you to interact with the Recorded Future API extremely easily. There’s no need to manually build the URLs and query parameters, just use the modules dedicated to individual API endpoints.
 
-PSEngine is a Python package solely built and maintained by the Recorded Future Cyber Security Engineering team powering a number of high profile integrations, such as: [Banshee](https://recordedfuture-professionalservices.github.io/banshee); [Recorded Future Alerts for QRadar](https://apps.xforce.ibmcloud.com/extension/b36efdf42b7bf5e3759d036dbcdbf606); Anomali ThreatStream: [Alerts](https://support.recordedfuture.com/hc/en-us/articles/29255683708691-Recorded-Future-Alerts-for-Anomali-ThreatStream) and [Analyst Notes](https://support.recordedfuture.com/hc/en-us/articles/12928414947475-Recorded-Future-Analyst-Notes-for-Anomali-ThreatStream) integrations; [Google SecOps](https://app.recordedfuture.com/portal/integration-center/detail/google-chronicle-nbfi?organization=uhash%3A5cJsHMHeSM&filter_tab=all) and many more.
-
+PSEngine is a Python package solely built and maintained by the Cyber Security Engineering team powering a number of high profile integrations, such as: Elasticsearch, QRadar, Anomali, Jira, TheHive, etc.
 
 ## Installation
 
@@ -21,7 +20,7 @@ PSEngine is a Python package that can be installed using `pip`. To install PSeng
 pip install psengine
 ```
 
-PSEngine officially supports Python >= 3.10, < 3.15.
+PSEngine officially supports Python >= 3.9, < 3.14.
 
 
 ## Supported Features & Best Practices
@@ -38,7 +37,6 @@ It can easily interact with the following Recorded Future datasets:
 - Fusion File management
 - Identity Exposures management
 - List management
-- Malware Intelligence (including Auto Yara and Auto Sigma)
 - Malware Sandbox reports download
 - On demand IOC enrichment
 - Risklists
@@ -52,10 +50,4 @@ And facilitate the development with features like:
 - Easy configuration management
 - Markdown creation from certain data types
 - Proxy support
-
-## Previous versions and version documentation
-
-PSEngine has been made public from our internal version 2.0.4. Previous versions, including version 1, are not publicly available.
-
-The documentation arrived at version 2.1.1. Older versions are not explicitly documented and changes can be found in the [Release History](./CHANGELOG.md) section.
 

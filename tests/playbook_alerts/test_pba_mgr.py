@@ -460,7 +460,6 @@ class Test_PlaybookAlertMgr:
             max_results=2,
             statuses=['New'],
             priority=['High', 'Informational'],
-            organisation=['moise', 'ernest'],
             direction='asc',
             category=['code_repo_leakage'],
             created_from='2023-01-01',
@@ -474,7 +473,6 @@ class Test_PlaybookAlertMgr:
         assert query.statuses == ['New']
         assert query.priority == ['High', 'Informational']
         assert query.direction == 'asc'
-        assert query.organisation == ['uhash:moise', 'uhash:ernest']
         assert query.category == ['code_repo_leakage']
         assert query.created_range.from_.strftime('%Y-%m-%d') == '2023-01-01'
         assert query.created_range.until.strftime('%Y-%m-%d') == '2023-01-02'
@@ -482,7 +480,9 @@ class Test_PlaybookAlertMgr:
         assert query.updated_range.until.strftime('%Y-%m-%d') == '2023-01-02'
 
         query = playbook_mgr._prepare_query(
-            statuses='New', priority='High', category='domain_abuse', organisation='moise'
+            statuses='New',
+            priority='High',
+            category='domain_abuse',
         )
 
         assert isinstance(query, SearchIn)
@@ -490,7 +490,6 @@ class Test_PlaybookAlertMgr:
         assert query.statuses == ['New']
         assert query.priority == ['High']
         assert query.category == ['domain_abuse']
-        assert query.organisation == ['uhash:moise']
         assert query.from_ is None
         assert query.created_range is None
         assert query.updated_range is None

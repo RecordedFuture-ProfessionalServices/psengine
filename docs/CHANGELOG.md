@@ -1,39 +1,12 @@
 # Changelog
 
-## v2.7.0 - 2026-05-01
+## v2.6.1 - 2026-05-08
 
-- Added support for Threat Map and Malware Map via the `ThreatMapMgr`.
-
-## v2.6.0 - 2026-04-29
+- `psengine.links` now supports the Links API via the `LinksMgr` class.
 
 ### Added
 
-- Added support for Python 3.14
-- `PlaybookAlertMgr.search` now supports filter for a single or a list of organisations.
-- `TimeHelpers.rel_time_to_date` now supports a starting time from where the math begins. If not specified it will be the UTC execution time.
-- `TimeHelpers.rel_time_to_date` now supports increment calculation, with `+1h`.
-- `TimeHelpers.rel_time_to_date` now supports increment or decrement of minutes with `+10m` or `-10m`.
-- Added `malware_intel.AutoYaraMgr` and `malware_intel.AutoSigmaMgr` managers to interact with auto-yara and auto-sigma APIs.
-- `ClassicAlertMgr.fetch` and `ClassicAlertMgr.fetch_bulk` now allow to fetch images directly via the `fetch_images` argument. Defaults to `False`.
-- `AnalystNote` model now supports `is_threat_actor` field.
-
-### Fixed
-
-- `playbook_alerts.helpers.save_pba_images` now allow for all alert types that support images.
-- `IdentityMgr.fetch_incident_report` now support a single string `organization_id` field. 
-
-### Changed
-
-- `IdentityMgr` methods now support 1000 maximum identities returned instead of 500.
-
-### Removed
-
-- Removed support for Python 3.9
-
-## v2.5.2 - 2026-04-27
-
-### Fixed
-- When parsing any Playbook Alert object the `panel_log_v2.[].added.[].url` field no longer fails validation when the URL format does not conform to strict HTTP URL requirements.
+- `psengine.links` implements Links search and metadata listing via `LinksMgr`.
 
 ## v2.5.1 - 2026-03-26
 

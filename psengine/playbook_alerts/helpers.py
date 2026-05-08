@@ -12,13 +12,14 @@
 ##############################################################################################
 import logging
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Union
 
 from typing_extensions import Doc
 
 from ..errors import WriteFileError
 from ..helpers import OSHelpers, debug_call
-from .constants import DEFAULT_ALERTS_OUTPUT_DIR, PBA_WITH_IMAGES_INST, PBA_WITH_IMAGES_TYPE
+from .constants import DEFAULT_ALERTS_OUTPUT_DIR
+from .playbook_alerts import PBA_DomainAbuse
 
 LOG = logging.getLogger('psengine.playbook_alerts.helpers')
 
@@ -26,25 +27,25 @@ LOG = logging.getLogger('psengine.playbook_alerts.helpers')
 @debug_call
 def save_pba_images(
     playbook_alerts: Annotated[
-        PBA_WITH_IMAGES_TYPE | list[PBA_WITH_IMAGES_TYPE],
-        Doc('Single or list of alerts that contains images.'),
+        Union[PBA_DomainAbuse, list[PBA_DomainAbuse]],
+        Doc('Domain Abuse alert or a list of Domain Abuse alerts.'),
     ],
     output_directory: Annotated[
         str, Doc('A directory to save the images to.')
     ] = DEFAULT_ALERTS_OUTPUT_DIR,
 ) -> None:
-    """Save images/screenshots to disk as a `.png` file.
+    """Save Domain Abuse images/screenshots to disk as a `.png` file.
 
     Raises:
-        TypeError: If alerts are not objects part of the PBA_WITH_IMAGES_TYPE tuple.
+        TypeError: If alerts are not `PBA_DomainAbuse` objects.
         WriteFileError: If the image save fails with an `OSError`.
     """
-    if not isinstance(playbook_alerts, (list, *PBA_WITH_IMAGES_INST)):
-        raise TypeError(f'Image saving is only supported by {PBA_WITH_IMAGES_INST} alerts')
+    if not isinstance(playbook_alerts, (list, PBA_DomainAbuse)):
+        raise TypeError('Image saving is only supported by Domain Abuse alerts')
 
     playbook_alerts = playbook_alerts if isinstance(playbook_alerts, list) else [playbook_alerts]
-    if not all(isinstance(alert, PBA_WITH_IMAGES_INST) for alert in playbook_alerts):
-        raise TypeError(f'Image saving is only supported by {PBA_WITH_IMAGES_INST} alerts')
+    if not all(isinstance(alert, PBA_DomainAbuse) for alert in playbook_alerts):
+        raise TypeError('Image saving is only supported by Domain Abuse alerts')
 
     for alert in playbook_alerts:
         LOG.info(f'Saving {len(alert.images)} image(s) to disk for alert {alert.playbook_alert_id}')
@@ -60,7 +61,7 @@ def save_pba_images(
 def _save_image(
     file_name: str,
     image_bytes: bytes,
-    output_directory: str | Path = DEFAULT_ALERTS_OUTPUT_DIR,
+    output_directory: Union[str, Path] = DEFAULT_ALERTS_OUTPUT_DIR,
 ) -> None:
     """Save image to disk as a .png file.
 

@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated
+from typing import Annotated, Optional, Union
 
 import pydantic
 import requests
@@ -59,7 +59,7 @@ class PlaybookAlertMgr:
 
     def __init__(
         self,
-        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
+        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
     ):
         """Initialize the `PlaybookAlertMgr` object."""
         self.log = logging.getLogger(__name__)
@@ -72,17 +72,17 @@ class PlaybookAlertMgr:
         self,
         alert_id: Annotated[str, Doc('Alert ID to fetch.')],
         category: Annotated[
-            PACategory | None,
+            Optional[PACategory],
             Doc(
                 'Category to fetch. If not given, `playbook-alert/common` is used to determine it.'
             ),
         ] = None,
         panels: Annotated[
-            list[str] | None,
+            Optional[list[str]],
             Doc('Panels to fetch. The `status` panel is always fetched for ADT initialization.'),
         ] = None,
         fetch_images: Annotated[
-            bool | None, Doc('Fetch images for Domain Abuse & Geopol alerts.')
+            Optional[bool], Doc('Fetch images for Domain Abuse & Geopol alerts.')
         ] = True,
     ) -> Annotated[
         PLAYBOOK_ALERT_TYPE,
@@ -127,54 +127,54 @@ class PlaybookAlertMgr:
     def fetch_bulk(
         self,
         alerts: Annotated[
-            list[tuple[str, PACategory]] | None,
+            Optional[list[tuple[str, PACategory]]],
             Doc('List of (alert_id, category) tuples to fetch. Overrides search parameters.'),
         ] = None,
         panels: Annotated[
-            list[str] | None,
+            Optional[list[str]],
             Doc('Panels to fetch for each alert. The `status` panel is always fetched.'),
         ] = None,
         fetch_images: Annotated[
-            bool | None, Doc('Whether to fetch images for supported alert types.')
+            Optional[bool], Doc('Whether to fetch images for supported alert types.')
         ] = False,
         alerts_per_page: Annotated[
-            int | None, Doc('Number of alerts per page (pagination).')
+            Optional[int], Doc('Number of alerts per page (pagination).')
         ] = Field(ge=1, le=10000, default=ALERTS_PER_PAGE),
-        max_results: Annotated[int | None, Doc('Maximum number of alerts to fetch.')] = Field(
+        max_results: Annotated[Optional[int], Doc('Maximum number of alerts to fetch.')] = Field(
             ge=1, le=10_000, default=DEFAULT_LIMIT
         ),
         order_by: Annotated[
-            str | None, Doc('Field to order alerts by, e.g. `created` or `updated`.')
+            Optional[str], Doc('Field to order alerts by, e.g. `created` or `updated`.')
         ] = None,
-        direction: Annotated[str | None, Doc('Sort direction: `asc` or `desc`.')] = None,
+        direction: Annotated[Optional[str], Doc('Sort direction: `asc` or `desc`.')] = None,
         entity: Annotated[
-            str | list | None, Doc('Entity or list of entities to filter alerts by.')
+            Union[str, list, None], Doc('Entity or list of entities to filter alerts by.')
         ] = None,
         statuses: Annotated[
-            str | list | None,
+            Union[str, list, None],
             Doc("Status or list of statuses to filter alerts by, e.g. `['New', 'Closed']`."),
         ] = None,
         priority: Annotated[
-            str | list | None, Doc("Priority or list of priorities, e.g. `['High', 'Low']`.")
+            Union[str, list, None], Doc("Priority or list of priorities, e.g. `['High', 'Low']`.")
         ] = None,
         category: Annotated[
-            PACategory | list[PACategory] | None,
+            Union[PACategory, list[PACategory], None],
             Doc('Category or list of categories to filter alerts by.'),
         ] = None,
         assignee: Annotated[
-            str | list | None, Doc('Assignee or list of uhashes to filter by.')
+            Union[str, list, None], Doc('Assignee or list of uhashes to filter by.')
         ] = None,
         created_from: Annotated[
-            str | None, Doc('Start of created date range (ISO or relative, e.g. `-3d`).')
+            Optional[str], Doc('Start of created date range (ISO or relative, e.g. `-3d`).')
         ] = None,
         created_until: Annotated[
-            str | None, Doc('End of created date range (ISO or relative).')
+            Optional[str], Doc('End of created date range (ISO or relative).')
         ] = None,
         updated_from: Annotated[
-            str | None, Doc('Start of updated date range (ISO or relative).')
+            Optional[str], Doc('Start of updated date range (ISO or relative).')
         ] = None,
         updated_until: Annotated[
-            str | None, Doc('End of updated date range (ISO or relative).')
+            Optional[str], Doc('End of updated date range (ISO or relative).')
         ] = None,
     ) -> Annotated[
         list[PLAYBOOK_ALERT_TYPE],
@@ -225,48 +225,44 @@ class PlaybookAlertMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertSearchError)
     def search(
         self,
-        alerts_per_page: Annotated[int | None, Doc('Number of alerts per page.')] = Field(
-            ge=1, le=10_000, default=ALERTS_PER_PAGE
+        alerts_per_page: Annotated[Optional[int], Doc('Number of alerts per page.')] = Field(
+            ge=1, le=10000, default=ALERTS_PER_PAGE
         ),
-        max_results: Annotated[int | None, Doc('Maximum total number of alerts to fetch.')] = Field(
-            ge=1, le=10_000, default=DEFAULT_LIMIT
-        ),
+        max_results: Annotated[
+            Optional[int], Doc('Maximum total number of alerts to fetch.')
+        ] = Field(ge=1, le=10_000, default=DEFAULT_LIMIT),
         order_by: Annotated[
-            str | None, Doc('Field to order alerts by, e.g. `created` or `updated`.')
+            Optional[str], Doc('Field to order alerts by, e.g. `created` or `updated`.')
         ] = None,
-        direction: Annotated[str | None, Doc('Sort direction, either `asc` or `desc`.')] = None,
+        direction: Annotated[Optional[str], Doc('Sort direction, either `asc` or `desc`.')] = None,
         entity: Annotated[
-            str | list | None, Doc('Entity or list of entities to filter alerts by.')
+            Union[str, list, None], Doc('Entity or list of entities to filter alerts by.')
         ] = None,
         statuses: Annotated[
-            str | list | None, Doc('Status or list of statuses to filter alerts by.')
+            Union[str, list, None], Doc('Status or list of statuses to filter alerts by.')
         ] = None,
         priority: Annotated[
-            str | list | None, Doc('Priority or list of priorities to filter alerts by.')
+            Union[str, list, None], Doc('Priority or list of priorities to filter alerts by.')
         ] = None,
         category: Annotated[
-            PACategory | list[PACategory] | None,
+            Union[PACategory, list[PACategory], None],
             Doc('Category or list of categories to filter alerts by.'),
         ] = None,
         assignee: Annotated[
-            str | list | None,
+            Union[str, list, None],
             Doc('Assignee or list of assignees (uhashes) to filter alerts by.'),
         ] = None,
-        organisation: Annotated[
-            str | list | None,
-            Doc('Org or list of Orgs (uhashes) to filter alerts by.'),
-        ] = None,
         created_from: Annotated[
-            str | None, Doc('Start of created date range (ISO or relative, e.g. `-7d`).')
+            Optional[str], Doc('Start of created date range (ISO or relative, e.g. `-7d`).')
         ] = None,
         created_until: Annotated[
-            str | None, Doc('End of created date range (ISO or relative).')
+            Optional[str], Doc('End of created date range (ISO or relative).')
         ] = None,
         updated_from: Annotated[
-            str | None, Doc('Start of updated date range (ISO or relative).')
+            Optional[str], Doc('Start of updated date range (ISO or relative).')
         ] = None,
         updated_until: Annotated[
-            str | None, Doc('End of updated date range (ISO or relative).')
+            Optional[str], Doc('End of updated date range (ISO or relative).')
         ] = None,
     ) -> Annotated[SearchResponse, Doc('Search results matching the alert query.')]:
         """Search for playbook alerts using filters.
@@ -312,15 +308,19 @@ class PlaybookAlertMgr:
     def update(
         self,
         alert: Annotated[
-            PLAYBOOK_ALERT_TYPE | str, Doc('Playbook alert ADT or alert ID to update.')
+            Union[PLAYBOOK_ALERT_TYPE, str], Doc('Playbook alert ADT or alert ID to update.')
         ],
-        priority: Annotated[str | None, Doc("Updated alert priority (e.g. 'High', 'Low').")] = None,
-        status: Annotated[
-            str | None, Doc("Updated alert status (e.g. 'New', 'InProgress').")
+        priority: Annotated[
+            Optional[str], Doc("Updated alert priority (e.g. 'High', 'Low').")
         ] = None,
-        assignee: Annotated[str | None, Doc('Assignee uhash for the alert.')] = None,
-        log_entry: Annotated[str | None, Doc('Text for the alert log entry.')] = None,
-        reopen_strategy: Annotated[str | None, Doc('Strategy for reopening closed alerts.')] = None,
+        status: Annotated[
+            Optional[str], Doc("Updated alert status (e.g. 'New', 'InProgress').")
+        ] = None,
+        assignee: Annotated[Optional[str], Doc('Assignee uhash for the alert.')] = None,
+        log_entry: Annotated[Optional[str], Doc('Text for the alert log entry.')] = None,
+        reopen_strategy: Annotated[
+            Optional[str], Doc('Strategy for reopening closed alerts.')
+        ] = None,
     ) -> Annotated[requests.Response, Doc('API response object for the update operation.')]:
         """Update a playbook alert.
 
@@ -356,20 +356,19 @@ class PlaybookAlertMgr:
     @validate_call
     def _prepare_query(
         self,
-        alerts_per_page: int | None = ALERTS_PER_PAGE,
-        max_results: int | None = DEFAULT_LIMIT,
-        order_by: str | None = None,
-        direction: str | None = None,
-        entity: str | list | None = None,
-        statuses: str | list | None = None,
-        priority: str | list | None = None,
-        category: str | list | None = None,
-        assignee: str | list | None = None,
-        organisation: str | list | None = None,
-        created_from: str | None = None,
-        created_until: str | None = None,
-        updated_from: str | None = None,
-        updated_until: str | None = None,
+        alerts_per_page: Optional[int] = ALERTS_PER_PAGE,
+        max_results: Optional[int] = DEFAULT_LIMIT,
+        order_by: Optional[str] = None,
+        direction: Optional[str] = None,
+        entity: Union[str, list, None] = None,
+        statuses: Union[str, list, None] = None,
+        priority: Union[str, list, None] = None,
+        category: Union[str, list, None] = None,
+        assignee: Union[str, list, None] = None,
+        created_from: Optional[str] = None,
+        created_until: Optional[str] = None,
+        updated_from: Optional[str] = None,
+        updated_until: Optional[str] = None,
     ) -> SearchIn:
         """Create a query for searching playbook alerts.
 
@@ -381,6 +380,7 @@ class PlaybookAlertMgr:
         Returns:
             SearchIn: Validated search query
         """
+        params = {key: val for key, val in locals().items() if val and key != 'self'}
         query = {
             'created_range': {},
             'updated_range': {},
@@ -392,16 +392,12 @@ class PlaybookAlertMgr:
         if not category:
             query['category'] = [cat.value for cat in PACategory]
 
-        params = {key: val for key, val in locals().items() if val and key != 'self'}
-        for arg, val in params.items():
-            if arg in ['created_from', 'created_until', 'updated_from', 'updated_until']:
-                key, value = self._process_time_arg(arg, val)
-                if isinstance(value, dict):
-                    query[key].update(value)
-                else:
-                    query[key] = value
+        for arg in params:
+            key, value = self._process_arg(arg, params[arg])
+            if isinstance(value, dict):
+                query[key].update(value)
             else:
-                query[arg] = val
+                query[key] = value
 
         query = {
             key: val
@@ -418,8 +414,8 @@ class PlaybookAlertMgr:
     )
     def fetch_one_image(
         self,
-        alert_id: Annotated[str | None, Doc('Alert ID corresponding to the image ID.')] = None,
-        image_id: Annotated[str | None, Doc('ID of the image to retrieve.')] = None,
+        alert_id: Annotated[Optional[str], Doc('Alert ID corresponding to the image ID.')] = None,
+        image_id: Annotated[Optional[str], Doc('ID of the image to retrieve.')] = None,
         alert_category: Annotated[
             PBA_WITH_IMAGES_VALIDATOR,
             Doc("Category of the alert (e.g., 'domain_abuse', 'geopolitics_facility')."),
@@ -598,11 +594,11 @@ class PlaybookAlertMgr:
 
         return p_alerts
 
-    def _process_time_arg(
+    def _process_arg(
         self,
         attr: str,
-        value: int | str | list,
-    ) -> tuple[str, str | list]:
+        value: Union[int, str, list],
+    ) -> tuple[str, Union[str, list]]:
         """Return attribute and value normalized based on type of value.
 
         Args:
@@ -612,8 +608,14 @@ class PlaybookAlertMgr:
         Returns:
             tuple (str, Union[str, list]): canonicalized query attributes
         """
-        range_field = attr.split('_')[0] + '_range'
-        query_key = 'from' if attr.endswith('from') else 'until'
-        if TimeHelpers.is_rel_time_valid(value):
-            return range_field, {query_key: TimeHelpers.rel_time_to_date(value)}
-        return range_field, {query_key: value}
+        list_or_str_args = ['entity', 'statuses', 'priority', 'category', 'assignee']
+        if attr in ['created_from', 'created_until', 'updated_from', 'updated_until']:
+            range_field = attr.split('_')[0] + '_range'
+            query_key = 'from' if attr.endswith('from') else 'until'
+            if TimeHelpers.is_rel_time_valid(value):
+                return range_field, {query_key: TimeHelpers.rel_time_to_date(value)}
+            return range_field, {query_key: value}
+        if attr in list_or_str_args and isinstance(value, str):
+            return attr, [value]
+
+        return attr, value

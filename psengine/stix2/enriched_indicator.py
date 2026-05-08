@@ -126,7 +126,7 @@ class EnrichedIndicator(IndicatorEntity):
         """Creates relationship between object and indicator/observabe.
 
         Raises:
-            STIX2TransformError: Generic transform error
+            STIX2TransformError: Generic transofmr error
         """
         if isinstance(obj, IndicatorEntity):
             sources = []

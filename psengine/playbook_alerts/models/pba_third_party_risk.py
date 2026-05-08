@@ -12,6 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
+from typing import Optional
 
 from pydantic import Field, model_validator
 
@@ -21,16 +22,16 @@ from ..models.panel_status import PanelStatus
 
 
 class TPRPanelStatus(PanelStatus):
-    risk_score: int | None = None
-    entity_criticality: str | None = None
-    targets: list[ResolvedEntity] | None = []
+    risk_score: Optional[int] = None
+    entity_criticality: Optional[str] = None
+    targets: Optional[list[ResolvedEntity]] = []
 
 
 class ObservedNetworkTraffic(RFBaseModel):
     recent_timestamp: datetime
-    malware_family: str | None = None
-    client_ip_address: str | None = None
-    malware_ip_address: str | None = None
+    malware_family: Optional[str] = None
+    client_ip_address: Optional[str] = None
+    malware_ip_address: Optional[str] = None
 
 
 class SummaryString(RFBaseModel):
@@ -39,11 +40,11 @@ class SummaryString(RFBaseModel):
 
 
 class Reference(RFBaseModel):
-    title: str | None = None
-    fragment: str | None = None
+    title: Optional[str] = None
+    fragment: Optional[str] = None
     published: datetime
-    document_url: str | None = None
-    source: str | None = None
+    document_url: Optional[str] = None
+    source: Optional[str] = None
 
 
 class IpRule(RFBaseModel):
@@ -64,7 +65,8 @@ class Evidence(RFBaseModel):
     data: list
 
     @model_validator(mode='after')
-    def check_data_type(self):
+    @classmethod
+    def check_data_type(cls, evidence: 'Evidence'):
         """Check if evidence type is supported and validate it."""
         type_mapping = {
             'ip_rule': IpRule,
@@ -74,12 +76,12 @@ class Evidence(RFBaseModel):
             'hosts_communication': ObservedNetworkTraffic,
             'summary_string': SummaryString,
         }
-        self.data = [
+        evidence.data = [
             model.model_validate(obj)
-            for obj in self.data
-            if (model := type_mapping.get(self.type_))
+            for obj in evidence.data
+            if (model := type_mapping.get(evidence.type_))
         ]
-        return self
+        return evidence
 
 
 class TPRAssessment(RFBaseModel):
@@ -90,4 +92,4 @@ class TPRAssessment(RFBaseModel):
 
 
 class TPRPanelEvidence(RFBaseModel):
-    assessments: list[TPRAssessment] | None = []
+    assessments: Optional[list[TPRAssessment]] = []

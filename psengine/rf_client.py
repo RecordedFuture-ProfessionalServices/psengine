@@ -15,7 +15,7 @@ import re
 from collections import defaultdict
 from contextlib import suppress
 from json.decoder import JSONDecodeError
-from typing import Annotated
+from typing import Annotated, Optional, Union
 
 import jsonpath_ng
 from jsonpath_ng.exceptions import JsonPathParserError
@@ -45,16 +45,16 @@ class RFClient(BaseHTTPClient):
     def __init__(
         self,
         api_token: Annotated[
-            str | None, Doc('An RF API token. Defaults to RF_TOKEN environment variable.')
+            Union[str, None], Doc('An RF API token. Defaults to RF_TOKEN environment variable.')
         ] = None,
         http_proxy: Annotated[str, Doc('An HTTP proxy URL.')] = None,
         https_proxy: Annotated[str, Doc('An HTTPS proxy URL.')] = None,
         verify: Annotated[
-            str | bool,
+            Union[str, bool],
             Doc('An SSL verification flag or path to CA bundle.'),
         ] = None,
         auth: Annotated[tuple[str, str], Doc('Basic Auth credentials.')] = None,
-        cert: Annotated[str | tuple[str, str] | None, Doc('Client certificates.')] = None,
+        cert: Annotated[Union[str, tuple[str, str], None], Doc('Client certificates.')] = None,
         timeout: Annotated[int, Doc('A request timeout. Defaults to 120.')] = None,
         retries: Annotated[int, Doc('A number of retries. Defaults to 5.')] = None,
         backoff_factor: Annotated[int, Doc('A backoff factor. Defaults to 1.')] = None,
@@ -95,15 +95,15 @@ class RFClient(BaseHTTPClient):
             str, Doc('An HTTP method, one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.')
         ],
         url: Annotated[str, Doc('A URL to make the request to.')],
-        data: Annotated[dict | list[dict] | bytes | None, Doc('A request body.')] = None,
+        data: Annotated[Union[dict, list[dict], bytes, None], Doc('A request body.')] = None,
         *,
-        params: Annotated[dict | None, Doc('HTTP query parameters.')] = None,
+        params: Annotated[Optional[dict], Doc('HTTP query parameters.')] = None,
         headers: Annotated[
-            dict | None,
+            Optional[dict],
             Doc('If specified, it overrides default headers and does not set the token.'),
         ] = None,
         content_type_header: Annotated[
-            str | None, Doc('Content-Type header value.')
+            Optional[str], Doc('Content-Type header value.')
         ] = 'application/json',
         **kwargs,
     ) -> Annotated[Response, Doc('A requests.Response object.')]:
@@ -243,15 +243,15 @@ class RFClient(BaseHTTPClient):
         method: Annotated[str, Doc('An HTTP method: GET or POST.')],
         url: Annotated[str, Doc('A URL to make the request to.')],
         max_results: Annotated[int, Doc('The maximum number of results to return.')] = 1000,
-        data: Annotated[dict | list[dict] | None, Doc('A request body.')] = None,
+        data: Annotated[Union[dict, list[dict], None], Doc('A request body.')] = None,
         *,
-        params: Annotated[dict | None, Doc('HTTP query parameters.')] = None,
+        params: Annotated[Union[dict, None], Doc('HTTP query parameters.')] = None,
         headers: Annotated[
-            dict | None,
+            Union[dict, None],
             Doc('If specified, it overrides default headers and does not set the token.'),
         ] = None,
         results_path: Annotated[
-            str | list[str], Doc('Path to extract paged results from.')
+            Union[str, list[str]], Doc('Path to extract paged results from.')
         ] = 'data',
         offset_key: Annotated[str, Doc("Key to use for paging. Defaults to 'offset'.")] = 'offset',
         **kwargs,
@@ -408,7 +408,9 @@ class RFClient(BaseHTTPClient):
         except AttributeError:
             return str(path)
 
-    def _get_matches(self, results_expr: jsonpath_ng.jsonpath.Fields, results: list | dict) -> list:
+    def _get_matches(
+        self, results_expr: jsonpath_ng.jsonpath.Fields, results: Union[list, dict]
+    ) -> list:
         """Get matches from results.
 
         Args:

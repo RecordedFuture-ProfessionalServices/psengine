@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v5
 
     - name: Spell Check Repo
-      uses: crate-ci/typos@v1.45.2
+      uses: crate-ci/typos@v1.35.5
       with: 
         files: | 
           ./psengine/

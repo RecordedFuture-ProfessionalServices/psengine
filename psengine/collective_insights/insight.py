@@ -13,7 +13,7 @@
 
 from datetime import datetime
 from functools import total_ordering
-from typing import Annotated
+from typing import Annotated, Optional
 
 from pydantic import BeforeValidator
 
@@ -61,9 +61,11 @@ class Insight(RFBaseModel):
 
     timestamp: datetime
     ioc: RequestIOC
-    incident: IdNameType | None = None
-    mitre_codes: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
-    malwares: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    incident: Optional[IdNameType] = None
+    mitre_codes: Annotated[Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)] = (
+        None
+    )
+    malwares: Annotated[Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)] = None
     detection: RequestDetection
 
     def __hash__(self):
@@ -85,8 +87,8 @@ class Insight(RFBaseModel):
 class InsightsOut(RFBaseModel):
     """Validate data sent to CI."""
 
-    options: RequestOptions | None = None
-    organization_ids: list[str] | None = None
+    options: Optional[RequestOptions] = None
+    organization_ids: Optional[list[str]] = None
     data: list[Insight]
 
 

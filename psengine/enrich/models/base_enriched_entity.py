@@ -11,6 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from typing import Optional
 
 from pydantic import Field
 
@@ -31,12 +32,12 @@ class BaseEnrichedEntity(RFBaseModel):
     This model is intended to be inherited and should not be used on its own.
     """
 
-    ai_insights: AIInsights | None = Field(alias='aiInsights', default=None)
-    analyst_notes: list[AnalystNote] | None = Field(alias='analystNotes', default=[])
-    counts: list[ReferenceCount] | None = []
-    entity: IdNameTypeDescription | None = None
-    intel_card: str | None = Field(alias='intelCard', default=None)
-    metrics: list[Metric] | None = []
-    related_entities: list[RelatedEntities] | None = Field(alias='relatedEntities', default=[])
-    sightings: list[Sighting] | None = []
-    timestamps: Timestamps | None = None
+    ai_insights: Optional[AIInsights] = Field(alias='aiInsights', default=None)
+    analyst_notes: Optional[list[AnalystNote]] = Field(alias='analystNotes', default=[])
+    counts: Optional[list[ReferenceCount]] = []
+    entity: Optional[IdNameTypeDescription] = None
+    intel_card: Optional[str] = Field(alias='intelCard', default=None)
+    metrics: Optional[list[Metric]] = []
+    related_entities: Optional[list[RelatedEntities]] = Field(alias='relatedEntities', default=[])
+    sightings: Optional[list[Sighting]] = []
+    timestamps: Optional[Timestamps] = None

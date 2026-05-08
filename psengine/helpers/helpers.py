@@ -14,17 +14,16 @@ import csv
 import functools
 import json
 import logging
-import operator
 import os
 import platform
 import re
 import sys
-from collections.abc import Callable, Iterable
+from collections.abc import Iterable
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from inspect import getmodule, isclass, signature
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Callable, Optional, Union
 
 from dateutil.parser import parse as date_parse
 from pydantic import BaseModel
@@ -39,11 +38,11 @@ from requests.exceptions import (
 from typing_extensions import Doc
 
 from ..common_models import RFBaseModel
-from ..constants import ROOT_DIR, TIMESTAMP_STR
+from ..constants import ROOT_DIR
 from ..errors import ReadFileError, RecordedFutureError, WriteFileError
 
 LOG = logging.getLogger('psengine.helpers')
-VALID_TIME_REGEX = r'^([-+]?)([1-9]?[0-9]+[dDhHmM])$'
+VALID_TIME_REGEX = r'^(-?)([1-9]?[0-9]+[dDhH])$'
 IDS = ['ip:', 'idn:', 'url:', 'hash:', 'id:']
 
 
@@ -112,7 +111,7 @@ def connection_exceptions(
 
 def dump_models(
     models: Annotated[
-        BaseModel | list[BaseModel],
+        Union[BaseModel, list[BaseModel]],
         Doc('A Pydantic model or list of models to serialize.'),
     ],
 ) -> Annotated[list[str], Doc('List of models serialized as JSON strings.')]:
@@ -171,61 +170,38 @@ class TimeHelpers:
 
     @staticmethod
     def rel_time_to_date(
-        relative_time: Annotated[str, Doc("Relative time string like '7d', '3h', '4m' (minutes).")],
-        start_time: Annotated[
-            str | None,
-            Doc(
-                'Defined starting time in format %Y-%m-%d %H:%M:%S, if none it will be the run time'
-            ),
-        ] = None,
+        relative_time: Annotated[
+            str, Doc("Relative time string like '7d', '3h'. Minutes not supported.")
+        ],
     ) -> Annotated[str, Doc("Formatted date string in ISO format, e.g., '2022-08-08T13:11'.")]:
         """Convert a relative time to a date.
-
-        `relative_time` specification:
-            - `1h` means 1 hour ago
-            - `-1h` means 1 hour ago
-            - `+1h` means 1 hour in the future
 
         Example:
             ```python
             rel_time_to_date("1h")  # returns ISO datetime string ~1 hour ago
             rel_time_to_date("1d")  # returns ISO datetime string ~1 day ago
-            rel_time_to_date("+10m")  # returns ISO datetime string 10 minutes in the future
-            rel_time_to_date("1h", "2022-01-22 22:12:20") # returns 1 hour ago from the specified
-            rel_time_to_date("+1h", "2022-01-22 22:14:20") # returns 1 hour after from the specified
             ```
 
         Raises:
-            ValueError: If `relative_time` is invalid.
+            ValueError: If the relative time is invalid.
         """
         logger = logging.getLogger(__name__)
         match = re.match(VALID_TIME_REGEX, relative_time)
         if match is None:
             raise ValueError(
-                f"Invalid relative time '{relative_time}'. Accepted format: [-|+]?[integer][h|d|m]",
+                f"Invalid relative time '{relative_time}'. Accepted format: [-|][integer][h|d]",
             )
-        start_time = (
-            datetime.strptime(start_time, TIMESTAMP_STR)
-            if start_time
-            else datetime.now(timezone.utc)
-        )
-
-        sign = match.groups()[0]
-        operation = operator.add if sign == '+' else operator.sub
-
         relative_time = match.groups()[-1]
+        time_now = datetime.utcnow()
         digit = int(re.findall(r'^\d+', relative_time)[0])
         if relative_time.endswith('d'):
-            result = (operation(start_time, timedelta(days=digit))).strftime('%Y-%m-%dT%H:%M')
-        elif relative_time.endswith('h'):
-            result = (operation(start_time, timedelta(hours=digit))).strftime('%Y-%m-%dT%H:%M')
+            subtracted = (time_now - timedelta(days=digit)).strftime('%Y-%m-%dT%H:%M')
         else:
-            result = (operation(start_time, timedelta(minutes=digit))).strftime('%Y-%m-%dT%H:%M')
+            subtracted = (time_now - timedelta(hours=digit)).strftime('%Y-%m-%dT%H:%M')
+        logger.debug(f'UTC Time now: {time_now}')
+        logger.debug(f'Relative time -{relative_time} to date: {subtracted}')
 
-        logger.debug(f'UTC Time now: {start_time}')
-        logger.debug(f'Relative time {sign}{relative_time} to date: {result}')
-
-        return result
+        return subtracted
 
     @staticmethod
     def is_rel_time_valid(
@@ -298,14 +274,14 @@ class OSHelpers:
 
     @staticmethod
     def os_platform() -> Annotated[
-        str | None, Doc('OS platform info string, or None if unavailable.')
+        Optional[str], Doc('OS platform info string, or None if unavailable.')
     ]:
         """Get the OS platform information, for example: `macOS-13.0-x86_64-i386-64bit`."""
         return platform.platform(aliased=True, terse=False) or None
 
     @staticmethod
     def mkdir(
-        path: Annotated[str | Path, Doc('Path to directory to create.')],
+        path: Annotated[Union[str, Path], Doc('Path to directory to create.')],
     ) -> Annotated[Path, Doc('Path to the directory created.')]:
         """Safely create a directory.
 
@@ -325,10 +301,10 @@ class OSHelpers:
         try:
             path.mkdir(parents=True, exist_ok=True)
         except PermissionError as err:
-            raise WriteFileError(f'Directory {path} is not writable') from err
-        # In case it already exists, check if it is writable
+            raise WriteFileError(f'Directory {path} is not writeable') from err
+        # In case it already exists, check if it is writeable
         if not os.access(path, os.W_OK):
-            raise WriteFileError(f'Directory {path} is not writable')
+            raise WriteFileError(f'Directory {path} is not writeable')
         return path
 
 
@@ -337,7 +313,7 @@ class FileHelpers:
 
     @staticmethod
     def read_csv(
-        csv_file: Annotated[str | Path, Doc('Path to CSV file.')],
+        csv_file: Annotated[Union[str, Path], Doc('Path to CSV file.')],
         as_dict: Annotated[bool, Doc('Return rows as dictionaries keyed by header.')] = False,
         single_column: Annotated[bool, Doc('Return only first column values as strings.')] = False,
     ) -> Annotated[list, Doc('List of rows from the CSV file.')]:
@@ -407,7 +383,7 @@ class FileHelpers:
     @staticmethod
     def write_file(
         to_write: Annotated[str, Doc('Content to write to file.')],
-        output_directory: Annotated[str | Path, Doc('Directory to write the file into.')],
+        output_directory: Annotated[Union[str, Path], Doc('Directory to write the file into.')],
         fname: Annotated[str, Doc('Name of the file to write.')],
     ) -> Annotated[Path, Doc('Path to the file written.')]:
         """Write string content to a file.
@@ -485,8 +461,8 @@ class Validators:
 
     @staticmethod
     def convert_str_to_list(
-        value: Annotated[str | list | None, Doc('String or list to convert.')],
-    ) -> Annotated[list | None, Doc('Converted list with None values removed.')]:
+        value: Annotated[Union[str, list, None], Doc('String or list to convert.')],
+    ) -> Annotated[Union[list, None], Doc('Converted list with None values removed.')]:
         """Convert value from str to list and remove None values."""
         if value:
             value = value if isinstance(value, list) else [value]
@@ -506,8 +482,10 @@ class Validators:
 
     @staticmethod
     def check_uhash_prefix(
-        value: Annotated[str | list, Doc('String or list of strings to check for uhash prefix.')],
-    ) -> Annotated[str | list, Doc("String or list with 'uhash:' prefix ensured.")]:
+        value: Annotated[
+            Union[str, list], Doc('String or list of strings to check for uhash prefix.')
+        ],
+    ) -> Annotated[Union[str, list], Doc("String or list with 'uhash:' prefix ensured.")]:
         """Validate that all fields start with 'uhash:' and add it if missing."""
         uhash = 'uhash:'
         if isinstance(value, str):

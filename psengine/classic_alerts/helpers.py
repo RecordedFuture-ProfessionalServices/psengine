@@ -13,7 +13,7 @@
 
 import logging
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Union
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -31,7 +31,7 @@ def save_image(
     image_bytes: Annotated[bytes, Doc('The image to save.')],
     file_name: Annotated[str, Doc('The file name to save the image as, without extension.')],
     output_directory: Annotated[
-        str | Path, Doc('The directory to save the image to.')
+        Union[str, Path], Doc('The directory to save the image to.')
     ] = DEFAULT_CA_OUTPUT_DIR,
 ) -> Annotated[Path, Doc('The path to the file written.')]:
     """Save an image to disk as a PNG file.
@@ -62,7 +62,7 @@ def save_image(
 def save_images(
     alert: Annotated[ClassicAlert, Doc('The alert to save images from.')],
     output_directory: Annotated[
-        str | Path, Doc('The directory to save the images to.')
+        Union[str, Path], Doc('The directory to save the images to.')
     ] = DEFAULT_CA_OUTPUT_DIR,
 ) -> Annotated[dict, Doc('A dictionary of image file paths with the image ID as the key.')]:
     """Save all images from a `ClassicAlert` to disk.

@@ -8,14 +8,12 @@ updates:
       runtime-minors:
         patterns: ["*"]                 
         update-types: ["minor", "patch"] 
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
     rebase-strategy: "auto"
     commit-message:
       prefix: "😨"
     labels:
       - "python-dependencies"
-    cooldown:
-      default-days: 7
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -31,6 +29,4 @@ updates:
       prefix: "😨"
     labels:
       - "github-actions-dependencies"
-    cooldown:
-      default-days: 7
 

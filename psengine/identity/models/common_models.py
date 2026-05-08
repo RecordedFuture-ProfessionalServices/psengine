@@ -13,7 +13,7 @@
 
 from datetime import datetime
 from enum import Enum
-from typing import Annotated
+from typing import Annotated, Optional, Union
 
 from pydantic import AfterValidator, BeforeValidator, Field, field_validator, model_validator
 from pydantic.networks import IPvAnyAddress
@@ -21,7 +21,6 @@ from pydantic.networks import IPvAnyAddress
 from ...common_models import IdName, RFBaseModel
 from ...constants import DEFAULT_LIMIT
 from ...helpers import Validators
-from ..constants import MAXIMUM_IDENTITIES
 
 
 class DetectionType(Enum):
@@ -86,20 +85,21 @@ class Algorithm(Enum):
 
 
 class Technology(IdName):
-    category: str | None = None
+    category: Optional[str] = None
 
 
 class PasswordHash(RFBaseModel):
     algorithm: Algorithm
-    hash_: str | None = Field(alias='hash', default=None)
-    hash_prefix: str | None = None
+    hash_: Optional[str] = Field(alias='hash', default=None)
+    hash_prefix: Optional[str] = None
 
     @model_validator(mode='after')
-    def check_hash_fields_present(self):
+    @classmethod
+    def check_hash_fields_present(cls, data):
         """Validates at least one of hash or hash_prefix is supplied."""
-        if not (self.hash_ or self.hash_prefix):
+        if not (data.hash_ or data.hash_prefix):
             raise ValueError('One of `hash` or `hash_prefix` must be supplied')
-        return self
+        return data
 
 
 class Cookie(RFBaseModel):
@@ -120,13 +120,13 @@ class Country(RFBaseModel):
 
 class Location(RFBaseModel):
     country: Country
-    postal_code: str | None = None
-    city: str | None = None
-    address: str | None = None
-    address_one: str | None = Field(validation_alias='address1', default=None)
-    address_two: str | None = Field(validation_alias='address2', default=None)
-    state: str | None = None
-    zip: str | None = None
+    postal_code: Optional[str] = None
+    city: Optional[str] = None
+    address: Optional[str] = None
+    address_one: Optional[str] = Field(validation_alias='address1', default=None)
+    address_two: Optional[str] = Field(validation_alias='address2', default=None)
+    state: Optional[str] = None
+    zip: Optional[str] = None
 
 
 class Infrastructure(RFBaseModel):
@@ -135,20 +135,20 @@ class Infrastructure(RFBaseModel):
 
 class Compromise(RFBaseModel):
     exfiltration_date: datetime
-    os: str | None = None
-    os_username: str | None = None
-    malware_file: str | None = None
-    timezone: str | None = None
-    computer_name: str | None = None
-    uac: str | None = None
-    antivirus: str | list[str] | None = None
+    os: Optional[str] = None
+    os_username: Optional[str] = None
+    malware_file: Optional[str] = None
+    timezone: Optional[str] = None
+    computer_name: Optional[str] = None
+    uac: Optional[str] = None
+    antivirus: Union[str, list[str], None] = None
 
 
 class Breach(RFBaseModel):
     name: str
     domain: str
     type_: str = Field(alias='type')
-    breached: datetime | None = None
+    breached: Optional[datetime] = None
     start: datetime
     stop: datetime
     precision: Precision
@@ -162,36 +162,36 @@ class BaseIdentityOut(RFBaseModel):
 
 
 class QueryProperties(RFBaseModel):
-    name: str | None = None
-    date: datetime | None = None
+    name: Optional[str] = None
+    date: Optional[datetime] = None
 
 
 class FilterIn(RFBaseModel):
     first_downloaded_gte: Annotated[
-        datetime | None, BeforeValidator(Validators.convert_relative_time)
+        Optional[datetime], BeforeValidator(Validators.convert_relative_time)
     ] = None
     latest_downloaded_gte: Annotated[
-        datetime | None, BeforeValidator(Validators.convert_relative_time)
+        Optional[datetime], BeforeValidator(Validators.convert_relative_time)
     ] = None
     exfiltration_date_gte: Annotated[
-        datetime | None, BeforeValidator(Validators.convert_relative_time)
+        Optional[datetime], BeforeValidator(Validators.convert_relative_time)
     ] = None
-    breach_properties: QueryProperties | None = None
-    dump_properties: QueryProperties | None = None
+    breach_properties: Optional[QueryProperties] = None
+    dump_properties: Optional[QueryProperties] = None
     properties: Annotated[
-        list[Properties] | None, BeforeValidator(Validators.convert_str_to_list)
+        Optional[list[Properties]], BeforeValidator(Validators.convert_str_to_list)
     ] = None
     username_properties: Annotated[
-        list[str] | None, BeforeValidator(Validators.convert_str_to_list)
+        Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)
     ] = None
     authorization_technologies: Annotated[
-        list[str] | None, BeforeValidator(Validators.convert_str_to_list)
+        Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)
     ] = None
     authorization_protocols: Annotated[
-        list[str] | None, BeforeValidator(Validators.convert_str_to_list)
+        Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)
     ] = None
     malware_families: Annotated[
-        list[str] | None, BeforeValidator(Validators.convert_str_to_list)
+        Optional[list[str]], BeforeValidator(Validators.convert_str_to_list)
     ] = None
 
     @field_validator('username_properties', mode='before')
@@ -206,22 +206,22 @@ class FilterIn(RFBaseModel):
 
 
 class BaseIdentityIn(RFBaseModel):
-    limit: int | None = Field(default=DEFAULT_LIMIT, gt=0, le=MAXIMUM_IDENTITIES)
-    offset: str | None = None
+    limit: Optional[int] = Field(default=DEFAULT_LIMIT, gt=0, le=500)
+    offset: Optional[str] = None
 
 
 class IdentityOrgIn(BaseIdentityIn):
-    organization_id: Annotated[str | None, AfterValidator(Validators.check_uhash_prefix)] = None
+    organization_id: Annotated[Optional[str], AfterValidator(Validators.check_uhash_prefix)] = None
 
 
 class DumpSearchOut(RFBaseModel):
     """Model for payload received by POST `/identity/metadata/dump/search` endpoint."""
 
     name: str
-    source: str | None = None
-    description: str | None = None
+    source: Optional[str] = None
+    description: Optional[str] = None
     downloaded: datetime
-    breaches: list[Breach] | None = None
-    compromise: Compromise | None = None
-    infrastructure: Infrastructure | None = None
-    location: Location | None = None
+    breaches: Optional[list[Breach]] = None
+    compromise: Optional[Compromise] = None
+    infrastructure: Optional[Infrastructure] = None
+    location: Optional[Location] = None

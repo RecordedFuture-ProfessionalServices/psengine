@@ -23,8 +23,10 @@ API_VERSION = 'v2'
 BASE_URL = 'https://api.recordedfuture.com'
 CONNECT_API_BASE_URL = BASE_URL + '/' + API_VERSION
 
-BASE_URL = environ.get('RF_BASE_URL') or BASE_URL
-CONNECT_API_BASE_URL = environ.get('RF_BASE_URL') or CONNECT_API_BASE_URL
+BASE_URL = environ.get('RF_BASE_URL') if environ.get('RF_BASE_URL') else BASE_URL
+CONNECT_API_BASE_URL = (
+    environ.get('RF_BASE_URL') if environ.get('RF_BASE_URL') else CONNECT_API_BASE_URL
+)
 
 ###############################################################################
 # Classic Alerts Endpoints V3
@@ -118,23 +120,22 @@ EP_IDENTITY_DUMP_SEARCH = EP_IDENTITY + 'metadata/dump/search'
 ###############################################################################
 EP_MALWARE_INTELLIGENCE = BASE_URL + '/malware-intelligence/v1/'
 EP_MALWARE_INTEL_REPORTS = EP_MALWARE_INTELLIGENCE + 'reports'
-EP_AUTO_YARA = EP_MALWARE_INTELLIGENCE + 'auto-yara/'
-EP_AUTO_YARA_JOBS = EP_AUTO_YARA + 'jobs'
-EP_AUTO_YARA_JOB_ID = EP_AUTO_YARA_JOBS + '/{}'
-EP_AUTO_YARA_JOB_ID_RETRY = EP_AUTO_YARA_JOB_ID + '/retry'
-EP_AUTO_YARA_JOBS_EDIT = EP_AUTO_YARA_JOBS + '/edit'
-EP_AUTO_SIGMA = EP_MALWARE_INTELLIGENCE + 'auto-sigma/'
-EP_AUTO_SIGMA_JOBS = EP_AUTO_SIGMA + 'jobs'
-EP_AUTO_SIGMA_GET_JOBS = EP_AUTO_SIGMA + 'get_jobs'
-EP_AUTO_SIGMA_JOB_ID = EP_AUTO_SIGMA_JOBS + '/{}'
-EP_AUTO_SIGMA_JOB_ID_RULE_ID = EP_AUTO_SIGMA_JOB_ID + '/{}'
-EP_AUTO_SIGMA_JOB_ID_RETRY = EP_AUTO_SIGMA_JOB_ID + '/retry'
 
 ###############################################################################
 # Risk History API Endpoints
 ###############################################################################
 EP_RISK_HISTORY_BASE = BASE_URL + '/risk'
 EP_RISK_HISTORY = EP_RISK_HISTORY_BASE + '/history'
+
+###############################################################################
+# Links API Endpoints
+###############################################################################
+LINKS_BASE_URL = f'{BASE_URL}/links'
+LINKS_METADATA_URL = f'{LINKS_BASE_URL}/metadata'
+EP_LINKS_SEARCH = f'{LINKS_BASE_URL}/search'
+EP_LINKS_METADATA_SECTIONS = f'{LINKS_METADATA_URL}/sections'
+EP_LINKS_METADATA_EVENTS = f'{LINKS_METADATA_URL}/events'
+EP_LINKS_METADATA_ENTITIES = f'{LINKS_METADATA_URL}/entities'
 
 ################################################################################
 # Attack Surface Intelligence API Endpoints
@@ -147,13 +148,3 @@ EP_ASI_ASSET_EXPOSURES = f'{EP_ASI_ASSETS}/{{}}/exposures'
 EP_ASI_ASSETS_SEARCH = f'{EP_ASI_ASSETS}/_search'
 EP_ASI_EXPOSURES = f'{EP_ASI_PROJECTS}/{{}}/exposures'
 EP_ASI_EXPOSURES_BY_SIGNATURE = f'{EP_ASI_EXPOSURES}/{{}}'
-
-################################################################################
-# Threat Map API Endpoints
-################################################################################
-EP_THREAT_MAPS_BASE = BASE_URL + '/threat'
-EP_THREAT_MAPS_LIST = EP_THREAT_MAPS_BASE + '/maps'
-EP_THREAT_MAP = EP_THREAT_MAPS_BASE + '/map/{}'
-EP_THREAT_MAP_ORG = EP_THREAT_MAPS_BASE + '/map/{}/{}'
-EP_ACTOR_SEARCH = EP_THREAT_MAPS_BASE + '/actor/search'
-EP_CATEGORIES = EP_THREAT_MAPS_BASE + '/{}/categories'

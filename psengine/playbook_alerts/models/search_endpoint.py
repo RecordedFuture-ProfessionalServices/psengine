@@ -13,6 +13,7 @@
 
 import contextlib
 from datetime import datetime
+from typing import Optional
 
 from pydantic import Field, model_validator
 
@@ -22,8 +23,8 @@ from .common_models import AlertRule
 
 
 class DatetimeRange(RFBaseModel):
-    from_: datetime | None = Field(alias='from', default=None)
-    until: datetime | None = None
+    from_: Optional[datetime] = Field(alias='from', default=None)
+    until: Optional[datetime] = None
 
 
 class SearchStatus(RFBaseModel):
@@ -36,14 +37,14 @@ class SearchData(RFBaseModel):
     alert_rule: AlertRule
     status: str
     priority: str
-    reopen: str | None = None
+    reopen: Optional[str] = None
     created: datetime
     updated: datetime
     category: str
     title: str
-    assignee_name: str | None = None
-    assignee_id: str | None = None
-    owner_organisation_details: OwnerOrganisationDetails | None = None
+    assignee_name: Optional[str] = None
+    assignee_id: Optional[str] = None
+    owner_organisation_details: Optional[OwnerOrganisationDetails] = None
     actions_taken: list[str]
 
     @model_validator(mode='before')

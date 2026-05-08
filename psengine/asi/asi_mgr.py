@@ -13,7 +13,7 @@
 
 
 import logging
-from typing import Annotated, Literal
+from typing import Annotated, Literal, Optional, Union
 
 from pydantic import AfterValidator, Field, validate_call
 from typing_extensions import Doc
@@ -110,7 +110,7 @@ class AttackSurfaceMgr:
     def fetch_projects(
         self,
         sort_direction: Annotated[
-            Literal['asc', 'desc'] | None, Doc('Sort direction for the projects')
+            Optional[Literal['asc', 'desc']], Doc('Sort direction for the projects')
         ] = 'asc',
     ) -> Annotated[ProjectListOut, Doc('List of ASI Project models')]:
         """Fetch ASI projects.
@@ -136,28 +136,28 @@ class AttackSurfaceMgr:
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
         quick_search: Annotated[
-            str | None,
+            Optional[str],
             Doc('Search term to match against asset name, IP addresses, and technology fields'),
         ] = None,
         asset_id: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 """Filter for the specific asset, which will be either a IP or domain value
                 (examples: 192.88.99.2 or www.example.com)."""
             ),
         ] = None,
         asset_name: Annotated[
-            str | None, Doc("""Filter on the name of the asset(IP address or domain).""")
+            Optional[str], Doc("""Filter on the name of the asset(IP address or domain).""")
         ] = None,
         asset_apex_domain: Annotated[
-            str | list[str] | None,
+            Optional[Union[str, list[str]]],
             Doc(
                 """Filter on the apex domain of the asset (example: example.com).
                 Pass a single value or a list."""
             ),
         ] = None,
         asset_discovered_date: Annotated[
-            tuple[str | None, str | None] | None,
+            Optional[tuple[Optional[str], Optional[str]]],
             Doc(
                 """Filter on the date (Y-m-d) the asset was discovered by Recorded Future ASI.
                 This may be different than when the asset was added to the project.
@@ -166,70 +166,71 @@ class AttackSurfaceMgr:
             ),
         ] = None,
         asset_type: Annotated[
-            AssetType | None,
+            Optional[AssetType],
             Doc(
                 """The type of asset, one of: ip, domain and host
                 (where domain and host represent the same asset type)."""
             ),
         ] = None,
         custom_tags: Annotated[
-            list[str] | None,
+            Optional[list[str]],
             Doc('Filter for assets tagged with any of the provided custom tags.'),
         ] = None,
         is_static_asset: Annotated[
-            bool | None,
+            Optional[bool],
             Doc(
                 """Filter for assets that are static, meaning they have a consistent IP address or
                 domain name over time."""
             ),
         ] = None,
         exposure_severity: Annotated[
-            ExposureSeverity | list[ExposureSeverity] | None,
+            Optional[Union[ExposureSeverity, list[ExposureSeverity]]],
             Doc("""Filter assets by exposure severity.
             Pass a single value or a list to match any of the provided severities."""),
         ] = None,
         exposure_signature_id: Annotated[
-            str | list[str] | None,
+            Optional[Union[str, list[str]]],
             Doc("""Filter assets by ASI Signature ID. Pass a single ID or a list.
             Some signatures align with CVEs, e.g. "cve-2024-6387" or "cve-OpenSSH"."""),
         ] = None,
         exposure_score: Annotated[
-            Annotated[
-                tuple[Annotated[int, Field(ge=0, le=100)], Annotated[int, Field(ge=0, le=100)]],
-                AfterValidator(_validate_exposure_score_range),
-            ]
-            | None,
+            Optional[
+                Annotated[
+                    tuple[Annotated[int, Field(ge=0, le=100)], Annotated[int, Field(ge=0, le=100)]],
+                    AfterValidator(_validate_exposure_score_range),
+                ]
+            ],
             Doc("""Filter assets by exposure score range (0–100). Provide a (min, max) tuple.
             The score indicates potential asset risk based on various factors."""),
         ] = None,
         exposure_last_scanned: Annotated[
-            tuple[str | None, str | None] | None,
+            Optional[tuple[Optional[str], Optional[str]]],
             Doc("""Filter assets by the date they were last scanned for exposures.
             Provide a (start, end) tuple of "YYYY-MM-DD" strings.
             Use None for an open-ended bound."""),
         ] = None,
         open_port_number: Annotated[
-            int | list[int] | None,
+            Optional[Union[int, list[int]]],
             Doc(
                 """Filter for assets which have an open port with the provided number (e.g. 80)."""
             ),
         ] = None,
         open_port_service: Annotated[
-            str | list[str] | None,
+            Optional[Union[str, list[str]]],
             Doc(
                 """Filter for assets which have an open port with the provided service (e.g. http,
                 ftp, rdp)."""
             ),
         ] = None,
         open_port_protocol: Annotated[
-            str | list[str] | None,
+            Optional[Union[str, list[str]]],
             Doc(
                 """Filter for assets which have an open port with the provided protocol (e.g. tcp,
                 udp)."""
             ),
         ] = None,
         technology_name: Annotated[
-            str | list[str] | None,
+            Optional[Union[str, list[str]]],
             Doc(
                 """Filter for the name of a technology found on the asset. Could be directly
                 attached to the port (nginx, etc) or a web technology (e.g. 'jQuery',
@@ -237,14 +238,14 @@ class AttackSurfaceMgr:
             ),
         ] = None,
         certificate_issuer: Annotated[
-            str | list[str] | None,
+            Optional[Union[str, list[str]]],
             Doc(
                 """Filter where the certificate (or in the chain) issuer's common name
                 or organization matches the provided value"""
             ),
         ] = None,
         is_responsive: Annotated[
-            bool | None,
+            Optional[bool],
             Doc(
                 """Filter for assets that are unresponsive over ICMP and no ports are open.
                 This is a boolean filter, so it will return assets that are either responsive
@@ -261,7 +262,7 @@ class AttackSurfaceMgr:
             Doc('Number of assets to fetch per page'),
         ] = ASSETS_PER_PAGE,
         max_results: Annotated[
-            int | None, Doc('Maximum number of assets to fetch')
+            Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
     ) -> Annotated[AssetResponse, Doc('Response model for ASI assets search')]:
         """Search for assets within an ASI project.
@@ -311,28 +312,29 @@ class AttackSurfaceMgr:
     @debug_call
     def _lookup_filter(
         self,
-        quick_search: str | None = None,
-        asset_id: str | None = None,
-        asset_name: str | None = None,
-        asset_apex_domain: str | list[str] | None = None,
-        asset_type: AssetType | None = None,
-        asset_discovered_date: tuple[str | None, str | None] | None = None,
-        custom_tags: list[str] | None = None,
-        is_static_asset: bool | None = None,
-        open_port_number: int | list[int] | None = None,
-        open_port_service: str | list[str] | None = None,
-        open_port_protocol: str | list[str] | None = None,
-        technology_name: str | list[str] | None = None,
-        certificate_issuer: str | list[str] | None = None,
-        is_responsive: bool | None = None,
-        exposure_severity: ExposureSeverity | list[ExposureSeverity] | None = None,
-        exposure_signature_id: str | list[str] | None = None,
-        exposure_score: Annotated[
-            tuple[Annotated[int, Field(ge=0, le=100)], Annotated[int, Field(ge=0, le=100)]],
-            AfterValidator(_validate_exposure_score_range),
-        ]
-        | None = None,
-        exposure_last_scanned: tuple[str | None, str | None] | None = None,
+        quick_search: Optional[str] = None,
+        asset_id: Optional[str] = None,
+        asset_name: Optional[str] = None,
+        asset_apex_domain: Optional[Union[str, list[str]]] = None,
+        asset_type: Optional[AssetType] = None,
+        asset_discovered_date: Optional[tuple[Optional[str], Optional[str]]] = None,
+        custom_tags: Optional[list[str]] = None,
+        is_static_asset: Optional[bool] = None,
+        open_port_number: Optional[Union[int, list[int]]] = None,
+        open_port_service: Optional[Union[str, list[str]]] = None,
+        open_port_protocol: Optional[Union[str, list[str]]] = None,
+        technology_name: Optional[Union[str, list[str]]] = None,
+        certificate_issuer: Optional[Union[str, list[str]]] = None,
+        is_responsive: Optional[bool] = None,
+        exposure_severity: Optional[Union[ExposureSeverity, list[ExposureSeverity]]] = None,
+        exposure_signature_id: Optional[Union[str, list[str]]] = None,
+        exposure_score: Optional[
+            Annotated[
+                tuple[Annotated[int, Field(ge=0, le=100)], Annotated[int, Field(ge=0, le=100)]],
+                AfterValidator(_validate_exposure_score_range),
+            ]
+        ] = None,
+        exposure_last_scanned: Optional[tuple[Optional[str], Optional[str]]] = None,
     ) -> AssetSearchFilterIn:
         """Create a query for filtering asset searches."""
         params = {key: val for key, val in locals().items() if val is not None and key != 'self'}
@@ -372,14 +374,14 @@ class AttackSurfaceMgr:
         self,
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
         filter_cve_id: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 """Filter for asset or exposure tied to a vulnerability with the provided CVE.
                 Example CVE-2024-6387."""
             ),
         ] = None,
         filter_cvss_score_gte: Annotated[
-            float | None,
+            Optional[float],
             Field(ge=0, le=10),
             Doc(
                 """Filter for asset or exposure tied to a vulnerability with the provided CVSS
@@ -387,7 +389,7 @@ class AttackSurfaceMgr:
             ),
         ] = None,
         filter_cvss_score_lte: Annotated[
-            float | None,
+            Optional[float],
             Field(ge=0, le=10),
             Doc(
                 """Filter for asset or exposure tied to a vulnerability with the provided CVSS
@@ -395,27 +397,27 @@ class AttackSurfaceMgr:
             ),
         ] = None,
         filter_cwe_id: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 """Filter for asset or exposure tied to a vulnerability associated with
                 the provided CWE. Example CWE-79."""
             ),
         ] = None,
         filter_severity_exact: Annotated[
-            SEVERITY_FILTER | None,
+            Optional[SEVERITY_FILTER],
             Doc('Filter for assets which have an exposure severity matching the provided value.'),
         ] = None,
         filter_severity_min: Annotated[
-            SEVERITY_FILTER | None,
+            Optional[SEVERITY_FILTER],
             Doc(
                 """Filter for assets which have an exposure severity matching or higher than the
                 provided value."""
             ),
         ] = None,
         max_results: Annotated[
-            int | None, Doc('Maximum number of assets to fetch')
+            Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
-        exposures_per_page: Annotated[int | None, Doc('Results per page')] = DEFAULT_LIMIT,
+        exposures_per_page: Annotated[Optional[int], Doc('Results per page')] = DEFAULT_LIMIT,
     ) -> Annotated[ExposureSearchOut, Doc('Response model for ASI exposures search')]:
         """Search for exposures within an ASI project.
 
@@ -451,9 +453,9 @@ class AttackSurfaceMgr:
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
         signature_id: Annotated[str, Doc('The ID of the signature to search assets within')],
         max_results: Annotated[
-            int | None, Doc('Maximum number of assets to fetch')
+            Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
-        exposures_per_page: Annotated[int | None, Doc('Results per page')] = DEFAULT_LIMIT,
+        exposures_per_page: Annotated[Optional[int], Doc('Results per page')] = DEFAULT_LIMIT,
     ) -> Annotated[
         AssetWithExposureSearch, Doc('ASI asset with exposure details for the requested signature')
     ]:
@@ -504,49 +506,49 @@ class AttackSurfaceMgr:
             Doc('The direction to sort by.'),
         ] = 'desc',
         asset_type: Annotated[
-            Literal['domain', 'host', 'ip'] | None,
+            Optional[Literal['domain', 'host', 'ip']],
             Doc('The type of asset, one of: ip, domain, or host.'),
         ] = None,
         custom_tags: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter by custom tags placed on your assets.'),
         ] = None,
         custom_tags_strict: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'Filter by custom tags placed on your assets. Strict version will return a '
                 'validation error if any of the tags have not been defined on your project.'
             ),
         ] = None,
         has_custom_tags: Annotated[
-            bool | None,
+            Optional[bool],
             Doc(
                 'Filter for assets that have at least one custom tag applied. Overrides any '
                 'other custom tag filtering specified.'
             ),
         ] = None,
         added_to_project_before: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter on the date (YYYY-MM-DD) the asset was added to the project.'),
         ] = None,
         added_to_project_after: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter on the date (YYYY-MM-DD) the asset was added to the project.'),
         ] = None,
         discovered_before: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter on the date (YYYY-MM-DD) the asset was discovered.'),
         ] = None,
         discovered_after: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter on the date (YYYY-MM-DD) the asset was discovered.'),
         ] = None,
         apex: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter on the apex domain of the assets. Example: example.com.'),
         ] = None,
         referenced_ip: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'Filter on an A or CNAME record pointing to the IP address. Use eq or in for '
                 'exact IP matching. Use contains with a trailing . for CIDR range matching, '
@@ -554,204 +556,205 @@ class AttackSurfaceMgr:
             ),
         ] = None,
         referenced_ip_before: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'If filtering on a referenced_ip, include additional criteria that the record '
                 'existed during a date range. The reference must have started before this date.'
             ),
         ] = None,
         referenced_ip_after: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'If filtering on a referenced_ip, include additional criteria that the record '
                 'existed during a date range. The reference must have existed after this date.'
             ),
         ] = None,
         has_dns_record_type: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter for assets that have this DNS record type, e.g. A, CNAME, MX.'),
         ] = None,
         dns_resolves: Annotated[
-            bool | None,
+            Optional[bool],
             Doc(
                 'Filter for assets that in the end resolve to a valid IP currently, either via '
                 'an A or CNAME. IP assets are included when filtering for assets that resolve.'
             ),
         ] = None,
         asn: Annotated[
-            int | None,
+            Optional[int],
             Doc(
                 'Filter for assets which either are, or point to, an IP address announced by '
                 'the provided ASN.'
             ),
         ] = None,
         cname_reference: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'Filter on a domain that is referenced by a CNAME record. Only makes sense for '
                 'domain asset types. Treated as a wildcard.'
             ),
         ] = None,
         geo_country_iso: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'Filter for assets which either are, or point to, an IP address located in the '
                 'provided ISO country code.'
             ),
         ] = None,
         ip_owner: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'Filter for assets which either are, or point to, an IP address owned by the '
                 'provided organization.'
             ),
         ] = None,
         whois_email: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter for assets where the WHOIS email address matches the provided value.'),
         ] = None,
         whois_email_current: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'Filter for assets where the WHOIS email address matches the provided value on '
                 'the current WHOIS record.'
             ),
         ] = None,
         open_port_number: Annotated[
-            int | None,
+            Optional[int],
             Doc('Filter for assets which have an open port with the provided number.'),
         ] = None,
         open_port_protocol: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter for assets which have an open port on the provided protocol.'),
         ] = None,
         open_port_service: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'Filter for assets which have an open port that appears to support the provided '
                 'protocol.'
             ),
         ] = None,
         open_port_technology: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter for assets which have a specific product listening on an open port.'),
         ] = None,
         technology_name: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter for the name of a technology found on the asset.'),
         ] = None,
         web_technology_name: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'Filter for the name of a technology specifically associated with web '
                 'resources, such as jQuery or Wordpress.'
             ),
         ] = None,
         certificate_issuer: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 "Filter where the certificate issuer's common name or organization matches the "
                 'provided value.'
             ),
         ] = None,
         certificate_expires_before: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter where the certificate expiration date is before the provided value.'),
         ] = None,
         certificate_expires_after: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter where the certificate expiration date is after the provided value.'),
         ] = None,
         certificate_issued_before: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter where the certificate issuance date is before the provided value.'),
         ] = None,
         certificate_issued_after: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter where the certificate issuance date is after the provided value.'),
         ] = None,
         certificate_subject: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter where certificate subject or organizationName matches the value.'),
         ] = None,
         certificate_subject_alt_name: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter where the certificate Subject Alternative Name matches the value.'),
         ] = None,
         certificate_sha256: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter where the certificate public key sha256 value matches the value.'),
         ] = None,
         certificate_covers_domain: Annotated[
-            str | None,
+            Optional[str],
             Doc(
                 'Filter where the certificate subject common name or SAN exactly matches or '
                 'wildcard-covers the provided value.'
             ),
         ] = None,
         waf_detected: Annotated[
-            bool | None,
+            Optional[bool],
             Doc('Filter for assets where a WAF is detected.'),
         ] = None,
         waf_name: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter for assets where a specific WAF is detected.'),
         ] = None,
         is_responsive: Annotated[
-            bool | None,
+            Optional[bool],
             Doc(
                 'Filter for assets that are either responsive or not responsive over ICMP and '
                 'port scanning.'
             ),
         ] = None,
         exposure_score_gte: Annotated[
-            int | None,
+            Optional[int],
             Field(ge=0, le=100),
             Doc('Filter for assets with exposure score greater than or equal to this value.'),
         ] = None,
         exposure_score_lte: Annotated[
-            int | None,
+            Optional[int],
             Field(ge=0, le=100),
             Doc('Filter for assets with exposure score less than or equal to this value.'),
         ] = None,
         exposure_severity: Annotated[
-            Literal['unknown', 'informational', 'moderate', 'critical'] | None,
+            Optional[Literal['unknown', 'informational', 'moderate', 'critical']],
             Doc(
                 'Filter for assets with an exposure severity matching or higher than the '
                 'provided value.'
             ),
         ] = None,
         exposure_id: Annotated[
-            str | None,
+            Optional[str],
             Doc('Filter for assets which have an exposure with the provided ASI Signature ID.'),
         ] = None,
         additional_fields: Annotated[
-            list[
-                Literal[
-                    'custom_tags',
-                    'dns_records',
-                    'whois',
-                    'ip_metadata',
-                    'open_tcp_ports',
-                    'open_udp_ports',
-                    'web_technologies',
-                    'certificates',
-                    'certificate_chain',
-                    'defenses',
-                    'exposures',
-                    'exposure_instance_details',
+            Optional[
+                list[
+                    Literal[
+                        'custom_tags',
+                        'dns_records',
+                        'whois',
+                        'ip_metadata',
+                        'open_tcp_ports',
+                        'open_udp_ports',
+                        'web_technologies',
+                        'certificates',
+                        'certificate_chain',
+                        'defenses',
+                        'exposures',
+                        'exposure_instance_details',
+                    ]
                 ]
-            ]
-            | None,
+            ],
             Doc(
                 'Additional fields to include in the response. May be specified multiple times '
                 'or as a comma-separated list in the raw API.'
             ),
         ] = None,
         max_results: Annotated[
-            int | None, Doc('Maximum number of assets to fetch')
+            Optional[int], Doc('Maximum number of assets to fetch')
         ] = DEFAULT_LIMIT,
-        assets_per_page: Annotated[int | None, Doc('Results per page')] = DEFAULT_LIMIT,
+        assets_per_page: Annotated[Optional[int], Doc('Results per page')] = DEFAULT_LIMIT,
     ) -> Annotated[AssetResponse, Doc('Response model for ASI assets list')]:
         """Fetch assets within an ASI project.
 
@@ -787,23 +790,24 @@ class AttackSurfaceMgr:
         project_id: Annotated[str, Doc('The ID of the ASI project to search assets within')],
         asset_id: Annotated[str, Doc('The asset ID to search for.')],
         additional_fields: Annotated[
-            list[
-                Literal[
-                    'custom_tags',
-                    'dns_records',
-                    'whois',
-                    'ip_metadata',
-                    'open_tcp_ports',
-                    'open_udp_ports',
-                    'web_technologies',
-                    'certificates',
-                    'certificate_chain',
-                    'defenses',
-                    'exposures',
-                    'exposure_instance_details',
+            Optional[
+                list[
+                    Literal[
+                        'custom_tags',
+                        'dns_records',
+                        'whois',
+                        'ip_metadata',
+                        'open_tcp_ports',
+                        'open_udp_ports',
+                        'web_technologies',
+                        'certificates',
+                        'certificate_chain',
+                        'defenses',
+                        'exposures',
+                        'exposure_instance_details',
+                    ]
                 ]
-            ]
-            | None,
+            ],
             Doc(
                 'Additional fields to include in the response. May be specified multiple times '
                 'or as a comma-separated list in the raw API.'

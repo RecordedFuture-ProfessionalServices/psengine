@@ -493,7 +493,7 @@ def test_prepare_headers_with_token(asi_client, mocker):
     headers = asi_client._prepare_headers()
 
     assert headers == {
-        'User-Agent': 'app_id/0.0.0 (Linux) SDK_ID',
+        'User-Agent': 'app_id unknown (Linux) SDK_ID platform_id unknown',
         'Content-Type': 'application/json',
         'accept': 'application/json',
         'apikey': 'a' * 32,
@@ -509,7 +509,7 @@ def test_prepare_headers_without_token_logs_warning(asi_client, mocker, caplog):
         headers = asi_client._prepare_headers()
 
     assert headers == {
-        'User-Agent': 'app_id/0.0.0 (Linux) SDK_ID',
+        'User-Agent': 'app_id unknown (Linux) SDK_ID platform_id unknown',
         'Content-Type': 'application/json',
         'accept': 'application/json',
     }

@@ -11,6 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from typing import Optional
 
 from pydantic.networks import IPvAnyAddress
 
@@ -23,8 +24,8 @@ class IncidentReportCredentials(RFBaseModel):
     email_or_login: str
     password: str
     password_sha1: str
-    domain_category: str | None = None
-    domain_technology: str | None = None
+    domain_category: Optional[str] = None
+    domain_technology: Optional[str] = None
     contains_high_risk_technologies: bool
     contains_cookies: bool
     contains_active_cookies: bool
@@ -32,6 +33,6 @@ class IncidentReportCredentials(RFBaseModel):
 
 class IncidentReportDetails(Compromise):
     malware_family: str
-    ip_address: IPvAnyAddress | None = None
-    postal_code: str | None = None
-    country: str | None = None
+    ip_address: Optional[IPvAnyAddress] = None
+    postal_code: Optional[str] = None
+    country: Optional[str] = None

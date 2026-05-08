@@ -21,7 +21,7 @@ PSEngine is a Python package that can be installed using `pip`. To install PSeng
 pip install psengine
 ```
 
-PSEngine officially supports Python >= 3.10, < 3.15.
+PSEngine officially supports Python >= 3.9, < 3.14.
 
 
 ## Supported Features & Best Practices
@@ -38,7 +38,6 @@ It can easily interact with the following Recorded Future datasets:
 - Fusion File management
 - Identity Exposures management
 - List management
-- Malware Intelligence (including Auto Yara and Auto Sigma)
 - Malware Sandbox reports download
 - On demand IOC enrichment
 - Risklists

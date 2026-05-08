@@ -6,7 +6,6 @@ from unittest import mock
 from unittest.mock import patch
 
 import pytest
-from freezegun import freeze_time
 from requests.exceptions import (
     ConnectionError,  # noqa: A004
     ConnectTimeout,
@@ -35,7 +34,7 @@ from tests.helpers.conftest import MOCK_DIR
 
 
 class Test_TimeHelpers:
-    @pytest.mark.parametrize('times', ['1h', '7D', '1m', '70M'])
+    @pytest.mark.parametrize('times', ['1h', '7D'])
     def test_rel_time_to_date(self, times):
         date = TimeHelpers.rel_time_to_date(times)
         match = bool(re.match(r'(^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$)', date))
@@ -60,8 +59,8 @@ class Test_TimeHelpers:
             ('30H', True),
             ('-300h', True),
             ('58H', True),
-            ('+1D', True),
-            ('+7d', True),
+            ('+1D', False),
+            ('+7d', False),
             ('1hour', False),
             ('1HOUR', False),
             ('tendays', False),
@@ -75,42 +74,6 @@ class Test_TimeHelpers:
     )
     def test_is_rel_time_valid(self, time, expected):
         assert TimeHelpers.is_rel_time_valid(time) is expected
-
-    def test_rel_time_to_date_start_time(self):
-        new_time = TimeHelpers.rel_time_to_date('1h', '2024-01-22 13:55:21')
-        assert new_time == '2024-01-22T12:55'
-
-    @pytest.mark.parametrize(
-        ('rel_time', 'start', 'expected'),
-        [
-            ('1h', '2022-12-31 00:00:00', '2022-12-30T23:00'),
-            ('-1h', '2022-12-31 00:00:00', '2022-12-30T23:00'),
-            ('+1h', '2022-12-31 23:00:00', '2023-01-01T00:00'),
-            ('+1d', '2023-12-31 23:20:00', '2024-01-01T23:20'),
-            ('+1m', '2023-12-31 23:20:00', '2023-12-31T23:21'),
-            ('1m', '2023-12-31 23:20:00', '2023-12-31T23:19'),
-        ],
-    )
-    def test_rel_time_to_date_start_time_operations(self, rel_time, start, expected):
-        new_time = TimeHelpers.rel_time_to_date(rel_time, start)
-        assert new_time == expected
-
-    @freeze_time('2026-01-01 12:00:00')
-    @pytest.mark.parametrize(
-        ('rel_time', 'expected'),
-        [
-            ('1h', '2026-01-01T11:00'),
-            ('-1h', '2026-01-01T11:00'),
-            ('+1h', '2026-01-01T13:00'),
-            ('+1d', '2026-01-02T12:00'),
-            ('+1m', '2026-01-01T12:01'),
-            ('1m', '2026-01-01T11:59'),
-            ('-1m', '2026-01-01T11:59'),
-        ],
-    )
-    def test_rel_time_to_date_operations(self, rel_time, expected):
-        new_time = TimeHelpers.rel_time_to_date(rel_time)
-        assert new_time == expected
 
     @pytest.mark.parametrize(
         ('time', 'error'),
@@ -129,7 +92,7 @@ class Test_TimeHelpers:
             with pytest.raises(
                 error,
                 match=re.escape(
-                    f"Invalid relative time '{time}'. Accepted format: [-|+]?[integer][h|d|m]"
+                    f"Invalid relative time '{time}'. Accepted format: [-|][integer][h|d]"
                 ),
             ):
                 TimeHelpers.rel_time_to_date(time)
@@ -168,7 +131,7 @@ class Test_TimeHelpers:
 
 class Test_OSHelper:
     def test_os_platform(self):
-        # Unfortunately, this will return a different value depending on the OS it runs on
+        # Unfortunatelly, this will return a different value depending on the OS it runs on
         # so can not be properly tested, hence we make sure it returns something
         os_info = OSHelpers.os_platform()
 

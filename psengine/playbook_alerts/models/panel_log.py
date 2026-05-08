@@ -12,8 +12,9 @@
 ##############################################################################################
 
 from datetime import datetime
+from typing import Optional
 
-from pydantic import Field, model_validator
+from pydantic import Field, HttpUrl, model_validator
 
 from ...common_models import IdOptionalNameType, RFBaseModel
 
@@ -43,8 +44,8 @@ class OldNewOptionalType(ChangeType):
 
     """
 
-    old: str | None = None
-    new: str | None = None
+    old: Optional[str] = None
+    new: Optional[str] = None
 
 
 class AddedRemovedTypeEntities(ChangeType):
@@ -54,13 +55,13 @@ class AddedRemovedTypeEntities(ChangeType):
     - `RelatedEntityChangeV2`
     """
 
-    removed: list[IdOptionalNameType] | None = []
-    added: list[IdOptionalNameType] | None = []
+    removed: Optional[list[IdOptionalNameType]] = []
+    added: Optional[list[IdOptionalNameType]] = []
 
 
 class AddedRemovedList(ChangeType):
-    removed: list[str] | None = []
-    added: list[str] | None = []
+    removed: Optional[list[str]] = []
+    added: Optional[list[str]] = []
 
 
 class CommentChange(ChangeType):
@@ -73,13 +74,13 @@ class Assignee(RFBaseModel):
 
 
 class AssigneeChange(ChangeType):
-    old: Assignee | None = None
-    new: Assignee | None = None
+    old: Optional[Assignee] = None
+    new: Optional[Assignee] = None
 
 
 class DnsRecord(RFBaseModel):
-    type_: str | None = Field(alias='type', default=None)
-    entity: IdOptionalNameType | None = None
+    type_: Optional[str] = Field(alias='type', default=None)
+    entity: Optional[IdOptionalNameType] = None
 
 
 class DomainAbuseDnsChange(ChangeType):
@@ -89,77 +90,77 @@ class DomainAbuseDnsChange(ChangeType):
 
 
 class WhoisRecord(RFBaseModel):
-    status: str | None = None
-    registrar_name: str | None = None
-    private_registration: bool | None = None
-    name_servers: list[str] | None = []
-    contact_email: str | None = None
-    created: datetime | None = None
+    status: Optional[str] = None
+    registrar_name: Optional[str] = None
+    private_registration: Optional[bool] = None
+    name_servers: Optional[list[str]] = []
+    contact_email: Optional[str] = None
+    created: Optional[datetime] = None
 
 
 class WhoisContactRecord(ChangeType):
-    telephone: str | None = None
-    street1: str | None = None
-    state: str | None = None
-    postal_code: str | None = None
-    organization: str | None = None
-    name: str | None = None
-    fax: str | None = None
-    email: str | None = None
-    country_code: str | None = None
-    country: str | None = None
-    city: str | None = None
-    created: datetime | None = None
+    telephone: Optional[str] = None
+    street1: Optional[str] = None
+    state: Optional[str] = None
+    postal_code: Optional[str] = None
+    organization: Optional[str] = None
+    name: Optional[str] = None
+    fax: Optional[str] = None
+    email: Optional[str] = None
+    country_code: Optional[str] = None
+    country: Optional[str] = None
+    city: Optional[str] = None
+    created: Optional[datetime] = None
 
 
 class DomainAbuseWhoisChange(ChangeType):
     domain: str
-    old_record: WhoisRecord | None = None
-    new_record: WhoisRecord | None = None
+    old_record: Optional[WhoisRecord] = None
+    new_record: Optional[WhoisRecord] = None
     removed_contacts: list[WhoisContactRecord]
     added_contacts: list[WhoisContactRecord]
 
 
 class LogotypeInScreenshot(RFBaseModel):
-    logotype_id: str | None = None
-    screenshot_id: str | None = None
-    url: str
+    logotype_id: Optional[str] = None
+    screenshot_id: Optional[str] = None
+    url: HttpUrl
 
 
 class DomainAbuseLogoTypeChange(ChangeType):
     domain: str
-    removed: list[LogotypeInScreenshot] | None = []
-    added: list[LogotypeInScreenshot] | None = []
+    removed: Optional[list[LogotypeInScreenshot]] = []
+    added: Optional[list[LogotypeInScreenshot]] = []
 
 
 class MaliciousAssessment(RFBaseModel):
     id_: str = Field(alias='id')
     level: int
-    title: str | None = None
+    title: Optional[str] = None
 
 
 class MaliciousDnsRecord(RFBaseModel):
-    id_: str | None = Field(alias='id', default=None)
+    id_: Optional[str] = Field(alias='id', default=None)
     assessments: list[MaliciousAssessment]
 
 
 class DomainAbuseMaliciousDnsChange(ChangeType):
     domain: str
-    removed: list[MaliciousDnsRecord] | None = []
-    added: list[MaliciousDnsRecord] | None = []
+    removed: Optional[list[MaliciousDnsRecord]] = []
+    added: Optional[list[MaliciousDnsRecord]] = []
 
 
 class ReregistrationRecord(RFBaseModel):
-    registrar: str | None = None
-    registrar_name: str | None = None
-    iana_id: int | None = None
-    expiration: datetime | None = None
+    registrar: Optional[str] = None
+    registrar_name: Optional[str] = None
+    iana_id: Optional[int] = None
+    expiration: Optional[datetime] = None
 
 
 class DomainAbuseReregistrationRecordChange(ChangeType):
     domain: str
-    removed: ReregistrationRecord | None = None
-    added: ReregistrationRecord | None = None
+    removed: Optional[ReregistrationRecord] = None
+    added: Optional[ReregistrationRecord] = None
 
 
 class Source(RFBaseModel):
@@ -172,24 +173,24 @@ class UrlAssessment(MaliciousAssessment):
 
 
 class MaliciousUrlRecord(RFBaseModel):
-    url: str | None = None
+    url: Optional[HttpUrl] = None
     assessments: list[UrlAssessment]
 
 
 class DomainAbuseMaliciousUrlChange(ChangeType):
     domain: str
-    removed: list[MaliciousUrlRecord] | None = []
-    added: list[MaliciousUrlRecord] | None = []
+    removed: Optional[list[MaliciousUrlRecord]] = []
+    added: Optional[list[MaliciousUrlRecord]] = []
 
 
 class MentionedEntity(RFBaseModel):
     entity: IdOptionalNameType
-    reference: str | None = None
-    fragment: str | None = None
+    reference: Optional[str] = None
+    fragment: Optional[str] = None
 
 
 class ScreenshotMention(RFBaseModel):
-    url: str
+    url: HttpUrl
     screenshot_id: str
     document: str
     analyzed: datetime
@@ -204,43 +205,43 @@ class DomainAbuseScreenshotMentions(ChangeType):
 class VulnerabilityAssessment(RFBaseModel):
     id_: str = Field(alias='id')
     level: int
-    title: str | None = None
+    title: Optional[str] = None
 
 
 class TriggeredRiskRule(RFBaseModel):
     id_: str = Field(alias='id')
-    name: str | None = None
-    description: str | None = None
-    evidence_string: str | None = None
-    machine_name: str | None = None
-    timestamp: datetime | None = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    evidence_string: Optional[str] = None
+    machine_name: Optional[str] = None
+    timestamp: Optional[datetime] = None
 
 
 class VulnerabilityLifecycleChange(ChangeType):
-    added: VulnerabilityAssessment | None = None
-    removed: VulnerabilityAssessment | None = None
-    triggered_by_risk_rule: TriggeredRiskRule | None = None
+    added: Optional[VulnerabilityAssessment] = None
+    removed: Optional[VulnerabilityAssessment] = None
+    triggered_by_risk_rule: Optional[TriggeredRiskRule] = None
 
 
 class Document(RFBaseModel):
     id_: str = Field(alias='id')
     content: str
     owner_id: str
-    owner_name: str | None = None
+    owner_name: Optional[str] = None
     published: datetime
 
 
 class WatchList(RFBaseModel):
     id_: str = Field(alias='id')
-    name: str | None = None
+    name: Optional[str] = None
 
 
 class RepoAssessment(RFBaseModel):
     id_: str = Field(alias='id')
     level: int
-    title: str | None = None
-    text_indicator: str | None = None
-    entity: IdOptionalNameType | None = None
+    title: Optional[str] = None
+    text_indicator: Optional[str] = None
+    entity: Optional[IdOptionalNameType] = None
 
 
 class CodeRepoLeakageEvidence(RFBaseModel):
@@ -256,14 +257,14 @@ class CodeRepoLeakageEvidenceChange(ChangeType):
 
 class TPRRiskEvidence(RFBaseModel):
     level: int
-    evidence_string: str | None = None
-    timestamp: datetime | None = None
+    evidence_string: Optional[str] = None
+    timestamp: Optional[datetime] = None
 
 
 class ThirdPartyAssessmentChange(ChangeType):
     risk_attribute: str
-    added: TPRRiskEvidence | None = None
-    removed: TPRRiskEvidence | None = None
+    added: Optional[TPRRiskEvidence] = None
+    removed: Optional[TPRRiskEvidence] = None
 
 
 class Assessment(RFBaseModel):
@@ -274,8 +275,8 @@ class Assessment(RFBaseModel):
 
 class AssessmentChange(ChangeType):
     risk_attribute: str
-    removed: Assessment | None = None
-    added: Assessment | None = None
+    removed: Optional[Assessment] = None
+    added: Optional[Assessment] = None
 
 
 TYPE_MAPPING = {
@@ -307,8 +308,8 @@ TYPE_MAPPING = {
 
 class PanelLogV2(RFBaseModel):
     id_: str = Field(alias='id')
-    author_id: str | None = None
-    author_name: str | None = None
+    author_id: Optional[str] = None
+    author_name: Optional[str] = None
     created: datetime
     changes: list
 

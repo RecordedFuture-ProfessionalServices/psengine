@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated
+from typing import Annotated, Optional, Union
 from urllib.parse import quote
 
 from pydantic import Field, validate_call
@@ -32,7 +32,7 @@ class EntityMatchMgr:
 
     def __init__(
         self,
-        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
+        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
     ):
         """Initialize the `EntityMatchMgr` object."""
         self.log = logging.getLogger(__name__)
@@ -45,7 +45,7 @@ class EntityMatchMgr:
         self,
         entity_name: Annotated[str, Doc('Name of the entity.')],
         entity_type: Annotated[
-            list | str | None, Doc('Type or list of types of the entity, if known.')
+            Optional[Union[list, str]], Doc('Type or list of types of the entity, if known.')
         ] = None,
         limit: Annotated[int, Doc('Maximum number of matches to return.')] = DEFAULT_LIMIT,
     ) -> Annotated[list[ResolvedEntity], Doc('List of deduplicated resolved entity matches.')]:
@@ -75,10 +75,10 @@ class EntityMatchMgr:
     def resolve_entity_id(
         self,
         entity_name: Annotated[str, Doc('Name of the entity.')],
-        entity_type: Annotated[str | None, Doc('Type of the entity, if known.')] = Field(
+        entity_type: Annotated[Optional[str], Doc('Type of the entity, if known.')] = Field(
             min_length=2, default=None
         ),
-        limit: Annotated[int | None, Doc('Number of matches to check.')] = DEFAULT_LIMIT,
+        limit: Annotated[Optional[int], Doc('Number of matches to check.')] = DEFAULT_LIMIT,
     ) -> Annotated[ResolvedEntity, Doc('Resolved entity match.')]:
         """Resolve an entity name (and optionally type) to an ID.
 
@@ -116,14 +116,14 @@ class EntityMatchMgr:
     def resolve_entity_ids(
         self,
         entities: Annotated[
-            list[str] | list[tuple[str, str]],
+            Union[list[str], list[tuple[str, str]]],
             Doc('List of entity names or (name, type) tuples.'),
         ],
         limit: Annotated[
-            int | None, Doc('Number of matches to return for each entity.')
+            Optional[int], Doc('Number of matches to return for each entity.')
         ] = DEFAULT_LIMIT,
         max_workers: Annotated[
-            int | None, Doc('Number of workers to multithread requests.')
+            Optional[int], Doc('Number of workers to multithread requests.')
         ] = DEFAULT_MAX_WORKERS,
     ) -> Annotated[list[ResolvedEntity], Doc('Resolved entities for the provided input list.')]:
         """Resolve a list of entities to their corresponding IDs.
@@ -179,7 +179,9 @@ class EntityMatchMgr:
     def lookup_bulk(
         self,
         ids: Annotated[list[str], Doc('List of Recorded Future IDs to look up.')],
-        max_workers: Annotated[int | None, Doc('Number of workers to multithread requests.')] = 0,
+        max_workers: Annotated[
+            Optional[int], Doc('Number of workers to multithread requests.')
+        ] = 0,
     ) -> Annotated[
         list[EntityLookup], Doc('List of EntityLookup objects containing entity details.')
     ]:
@@ -206,9 +208,11 @@ class EntityMatchMgr:
     def _bulk_resolution_helper(
         self,
         entity: Annotated[
-            tuple[str, str | None], Doc('Tuple containing entity name and optional type.')
+            tuple[str, Optional[str]], Doc('Tuple containing entity name and optional type.')
         ],
-        limit: Annotated[int | None, Doc('Limit of results to check for matches.')] = DEFAULT_LIMIT,
+        limit: Annotated[
+            Optional[int], Doc('Limit of results to check for matches.')
+        ] = DEFAULT_LIMIT,
     ) -> Annotated[ResolvedEntity, Doc('ResolvedEntity object.')]:
         """Helper function for multithreaded entity resolution."""
         return self.resolve_entity_id(entity[0], entity[1], limit)

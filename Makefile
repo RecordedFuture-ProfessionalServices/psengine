@@ -1,7 +1,7 @@
 FOLDERS=psengine tests docs
 
 help:
-	@echo "Available targets"
+	@echo "Available targets:"
 	@echo " test      - run pytest"
 	@echo " format    - run ruff format"
 	@echo " lint      - run ruff check --fix"

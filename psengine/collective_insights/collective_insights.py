@@ -13,7 +13,7 @@
 
 import json
 import logging
-from typing import Annotated
+from typing import Annotated, Optional, Union
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -46,19 +46,19 @@ class CollectiveInsights:
         ioc_type: Annotated[str, Doc('The type of the IOC.')],
         timestamp: Annotated[str, Doc('The timestamp associated with the detection as ISO 8601.')],
         detection_type: Annotated[str, Doc('The type of the detection.')],
-        detection_sub_type: Annotated[str | None, Doc('The subtype of the detection.')] = None,
-        detection_id: Annotated[str | None, Doc('The ID of the detection.')] = None,
-        detection_name: Annotated[str | None, Doc('The name of the detection.')] = None,
-        ioc_field: Annotated[str | None, Doc('The field in which the IOC was detected.')] = None,
-        ioc_source_type: Annotated[str | None, Doc('The source type of the IOC.')] = None,
-        incident_id: Annotated[str | None, Doc('The ID of the incident.')] = None,
-        incident_name: Annotated[str | None, Doc('The name of the incident.')] = None,
-        incident_type: Annotated[str | None, Doc('The type of the incident.')] = None,
+        detection_sub_type: Annotated[Optional[str], Doc('The subtype of the detection.')] = None,
+        detection_id: Annotated[Optional[str], Doc('The ID of the detection.')] = None,
+        detection_name: Annotated[Optional[str], Doc('The name of the detection.')] = None,
+        ioc_field: Annotated[Optional[str], Doc('The field in which the IOC was detected.')] = None,
+        ioc_source_type: Annotated[Optional[str], Doc('The source type of the IOC.')] = None,
+        incident_id: Annotated[Optional[str], Doc('The ID of the incident.')] = None,
+        incident_name: Annotated[Optional[str], Doc('The name of the incident.')] = None,
+        incident_type: Annotated[Optional[str], Doc('The type of the incident.')] = None,
         mitre_codes: Annotated[
-            list[str] | str | None, Doc('MITRE ATT&CK technique or tactic codes.')
+            Union[list[str], str, None], Doc('MITRE ATT&CK technique or tactic codes.')
         ] = None,
         malwares: Annotated[
-            list[str] | str | None, Doc('Associated malware family or names.')
+            Union[list[str], str, None], Doc('Associated malware family or names.')
         ] = None,
         **kwargs,
     ) -> Annotated[Insight, Doc('The created Insight object.')]:
@@ -105,12 +105,12 @@ class CollectiveInsights:
     def submit(
         self,
         insight: Annotated[
-            Insight | list[Insight], Doc('A detection or list of detections to submit.')
+            Union[Insight, list[Insight]], Doc('A detection or list of detections to submit.')
         ],
         debug: Annotated[
             bool, Doc('Whether the submission should appear in the SecOPS dashboard.')
         ] = True,
-        organization_ids: Annotated[list | None, Doc('List of organization IDs.')] = None,
+        organization_ids: Annotated[Optional[list], Doc('List of organization IDs.')] = None,
     ) -> Annotated[InsightsIn, Doc('Response from the Recorded Future API.')]:
         """Submit a detection or insight to the Recorded Future Collective Insights API.
 

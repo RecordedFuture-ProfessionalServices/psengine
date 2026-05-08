@@ -101,12 +101,12 @@ nav:
       - Entity Match: modules/entity_match.md
       - Fusion: modules/fusion.md
       - Identity: modules/identity.md
+      - Links: modules/links.md
       - Malware Intelligence: modules/malware_intel.md
       - Playbook Alerts: modules/playbook_alerts.md
       - Risk History: modules/risk_history.md
       - Risklists: modules/risklists.md
       - STIX2: modules/stix2.md
-      - Threat Maps: modules/threat_maps.md
       - Error Handling: modules/errors.md
       - Config: modules/config.md
       - Logger: modules/logger.md
@@ -191,17 +191,19 @@ nav:
           - ADT: api/identity/identity.md
           - Constants: api/identity/constants.md
           - Errors: api/identity/errors.md
+      - Links:
+          - Manager: api/links/links_mgr.md
+          - ADT: api/links/links_adt.md
+          - Models: api/links/links_models.md
+          - Errors: api/links/errors.md
       - Logger:
           - Logger: api/logger/rf_logger.md
           - Constants: api/logger/constants.md
           - Errors: api/logger/errors.md
       - Malware Intelligence:
           - Manager: api/malware_intel/malware_intel_mgr.md
-          - Auto Yara Manager: api/malware_intel/auto_yara_mgr.md
-          - Auto Sigma Manager: api/malware_intel/auto_sigma_mgr.md
           - ADT: api/malware_intel/malware_intel.md
           - Models: api/malware_intel/models.md
-          - Helpers: api/malware_intel/helpers.md
           - Errors: api/malware_intel/errors.md
       - Markdown:
           - Markdown: api/markdown/markdown.md
@@ -244,11 +246,6 @@ nav:
           - Helpers: api/stix2/helpers.md
           - Constants: api/stix2/constants.md
           - Errors: api/stix2/errors.md
-      - Threat Maps:
-          - Manager: api/threat_maps/threat_map_mgr.md
-          - ADT: api/threat_maps/threat_map.md
-          - Models: api/threat_maps/models.md
-          - Errors: api/threat_maps/errors.md
       - Client:
           - Client: api/client/rf_client.md
           - Base HTTP Client: api/client/base_client.md

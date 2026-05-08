@@ -12,6 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
+from typing import Optional
 
 from pydantic import Field
 
@@ -24,13 +25,13 @@ class ResolvedEntity(RFBaseModel):
 
 class PBAInsiktNote(RFBaseModel):
     id_: str = Field(alias='id')
-    title: str | None = None
-    published: datetime | None = None
-    topic: str | None = None
-    fragment: str | None = None
+    title: Optional[str] = None
+    published: Optional[datetime] = None
+    topic: Optional[str] = None
+    fragment: Optional[str] = None
 
 
 class AlertRule(RFBaseModel):
     id_: str = Field(alias='id')
     label: str
-    name: str | None = None
+    name: Optional[str] = None

@@ -13,6 +13,7 @@
 
 import contextlib
 from datetime import datetime
+from typing import Optional, Union
 
 from pydantic import model_validator
 
@@ -35,21 +36,21 @@ class OwnerOrganisationDetails(RFBaseModel):
 class PanelStatus(RFBaseModel):
     status: str
     priority: str
-    reopen: str | None = None
-    assignee_name: str | None = None
-    assignee_id: str | None = None
+    reopen: Optional[str] = None
+    assignee_name: Optional[str] = None
+    assignee_id: Optional[str] = None
     created: datetime
     updated: datetime
-    case_rule_id: str | None = None
-    case_rule_label: str | None = None
+    case_rule_id: Optional[str] = None
+    case_rule_label: Optional[str] = None
     alert_rule: AlertRule
-    creator_name: str | None = None
-    creator_id: str | None = None
-    owner_organisation_details: OwnerOrganisationDetails | None = None
-    entity_id: str | None = None
-    entity_name: str | None = None
+    creator_name: Optional[str] = None
+    creator_id: Optional[str] = None
+    owner_organisation_details: Optional[OwnerOrganisationDetails] = None
+    entity_id: Optional[str] = None
+    entity_name: Optional[str] = None
     actions_taken: list[str]
-    targets: list[ResolvedEntity | str] | None = []
+    targets: Optional[list[Union[ResolvedEntity, str]]] = []
 
     @model_validator(mode='before')
     @classmethod
@@ -62,10 +63,10 @@ class PanelStatus(RFBaseModel):
 
 
 class PanelAction(RFBaseModel):
-    action: str | None = None
-    updated: datetime | None = None
-    assignee_name: str | None = None
-    assignee_id: str | None = None
-    status: str | None = None
-    description: str | None = None
-    link: str | None = None
+    action: Optional[str] = None
+    updated: Optional[datetime] = None
+    assignee_name: Optional[str] = None
+    assignee_id: Optional[str] = None
+    status: Optional[str] = None
+    description: Optional[str] = None
+    link: Optional[str] = None

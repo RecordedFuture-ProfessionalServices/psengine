@@ -134,7 +134,7 @@ class Test_Logger:
             'level must be one of: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL',
         ),
         ('50', ValueError, 'level must be one of: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL'),
-        (['list'], TypeError, 'level must be a string or int'),
+        (['list'], TypeError, ''),
         (999, ValueError, 'level must be one of: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL'),
     ]
 

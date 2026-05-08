@@ -13,7 +13,7 @@
 
 from datetime import date, datetime
 from enum import Enum
-from typing import Any, Generic, Optional, TypeVar
+from typing import Any, Generic, Optional, TypeVar, Union
 
 from pydantic import Field
 
@@ -84,38 +84,38 @@ class ContainsFilter(RFBaseModel):
 
 
 class RangeFilter(RFBaseModel, Generic[FilterValueT]):
-    start: FilterValueT | None = None
-    end: FilterValueT | None = None
+    start: Optional[FilterValueT] = None
+    end: Optional[FilterValueT] = None
 
 
 class PaginationResponse(RFBaseModel):
-    next_cursor: str | None = None
-    limit: int | None = 50
-    total: int | None = None
-    sort: list[list[str]] | None = None
+    next_cursor: Optional[str] = None
+    limit: Optional[int] = 50
+    total: Optional[int] = None
+    sort: Optional[list[list[str]]] = None
 
 
 class ApiCount(RFBaseModel):
     returned: int
-    total: int | None = None
+    total: Optional[int] = None
 
 
 class ApiMeta(RFBaseModel):
-    counts: ApiCount | None = None
-    pagination: PaginationResponse | None = None
-    request_id: str | None = None
+    counts: Optional[ApiCount] = None
+    pagination: Optional[PaginationResponse] = None
+    request_id: Optional[str] = None
 
 
 class Pagination(RFBaseModel):
-    next_cursor: str | None = None
-    limit: int | None = 50
+    next_cursor: Optional[str] = None
+    limit: Optional[int] = 50
 
 
 class CertificateEntity(RFBaseModel):
-    common_name: str | None = None
-    organization_name: str | None = None
-    organizational_unit_name: str | None = None
-    country_name: str | None = None
+    common_name: Optional[str] = None
+    organization_name: Optional[str] = None
+    organizational_unit_name: Optional[str] = None
+    country_name: Optional[str] = None
 
 
 class Certificate(RFBaseModel):
@@ -123,36 +123,36 @@ class Certificate(RFBaseModel):
     issued_at: datetime
     sha256: str
     subject: CertificateEntity
-    subject_alt_names: list[str] | None = None
-    issuer: CertificateEntity | None = None
-    chain: list['Certificate'] | None = None
-    signature_algorithm: str | None = None
+    subject_alt_names: Optional[list[str]] = None
+    issuer: Optional[CertificateEntity] = None
+    chain: Optional[list['Certificate']] = None
+    signature_algorithm: Optional[str] = None
 
 
 class ExposureInstance(RFBaseModel):
     port_number: int
-    url: str | None = None
+    url: Optional[str] = None
 
 
 class VulnerabilityPublic(RFBaseModel):
     name: str
     slug: str
-    cvss_score: float | None = None
-    cvss_metrics: str | None = None
+    cvss_score: Optional[float] = None
+    cvss_metrics: Optional[str] = None
     references: list[str]
-    cve_id: str | None = None
-    cwe_ids: list[str | None] | None = None
-    epss_score: float | None = None
+    cve_id: Optional[str] = None
+    cwe_ids: Optional[list[Optional[str]]] = None
+    epss_score: Optional[float] = None
 
 
 class ExposureSignature(RFBaseModel):
     id_: str = Field(alias='id')
     name: str
-    description: str | None
-    severity: ExposureSeverity | None
-    references: list[str] | None
-    added_at: datetime | None = None
-    vulnerabilities: list[VulnerabilityPublic] | None = None
+    description: Optional[str]
+    severity: Optional[ExposureSeverity]
+    references: Optional[list[str]]
+    added_at: Optional[datetime] = None
+    vulnerabilities: Optional[list[VulnerabilityPublic]] = None
 
 
 class AssetExposure(RFBaseModel):
@@ -165,177 +165,181 @@ class AssetWithExposure(RFBaseModel):
     asset_id: str
     details: Any
     instances: list[ExposureInstance]
-    signature: ExposureSignature | None = None
+    signature: Optional[ExposureSignature] = None
 
 
 class Exposure(RFBaseModel):
     id_: str = Field(alias='id')
-    detection_id: str | None
+    detection_id: Optional[str]
     severity: ExposureSeverity
     instances: list[ExposureInstance]
-    supports_evidence: bool | None = None
+    supports_evidence: Optional[bool] = None
 
 
 class GeoLocation(RFBaseModel):
-    continent: str | None = None
-    country: str | None = None
-    city: str | None = None
-    country_iso: str | None = None
+    continent: Optional[str] = None
+    country: Optional[str] = None
+    city: Optional[str] = None
+    country_iso: Optional[str] = None
 
 
 class CertificatePropertiesFilter(RFBaseModel):
-    certificate_subject: ContainsFilter | EqFilter[str] | InFilter[str] | None = None
-    certificate_subject_alt_name: ContainsFilter | EqFilter[str] | InFilter[str] | None = None
-    certificate_sha256: EqFilter[str] | None = None
-    certificate_expires_at: RangeFilter[date] | None = None
-    certificate_issued_at: RangeFilter[date] | None = None
-    certificate_issuer: EqFilter[str] | InFilter[str] | None = None
-    certificate_covers_domain: ContainsFilter | EqFilter[str] | InFilter[str] | None = None
+    certificate_subject: Optional[Union[ContainsFilter, EqFilter[str], InFilter[str]]] = None
+    certificate_subject_alt_name: Optional[Union[ContainsFilter, EqFilter[str], InFilter[str]]] = (
+        None
+    )
+    certificate_sha256: Optional[EqFilter[str]] = None
+    certificate_expires_at: Optional[RangeFilter[date]] = None
+    certificate_issued_at: Optional[RangeFilter[date]] = None
+    certificate_issuer: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    certificate_covers_domain: Optional[Union[ContainsFilter, EqFilter[str], InFilter[str]]] = None
 
 
 class ExposurePropertiesFilter(RFBaseModel):
-    severity: EqFilter[ExposureSeverity] | InFilter[ExposureSeverity] | None = None
-    signature_id: EqFilter[str] | InFilter[str] | None = None
-    asset_exposure_score: RangeFilter[int] | None = None
-    last_scanned_at: RangeFilter[date] | None = None
+    severity: Optional[Union[EqFilter[ExposureSeverity], InFilter[ExposureSeverity]]] = None
+    signature_id: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    asset_exposure_score: Optional[RangeFilter[int]] = None
+    last_scanned_at: Optional[RangeFilter[date]] = None
 
 
 class IPMetadata(RFBaseModel):
-    as_number: int | None = None
-    owner_name: str | None = None
-    registry: str | None = None
-    owner_geo: GeoLocation | None = None
+    as_number: Optional[int] = None
+    owner_name: Optional[str] = None
+    registry: Optional[str] = None
+    owner_geo: Optional[GeoLocation] = None
 
 
 class AssetPropertiesFilter(RFBaseModel):
-    asset_id: EqFilter[str] | None = None
-    name: ContainsFilter | None = None
-    static_asset: EqFilter[bool] | None = None
-    apex: EqFilter[str] | InFilter[str] | None = None
-    added_to_project: RangeFilter[date] | None = None
-    discovered: RangeFilter[date] | None = None
-    asset_type: EqFilter[str] | None = None
-    referenced_ip: ContainsFilter | EqFilter[str] | InFilter[str] | None = None
-    cname_reference: ContainsFilter | EqFilter[str] | None = None
-    referenced_ip_at: RangeFilter[date] | None = None
-    valid_record_type: EqFilter[str] | InFilter[str] | NeqFilter[str] | None = None
-    dns_resolves: EqFilter[bool] | None = None
-    custom_tags: EqFilter[str] | InFilter[str] | RequireAllFilter[str] | None = None
-    custom_tags_strict: EqFilter[str] | InFilter[str] | RequireAllFilter[str] | None = None
-    asn: EqFilter[int] | InFilter[int] | None = None
-    ip_geo_country_iso: EqFilter[str] | InFilter[str] | None = None
-    ip_owner: EqFilter[str] | InFilter[str] | None = None
-    registry: EqFilter[str] | InFilter[str] | None = None
-    whois_email_current: EqFilter[str] | InFilter[str] | None = None
-    whois_email: EqFilter[str] | InFilter[str] | None = None
+    asset_id: Optional[EqFilter[str]] = None
+    name: Optional[ContainsFilter] = None
+    static_asset: Optional[EqFilter[bool]] = None
+    apex: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    added_to_project: Optional[RangeFilter[date]] = None
+    discovered: Optional[RangeFilter[date]] = None
+    asset_type: Optional[EqFilter[str]] = None
+    referenced_ip: Optional[Union[ContainsFilter, EqFilter[str], InFilter[str]]] = None
+    cname_reference: Optional[Union[ContainsFilter, EqFilter[str]]] = None
+    referenced_ip_at: Optional[RangeFilter[date]] = None
+    valid_record_type: Optional[Union[EqFilter[str], InFilter[str], NeqFilter[str]]] = None
+    dns_resolves: Optional[EqFilter[bool]] = None
+    custom_tags: Optional[Union[EqFilter[str], InFilter[str], RequireAllFilter[str]]] = None
+    custom_tags_strict: Optional[Union[EqFilter[str], InFilter[str], RequireAllFilter[str]]] = None
+    asn: Optional[Union[EqFilter[int], InFilter[int]]] = None
+    ip_geo_country_iso: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    ip_owner: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    registry: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    whois_email_current: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    whois_email: Optional[Union[EqFilter[str], InFilter[str]]] = None
 
 
 class TechnologyInstance(RFBaseModel):
     seen_at: datetime
     seen_port: int
-    seen_url: str | None = None
+    seen_url: Optional[str] = None
 
 
 class DefensiveControl(RFBaseModel):
     name: str
-    vendor: str | None = None
-    technology_type: str | None = None
-    version: str | None = None
-    instances: list[TechnologyInstance] | None = None
+    vendor: Optional[str] = None
+    technology_type: Optional[str] = None
+    version: Optional[str] = None
+    instances: Optional[list[TechnologyInstance]] = None
 
 
 class TechnologyPropertiesFilter(RFBaseModel):
-    open_port_number: EqFilter[int] | InFilter[int] | None = None
-    open_port_service: EqFilter[str] | InFilter[str] | None = None
-    open_port_protocol: EqFilter[str] | InFilter[str] | None = None
-    open_port_technology: EqFilter[str] | InFilter[str] | None = None
-    waf_detected: EqFilter[bool] | None = None
-    waf_name: EqFilter[str] | InFilter[str] | None = None
-    technology_name: EqFilter[str] | InFilter[str] | None = None
-    web_technology_name: EqFilter[str] | InFilter[str] | None = None
-    is_responsive: EqFilter[bool] | None = None
+    open_port_number: Optional[Union[EqFilter[int], InFilter[int]]] = None
+    open_port_service: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    open_port_protocol: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    open_port_technology: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    waf_detected: Optional[EqFilter[bool]] = None
+    waf_name: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    technology_name: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    web_technology_name: Optional[Union[EqFilter[str], InFilter[str]]] = None
+    is_responsive: Optional[EqFilter[bool]] = None
 
 
 class AssetSearchFilterIn(RFBaseModel):
-    asset_properties: AssetPropertiesFilter | None = None
-    certificate_properties: CertificatePropertiesFilter | None = None
-    exposure_properties: ExposurePropertiesFilter | None = None
-    technology_properties: TechnologyPropertiesFilter | None = None
-    quick_search: QuickSearchFilter | None = None
+    asset_properties: Optional[AssetPropertiesFilter] = None
+    certificate_properties: Optional[CertificatePropertiesFilter] = None
+    exposure_properties: Optional[ExposurePropertiesFilter] = None
+    technology_properties: Optional[TechnologyPropertiesFilter] = None
+    quick_search: Optional[QuickSearchFilter] = None
 
 
 class AssetSearchRequest(RFBaseModel):
-    filter_: AssetSearchFilterIn | None = Field(None, alias='filter')
-    pagination: Pagination | None = None
-    enrichments: list[AssetEnrichment] | None = None
-    sort: list[AssetSortField] | list[list[AssetSortField | SortDirection]] | None = None
+    filter_: Optional[AssetSearchFilterIn] = Field(None, alias='filter')
+    pagination: Optional[Pagination] = None
+    enrichments: Optional[list[AssetEnrichment]] = None
+    sort: Optional[
+        Union[list[AssetSortField], list[list[Union[AssetSortField, SortDirection]]]]
+    ] = None
 
 
 class TechnologyWithInstances(RFBaseModel):
     name: str
-    vendor: str | None = None
-    technology_type: str | None = None
-    version: str | None = None
-    instances: list[TechnologyInstance] | None = None
+    vendor: Optional[str] = None
+    technology_type: Optional[str] = None
+    version: Optional[str] = None
+    instances: Optional[list[TechnologyInstance]] = None
 
 
 class PortInstance(RFBaseModel):
     seen_ip: str
     seen_at: datetime
-    service: str | None = None
-    technology: TechnologyWithInstances | None = None
-    web_technologies: list[TechnologyWithInstances] | None = None
-    exposures: list[Exposure] | None = None
-    defenses: list[DefensiveControl] | None = None
+    service: Optional[str] = None
+    technology: Optional[TechnologyWithInstances] = None
+    web_technologies: Optional[list[TechnologyWithInstances]] = None
+    exposures: Optional[list[Exposure]] = None
+    defenses: Optional[list[DefensiveControl]] = None
 
 
 class Port(RFBaseModel):
     port: int
     protocol: str
-    instances: list[PortInstance] | None = None
-    certificate: Certificate | None = None
+    instances: Optional[list[PortInstance]] = None
+    certificate: Optional[Certificate] = None
 
 
 class CertificateInstance(RFBaseModel):
     certificate: Certificate
-    seen_ports: list[Port] | None = None
+    seen_ports: Optional[list[Port]] = None
 
 
 class ScannedIP(RFBaseModel):
     ip: str
-    last_scanned_at: datetime | None = None
+    last_scanned_at: Optional[datetime] = None
     whois: Optional['WHOISRecord'] = None
-    open_ports: list[Port] | None = None
-    metadata: IPMetadata | None = None
-    is_responsive: bool | None = None
+    open_ports: Optional[list[Port]] = None
+    metadata: Optional[IPMetadata] = None
+    is_responsive: Optional[bool] = None
 
 
 class WHOISContact(RFBaseModel):
-    email: str | None = None
-    name: str | None = None
-    organization: str | None = None
-    is_current: bool | None = True
+    email: Optional[str] = None
+    name: Optional[str] = None
+    organization: Optional[str] = None
+    is_current: Optional[bool] = True
 
 
 class WHOISRecord(RFBaseModel):
-    registrar: str | None = None
-    expires_at: datetime | None = None
-    updated_at: datetime | None = None
-    created_at: datetime | None = None
-    is_private: bool | None = None
-    is_from_parent: bool | None = False
-    contacts: list[WHOISContact] | None = None
-    name_servers: list[str] | None = None
+    registrar: Optional[str] = None
+    expires_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+    created_at: Optional[datetime] = None
+    is_private: Optional[bool] = None
+    is_from_parent: Optional[bool] = False
+    contacts: Optional[list[WHOISContact]] = None
+    name_servers: Optional[list[str]] = None
 
 
 class DNSValue(RFBaseModel):
     value: Any
-    last_resolved_at: datetime | None
-    seen_from: list[str] | None = None
-    first_seen_at: datetime | None = None
+    last_resolved_at: Optional[datetime]
+    seen_from: Optional[list[str]] = None
+    first_seen_at: Optional[datetime] = None
 
 
 class DNSRecord(RFBaseModel):
     record_type: str
-    value: list[DNSValue] | None
-    is_virtual: bool | None = False
+    value: Optional[list[DNSValue]]
+    is_virtual: Optional[bool] = False

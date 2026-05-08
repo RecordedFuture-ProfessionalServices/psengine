@@ -13,7 +13,7 @@
 
 import json
 import logging
-from typing import Annotated
+from typing import Annotated, Union
 
 from pydantic import validate_call
 from requests import (
@@ -51,10 +51,10 @@ class BaseHTTPClient:
         http_proxy: Annotated[str, Doc('An HTTP proxy URL.')] = None,
         https_proxy: Annotated[str, Doc('An HTTPS proxy URL.')] = None,
         verify: Annotated[
-            str | bool, Doc('An SSL verification flag or path to CA bundle.')
+            Union[str, bool], Doc('An SSL verification flag or path to CA bundle.')
         ] = SSL_VERIFY,
         auth: Annotated[tuple[str, str], Doc('Basic Auth credentials.')] = None,
-        cert: Annotated[str | tuple[str, str] | None, Doc('Client certificates.')] = None,
+        cert: Annotated[Union[str, tuple[str, str], None], Doc('Client certificates.')] = None,
         timeout: Annotated[int, Doc('A request timeout.')] = REQUEST_TIMEOUT,
         retries: Annotated[int, Doc('A number of retries.')] = RETRY_TOTAL,
         backoff_factor: Annotated[int, Doc('A backoff factor.')] = BACKOFF_FACTOR,
@@ -97,11 +97,11 @@ class BaseHTTPClient:
         self,
         method: Annotated[str, Doc('An HTTP method.')],
         url: Annotated[str, Doc('A URL to make the request to.')],
-        data: Annotated[dict | list[dict] | bytes | None, Doc('A request body.')] = None,
+        data: Annotated[Union[dict, list[dict], bytes, None], Doc('A request body.')] = None,
         *,
-        params: Annotated[dict | None, Doc('HTTP query parameters.')] = None,
+        params: Annotated[Union[dict, None], Doc('HTTP query parameters.')] = None,
         headers: Annotated[
-            dict | None,
+            Union[dict, None],
             Doc('If specified, overrides default headers and does not set the token.'),
         ] = None,
         **kwargs,
@@ -260,15 +260,14 @@ class BaseHTTPClient:
 
     def _get_user_agent_header(self):
         os_info = OSHelpers.os_platform()
-        app_id = self.config.app_id or 'app_id/0.0.0'
-        platform_id = self.config.platform_id
+        app_id = self.config.app_id or 'app_id unknown'
+        platform_id = self.config.platform_id or 'platform_id unknown'
         user_agent_list = []
 
         user_agent_list.append(app_id)
         if os_info is not None:
             user_agent_list.append(f'({os_info})')
         user_agent_list.append(SDK_ID)
-        if platform_id:
-            user_agent_list.append(platform_id)
+        user_agent_list.append(platform_id)
 
         return ' '.join(user_agent_list)

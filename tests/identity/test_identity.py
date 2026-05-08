@@ -135,7 +135,7 @@ class Test_Identity:
         search = search1 + search2
         search = set(search)
         assert len(search) == len(search1)
-        assert all(a == b for a, b in zip(search1, search2, strict=False))
+        assert all(a == b for a, b in zip(search1, search2))
         assert search1[0] > search1[1]
         assert (
             str(search1[0])

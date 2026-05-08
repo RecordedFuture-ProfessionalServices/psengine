@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v5
       - name: Check imports
         run: | 
           if matches=$(grep -RIn --line-number -E '^from[[:space:]]+psengine' psengine) ; then

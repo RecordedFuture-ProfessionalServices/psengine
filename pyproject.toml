@@ -1,9 +1,9 @@
 [project]
 name = "psengine"
-version = "2.7.0"
+version = "2.5.1"
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.10, <3.15"
+requires-python = ">=3.9, <3.14"
 description = "psengine is a simple, yet elegant, library for rapid development of integrations with Recorded Future."
 
 authors = [
@@ -19,112 +19,87 @@ classifiers=[
         "Intended Audience :: Developers",
         "Topic :: Security",
         "Topic :: Software Development :: Libraries",
+        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
-        "Programming Language :: Python :: 3.13",
-        "Programming Language :: Python :: 3.14"
+        "Programming Language :: Python :: 3.13"
 ]
 
-dependencies = [ 
-    "typing_extensions >= 4.8.0", 
+
+dependencies = [
+    "typing_extensions >= 4.8.0",
     "requests>=2.27.1",
-    "jsonpath_ng>=1.5.3, <=1.8.0",
+    "jsonpath_ng>=1.5.3, <=1.6.1",
     "stix2~=3.0.1",
     "python-dateutil>=2.7.0",
-    "more-itertools>=9.0.0, <=11.0.2",
+    "more-itertools>=9.0.0, <=10.2.0",
     "pydantic>=2.7, <3.0.0",
-    "pydantic-settings[toml]>=2.12.2,<2.14.1",
-    "markdown-strings==3.4.0"
+    "pydantic-settings[toml]>=2.5.2,<2.11.0",
+    "markdown-strings==3.4.0",
 ]
 
-
-
-[project.urls]
-Homepage = "https://recordedfuture-professionalservices.github.io/psengine/latest/"
-Changelog = "https://recordedfuture-professionalservices.github.io/psengine/latest/CHANGELOG/"
-
-[dependency-groups]
+[project.optional-dependencies]
 dev = [
-    "pytest==9.0.3",
-    "pytest-cov==7.1.0",
-    "pytest-mock==3.15.1",
+    "pytest==8.3.4",
+    "pytest-cov==6.0.0",
+    "pytest-mock==3.14.0",
     "pytest-md==0.2.0",
-    "pytest-random-order==1.2.0",
-    "pytest-httpdbg==0.10.2",
-    "ruff~=0.15.8",
-    "mimesis>=19.1.0",
-    "freezegun>=1.5.5",
+    "pytest-random-order==1.1.1",
+    "pytest-httpdbg==0.9.0",
+    "ruff~=0.11.0",
+    "mimesis>=12.1.0",
+    "build==1.3.0",
+    "wheel==0.45.1",
+    "setuptools==80.9.0",
 ]
 
 docs = [
-    "mike>=2.1.4,<2.3.0",
+    "ruff~=0.11.0",
+    "mike~=2.1.3",
     "mkdocs~=1.6.1",
-    "mkdocs-material>=9.6.18,<9.8.0",
+    "mkdocs-material~=9.6.18",
     "mkdocstrings[python]>=0.18",
-    "griffe-typingdoc>=0.2.8,<0.4.0",
+    "griffe-typingdoc~=0.2.8",
     "mkdocs-codeinclude-plugin~=0.2.1",
     "markdown-include~=0.8.1",
     "mkdocs-exclude~=1.0.2",
 
     # Tools for examples
-    "rich==15.0.0",
-    "logging-tree==1.10",
+    "rich",
+    "logging-tree",
 ]
 
 [build-system]
-requires = ["uv_build>=0.11.7,<0.12"]
-build-backend = "uv_build"
+requires = [
+    "setuptools>=80",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
 
-[tool.uv]
-default-groups = "all"
-exclude-newer = "7 days"
+[project.urls]
+Homepage = "https://recordedfuture-professionalservices.github.io/psengine/latest/"
+Changelog = "https://recordedfuture-professionalservices.github.io/psengine/latest/CHANGELOG/"
 
-[tool.uv.build-backend]
-module-root = ""
-module-name = "psengine"
-source-exclude = [
-    # Hidden directories
-    ".git/**",
-    ".github/**",
-    ".pytest_cache/**",
-    ".ruff_cache/**",
-    ".venv/**",
+[tool.setuptools]
+packages = [
+    "psengine",
+]
 
-    # Hidden files
-    ".coverage",
-    ".env",
-    ".gitignore",
-    ".python-version",
+[tool.setuptools.package-data]
+"*" = [
+    "**/*",
+]
+psengine = ["py.typed"]
 
-    # Build and test artifacts
-    "dist/**",
-    "build/**",
-    "htmlcov/**",
-    "*.egg-info/**",
+[tool.setuptools.exclude-package-data]
+"*" = [
+    "**/*.pyc",
+]
 
-    # Development/local files
-    "local/**",
-    "logs/**",
-    "docs/**",
-    "out/**",
-    "data/**",
-    "input/**",
-    "workdir/**",
-
-    # Tests
-    "tests/**",
-
-    # Release artifacts
-    "CHANGELOG.md",
-
-    # Lock and cache files
-    "__pycache__/**",
-    "uv.lock",
-    "*.pyc",
-    "*.pyo",
-    "*.log",
-    "*.log.*",
+[dependency-groups]
+dev = [
+    "pytest-mock>=3.14.0",
 ]
 
 

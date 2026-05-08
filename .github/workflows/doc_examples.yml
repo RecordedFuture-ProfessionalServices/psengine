@@ -14,8 +14,8 @@ jobs:
       RF_ASI_TOKEN: ${{ secrets.RF_ASI_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v6
-      - uses: astral-sh/setup-uv@v7
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
 
       - name: Install GNU parallel
         run: sudo apt-get update && sudo apt-get install -y parallel
@@ -25,7 +25,8 @@ jobs:
 
       - name: Set up venv
         run: |
-          uv sync --group docs --no-default-groups
+          uv venv -p ${{ vars.PYTHON_VERSION }}
+          uv pip install '.[docs]'
 
       - name: Run Examples
         shell: bash

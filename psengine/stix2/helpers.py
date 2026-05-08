@@ -11,7 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Annotated
+from typing import Annotated, Union
 
 from typing_extensions import Doc
 
@@ -41,7 +41,7 @@ def convert_entity(
     ] = False,
     **kwargs,
 ) -> Annotated[
-    IndicatorEntity | Identity | Malware | Vulnerability | TTP,
+    Union[IndicatorEntity, Identity, Malware, Vulnerability, TTP],
     Doc('An instance of a corresponding STIX2 entity based on the provided entity type.'),
 ]:
     """Convert an RF entity to STIX2.

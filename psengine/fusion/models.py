@@ -12,6 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
+from typing import Optional
 
 from pydantic import Field
 
@@ -22,12 +23,12 @@ class FileInfoOut(RFBaseModel):
     type_: str = Field(alias='type')
     name: str
     path: str
-    format: str | None = None
-    hash: str | None = None
-    created: datetime | None = None
-    size: int | None = None
-    flow: str | None = None
-    owner: str | None = None
+    format: Optional[str] = None
+    hash: Optional[str] = None
+    created: Optional[datetime] = None
+    size: Optional[int] = None
+    flow: Optional[str] = None
+    owner: Optional[str] = None
 
 
 class DirectoryListOut(RFBaseModel):
@@ -51,8 +52,8 @@ class FileDeleteOut(RFBaseModel):
 class FileHeadOut(RFBaseModel):
     path: str
     exists: bool
-    content_disposition: str | None = Field(alias='content-disposition', default=None)
-    content_length: int | None = Field(alias='Content-Length', default=None)
-    content_type: str | None = Field(alias='content-type', default=None)
-    etag: str | None = None
-    last_modified: str | None = Field(alias='last-modified', default=None)
+    content_disposition: Optional[str] = Field(alias='content-disposition', default=None)
+    content_length: Optional[int] = Field(alias='Content-Length', default=None)
+    content_type: Optional[str] = Field(alias='content-type', default=None)
+    etag: Optional[str] = None
+    last_modified: Optional[str] = Field(alias='last-modified', default=None)

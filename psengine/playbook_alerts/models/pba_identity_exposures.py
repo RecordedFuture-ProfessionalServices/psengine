@@ -12,6 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
+from typing import Optional
 
 from pydantic import Field, IPvAnyAddress
 
@@ -26,67 +27,67 @@ class Assessment(RFBaseModel):
 
 
 class PasswordDetails(RFBaseModel):
-    properties: list[str] | None = []
-    rank: list[str] | None = []
-    clear_text_value: str | None = None
-    clear_text_hint: str | None = None
+    properties: Optional[list[str]] = []
+    rank: Optional[list[str]] = []
+    clear_text_value: Optional[str] = None
+    clear_text_hint: Optional[str] = None
 
 
 class PasswordHash(RFBaseModel):
     algorithm: str
-    hash_: str | None = Field(alias='hash', default=None)
-    hash_prefix: str | None = None
+    hash_: Optional[str] = Field(alias='hash', default=None)
+    hash_prefix: Optional[str] = None
 
 
 class ExposedSecret(RFBaseModel):
     type_: str = Field(alias='type', default=None)
-    effectively_clear: bool | None = None
-    hashes: list[PasswordHash] | None = []
-    details: PasswordDetails | None = Field(default_factory=PasswordDetails)
+    effectively_clear: Optional[bool] = None
+    hashes: Optional[list[PasswordHash]] = []
+    details: Optional[PasswordDetails] = Field(default_factory=PasswordDetails)
 
 
 class Dump(RFBaseModel):
-    name: str | None = None
-    description: str | None = None
+    name: Optional[str] = None
+    description: Optional[str] = None
 
 
 class MalwareFamily(RFBaseModel):
     id_: str = Field(alias='id', default=None)
-    name: str | None = None
+    name: Optional[str] = None
 
 
 class Infrastructure(RFBaseModel):
-    ip: IPvAnyAddress | None = None
+    ip: Optional[IPvAnyAddress] = None
 
 
 class Technology(RFBaseModel):
     name: str
-    id_: str | None = Field(alias='id', default=None)
-    category: str | None = None
+    id_: Optional[str] = Field(alias='id', default=None)
+    category: Optional[str] = None
 
 
 class CompromisedHost(RFBaseModel):
-    exfiltration_date: datetime | None = None
-    os: str | None = None
-    os_username: str | None = None
-    malware_file: str | None = None
-    timezone: str | None = None
-    computer_name: str | None = None
-    uac: str | None = None
-    antivirus: list[str] | None = []
+    exfiltration_date: Optional[datetime] = None
+    os: Optional[str] = None
+    os_username: Optional[str] = None
+    malware_file: Optional[str] = None
+    timezone: Optional[str] = None
+    computer_name: Optional[str] = None
+    uac: Optional[str] = None
+    antivirus: Optional[list[str]] = []
 
 
 class IdentityPanelStatus(PanelStatus):
-    targets: list[ResolvedEntity] | None = []
+    targets: Optional[list[ResolvedEntity]] = []
 
 
 class IdentityPanelEvidence(RFBaseModel):
-    assessments: list[Assessment] | None = []
-    subject: str | None = None
-    exposed_secret: ExposedSecret | None = Field(default_factory=ExposedSecret)
-    dump: Dump | None = Field(default_factory=Dump)
-    authorization_url: str | None = None
-    compromised_host: CompromisedHost | None = Field(default_factory=CompromisedHost)
-    malware_family: MalwareFamily | None = Field(default_factory=MalwareFamily)
-    infrastructure: Infrastructure | None = Field(default_factory=Infrastructure)
-    technologies: list[Technology] | None = []
+    assessments: Optional[list[Assessment]] = []
+    subject: Optional[str] = None
+    exposed_secret: Optional[ExposedSecret] = Field(default_factory=ExposedSecret)
+    dump: Optional[Dump] = Field(default_factory=Dump)
+    authorization_url: Optional[str] = None
+    compromised_host: Optional[CompromisedHost] = Field(default_factory=CompromisedHost)
+    malware_family: Optional[MalwareFamily] = Field(default_factory=MalwareFamily)
+    infrastructure: Optional[Infrastructure] = Field(default_factory=Infrastructure)
+    technologies: Optional[list[Technology]] = []

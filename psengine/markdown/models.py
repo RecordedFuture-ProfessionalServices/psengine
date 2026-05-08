@@ -12,9 +12,11 @@
 ##############################################################################################
 
 
+from typing import Union
+
 from ..common_models import RFBaseModel
 
 
 class Section(RFBaseModel):
     title: str
-    content: list['Section'] | list[str]
+    content: Union[list['Section'], list[str]]

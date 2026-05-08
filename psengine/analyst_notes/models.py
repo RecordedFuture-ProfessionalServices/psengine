@@ -13,7 +13,7 @@
 
 import logging
 from datetime import datetime
-from typing import Annotated, Any
+from typing import Annotated, Any, Optional, Union
 
 from pydantic import BeforeValidator, Field, ValidationError, field_validator, model_validator
 
@@ -21,22 +21,18 @@ from ..common_models import IdNameType, IdNameTypeDescription, RFBaseModel
 from ..helpers import Validators
 
 
-class NoteEntity(IdNameTypeDescription):
-    is_threat_actor: bool | None = None
-
-
 class DiamondModel(RFBaseModel):
-    start: datetime | None = None
-    stop: datetime | None = None
-    malicious_infrastructure: list[NoteEntity] | None = []
-    capabilities: list[NoteEntity] | None = []
-    adversary: list[NoteEntity] | None = []
-    target: list[NoteEntity] | None = []
+    start: Optional[datetime] = None
+    stop: Optional[datetime] = None
+    malicious_infrastructure: Optional[list[IdNameTypeDescription]] = []
+    capabilities: Optional[list[IdNameTypeDescription]] = []
+    adversary: Optional[list[IdNameTypeDescription]] = []
+    target: Optional[list[IdNameTypeDescription]] = []
 
 
 class Query(RFBaseModel):
     title: str
-    url: NoteEntity | None = None
+    url: Optional[IdNameTypeDescription] = None
 
 
 class Position(RFBaseModel):
@@ -47,35 +43,35 @@ class Position(RFBaseModel):
 class PositionEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    location: list[NoteEntity] | None = []
-    event_positions: list[Position] | None = []
+    location: Optional[list[IdNameTypeDescription]] = []
+    event_positions: Optional[list[Position]] = []
 
 
 class CyberAttackEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    adversary: list[NoteEntity] | None = []
-    target: list[NoteEntity] | None = []
-    capabilities: list[NoteEntity] = []
-    malicious_infrastructure: list[NoteEntity] | None = []
-    operation: list[NoteEntity] | None = []
+    adversary: Optional[list[IdNameTypeDescription]] = []
+    target: Optional[list[IdNameTypeDescription]] = []
+    capabilities: list[IdNameTypeDescription] = []
+    malicious_infrastructure: Optional[list[IdNameTypeDescription]] = []
+    operation: Optional[list[IdNameTypeDescription]] = []
 
 
 class ArmedConflictEvent(PositionEvent):
-    attacker: list[NoteEntity] | None = []
-    target: list[NoteEntity] | None = []
+    attacker: Optional[list[IdNameTypeDescription]] = []
+    target: Optional[list[IdNameTypeDescription]] = []
 
 
 class ArmsPurchaseSaleEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    arms_seller: list[NoteEntity] | None = []
-    arms_purchaser: list[NoteEntity] | None = []
+    arms_seller: Optional[list[IdNameTypeDescription]] = []
+    arms_purchaser: Optional[list[IdNameTypeDescription]] = []
 
 
 class DiseaseOutbreakEvent(PositionEvent):
-    disease: list[NoteEntity] | None = []
-    facility: list[NoteEntity] | None = []
+    disease: Optional[list[IdNameTypeDescription]] = []
+    facility: Optional[list[IdNameTypeDescription]] = []
 
 
 class EnvironmentalIssueEvent(PositionEvent):
@@ -83,45 +79,45 @@ class EnvironmentalIssueEvent(PositionEvent):
 
 
 class ManMadeDisasterEvent(PositionEvent):
-    facility: list[NoteEntity]
-    manmade_disaster: list[NoteEntity] | list[str]
+    facility: list[IdNameTypeDescription]
+    manmade_disaster: Union[list[IdNameTypeDescription], list[str]]
 
 
 class MilitaryManeuverEvent(PositionEvent):
-    actors: list[NoteEntity] | None = []
+    actors: Optional[list[IdNameTypeDescription]] = []
 
 
 class NaturalDisasterEvent(PositionEvent):
-    natural_disaster: list[NoteEntity]
+    natural_disaster: list[IdNameTypeDescription]
 
 
 class NuclearMaterialTransactionEvent(PositionEvent):
     material: list[str]
-    location_origin: list[str] | None = []
-    location_destination: list[str] | None = []
+    location_origin: Optional[list[str]] = []
+    location_destination: Optional[list[str]] = []
 
 
 class PersonThreatEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    threatened: list[NoteEntity]
-    actor: list[NoteEntity] | None = []
+    threatened: list[IdNameTypeDescription]
+    actor: Optional[list[IdNameTypeDescription]] = []
 
 
 class ProtestEvent(RFBaseModel):
-    protest_target: list[NoteEntity] | None = []
+    protest_target: Optional[list[IdNameTypeDescription]] = []
 
 
 class MalwareAnalysisEvent(RFBaseModel):
     start: datetime
     stop: datetime
-    malware: list[NoteEntity]
-    attacker: list[NoteEntity] | None = []
-    malicious_infrastructure: list[NoteEntity] | None = []
-    ttp: list[NoteEntity] | None = []
-    target: list[NoteEntity] | None = []
-    exploit: list[NoteEntity] | None = []
-    hash_: list[NoteEntity] | None = Field(alias='hash', default=[])
+    malware: list[IdNameTypeDescription]
+    attacker: Optional[list[IdNameTypeDescription]] = []
+    malicious_infrastructure: Optional[list[IdNameTypeDescription]] = []
+    ttp: Optional[list[IdNameTypeDescription]] = []
+    target: Optional[list[IdNameTypeDescription]] = []
+    exploit: Optional[list[IdNameTypeDescription]] = []
+    hash_: Optional[list[IdNameTypeDescription]] = Field(alias='hash', default=[])
 
 
 ATTRIBUTES_MAPPING = {
@@ -147,8 +143,8 @@ ATTRIBUTES_MAPPING = {
 
 
 class NoteEvent(RFBaseModel):
-    type_: str | None = Field(alias='type', default=None)
-    attributes: Any | None = None
+    type_: Optional[str] = Field(alias='type', default=None)
+    attributes: Optional[Any] = None
 
     @model_validator(mode='before')
     @classmethod
@@ -179,17 +175,17 @@ class Attributes(RFBaseModel):
     title: str
     text: str
     published: datetime
-    attachment: str | None = None
-    events: list[NoteEvent] | None = []
-    validated_on: datetime | None = None
-    note_entities: list[NoteEntity] | None = []
-    context_entities: list[NoteEntity] | None = []
-    topic: list[NoteEntity] | NoteEntity | None = []
-    labels: list[NoteEntity] | None = []
-    validation_urls: list[NoteEntity] | None = []
-    diamond_model: list[DiamondModel] | None = []
-    recommended_queries: list[Query] | None = []
-    header_image: IdNameType | None = None
+    attachment: Optional[str] = None
+    events: Optional[list[NoteEvent]] = []
+    validated_on: Optional[datetime] = None
+    note_entities: Optional[list[IdNameTypeDescription]] = []
+    context_entities: Optional[list[IdNameTypeDescription]] = []
+    topic: Optional[Union[list[IdNameTypeDescription], IdNameTypeDescription]] = []
+    labels: Optional[list[IdNameTypeDescription]] = []
+    validation_urls: Optional[list[IdNameTypeDescription]] = []
+    diamond_model: Optional[list[DiamondModel]] = []
+    recommended_queries: Optional[list[Query]] = []
+    header_image: Optional[IdNameType] = None
 
     @field_validator('events', mode='after')
     @classmethod
@@ -201,24 +197,24 @@ class Attributes(RFBaseModel):
 class PreviewAttributesIn(RFBaseModel):
     title: str
     text: str
-    note_entities: list[str] | None = []
-    context_entities: list[str] | None = []
+    note_entities: Optional[list[str]] = []
+    context_entities: Optional[list[str]] = []
     topic: Annotated[
-        list[str] | str | None,
+        Union[list[str], str, None],
         BeforeValidator(Validators.convert_str_to_list),
     ] = []
-    labels: list[str] | None = []
-    validation_urls: list[str] | None = []
+    labels: Optional[list[str]] = []
+    validation_urls: Optional[list[str]] = []
 
 
 class PreviewAttributesOut(RFBaseModel):
     title: str
     text: str
-    note_entities: list[NoteEntity] | None = []
-    context_entities: list[NoteEntity] | None = []
-    topic: list[NoteEntity] | None = []
-    labels: list[NoteEntity] | None = []
-    validation_urls: list[NoteEntity] | None = []
+    note_entities: Optional[list[IdNameTypeDescription]] = []
+    context_entities: Optional[list[IdNameTypeDescription]] = []
+    topic: Optional[list[IdNameTypeDescription]] = []
+    labels: Optional[list[IdNameTypeDescription]] = []
+    validation_urls: Optional[list[IdNameTypeDescription]] = []
 
 
 class RequestAttachment(RFBaseModel):

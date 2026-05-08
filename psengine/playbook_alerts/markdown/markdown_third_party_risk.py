@@ -13,7 +13,7 @@
 
 import itertools
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
 
 from markdown_strings import bold, unordered_list
 
@@ -76,7 +76,7 @@ def _format_ip_rule_type(
     *,
     pba: 'PBA_ThirdPartyRisk',
     html_tags: bool,
-    extra_context: list[MDEnrichedIps] | list[AnalystNote],
+    extra_context: Union[list[MDEnrichedIps], list[AnalystNote]],
     **kwargs,  # noqa: ARG001
 ) -> str:
     """Format assessment with ip_rule type. Enrich IPs with risk score."""
@@ -112,7 +112,7 @@ def _format_hosts_communication_type(
     assessment: TPRAssessment,
     *,
     pba: 'PBA_ThirdPartyRisk',
-    extra_context: list[AnalystNote] | list[MDEnrichedIps],
+    extra_context: Union[list[AnalystNote], list[MDEnrichedIps]],
     html_tags: bool,
     **kwargs,  # noqa: ARG001
 ) -> str:
@@ -238,7 +238,7 @@ def _add_assessments(
     pba: 'PBA_ThirdPartyRisk',
     md_maker: MarkdownMaker,
     html_tags: bool,
-    extra_context: list[AnalystNote] | list[MDEnrichedIps],
+    extra_context: Union[list[AnalystNote], list[MDEnrichedIps]],
 ) -> None:
     results = []
     err = '\nAssessments unavailable. Consult the Recorded Future Portal.\n\n'
@@ -284,7 +284,7 @@ def _third_party_risk_markdown(
     pba: 'PBA_ThirdPartyRisk',
     md_maker: MarkdownMaker,
     html_tags: bool,
-    extra_context: list[EnrichmentData] | list[AnalystNote] | list[SOAREnrichOut],
+    extra_context: Union[list[EnrichmentData], list[AnalystNote], list[SOAREnrichOut]],
 ) -> str:  # noqa: ARG001
     if extra_context is None:
         extra_context = []

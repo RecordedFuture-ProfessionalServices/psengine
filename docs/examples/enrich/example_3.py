@@ -23,7 +23,5 @@ enriched_ips = mgr.soar(ip=ips_to_enrich)
 with enriched_file.open('w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(['ip', 'score'])
-    for ip, enriched in zip(
-        ips_to_enrich, enriched_ips, strict=False
-    ):
+    for ip, enriched in zip(ips_to_enrich, enriched_ips):
         writer.writerow([ip, enriched.content.risk.score])

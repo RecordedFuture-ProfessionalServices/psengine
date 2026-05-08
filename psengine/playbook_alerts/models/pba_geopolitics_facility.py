@@ -12,6 +12,7 @@
 ##############################################################################################
 
 from datetime import datetime
+from typing import Optional
 
 from pydantic import Field
 
@@ -31,7 +32,7 @@ class Event(RFBaseModel):
     assessments: list[Assessment] = []
     document_id: str = None
     time: datetime = None
-    images: list[str] | None = []
+    images: Optional[list[str]] = []
 
 
 class GeopolPanelEvidence(RFBaseModel):
@@ -65,8 +66,8 @@ class GeopolPanelOverview(RFBaseModel):
 
 
 class GeopolPanelStatus(PanelStatus):
-    risk_score: int | None = None
-    entity_criticality: str | None = None
+    risk_score: Optional[int] = None
+    entity_criticality: Optional[str] = None
 
 
 class GeopolEvent(RFBaseModel):
@@ -77,7 +78,7 @@ class GeopolEvent(RFBaseModel):
     document_id: str = None
     time: datetime = None
     assessments: list[Assessment] = []
-    images: list[str] | None = None
+    images: Optional[list[str]] = None
 
 
 class GeopolPanelEvents(RFBaseModel):

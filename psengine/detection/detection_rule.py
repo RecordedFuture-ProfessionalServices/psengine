@@ -13,6 +13,7 @@
 
 from datetime import datetime
 from functools import total_ordering
+from typing import Optional
 
 from pydantic import Field
 
@@ -79,7 +80,7 @@ class DetectionRule(RFBaseModel):
 class DetectionRuleSearchOut(RFBaseModel):
     """Model to validate `/search` endpoint payload sent."""
 
-    filter_: SearchFilter | None = Field(alias='filter', default={})
-    tagged_entities: bool | None = False
-    limit: int | None = None
-    offset: str | None = None
+    filter_: Optional[SearchFilter] = Field(alias='filter', default={})
+    tagged_entities: Optional[bool] = False
+    limit: Optional[int] = None
+    offset: Optional[str] = None

@@ -12,8 +12,8 @@
 ##############################################################################################
 
 import logging
+import logging.config
 import sys
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from typing import Annotated
 
@@ -101,7 +101,7 @@ class RFLogger:
     def _create_file_handler(self, output):
         log_filename = self._setup_output(output)
 
-        file_handler = RotatingFileHandler(
+        file_handler = logging.handlers.RotatingFileHandler(
             log_filename,
             maxBytes=MAX_BYTES,
             backupCount=BACKUP_COUNT,
