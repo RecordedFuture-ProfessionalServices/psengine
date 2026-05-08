@@ -34,7 +34,7 @@
 
 ### Fixed
 
-- `PlaybookAlertMgr.fetch_bulk()` now correctly respects the `alerts_per_page` parameter for bulk lookup batching instead of using a hardcoded internal constant.
+-`PlaybookAlertMgr.fetch_bulk()` now correctly respects the `alerts_per_page` parameter for bulk lookup batching instead of using a hardcoded internal constant.
 - `PBA_GeopoliticsFacility` event `url` field no longer fails validation when the URL format does not conform to strict HTTP URL requirements.
 
 

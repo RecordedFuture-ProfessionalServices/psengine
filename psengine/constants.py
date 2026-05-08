@@ -1,5 +1,4 @@
-##################################### TERMS OF USE
-# ###########################################
+##################################### TERMS OF USE ###########################################
 # The following code is provided for demonstration purpose only, and should not be used      #
 # without independent verification. Recorded Future makes no representations or warranties,  #
 # express, implied, statutory, or otherwise, regarding any aspect of this code or of the     #

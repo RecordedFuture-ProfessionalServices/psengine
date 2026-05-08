@@ -17,8 +17,6 @@ from typing import Annotated, Optional
 from pydantic import validate_call
 from typing_extensions import Doc
 
-from psengine import RFClient
-
 from ..common_models import IdName
 from ..endpoints import (
     EP_LINKS_METADATA_ENTITIES,
@@ -27,6 +25,7 @@ from ..endpoints import (
     EP_LINKS_SEARCH,
 )
 from ..helpers import connection_exceptions, debug_call
+from ..rf_client import RFClient
 from .errors import LinksMetadataError, LinksSearchError
 from .links import LinksFilterObjects, LinksLimitsObjects, LinksSearchIn, LinksSearchResponse
 from .models import (
