@@ -185,11 +185,6 @@ class SandboxClient(BaseHTTPClient):
         prev_offset = None
 
         while offset and len(all_results) < max_results:
-            # Defensive: a server that re-emits the same `next` would loop us forever.
-            if offset == prev_offset:
-                self.log.debug(f'Paged request returned a repeated offset {offset!r}; stopping.')
-                break
-
             params['offset'] = offset
             params['limit'] = min(results_per_page, max_results - len(all_results))
             response = self.request(
