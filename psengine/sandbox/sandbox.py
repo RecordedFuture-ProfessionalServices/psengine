@@ -12,11 +12,16 @@
 ##############################################################################################
 
 from datetime import datetime
+from pathlib import Path
+from typing import Literal
 
-from pydantic import ConfigDict, Field, field_validator
+from pydantic import ConfigDict, Field, field_validator, model_validator
 
 from ..common_models import RFBaseModel
 from .models.analysis import Meta, Task
+
+SubmitKind = Literal['file', 'url', 'fetch', 'import']
+NetworkMode = Literal['internet', 'drop', 'tor', 'vpn', 'sim200', 'sim404', 'simnx']
 
 # TODO: remove ConfigDict
 
@@ -108,15 +113,131 @@ class SearchIn(RFBaseModel):
 
 
 class SearchResult(RFBaseModel):
-    model_config = ConfigDict(extra='forbid')
+    """Sample record returned by `/search`.
+
+    Common shape across the sample-listing endpoints. `fetch_sample()` returns
+    the richer `SampleOut` subclass.
+    """
+
     id_: str = Field(alias='id')
     status: str
     kind: str
     filename: str | None = None
     submitted: datetime
-    completed: datetime
+    completed: datetime | None = None
     sha256: str | None = None
     url: str | None = None
+    user_id: str
+
+
+class SampleOut(SearchResult):
+    """Sample record returned by `GET /samples/{sample_id}`."""
+
+    tasks: list[dict] | None = None
+
+
+class DeleteOut(RFBaseModel):
+    """Result of a `DELETE /samples/{sample_id}` call.
+
+    The Sandbox API returns an empty body on success; the manager constructs this
+    model with `deleted=True` when the HTTP request succeeds.
+    """
+
+    deleted: bool
+
+
+class SubmitSampleIn(RFBaseModel):
+    """Validated payload for `POST /samples`.
+
+    Flat fields collected from the public `submit_sample` kwargs. `@model_validator`
+    enforces required-per-kind and the geolocation-needs-vpn rule. `to_api_payload()`
+    produces the `_json` dict (with nested `defaults`) and the file path (if any)
+    for multipart upload.
+    """
+
+    kind: SubmitKind
+    file_path: Path | None = None
+    url: str | None = None
+    source_id: str | None = None
+    interactive: bool | None = None
+    password: str | None = None
+    profiles: list[dict] | None = None
+    user_tags: list[str] | None = None
+    timeout: int | None = Field(default=None, ge=1, le=3600)
+    network: NetworkMode | None = None
+    geolocation: str | None = None
+
+    @model_validator(mode='after')
+    def _check_required_per_kind(self):
+        if self.kind == 'file' and self.file_path is None:
+            raise ValueError("kind='file' requires `file_path`")
+        if self.kind in ('url', 'fetch') and not self.url:
+            raise ValueError(f'kind={self.kind!r} requires `url`')
+        if self.kind == 'import' and not self.source_id:
+            raise ValueError("kind='import' requires `source_id`")
+        if self.kind != 'file' and self.file_path is not None:
+            raise ValueError(f"`file_path` only valid when kind='file' (got kind={self.kind!r})")
+        if self.kind not in ('url', 'fetch') and self.url is not None:
+            raise ValueError(
+                f"`url` only valid when kind in {{'url','fetch'}} (got kind={self.kind!r})"
+            )
+        if self.kind != 'import' and self.source_id is not None:
+            raise ValueError(f"`source_id` only valid when kind='import' (got kind={self.kind!r})")
+        return self
+
+    @model_validator(mode='after')
+    def _check_geolocation_needs_vpn(self):
+        if self.geolocation is not None and self.network != 'vpn':
+            raise ValueError("`geolocation` requires `network='vpn'`")
+        return self
+
+    @model_validator(mode='after')
+    def _check_file_path_exists(self):
+        if self.file_path is not None and not self.file_path.is_file():
+            raise ValueError(f'`file_path` does not point to an existing file: {self.file_path}')
+        return self
+
+    def to_api_payload(self) -> tuple[dict, Path | None]:
+        """Build the multipart payload for `POST /samples`.
+
+        Despite what the API docs' curl examples suggest, the `url` field for
+        kind in {'url','fetch'} must be carried *inside* the `_json` body, not
+        as a separate multipart form field. The only top-level multipart field
+        besides `_json` is the `file` binary for kind='file'.
+
+        Returns:
+            - `json_body`: dict to JSON-encode under the `_json` multipart field.
+            - `file_path`: path to upload as the `file` field for kind='file',
+              else None.
+        """
+        body: dict = {'kind': self.kind}
+        if self.kind in ('url', 'fetch'):
+            body['url'] = self.url
+        # For kind='import' the public Triage reference (URL or bare sample id)
+        # is carried in the same `url` field as url/fetch. We keep `source_id`
+        # as the public-facing param name because it's semantically clearer.
+        if self.kind == 'import':
+            body['url'] = self.source_id
+        if self.interactive is not None:
+            body['interactive'] = self.interactive
+        if self.password is not None:
+            body['password'] = self.password
+        if self.profiles is not None:
+            body['profiles'] = self.profiles
+        if self.user_tags is not None:
+            body['user_tags'] = self.user_tags
+
+        defaults: dict = {}
+        if self.timeout is not None:
+            defaults['timeout'] = self.timeout
+        if self.network is not None:
+            defaults['network'] = self.network
+        if self.geolocation is not None:
+            defaults['geolocation'] = self.geolocation
+        if defaults:
+            body['defaults'] = defaults
+
+        return body, self.file_path
 
 
 class SandboxUser(RFBaseModel):

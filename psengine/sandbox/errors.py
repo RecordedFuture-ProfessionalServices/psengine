@@ -11,5 +11,16 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from .sandbox import DeleteOut, SampleOut, SearchResult
-from .sandbox_mgr import SandboxMgr
+from ..errors import RecordedFutureError
+
+
+class SampleFetchError(RecordedFutureError):
+    """Raised when a sample lookup against `/samples/{id}` fails."""
+
+
+class SampleDeleteError(RecordedFutureError):
+    """Raised when a sample delete against `/samples/{id}` fails."""
+
+
+class SampleSubmitError(RecordedFutureError):
+    """Raised when a sample submission against `/samples` fails."""
