@@ -24,10 +24,6 @@ from ..endpoints import (
     EP_SANDBOX_SAMPLES_ID,
     EP_SANDBOX_SAMPLES_SUMMARY,
     EP_SANDBOX_SEARCH,
-    EP_SANDBOX_USERS,
-    EP_SANDBOX_USERS_APIKEYS,
-    EP_SANDBOX_USERS_APIKEYS_NAME,
-    EP_SANDBOX_USERS_ID,
     SANDBOX_BASE_URLS,
 )
 from ..helpers import connection_exceptions, debug_call
@@ -111,91 +107,6 @@ class SandboxMgr:
             'get', endpoint, params=params.model_dump(), max_samples=max_results
         )
         return [SearchResult.model_validate(e) for e in data]
-
-    @debug_call
-    @validate_call
-    def fetch_all_users(
-        self,
-    ) -> Annotated[list[dict], Doc('List of company users.')]:
-        """Fetch and return company users from `GET /users`."""
-        endpoint = EP_SANDBOX_USERS.format(base_url=self.base_url)
-        print(f'fetch_all_users [GET]: {endpoint}')
-        response = self.sb_client.request('get', endpoint)
-        payload = response.json()
-
-        return payload
-
-    @debug_call
-    @validate_call
-    def create_user(
-        self,
-    ) -> Annotated[str, Doc('POST /users endpoint URL.')]:
-        """Return and print the URL for creating a user (POST /users)."""
-        endpoint = EP_SANDBOX_USERS.format(base_url=self.base_url)
-        print(f'create_user [POST]: {endpoint}')
-        return endpoint
-
-    @debug_call
-    @validate_call
-    def fetch_user(
-        self,
-        user_id: Annotated[str, Field(min_length=1), Doc('Sandbox user identifier.')],
-    ) -> Annotated[str, Doc('Resolved endpoint URL for fetching or deleting a user.')]:
-        """Return and print the URL for getting a user (GET /users/{userID})."""
-        endpoint = EP_SANDBOX_USERS_ID.format(base_url=self.base_url, user_id=user_id)
-        print(f'fetch_user [GET]: {endpoint}')
-        return endpoint
-
-    @debug_call
-    @validate_call
-    def delete_user(
-        self,
-        user_id: Annotated[
-            str,
-            Field(min_length=1),
-            Doc('User ID, username, or email supported by the endpoint.'),
-        ],
-    ) -> Annotated[str, Doc('DELETE /users/{userID} endpoint URL.')]:
-        """Return and print the URL for deleting a user (DELETE /users/{userID})."""
-        endpoint = EP_SANDBOX_USERS_ID.format(base_url=self.base_url, user_id=user_id)
-        print(f'delete_user [DELETE]: {endpoint}')
-        return endpoint
-
-    @debug_call
-    @validate_call
-    def fetch_user_apikeys(
-        self,
-        user_id: Annotated[str, Field(min_length=1), Doc('Sandbox user identifier.')],
-    ) -> Annotated[str, Doc('Resolved endpoint URL for listing or creating user API keys.')]:
-        """Return and print the URL for listing user API keys (GET /users/{userID}/apikeys)."""
-        endpoint = EP_SANDBOX_USERS_APIKEYS.format(base_url=self.base_url, user_id=user_id)
-        print(f'fetch_user_apikeys [GET]: {endpoint}')
-        return endpoint
-
-    @debug_call
-    @validate_call
-    def create_user_apikey(
-        self,
-        user_id: Annotated[str, Field(min_length=1), Doc('Sandbox user identifier.')],
-    ) -> Annotated[str, Doc('Resolved endpoint URL for listing or creating user API keys.')]:
-        """Return and print the URL for creating a user API key (POST /users/{userID}/apikeys)."""
-        endpoint = EP_SANDBOX_USERS_APIKEYS.format(base_url=self.base_url, user_id=user_id)
-        print(f'create_user_apikey [POST]: {endpoint}')
-        return endpoint
-
-    @debug_call
-    @validate_call
-    def delete_user_apikey(
-        self,
-        user_id: Annotated[str, Field(min_length=1), Doc('Sandbox user identifier.')],
-        name: Annotated[str, Field(min_length=1), Doc('API key name.')],
-    ) -> Annotated[str, Doc('Resolved endpoint URL for deleting a specific user API key.')]:
-        """Return and print the URL for deleting a user API key (DELETE /users/{userID}/apikeys/{name})."""
-        endpoint = EP_SANDBOX_USERS_APIKEYS_NAME.format(
-            base_url=self.base_url, user_id=user_id, name=name
-        )
-        print(f'delete_user_apikey [DELETE]: {endpoint}')
-        return endpoint
 
     @debug_call
     @validate_call

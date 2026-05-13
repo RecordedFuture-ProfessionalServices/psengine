@@ -183,25 +183,3 @@ EP_SANDBOX_SAMPLES_MAGIC = '{base_url}/samples/{sample_id}/magic'
 
 # Sandbox Search Endpoints
 EP_SANDBOX_SEARCH = '{base_url}/search'
-
-# Sandbox Profile Endpoints
-EP_SANDBOX_PROFILES = '{base_url}/profiles'
-EP_SANDBOX_PROFILES_ID = '{base_url}/profiles/{profile_id}'
-
-# Sandbox Resources and Geolocations Endpoints
-EP_SANDBOX_RESOURCES = '{base_url}/resources'
-EP_SANDBOX_GEOLOCATIONS = '{base_url}/geolocations'
-
-# Sandbox YARA Endpoints
-EP_SANDBOX_YARA = '{base_url}/yara'
-EP_SANDBOX_YARA_NAME = '{base_url}/yara/{name}'
-
-# Sandbox User Management Endpoints
-EP_SANDBOX_USERS = '{base_url}/users'
-EP_SANDBOX_USERS_ID = '{base_url}/users/{user_id}'
-EP_SANDBOX_USERS_APIKEYS = '{base_url}/users/{user_id}/apikeys'
-EP_SANDBOX_USERS_APIKEYS_NAME = '{base_url}/users/{user_id}/apikeys/{name}'
-
-# Sandbox Organisation Settings Endpoints
-EP_SANDBOX_ORG_SETTINGS = '{base_url}/org/settings'
-EP_SANDBOX_ORG_SETTINGS_MAGIC = '{base_url}/org/settings/magic'
