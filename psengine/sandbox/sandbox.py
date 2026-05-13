@@ -146,6 +146,26 @@ class DeleteOut(RFBaseModel):
     deleted: bool
 
 
+class Profile(RFBaseModel):
+    """Analysis profile record returned by `GET /profiles`."""
+
+    id_: str = Field(alias='id')
+    name: str
+    tags: list[str] = Field(default_factory=list)
+    network: NetworkMode | None = None
+    geolocation: list[str] = Field(default_factory=list)
+    timeout: int | None = None
+    options: dict | None = None
+
+    @field_validator('geolocation', mode='before')
+    @classmethod
+    def _none_to_empty_list(cls, v):
+        # API returns either `null` or `[]` for unset geolocation; both normalise to [].
+        if v is None:
+            return []
+        return v
+
+
 class SubmitSampleIn(RFBaseModel):
     """Validated payload for `POST /samples`.
 

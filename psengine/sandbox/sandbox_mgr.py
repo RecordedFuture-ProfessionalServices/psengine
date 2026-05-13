@@ -20,6 +20,7 @@ from pydantic import Field, validate_call
 from typing_extensions import Doc
 
 from ..endpoints import (
+    EP_SANDBOX_PROFILES,
     EP_SANDBOX_SAMPLES,
     EP_SANDBOX_SAMPLES_ID,
     EP_SANDBOX_SAMPLES_SUMMARY,
@@ -29,16 +30,22 @@ from ..endpoints import (
 from ..helpers import connection_exceptions, debug_call
 from .client import SAMPLES_PER_PAGE, SandboxClient
 from .constants import DEFAULT_PAGE_LIMIT
-from .errors import SampleDeleteError, SampleFetchError, SampleSubmitError
+from .errors import (
+    ProfileFetchError,
+    SampleDeleteError,
+    SampleFetchError,
+    SampleSubmitError,
+)
 from .sandbox import (
     DeleteOut,
     NetworkMode,
+    Profile,
     SampleOut,
     SampleSummary,
     SearchIn,
     SearchResult,
-    SubmitSampleIn,
     SubmitKind,
+    SubmitSampleIn,
 )
 
 SandboxChoice = Literal['eu', 'usa', 'apj', 'public', 'private']
@@ -381,3 +388,34 @@ class SandboxMgr:
         endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
         self.sb_client.request('delete', endpoint)
         return DeleteOut(deleted=True)
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ProfileFetchError)
+    def fetch_profiles(
+        self,
+    ) -> Annotated[list[Profile], Doc('List of Profile models.')]:
+        """List analysis profiles.
+
+        Profiles are company-scoped analysis configurations (OS tags, network mode,
+        timeout, geolocation, browser) referenced by `submit_sample(profiles=[...])`.
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            profiles = mgr.fetch_profiles()
+            for p in profiles:
+                print(p.id_, p.name, p.network, p.tags)
+            ```
+
+        Endpoint:
+            `GET /profiles`
+
+        Raises:
+            ProfileFetchError: If the API returns a non-2xx or a connection error occurs.
+        """
+        endpoint = EP_SANDBOX_PROFILES.format(base_url=self.base_url)
+        response = self.sb_client.request('get', endpoint)
+        return [Profile.model_validate(e) for e in response.json()['data']]

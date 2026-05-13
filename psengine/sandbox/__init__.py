@@ -11,5 +11,5 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from .sandbox import DeleteOut, SampleOut, SearchResult
+from .sandbox import DeleteOut, Profile, SampleOut, SearchResult
 from .sandbox_mgr import SandboxMgr

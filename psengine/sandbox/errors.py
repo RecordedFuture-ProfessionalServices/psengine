@@ -24,3 +24,7 @@ class SampleDeleteError(RecordedFutureError):
 
 class SampleSubmitError(RecordedFutureError):
     """Raised when a sample submission against `/samples` fails."""
+
+
+class ProfileFetchError(RecordedFutureError):
+    """Raised when a profile lookup against `/profiles` fails."""
