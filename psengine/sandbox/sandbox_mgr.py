@@ -100,10 +100,15 @@ class SandboxMgr:
         wallet: list[str] | str | None = None,
         analysis_time: list[str] | str | None = None,
         query: str | None = None,
+        results_per_page: int = SAMPLES_PER_PAGE,
         max_results: int | None = DEFAULT_PAGE_LIMIT,
     ):
         # TODO: write about the id constraints
-        params = {p: v for p, v in locals().items() if p not in ('self', 'query', 'max_results')}
+        params = {
+            p: v
+            for p, v in locals().items()
+            if p not in ('self', 'query', 'max_results', 'results_per_page')
+        }
         params = SearchIn.model_validate(params).to_query_out()
 
         if query:
@@ -111,7 +116,11 @@ class SandboxMgr:
 
         endpoint = EP_SANDBOX_SEARCH.format(base_url=self.base_url)
         data = self.sb_client.request_paged(
-            'get', endpoint, params=params.model_dump(), max_samples=max_results
+            'get',
+            endpoint,
+            params=params.model_dump(),
+            max_results=max_results,
+            results_per_page=results_per_page,
         )
         return [SearchResult.model_validate(e) for e in data]
 
@@ -167,8 +176,8 @@ class SandboxMgr:
             'get',
             endpoint,
             params={'subset': subset},
-            max_samples=max_results,
-            samples_per_page=samples_per_page,
+            max_results=max_results,
+            results_per_page=samples_per_page,
         )
         return [SampleOut.model_validate(e) for e in data]
 

@@ -143,8 +143,8 @@ class SandboxClient(BaseHTTPClient):
         content_type_header: Annotated[
             str | None, Doc('Content-Type header value.')
         ] = 'application/json',
-        max_samples: int = DEFAULT_PAGE_LIMIT,
-        samples_per_page: Annotated[
+        max_results: int = DEFAULT_PAGE_LIMIT,
+        results_per_page: Annotated[
             int | None, Doc('The number of samples per page for pagination.')
         ] = Field(ge=1, le=MAXIMUM_SAMPLES, default=SAMPLES_PER_PAGE),
         **kwargs,
@@ -155,8 +155,10 @@ class SandboxClient(BaseHTTPClient):
             ValidationError: If method is not one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.
         """
         headers = headers or self._prepare_headers(content_type_header)
-        all_results = []
+        all_results: list = []
 
+        # Trim `limit` to remaining headroom so the last page doesn't overfetch.
+        params['limit'] = min(results_per_page, max_results - len(all_results))
         response = self.request(
             method=method,
             url=url,
@@ -173,14 +175,23 @@ class SandboxClient(BaseHTTPClient):
             raise
 
         try:
-            all_results.extend(json_response['data'])
+            page = json_response['data']
         except KeyError:
             self.log.debug(f'Paged request does not contain `data` JSON key:\n{response.text}')
             raise
 
-        while (offset := json_response.get('next')) or (len(all_results) < max_samples):
+        all_results.extend(page)
+        offset = json_response.get('next')
+        prev_offset = None
+
+        while offset and len(all_results) < max_results:
+            # Defensive: a server that re-emits the same `next` would loop us forever.
+            if offset == prev_offset:
+                self.log.debug(f'Paged request returned a repeated offset {offset!r}; stopping.')
+                break
+
             params['offset'] = offset
-            params['limit'] = samples_per_page
+            params['limit'] = min(results_per_page, max_results - len(all_results))
             response = self.request(
                 method=method,
                 url=url,
@@ -190,8 +201,18 @@ class SandboxClient(BaseHTTPClient):
                 **kwargs,
             )
             json_response = response.json()
-            all_results.extend(json_response['data'])
-        return all_results[:max_samples]
+            page = json_response.get('data', [])
+
+            if not page:
+                # The last page is always empty
+                self.log.debug('Paged request returned an empty `data` page; stopping.')
+                break
+
+            all_results.extend(page)
+            prev_offset = offset
+            offset = json_response.get('next')
+
+        return all_results[:max_results]
 
     def _prepare_headers(self, content_type_header: str = 'application/json'):
         user_agent = self._get_user_agent_header()
