@@ -138,7 +138,7 @@ class SampleOut(SearchResult):
     tasks: list[dict] | None = None
 
 
-class ProfileDeleteOut(RFBaseModel):
+class SampleDeleteOut(RFBaseModel):
     """Result of a `DELETE /samples/{sample_id}` call.
 
     The Sandbox API returns an empty body on success; the manager constructs this
@@ -146,17 +146,6 @@ class ProfileDeleteOut(RFBaseModel):
     """
 
     deleted: bool
-
-
-class ProfileUpdateOut(RFBaseModel):
-    """Result of a `PUT /profiles/{profile_id}` call.
-
-    `PUT /profiles/{id}` returns `200` with an empty body `{}` on success rather
-    than echoing the updated profile, so the manager constructs this model with
-    `updated=True` when the HTTP request succeeds.
-    """
-
-    updated: bool
 
 
 class SubmitSampleIn(RFBaseModel):
@@ -272,6 +261,28 @@ class ProfileOptions(RFBaseModel):
         if v == '':
             return None
         return v
+
+
+class ProfileDeleteOut(RFBaseModel):
+    """Result of a `DELETE /profiles/{profile_id}` call.
+
+    The Sandbox API returns an empty body on success; the manager constructs this
+    model with `deleted=True` on a 2xx response and `deleted=False` when the
+    profile didn't exist (404, treated as idempotent).
+    """
+
+    deleted: bool
+
+
+class ProfileUpdateOut(RFBaseModel):
+    """Result of a `PUT /profiles/{profile_id}` call.
+
+    `PUT /profiles/{id}` returns `200` with an empty body `{}` on success rather
+    than echoing the updated profile, so the manager constructs this model with
+    `updated=True` when the HTTP request succeeds.
+    """
+
+    updated: bool
 
 
 class Profile(RFBaseModel):

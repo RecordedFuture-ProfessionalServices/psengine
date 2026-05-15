@@ -6,13 +6,7 @@ from requests import ConnectionError, ConnectTimeout, HTTPError, ReadTimeout  # 
 from requests.models import Response
 
 from psengine.endpoints import EP_SANDBOX_PROFILES, EP_SANDBOX_PROFILES_ID
-from psengine.sandbox import (
-    Profile,
-    ProfileDeleteOut,
-    ProfileOptions,
-    ProfileUpdateOut,
-    SandboxMgr,
-)
+from psengine.sandbox import Profile, ProfileOptions, SandboxMgr
 from psengine.sandbox.errors import (
     ProfileCreateError,
     ProfileDeleteError,
@@ -212,7 +206,7 @@ class Test_SandboxMgr:
         assert sent['timeout'] == 120
         assert sent['network'] == 'vpn'
         assert sent['geolocation'] == ['us']
-        assert sent['options'] == {'browser': 'chrome'} 
+        assert sent['options'] == {'browser': 'chrome'}
         assert 'browser' not in sent
 
     def test_create_profile_tags_string_coerced_to_list(
@@ -280,7 +274,7 @@ class Test_SandboxMgr:
             timeout=180,
         )
 
-        assert result.updated == True
+        assert result.updated is True
         assert mocked.call_args.args == (
             'put',
             EP_SANDBOX_PROFILES_ID.format(base_url=sandbox_mgr.base_url, profile_id='abc-123'),
@@ -321,7 +315,7 @@ class Test_SandboxMgr:
             timeout=60,
         )
 
-        assert result.updated == False
+        assert result.updated is False
 
     @pytest.mark.parametrize('status_code', [400, 401, 409, 500])
     def test_update_profile_non_404_raises(self, sandbox_mgr: SandboxMgr, mocker, status_code):
@@ -364,7 +358,7 @@ class Test_SandboxMgr:
 
         result = sandbox_mgr.delete_profile(profile_id='abc-123')
 
-        assert result.deleted == True
+        assert result.deleted is True
         assert mocked.call_args.args == (
             'delete',
             EP_SANDBOX_PROFILES_ID.format(base_url=sandbox_mgr.base_url, profile_id='abc-123'),
@@ -379,7 +373,7 @@ class Test_SandboxMgr:
 
         result = sandbox_mgr.delete_profile(profile_id='missing-id')
 
-        assert result.deleted == False
+        assert result.deleted is False
 
     @pytest.mark.parametrize('status_code', [400, 401, 403, 500])
     def test_delete_profile_non_404_raises(self, sandbox_mgr: SandboxMgr, mocker, status_code):

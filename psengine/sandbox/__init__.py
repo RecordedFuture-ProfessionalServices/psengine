@@ -16,6 +16,7 @@ from .sandbox import (
     ProfileDeleteOut,
     ProfileOptions,
     ProfileUpdateOut,
+    SampleDeleteOut,
     SampleOut,
     SearchResult,
 )

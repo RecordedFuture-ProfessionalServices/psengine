@@ -47,6 +47,7 @@ from .sandbox import (
     ProfileDeleteOut,
     NetworkMode,
     Profile,
+    SampleDeleteOut,
     SampleOut,
     SampleSummary,
     SearchIn,
@@ -374,13 +375,16 @@ class SandboxMgr:
             Doc('Sandbox sample ID to delete.'),
         ],
     ) -> Annotated[
-        ProfileDeleteOut,
-        Doc('`DeleteOut(deleted=True)` on success; any HTTP failure raises `SampleDeleteError`.'),
+        SampleDeleteOut,
+        Doc(
+            '`SampleDeleteOut(deleted=True)` on success; any HTTP failure raises '
+            '`SampleDeleteError`.'
+        ),
     ]:
         """Delete a sample by id.
 
-        Returns `DeleteOut(deleted=True)` only on a successful 2xx response. Any
-        HTTP failure raises `SampleDeleteError`; this method never returns
+        Returns `SampleDeleteOut(deleted=True)` only on a successful 2xx response.
+        Any HTTP failure raises `SampleDeleteError`; this method never returns
         `deleted=False`.
 
         Example:
@@ -407,7 +411,7 @@ class SandboxMgr:
         """
         endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
         self.sb_client.request('delete', endpoint)
-        return ProfileDeleteOut(deleted=True)
+        return SampleDeleteOut(deleted=True)
 
     @debug_call
     @validate_call
