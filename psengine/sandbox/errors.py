@@ -28,3 +28,19 @@ class SampleSubmitError(RecordedFutureError):
 
 class ProfileFetchError(RecordedFutureError):
     """Raised when a profile lookup against `/profiles` fails."""
+
+
+class ProfileNotFoundError(RecordedFutureError):
+    """Raised when a single-profile lookup against `/profiles/{id}` (GET) fails."""
+
+
+class ProfileCreateError(RecordedFutureError):
+    """Raised when a profile create against `/profiles` (POST) fails."""
+
+
+class ProfileUpdateError(RecordedFutureError):
+    """Raised when a profile update against `/profiles/{id}` (PUT) fails."""
+
+
+class ProfileDeleteError(RecordedFutureError):
+    """Raised when a profile delete against `/profiles/{id}` (DELETE) fails."""

@@ -21,6 +21,7 @@ from typing_extensions import Doc
 
 from ..endpoints import (
     EP_SANDBOX_PROFILES,
+    EP_SANDBOX_PROFILES_ID,
     EP_SANDBOX_SAMPLES,
     EP_SANDBOX_SAMPLES_ID,
     EP_SANDBOX_SAMPLES_SUMMARY,
@@ -31,13 +32,19 @@ from ..helpers import connection_exceptions, debug_call
 from .client import SAMPLES_PER_PAGE, SandboxClient
 from .constants import DEFAULT_PAGE_LIMIT
 from .errors import (
+    ProfileCreateError,
+    ProfileDeleteError,
     ProfileFetchError,
+    ProfileNotFoundError,
+    ProfileUpdateError,
     SampleDeleteError,
     SampleFetchError,
     SampleSubmitError,
 )
 from .sandbox import (
-    DeleteOut,
+    Browser,
+    CreateUpdateProfileIn,
+    ProfileDeleteOut,
     NetworkMode,
     Profile,
     SampleOut,
@@ -46,6 +53,7 @@ from .sandbox import (
     SearchResult,
     SubmitKind,
     SubmitSampleIn,
+    ProfileUpdateOut,
 )
 
 SandboxChoice = Literal['eu', 'usa', 'apj', 'public', 'private']
@@ -252,8 +260,11 @@ class SandboxMgr:
             Doc('Per-file profile mappings, e.g. [{"pick":"path","profile":"<id>"}].'),
         ] = None,
         user_tags: Annotated[
-            list[str] | None,
-            Doc('Custom tags attached to the submission (max 1kB total).'),
+            str | list[str] | None,
+            Doc(
+                'Custom tags attached to the submission (max 1kB total). A bare string is '
+                'coerced to a single-item list.'
+            ),
         ] = None,
         timeout: Annotated[
             int | None,
@@ -363,7 +374,7 @@ class SandboxMgr:
             Doc('Sandbox sample ID to delete.'),
         ],
     ) -> Annotated[
-        DeleteOut,
+        ProfileDeleteOut,
         Doc('`DeleteOut(deleted=True)` on success; any HTTP failure raises `SampleDeleteError`.'),
     ]:
         """Delete a sample by id.
@@ -396,7 +407,7 @@ class SandboxMgr:
         """
         endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
         self.sb_client.request('delete', endpoint)
-        return DeleteOut(deleted=True)
+        return ProfileDeleteOut(deleted=True)
 
     @debug_call
     @validate_call
@@ -407,7 +418,7 @@ class SandboxMgr:
         """List analysis profiles.
 
         Profiles are company-scoped analysis configurations (OS tags, network mode,
-        timeout, geolocation, browser) referenced by `submit_sample(profiles=[...])`.
+        timeout, geolocation, browser).
 
         Example:
             ```python
@@ -428,3 +439,290 @@ class SandboxMgr:
         endpoint = EP_SANDBOX_PROFILES.format(base_url=self.base_url)
         response = self.sb_client.request('get', endpoint)
         return [Profile.model_validate(e) for e in response.json()['data']]
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ProfileNotFoundError)
+    def fetch_profile(
+        self,
+        profile_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Profile ID or name.'),
+        ],
+    ) -> Annotated[
+        Profile,
+        Doc('Profile model'),
+    ]:
+        """Fetch a single analysis profile by ID or name.
+
+        The API accepts either the ID assigned at create time or the profile
+        name. Prefer the ID for stable references — renames invalidate
+        name-based lookups.
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            profile = mgr.fetch_profile('022b8c4e-22ab-46a4-ac49-a2732b2412b7')
+            print(profile.id_, profile.name, profile.tags)
+            ```
+
+        Endpoint:
+            `GET /profiles/{profile_id}`
+
+        Raises:
+            ValidationError: If `profile_id` is empty or of incorrect type.
+            ProfileNotFoundError: If the API returns a non-2xx (e.g. 404 for an
+                unknown profile id/name) or a connection error occurs.
+        """
+        endpoint = EP_SANDBOX_PROFILES_ID.format(base_url=self.base_url, profile_id=profile_id)
+        response = self.sb_client.request('get', endpoint)
+        return Profile.model_validate(response.json())
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ProfileCreateError)
+    def create_profile(
+        self,
+        name: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Profile name. Must be unique within the company.'),
+        ],
+        tags: Annotated[
+            str | list[str],
+            Field(min_length=1),
+            Doc(
+                'Resource tags, e.g. `["os:windows10-2004-x64", "locale:en-us"]`. '
+                'A bare string is coerced to a single-item list.'
+            ),
+        ],
+        timeout: Annotated[
+            int,
+            Field(ge=1, le=3600),
+            Doc('Analysis duration in seconds (1–3600).'),
+        ],
+        network: Annotated[
+            NetworkMode | None,
+            Doc('Network mode applied to analysis VMs using this profile.'),
+        ] = None,
+        geolocation: Annotated[
+            str | list[str] | None,
+            Doc(
+                'Region tag(s). The API rejects this unless `network="vpn"`. '
+                'A bare string is coerced to a single-item list.'
+            ),
+        ] = None,
+        browser: Annotated[
+            Browser | None,
+            Doc("Browser used by analyses. One of 'chrome', 'firefox', 'ie11', 'microsoft-edge'."),
+        ] = None,
+    ) -> Annotated[
+        Profile,
+        Doc('The newly-created profile.'),
+    ]:
+        """Create a new analysis profile.
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            profile = mgr.create_profile(
+                name='my-profile',
+                tags=['os:windows10-2004-x64', 'locale:en-us'],
+                timeout=120,
+                network='internet',
+                browser='firefox',
+            )
+            print(profile.id_, profile.name, profile.options)
+            ```
+
+        Endpoint:
+            `POST /profiles`
+
+        Raises:
+            ValidationError: If `name`/`tags` are empty, `timeout` is out of range,
+                or `browser` is not one of the allowed values.
+            ProfileCreateError: If the API returns a non-2xx (e.g. 400 for an
+                invalid `geolocation`+`network` combination, 409 if the name
+                collides) or a connection error occurs.
+        """
+        payload = CreateUpdateProfileIn(
+            name=name,
+            tags=tags,
+            timeout=timeout,
+            network=network,
+            geolocation=geolocation,
+            browser=browser,
+        )
+        endpoint = EP_SANDBOX_PROFILES.format(base_url=self.base_url)
+        response = self.sb_client.request('post', endpoint, data=payload.to_api_payload())
+        return Profile.model_validate(response.json())
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(
+        ignore_status_code=[404],
+        exception_to_raise=ProfileUpdateError,
+        on_ignore_return=ProfileUpdateOut(updated=False),
+    )
+    def update_profile(
+        self,
+        profile_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc(
+                'Profile ID or name. Renaming via `name=` is allowed, but stale '
+                'name-based lookups will break afterwards -- prefer the ID for '
+                'stable references.'
+            ),
+        ],
+        name: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Profile name. May differ from the existing name (rename).'),
+        ],
+        tags: Annotated[
+            str | list[str],
+            Field(min_length=1),
+            Doc(
+                'Resource tags, e.g. `["os:windows10-2004-x64", "locale:en-us"]`. '
+                'A bare string is coerced to a single-item list.'
+            ),
+        ],
+        timeout: Annotated[
+            int,
+            Field(ge=1, le=3600),
+            Doc('Analysis duration in seconds (1–3600).'),
+        ],
+        network: Annotated[
+            NetworkMode | None,
+            Doc('Network mode applied to analysis VMs using this profile.'),
+        ] = None,
+        geolocation: Annotated[
+            str | list[str] | None,
+            Doc(
+                'Region tag(s). The API rejects this unless `network="vpn"`. '
+                'A bare string is coerced to a single-item list.'
+            ),
+        ] = None,
+        browser: Annotated[
+            Browser | None,
+            Doc("Browser used by analyses. One of 'chrome', 'firefox', 'ie11', 'microsoft-edge'."),
+        ] = None,
+    ) -> Annotated[
+        ProfileUpdateOut,
+        Doc(
+            'ProfileUpdateOut model'
+        ),
+    ]:
+        """Update an existing analysis profile.
+
+        The PUT is a **full replace**: all fields except `id` must be submitted.
+        Any optional field omitted from this call is cleared on the server --
+        e.g. calling without `browser` removes any browser previously set on
+        the profile.
+
+        Idempotent on 404: updating a profile that doesn't exist (already
+        deleted, wrong id/name) returns `UpdateOut(updated=False)` rather than
+        raising, so callers can check `result.updated` to know whether the
+        target existed. Every other failure mode (401/403 auth, 409 name
+        collision, 5xx, connection errors) still raises `ProfileUpdateError`.
+
+        The API returns `200` with an empty body on success (it does not echo
+        the updated profile), so this method returns `UpdateOut(updated=True)`
+        rather than a `Profile`. Call `fetch_profile()` afterwards if you need
+        the echoed record.
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            result = mgr.update_profile(
+                profile_id='022b8c4e-22ab-46a4-ac49-a2732b2412b7',
+                name='my-profile-v2',
+                tags=['os:windows10-2004-x64', 'locale:en-us'],
+                timeout=180,
+                network='internet',
+                browser='firefox',
+            )
+            if result.updated:
+                print('updated')
+            else:
+                print('target profile did not exist')
+            ```
+
+        Endpoint:
+            `PUT /profiles/{profile_id}`
+
+        Raises:
+            ValidationError: If `name`/`tags` are empty, `timeout` is out of range,
+                or `browser` is not one of the allowed values.
+            ProfileUpdateError: If the API returns a non-2xx other than 404
+                (e.g. 409 if the new `name` collides) or a connection error occurs.
+        """
+        payload = CreateUpdateProfileIn(
+            name=name,
+            tags=tags,
+            timeout=timeout,
+            network=network,
+            geolocation=geolocation,
+            browser=browser,
+        )
+        endpoint = EP_SANDBOX_PROFILES_ID.format(base_url=self.base_url, profile_id=profile_id)
+        self.sb_client.request('put', endpoint, data=payload.to_api_payload())
+        return ProfileUpdateOut(updated=True)
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(
+        ignore_status_code=[404],
+        exception_to_raise=ProfileDeleteError,
+        on_ignore_return=ProfileDeleteOut(deleted=False),
+    )
+    def delete_profile(
+        self,
+        profile_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Profile ID or name.'),
+        ],
+    ) -> Annotated[
+        ProfileDeleteOut,
+        Doc('ProfileDeleteOut model'),
+    ]:
+        """Delete an analysis profile.
+
+        Idempotent on 404: deleting a profile that doesn't exist (already deleted,
+        wrong id/name, etc.) returns `ProfileDeleteOut(deleted=False)` rather than
+        raising, so callers can do best-effort cleanup without `try/except`. Every
+        other failure mode (401/403 auth, 5xx, connection errors) still raises
+        `ProfileDeleteError`.
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            result = mgr.delete_profile('022b8c4e-22ab-46a4-ac49-a2732b2412b7')
+            if result.deleted:
+                print('removed')
+            else:
+                print('was already gone')
+            ```
+
+        Endpoint:
+            `DELETE /profiles/{profile_id}`
+
+        Raises:
+            ValidationError: If `profile_id` is empty or of incorrect type.
+            ProfileDeleteError: If the API returns a non-2xx other than 404, or
+                a connection error occurs.
+        """
+        endpoint = EP_SANDBOX_PROFILES_ID.format(base_url=self.base_url, profile_id=profile_id)
+        self.sb_client.request('delete', endpoint)
+        return ProfileDeleteOut(deleted=True)

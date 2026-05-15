@@ -13,15 +13,17 @@
 
 from datetime import datetime
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import ConfigDict, Field, field_validator, model_validator
+from pydantic import BeforeValidator, ConfigDict, Field, field_validator, model_validator
 
 from ..common_models import RFBaseModel
+from ..helpers import Validators
 from .models.analysis import Meta, Task
 
 SubmitKind = Literal['file', 'url', 'fetch', 'import']
 NetworkMode = Literal['internet', 'drop', 'tor', 'vpn', 'sim200', 'sim404', 'simnx']
+Browser = Literal['chrome', 'firefox', 'ie11', 'microsoft-edge']
 
 # TODO: remove ConfigDict
 
@@ -136,7 +138,7 @@ class SampleOut(SearchResult):
     tasks: list[dict] | None = None
 
 
-class DeleteOut(RFBaseModel):
+class ProfileDeleteOut(RFBaseModel):
     """Result of a `DELETE /samples/{sample_id}` call.
 
     The Sandbox API returns an empty body on success; the manager constructs this
@@ -146,24 +148,15 @@ class DeleteOut(RFBaseModel):
     deleted: bool
 
 
-class Profile(RFBaseModel):
-    """Analysis profile record returned by `GET /profiles`."""
+class ProfileUpdateOut(RFBaseModel):
+    """Result of a `PUT /profiles/{profile_id}` call.
 
-    id_: str = Field(alias='id')
-    name: str
-    tags: list[str] = Field(default_factory=list)
-    network: NetworkMode | None = None
-    geolocation: list[str] = Field(default_factory=list)
-    timeout: int | None = None
-    options: dict | None = None
+    `PUT /profiles/{id}` returns `200` with an empty body `{}` on success rather
+    than echoing the updated profile, so the manager constructs this model with
+    `updated=True` when the HTTP request succeeds.
+    """
 
-    @field_validator('geolocation', mode='before')
-    @classmethod
-    def _none_to_empty_list(cls, v):
-        # API returns either `null` or `[]` for unset geolocation; both normalise to [].
-        if v is None:
-            return []
-        return v
+    updated: bool
 
 
 class SubmitSampleIn(RFBaseModel):
@@ -182,7 +175,7 @@ class SubmitSampleIn(RFBaseModel):
     interactive: bool | None = None
     password: str | None = None
     profiles: list[dict] | None = None
-    user_tags: list[str] | None = None
+    user_tags: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
     timeout: int | None = Field(default=None, ge=1, le=3600)
     network: NetworkMode | None = None
     geolocation: str | None = None
@@ -260,14 +253,47 @@ class SubmitSampleIn(RFBaseModel):
         return body, self.file_path
 
 
-class SandboxUser(RFBaseModel):
-    """Sandbox user record returned by user-management endpoints."""
+class Profile(RFBaseModel):
+    """Analysis profile record returned by `/profiles`."""
 
-    id_: str = Field(alias='id', default=None)
-    company_id: str
-    email: str = None
+    id_: str = Field(alias='id')
     name: str
-    first_name: str
-    last_name: str
-    created_at: datetime
-    role: str
+    tags: list[str] = Field(default_factory=list)
+    network: NetworkMode | None = None
+    geolocation: list[str] = Field(default_factory=list)
+    timeout: int | None = None
+    options: dict | None = None
+
+    @field_validator('geolocation', mode='before')
+    @classmethod
+    def _none_to_empty_list(cls, v):
+        # API returns either `null` or `[]` for unset geolocation; both normalise to [].
+        if v is None:
+            return []
+        return v
+
+    @field_validator('network', mode='before')
+    @classmethod
+    def _empty_str_to_none(cls, v):
+        # POST /profiles echoes `network=""` for profiles created without a network mode.
+        if v == '':
+            return None
+        return v
+
+
+class CreateUpdateProfileIn(RFBaseModel):
+    """Validates payload for `POST /profiles` and `PUT /profiles/{id}`."""
+
+    name: str = Field(min_length=1)
+    tags: Annotated[list[str], BeforeValidator(Validators.convert_str_to_list), Field(min_length=1)]
+    timeout: int = Field(ge=1, le=3600)
+    network: NetworkMode | None = None
+    geolocation: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    browser: Browser | None = None
+
+    def to_api_payload(self) -> dict:
+        """Build the JSON body for POST/PUT /profiles."""
+        body = self.model_dump(exclude_none=True, exclude={'browser'})
+        if self.browser is not None:
+            body['options'] = {'browser': self.browser}
+        return body
