@@ -615,9 +615,7 @@ class SandboxMgr:
         ] = None,
     ) -> Annotated[
         ProfileUpdateOut,
-        Doc(
-            'ProfileUpdateOut model'
-        ),
+        Doc('ProfileUpdateOut model'),
     ]:
         """Update an existing analysis profile.
 

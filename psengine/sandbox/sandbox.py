@@ -253,6 +253,27 @@ class SubmitSampleIn(RFBaseModel):
         return body, self.file_path
 
 
+class ProfileOptions(RFBaseModel):
+    """Per-profile analysis knobs returned under `Profile.options`.
+
+    Today the only documented key is `browser`. Inherits `RFBaseModel`'s
+    default `extra='ignore'` policy so newly-introduced option keys on the
+    API don't break parsing.
+    """
+
+    browser: Browser | None = None
+
+    @field_validator('browser', mode='before')
+    @classmethod
+    def _empty_str_to_none(cls, v):
+        # Real-world payloads show `"browser": ""` for profiles created
+        # without a browser choice — normalise to None so the Browser
+        # Literal validator doesn't reject the shape.
+        if v == '':
+            return None
+        return v
+
+
 class Profile(RFBaseModel):
     """Analysis profile record returned by `/profiles`."""
 
@@ -262,7 +283,7 @@ class Profile(RFBaseModel):
     network: NetworkMode | None = None
     geolocation: list[str] = Field(default_factory=list)
     timeout: int | None = None
-    options: dict | None = None
+    options: ProfileOptions | None = None
 
     @field_validator('geolocation', mode='before')
     @classmethod
@@ -295,5 +316,5 @@ class CreateUpdateProfileIn(RFBaseModel):
         """Build the JSON body for POST/PUT /profiles."""
         body = self.model_dump(exclude_none=True, exclude={'browser'})
         if self.browser is not None:
-            body['options'] = {'browser': self.browser}
+            body['options'] = ProfileOptions(browser=self.browser).model_dump(exclude_none=True)
         return body
