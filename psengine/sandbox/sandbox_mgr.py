@@ -367,6 +367,7 @@ class SandboxMgr:
 
         endpoint = EP_SANDBOX_SAMPLES.format(base_url=self.base_url)
         response = self.sb_client.request('post', endpoint, headers=headers, files=files)
+        # TODO - we are using same model here, rename or make a seprate one.
         return SearchResult.model_validate(response.json())
 
     @debug_call

@@ -135,6 +135,7 @@ class SearchResult(RFBaseModel):
 class SampleOut(SearchResult):
     """Sample record returned by `GET /samples/{sample_id}`."""
 
+    # TODO - incomplete model
     tasks: list[dict] | None = None
 
 
