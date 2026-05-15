@@ -1,0 +1,19 @@
+{
+  "id": "260515-nta8kscxnf",
+  "kind": "url",
+  "status": "running",
+  "submitted": "2026-05-15T11:40:51Z",
+  "tasks": [
+    {
+      "id": "static1",
+      "status": "reported"
+    },
+    {
+      "id": "behavioral1",
+      "status": "running",
+      "target": "https://example.com"
+    }
+  ],
+  "url": "https://example.com",
+  "user_id": "<redacted>"
+}

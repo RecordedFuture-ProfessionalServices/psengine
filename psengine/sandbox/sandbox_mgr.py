@@ -39,7 +39,10 @@ from .errors import (
     ProfileUpdateError,
     SampleDeleteError,
     SampleFetchError,
+    SampleSearchError,
     SampleSubmitError,
+    SampleSummaryError,
+    SamplesFetchError,
 )
 from .sandbox import (
     Browser,
@@ -90,6 +93,7 @@ class SandboxMgr:
 
     @debug_call
     @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSummaryError)
     def sample_summary(self, sample_id: str) -> SampleSummary:
         endpoint = EP_SANDBOX_SAMPLES_SUMMARY.format(base_url=self.base_url, sample_id=sample_id)
         data = self.sb_client.request(
@@ -98,6 +102,9 @@ class SandboxMgr:
         )
         return SampleSummary.model_validate(data.json())
 
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSearchError)
     def search(
         self,
         file_hash: list[str] | str | None = None,
@@ -135,6 +142,7 @@ class SandboxMgr:
 
     @debug_call
     @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SamplesFetchError)
     def fetch_samples(
         self,
         subset: Annotated[
@@ -159,10 +167,7 @@ class SandboxMgr:
         list[SampleOut],
         Doc('List of SampleOut models.'),
     ]:
-        """List samples visible to the token..
-
-        Pagination is performed automatically, capping
-        the total result count at `max_results`.
+        """List the collection of samples submitted to the sandbox.
 
         Example:
             ```python
@@ -200,7 +205,7 @@ class SandboxMgr:
             Field(min_length=1),
             Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
         ],
-    ) -> Annotated[SampleOut, Doc('Sample record returned by `GET /samples/{sample_id}`.')]:
+    ) -> Annotated[SampleOut, Doc('SampleOut model')]:
         """Fetch a single sample by id.
 
 
@@ -281,7 +286,7 @@ class SandboxMgr:
         ] = None,
     ) -> Annotated[
         SearchResult,
-        Doc('The freshly-created sample record (id, status, kind, submitted, ...).'),
+        Doc('The freshly-created sample SearchResult model.'),
     ]:
         """Submit a sample for analysis via `POST /samples`.
 
@@ -376,10 +381,7 @@ class SandboxMgr:
         ],
     ) -> Annotated[
         SampleDeleteOut,
-        Doc(
-            '`SampleDeleteOut(deleted=True)` on success; any HTTP failure raises '
-            '`SampleDeleteError`.'
-        ),
+        Doc('SampleDeleteOut model'),
     ]:
         """Delete a sample by id.
 

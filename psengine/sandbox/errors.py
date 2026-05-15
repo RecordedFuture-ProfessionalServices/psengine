@@ -26,6 +26,18 @@ class SampleSubmitError(RecordedFutureError):
     """Raised when a sample submission against `/samples` fails."""
 
 
+class SampleSummaryError(RecordedFutureError):
+    """Raised when a sample summary lookup against `/samples/{id}/summary` fails."""
+
+
+class SampleSearchError(RecordedFutureError):
+    """Raised when a sample search against `/search` fails."""
+
+
+class SamplesFetchError(RecordedFutureError):
+    """Raised when a sample listing against `/samples` fails."""
+
+
 class ProfileFetchError(RecordedFutureError):
     """Raised when a profile lookup against `/profiles` fails."""
 
