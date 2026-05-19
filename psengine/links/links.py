@@ -11,7 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Annotated, Literal, Optional
+from typing import Annotated, Literal
 
 from pydantic import AfterValidator
 
@@ -20,7 +20,7 @@ from ..helpers import TimeHelpers
 from .models import EntityAttribute, EntitySearchError
 
 
-def _validate_rel_time(v: Optional[str]) -> Optional[str]:
+def _validate_rel_time(v: str | None) -> str | None:
     if v is not None and not TimeHelpers.is_rel_time_valid(v):
         raise ValueError(f'Invalid relative time: {v}')
     return v
@@ -29,33 +29,33 @@ def _validate_rel_time(v: Optional[str]) -> Optional[str]:
 class FilterTechnical(RFBaseModel):
     """Fields in the Technical Object of Filters."""
 
-    timeframe: Annotated[Optional[str], AfterValidator(_validate_rel_time)] = None
-    events: Optional[list[str]] = None
-    connected_entities: Optional[list[str]] = None
+    timeframe: Annotated[str | None, AfterValidator(_validate_rel_time)] = None
+    events: list[str] | None = None
+    connected_entities: list[str] | None = None
 
 
 class LinksFilterObjects(RFBaseModel):
     """Objects in the fields data parameter of links."""
 
-    sections: Optional[list[str]] = None
-    entity_types: Optional[list[str]] = None
-    sources: Optional[list[Literal['technical', 'insikt']]] = None
-    technical: Optional[FilterTechnical] = None
+    sections: list[str] | None = None
+    entity_types: list[str] | None = None
+    sources: list[Literal['technical', 'insikt']] | None = None
+    technical: FilterTechnical | None = None
 
 
 class LinksLimitsObjects(RFBaseModel):
     """Objects in the limits object fields."""
 
-    search_scope: Optional[Literal['small', 'medium', 'large']] = None
-    per_entity_type: Optional[int] = None
+    search_scope: Literal['small', 'medium', 'large'] | None = None
+    per_entity_type: int | None = None
 
 
 class LinksSearchIn(RFBaseModel):
     """Model for payload sent to POST `/links/search` endpoint."""
 
     entities: list[str]
-    filters: Optional[LinksFilterObjects] = None
-    limits: Optional[LinksLimitsObjects] = None
+    filters: LinksFilterObjects | None = None
+    limits: LinksLimitsObjects | None = None
 
 
 class LinkedEntity(IdNameType):
@@ -64,17 +64,17 @@ class LinkedEntity(IdNameType):
     Inherits id_ (alias 'id'), name, and type_ (alias 'type') from IdNameType.
     """
 
-    source: Optional[str] = None
-    section: Optional[str] = None
+    source: str | None = None
+    section: str | None = None
     attributes: list[EntityAttribute] = []
 
 
 class SearchResultSet(RFBaseModel):
     """The result set for a single entity that was queried."""
 
-    entity: Optional[IdNameType] = None
+    entity: IdNameType | None = None
     links: list[LinkedEntity] = []
-    error: Optional[EntitySearchError] = None
+    error: EntitySearchError | None = None
 
 
 class LinksSearchResponse(RFBaseModel):

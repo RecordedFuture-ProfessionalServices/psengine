@@ -12,7 +12,7 @@
 ##############################################################################################
 
 import logging
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import validate_call
 from typing_extensions import Doc
@@ -42,7 +42,7 @@ class LinksMgr:
 
     def __init__(
         self,
-        rf_token: Annotated[Optional[str], Doc('Recorded Future API token.')] = None,
+        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
     ):
         """Initialize the `LinksMgr` object."""
         self.log = logging.getLogger(__name__)
@@ -150,10 +150,10 @@ class LinksMgr:
             list[str], Doc('List of Recorded Future entity IDs to search for links against.')
         ],
         filters: Annotated[
-            Optional[LinksFilterObjects], Doc('Filter objects for the search.')
+            LinksFilterObjects | None, Doc('Filter objects for the search.')
         ] = None,
         limits: Annotated[
-            Optional[LinksLimitsObjects], Doc('Limits objects for the search.')
+            LinksLimitsObjects | None, Doc('Limits objects for the search.')
         ] = None,
     ) -> Annotated[LinksSearchResponse, Doc('The structured search results.')]:
         """Search for entities connected to one or more target entities.

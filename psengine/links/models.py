@@ -11,7 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Any, Literal, Optional
+from typing import Any, Literal
 
 from pydantic import Field
 
@@ -19,7 +19,7 @@ from ..common_models import IdName, RFBaseModel
 
 
 class MetadataSection(IdName):
-    description: Optional[str] = None
+    description: str | None = None
 
 
 class MetadataSectionsResponse(RFBaseModel):
@@ -29,7 +29,7 @@ class MetadataSectionsResponse(RFBaseModel):
 
 
 class MetadataEvent(IdName):
-    description: Optional[str] = None
+    description: str | None = None
 
 
 class MetadataEventsResponse(RFBaseModel):
@@ -46,22 +46,22 @@ class MetadataEntityTypesResponse(RFBaseModel):
 
 class RiskAttribute(RFBaseModel):
     id_: Literal['risk_score', 'risk_level'] = Field(alias='id')
-    value: Optional[float | str] = None
+    value: float | str | None = None
 
 
 class CriticalityAttribute(RFBaseModel):
     id_: Literal['criticality'] = Field(alias='id')
-    value: Optional[str] = None
+    value: str | None = None
 
 
 class MitreNameAttribute(RFBaseModel):
     id_: Literal['display_name'] = Field(alias='id')
-    value: Optional[str] = None
+    value: str | None = None
 
 
 class ThreatActorAttribute(RFBaseModel):
     id_: Literal['threat_actor'] = Field(alias='id')
-    value: Optional[bool] = None
+    value: bool | None = None
 
 
 class GenericAttribute(RFBaseModel):
