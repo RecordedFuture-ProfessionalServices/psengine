@@ -149,12 +149,8 @@ class LinksMgr:
         entities: Annotated[
             list[str], Doc('List of Recorded Future entity IDs to search for links against.')
         ],
-        filters: Annotated[
-            LinksFilterObjects | None, Doc('Filter objects for the search.')
-        ] = None,
-        limits: Annotated[
-            LinksLimitsObjects | None, Doc('Limits objects for the search.')
-        ] = None,
+        filters: Annotated[LinksFilterObjects | None, Doc('Filter objects for the search.')] = None,
+        limits: Annotated[LinksLimitsObjects | None, Doc('Limits objects for the search.')] = None,
     ) -> Annotated[LinksSearchResponse, Doc('The structured search results.')]:
         """Search for entities connected to one or more target entities.
 
