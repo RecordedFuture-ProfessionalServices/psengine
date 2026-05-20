@@ -118,6 +118,17 @@ EP_IDENTITY_DUMP_SEARCH = EP_IDENTITY + 'metadata/dump/search'
 ###############################################################################
 EP_MALWARE_INTELLIGENCE = BASE_URL + '/malware-intelligence/v1/'
 EP_MALWARE_INTEL_REPORTS = EP_MALWARE_INTELLIGENCE + 'reports'
+EP_AUTO_YARA = EP_MALWARE_INTELLIGENCE + 'auto-yara/'
+EP_AUTO_YARA_JOBS = EP_AUTO_YARA + 'jobs'
+EP_AUTO_YARA_JOB_ID = EP_AUTO_YARA_JOBS + '/{}'
+EP_AUTO_YARA_JOB_ID_RETRY = EP_AUTO_YARA_JOB_ID + '/retry'
+EP_AUTO_YARA_JOBS_EDIT = EP_AUTO_YARA_JOBS + '/edit'
+EP_AUTO_SIGMA = EP_MALWARE_INTELLIGENCE + 'auto-sigma/'
+EP_AUTO_SIGMA_JOBS = EP_AUTO_SIGMA + 'jobs'
+EP_AUTO_SIGMA_GET_JOBS = EP_AUTO_SIGMA + 'get_jobs'
+EP_AUTO_SIGMA_JOB_ID = EP_AUTO_SIGMA_JOBS + '/{}'
+EP_AUTO_SIGMA_JOB_ID_RULE_ID = EP_AUTO_SIGMA_JOB_ID + '/{}'
+EP_AUTO_SIGMA_JOB_ID_RETRY = EP_AUTO_SIGMA_JOB_ID + '/retry'
 
 ###############################################################################
 # Risk History API Endpoints
@@ -146,3 +157,13 @@ EP_ASI_ASSET_EXPOSURES = f'{EP_ASI_ASSETS}/{{}}/exposures'
 EP_ASI_ASSETS_SEARCH = f'{EP_ASI_ASSETS}/_search'
 EP_ASI_EXPOSURES = f'{EP_ASI_PROJECTS}/{{}}/exposures'
 EP_ASI_EXPOSURES_BY_SIGNATURE = f'{EP_ASI_EXPOSURES}/{{}}'
+
+################################################################################
+# Threat Map API Endpoints
+################################################################################
+EP_THREAT_MAPS_BASE = BASE_URL + '/threat'
+EP_THREAT_MAPS_LIST = EP_THREAT_MAPS_BASE + '/maps'
+EP_THREAT_MAP = EP_THREAT_MAPS_BASE + '/map/{}'
+EP_THREAT_MAP_ORG = EP_THREAT_MAPS_BASE + '/map/{}/{}'
+EP_ACTOR_SEARCH = EP_THREAT_MAPS_BASE + '/actor/search'
+EP_CATEGORIES = EP_THREAT_MAPS_BASE + '/{}/categories'
