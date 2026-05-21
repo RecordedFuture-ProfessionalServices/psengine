@@ -160,7 +160,7 @@ class LinksMgr:
         """Search for entities connected to one or more target entities.
 
         Issues a single batched request: the response contains one
-        `Link` per entity in `entities`, in the same order. If the
+        `EntityLinks` per entity in `entities`, in the same order. If the
         API failed for a specific entity, that result's `error` is populated
         and `links` is empty — the rest of the batch still succeeds.
 
@@ -172,7 +172,7 @@ class LinksMgr:
 
         If the API failed for a specific entity in the batch, its result looks like:
         ```python
-            Link(
+            EntityLinks(
                 entity=IdNameType(id_='QCwdoU', name='...', type_='...'),
                 links=[],
                 error=EntitySearchError(message='...', status_code=404),

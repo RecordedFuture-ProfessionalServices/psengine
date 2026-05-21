@@ -2,14 +2,31 @@ from psengine.links import LinksMgr
 
 mgr = LinksMgr()
 
-print('Sections:')
-for section in mgr.list_sections():
-    print(f'  {section.id_}: {section.name}')
+results = mgr.search(entities=['QCwdoU'])
 
-print('\nEvent types:')
-for event in mgr.list_events():
-    print(f'  {event.id_}: {event.name}')
+for result in results.data:
+    if result.error:
+        print(f'Failed: {result.error.message}')
+        continue
 
-print('\nEntity types:')
-for entity_type in mgr.list_entity_types():
-    print(f'  {entity_type.id_}: {entity_type.name}')
+    print(f'Entity: {result.entity.name}')
+
+    print('\nIOCs grouped by type:')
+    for ioc_type, iocs in result.iocs().items():
+        print(f'  {ioc_type}: {len(iocs)}')
+        for ioc in iocs[:3]:
+            print(
+                f'    - {ioc.name} score:{ioc.risk_score}'
+            )
+
+    print('\nTTPs:')
+    for ttp in result.ttps()[:5]:
+        print(f'  - {ttp.name} ({ttp.display_name})')
+
+    print('\nMalwares:')
+    for malware in result.malwares()[:5]:
+        print(f'  - {malware.name}')
+
+    print('\nThreat actors:')
+    for threat_actor in result.threat_actors()[:5]:
+        print(f'  - {threat_actor.name}')

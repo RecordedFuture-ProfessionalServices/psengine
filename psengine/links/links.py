@@ -12,8 +12,44 @@
 ##############################################################################################
 
 
+from collections import defaultdict
+
 from ..common_models import IdNameType, RFBaseModel
 from .models import EntityAttribute, EntitySearchError
+
+LINK_IOC_TYPE = [
+    'type:InternetDomainName',
+    'type:CyberVulnerability',
+    'type:IpAddress',
+    'type:Hash',
+    'type:Url',
+]
+
+
+class LinkedIOC(IdNameType):
+    """Return linked iocs entities."""
+
+    risk_score: int
+    source: str | None = None
+
+
+class LinkedTTP(IdNameType):
+    """Return linked TTPs entities."""
+
+    display_name: str
+    source: str | None = None
+
+
+class LinkedTA(IdNameType):
+    """Return linked threat actors entities."""
+
+    source: str | None = None
+
+
+class LinkedMalware(IdNameType):
+    """Return linked malware entities."""
+
+    source: str | None = None
 
 
 class LinkedEntity(IdNameType):
@@ -24,15 +60,90 @@ class LinkedEntity(IdNameType):
     attributes: list[EntityAttribute] = []
 
 
-class Link(RFBaseModel):
+class EntityLinks(RFBaseModel):
     """The result set for a single entity that was queried."""
 
     entity: IdNameType | None = None
     links: list[LinkedEntity] = []
     error: EntitySearchError | None = None
 
+    def iocs(self) -> list[LinkedIOC]:
+        """Return linked indicators of compromise grouped by IOC type."""
+        iocs = defaultdict(list)
+        for link in self.links:
+            if link.type_ in LINK_IOC_TYPE:
+                ioc_score = next(
+                    (attr.value for attr in link.attributes if attr.id_ == 'risk_score'),
+                    0,
+                )
+                iocs[link.type_].append(
+                    LinkedIOC(
+                        id=link.id_,
+                        type=link.type_,
+                        name=link.name,
+                        risk_score=ioc_score,
+                        source=link.source,
+                    )
+                )
+
+        return iocs
+
+    def ttps(self) -> list[LinkedTTP]:
+        """Return linked MITRE ATT&CK techniques and their display names."""
+        ttps = []
+        for link in self.links:
+            if link.type_ == 'type:MitreAttackIdentifier':
+                display_name = next(
+                    (attr.value for attr in link.attributes if attr.id_ == 'display_name'),
+                    'N/A',
+                )
+                ttps.append(
+                    LinkedTTP(
+                        id=link.id_,
+                        type=link.type_,
+                        name=link.name,
+                        display_name=display_name,
+                        source=link.source,
+                    )
+                )
+
+        return ttps
+
+    def threat_actors(self) -> list[LinkedTA]:
+        """Return linked organizations marked as threat actors."""
+        tas = []
+        for link in self.links:
+            if link.type_ == 'type:Organization':
+                is_threat_actor = next(
+                    (attr.value for attr in link.attributes if attr.id_ == 'threat_actor'),
+                )
+                if is_threat_actor:
+                    tas.append(
+                        LinkedTA(
+                            id=link.id_,
+                            type=link.type_,
+                            name=link.name,
+                            source=link.source,
+                        )
+                    )
+
+        return tas
+
+    def malwares(self) -> list[LinkedMalware]:
+        """Return linked malware entities."""
+        return [
+            LinkedMalware(
+                id=link.id_,
+                type=link.type_,
+                name=link.name,
+                source=link.source,
+            )
+            for link in self.links
+            if link.type_ == 'type:Malware'
+        ]
+
 
 class LinksSearchResponseOut(RFBaseModel):
     """Response from POST `/links/search` endpoint."""
 
-    data: list[Link] = []
+    data: list[EntityLinks] = []

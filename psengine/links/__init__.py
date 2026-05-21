@@ -17,7 +17,7 @@ from .errors import (
     LinksSearchError,
 )
 from .links import (
-    Link,
+    EntityLinks,
     LinkedEntity,
     LinksSearchResponseOut,
 )

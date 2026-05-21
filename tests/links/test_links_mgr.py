@@ -191,3 +191,170 @@ def test_search_with_limits(links_mgr, mocker, make_response):
     _, kwargs = links_mgr.rf_client.request.call_args
     assert kwargs['data']['limits']['search_scope'] == 'small'
     assert kwargs['data']['limits']['per_entity_type'] == 10
+
+
+def test_entity_links_iocs_groups_results_and_defaults_risk_score(links_mgr, mocker, make_response):
+    mock_data = {
+        'data': [
+            {
+                'entity': {'id': 'ent1', 'name': 'Entity 1', 'type': 'Type1'},
+                'links': [
+                    {
+                        'id': 'ioc1',
+                        'name': 'example.com',
+                        'type': 'type:InternetDomainName',
+                        'source': 'technical',
+                        'attributes': [{'id': 'risk_score', 'value': 90}],
+                    },
+                    {
+                        'id': 'ioc2',
+                        'name': 'abcdef1234',
+                        'type': 'type:Hash',
+                        'source': 'insikt',
+                        'attributes': [],
+                    },
+                    {
+                        'id': 'not-ioc',
+                        'name': 'Not IOC',
+                        'type': 'type:Organization',
+                        'attributes': [{'id': 'threat_actor', 'value': True}],
+                    },
+                ],
+            }
+        ]
+    }
+    mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
+
+    entity_links = links_mgr.search(entities=['ent1']).data[0]
+    iocs = entity_links.iocs()
+
+    assert set(iocs.keys()) == {'type:InternetDomainName', 'type:Hash'}
+    assert len(iocs['type:InternetDomainName']) == 1
+    assert len(iocs['type:Hash']) == 1
+    assert iocs['type:InternetDomainName'][0].risk_score == 90
+    assert iocs['type:InternetDomainName'][0].source == 'technical'
+    assert iocs['type:Hash'][0].risk_score == 0
+    assert iocs['type:Hash'][0].source == 'insikt'
+
+
+def test_entity_links_ttps_filters_mitre_attack_links(links_mgr, mocker, make_response):
+    mock_data = {
+        'data': [
+            {
+                'entity': {'id': 'ent1', 'name': 'Entity 1', 'type': 'Type1'},
+                'links': [
+                    {
+                        'id': 'ttp1',
+                        'name': 'T1059',
+                        'type': 'type:MitreAttackIdentifier',
+                        'source': 'technical',
+                        'attributes': [{'id': 'display_name', 'value': 'Command and Scripting'}],
+                    },
+                    {
+                        'id': 'ttp2',
+                        'name': 'T1566',
+                        'type': 'type:MitreAttackIdentifier',
+                        'source': 'insikt',
+                        'attributes': [],
+                    },
+                    {
+                        'id': 'not-ttp',
+                        'name': 'Not TTP',
+                        'type': 'type:Malware',
+                        'attributes': [],
+                    },
+                ],
+            }
+        ]
+    }
+    mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
+
+    ttps = links_mgr.search(entities=['ent1']).data[0].ttps()
+
+    assert len(ttps) == 2
+    assert ttps[0].id_ == 'ttp1'
+    assert ttps[0].display_name == 'Command and Scripting'
+    assert ttps[0].source == 'technical'
+    assert ttps[1].id_ == 'ttp2'
+    assert ttps[1].display_name == 'N/A'
+    assert ttps[1].source == 'insikt'
+
+
+def test_entity_links_threat_actors_only_returns_marked_organizations(
+    links_mgr, mocker, make_response
+):
+    mock_data = {
+        'data': [
+            {
+                'entity': {'id': 'ent1', 'name': 'Entity 1', 'type': 'Type1'},
+                'links': [
+                    {
+                        'id': 'ta1',
+                        'name': 'Threat Actor Org',
+                        'type': 'type:Organization',
+                        'source': 'insikt',
+                        'attributes': [{'id': 'threat_actor', 'value': True}],
+                    },
+                    {
+                        'id': 'org2',
+                        'name': 'Benign Org',
+                        'type': 'type:Organization',
+                        'attributes': [{'id': 'threat_actor', 'value': False}],
+                    },
+                    {
+                        'id': 'not-org',
+                        'name': 'Not Org',
+                        'type': 'type:Malware',
+                        'attributes': [{'id': 'threat_actor', 'value': True}],
+                    },
+                ],
+            }
+        ]
+    }
+    mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
+
+    threat_actors = links_mgr.search(entities=['ent1']).data[0].threat_actors()
+
+    assert len(threat_actors) == 1
+    assert threat_actors[0].id_ == 'ta1'
+    assert threat_actors[0].name == 'Threat Actor Org'
+    assert threat_actors[0].source == 'insikt'
+
+
+def test_entity_links_malwares_only_returns_malware_links(links_mgr, mocker, make_response):
+    mock_data = {
+        'data': [
+            {
+                'entity': {'id': 'ent1', 'name': 'Entity 1', 'type': 'Type1'},
+                'links': [
+                    {
+                        'id': 'mw1',
+                        'name': 'Malware One',
+                        'type': 'type:Malware',
+                        'source': 'technical',
+                        'attributes': [],
+                    },
+                    {
+                        'id': 'not-malware',
+                        'name': 'Not Malware',
+                        'type': 'type:Organization',
+                        'attributes': [{'id': 'threat_actor', 'value': True}],
+                    },
+                    {
+                        'id': 'mw2',
+                        'name': 'Malware Two',
+                        'type': 'type:Malware',
+                        'source': 'insikt',
+                        'attributes': [],
+                    },
+                ],
+            }
+        ]
+    }
+    mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
+
+    malwares = links_mgr.search(entities=['ent1']).data[0].malwares()
+
+    assert len(malwares) == 2
+    assert [malware.id_ for malware in malwares] == ['mw1', 'mw2']
+    assert [malware.source for malware in malwares] == ['technical', 'insikt']
