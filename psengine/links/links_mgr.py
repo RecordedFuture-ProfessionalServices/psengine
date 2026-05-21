@@ -17,8 +17,6 @@ from typing import Annotated
 from pydantic import AfterValidator, validate_call
 from typing_extensions import Doc
 
-from psengine.helpers.helpers import Validators
-
 from ..endpoints import (
     EP_LINKS_METADATA_ENTITIES,
     EP_LINKS_METADATA_EVENTS,
@@ -26,6 +24,7 @@ from ..endpoints import (
     EP_LINKS_SEARCH,
 )
 from ..helpers import connection_exceptions, debug_call
+from ..helpers.helpers import Validators
 from ..rf_client import RFClient
 from .errors import LinksMetadataError, LinksSearchError
 from .links import (
