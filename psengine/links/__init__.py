@@ -17,9 +17,9 @@ from .errors import (
     LinksSearchError,
 )
 from .links import (
+    Link,
     LinkedEntity,
     LinksSearchResponseOut,
-    Link,
 )
 from .links_mgr import LinksMgr
 from .models import (
