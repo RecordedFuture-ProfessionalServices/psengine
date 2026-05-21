@@ -108,11 +108,16 @@ def test_links_mgr_search_builds_minimal_payload_with_entity_str(links_mgr, mock
     _, kwargs = links_mgr.rf_client.request.call_args
     assert kwargs['method'] == 'POST'
     assert kwargs['url'] == EP_LINKS_SEARCH
-    assert kwargs['data'] == {
-        'entities': ['ent1'],
-        'filters': {'technical': {}},
-        'limits': {},
-    }
+    assert kwargs['data'] == {'entities': ['ent1']}
+
+
+def test_links_mgr_search_omits_empty_technical_filter_object(links_mgr, mocker, make_response):
+    mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response({'data': []}))
+
+    links_mgr.search(entities='ent1', sections='section:actors')
+
+    _, kwargs = links_mgr.rf_client.request.call_args
+    assert kwargs['data']['filters'] == {'sections': ['section:actors']}
 
 
 @pytest.mark.parametrize(

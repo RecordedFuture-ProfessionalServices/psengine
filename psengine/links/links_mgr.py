@@ -28,6 +28,7 @@ from ..helpers.helpers import Validators
 from ..rf_client import RFClient
 from .errors import LinksMetadataError, LinksSearchError
 from .links import (
+    LinksSearchIn,
     LinksSearchResponseOut,
 )
 from .models import (
@@ -182,7 +183,7 @@ class LinksMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             LinksSearchError: If an API or connection error occurs at the request level.
         """
-        technical_filter = FilterTechnical(
+        technical_filters = FilterTechnical(
             timeframe=timeframe, events=events, connected_entities=connected_entities
         ).json()
 
@@ -190,12 +191,16 @@ class LinksMgr:
             sections=sections,
             entity_types=entity_types,
             sources=sources,
-            technical=technical_filter,
+            technical=technical_filters or None,
         ).json()
         limits = LinksLimitsObjects(
             search_scope=search_scope, per_entity_type=per_entity_type
         ).json()
-        payload = {'entities': entities, 'filters': filters, 'limits': limits}
+        payload = LinksSearchIn(
+            entities=entities,
+            filters=filters or None,
+            limits=limits or None,
+        ).json()
 
         self.log.info(f'Executing links search for {len(entities)} entities.')
 

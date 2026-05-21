@@ -15,7 +15,7 @@
 from collections import defaultdict
 
 from ..common_models import IdNameType, RFBaseModel
-from .models import EntityAttribute, EntitySearchError
+from .models import EntityAttribute, EntitySearchError, LinksFilterObjects, LinksLimitsObjects
 
 LINK_IOC_TYPE = [
     'type:InternetDomainName',
@@ -147,3 +147,11 @@ class LinksSearchResponseOut(RFBaseModel):
     """Response from POST `/links/search` endpoint."""
 
     data: list[EntityLinks] = []
+
+
+class LinksSearchIn(RFBaseModel):
+    """Model for payload sent to POST `/links/search` endpoint."""
+
+    entities: list[str]
+    filters: LinksFilterObjects | None = None
+    limits: LinksLimitsObjects | None = None
