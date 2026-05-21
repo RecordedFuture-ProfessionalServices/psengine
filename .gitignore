@@ -1,28 +1,37 @@
-.DS_Store
-**/venv/*
-**/venv3/*
+# build 
 __pycache__
 **/dist/*
 **/build/*
-**/pkg_build/*
-**/.ruff_cache/*
-*.log
-*.log.*
-*.csv
-.tox
-rfalerts_*.json
-rfplaybookalerts_*.json
 dist/
-.vscode
 *.pyc
 *.egg-info
 *.tar.gz
 *.tgz
+site/
+
+# client
+.DS_Store
+.vscode
+.idea/
+
+
+# tets and coverage
+**/.ruff_cache/*
+*.log
+*.log.*
+*.csv
 result.xml
 .coverage
 tests/stix2/tests
 tests/output/*
-virt/
+alerts/
+attachments/
+rules/
+risklists/
+bundles/
+
+
+# docs
 docs/examples/classic_alerts/alerts
 docs/examples/playbook_alerts/alerts
 docs/examples/analyst_notes/attachments
@@ -31,12 +40,4 @@ docs/examples/enrich/enrich
 docs/examples/risklists/risklists
 docs/examples/stix2/bundles
 
-alerts/
-attachments/
-rules/
-risklists/
-bundles/
 
-
-site/
-.idea/
