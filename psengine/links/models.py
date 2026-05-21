@@ -11,11 +11,13 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Any, Literal
+from enum import Enum
+from typing import Annotated, Any, Literal
 
-from pydantic import Field
+from pydantic import AfterValidator, BeforeValidator, Field
 
 from ..common_models import IdName, RFBaseModel
+from ..helpers.helpers import Validators
 
 
 class Metadata(IdName):
@@ -71,3 +73,46 @@ EntityAttribute = (
 class EntitySearchError(RFBaseModel):
     message: str
     status_code: int
+
+
+class LinkSource(Enum):
+    """RF Links API source filter."""
+
+    technical = 'technical'
+    insikt = 'insikt'
+
+
+class SearchScope(Enum):
+    """RF Links API search scope."""
+
+    small = 'small'
+    medium = 'medium'
+    large = 'large'
+
+
+class FilterTechnical(RFBaseModel):
+    """Fields in the Technical Object of Filters."""
+
+    timeframe: Annotated[str | None, AfterValidator(Validators.is_rel_time_valid)] = None
+    events: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    connected_entities: Annotated[
+        list[str] | None, BeforeValidator(Validators.convert_str_to_list)
+    ] = None
+
+
+class LinksFilterObjects(RFBaseModel):
+    """Objects in the fields data parameter of links."""
+
+    sections: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    entity_types: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = (
+        None
+    )
+    sources: list[Literal['technical', 'insikt']] | None = None
+    technical: FilterTechnical | None = None
+
+
+class LinksLimitsObjects(RFBaseModel):
+    """Objects in the limits object fields."""
+
+    search_scope: SearchScope | None = None
+    per_entity_type: int | None = None

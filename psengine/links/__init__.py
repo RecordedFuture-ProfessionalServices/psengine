@@ -17,11 +17,7 @@ from .errors import (
     LinksSearchError,
 )
 from .links import (
-    FilterTechnical,
     LinkedEntity,
-    LinksFilterObjects,
-    LinksLimitsObjects,
-    LinksSearchIn,
     LinksSearchResponse,
     SearchResultSet,
 )

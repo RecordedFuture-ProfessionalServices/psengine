@@ -14,8 +14,10 @@
 import logging
 from typing import Annotated
 
-from pydantic import validate_call
+from pydantic import AfterValidator, BeforeValidator, validate_call
 from typing_extensions import Doc
+
+from psengine.helpers.helpers import Validators
 
 from ..endpoints import (
     EP_LINKS_METADATA_ENTITIES,
@@ -26,9 +28,19 @@ from ..endpoints import (
 from ..helpers import connection_exceptions, debug_call
 from ..rf_client import RFClient
 from .errors import LinksMetadataError, LinksSearchError
-from .links import LinksFilterObjects, LinksLimitsObjects, LinksSearchIn, LinksSearchResponse
 from .models import (
+    FilterTechnical,
+    LinksFilterObjects,
+    LinksLimitsObjects,
+)
+
+from .links import (
+    LinksSearchResponse,
+)
+from .models import (
+    LinkSource,
     MetadataOut,
+    SearchScope,
 )
 
 
@@ -112,11 +124,42 @@ class LinksMgr:
     def search(
         self,
         entities: Annotated[
-            list[str], Doc('List of Recorded Future entity IDs to search for links against.')
+            Annotated[str | list[str], AfterValidator(Validators.convert_str_to_list)],
+            Doc('One or more Recorded Future entity IDs to look up links for.'),
         ],
-        filters: Annotated[LinksFilterObjects | None, Doc('Filter objects for the search.')] = None,
-        limits: Annotated[LinksLimitsObjects | None, Doc('Limits objects for the search.')] = None,
-    ) -> Annotated[LinksSearchResponse, Doc('The structured search results.')]:
+        sections: Annotated[
+            str | list[str] | None, Doc('Filter results to these link section IDs.')
+        ] = None,
+        entity_types: Annotated[
+            str | list[str] | None,
+            Doc('Restrict linked entities to these entity types (e.g. "type:IpAddress").'),
+        ] = None,
+        sources: Annotated[
+            list[LinkSource] | None,
+            Doc('Limit to source type(s): technical, insikt, or both.'),
+        ] = None,
+        timeframe: Annotated[
+            str | None,
+            Doc('Technical-link timeframe (e.g. "-30d", default "-30d", max "-90d").'),
+        ] = None,
+        events: Annotated[
+            str | list[str] | None,
+            Doc('Restrict technical links to these event types (e.g. "type:MalwareAnalysis").'),
+        ] = None,
+        connected_entities: Annotated[
+            str | list[str] | None,
+            Doc('Only return technical links that connect to these entities.'),
+        ] = None,
+        search_scope: Annotated[
+            SearchScope | None,
+            Doc('Result-volume scope: small, medium (default), or large.'),
+        ] = None,
+        per_entity_type: Annotated[
+            int | None, Doc('Max linked entities returned per entity type.')
+        ] = None,
+    ) -> Annotated[
+        list[LinksSearchResponse], Doc('A list of LinkResult models — one per input entity.')
+    ]:
         """Search for entities connected to one or more target entities.
 
         Issues a single batched request: the response contains one
@@ -145,40 +188,6 @@ class LinksMgr:
         Endpoint:
             `/links/search`
 
-        Example:
-            ```python
-            from psengine.links import LinksMgr
-
-            mgr = LinksMgr()
-            results = mgr.search(entities=['QCwdoU'])
-            for result in results.data:
-                if result.error:
-                    continue
-                for link in result.links:
-                    print(f'{link.name} ({link.type_})')
-            ```
-
-            With filters and limits:
-            ```python
-            from psengine.links import (
-                FilterTechnical,
-                LinksFilterObjects,
-                LinksLimitsObjects,
-                LinksMgr,
-            )
-
-            mgr = LinksMgr()
-            filters = LinksFilterObjects(
-                sources=['technical'],
-                entity_types=['Malware'],
-                technical=FilterTechnical(timeframe='-30d'),
-            )
-            limits = LinksLimitsObjects(search_scope='small', per_entity_type=50)
-            results = mgr.search(
-                entities=['QCwdoU'], filters=filters, limits=limits
-            )
-            ```
-
         If the API failed for a specific entity in the batch, its result looks like:
         ```python
         SearchResultSet(
@@ -192,15 +201,22 @@ class LinksMgr:
             ValidationError: If any supplied parameter is of incorrect type.
             LinksSearchError: If an API or connection error occurs at the request level.
         """
-        payload = LinksSearchIn(entities=entities, filters=filters, limits=limits)
+        technical_filter = FilterTechnical(
+            timeframe=timeframe, events=events, connected_entities=connected_entities
+        ).json()
 
-        # Kept: @debug_call logs the args list, but batch size is the operationally
-        # useful number to surface at INFO. Drop if the reviewer disagrees.
+        filters = LinksFilterObjects(
+            sections=sections,
+            entity_types=entity_types,
+            sources=sources,
+            technical=technical_filter,
+        ).json()
+        limits = LinksLimitsObjects(
+            search_scope=search_scope, per_entity_type=per_entity_type
+        ).json()
+        payload = {'entities': entities, 'filters': filters, 'limits': limits}
+
         self.log.info(f'Executing links search for {len(entities)} entities.')
 
-        response = self.rf_client.request(
-            method='POST',
-            url=EP_LINKS_SEARCH,
-            data=payload.model_dump(exclude_none=True, by_alias=True),
-        )
+        response = self.rf_client.request(method='POST', url=EP_LINKS_SEARCH, data=payload)
         return LinksSearchResponse.model_validate(response.json())

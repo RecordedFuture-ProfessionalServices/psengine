@@ -11,51 +11,9 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from typing import Annotated, Literal
-
-from pydantic import AfterValidator
 
 from ..common_models import IdNameType, RFBaseModel
-from ..helpers import TimeHelpers
 from .models import EntityAttribute, EntitySearchError
-
-
-def _validate_rel_time(v: str | None) -> str | None:
-    if v is not None and not TimeHelpers.is_rel_time_valid(v):
-        raise ValueError(f'Invalid relative time: {v}')
-    return v
-
-
-class FilterTechnical(RFBaseModel):
-    """Fields in the Technical Object of Filters."""
-
-    timeframe: Annotated[str | None, AfterValidator(_validate_rel_time)] = None
-    events: list[str] | None = None
-    connected_entities: list[str] | None = None
-
-
-class LinksFilterObjects(RFBaseModel):
-    """Objects in the fields data parameter of links."""
-
-    sections: list[str] | None = None
-    entity_types: list[str] | None = None
-    sources: list[Literal['technical', 'insikt']] | None = None
-    technical: FilterTechnical | None = None
-
-
-class LinksLimitsObjects(RFBaseModel):
-    """Objects in the limits object fields."""
-
-    search_scope: Literal['small', 'medium', 'large'] | None = None
-    per_entity_type: int | None = None
-
-
-class LinksSearchIn(RFBaseModel):
-    """Model for payload sent to POST `/links/search` endpoint."""
-
-    entities: list[str]
-    filters: LinksFilterObjects | None = None
-    limits: LinksLimitsObjects | None = None
 
 
 class LinkedEntity(IdNameType):

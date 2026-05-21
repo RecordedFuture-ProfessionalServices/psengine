@@ -14,14 +14,9 @@
 import pytest
 from pydantic import ValidationError
 
-from psengine.links.links import FilterTechnical, LinksSearchIn
+from psengine.links.models import FilterTechnical
 
 
 def test_filter_technical_timeframe_invalid_format():
     with pytest.raises(ValidationError, match='Invalid relative time'):
         FilterTechnical(timeframe='not-a-time')
-
-
-def test_links_search_in_entities_required():
-    with pytest.raises(ValidationError, match='entities'):
-        LinksSearchIn()

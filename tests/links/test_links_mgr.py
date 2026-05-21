@@ -17,10 +17,11 @@ from requests import Response
 from requests.exceptions import HTTPError
 
 from psengine.links.errors import LinksMetadataError, LinksSearchError
-from psengine.links.links import LinksFilterObjects, LinksLimitsObjects
 from psengine.links.models import (
     CriticalityAttribute,
     GenericAttribute,
+    LinksFilterObjects,
+    LinksLimitsObjects,
     MitreNameAttribute,
     RiskAttribute,
     ThreatActorAttribute,
@@ -184,10 +185,9 @@ def test_search_complex_attributes(links_mgr, mocker, make_response):
 
 
 def test_search_with_limits(links_mgr, mocker, make_response):
-    limits = LinksLimitsObjects(search_scope='small', per_entity_type=10)
     mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response({'data': []}))
 
-    links_mgr.search(entities=['ent1'], limits=limits)
+    links_mgr.search(entities=['ent1'], search_scope='small', per_entity_type=10)
 
     _, kwargs = links_mgr.rf_client.request.call_args
     assert kwargs['data']['limits']['search_scope'] == 'small'
