@@ -14,7 +14,7 @@
 import logging
 from typing import Annotated
 
-from pydantic import AfterValidator, BeforeValidator, validate_call
+from pydantic import AfterValidator, validate_call
 from typing_extensions import Doc
 
 from psengine.helpers.helpers import Validators
@@ -28,16 +28,13 @@ from ..endpoints import (
 from ..helpers import connection_exceptions, debug_call
 from ..rf_client import RFClient
 from .errors import LinksMetadataError, LinksSearchError
-from .models import (
-    FilterTechnical,
-    LinksFilterObjects,
-    LinksLimitsObjects,
-)
-
 from .links import (
     LinksSearchResponse,
 )
 from .models import (
+    FilterTechnical,
+    LinksFilterObjects,
+    LinksLimitsObjects,
     LinkSource,
     MetadataOut,
     SearchScope,

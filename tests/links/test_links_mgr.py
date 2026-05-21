@@ -21,7 +21,6 @@ from psengine.links.models import (
     CriticalityAttribute,
     GenericAttribute,
     LinksFilterObjects,
-    LinksLimitsObjects,
     MitreNameAttribute,
     RiskAttribute,
     ThreatActorAttribute,

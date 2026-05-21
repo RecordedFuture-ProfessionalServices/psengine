@@ -17,9 +17,9 @@ from pydantic import ValidationError
 from psengine.endpoints import EP_LINKS_SEARCH
 from psengine.links.models import (
     FilterTechnical,
-    LinkSource,
     LinksFilterObjects,
     LinksLimitsObjects,
+    LinkSource,
     SearchScope,
 )
 
@@ -142,10 +142,26 @@ def test_links_mgr_search_converts_str_filter_fields_to_lists(
 @pytest.mark.parametrize(
     ('search_kwargs', 'expected_filter_key', 'expected_value'),
     [
-        ({'sections': ['section:actors', 'section:tools']}, ('sections',), ['section:actors', 'section:tools']),
-        ({'entity_types': ['type:IpAddress', 'type:DomainName']}, ('entity_types',), ['type:IpAddress', 'type:DomainName']),
-        ({'events': ['type:MalwareAnalysis', 'type:TTPAnalysis']}, ('technical', 'events'), ['type:MalwareAnalysis', 'type:TTPAnalysis']),
-        ({'connected_entities': ['id:Ent1', 'id:Ent2']}, ('technical', 'connected_entities'), ['id:Ent1', 'id:Ent2']),
+        (
+            {'sections': ['section:actors', 'section:tools']},
+            ('sections',),
+            ['section:actors', 'section:tools'],
+        ),
+        (
+            {'entity_types': ['type:IpAddress', 'type:DomainName']},
+            ('entity_types',),
+            ['type:IpAddress', 'type:DomainName'],
+        ),
+        (
+            {'events': ['type:MalwareAnalysis', 'type:TTPAnalysis']},
+            ('technical', 'events'),
+            ['type:MalwareAnalysis', 'type:TTPAnalysis'],
+        ),
+        (
+            {'connected_entities': ['id:Ent1', 'id:Ent2']},
+            ('technical', 'connected_entities'),
+            ['id:Ent1', 'id:Ent2'],
+        ),
     ],
 )
 def test_links_mgr_search_preserves_list_filter_fields(
