@@ -4,7 +4,7 @@ mgr = LinksMgr()
 
 results = mgr.search(entities=['QCwdoU'])
 
-for result in results.data:
+for result in results:
     if result.error:
         print(f'Failed: {result.error.message}')
         continue

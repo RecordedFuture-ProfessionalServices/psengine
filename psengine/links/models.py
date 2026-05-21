@@ -16,22 +16,8 @@ from typing import Annotated, Any, Literal
 
 from pydantic import AfterValidator, BeforeValidator, Field
 
-from ..common_models import IdName, RFBaseModel
+from ..common_models import RFBaseModel
 from ..helpers.helpers import Validators
-
-
-class Metadata(IdName):
-    description: str | None = None
-
-
-class MetadataOut(RFBaseModel):
-    """Response for endpoints:
-    - `/links/metadata/sections`
-    - `/links/metadata/events`
-    - `/links/metadata/entities`.
-    """
-
-    data: list[Metadata]
 
 
 class RiskAttribute(RFBaseModel):

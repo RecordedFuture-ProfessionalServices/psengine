@@ -17,6 +17,7 @@ from typing import Annotated
 from pydantic import AfterValidator, validate_call
 from typing_extensions import Doc
 
+from ..common_models import IdName
 from ..endpoints import (
     EP_LINKS_METADATA_ENTITIES,
     EP_LINKS_METADATA_EVENTS,
@@ -28,15 +29,14 @@ from ..helpers.helpers import Validators
 from ..rf_client import RFClient
 from .errors import LinksMetadataError, LinksSearchError
 from .links import (
+    EntityLinks,
     LinksSearchIn,
-    LinksSearchResponseOut,
 )
 from .models import (
     FilterTechnical,
     LinksFilterObjects,
     LinksLimitsObjects,
     LinkSource,
-    MetadataOut,
     SearchScope,
 )
 
@@ -57,7 +57,7 @@ class LinksMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=LinksMetadataError)
     def list_sections(
         self,
-    ) -> Annotated[MetadataOut, Doc('Section objects with id, name, and description.')]:
+    ) -> Annotated[list[IdName], Doc('List of section objects with id and name.')]:
         """List all sections that can be used to filter a Link search.
 
         Sections are the high-level categories the Links API groups results into,
@@ -71,14 +71,14 @@ class LinksMgr:
             LinksMetadataError: If an API or connection error occurs.
         """
         response = self.rf_client.request(method='GET', url=EP_LINKS_METADATA_SECTIONS)
-        return MetadataOut.model_validate(response.json()).data
+        return [IdName.model_validate(item) for item in response.json()['data']]
 
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=LinksMetadataError)
     def list_events(
         self,
-    ) -> Annotated[MetadataOut, Doc('Event objects with id, name, and description.')]:
+    ) -> Annotated[list[IdName], Doc('List of event objects with id and name.')]:
         """List all event types that can be used to filter technical Link searches.
 
         Event types describe the kind of analytical evidence that produced a
@@ -92,14 +92,14 @@ class LinksMgr:
             LinksMetadataError: If an API or connection error occurs.
         """
         response = self.rf_client.request(method='GET', url=EP_LINKS_METADATA_EVENTS)
-        return MetadataOut.model_validate(response.json()).data
+        return [IdName.model_validate(item) for item in response.json()['data']]
 
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=LinksMetadataError)
     def list_entity_types(
         self,
-    ) -> Annotated[MetadataOut, Doc('Entity-type objects with id and name.')]:
+    ) -> Annotated[list[IdName], Doc('List of entity-type objects with id and name.')]:
         """List all entity types that can be used to filter a Link search.
 
         The returned values are the supported types for connected entities
@@ -113,7 +113,7 @@ class LinksMgr:
             LinksMetadataError: If an API or connection error occurs.
         """
         response = self.rf_client.request(method='GET', url=EP_LINKS_METADATA_ENTITIES)
-        return MetadataOut.model_validate(response.json()).data
+        return [IdName.model_validate(item) for item in response.json()['data']]
 
     @debug_call
     @validate_call
@@ -155,7 +155,8 @@ class LinksMgr:
             int | None, Doc('Max linked entities returned per entity type.')
         ] = None,
     ) -> Annotated[
-        list[LinksSearchResponseOut], Doc('A list of LinkResult models — one per input entity.')
+        list[EntityLinks],
+        Doc('A list of EntityLinks objects'),
     ]:
         """Search for entities connected to one or more target entities.
 
@@ -205,4 +206,4 @@ class LinksMgr:
         self.log.info(f'Executing links search for {len(entities)} entities.')
 
         response = self.rf_client.request(method='POST', url=EP_LINKS_SEARCH, data=payload)
-        return LinksSearchResponseOut.model_validate(response.json())
+        return [EntityLinks.model_validate(item) for item in response.json()['data']]

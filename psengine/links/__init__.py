@@ -19,10 +19,8 @@ from .errors import (
 from .links import (
     EntityLinks,
     LinkedEntity,
-    LinksSearchResponseOut,
 )
 from .links_mgr import LinksMgr
 from .models import (
     EntityAttribute,
-    MetadataOut,
 )

@@ -11,7 +11,7 @@ results = mgr.search(
     per_entity_type=50,
 )
 
-for result in results.data:
+for result in results:
     if result.error:
         print(f'Failed: {result.error.message}')
         continue

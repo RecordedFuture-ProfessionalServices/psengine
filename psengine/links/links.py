@@ -116,6 +116,7 @@ class EntityLinks(RFBaseModel):
             if link.type_ == 'type:Organization':
                 is_threat_actor = next(
                     (attr.value for attr in link.attributes if attr.id_ == 'threat_actor'),
+                    False,
                 )
                 if is_threat_actor:
                     tas.append(
@@ -141,12 +142,6 @@ class EntityLinks(RFBaseModel):
             for link in self.links
             if link.type_ == 'type:Malware'
         ]
-
-
-class LinksSearchResponseOut(RFBaseModel):
-    """Response from POST `/links/search` endpoint."""
-
-    data: list[EntityLinks] = []
 
 
 class LinksSearchIn(RFBaseModel):

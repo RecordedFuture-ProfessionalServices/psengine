@@ -16,6 +16,7 @@ from pydantic import ValidationError
 from requests import Response
 from requests.exceptions import HTTPError
 
+from psengine.links import LinksMgr
 from psengine.links.errors import LinksMetadataError, LinksSearchError
 from psengine.links.models import (
     CriticalityAttribute,
@@ -27,7 +28,7 @@ from psengine.links.models import (
 )
 
 
-def test_list_sections(links_mgr, mocker, make_response):
+def test_list_sections(links_mgr: LinksMgr, mocker, make_response):
     mock_data = {
         'data': [
             {'id': 's1', 'name': 'Section 1', 'description': 'Desc 1'},
@@ -42,7 +43,7 @@ def test_list_sections(links_mgr, mocker, make_response):
     assert sections[1].name == 'Section 2'
 
 
-def test_list_events(links_mgr, mocker, make_response):
+def test_list_events(links_mgr: LinksMgr, mocker, make_response):
     mock_data = {
         'data': [
             {'id': 'e1', 'name': 'Event 1', 'description': 'Desc 1'},
@@ -57,7 +58,7 @@ def test_list_events(links_mgr, mocker, make_response):
     assert events[1].name == 'Event 2'
 
 
-def test_list_entity_types(links_mgr, mocker, make_response):
+def test_list_entity_types(links_mgr: LinksMgr, mocker, make_response):
     mock_data = {
         'data': [
             {'id': 'Type1', 'name': 'Type 1'},
@@ -72,7 +73,7 @@ def test_list_entity_types(links_mgr, mocker, make_response):
     assert entity_types[1].name == 'Type 2'
 
 
-def test_search_basic(links_mgr, mocker, make_response):
+def test_search_basic(links_mgr: LinksMgr, mocker, make_response):
     mock_data = {
         'data': [
             {
@@ -93,10 +94,10 @@ def test_search_basic(links_mgr, mocker, make_response):
     mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
 
     results = links_mgr.search(entities=['ent1'])
-    assert len(results.data) == 1
-    assert results.data[0].entity.id_ == 'ent1'
-    assert len(results.data[0].links) == 1
-    assert results.data[0].links[0].id_ == 'link1'
+    assert len(results) == 1
+    assert results[0].entity.id_ == 'ent1'
+    assert len(results[0].links) == 1
+    assert results[0].links[0].id_ == 'link1'
 
 
 def test_filter_objects_invalid_source():
@@ -104,7 +105,7 @@ def test_filter_objects_invalid_source():
         LinksFilterObjects(sources=['invalid_source'])
 
 
-def test_metadata_error(links_mgr, mocker):
+def test_metadata_error(links_mgr: LinksMgr, mocker):
     mock_resp = mocker.Mock(spec=Response)
     mock_resp.status_code = 500
     mock_resp.text = 'Internal Server Error'
@@ -118,7 +119,7 @@ def test_metadata_error(links_mgr, mocker):
         links_mgr.list_sections()
 
 
-def test_search_error(links_mgr, mocker):
+def test_search_error(links_mgr: LinksMgr, mocker):
     mock_resp = mocker.Mock(spec=Response)
     mock_resp.status_code = 400
     mock_resp.text = 'Bad Request'
@@ -132,7 +133,7 @@ def test_search_error(links_mgr, mocker):
         links_mgr.search(entities=['ent1'])
 
 
-def test_search_complex_attributes(links_mgr, mocker, make_response):
+def test_search_complex_attributes(links_mgr: LinksMgr, mocker, make_response):
     mock_data = {
         'data': [
             {
@@ -158,7 +159,7 @@ def test_search_complex_attributes(links_mgr, mocker, make_response):
     mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
 
     results = links_mgr.search(entities=['ent1'])
-    attrs = results.data[0].links[0].attributes
+    attrs = results[0].links[0].attributes
     assert len(attrs) == 6
 
     assert isinstance(attrs[0], RiskAttribute)
@@ -183,7 +184,7 @@ def test_search_complex_attributes(links_mgr, mocker, make_response):
     assert attrs[5].value == 'some value'
 
 
-def test_search_with_limits(links_mgr, mocker, make_response):
+def test_search_with_limits(links_mgr: LinksMgr, mocker, make_response):
     mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response({'data': []}))
 
     links_mgr.search(entities=['ent1'], search_scope='small', per_entity_type=10)
@@ -193,7 +194,9 @@ def test_search_with_limits(links_mgr, mocker, make_response):
     assert kwargs['data']['limits']['per_entity_type'] == 10
 
 
-def test_entity_links_iocs_groups_results_and_defaults_risk_score(links_mgr, mocker, make_response):
+def test_entity_links_iocs_groups_results_and_defaults_risk_score(
+    links_mgr: LinksMgr, mocker, make_response
+):
     mock_data = {
         'data': [
             {
@@ -225,7 +228,7 @@ def test_entity_links_iocs_groups_results_and_defaults_risk_score(links_mgr, moc
     }
     mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
 
-    entity_links = links_mgr.search(entities=['ent1']).data[0]
+    entity_links = links_mgr.search(entities=['ent1'])[0]
     iocs = entity_links.iocs()
 
     assert set(iocs.keys()) == {'type:InternetDomainName', 'type:Hash'}
@@ -237,7 +240,7 @@ def test_entity_links_iocs_groups_results_and_defaults_risk_score(links_mgr, moc
     assert iocs['type:Hash'][0].source == 'insikt'
 
 
-def test_entity_links_ttps_filters_mitre_attack_links(links_mgr, mocker, make_response):
+def test_entity_links_ttps_filters_mitre_attack_links(links_mgr: LinksMgr, mocker, make_response):
     mock_data = {
         'data': [
             {
@@ -269,7 +272,7 @@ def test_entity_links_ttps_filters_mitre_attack_links(links_mgr, mocker, make_re
     }
     mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
 
-    ttps = links_mgr.search(entities=['ent1']).data[0].ttps()
+    ttps = links_mgr.search(entities=['ent1'])[0].ttps()
 
     assert len(ttps) == 2
     assert ttps[0].id_ == 'ttp1'
@@ -281,7 +284,7 @@ def test_entity_links_ttps_filters_mitre_attack_links(links_mgr, mocker, make_re
 
 
 def test_entity_links_threat_actors_only_returns_marked_organizations(
-    links_mgr, mocker, make_response
+    links_mgr: LinksMgr, mocker, make_response
 ):
     mock_data = {
         'data': [
@@ -313,7 +316,7 @@ def test_entity_links_threat_actors_only_returns_marked_organizations(
     }
     mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
 
-    threat_actors = links_mgr.search(entities=['ent1']).data[0].threat_actors()
+    threat_actors = links_mgr.search(entities=['ent1'])[0].threat_actors()
 
     assert len(threat_actors) == 1
     assert threat_actors[0].id_ == 'ta1'
@@ -321,7 +324,9 @@ def test_entity_links_threat_actors_only_returns_marked_organizations(
     assert threat_actors[0].source == 'insikt'
 
 
-def test_entity_links_malwares_only_returns_malware_links(links_mgr, mocker, make_response):
+def test_entity_links_malwares_only_returns_malware_links(
+    links_mgr: LinksMgr, mocker, make_response
+):
     mock_data = {
         'data': [
             {
@@ -353,8 +358,34 @@ def test_entity_links_malwares_only_returns_malware_links(links_mgr, mocker, mak
     }
     mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
 
-    malwares = links_mgr.search(entities=['ent1']).data[0].malwares()
+    malwares = links_mgr.search(entities=['ent1'])[0].malwares()
 
     assert len(malwares) == 2
     assert [malware.id_ for malware in malwares] == ['mw1', 'mw2']
     assert [malware.source for malware in malwares] == ['technical', 'insikt']
+
+
+def test_entity_links_threat_actors_skips_organization_missing_attribute(
+    links_mgr: LinksMgr, mocker, make_response
+):
+    mock_data = {
+        'data': [
+            {
+                'entity': {'id': 'ent1', 'name': 'Entity 1', 'type': 'Type1'},
+                'links': [
+                    {
+                        'id': 'org-no-attr',
+                        'name': 'Organization Without Flag',
+                        'type': 'type:Organization',
+                        'source': 'insikt',
+                        'attributes': [],
+                    },
+                ],
+            }
+        ]
+    }
+    mocker.patch.object(links_mgr.rf_client, 'request', return_value=make_response(mock_data))
+
+    threat_actors = links_mgr.search(entities=['ent1'])[0].threat_actors()
+
+    assert threat_actors == []
