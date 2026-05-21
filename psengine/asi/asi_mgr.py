@@ -95,12 +95,11 @@ _ASSET_SEARCH_QUERY_MAP: dict[str, tuple[str, str, callable]] = {
 class AttackSurfaceMgr:
     """Manages requests for Recorded Future SecurityTrails (ASI) API."""
 
-    def __init__(self, api_token: str = None):
-        """Initializes the `AttackSurfaceMgr` object.
-
-        Args:
-            api_token (str, optional): ASI API token.
-        """
+    def __init__(
+        self,
+        api_token: Annotated[str | None, Doc('ASI API token.')] = None,
+    ):
+        """Initializes the `AttackSurfaceMgr` object."""
         self.log = logging.getLogger(__name__)
         self.asi_client = ASIClient(api_token=api_token) if api_token else ASIClient()
 

@@ -36,12 +36,11 @@ from .models import DirectoryListOut, FileDeleteOut, FileGetOut, FileHeadOut, Fi
 class FusionMgr:
     """Manages requests for Recorded Future Fusion files."""
 
-    def __init__(self, rf_token: str = None):
-        """Initializes the `FusionMgr` object.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token.
-        """
+    def __init__(
+        self,
+        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
+    ):
+        """Initializes the `FusionMgr` object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
 
