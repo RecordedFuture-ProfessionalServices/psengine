@@ -38,7 +38,7 @@ Entity: Lazarus Group
 
 #### 2: Filter link results and apply limits
 
-In this example, we use `LinksFilterObjects` and `LinksLimitsObjects` to narrow results to technical malware links seen in the last 30 days, and to cap result size per entity type.
+In this example, we pass filter and limit arguments directly to `search` (for example `sources`, `entity_types`, `timeframe`, `search_scope`, and `per_entity_type`) to narrow results to technical malware links seen in the last 30 days and cap result size per entity type.
 
 ```python
 --8<-- "docs/examples/links/example_2.py"
@@ -46,7 +46,7 @@ In this example, we use `LinksFilterObjects` and `LinksLimitsObjects` to narrow 
 
 #### 3: Discover available metadata for filters
 
-In this example, we list valid sections, event types, and entity types. These IDs can be reused in `LinksFilterObjects` and `FilterTechnical` when building search queries.
+In this example, we list valid sections, event types, and entity types. These IDs can be reused in the `search` filter arguments when building queries.
 
 ```python
 --8<-- "docs/examples/links/example_3.py"

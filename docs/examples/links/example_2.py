@@ -1,25 +1,20 @@
-from psengine.links import (
-    FilterTechnical,
-    LinksFilterObjects,
-    LinksLimitsObjects,
-    LinksMgr,
-)
+from psengine.links import LinksMgr
 
 mgr = LinksMgr()
 
-filters = LinksFilterObjects(
-    sources=['technical'],
-    entity_types=['Malware'],
-    technical=FilterTechnical(timeframe='-30d'),
-)
-limits = LinksLimitsObjects(
-    search_scope='small', per_entity_type=50
-)
-
 results = mgr.search(
-    entities=['QCwdoU'], filters=filters, limits=limits
+    entities=['QCwdoU'],
+    sources=['technical'],
+    entity_types=['type:Malware'],
+    timeframe='-30d',
+    search_scope='small',
+    per_entity_type=50,
 )
 
 for result in results.data:
+    if result.error:
+        print(f'Failed: {result.error.message}')
+        continue
+
     for link in result.links:
         print(f'{link.name} ({link.type_})')

@@ -18,8 +18,8 @@ from .errors import (
 )
 from .links import (
     LinkedEntity,
-    LinksSearchResponse,
-    SearchResultSet,
+    LinksSearchResponseOut,
+    Link,
 )
 from .links_mgr import LinksMgr
 from .models import (

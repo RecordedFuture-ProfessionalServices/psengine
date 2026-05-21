@@ -29,7 +29,7 @@ from ..helpers import connection_exceptions, debug_call
 from ..rf_client import RFClient
 from .errors import LinksMetadataError, LinksSearchError
 from .links import (
-    LinksSearchResponse,
+    LinksSearchResponseOut,
 )
 from .models import (
     FilterTechnical,
@@ -155,43 +155,28 @@ class LinksMgr:
             int | None, Doc('Max linked entities returned per entity type.')
         ] = None,
     ) -> Annotated[
-        list[LinksSearchResponse], Doc('A list of LinkResult models — one per input entity.')
+        list[LinksSearchResponseOut], Doc('A list of LinkResult models — one per input entity.')
     ]:
         """Search for entities connected to one or more target entities.
 
         Issues a single batched request: the response contains one
-        `SearchResultSet` per entity in `entities`, in the same order. If the
+        `Link` per entity in `entities`, in the same order. If the
         API failed for a specific entity, that result's `error` is populated
         and `links` is empty — the rest of the batch still succeeds.
 
-        `filters` narrows the result set:
-
-        - `sections` — restrict to specific Links sections (see `list_sections`).
-        - `entity_types` — restrict to specific connected-entity types (see `list_entity_types`).
-        - `sources` — restrict to `technical`, `insikt`, or both.
-        - `technical` — sub-filters that apply only to technical links (timeframe,
-          event types, connected-entity scope).
-
-        `limits` controls how aggressively the API searches:
-
-        - `search_scope` — one of `small`, `medium`, `large`. Larger scopes scan
-          more references and Insikt notes per query at the cost of latency.
-        - `per_entity_type` — caps how many connected entities of each type
-          are returned.
-
         Entities must be supplied as Recorded Future entity IDs; if you only have
-        a name, resolve it with `EntityMatchMgr` or `LookupMgr` first.
+        a name, resolve it with `EntityMatchMgr` first.
 
         Endpoint:
             `/links/search`
 
         If the API failed for a specific entity in the batch, its result looks like:
         ```python
-        SearchResultSet(
-            entity=IdNameType(id_='QCwdoU', name='...', type_='...'),
-            links=[],
-            error=EntitySearchError(message='...', status_code=404),
-        )
+            Link(
+                entity=IdNameType(id_='QCwdoU', name='...', type_='...'),
+                links=[],
+                error=EntitySearchError(message='...', status_code=404),
+            )
         ```
 
         Raises:
@@ -216,4 +201,4 @@ class LinksMgr:
         self.log.info(f'Executing links search for {len(entities)} entities.')
 
         response = self.rf_client.request(method='POST', url=EP_LINKS_SEARCH, data=payload)
-        return LinksSearchResponse.model_validate(response.json())
+        return LinksSearchResponseOut.model_validate(response.json())

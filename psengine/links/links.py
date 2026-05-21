@@ -17,17 +17,14 @@ from .models import EntityAttribute, EntitySearchError
 
 
 class LinkedEntity(IdNameType):
-    """An entity connected to the search target.
-
-    Inherits id_ (alias 'id'), name, and type_ (alias 'type') from IdNameType.
-    """
+    """An entity connected to the search target."""
 
     source: str | None = None
     section: str | None = None
     attributes: list[EntityAttribute] = []
 
 
-class SearchResultSet(RFBaseModel):
+class Link(RFBaseModel):
     """The result set for a single entity that was queried."""
 
     entity: IdNameType | None = None
@@ -35,7 +32,7 @@ class SearchResultSet(RFBaseModel):
     error: EntitySearchError | None = None
 
 
-class LinksSearchResponse(RFBaseModel):
+class LinksSearchResponseOut(RFBaseModel):
     """Response from POST `/links/search` endpoint."""
 
-    data: list[SearchResultSet] = []
+    data: list[Link] = []
