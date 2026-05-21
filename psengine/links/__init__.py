@@ -28,9 +28,5 @@ from .links import (
 from .links_mgr import LinksMgr
 from .models import (
     EntityAttribute,
-    MetadataEntityTypesResponse,
-    MetadataEvent,
-    MetadataEventsResponse,
-    MetadataSection,
-    MetadataSectionsResponse,
+    MetadataOut,
 )

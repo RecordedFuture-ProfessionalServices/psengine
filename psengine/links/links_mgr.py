@@ -17,7 +17,6 @@ from typing import Annotated
 from pydantic import validate_call
 from typing_extensions import Doc
 
-from ..common_models import IdName
 from ..endpoints import (
     EP_LINKS_METADATA_ENTITIES,
     EP_LINKS_METADATA_EVENTS,
@@ -29,11 +28,7 @@ from ..rf_client import RFClient
 from .errors import LinksMetadataError, LinksSearchError
 from .links import LinksFilterObjects, LinksLimitsObjects, LinksSearchIn, LinksSearchResponse
 from .models import (
-    MetadataEntityTypesResponse,
-    MetadataEvent,
-    MetadataEventsResponse,
-    MetadataSection,
-    MetadataSectionsResponse,
+    MetadataOut,
 )
 
 
@@ -53,93 +48,63 @@ class LinksMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=LinksMetadataError)
     def list_sections(
         self,
-    ) -> Annotated[list[MetadataSection], Doc('Section objects with id, name, and description.')]:
+    ) -> Annotated[MetadataOut, Doc('Section objects with id, name, and description.')]:
         """List all sections that can be used to filter a Link search.
 
         Sections are the high-level categories the Links API groups results into,
         for example *Actors, Tools & TTPs* or *Indicators & Detection Rules*.
-        Use the returned `id_` values to populate `LinksFilterObjects.sections`.
 
         Endpoint:
             `/links/metadata/sections`
-
-        Example:
-            ```python
-            from psengine.links import LinksMgr
-
-            mgr = LinksMgr()
-            for section in mgr.list_sections():
-                print(f'{section.id_}: {section.name}')
-            ```
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
             LinksMetadataError: If an API or connection error occurs.
         """
         response = self.rf_client.request(method='GET', url=EP_LINKS_METADATA_SECTIONS)
-        return MetadataSectionsResponse.model_validate(response.json()).data
+        return MetadataOut.model_validate(response.json()).data
 
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=LinksMetadataError)
     def list_events(
         self,
-    ) -> Annotated[list[MetadataEvent], Doc('Event objects with id, name, and description.')]:
+    ) -> Annotated[MetadataOut, Doc('Event objects with id, name, and description.')]:
         """List all event types that can be used to filter technical Link searches.
 
         Event types describe the kind of analytical evidence that produced a
         technical link (for example `TTPAnalysis` or `InfrastructureAnalysis`).
-        Use the returned `id_` values to populate `FilterTechnical.events`.
 
         Endpoint:
             `/links/metadata/events`
-
-        Example:
-            ```python
-            from psengine.links import LinksMgr
-
-            mgr = LinksMgr()
-            for event in mgr.list_events():
-                print(f'{event.id_}: {event.name}')
-            ```
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
             LinksMetadataError: If an API or connection error occurs.
         """
         response = self.rf_client.request(method='GET', url=EP_LINKS_METADATA_EVENTS)
-        return MetadataEventsResponse.model_validate(response.json()).data
+        return MetadataOut.model_validate(response.json()).data
 
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=LinksMetadataError)
     def list_entity_types(
         self,
-    ) -> Annotated[list[IdName], Doc('Entity-type objects with id and name.')]:
+    ) -> Annotated[MetadataOut, Doc('Entity-type objects with id and name.')]:
         """List all entity types that can be used to filter a Link search.
 
         The returned values are the supported types for connected entities
-        (for example `Malware`, `Company`, `IpAddress`). Use the `id_` values
-        to populate `LinksFilterObjects.entity_types`.
+        (for example `Malware`, `Company`, `IpAddress`).
 
         Endpoint:
             `/links/metadata/entities`
-
-        Example:
-            ```python
-            from psengine.links import LinksMgr
-
-            mgr = LinksMgr()
-            for entity_type in mgr.list_entity_types():
-                print(f'{entity_type.id_}: {entity_type.name}')
-            ```
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
             LinksMetadataError: If an API or connection error occurs.
         """
         response = self.rf_client.request(method='GET', url=EP_LINKS_METADATA_ENTITIES)
-        return MetadataEntityTypesResponse.model_validate(response.json()).data
+        return MetadataOut.model_validate(response.json()).data
 
     @debug_call
     @validate_call

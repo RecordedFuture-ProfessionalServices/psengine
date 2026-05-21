@@ -18,30 +18,18 @@ from pydantic import Field
 from ..common_models import IdName, RFBaseModel
 
 
-class MetadataSection(IdName):
+class Metadata(IdName):
     description: str | None = None
 
 
-class MetadataSectionsResponse(RFBaseModel):
-    """Response from GET `/links/metadata/sections` endpoint."""
+class MetadataOut(RFBaseModel):
+    """Response for endpoints:
+    - `/links/metadata/sections`
+    - `/links/metadata/events`
+    - `/links/metadata/entities`.
+    """
 
-    data: list[MetadataSection]
-
-
-class MetadataEvent(IdName):
-    description: str | None = None
-
-
-class MetadataEventsResponse(RFBaseModel):
-    """Response from GET `/links/metadata/events` endpoint."""
-
-    data: list[MetadataEvent]
-
-
-class MetadataEntityTypesResponse(RFBaseModel):
-    """Response from GET `/links/metadata/entities` endpoint."""
-
-    data: list[IdName]
+    data: list[Metadata]
 
 
 class RiskAttribute(RFBaseModel):
