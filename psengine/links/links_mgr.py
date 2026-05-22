@@ -14,7 +14,7 @@
 import logging
 from typing import Annotated
 
-from pydantic import AfterValidator, validate_call
+from pydantic import AfterValidator, Field, validate_call
 from typing_extensions import Doc
 
 from ..common_models import IdName
@@ -133,7 +133,7 @@ class LinksMgr:
         ] = None,
         sources: Annotated[
             list[LinkSource] | None,
-            Doc('Limit to source type(s): technical, insikt, or both.'),
+            Doc('Limit to source type(s): "technical", "insikt", or both if argument omitted.'),
         ] = None,
         timeframe: Annotated[
             str | None,
@@ -149,18 +149,20 @@ class LinksMgr:
         ] = None,
         search_scope: Annotated[
             SearchScope | None,
-            Doc('Result-volume scope: small, medium (default), or large.'),
-        ] = None,
+            Doc('Result-volume scope: "small", "medium" (default), or "large".'),
+        ] = 'medium',
         per_entity_type: Annotated[
-            int | None, Doc('Max linked entities returned per entity type.')
+            int | None,
+            Field(ge=1, le=1_000_000_000),
+            Doc('Max linked entities returned per entity type (>= 1 <= 1,000,000,000).'),
         ] = None,
     ) -> Annotated[
         list[EntityLinks],
         Doc('A list of EntityLinks objects'),
     ]:
-        """Search for technically validated relationships between threat intelligence 
-        entities in the Recorded Future Intelligence Cloud — connections established 
-        through sandbox analysis, infrastructure analysis, network traffic analysis, 
+        """Search for technically validated relationships between threat intelligence
+        entities in the Recorded Future Intelligence Cloud — connections established
+        through sandbox analysis, infrastructure analysis, network traffic analysis,
         and Insikt Group research.
 
         Issues a single batched request: the response contains one

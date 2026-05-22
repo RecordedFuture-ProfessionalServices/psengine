@@ -11,7 +11,6 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from enum import Enum
 from typing import Annotated, Any, Literal
 
 from pydantic import AfterValidator, BeforeValidator, Field
@@ -61,19 +60,8 @@ class EntitySearchError(RFBaseModel):
     status_code: int
 
 
-class LinkSource(Enum):
-    """RF Links API source filter."""
-
-    technical = 'technical'
-    insikt = 'insikt'
-
-
-class SearchScope(Enum):
-    """RF Links API search scope."""
-
-    small = 'small'
-    medium = 'medium'
-    large = 'large'
+LinkSource = Literal['technical', 'insikt']
+SearchScope = Literal['small', 'medium', 'large']
 
 
 class FilterTechnical(RFBaseModel):
@@ -101,4 +89,4 @@ class LinksLimitsObjects(RFBaseModel):
     """Objects in the limits object fields."""
 
     search_scope: SearchScope | None = None
-    per_entity_type: int | None = None
+    per_entity_type: Annotated[int, Field(ge=1, le=1_000_000_000)] | None = None

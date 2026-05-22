@@ -19,17 +19,7 @@ from psengine.links.models import (
     FilterTechnical,
     LinksFilterObjects,
     LinksLimitsObjects,
-    LinkSource,
-    SearchScope,
 )
-
-
-def test_link_source_enum_values():
-    assert [member.value for member in LinkSource] == ['technical', 'insikt']
-
-
-def test_search_scope_enum_values():
-    assert [member.value for member in SearchScope] == ['small', 'medium', 'large']
 
 
 def test_filter_technical_timeframe_invalid_format():
@@ -80,24 +70,24 @@ def test_links_filter_objects_normalizes_scalar_fields():
     }
 
 
-def test_links_filter_objects_accepts_link_source_enums():
-    model = LinksFilterObjects(sources=[LinkSource.technical, LinkSource.insikt])
-    assert model.json() == {'sources': ['technical', 'insikt']}
-
-
 def test_links_filter_objects_invalid_source():
     with pytest.raises(ValidationError, match='sources'):
         LinksFilterObjects(sources=['invalid_source'])
 
 
-def test_links_limits_objects_serializes_search_scope_enum():
-    model = LinksLimitsObjects(search_scope=SearchScope.small, per_entity_type=25)
+def test_links_limits_objects_serializes_search_scope():
+    model = LinksLimitsObjects(search_scope='small', per_entity_type=25)
     assert model.json() == {'search_scope': 'small', 'per_entity_type': 25}
 
 
 def test_links_limits_objects_invalid_search_scope():
     with pytest.raises(ValidationError, match='search_scope'):
         LinksLimitsObjects(search_scope='huge')
+
+
+def test_links_limits_objects_per_entity_type_rejects_non_positive():
+    with pytest.raises(ValidationError, match='per_entity_type'):
+        LinksLimitsObjects(per_entity_type=0)
 
 
 def test_links_mgr_search_builds_minimal_payload_with_entity_str(links_mgr, mocker, make_response):
@@ -108,7 +98,7 @@ def test_links_mgr_search_builds_minimal_payload_with_entity_str(links_mgr, mock
     _, kwargs = links_mgr.rf_client.request.call_args
     assert kwargs['method'] == 'POST'
     assert kwargs['url'] == EP_LINKS_SEARCH
-    assert kwargs['data'] == {'entities': ['ent1']}
+    assert kwargs['data'] == {'entities': ['ent1'], 'limits': {'search_scope': 'medium'}}
 
 
 def test_links_mgr_search_omits_empty_technical_filter_object(links_mgr, mocker, make_response):
@@ -191,11 +181,11 @@ def test_links_mgr_search_builds_full_payload_from_model_inputs(links_mgr, mocke
         entities=['ent1', 'ent2'],
         sections='section:actors',
         entity_types='type:IpAddress',
-        sources=[LinkSource.technical, LinkSource.insikt],
+        sources=['technical', 'insikt'],
         timeframe='-30d',
         events='type:MalwareAnalysis',
         connected_entities=['id:EntA', 'id:EntB'],
-        search_scope=SearchScope.large,
+        search_scope='large',
         per_entity_type=10,
     )
 
