@@ -13,4 +13,4 @@ for result in results:
     print(f'Entity: {entity.name}')
 
     for link in result.links[:5]:
-        print(f'  -> {link.name} source:{link.source}')
+        print(f'  -> {link.name} source: {link.source}')

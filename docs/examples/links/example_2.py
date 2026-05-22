@@ -3,10 +3,10 @@ from psengine.links import LinksMgr
 mgr = LinksMgr()
 
 results = mgr.search(
-    entities=['QCwdoU'],
+    entities=['I60vfZ'],
     sources=['technical'],
     entity_types=['type:Malware'],
-    timeframe='-30d',
+    timeframe='-90d',
     search_scope='small',
     per_entity_type=50,
 )

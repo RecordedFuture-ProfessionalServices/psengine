@@ -38,7 +38,7 @@ Entity: Lazarus Group
 
 #### 2: Filter link results and apply limits
 
-In this example, we pass filter and limit arguments directly to `search` (for example `sources`, `entity_types`, `timeframe`, `search_scope`, and `per_entity_type`) to narrow results to technical malware links seen in the last 30 days and cap result size per entity type.
+In this example, we pass filter and limit arguments directly to `search` (for example `sources`, `entity_types`, `timeframe`, `search_scope`, and `per_entity_type`) to narrow results to technical malware links seen in the last 90 days and cap result size per entity type.
 
 ```python
 --8<-- "docs/examples/links/example_2.py"
