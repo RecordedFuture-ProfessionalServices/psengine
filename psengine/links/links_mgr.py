@@ -132,7 +132,7 @@ class LinksMgr:
             Doc('Restrict linked entities to these entity types (e.g. "type:IpAddress").'),
         ] = None,
         sources: Annotated[
-            list[LinkSource] | None,
+            str | list[LinkSource] | None,
             Doc('Limit to source type(s): "technical", "insikt", or both if argument omitted.'),
         ] = None,
         timeframe: Annotated[

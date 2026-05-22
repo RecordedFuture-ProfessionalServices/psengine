@@ -81,7 +81,9 @@ class LinksFilterObjects(RFBaseModel):
     entity_types: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = (
         None
     )
-    sources: list[LinkSource] | None = None
+    sources: Annotated[list[LinkSource] | None, BeforeValidator(Validators.convert_str_to_list)] = (
+        None
+    )
     technical: FilterTechnical | None = None
 
 

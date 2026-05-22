@@ -2,7 +2,7 @@ from psengine.links import LinksMgr
 
 mgr = LinksMgr()
 
-results = mgr.search(entities=['QCwdoU'])
+results = mgr.search(entities='QCwdoU')
 
 for result in results:
     if result.error:
