@@ -28,11 +28,11 @@ The output will be:
 
 ```
 Entity: Lazarus Group
-  -> CVE-2022-47966 source:insikt
-  -> 24988feb1b38f400069acec4514aa4deea3f6ca8ceb5296f54926e2b22af1e5a source:insikt
-  -> 36db27f5eb3343cfc72d261d78da44957a49cb6731acb50a96ea5694f4d616c5 source:insikt
-  -> ffec6e6d4e314f64f5d31c62024252abde7f77acdd63991cb16923ff17828885 source:insikt
-  -> 3e5fd9acdab438ffc8b2cce48c91679d3f980d08f9dea47d5e1039d352cd64fb source:insikt
+  -> CVE-2022-47966 source: insikt
+  -> 24988feb1b38f400069acec4514aa4deea3f6ca8ceb5296f54926e2b22af1e5a source: insikt
+  -> 36db27f5eb3343cfc72d261d78da44957a49cb6731acb50a96ea5694f4d616c5 source: insikt
+  -> ffec6e6d4e314f64f5d31c62024252abde7f77acdd63991cb16923ff17828885 source: insikt
+  -> 3e5fd9acdab438ffc8b2cce48c91679d3f980d08f9dea47d5e1039d352cd64fb source: insikt
 ```
 
 
