@@ -158,7 +158,10 @@ class LinksMgr:
         list[EntityLinks],
         Doc('A list of EntityLinks objects'),
     ]:
-        """Search for entities connected to one or more target entities.
+        """Search for technically validated relationships between threat intelligence 
+        entities in the Recorded Future Intelligence Cloud — connections established 
+        through sandbox analysis, infrastructure analysis, network traffic analysis, 
+        and Insikt Group research.
 
         Issues a single batched request: the response contains one
         `EntityLinks` per entity in `entities`, in the same order. If the

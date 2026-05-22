@@ -1,6 +1,6 @@
 ## Introduction
 
-The `LinksMgr` class of the `links` module allows you to find entities connected to one or more Recorded Future entities.
+The `LinksMgr` class of the `links` module allows you to search for technically validated relationships between threat intelligence entities in the Recorded Future Intelligence Cloud — connections established through sandbox analysis, infrastructure analysis, network traffic analysis, and Insikt Group research.
 
 See the [**API Reference**](../api/links/links_mgr.md) for internal details of the module.
 
