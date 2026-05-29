@@ -428,11 +428,11 @@ class Test_SandboxMgr:
 
     # --- sample methods ----------------------------------------------------
 
-    def test_sample_summary_happy_path(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+    def test_fetch_sample_summary_happy_path(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
         mock = mock_request(MOCK_DIR / 'sample_summary.json')
         mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
 
-        result = sandbox_mgr.sample_summary('260515-nta8kscxnf')
+        result = sandbox_mgr.fetch_sample_summary('260515-nta8kscxnf')
 
         assert isinstance(result, SampleSummary)
         assert result.sample == '260515-nta8kscxnf'
@@ -443,7 +443,7 @@ class Test_SandboxMgr:
             ),
         )
 
-    def test_sample_summary_normalises_task_keys(
+    def test_fetch_sample_summary_normalises_task_keys(
         self, sandbox_mgr: SandboxMgr, mocker, mock_request
     ):
         # Wire keys carry the `<sample_id>-` prefix; SampleSummary.normalize_task_keys
@@ -451,35 +451,35 @@ class Test_SandboxMgr:
         mock = mock_request(MOCK_DIR / 'sample_summary.json')
         mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
 
-        result = sandbox_mgr.sample_summary('260515-nta8kscxnf')
+        result = sandbox_mgr.fetch_sample_summary('260515-nta8kscxnf')
 
         assert set(result.tasks) == {'static1', 'behavioral1'}
 
     @pytest.mark.parametrize('sample_id', [None, 123])
-    def test_sample_summary_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
-        # NOTE: `sample_summary`'s `sample_id` parameter lacks `Field(min_length=1)`
+    def test_fetch_sample_summary_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        # NOTE: `fetch_sample_summary`'s `sample_id` parameter lacks `Field(min_length=1)`
         # (unlike fetch_sample/delete_sample), so `''` passes type validation here
         # and would hit the network. Only non-str types raise ValidationError.
         with pytest.raises(ValidationError):
-            sandbox_mgr.sample_summary(sample_id)
+            sandbox_mgr.fetch_sample_summary(sample_id)
 
     @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
-    def test_sample_summary_raises_on_connection_errors(
+    def test_fetch_sample_summary_raises_on_connection_errors(
         self, sandbox_mgr: SandboxMgr, exception, mocker
     ):
         err = _http_error(500) if exception is HTTPError else exception('boom')
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
 
         with pytest.raises(SampleSummaryError):
-            sandbox_mgr.sample_summary('any-id')
+            sandbox_mgr.fetch_sample_summary('any-id')
 
-    def test_search_happy_path(self, sandbox_mgr: SandboxMgr, mocker):
+    def test_search_samples_happy_path(self, sandbox_mgr: SandboxMgr, mocker):
         page = json.loads((MOCK_DIR / 'sample_list_page.json').read_text())
         mocked = mocker.patch.object(
             sandbox_mgr.sb_client, 'request_paged', return_value=page['data']
         )
 
-        results = sandbox_mgr.search(tag='malware')
+        results = sandbox_mgr.search_samples(tag='malware')
 
         assert isinstance(results, list)
         assert len(results) == len(page['data'])
@@ -491,42 +491,44 @@ class Test_SandboxMgr:
         # SearchIn.to_query_out() builds the query string with the field prefix.
         assert mocked.call_args.kwargs['params'] == {'query': 'tag:malware'}
 
-    def test_search_query_string_composition(self, sandbox_mgr: SandboxMgr, mocker):
+    def test_search_samples_query_string_composition(self, sandbox_mgr: SandboxMgr, mocker):
         mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
 
-        sandbox_mgr.search(tag='malware', family='zeus')
+        sandbox_mgr.search_samples(tag='malware', family='zeus')
 
         # Order in the AND-joined string is the SearchIn field-declaration order.
         assert mocked.call_args.kwargs['params'] == {'query': 'family:zeus AND tag:malware'}
 
-    def test_search_bare_query_appended(self, sandbox_mgr: SandboxMgr, mocker):
+    def test_search_samples_bare_query_appended(self, sandbox_mgr: SandboxMgr, mocker):
         mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
 
-        sandbox_mgr.search(tag='malware', query='extra-text')
+        sandbox_mgr.search_samples(tag='malware', query='extra-text')
 
         assert mocked.call_args.kwargs['params']['query'].endswith('extra-text')
         assert 'tag:malware' in mocked.call_args.kwargs['params']['query']
 
-    def test_search_empty_result(self, sandbox_mgr: SandboxMgr, mocker):
+    def test_search_samples_empty_result(self, sandbox_mgr: SandboxMgr, mocker):
         mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
 
-        assert sandbox_mgr.search(tag='nothing-here') == []
+        assert sandbox_mgr.search_samples(tag='nothing-here') == []
 
-    def test_search_forwards_pagination_kwargs(self, sandbox_mgr: SandboxMgr, mocker):
+    def test_search_samples_forwards_pagination_kwargs(self, sandbox_mgr: SandboxMgr, mocker):
         mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
 
-        sandbox_mgr.search(tag='malware', max_results=42, results_per_page=17)
+        sandbox_mgr.search_samples(tag='malware', max_results=42, results_per_page=17)
 
         assert mocked.call_args.kwargs['max_results'] == 42
         assert mocked.call_args.kwargs['results_per_page'] == 17
 
     @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
-    def test_search_raises_on_connection_errors(self, sandbox_mgr: SandboxMgr, exception, mocker):
+    def test_search_samples_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
         err = _http_error(500) if exception is HTTPError else exception('boom')
         mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', side_effect=err)
 
         with pytest.raises(SampleSearchError):
-            sandbox_mgr.search(tag='anything')
+            sandbox_mgr.search_samples(tag='anything')
 
     def test_fetch_samples_happy_path(self, sandbox_mgr: SandboxMgr, mocker):
         page = json.loads((MOCK_DIR / 'sample_list_page.json').read_text())

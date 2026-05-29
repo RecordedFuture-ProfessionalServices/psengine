@@ -94,7 +94,7 @@ class SandboxMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSummaryError)
-    def sample_summary(self, sample_id: str) -> SampleSummary:
+    def fetch_sample_summary(self, sample_id: str) -> SampleSummary:
         endpoint = EP_SANDBOX_SAMPLES_SUMMARY.format(base_url=self.base_url, sample_id=sample_id)
         data = self.sb_client.request(
             'get',
@@ -105,7 +105,7 @@ class SandboxMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSearchError)
-    def search(
+    def search_samples(
         self,
         file_hash: list[str] | str | None = None,
         family: list[str] | str | None = None,
@@ -119,6 +119,25 @@ class SandboxMgr:
         results_per_page: int = SAMPLES_PER_PAGE,
         max_results: int | None = DEFAULT_PAGE_LIMIT,
     ):
+        """Allows you to search available analyses for a range of IoCs or file characteristics.
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            results = mgr.search_samples(file_hash='d41d8cd98f00b204e9800998ecf8427e')
+            for r in results:
+                print(r.id_, r.file_hash, r.family)
+            ```
+
+        Endpoint:
+
+
+        Raises:
+            ValidationError: If any supplied parameter is of incorrect type or out of range.
+            SampleSearchError: If the API returns a non-2xx or a connection error occurs.
+        """
         # TODO: write about the id constraints
         params = {
             p: v

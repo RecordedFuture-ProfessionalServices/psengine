@@ -49,7 +49,7 @@ Submitted: id=260501-h4p7laawme, kind=url, status=pending
 
 #### 2: Search for samples by malware family
 
-`search` accepts the same field-prefixed query syntax as the Sandbox web UI (`family:`, `tag:`, `sha256:`, `ip:`, `domain:`, ...). Each filter kwarg (`family`, `tag`, `botnet`, ...) is composed with `AND` into the final query string. The example searches for up to five recent Emotet samples.
+`search_samples` accepts the same field-prefixed query syntax as the Sandbox web UI (`family:`, `tag:`, `sha256:`, `ip:`, `domain:`, ...). Each filter kwarg (`family`, `tag`, `botnet`, ...) is composed with `AND` into the final query string. The example searches for up to five recent Emotet samples.
 
 !!! tip
 
@@ -69,7 +69,7 @@ Submitted: id=260501-h4p7laawme, kind=url, status=pending
 
 #### 4: Submit, wait for the report, and read the summary
 
-Submissions are asynchronous, so a fresh `id_` will return `status='pending'` for a while. The example polls `fetch_sample` every 10 seconds until the status reaches a terminal state (`reported` or `failed`), then calls `sample_summary` to retrieve the score and per-task breakdown.
+Submissions are asynchronous, so a fresh `id_` will return `status='pending'` for a while. The example polls `fetch_sample` every 10 seconds until the status reaches a terminal state (`reported` or `failed`), then calls `fetch_sample_summary` to retrieve the score and per-task breakdown.
 
 !!! tip
 

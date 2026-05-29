@@ -8,4 +8,6 @@ result = mgr.submit_sample(
     user_tags=['psengine-docs', 'demo'],
 )
 
-print(f'Submitted: id={result.id_}, kind={result.kind}, status={result.status}')
+print(
+    f'Submitted: id={result.id_}, kind={result.kind}, status={result.status}'
+)
