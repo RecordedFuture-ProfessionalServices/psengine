@@ -24,6 +24,7 @@ from ..endpoints import (
     EP_SANDBOX_PROFILES_ID,
     EP_SANDBOX_SAMPLES,
     EP_SANDBOX_SAMPLES_ID,
+    EP_SANDBOX_SAMPLES_DOWNLOAD,
     EP_SANDBOX_SAMPLES_SUMMARY,
     EP_SANDBOX_SEARCH,
     SANDBOX_BASE_URLS,
@@ -39,6 +40,7 @@ from .errors import (
     ProfileUpdateError,
     SampleDeleteError,
     SampleFetchError,
+    SampleFileFetchError,
     SampleSearchError,
     SampleSubmitError,
     SampleSummaryError,
@@ -217,7 +219,7 @@ class SandboxMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleFetchError)
-    def fetch_sample(
+    def fetch_sample_analysis_result(
         self,
         sample_id: Annotated[
             str,
@@ -250,6 +252,52 @@ class SandboxMgr:
         endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
         response = self.sb_client.request('get', endpoint)
         return SampleOut.model_validate(response.json())
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleFileFetchError)
+    def fetch_sample_file(
+        self,
+        sample_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
+        ],
+    ) -> Annotated[
+        bytes,
+        Doc('Raw bytes of the originally submitted file.'),
+    ]:
+        """Download the originally submitted file for a sample.
+
+        Returns the raw file content exactly as it was submitted.
+
+        Warning:
+            Unlike the UI download, files retrieved via the API are **not**
+            zipped or encrypted -- this returns live, potentially malicious
+            bytes. Handle them in an isolated environment.
+
+        Example:
+            ```python
+            from pathlib import Path
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            content = mgr.fetch_sample_file('260501-h4p7laawme')
+            Path('260501-h4p7laawme.bin').write_bytes(content)
+            ```
+
+        Endpoint:
+            `GET /samples/{sample_id}/sample`
+
+        Raises:
+            ValidationError: If `sample_id` is empty or of incorrect type.
+            SampleFileFetchError: If the API returns a non-2xx (e.g. 404 for an
+                unknown id, 401 for a sample outside your organisation) or a
+                connection error occurs.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_DOWNLOAD.format(base_url=self.base_url, sample_id=sample_id)
+        response = self.sb_client.request('get', endpoint)
+        return response.content
 
     @debug_call
     @validate_call

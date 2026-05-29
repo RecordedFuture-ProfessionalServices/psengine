@@ -10,6 +10,7 @@ from psengine.endpoints import (
     EP_SANDBOX_PROFILES,
     EP_SANDBOX_PROFILES_ID,
     EP_SANDBOX_SAMPLES,
+    EP_SANDBOX_SAMPLES_DOWNLOAD,
     EP_SANDBOX_SAMPLES_ID,
     EP_SANDBOX_SAMPLES_SUMMARY,
     EP_SANDBOX_SEARCH,
@@ -586,7 +587,7 @@ class Test_SandboxMgr:
         mock = mock_request(MOCK_DIR / 'sample_single.json')
         mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
 
-        sample = sandbox_mgr.fetch_sample('260515-nta8kscxnf')
+        sample = sandbox_mgr.fetch_sample_analysis_result('260515-nta8kscxnf')
 
         assert isinstance(sample, SampleOut)
         assert sample.id_ == '260515-nta8kscxnf'
@@ -601,7 +602,7 @@ class Test_SandboxMgr:
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
 
         with pytest.raises(SampleFetchError):
-            sandbox_mgr.fetch_sample('missing')
+            sandbox_mgr.fetch_sample_analysis_result('missing')
 
     @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
     def test_fetch_sample_raises_on_connection_errors(
@@ -611,12 +612,51 @@ class Test_SandboxMgr:
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
 
         with pytest.raises(SampleFetchError):
-            sandbox_mgr.fetch_sample('any-id')
+            sandbox_mgr.fetch_sample_analysis_result('any-id')
 
     @pytest.mark.parametrize('sample_id', ['', None, 123])
     def test_fetch_sample_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
         with pytest.raises(ValidationError):
-            sandbox_mgr.fetch_sample(sample_id)
+            sandbox_mgr.fetch_sample_analysis_result(sample_id)
+
+    def test_fetch_sample_file_happy_path(
+        self, sandbox_mgr: SandboxMgr, mocker, make_binary_response
+    ):
+        # The endpoint returns raw octet-stream bytes with no filename header,
+        # so the manager returns response.content verbatim.
+        mock = make_binary_response(b'\x50\x4b\x03\x04rawbytes', {})
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        content = sandbox_mgr.fetch_sample_file('260515-nta8kscxnf')
+
+        assert content == b'\x50\x4b\x03\x04rawbytes'
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_SAMPLES_DOWNLOAD.format(
+                base_url=sandbox_mgr.base_url, sample_id='260515-nta8kscxnf'
+            ),
+        )
+
+    def test_fetch_sample_file_404_raises_fetch_error(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
+
+        with pytest.raises(SampleFetchError):
+            sandbox_mgr.fetch_sample_file('missing')
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_sample_file_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleFetchError):
+            sandbox_mgr.fetch_sample_file('any-id')
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_sample_file_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_sample_file(sample_id)
 
     def test_submit_sample_url_kind(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
         mock = mock_request(MOCK_DIR / 'sample_submit_url.json')

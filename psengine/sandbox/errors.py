@@ -18,6 +18,10 @@ class SampleFetchError(RecordedFutureError):
     """Raised when a sample lookup against `/samples/{id}` fails."""
 
 
+class SampleFileFetchError(RecordedFutureError):
+    """Raised when a sample file lookup against `/samples/{id}/sample` fails."""
+
+
 class SampleDeleteError(RecordedFutureError):
     """Raised when a sample delete against `/samples/{id}` fails."""
 

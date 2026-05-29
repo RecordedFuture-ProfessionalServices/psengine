@@ -5,7 +5,8 @@
             - submit_sample
             - search_samples
             - fetch_samples
-            - fetch_sample
+            - fetch_sample_analysis_result
+            - fetch_sample_file
             - fetch_sample_summary
             - delete_sample
             - create_profile

@@ -165,6 +165,7 @@ SANDBOX_BASE_URLS = {
 # Sandbox Sample Endpoints (using {base_url} as placeholder)
 EP_SANDBOX_SAMPLES = '{base_url}/samples'
 EP_SANDBOX_SAMPLES_ID = '{base_url}/samples/{sample_id}'
+EP_SANDBOX_SAMPLES_DOWNLOAD = '{base_url}/samples/{sample_id}/sample'
 EP_SANDBOX_SAMPLES_SUMMARY = '{base_url}/samples/{sample_id}/summary'
 EP_SANDBOX_SEARCH = '{base_url}/search'
 EP_SANDBOX_PROFILES = '{base_url}/profiles'
