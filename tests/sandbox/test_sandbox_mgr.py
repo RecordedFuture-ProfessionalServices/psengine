@@ -12,11 +12,12 @@ from psengine.endpoints import (
     EP_SANDBOX_SAMPLES,
     EP_SANDBOX_SAMPLES_DOWNLOAD,
     EP_SANDBOX_SAMPLES_ID,
+    EP_SANDBOX_SAMPLES_STATIC_REPORT,
     EP_SANDBOX_SAMPLES_SUMMARY,
     EP_SANDBOX_SEARCH,
     SANDBOX_BASE_URLS,
 )
-from psengine.sandbox import Profile, ProfileOptions, SandboxMgr
+from psengine.sandbox import Profile, ProfileOptions, SandboxMgr, StaticAnalysisReport
 from psengine.sandbox.errors import (
     ProfileCreateError,
     ProfileDeleteError,
@@ -25,8 +26,10 @@ from psengine.sandbox.errors import (
     ProfileUpdateError,
     SampleDeleteError,
     SampleFetchError,
+    SampleFileFetchError,
     SampleSearchError,
     SamplesFetchError,
+    SampleStaticReportError,
     SampleSubmitError,
     SampleSummaryError,
 )
@@ -640,7 +643,7 @@ class Test_SandboxMgr:
     def test_fetch_sample_file_404_raises_fetch_error(self, sandbox_mgr: SandboxMgr, mocker):
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
 
-        with pytest.raises(SampleFetchError):
+        with pytest.raises(SampleFileFetchError):
             sandbox_mgr.fetch_sample_file('missing')
 
     @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
@@ -650,13 +653,77 @@ class Test_SandboxMgr:
         err = _http_error(500) if exception is HTTPError else exception('boom')
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
 
-        with pytest.raises(SampleFetchError):
+        with pytest.raises(SampleFileFetchError):
             sandbox_mgr.fetch_sample_file('any-id')
 
     @pytest.mark.parametrize('sample_id', ['', None, 123])
     def test_fetch_sample_file_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
         with pytest.raises(ValidationError):
             sandbox_mgr.fetch_sample_file(sample_id)
+
+    def test_fetch_sample_static_report_simple(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+        # static_report_simple.json is a real capture of a single-file (CSV) sample:
+        # no signatures, one file at depth 0, nothing unpacked.
+        mock = mock_request(MOCK_DIR / 'static_report_simple.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_static_report('260529-q2zl9abwxw')
+
+        assert isinstance(report, StaticAnalysisReport)
+        assert report.sample.sample == '260529-q2zl9abwxw'
+        assert report.sample.target == 'ca.csv'
+        assert report.analysis.score == 1
+        assert report.signatures == []
+        assert len(report.files) == 1
+        assert report.files[0].sha256.startswith('51bcb923')
+        assert report.unpack_count == 0
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_SAMPLES_STATIC_REPORT.format(
+                base_url=sandbox_mgr.base_url, sample_id='260529-q2zl9abwxw'
+            ),
+        )
+
+    def test_fetch_sample_static_report_archive(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # static_report_archive.json is a real capture of a zip submission: it carries
+        # signatures, analysis tags, and an unpacked files table with per-file errors.
+        mock = mock_request(MOCK_DIR / 'static_report_archive.json')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_static_report('260529-raphmsb1e5')
+
+        assert report.analysis.score == 5
+        assert report.analysis.tags == ['pdf']
+        assert [s.name for s in report.signatures] == ['Malformed data in PDF']
+        archive = next(f for f in report.files if f.kind == 'archive')
+        assert archive.exts == ['.zip']
+        # A child file with relpath, ssdeep and an analysis error round-trips.
+        errored = next(f for f in report.files if f.error)
+        assert errored.relpath is not None
+        assert errored.error.startswith('PDF crash')
+
+    def test_fetch_sample_static_report_404_raises(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
+
+        with pytest.raises(SampleStaticReportError):
+            sandbox_mgr.fetch_sample_static_report('missing')
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_sample_static_report_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleStaticReportError):
+            sandbox_mgr.fetch_sample_static_report('any-id')
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_sample_static_report_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_sample_static_report(sample_id)
 
     def test_submit_sample_url_kind(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
         mock = mock_request(MOCK_DIR / 'sample_submit_url.json')

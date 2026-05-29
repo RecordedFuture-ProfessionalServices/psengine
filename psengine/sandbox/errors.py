@@ -34,6 +34,10 @@ class SampleSummaryError(RecordedFutureError):
     """Raised when a sample summary lookup against `/samples/{id}/summary` fails."""
 
 
+class SampleStaticReportError(RecordedFutureError):
+    """Raised when a static report lookup against `/samples/{id}/reports/static` fails."""
+
+
 class SampleSearchError(RecordedFutureError):
     """Raised when a sample search against `/search` fails."""
 

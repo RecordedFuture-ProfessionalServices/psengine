@@ -19,5 +19,6 @@ from .sandbox import (
     SampleDeleteOut,
     SampleOut,
     SearchResult,
+    StaticAnalysisReport,
 )
 from .sandbox_mgr import SandboxMgr

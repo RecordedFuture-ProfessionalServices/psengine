@@ -20,6 +20,13 @@ from pydantic import BeforeValidator, ConfigDict, Field, field_validator, model_
 from ..common_models import RFBaseModel
 from ..helpers import Validators
 from .models.analysis import Meta, Task
+from .models.static_report import (
+    StaticReportAnalysis,
+    StaticReportFile,
+    StaticReportSample,
+    StaticReportSignature,
+    StaticReportTask,
+)
 
 SubmitKind = Literal['file', 'url', 'fetch', 'import']
 NetworkMode = Literal['internet', 'drop', 'tor', 'vpn', 'sim200', 'sim404', 'simnx']
@@ -137,6 +144,25 @@ class SampleOut(SearchResult):
 
     # TODO - incomplete model
     tasks: list[dict] | None = None
+
+
+class StaticAnalysisReport(RFBaseModel):
+    """Static report returned by `GET /samples/{sample_id}/reports/static`.
+
+    Covers the pre-detonation pass: sample identity, the static task, a score,
+    any static `signatures`, and the `files` table (the submitted file plus
+    everything unpacked from it, e.g. archive members).
+    """
+
+    version: str | None = None
+    build: str | None = None
+    sample: StaticReportSample
+    task: StaticReportTask
+    analysis: StaticReportAnalysis
+    signatures: list[StaticReportSignature] = Field(default_factory=list)
+    files: list[StaticReportFile] = Field(default_factory=list)
+    unpack_count: int | None = None
+    error_count: int | None = None
 
 
 class SampleDeleteOut(RFBaseModel):

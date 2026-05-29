@@ -8,6 +8,7 @@
             - fetch_sample_analysis_result
             - fetch_sample_file
             - fetch_sample_summary
+            - fetch_sample_static_report
             - delete_sample
             - create_profile
             - fetch_profiles

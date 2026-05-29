@@ -23,8 +23,9 @@ from ..endpoints import (
     EP_SANDBOX_PROFILES,
     EP_SANDBOX_PROFILES_ID,
     EP_SANDBOX_SAMPLES,
-    EP_SANDBOX_SAMPLES_ID,
     EP_SANDBOX_SAMPLES_DOWNLOAD,
+    EP_SANDBOX_SAMPLES_ID,
+    EP_SANDBOX_SAMPLES_STATIC_REPORT,
     EP_SANDBOX_SAMPLES_SUMMARY,
     EP_SANDBOX_SEARCH,
     SANDBOX_BASE_URLS,
@@ -42,24 +43,26 @@ from .errors import (
     SampleFetchError,
     SampleFileFetchError,
     SampleSearchError,
+    SamplesFetchError,
+    SampleStaticReportError,
     SampleSubmitError,
     SampleSummaryError,
-    SamplesFetchError,
 )
 from .sandbox import (
     Browser,
     CreateUpdateProfileIn,
-    ProfileDeleteOut,
     NetworkMode,
     Profile,
+    ProfileDeleteOut,
+    ProfileUpdateOut,
     SampleDeleteOut,
     SampleOut,
     SampleSummary,
     SearchIn,
     SearchResult,
+    StaticAnalysisReport,
     SubmitKind,
     SubmitSampleIn,
-    ProfileUpdateOut,
 )
 
 SandboxChoice = Literal['eu', 'usa', 'apj', 'public', 'private']
@@ -298,6 +301,53 @@ class SandboxMgr:
         endpoint = EP_SANDBOX_SAMPLES_DOWNLOAD.format(base_url=self.base_url, sample_id=sample_id)
         response = self.sb_client.request('get', endpoint)
         return response.content
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleStaticReportError)
+    def fetch_sample_static_report(
+        self,
+        sample_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
+        ],
+    ) -> Annotated[
+        StaticAnalysisReport,
+        Doc('StaticAnalysisReport model'),
+    ]:
+        """Fetch the static analysis report for a sample.
+
+        The static report is the pre-detonation pass: it identifies the submitted
+        sample, scores it, lists any static `signatures`, and enumerates the
+        `files` table -- the submitted file plus everything unpacked from it
+        (e.g. members of a submitted archive).
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            report = mgr.fetch_sample_static_report('260501-h4p7laawme')
+            print(report.analysis.score)
+            for f in report.files:
+                print(f.filename, f.sha256, f.kind)
+            ```
+
+        Endpoint:
+            `GET /samples/{sample_id}/reports/static`
+
+        Raises:
+            ValidationError: If `sample_id` is empty or of incorrect type.
+            SampleStaticReportError: If the API returns a non-2xx (e.g. 404 if the
+                static report does not exist for the sample) or a connection error
+                occurs.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_STATIC_REPORT.format(
+            base_url=self.base_url, sample_id=sample_id
+        )
+        response = self.sb_client.request('get', endpoint)
+        return StaticAnalysisReport.model_validate(response.json())
 
     @debug_call
     @validate_call
