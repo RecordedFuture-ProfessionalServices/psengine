@@ -12,12 +12,19 @@ from psengine.endpoints import (
     EP_SANDBOX_SAMPLES,
     EP_SANDBOX_SAMPLES_DOWNLOAD,
     EP_SANDBOX_SAMPLES_ID,
+    EP_SANDBOX_SAMPLES_PROFILE,
     EP_SANDBOX_SAMPLES_STATIC_REPORT,
     EP_SANDBOX_SAMPLES_SUMMARY,
     EP_SANDBOX_SEARCH,
     SANDBOX_BASE_URLS,
 )
-from psengine.sandbox import Profile, ProfileOptions, SandboxMgr, StaticAnalysisReport
+from psengine.sandbox import (
+    Profile,
+    ProfileOptions,
+    SampleProfileOut,
+    SandboxMgr,
+    StaticAnalysisReport,
+)
 from psengine.sandbox.errors import (
     ProfileCreateError,
     ProfileDeleteError,
@@ -27,6 +34,7 @@ from psengine.sandbox.errors import (
     SampleDeleteError,
     SampleFetchError,
     SampleFileFetchError,
+    SampleProfileError,
     SampleSearchError,
     SamplesFetchError,
     SampleStaticReportError,
@@ -590,7 +598,7 @@ class Test_SandboxMgr:
         mock = mock_request(MOCK_DIR / 'sample_single.json')
         mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
 
-        sample = sandbox_mgr.fetch_sample_analysis_result('260515-nta8kscxnf')
+        sample = sandbox_mgr.fetch_sample('260515-nta8kscxnf')
 
         assert isinstance(sample, SampleOut)
         assert sample.id_ == '260515-nta8kscxnf'
@@ -605,7 +613,7 @@ class Test_SandboxMgr:
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
 
         with pytest.raises(SampleFetchError):
-            sandbox_mgr.fetch_sample_analysis_result('missing')
+            sandbox_mgr.fetch_sample('missing')
 
     @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
     def test_fetch_sample_raises_on_connection_errors(
@@ -615,12 +623,12 @@ class Test_SandboxMgr:
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
 
         with pytest.raises(SampleFetchError):
-            sandbox_mgr.fetch_sample_analysis_result('any-id')
+            sandbox_mgr.fetch_sample('any-id')
 
     @pytest.mark.parametrize('sample_id', ['', None, 123])
     def test_fetch_sample_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
         with pytest.raises(ValidationError):
-            sandbox_mgr.fetch_sample_analysis_result(sample_id)
+            sandbox_mgr.fetch_sample(sample_id)
 
     def test_fetch_sample_file_happy_path(
         self, sandbox_mgr: SandboxMgr, mocker, make_binary_response
@@ -724,6 +732,97 @@ class Test_SandboxMgr:
     def test_fetch_sample_static_report_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
         with pytest.raises(ValidationError):
             sandbox_mgr.fetch_sample_static_report(sample_id)
+
+    # --- set_sample_profile ------------------------------------------------
+
+    def test_set_sample_profile_auto_default_pick(self, sandbox_mgr: SandboxMgr, mocker):
+        # auto=True with no pick -> empty list (advance all targets).
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+
+        result = sandbox_mgr.set_sample_profile('260529-szm7jsc1b3', auto=True)
+
+        assert isinstance(result, SampleProfileOut)
+        assert result.success is True
+        assert mocked.call_args.args == (
+            'post',
+            EP_SANDBOX_SAMPLES_PROFILE.format(
+                base_url=sandbox_mgr.base_url, sample_id='260529-szm7jsc1b3'
+            ),
+        )
+        assert mocked.call_args.kwargs['data'] == {'auto': True, 'pick': []}
+
+    def test_set_sample_profile_auto_with_pick(self, sandbox_mgr: SandboxMgr, mocker):
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+
+        sandbox_mgr.set_sample_profile('sid', auto=True, pick=['unpack001/a.txt'])
+
+        assert mocked.call_args.kwargs['data'] == {'auto': True, 'pick': ['unpack001/a.txt']}
+
+    def test_set_sample_profile_manual_string_profile_wrapped(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # A string profile (id or name) is wrapped into the {"id": ...} object.
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+
+        sandbox_mgr.set_sample_profile(
+            'sid', profiles=[{'pick': 'unpack001/a.txt', 'profile': 'drew-test'}]
+        )
+
+        assert mocked.call_args.kwargs['data'] == {
+            'auto': False,
+            'profiles': [{'pick': 'unpack001/a.txt', 'profile': {'id': 'drew-test'}}],
+        }
+
+    def test_set_sample_profile_manual_dict_profile_passthrough(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # A dict profile is sent verbatim (no wrapping).
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+
+        sandbox_mgr.set_sample_profile(
+            'sid', profiles=[{'pick': 'unpack001/a.txt', 'profile': {'name': 'drew-test'}}]
+        )
+
+        assert mocked.call_args.kwargs['data'] == {
+            'auto': False,
+            'profiles': [{'pick': 'unpack001/a.txt', 'profile': {'name': 'drew-test'}}],
+        }
+
+    @pytest.mark.parametrize(
+        'kwargs',
+        [
+            {},  # auto=False (default) but no profiles
+            {'auto': False},  # explicit, still no profiles
+            {'auto': False, 'pick': ['a']},  # pick only valid with auto=True
+            {'auto': True, 'profiles': [{'pick': 'a', 'profile': 'p'}]},  # profiles with auto
+        ],
+    )
+    def test_set_sample_profile_invalid_combinations(self, sandbox_mgr: SandboxMgr, mocker, kwargs):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+        with pytest.raises(ValidationError):
+            sandbox_mgr.set_sample_profile('sid', **kwargs)
+
+    def test_set_sample_profile_400_raises(self, sandbox_mgr: SandboxMgr, mocker):
+        # e.g. the sample is not paused in static_analysis.
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(400))
+
+        with pytest.raises(SampleProfileError):
+            sandbox_mgr.set_sample_profile('sid', auto=True)
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_set_sample_profile_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleProfileError):
+            sandbox_mgr.set_sample_profile('sid', auto=True)
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_set_sample_profile_sample_id_validation(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.set_sample_profile(sample_id, auto=True)
 
     def test_submit_sample_url_kind(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
         mock = mock_request(MOCK_DIR / 'sample_submit_url.json')

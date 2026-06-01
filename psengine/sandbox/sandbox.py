@@ -175,6 +175,16 @@ class SampleDeleteOut(RFBaseModel):
     deleted: bool
 
 
+class SampleProfileOut(RFBaseModel):
+    """Result of a `POST /samples/{sample_id}/profile` call.
+
+    The Sandbox API returns an empty body on success; the manager constructs this
+    model with `success=True` when the HTTP request succeeds.
+    """
+
+    success: bool
+
+
 class SubmitSampleIn(RFBaseModel):
     """Validated payload for `POST /samples`.
 
@@ -267,6 +277,53 @@ class SubmitSampleIn(RFBaseModel):
             body['defaults'] = defaults
 
         return body, self.file_path
+
+
+class SetProfileIn(RFBaseModel):
+    """Validated payload for `POST /samples/{sample_id}/profile`.
+
+    Two mutually-exclusive modes, keyed off `auto`:
+    - `auto=False` (manual): `profiles` is required -- one mapping per target,
+      e.g. `[{"pick": "unpack001/file.exe", "profile": "<id-or-name>"}]`. Each
+      `profile` may be a string (an id *or* a human-readable name; wrapped to
+      the `{"id": ...}` object the API expects) or a dict passed through as-is.
+    - `auto=True`: the sandbox picks profiles itself; `pick` optionally narrows
+      which targets to advance (empty/None = all).
+    """
+
+    auto: bool = False
+    profiles: list[dict] | None = None
+    pick: list[str] | None = None
+
+    @model_validator(mode='after')
+    def _check_mode(self):
+        if self.auto:
+            if self.profiles is not None:
+                raise ValueError('`profiles` is only valid when auto=False')
+        else:
+            if not self.profiles:
+                raise ValueError('auto=False requires a non-empty `profiles`')
+            if self.pick is not None:
+                raise ValueError('`pick` is only valid when auto=True')
+        return self
+
+    def to_api_payload(self) -> dict:
+        """Build the JSON body for `POST /samples/{sample_id}/profile`.
+
+        A string `profile` (id or name) is wrapped into the `{"id": ...}` object
+        the API requires; a dict `profile` is sent verbatim.
+        """
+        if self.auto:
+            return {'auto': True, 'pick': self.pick or []}
+
+        normalised = []
+        for entry in self.profiles:
+            entry = dict(entry)
+            profile = entry.get('profile')
+            if isinstance(profile, str):
+                entry['profile'] = {'id': profile}
+            normalised.append(entry)
+        return {'auto': False, 'profiles': normalised}
 
 
 class ProfileOptions(RFBaseModel):

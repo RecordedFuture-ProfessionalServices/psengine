@@ -247,6 +247,8 @@ class Config:
             platform_id (str): Name & version of the tool this integrates with, example: ES/8.0.0.
             app_id (str): Name & version of the integration itself, example: get-alerts/1.0.0.
             rf_token (str): Recorded Future API token.
+            asi_token (str): Recorded Future Attack Surface Intelligence API token.
+            sandbox_token (str): Recorded Future Sandbox API token.
             http_proxy (str): HTTP proxy.
             https_proxy (str): HTTPS proxy.
             client_ssl_verify (bool): SSL verification. Default is True.

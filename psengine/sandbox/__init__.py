@@ -18,6 +18,7 @@ from .sandbox import (
     ProfileUpdateOut,
     SampleDeleteOut,
     SampleOut,
+    SampleProfileOut,
     SearchResult,
     StaticAnalysisReport,
 )

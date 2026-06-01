@@ -9,6 +9,7 @@
             - fetch_sample_file
             - fetch_sample_summary
             - fetch_sample_static_report
+            - set_sample_profile
             - delete_sample
             - create_profile
             - fetch_profiles

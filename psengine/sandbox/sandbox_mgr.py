@@ -25,6 +25,7 @@ from ..endpoints import (
     EP_SANDBOX_SAMPLES,
     EP_SANDBOX_SAMPLES_DOWNLOAD,
     EP_SANDBOX_SAMPLES_ID,
+    EP_SANDBOX_SAMPLES_PROFILE,
     EP_SANDBOX_SAMPLES_STATIC_REPORT,
     EP_SANDBOX_SAMPLES_SUMMARY,
     EP_SANDBOX_SEARCH,
@@ -42,6 +43,7 @@ from .errors import (
     SampleDeleteError,
     SampleFetchError,
     SampleFileFetchError,
+    SampleProfileError,
     SampleSearchError,
     SamplesFetchError,
     SampleStaticReportError,
@@ -57,9 +59,11 @@ from .sandbox import (
     ProfileUpdateOut,
     SampleDeleteOut,
     SampleOut,
+    SampleProfileOut,
     SampleSummary,
     SearchIn,
     SearchResult,
+    SetProfileIn,
     StaticAnalysisReport,
     SubmitKind,
     SubmitSampleIn,
@@ -100,6 +104,7 @@ class SandboxMgr:
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSummaryError)
     def fetch_sample_summary(self, sample_id: str) -> SampleSummary:
+        # TODO - incomplete? as it fails with validation errors
         endpoint = EP_SANDBOX_SAMPLES_SUMMARY.format(base_url=self.base_url, sample_id=sample_id)
         data = self.sb_client.request(
             'get',
@@ -209,6 +214,8 @@ class SandboxMgr:
         Raises:
             ValidationError: If any supplied parameter is of incorrect type or out of range.
         """
+        # TODO - very similar to what search_samples() does but this is for what this user has access to
+        # consider to rename this?
         endpoint = EP_SANDBOX_SAMPLES.format(base_url=self.base_url)
         data = self.sb_client.request_paged(
             'get',
@@ -222,7 +229,7 @@ class SandboxMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleFetchError)
-    def fetch_sample_analysis_result(
+    def fetch_sample(
         self,
         sample_id: Annotated[
             str,
@@ -348,6 +355,50 @@ class SandboxMgr:
         )
         response = self.sb_client.request('get', endpoint)
         return StaticAnalysisReport.model_validate(response.json())
+    
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleStaticReportError)
+    def fetch_sample_overview_report(
+        self,
+        sample_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
+        ],
+        task_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Task ID, e.g. "behavioral1".'),
+        ],
+    ) -> Annotated[
+        StaticAnalysisReport,
+        Doc('StaticAnalysisReport model'),
+    ]:
+        # endpoint '/v1/samples/{0}/overview.json'.format(sample_id)
+        pass
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleStaticReportError)
+    def fetch_sample_kernel_report(
+        self,
+        sample_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
+        ],
+        task_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Task ID, e.g. "behavioral1".'),
+        ],
+    ) -> Annotated[
+        StaticAnalysisReport,
+        Doc('StaticAnalysisReport model'),
+    ]:
+        # endpoint /samples/{sampleID}/{taskID}/logs/onemon.json
+        pass
 
     @debug_call
     @validate_call
@@ -486,6 +537,83 @@ class SandboxMgr:
         response = self.sb_client.request('post', endpoint, headers=headers, files=files)
         # TODO - we are using same model here, rename or make a seprate one.
         return SearchResult.model_validate(response.json())
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleProfileError)
+    def set_sample_profile(
+        self,
+        sample_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
+        ],
+        auto: Annotated[
+            bool,
+            Doc(
+                'Let the sandbox pick profiles itself. When False (default) you must '
+                'supply `profiles`; when True you may narrow targets with `pick`.'
+            ),
+        ] = False,
+        profiles: Annotated[
+            list[dict] | None,
+            Doc(
+                'Manual per-target profile mappings (required when `auto=False`), e.g. '
+                '`[{"pick": "unpack001/file.exe", "profile": "<id-or-name>"}]`. `pick` is '
+                'a target path from the static report (`files[].relpath`). `profile` may '
+                'be a string (profile id or name) or a dict; a string is wrapped into the '
+                '`{"id": ...}` object the API expects.'
+            ),
+        ] = None,
+        pick: Annotated[
+            list[str] | None,
+            Doc(
+                'Target filenames to advance when `auto=True` (empty/None = all). Only '
+                'valid when `auto=True`.'
+            ),
+        ] = None,
+    ) -> Annotated[
+        SampleProfileOut,
+        Doc('SampleProfileOut model'),
+    ]:
+        """Set the analysis profile for an interactive sample.
+
+        Only valid while the sample is paused in `static_analysis` -- i.e. it was
+        submitted with `interactive=True`. Setting the profile advances the sample
+        into the analysis queue.
+
+        Example:
+            Manual selection (one mapping per target):
+
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            mgr.set_sample_profile(
+                '260501-h4p7laawme',
+                profiles=[{'pick': 'file.exe', 'profile': 'w7_long'}],
+            )
+            ```
+
+            Let the sandbox pick profiles automatically:
+
+            ```python
+            mgr.set_sample_profile('260501-h4p7laawme', auto=True)
+            ```
+
+        Endpoint:
+            `POST /samples/{sample_id}/profile`
+
+        Raises:
+            ValidationError: If `sample_id` is empty, or the `auto`/`profiles`/`pick`
+                combination is invalid (e.g. `auto=False` without `profiles`).
+            SampleProfileError: If the API returns a non-2xx (e.g. the sample is not
+                in `static_analysis`) or a connection error occurs.
+        """
+        payload = SetProfileIn(auto=auto, profiles=profiles, pick=pick)
+        endpoint = EP_SANDBOX_SAMPLES_PROFILE.format(base_url=self.base_url, sample_id=sample_id)
+        self.sb_client.request('post', endpoint, data=payload.to_api_payload())
+        return SampleProfileOut(success=True)
 
     @debug_call
     @validate_call

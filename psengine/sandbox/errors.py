@@ -38,6 +38,10 @@ class SampleStaticReportError(RecordedFutureError):
     """Raised when a static report lookup against `/samples/{id}/reports/static` fails."""
 
 
+class SampleProfileError(RecordedFutureError):
+    """Raised when setting a sample profile against `/samples/{id}/profile` (POST) fails."""
+
+
 class SampleSearchError(RecordedFutureError):
     """Raised when a sample search against `/search` fails."""
 

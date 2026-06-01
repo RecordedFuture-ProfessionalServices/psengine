@@ -18,7 +18,7 @@ print(
 
 deadline = time.monotonic() + TIMEOUT_SEC
 while time.monotonic() < deadline:
-    sample = mgr.fetch_sample_analysis_result(
+    sample = mgr.fetch_sample(
         submission.id_
     )
     print(f'  status={sample.status}')
