@@ -1,8 +1,9 @@
 # Changelog
 
-## v2.8.0 - 2026-05-22
+## v2.8.0 - 2026-06-04
 
 - Added support for Links API via the `LinksMgr`.
+- Added support for Suricata rule extraction in `AnalystNote.detection_rule_type`.
 
 ## v2.7.0 - 2026-05-01
 
