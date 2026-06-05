@@ -43,12 +43,11 @@ from .errors import (
 class ClassicAlertMgr:
     """Alert Manager for Classic Alert (v3) API."""
 
-    def __init__(self, rf_token: str = None):
-        """Initializes the ClassicAlertMgr object.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token.
-        """
+    def __init__(
+        self,
+        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
+    ):
+        """Initializes the ClassicAlertMgr object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
 

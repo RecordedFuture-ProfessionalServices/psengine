@@ -36,9 +36,12 @@ EXTRACTED_KEYS = {
 
 def _cleanup_insikt_note_text(note_text: str) -> str:
     """Clean up insikt note text to avoid markdown rendering issues."""
+    note_text = ''.join(
+        line if line.lstrip().startswith('|') else re.sub(r'--+', '', line)
+        for line in note_text.splitlines(keepends=True)
+    )
     translation = {
         r'\•': '+ ',
-        r'--+': '',
         r'>>+': '',
         r'<<+': '',
         r'\*\*': '••',

@@ -505,6 +505,15 @@ class Validators:
         )
 
     @staticmethod
+    def is_rel_time_valid(
+        input_time: Annotated[str | None, Doc("Relative time string, e.g., '7d', '3h'.")],
+    ):
+        """Check that a relative time like `-3d` is valid."""
+        if input_time is not None and not TimeHelpers.is_rel_time_valid(input_time):
+            raise ValueError(f'Invalid relative time: {input_time}')
+        return input_time
+
+    @staticmethod
     def check_uhash_prefix(
         value: Annotated[str | list, Doc('String or list of strings to check for uhash prefix.')],
     ) -> Annotated[str | list, Doc("String or list with 'uhash:' prefix ensured.")]:

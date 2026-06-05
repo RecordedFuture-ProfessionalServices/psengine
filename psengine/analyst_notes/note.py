@@ -80,9 +80,9 @@ class AnalystNote(RFBaseModel):
     @property
     def detection_rule_type(self) -> str | None:
         """Returns the attachment type if present, else None. It checks for specific types like
-        `sigma rule`, `yara rule`, and `snort rule` in the topics of the note.
+        `sigma rule`, `yara rule`, `snort rule` and `suricata rule` in the topics of the note.
         """
-        topics_type = ('sigma rule', 'yara rule', 'snort rule')
+        topics_type = ('sigma rule', 'yara rule', 'snort rule', 'suricata rule')
 
         topics = (
             {topic.name.lower() for topic in self.attributes.topic if topic.name}

@@ -1,5 +1,16 @@
 # Changelog
 
+## v2.8.0 - 2026-06-04
+
+### Added
+
+- Added support for Links API via the `LinksMgr`.
+- Added support for Suricata rule extraction in `AnalystNote.detection_rule_type`.
+
+### Fixed
+
+- Fix `AnalystNote.markdown` to avoid removing tables headers during text cleanup.
+
 ## v2.7.0 - 2026-05-01
 
 - Added support for Threat Map and Malware Map via the `ThreatMapMgr`.
