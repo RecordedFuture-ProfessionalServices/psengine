@@ -18,9 +18,7 @@ print(
 
 deadline = time.monotonic() + TIMEOUT_SEC
 while time.monotonic() < deadline:
-    sample = mgr.fetch_sample(
-        submission.id_
-    )
+    sample = mgr.fetch_sample(submission.id_)
     print(f'  status={sample.status}')
     if sample.status in TERMINAL:
         break

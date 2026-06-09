@@ -102,18 +102,6 @@ class SandboxMgr:
 
     @debug_call
     @validate_call
-    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSummaryError)
-    def fetch_sample_summary(self, sample_id: str) -> SampleSummary:
-        # TODO - incomplete? as it fails with validation errors
-        endpoint = EP_SANDBOX_SAMPLES_SUMMARY.format(base_url=self.base_url, sample_id=sample_id)
-        data = self.sb_client.request(
-            'get',
-            endpoint,
-        )
-        return SampleSummary.model_validate(data.json())
-
-    @debug_call
-    @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSearchError)
     def search_samples(
         self,
@@ -262,6 +250,18 @@ class SandboxMgr:
         endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
         response = self.sb_client.request('get', endpoint)
         return SampleOut.model_validate(response.json())
+    
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSummaryError)
+    def fetch_sample_summary(self, sample_id: str) -> SampleSummary:
+        # TODO - incomplete? as it fails with validation errors
+        endpoint = EP_SANDBOX_SAMPLES_SUMMARY.format(base_url=self.base_url, sample_id=sample_id)
+        data = self.sb_client.request(
+            'get',
+            endpoint,
+        )
+        return SampleSummary.model_validate(data.json())
 
     @debug_call
     @validate_call
@@ -305,6 +305,7 @@ class SandboxMgr:
                 unknown id, 401 for a sample outside your organisation) or a
                 connection error occurs.
         """
+        # TODO - consider returning a zip
         endpoint = EP_SANDBOX_SAMPLES_DOWNLOAD.format(base_url=self.base_url, sample_id=sample_id)
         response = self.sb_client.request('get', endpoint)
         return response.content
@@ -355,7 +356,7 @@ class SandboxMgr:
         )
         response = self.sb_client.request('get', endpoint)
         return StaticAnalysisReport.model_validate(response.json())
-    
+
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleStaticReportError)
@@ -381,23 +382,19 @@ class SandboxMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleStaticReportError)
-    def fetch_sample_kernel_report(
+    def fetch_behavioral_reports(
         self,
         sample_id: Annotated[
             str,
             Field(min_length=1),
             Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
-        ],
-        task_id: Annotated[
-            str,
-            Field(min_length=1),
-            Doc('Task ID, e.g. "behavioral1".'),
-        ],
+        ]
     ) -> Annotated[
         StaticAnalysisReport,
         Doc('StaticAnalysisReport model'),
     ]:
-        # endpoint /samples/{sampleID}/{taskID}/logs/onemon.json
+        # Loop through all tasks -> fetch
+            # endpoint GET /samples/{sampleID}/{taskID}/report_triage.json
         pass
 
     @debug_call
@@ -802,6 +799,7 @@ class SandboxMgr:
                 invalid `geolocation`+`network` combination, 409 if the name
                 collides) or a connection error occurs.
         """
+        # TODO - add OS argument
         payload = CreateUpdateProfileIn(
             name=name,
             tags=tags,
@@ -915,6 +913,7 @@ class SandboxMgr:
             ProfileUpdateError: If the API returns a non-2xx other than 404
                 (e.g. 409 if the new `name` collides) or a connection error occurs.
         """
+        # TODO - add OS argument
         payload = CreateUpdateProfileIn(
             name=name,
             tags=tags,

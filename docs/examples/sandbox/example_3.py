@@ -9,7 +9,5 @@ for s in samples:
     )
 
 if samples:
-    detail = mgr.fetch_sample(
-        samples[0].id_
-    )
+    detail = mgr.fetch_sample(samples[0].id_)
     print(f'\nFirst sample tasks: {detail.tasks}')
