@@ -1,5 +1,12 @@
 # Changelog
 
+
+## v2.8.1 - 2026-06-10
+
+### Fixed
+
+- `EntityListMgr.info()` no longer fails validation for lists without organisation info (`organisation_id` and `organisation_name` are now optional).
+
 ## v2.8.0 - 2026-06-04
 
 ### Added

@@ -50,8 +50,8 @@ class ListInfoOut(RFBaseModel):
     )
     owner_id: str
     owner_name: str
-    organisation_id: str
-    organisation_name: str
+    organisation_id: str | None = None
+    organisation_name: str | None = None
 
 
 class ListStatusOut(RFBaseModel):
@@ -85,25 +85,13 @@ class ListEntity(RFBaseModel):
         )
 
 
-class EntityList(RFBaseModel):
+class EntityList(ListInfoOut):
     """Validate data received from `/create` endpoint."""
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
     rf_client: RFClient = Field(exclude=True)
     match_mgr: EntityMatchMgr = Field(exclude=True)
     log: logging.Logger = Field(exclude=True, default=logging.getLogger(__name__))
-    id_: str = Field(alias='id')
-    name: str
-    type_: str = Field(alias='type')
-    created: datetime
-    updated: datetime
-    owner_id: str
-    owner_name: str
-    organisation_id: str | None = None
-    organisation_name: str | None = None
-    owner_organisation_details: OwnerOrganisationDetails = Field(
-        default_factory=OwnerOrganisationDetails
-    )
 
     def __hash__(self):
         return hash(self.id_)
