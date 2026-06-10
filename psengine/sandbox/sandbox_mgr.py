@@ -275,6 +275,7 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type or out of range.
+            SamplesFetchError: If the API returns a non-2xx or a connection error occurs.
         """
         endpoint = EP_SANDBOX_SAMPLES.format(base_url=self.base_url)
         data = self.sb_client.request_paged(

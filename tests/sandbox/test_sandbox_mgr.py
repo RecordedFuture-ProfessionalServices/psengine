@@ -552,7 +552,7 @@ class Test_SandboxMgr:
 
         assert isinstance(results, list)
         assert len(results) == len(page['data'])
-        assert all(isinstance(r, SampleTasks) for r in results)
+        assert all(isinstance(r, Sample) for r in results)
         assert mocked.call_args.args[:2] == (
             'get',
             EP_SANDBOX_SAMPLES.format(base_url=sandbox_mgr.base_url),
