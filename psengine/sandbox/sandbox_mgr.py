@@ -396,9 +396,8 @@ class SandboxMgr:
         Returns the raw file content exactly as it was submitted.
 
         Warning:
-            Unlike the UI download, files retrieved via the API are **not**
-            zipped or encrypted -- this returns live, potentially malicious
-            bytes. Handle them in an isolated environment.
+            This returns live, potentially malicious bytes. Handle them in an isolated
+            environment.
 
         Example:
             ```python
@@ -419,7 +418,6 @@ class SandboxMgr:
                 unknown id, 401 for a sample outside your organisation) or a
                 connection error occurs.
         """
-        # TODO - consider returning a zip
         endpoint = EP_SANDBOX_SAMPLES_DOWNLOAD.format(base_url=self.base_url, sample_id=sample_id)
         response = self.sb_client.request('get', endpoint)
         return response.content
