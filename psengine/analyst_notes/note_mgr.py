@@ -93,6 +93,11 @@ class AnalystNoteMgr:
 
         `max_results` is the maximum number of references, not notes.
 
+        Note:
+            Search returns a reduced `AnalystNote` projection. Fields such as
+            `diamond_model`, `events`, and `labels` are not populated and must be
+            retrieved per note via `lookup()`.
+
         Endpoint:
             `/analystnote/search`
 
