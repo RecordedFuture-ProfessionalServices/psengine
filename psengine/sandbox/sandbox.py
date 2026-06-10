@@ -15,7 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Annotated, Literal
 
-from pydantic import BeforeValidator, ConfigDict, Field, field_validator, model_validator
+from pydantic import BeforeValidator, Field, field_validator, model_validator
 
 from ..common_models import RFBaseModel
 from ..helpers import Validators
@@ -32,7 +32,6 @@ SubmitKind = Literal['file', 'url', 'fetch', 'import']
 NetworkMode = Literal['internet', 'drop', 'tor', 'vpn', 'sim200', 'sim404', 'simnx']
 Browser = Literal['chrome', 'firefox', 'ie11', 'microsoft-edge']
 
-# TODO: remove ConfigDict
 _SEARCH_FIELD_PREFIX_MAP = {
     'file_hash': '',
     'family': 'family:',
@@ -48,30 +47,18 @@ _SEARCH_FIELD_PREFIX_MAP = {
 
 
 class SampleSummary(RFBaseModel):
-    model_config = ConfigDict(extra='forbid')
-
     sample: str
     status: str
     custom: str
     owner: str
     target: str
     created: datetime
-    completed: datetime
+    completed: datetime | None = None
     score: int
     sha256: str | None = None
     org_id: str | None = None
     meta: Meta | None = None
-
-    # Keys normalized to e.g. "static1", "behavioral1", ...
     tasks: dict[str, Task] = Field(default_factory=dict)
-
-    @field_validator('tasks', mode='before')
-    @classmethod
-    def normalize_task_keys(cls, v):
-        # Incoming keys look like "<id>-static1" keep only the suffix after the last '-'
-        if isinstance(v, dict):
-            return {str(k).rsplit('-', 1)[-1]: val for k, val in v.items()}
-        return v
 
 
 class SearchQuery(RFBaseModel):

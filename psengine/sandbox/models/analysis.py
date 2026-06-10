@@ -13,27 +13,24 @@
 
 from typing import Annotated, Literal
 
-from pydantic import ConfigDict, Field
+from pydantic import Field
 
 from ...common_models import RFBaseModel
 
-# TODO: remove ConfigDict
-
 
 class TaskBase(RFBaseModel):
-    model_config = ConfigDict(extra='forbid')
     kind: str
     status: str
 
 
 class StaticTask(TaskBase):
-    model_config = ConfigDict(extra='forbid')
     kind: Literal['static']
     score: int | None = None
+    tags: list[str] = Field(default_factory=list)
+    sigs: int | None = None
 
 
 class BehavioralTask(TaskBase):
-    model_config = ConfigDict(extra='forbid')
     kind: Literal['behavioral']
 
     tags: list[str] = Field(default_factory=list)
@@ -46,12 +43,14 @@ class BehavioralTask(TaskBase):
     queue_id: int | None = None
     timeout: int | None = None
     sigs: int | None = None
+    pick: str | None = None
+    failure: str | None = None
 
 
 class UrlscanTask(TaskBase):
-    model_config = ConfigDict(extra='forbid')
     kind: Literal['urlscan']
-    score: int
+    score: int | None = None
+    failure: str | None = None
 
 
 Task = Annotated[BehavioralTask | StaticTask | UrlscanTask, Field(discriminator='kind')]
@@ -67,6 +66,5 @@ class LightweightSampleTask(RFBaseModel):
 
 
 class Meta(RFBaseModel):
-    model_config = ConfigDict(extra='forbid')
     channel: str | None = None
     rforg: str | None = None

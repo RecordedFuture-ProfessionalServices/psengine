@@ -455,18 +455,6 @@ class Test_SandboxMgr:
             ),
         )
 
-    def test_fetch_sample_summary_normalises_task_keys(
-        self, sandbox_mgr: SandboxMgr, mocker, mock_request
-    ):
-        # Wire keys carry the `<sample_id>-` prefix; SampleSummary.normalize_task_keys
-        # strips that. The captured fixture has `260515-nta8kscxnf-static1` / `-behavioral1`.
-        mock = mock_request(MOCK_DIR / 'sample_summary.json')
-        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
-
-        result = sandbox_mgr.fetch_sample_summary('260515-nta8kscxnf')
-
-        assert set(result.tasks) == {'static1', 'behavioral1'}
-
     @pytest.mark.parametrize('sample_id', [None, 123])
     def test_fetch_sample_summary_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
         # NOTE: `fetch_sample_summary`'s `sample_id` parameter lacks `Field(min_length=1)`

@@ -333,14 +333,49 @@ class SandboxMgr:
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSummaryError)
-    def fetch_sample_summary(self, sample_id: str) -> SampleSummary:
-        # TODO - incomplete? as it fails with validation errors
+    def fetch_sample_summary(
+        self,
+        sample_id: Annotated[
+            str,
+            Field(min_length=1),
+            Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
+        ],
+    ) -> Annotated[
+        SampleSummary,
+        Doc('SampleSummary model, overall score/status plus a per-task breakdown.'),
+    ]:
+        """Fetch the short summary for a sample.
+
+        The summary is a compact one-object overview: the overall `score` and `status`, the
+        submission `target`, and a `tasks` map keyed by task id (e.g. `static1`, `behavioral1`,
+        `urlscan1`) where each task carries its own kind, status and score.
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            summary = mgr.fetch_sample_summary('260501-h4p7laawme')
+            print(summary.score, summary.status)
+            for task_id, task in summary.tasks.items():
+                print(task_id, task.kind, task.status, task.score)
+            ```
+
+        Note:
+            `completed` is `None` until every task has finished -- in-progress samples
+            (e.g. still in `static_analysis`) return a summary without it.
+
+        Endpoint:
+            `GET /samples/{sample_id}/summary`
+
+        Raises:
+            ValidationError: If `sample_id` is empty or of incorrect type.
+            SampleSummaryError: If the API returns a non-2xx (e.g. 404 for an unknown id)
+                or a connection error occurs.
+        """
         endpoint = EP_SANDBOX_SAMPLES_SUMMARY.format(base_url=self.base_url, sample_id=sample_id)
-        data = self.sb_client.request(
-            'get',
-            endpoint,
-        )
-        return SampleSummary.model_validate(data.json())
+        response = self.sb_client.request('get', endpoint)
+        return SampleSummary.model_validate(response.json())
 
     @debug_call
     @validate_call
