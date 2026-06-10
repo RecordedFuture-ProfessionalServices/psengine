@@ -34,6 +34,18 @@ NetworkMode = Literal['internet', 'drop', 'tor', 'vpn', 'sim200', 'sim404', 'sim
 Browser = Literal['chrome', 'firefox', 'ie11', 'microsoft-edge']
 
 # TODO: remove ConfigDict
+_SEARCH_FIELD_PREFIX_MAP = {
+    'file_hash': '',
+    'family': 'family:',
+    'tag': 'tag:',
+    'botnet': 'botnet:',
+    'wallet': 'wallet:',
+    'ip': 'ip:',
+    'domain': 'domain:',
+    'url': 'url:',
+    'from_date': 'from:',
+    'to_date': 'to:',
+}
 
 
 class SampleSummary(RFBaseModel):
@@ -68,25 +80,26 @@ class SearchQuery(RFBaseModel):
 
 
 class SearchIn(RFBaseModel):
-    model_config = ConfigDict(extra='forbid')
-
     file_hash: list[str] | str | None = None
     family: list[str] | str | None = None
     tag: list[str] | str | None = None
     botnet: list[str] | str | None = None
-    platform: list[str] | str | None = None
-    extracted_c2_data: list[str] | str | None = None
     wallet: list[str] | str | None = None
-    analysis_time: str | None = None
+    ip: list[str] | str | None = None
+    domain: list[str] | str | None = None
+    url: list[str] | str | None = None
+    from_date: str | None = None
+    to_date: str | None = None
 
     @field_validator(
         'file_hash',
         'family',
         'tag',
         'botnet',
-        'platform',
-        'extracted_c2_data',
         'wallet',
+        'ip',
+        'domain',
+        'url',
         mode='before',
     )
     @classmethod
@@ -102,21 +115,14 @@ class SearchIn(RFBaseModel):
 
     def to_query_out(self, join_operator='AND') -> SearchQuery:
         parts = []
-        special_fields = (
-            'extracted_c2_data',
-            'file_hash',
-            'analysis_time',
-        )
-
         for field_name, values in self.model_dump(exclude_none=True).items():
             if not values:
                 continue
 
-            prefix = '' if field_name in special_fields else f'{field_name}:'
-            for val in values:
-                value = val
-                if not val.startswith(prefix):
-                    value = f'{prefix}{val}'
+            prefix = _SEARCH_FIELD_PREFIX_MAP[field_name]
+            items = [values] if isinstance(values, str) else values
+            for val in items:
+                value = val if val.startswith(prefix) else f'{prefix}{val}'
                 parts.append(value)
 
         return SearchQuery(query=f' {join_operator} '.join(parts))

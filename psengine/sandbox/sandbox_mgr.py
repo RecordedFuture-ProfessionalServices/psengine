@@ -107,53 +107,125 @@ class SandboxMgr:
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSearchError)
     def search_samples(
         self,
-        file_hash: list[str] | str | None = None,
-        family: list[str] | str | None = None,
-        tag: list[str] | str | None = None,
-        botnet: list[str] | str | None = None,
-        platform: list[str] | str | None = None,
-        extracted_c2_data: list[str] | str | None = None,
-        wallet: list[str] | str | None = None,
-        analysis_time: list[str] | str | None = None,
-        query: str | None = None,
-        results_per_page: int = SAMPLES_PER_PAGE,
-        max_results: int | None = DEFAULT_PAGE_LIMIT,
-    ):
-        """Allows you to search available analyses for a range of IoCs or file characteristics.
+        file_hash: Annotated[
+            list[str] | str | None,
+            Doc(
+                'One or more file hashes (MD5/SHA1/SHA256/SHA512). Sent bare -- Triage '
+                'auto-detects the hash type.'
+            ),
+        ] = None,
+        family: Annotated[
+            list[str] | str | None,
+            Doc('Malware family tag(s), e.g. "emotet". Maps to the `family:` operator.'),
+        ] = None,
+        tag: Annotated[
+            list[str] | str | None,
+            Doc('Behaviour tag(s), e.g. "ransomware". Maps to the `tag:` operator.'),
+        ] = None,
+        botnet: Annotated[
+            list[str] | str | None,
+            Doc('Botnet tag(s). Maps to the `botnet:` operator.'),
+        ] = None,
+        wallet: Annotated[
+            list[str] | str | None,
+            Doc('Cryptocurrency wallet address(es). Maps to the `wallet:` operator.'),
+        ] = None,
+        ip: Annotated[
+            list[str] | str | None,
+            Doc('Extracted C2 IP address(es). Maps to the `ip:` operator.'),
+        ] = None,
+        domain: Annotated[
+            list[str] | str | None,
+            Doc('Extracted C2 domain(s). Maps to the `domain:` operator.'),
+        ] = None,
+        url: Annotated[
+            list[str] | str | None,
+            Doc('Extracted C2 URL(s). Maps to the `url:` operator.'),
+        ] = None,
+        from_date: Annotated[
+            str | None,
+            Doc(
+                'Start of the submission-date window (`yyyy-mm-dd`). Maps to the `from:` operator.'
+            ),
+        ] = None,
+        to_date: Annotated[
+            str | None,
+            Doc('End of the submission-date window (`yyyy-mm-dd`). Maps to the `to:` operator.'),
+        ] = None,
+        query: Annotated[
+            str | None,
+            Doc(
+                'Raw Triage query string appended to the structured filters with `AND`. Use for '
+                'operators not exposed as parameters or to build `OR`/`NOT` expressions.'
+            ),
+        ] = None,
+        results_per_page: Annotated[
+            int,
+            Field(ge=1, le=200),
+            Doc('Per-request page size (max 200).'),
+        ] = SAMPLES_PER_PAGE,
+        max_results: Annotated[
+            int,
+            Field(ge=1),
+            Doc('Total cap on samples returned across all pages.'),
+        ] = DEFAULT_PAGE_LIMIT,
+    ) -> Annotated[
+        list[Sample],
+        Doc('List of Sample models matching the search.'),
+    ]:
+        """Search available analyses for a range of IoCs or file characteristics.
+
+        Structured parameters are translated into Triage search operators and joined with `AND`
+        (e.g. `family='emotet', tag='ransomware'` becomes `family:emotet AND tag:ransomware`).
+        Each list-valued parameter may be a single string or a list of strings.
 
         Example:
             ```python
             from psengine.sandbox import SandboxMgr
 
             mgr = SandboxMgr(sandbox_choice='eu')
-            results = mgr.search_samples(file_hash='d41d8cd98f00b204e9800998ecf8427e')
+            results = mgr.search_samples(tag='ransomware', from_date='2024-01-01')
             for r in results:
-                print(r.id_, r.file_hash, r.family)
+                print(r.id_, r.sha256, r.status)
             ```
 
-        Endpoint:
+        Note:
+            A raw `query` is combined with the structured filters using `AND`. Pass `query`
+            alone to run an arbitrary Triage query (e.g. `query='family:emotet OR family:qakbot'`).
+            More information at: https://sandbox.recordedfuture.com/docs/cloud-api/search/
 
+        Endpoint:
+            `GET /search`
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type or out of range.
-            SampleSearchError: If the API returns a non-2xx or a connection error occurs.
+            ValueError: If no filter is supplied (no structured parameter and no raw `query`).
+            SampleSearchError: If the API returns a non-2xx (e.g. 400 `INVALID_QUERY` for a
+                malformed query) or a connection error occurs.
         """
-        # TODO: write about the id constraints
         params = {
             p: v
             for p, v in locals().items()
             if p not in ('self', 'query', 'max_results', 'results_per_page')
         }
-        params = SearchIn.model_validate(params).to_query_out()
+        search_query = SearchIn.model_validate(params).to_query_out()
 
         if query:
-            params.query += query
+            search_query.query = (
+                f'{search_query.query} AND {query}' if search_query.query else query
+            )
+
+        if not search_query.query:
+            raise ValueError(
+                'search_samples requires at least one filter: pass a structured parameter '
+                '(e.g. tag=, family=, file_hash=) or a raw `query` string.'
+            )
 
         endpoint = EP_SANDBOX_SEARCH.format(base_url=self.base_url)
         data = self.sb_client.request_paged(
             'get',
             endpoint,
-            params=params.model_dump(),
+            params=search_query.model_dump(),
             max_results=max_results,
             results_per_page=results_per_page,
         )
