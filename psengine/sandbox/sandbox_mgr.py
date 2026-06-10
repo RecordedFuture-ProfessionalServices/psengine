@@ -58,17 +58,19 @@ from .sandbox import (
     ProfileDeleteOut,
     ProfileUpdateOut,
     SampleDeleteOut,
-    SampleOut,
+    SampleTasks,
     SampleProfileOut,
     SampleSummary,
     SearchIn,
-    SearchResult,
+    Sample,
     SetProfileIn,
     StaticAnalysisReport,
     SubmitKind,
     SubmitSampleIn,
 )
 
+# TODO - test other choises
+# TODO - remove publi and private?
 SandboxChoice = Literal['eu', 'usa', 'apj', 'public', 'private']
 
 
@@ -155,7 +157,7 @@ class SandboxMgr:
             max_results=max_results,
             results_per_page=results_per_page,
         )
-        return [SearchResult.model_validate(e) for e in data]
+        return [Sample.model_validate(e) for e in data]
 
     @debug_call
     @validate_call
@@ -181,8 +183,8 @@ class SandboxMgr:
             Doc('Per-request page size (max 200).'),
         ] = SAMPLES_PER_PAGE,
     ) -> Annotated[
-        list[SampleOut],
-        Doc('List of SampleOut models.'),
+        list[Sample],
+        Doc('List of Sample models.'),
     ]:
         """List the collection of samples submitted to the sandbox.
 
@@ -202,8 +204,6 @@ class SandboxMgr:
         Raises:
             ValidationError: If any supplied parameter is of incorrect type or out of range.
         """
-        # TODO - very similar to what search_samples() does but this is for what this user has access to
-        # consider to rename this?
         endpoint = EP_SANDBOX_SAMPLES.format(base_url=self.base_url)
         data = self.sb_client.request_paged(
             'get',
@@ -212,7 +212,7 @@ class SandboxMgr:
             max_results=max_results,
             results_per_page=samples_per_page,
         )
-        return [SampleOut.model_validate(e) for e in data]
+        return [Sample.model_validate(e) for e in data]
 
     @debug_call
     @validate_call
@@ -224,7 +224,7 @@ class SandboxMgr:
             Field(min_length=1),
             Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
         ],
-    ) -> Annotated[SampleOut, Doc('SampleOut model')]:
+    ) -> Annotated[SampleTasks, Doc('SampleOut model')]:
         """Fetch a single sample by id.
 
 
@@ -249,8 +249,8 @@ class SandboxMgr:
         """
         endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
         response = self.sb_client.request('get', endpoint)
-        return SampleOut.model_validate(response.json())
-    
+        return SampleTasks.model_validate(response.json())
+
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleSummaryError)
@@ -388,13 +388,13 @@ class SandboxMgr:
             str,
             Field(min_length=1),
             Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
-        ]
+        ],
     ) -> Annotated[
         StaticAnalysisReport,
         Doc('StaticAnalysisReport model'),
     ]:
         # Loop through all tasks -> fetch
-            # endpoint GET /samples/{sampleID}/{taskID}/report_triage.json
+        # endpoint GET /samples/{sampleID}/{taskID}/report_triage.json
         pass
 
     @debug_call
@@ -450,8 +450,8 @@ class SandboxMgr:
             Doc("VPN exit region tag. Requires `network='vpn'`. Maps to `defaults.geolocation`."),
         ] = None,
     ) -> Annotated[
-        SearchResult,
-        Doc('The freshly-created sample SearchResult model.'),
+        Sample,
+        Doc('The Sample model.'),
     ]:
         """Submit a sample for analysis via `POST /samples`.
 
@@ -532,8 +532,7 @@ class SandboxMgr:
 
         endpoint = EP_SANDBOX_SAMPLES.format(base_url=self.base_url)
         response = self.sb_client.request('post', endpoint, headers=headers, files=files)
-        # TODO - we are using same model here, rename or make a seprate one.
-        return SearchResult.model_validate(response.json())
+        return Sample.model_validate(response.json())
 
     @debug_call
     @validate_call

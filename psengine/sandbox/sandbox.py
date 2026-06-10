@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Annotated, Literal
 
 from pydantic import BeforeValidator, ConfigDict, Field, field_validator, model_validator
+from typing import Optional
 
 from ..common_models import RFBaseModel
 from ..helpers import Validators
@@ -121,12 +122,8 @@ class SearchIn(RFBaseModel):
         return SearchQuery(query=f' {join_operator} '.join(parts))
 
 
-class SearchResult(RFBaseModel):
-    """Sample record returned by `/search`.
-
-    Common shape across the sample-listing endpoints. `fetch_sample()` returns
-    the richer `SampleOut` subclass.
-    """
+class Sample(RFBaseModel):
+    """Sample record returned by `/search` and `/samples`."""
 
     id_: str = Field(alias='id')
     status: str
@@ -139,11 +136,17 @@ class SearchResult(RFBaseModel):
     user_id: str
 
 
-class SampleOut(SearchResult):
-    """Sample record returned by `GET /samples/{sample_id}`."""
+class Task(RFBaseModel):
+    id_: str = Field(alias='id')
+    status: str
+    target: Optional[str] = None
+    pick: Optional[str] = None
 
-    # TODO - incomplete model
-    tasks: list[dict] | None = None
+
+class SampleTasks(Sample):
+    """Sample record with tasks returned by `GET /samples/{sample_id}`."""
+
+    tasks: list[Task] | None = None
 
 
 class StaticAnalysisReport(RFBaseModel):

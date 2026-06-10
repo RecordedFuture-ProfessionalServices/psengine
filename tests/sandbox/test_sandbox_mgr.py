@@ -42,9 +42,9 @@ from psengine.sandbox.errors import (
     SampleSummaryError,
 )
 from psengine.sandbox.sandbox import (
-    SampleOut,
+    SampleTasks,
     SampleSummary,
-    SearchResult,
+    Sample,
 )
 
 MOCK_DIR = Path(__file__).parent / 'mocks'
@@ -495,7 +495,7 @@ class Test_SandboxMgr:
 
         assert isinstance(results, list)
         assert len(results) == len(page['data'])
-        assert all(isinstance(r, SearchResult) for r in results)
+        assert all(isinstance(r, Sample) for r in results)
         assert mocked.call_args.args[:2] == (
             'get',
             EP_SANDBOX_SEARCH.format(base_url=sandbox_mgr.base_url),
@@ -552,7 +552,7 @@ class Test_SandboxMgr:
 
         assert isinstance(results, list)
         assert len(results) == len(page['data'])
-        assert all(isinstance(r, SampleOut) for r in results)
+        assert all(isinstance(r, SampleTasks) for r in results)
         assert mocked.call_args.args[:2] == (
             'get',
             EP_SANDBOX_SAMPLES.format(base_url=sandbox_mgr.base_url),
@@ -600,7 +600,7 @@ class Test_SandboxMgr:
 
         sample = sandbox_mgr.fetch_sample('260515-nta8kscxnf')
 
-        assert isinstance(sample, SampleOut)
+        assert isinstance(sample, SampleTasks)
         assert sample.id_ == '260515-nta8kscxnf'
         assert mocked.call_args.args == (
             'get',
@@ -830,7 +830,7 @@ class Test_SandboxMgr:
 
         result = sandbox_mgr.submit_sample(kind='url', url='https://example.com')
 
-        assert isinstance(result, SearchResult)
+        assert isinstance(result, Sample)
         assert mocked.call_args.args == (
             'post',
             EP_SANDBOX_SAMPLES.format(base_url=sandbox_mgr.base_url),

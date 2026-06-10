@@ -17,9 +17,9 @@ from .sandbox import (
     ProfileOptions,
     ProfileUpdateOut,
     SampleDeleteOut,
-    SampleOut,
+    SampleTasks,
     SampleProfileOut,
-    SearchResult,
+    Sample,
     StaticAnalysisReport,
 )
 from .sandbox_mgr import SandboxMgr
