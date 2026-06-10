@@ -297,9 +297,15 @@ class SandboxMgr:
             Field(min_length=1),
             Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
         ],
-    ) -> Annotated[SampleTasks, Doc('SampleOut model')]:
+    ) -> Annotated[
+        SampleTasks,
+        Doc('SampleTasks model, the sample record plus its list of analysis tasks.'),
+    ]:
         """Fetch a single sample by id.
 
+        Unlike the list endpoints (which return bare `Sample` records), this returns a
+        `SampleTasks` -- the same fields plus a `tasks` list of per-target analysis tasks
+        (id, status, target, pick).
 
         Example:
             ```python

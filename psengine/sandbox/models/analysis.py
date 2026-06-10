@@ -57,6 +57,15 @@ class UrlscanTask(TaskBase):
 Task = Annotated[BehavioralTask | StaticTask | UrlscanTask, Field(discriminator='kind')]
 
 
+class LightweightSampleTask(RFBaseModel):
+    """Lightweight task reference embedded in `GET /samples/{sample_id}` responses."""
+
+    id_: str = Field(alias='id')
+    status: str
+    target: str | None = None
+    pick: str | None = None
+
+
 class Meta(RFBaseModel):
     model_config = ConfigDict(extra='forbid')
     channel: str | None = None

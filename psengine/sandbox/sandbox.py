@@ -16,11 +16,10 @@ from pathlib import Path
 from typing import Annotated, Literal
 
 from pydantic import BeforeValidator, ConfigDict, Field, field_validator, model_validator
-from typing import Optional
 
 from ..common_models import RFBaseModel
 from ..helpers import Validators
-from .models.analysis import Meta, Task
+from .models.analysis import LightweightSampleTask, Meta, Task
 from .models.static_report import (
     StaticReportAnalysis,
     StaticReportFile,
@@ -142,17 +141,10 @@ class Sample(RFBaseModel):
     user_id: str
 
 
-class Task(RFBaseModel):
-    id_: str = Field(alias='id')
-    status: str
-    target: Optional[str] = None
-    pick: Optional[str] = None
-
-
 class SampleTasks(Sample):
     """Sample record with tasks returned by `GET /samples/{sample_id}`."""
 
-    tasks: list[Task] | None = None
+    tasks: list[LightweightSampleTask] | None = None
 
 
 class StaticAnalysisReport(RFBaseModel):
