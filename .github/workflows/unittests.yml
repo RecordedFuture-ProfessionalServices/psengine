@@ -64,7 +64,7 @@ jobs:
 
       - name: Comment link to coverage HTML
         if: ${{ always() && github.event_name == 'pull_request' }}
-        uses: mshick/add-pr-comment@v3
+        uses: mshick/add-pr-comment@v3.11.0
         with:
           message: |
             Coverage HTML (Python ${{ matrix.python_version }}): ${{ steps.cov_html.outputs.artifact-url }}
@@ -81,7 +81,7 @@ jobs:
 
       - name: Post test results to PR
         if: ${{ always() && github.event_name == 'pull_request'}}
-        uses: mshick/add-pr-comment@v3
+        uses: mshick/add-pr-comment@v3.11.0
         with:
           message-path: FINAL_REPORT.md
           message-id: TestResults-${{ matrix.python_version }}
