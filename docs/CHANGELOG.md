@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.8.2 - 2026-06-30
+
+### Changed
+
+- Bump requirements of `requests` and `pydantic-settings` to mitigate vulnerabilities.
 
 ## v2.8.1 - 2026-06-15
 

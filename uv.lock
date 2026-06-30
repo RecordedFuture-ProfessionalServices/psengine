@@ -3,7 +3,7 @@ revision = 3
 requires-python = ">=3.10, <3.15"
 
 [options]
-exclude-newer = "2026-05-12T14:28:43.699679Z"
+exclude-newer = "2026-06-23T08:40:54.10747Z"
 exclude-newer-span = "P7D"
 
 [[package]]
@@ -691,7 +691,7 @@ wheels = [
 
 [[package]]
 name = "mkdocs-material"
-version = "9.6.23"
+version = "9.7.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "babel" },
@@ -706,9 +706,9 @@ dependencies = [
     { name = "pymdown-extensions" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/57/de/cc1d5139c2782b1a49e1ed1845b3298ed6076b9ba1c740ad7c952d8ffcf9/mkdocs_material-9.6.23.tar.gz", hash = "sha256:62ebc9cdbe90e1ae4f4e9b16a6aa5c69b93474c7b9e79ebc0b11b87f9f055e00", size = 4048130, upload-time = "2025-11-01T16:33:11.782Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/45/29/6d2bcf41ae40802c4beda2432396fff97b8456fb496371d1bc7aad6512ec/mkdocs_material-9.7.6.tar.gz", hash = "sha256:00bdde50574f776d328b1862fe65daeaf581ec309bd150f7bff345a098c64a69", size = 4097959, upload-time = "2026-03-19T15:41:58.161Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f5/df/bc583e857174b0dc6df67d555123533f09e7e1ac0f3fae7693fb6840c0a3/mkdocs_material-9.6.23-py3-none-any.whl", hash = "sha256:3bf3f1d82d269f3a14ed6897bfc3a844cc05e1dc38045386691b91d7e6945332", size = 9210689, upload-time = "2025-11-01T16:33:08.196Z" },
+    { url = "https://files.pythonhosted.org/packages/2c/01/bc663630c510822c95c47a66af9fa7a443c295b47d5f041e5e6ae62ef659/mkdocs_material-9.7.6-py3-none-any.whl", hash = "sha256:71b84353921b8ea1ba84fe11c50912cc512da8fe0881038fcc9a0761c0e635ba", size = 9305470, upload-time = "2026-03-19T15:41:55.217Z" },
 ]
 
 [[package]]
@@ -822,7 +822,7 @@ wheels = [
 
 [[package]]
 name = "psengine"
-version = "2.7.0"
+version = "2.8.2"
 source = { editable = "." }
 dependencies = [
     { name = "jsonpath-ng" },
@@ -867,10 +867,10 @@ requires-dist = [
     { name = "markdown-strings", specifier = "==3.4.0" },
     { name = "more-itertools", specifier = ">=9.0.0,<=11.0.2" },
     { name = "pydantic", specifier = ">=2.7,<3.0.0" },
-    { name = "pydantic-settings", extras = ["toml"], specifier = ">=2.12.2,<2.14.1" },
+    { name = "pydantic-settings", extras = ["toml"], specifier = ">=2.14.2,<2.15.0" },
     { name = "python-dateutil", specifier = ">=2.7.0" },
-    { name = "requests", specifier = ">=2.27.1" },
-    { name = "stix2", specifier = "~=3.0.1" },
+    { name = "requests", specifier = ">=2.33.1" },
+    { name = "stix2", specifier = "~=3.0.2" },
     { name = "typing-extensions", specifier = ">=4.8.0" },
 ]
 
@@ -894,7 +894,7 @@ docs = [
     { name = "mkdocs", specifier = "~=1.6.1" },
     { name = "mkdocs-codeinclude-plugin", specifier = "~=0.2.1" },
     { name = "mkdocs-exclude", specifier = "~=1.0.2" },
-    { name = "mkdocs-material", specifier = ">=9.6.18,<9.8.0" },
+    { name = "mkdocs-material", specifier = ">=9.7.6,<9.8.0" },
     { name = "mkdocstrings", extras = ["python"], specifier = ">=0.18" },
     { name = "rich", specifier = "==15.0.0" },
 ]
@@ -1034,16 +1034,16 @@ wheels = [
 
 [[package]]
 name = "pydantic-settings"
-version = "2.13.0"
+version = "2.14.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "typing-inspection" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/96/a1/ae859ffac5a3338a66b74c5e29e244fd3a3cc483c89feaf9f56c39898d75/pydantic_settings-2.13.0.tar.gz", hash = "sha256:95d875514610e8595672800a5c40b073e99e4aae467fa7c8f9c263061ea2e1fe", size = 222450, upload-time = "2026-02-15T12:11:23.476Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5c/b5/8f48e906c3e0205276e8bd8cb7512217a87b2685304d64be27cad5b3019f/pydantic_settings-2.14.2.tar.gz", hash = "sha256:c19dd64b19097f1de80184f0cc7b0272a13ae6e170cbf240a3e27e381ed14a5f", size = 237700, upload-time = "2026-06-19T13:44:56.324Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b0/1a/dd1b9d7e627486cf8e7523d09b70010e05a4bc41414f4ae6ce184cf0afb6/pydantic_settings-2.13.0-py3-none-any.whl", hash = "sha256:d67b576fff39cd086b595441bf9c75d4193ca9c0ed643b90360694d0f1240246", size = 58429, upload-time = "2026-02-15T12:11:22.133Z" },
+    { url = "https://files.pythonhosted.org/packages/77/c1/6e422f34e569cf8e18df68d1939c81c099d2b61e4f7d9621c8a77560799c/pydantic_settings-2.14.2-py3-none-any.whl", hash = "sha256:a20c97b37910b6550d5ea50fbcc2d4187defe58cd57070b73863d069419c9440", size = 61715, upload-time = "2026-06-19T13:44:55.02Z" },
 ]
 
 [package.optional-dependencies]
