@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Bump requirements of `urllib3`.
+- Bump requirements of `urllib3` and `idna`.
 
 ## v2.8.2 - 2026-06-30
 
