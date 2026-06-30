@@ -41,10 +41,11 @@ from psengine.sandbox.errors import (
     SampleSubmitError,
     SampleSummaryError,
 )
+from psengine.sandbox.models.static_report import StaticReportExtractedConfig
 from psengine.sandbox.sandbox import (
-    SampleTasks,
-    SampleSummary,
     Sample,
+    SampleSummary,
+    SampleTasks,
 )
 
 MOCK_DIR = Path(__file__).parent / 'mocks'
@@ -699,6 +700,61 @@ class Test_SandboxMgr:
         errored = next(f for f in report.files if f.error)
         assert errored.relpath is not None
         assert errored.error.startswith('PDF crash')
+
+    def test_fetch_sample_static_report_extracted_config(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # static_report_extracted_config.json is a real darkcomet capture: a single
+        # extracted entry whose config carries c2, botnet, mutex, a typed key and the
+        # family-specific `attr` bag.
+        mock = mock_request(MOCK_DIR / 'static_report_extracted_config.json')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_static_report('251114-py23jaavtp')
+
+        assert len(report.extracted) == 1
+        cfg = report.extracted[0].config
+        assert cfg.family == 'darkcomet'
+        assert cfg.rule == 'Darkcomet'
+        assert cfg.botnet == 'AP'
+        assert cfg.c2 == ['kvejo991.ddns.net:1604']
+        assert cfg.mutex == ['DC_MUTEX-ARULYYD']
+        assert len(cfg.keys) == 1
+        assert cfg.keys[0].kind == 'rc4.plain'
+        assert cfg.keys[0].value == '#KCMDDC51#-890'
+        # `attr` stays a free-form dict (its keys are family-specific).
+        assert cfg.attr['reg_key'] == 'explorer'
+        # Lists that this family doesn't carry default to [] (never None).
+        assert cfg.decoy == []
+        assert cfg.credentials == []
+
+    def test_extracted_config_credentials(self):
+        # Real agenttesla shape: credentials carry an int `port`.
+        cfg = StaticReportExtractedConfig.model_validate(
+            {
+                'family': 'agenttesla',
+                'credentials': [
+                    {
+                        'protocol': 'ftp',
+                        'host': 'ftp://ftp.example.com',
+                        'port': 21,
+                        'username': 'user@example.com',
+                        'password': 'secret',
+                    }
+                ],
+            }
+        )
+        assert len(cfg.credentials) == 1
+        assert cfg.credentials[0].port == 21
+        assert cfg.credentials[0].protocol == 'ftp'
+
+    def test_extracted_config_omitted_lists_default_to_empty(self):
+        cfg = StaticReportExtractedConfig.model_validate({'family': 'mirai'})
+        assert cfg.c2 == []
+        assert cfg.keys == []
+        assert cfg.credentials == []
+        assert cfg.tags == []
+        assert cfg.mutex == []
 
     def test_fetch_sample_static_report_404_raises(self, sandbox_mgr: SandboxMgr, mocker):
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))

@@ -439,9 +439,10 @@ class SandboxMgr:
         """Fetch the static analysis report for a sample.
 
         The static report is the pre-detonation pass: it identifies the submitted
-        sample, scores it, lists any static `signatures`, and enumerates the
-        `files` table -- the submitted file plus everything unpacked from it
-        (e.g. members of a submitted archive).
+        sample, scores it, lists any static `signatures`, enumerates the `files`
+        table -- the submitted file plus everything unpacked from it (e.g. members
+        of a submitted archive) -- and surfaces any malware configuration recovered
+        at this stage in `extracted`.
 
         Example:
             ```python
@@ -452,7 +453,14 @@ class SandboxMgr:
             print(report.analysis.score)
             for f in report.files:
                 print(f.filename, f.sha256, f.kind)
+            for cfg in report.extracted:
+                print(cfg.config.family, cfg.config.c2)
             ```
+
+        Note:
+            `files`, `signatures` and `extracted` are always lists -- the API returns
+            `null` for them when empty (e.g. `files` for a URL submission), which this
+            method normalises to `[]`.
 
         Endpoint:
             `GET /samples/{sample_id}/reports/static`

@@ -22,6 +22,7 @@ from ..helpers import Validators
 from .models.analysis import LightweightSampleTask, Meta, Task
 from .models.static_report import (
     StaticReportAnalysis,
+    StaticReportExtracted,
     StaticReportFile,
     StaticReportSample,
     StaticReportSignature,
@@ -149,8 +150,16 @@ class StaticAnalysisReport(RFBaseModel):
     analysis: StaticReportAnalysis
     signatures: list[StaticReportSignature] = Field(default_factory=list)
     files: list[StaticReportFile] = Field(default_factory=list)
+    extracted: list[StaticReportExtracted] = Field(default_factory=list)
     unpack_count: int | None = None
     error_count: int | None = None
+
+    @field_validator('signatures', 'files', 'extracted', mode='before')
+    @classmethod
+    def _none_to_empty_list(cls, v):
+        # The API sends `null` for these when there's nothing (e.g. `files: null` for URL
+        # reports) -- coerce to [] so the fields are always iterable.
+        return v or []
 
 
 class SampleDeleteOut(RFBaseModel):
