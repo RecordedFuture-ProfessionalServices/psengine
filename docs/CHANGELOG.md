@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.8.3 - 2026-06-30
+
+### Changed
+
+- Bump requirements of `urllib3`.
+
 ## v2.8.2 - 2026-06-30
 
 ### Changed
