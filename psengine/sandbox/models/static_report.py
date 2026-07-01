@@ -102,6 +102,7 @@ class StaticReportExtractedConfig(RFBaseModel):
     mutex: list[str] = Field(default_factory=list)
     dns: list[str] = Field(default_factory=list)
     extracted_pe: list[str] = Field(default_factory=list)
+    wallet: list[str] = Field(default_factory=list)
     keys: list[StaticReportExtractedKey] = Field(default_factory=list)
     credentials: list[StaticReportExtractedCredential] = Field(default_factory=list)
     attr: dict = Field(default_factory=dict)

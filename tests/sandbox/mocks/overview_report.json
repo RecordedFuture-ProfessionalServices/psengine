@@ -1,0 +1,872 @@
+{
+  "analysis": {
+    "family": [
+      "darkcomet"
+    ],
+    "score": 10,
+    "tags": [
+      "family:darkcomet",
+      "botnet:ap",
+      "defense_evasion",
+      "discovery",
+      "persistence",
+      "rat",
+      "trojan",
+      "upx"
+    ]
+  },
+  "build": "f272ba6",
+  "extracted": [
+    {
+      "config": {
+        "attr": {
+          "InstallPath": "MSDCSC\\explorer.exe",
+          "gencode": "MEkifdG51Yac",
+          "install": true,
+          "offline_keylogger": true,
+          "persistence": true,
+          "reg_key": "explorer"
+        },
+        "botnet": "AP",
+        "c2": [
+          "kvejo991.ddns.net:1604"
+        ],
+        "family": "darkcomet",
+        "keys": [
+          {
+            "key": "RC4_key",
+            "kind": "rc4.plain",
+            "value": "#KCMDDC51#-890"
+          }
+        ],
+        "mutex": [
+          "DC_MUTEX-ARULYYD"
+        ],
+        "rule": "Darkcomet"
+      },
+      "dumped_file": "out.upx",
+      "resource": "static1/unpack001/out.upx",
+      "tasks": [
+        "static1",
+        "behavioral1",
+        "behavioral2"
+      ]
+    }
+  ],
+  "sample": {
+    "completed": "2025-11-14T12:47:38Z",
+    "created": "2025-11-14T12:45:04Z",
+    "id": "251114-py23jaavtp",
+    "md5": "46bcf4e361cd251c958720e1198e3f0a",
+    "score": 10,
+    "sha1": "57ab0765c97b230c615b43ee4ebc28b674887121",
+    "sha256": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554",
+    "sha512": "8674824eed2ff85101788750cdba20220beef485b2cf86d78d6260f2b4017710386461b500969c354da32cbef39ffe50f6411bf70627c837c11eba51b4159ce4",
+    "size": 325632,
+    "ssdeep": "6144:bcNYS996KFifeVjBpeExgVTFSXFoMc5RhCaL37yVwr5UpUhUjU8UG9U:bcW7KEZlPzCy37",
+    "target": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554"
+  },
+  "signatures": [
+    {
+      "desc": "DarkComet is a remote access trojan (RAT) developed by Jean-Pierre Lesueur.",
+      "label": "darkcomet",
+      "name": "Darkcomet",
+      "score": 10,
+      "tags": [
+        "trojan",
+        "rat",
+        "family:darkcomet"
+      ]
+    },
+    {
+      "name": "Darkcomet family",
+      "score": 10,
+      "tags": [
+        "family:darkcomet"
+      ]
+    },
+    {
+      "label": "winlogon_persistence",
+      "name": "Modifies WinLogon for persistence",
+      "score": 10,
+      "tags": [
+        "persistence"
+      ],
+      "ttp": [
+        "T1547.004",
+        "T1112"
+      ]
+    },
+    {
+      "label": "modifies_firewall_policy_registry",
+      "name": "Modifies firewall policy service",
+      "score": 10,
+      "tags": [
+        "defense_evasion"
+      ],
+      "ttp": [
+        "T1112",
+        "T1543.003",
+        "T1562.004"
+      ]
+    },
+    {
+      "label": "modifies_security_service_registry",
+      "name": "Modifies security service",
+      "score": 10,
+      "tags": [
+        "defense_evasion"
+      ],
+      "ttp": [
+        "T1112",
+        "T1543.003"
+      ]
+    },
+    {
+      "label": "bypasses_windows_security_registry",
+      "name": "Windows security bypass",
+      "score": 10,
+      "tags": [
+        "defense_evasion",
+        "trojan"
+      ],
+      "ttp": [
+        "T1562.001",
+        "T1112"
+      ]
+    },
+    {
+      "desc": "Adversaries may achieve persistence by adding a Registry key to the Active Setup of the local machine.",
+      "label": "modifies_installed_components_registry",
+      "name": "Boot or Logon Autostart Execution: Active Setup",
+      "score": 8,
+      "tags": [
+        "persistence"
+      ],
+      "ttp": [
+        "T1547.014",
+        "T1112"
+      ]
+    },
+    {
+      "desc": "Modifies file attributes to stop it showing in Explorer etc.",
+      "label": "sets_file_hidden",
+      "name": "Sets file to hidden",
+      "score": 8,
+      "tags": [
+        "defense_evasion"
+      ],
+      "ttp": [
+        "T1564.001"
+      ]
+    },
+    {
+      "desc": "Looks up country code configured in the registry, likely geofence.",
+      "label": "reg_checks_country_code",
+      "name": "Checks computer location settings",
+      "score": 7,
+      "ttp": [
+        "T1012",
+        "T1082"
+      ]
+    },
+    {
+      "name": "Deletes itself",
+      "score": 7
+    },
+    {
+      "name": "Executes dropped EXE",
+      "score": 7
+    },
+    {
+      "name": "Loads dropped DLL",
+      "score": 7
+    },
+    {
+      "label": "modifies_windows_security_registry",
+      "name": "Windows security modification",
+      "score": 7,
+      "tags": [
+        "defense_evasion",
+        "trojan"
+      ],
+      "ttp": [
+        "T1562.001",
+        "T1112"
+      ]
+    },
+    {
+      "label": "creates_runkey_registry",
+      "name": "Adds Run key to start application",
+      "score": 6,
+      "tags": [
+        "persistence"
+      ],
+      "ttp": [
+        "T1547.001",
+        "T1112"
+      ]
+    },
+    {
+      "desc": "Detects executables packed with UPX/modified UPX open source packer.",
+      "indicators": [
+        {
+          "resource": "sample",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/2072-0-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/files/0x0006000000014bcb-21.dat",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/2072-27-0x0000000003F40000-0x0000000004018000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/2072-71-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-73-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-74-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-75-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-76-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-78-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-79-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-83-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-84-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-89-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/1788-0-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/1788-2-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/files/0x00080000000241f4-6.dat",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-8-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-9-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-10-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/1052-15-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/1788-17-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-19-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-20-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-21-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-22-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-24-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-26-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-27-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-28-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-29-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-30-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-32-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral2/memory/5620-33-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        }
+      ],
+      "name": "UPX packed file",
+      "score": 5,
+      "tags": [
+        "upx"
+      ]
+    },
+    {
+      "desc": "Attempts to interact with connected storage/optical drive(s).",
+      "label": "file_antivm_ide_drive",
+      "name": "Enumerates physical storage devices",
+      "score": 3,
+      "ttp": [
+        "T1082"
+      ]
+    },
+    {
+      "desc": "Attempt gather information about the system language of a victim in order to infer the geographical location of that host.",
+      "label": "system_language_discovery",
+      "name": "System Location Discovery: System Language Discovery",
+      "score": 3,
+      "tags": [
+        "discovery"
+      ],
+      "ttp": [
+        "T1614.001"
+      ]
+    },
+    {
+      "desc": "Checks for missing Authenticode signature.",
+      "label": "unsigned_pe",
+      "name": "Unsigned PE",
+      "score": 3
+    },
+    {
+      "label": "reg_software_classes",
+      "name": "Modifies registry class"
+    },
+    {
+      "name": "Suspicious behavior: GetForegroundWindowSpam"
+    },
+    {
+      "name": "Suspicious use of AdjustPrivilegeToken"
+    },
+    {
+      "name": "Suspicious use of FindShellTrayWindow"
+    },
+    {
+      "name": "Suspicious use of SendNotifyMessage"
+    },
+    {
+      "name": "Suspicious use of SetWindowsHookEx"
+    },
+    {
+      "name": "Suspicious use of WriteProcessMemory"
+    },
+    {
+      "desc": "The Task Scheduler COM API can be used to schedule applications to run on boot or at set times.",
+      "label": "win_tasksched_com_clsid",
+      "name": "Uses Task Scheduler COM API",
+      "tags": [
+        "persistence"
+      ],
+      "ttp": [
+        "T1012"
+      ]
+    },
+    {
+      "label": "attrib_generic",
+      "name": "Views/modifies file attributes",
+      "tags": [
+        "defense_evasion"
+      ],
+      "ttp": [
+        "T1564.001"
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "family": [
+        "darkcomet"
+      ],
+      "iocs": {
+        "domains": [
+          "kvejo991.ddns.net"
+        ],
+        "ips": [
+          "8.8.8.8",
+          "208.89.74.23"
+        ]
+      },
+      "md5": "46bcf4e361cd251c958720e1198e3f0a",
+      "score": 10,
+      "sha1": "57ab0765c97b230c615b43ee4ebc28b674887121",
+      "sha256": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554",
+      "sha512": "8674824eed2ff85101788750cdba20220beef485b2cf86d78d6260f2b4017710386461b500969c354da32cbef39ffe50f6411bf70627c837c11eba51b4159ce4",
+      "signatures": [
+        {
+          "desc": "DarkComet is a remote access trojan (RAT) developed by Jean-Pierre Lesueur.",
+          "label": "darkcomet",
+          "name": "Darkcomet",
+          "score": 10,
+          "tags": [
+            "trojan",
+            "rat",
+            "family:darkcomet"
+          ]
+        },
+        {
+          "name": "Darkcomet family",
+          "score": 10,
+          "tags": [
+            "family:darkcomet"
+          ]
+        },
+        {
+          "label": "winlogon_persistence",
+          "name": "Modifies WinLogon for persistence",
+          "score": 10,
+          "tags": [
+            "persistence"
+          ],
+          "ttp": [
+            "T1547.004",
+            "T1112"
+          ]
+        },
+        {
+          "label": "modifies_firewall_policy_registry",
+          "name": "Modifies firewall policy service",
+          "score": 10,
+          "tags": [
+            "defense_evasion"
+          ],
+          "ttp": [
+            "T1112",
+            "T1543.003",
+            "T1562.004"
+          ]
+        },
+        {
+          "label": "modifies_security_service_registry",
+          "name": "Modifies security service",
+          "score": 10,
+          "tags": [
+            "defense_evasion"
+          ],
+          "ttp": [
+            "T1112",
+            "T1543.003"
+          ]
+        },
+        {
+          "label": "bypasses_windows_security_registry",
+          "name": "Windows security bypass",
+          "score": 10,
+          "tags": [
+            "defense_evasion",
+            "trojan"
+          ],
+          "ttp": [
+            "T1562.001",
+            "T1112"
+          ]
+        },
+        {
+          "desc": "Adversaries may achieve persistence by adding a Registry key to the Active Setup of the local machine.",
+          "label": "modifies_installed_components_registry",
+          "name": "Boot or Logon Autostart Execution: Active Setup",
+          "score": 8,
+          "tags": [
+            "persistence"
+          ],
+          "ttp": [
+            "T1547.014",
+            "T1112"
+          ]
+        },
+        {
+          "desc": "Modifies file attributes to stop it showing in Explorer etc.",
+          "label": "sets_file_hidden",
+          "name": "Sets file to hidden",
+          "score": 8,
+          "tags": [
+            "defense_evasion"
+          ],
+          "ttp": [
+            "T1564.001"
+          ]
+        },
+        {
+          "desc": "Looks up country code configured in the registry, likely geofence.",
+          "label": "reg_checks_country_code",
+          "name": "Checks computer location settings",
+          "score": 7,
+          "ttp": [
+            "T1012",
+            "T1082"
+          ]
+        },
+        {
+          "name": "Deletes itself",
+          "score": 7
+        },
+        {
+          "name": "Executes dropped EXE",
+          "score": 7
+        },
+        {
+          "name": "Loads dropped DLL",
+          "score": 7
+        },
+        {
+          "label": "modifies_windows_security_registry",
+          "name": "Windows security modification",
+          "score": 7,
+          "tags": [
+            "defense_evasion",
+            "trojan"
+          ],
+          "ttp": [
+            "T1562.001",
+            "T1112"
+          ]
+        },
+        {
+          "label": "creates_runkey_registry",
+          "name": "Adds Run key to start application",
+          "score": 6,
+          "tags": [
+            "persistence"
+          ],
+          "ttp": [
+            "T1547.001",
+            "T1112"
+          ]
+        },
+        {
+          "desc": "Detects executables packed with UPX/modified UPX open source packer.",
+          "indicators": [
+            {
+              "resource": "behavioral1/memory/2072-0-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/files/0x0006000000014bcb-21.dat",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/2072-27-0x0000000003F40000-0x0000000004018000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/2072-71-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/1400-73-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/1400-74-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/1400-75-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/1400-76-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/1400-78-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/1400-79-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/1400-83-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/1400-84-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral1/memory/1400-89-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/1788-0-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/1788-2-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/files/0x00080000000241f4-6.dat",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-8-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-9-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-10-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/1052-15-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/1788-17-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-19-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-20-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-21-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-22-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-24-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-26-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-27-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-28-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-29-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-30-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-32-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            },
+            {
+              "resource": "behavioral2/memory/5620-33-0x0000000000400000-0x00000000004D8000-memory.dmp",
+              "yara_rule": "upx"
+            }
+          ],
+          "name": "UPX packed file",
+          "score": 5,
+          "tags": [
+            "upx"
+          ]
+        },
+        {
+          "desc": "Attempts to interact with connected storage/optical drive(s).",
+          "label": "file_antivm_ide_drive",
+          "name": "Enumerates physical storage devices",
+          "score": 3,
+          "ttp": [
+            "T1082"
+          ]
+        },
+        {
+          "desc": "Attempt gather information about the system language of a victim in order to infer the geographical location of that host.",
+          "label": "system_language_discovery",
+          "name": "System Location Discovery: System Language Discovery",
+          "score": 3,
+          "tags": [
+            "discovery"
+          ],
+          "ttp": [
+            "T1614.001"
+          ]
+        },
+        {
+          "label": "reg_software_classes",
+          "name": "Modifies registry class"
+        },
+        {
+          "name": "Suspicious behavior: GetForegroundWindowSpam"
+        },
+        {
+          "name": "Suspicious use of AdjustPrivilegeToken"
+        },
+        {
+          "name": "Suspicious use of FindShellTrayWindow"
+        },
+        {
+          "name": "Suspicious use of SendNotifyMessage"
+        },
+        {
+          "name": "Suspicious use of SetWindowsHookEx"
+        },
+        {
+          "name": "Suspicious use of WriteProcessMemory"
+        },
+        {
+          "desc": "The Task Scheduler COM API can be used to schedule applications to run on boot or at set times.",
+          "label": "win_tasksched_com_clsid",
+          "name": "Uses Task Scheduler COM API",
+          "tags": [
+            "persistence"
+          ],
+          "ttp": [
+            "T1012"
+          ]
+        },
+        {
+          "label": "attrib_generic",
+          "name": "Views/modifies file attributes",
+          "tags": [
+            "defense_evasion"
+          ],
+          "ttp": [
+            "T1564.001"
+          ]
+        }
+      ],
+      "size": 325632,
+      "ssdeep": "6144:bcNYS996KFifeVjBpeExgVTFSXFoMc5RhCaL37yVwr5UpUhUjU8UG9U:bcW7KEZlPzCy37",
+      "tags": [
+        "botnet:ap",
+        "defense_evasion",
+        "discovery",
+        "family:darkcomet",
+        "persistence",
+        "rat",
+        "trojan",
+        "upx"
+      ],
+      "target": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554",
+      "tasks": [
+        "behavioral1",
+        "behavioral2"
+      ]
+    }
+  ],
+  "tasks": {
+    "251114-py23jaavtp-behavioral1": {
+      "backend": "sbx4m101",
+      "kind": "behavioral",
+      "name": "behavioral1",
+      "os": "windows7-x64",
+      "resource": "win7-20250407-en",
+      "score": 10,
+      "sigs": 25,
+      "status": "reported",
+      "tags": [
+        "botnet:ap",
+        "defense_evasion",
+        "discovery",
+        "family:darkcomet",
+        "persistence",
+        "rat",
+        "trojan",
+        "upx"
+      ],
+      "target": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554.exe",
+      "timeout": 150
+    },
+    "251114-py23jaavtp-behavioral2": {
+      "backend": "sbx4m105",
+      "kind": "behavioral",
+      "name": "behavioral2",
+      "os": "windows10-2004-x64",
+      "resource": "win10v2004-20250404-en",
+      "score": 10,
+      "sigs": 20,
+      "status": "reported",
+      "tags": [
+        "botnet:ap",
+        "defense_evasion",
+        "discovery",
+        "family:darkcomet",
+        "persistence",
+        "rat",
+        "trojan",
+        "upx"
+      ],
+      "target": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554.exe",
+      "timeout": 150
+    },
+    "251114-py23jaavtp-static1": {
+      "kind": "static",
+      "name": "static1",
+      "score": 10,
+      "sigs": 3,
+      "status": "reported",
+      "tags": [
+        "upx",
+        "botnet:ap",
+        "family:darkcomet"
+      ]
+    }
+  },
+  "version": "0.3.1"
+}

@@ -20,6 +20,15 @@ from pydantic import BeforeValidator, Field, field_validator, model_validator
 from ..common_models import RFBaseModel
 from ..helpers import Validators
 from .models.analysis import LightweightSampleTask, Meta, Task
+from .models.overview_report import (
+    OverviewAnalysis,
+    OverviewError,
+    OverviewExtracted,
+    OverviewSample,
+    OverviewSignature,
+    OverviewTarget,
+    OverviewTask,
+)
 from .models.static_report import (
     StaticReportAnalysis,
     StaticReportExtracted,
@@ -159,6 +168,32 @@ class StaticAnalysisReport(RFBaseModel):
     def _none_to_empty_list(cls, v):
         # The API sends `null` for these when there's nothing (e.g. `files: null` for URL
         # reports) -- coerce to [] so the fields are always iterable.
+        return v or []
+
+
+class OverviewReport(RFBaseModel):
+    """Overview report returned by `GET /samples/{sampleID}/overview.json`.
+
+    The one-pager that combines every task's result: the overall `analysis` verdict,
+    the `sample` identity, recovered malware `extracted` configs, `signatures`, the
+    per-`targets` breakdown (each with its own IOCs and signatures) and the `tasks` map.
+    """
+
+    version: str | None = None
+    build: str | None = None
+    analysis: OverviewAnalysis
+    sample: OverviewSample
+    signatures: list[OverviewSignature] = Field(default_factory=list)
+    extracted: list[OverviewExtracted] = Field(default_factory=list)
+    targets: list[OverviewTarget] = Field(default_factory=list)
+    tasks: dict[str, OverviewTask] = Field(default_factory=dict)
+    errors: list[OverviewError] = Field(default_factory=list)
+
+    @field_validator('targets', mode='before')
+    @classmethod
+    def _none_to_empty_list(cls, v):
+        # The API sends `targets: null` when there are no targets -- coerce to [] so the
+        # field is always iterable.
         return v or []
 
 

@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Annotated, Literal, cast
 
 from pydantic import Field, validate_call
+from requests.exceptions import HTTPError
 from typing_extensions import Doc
 
 from ..endpoints import (
@@ -25,6 +26,7 @@ from ..endpoints import (
     EP_SANDBOX_SAMPLES,
     EP_SANDBOX_SAMPLES_DOWNLOAD,
     EP_SANDBOX_SAMPLES_ID,
+    EP_SANDBOX_SAMPLES_OVERVIEW,
     EP_SANDBOX_SAMPLES_PROFILE,
     EP_SANDBOX_SAMPLES_STATIC_REPORT,
     EP_SANDBOX_SAMPLES_SUMMARY,
@@ -43,7 +45,10 @@ from .errors import (
     SampleDeleteError,
     SampleFetchError,
     SampleFileFetchError,
+    SampleOverviewError,
     SampleProfileError,
+    SampleReportNotAvailableError,
+    SampleReportNotFoundError,
     SampleSearchError,
     SamplesFetchError,
     SampleStaticReportError,
@@ -54,15 +59,16 @@ from .sandbox import (
     Browser,
     CreateUpdateProfileIn,
     NetworkMode,
+    OverviewReport,
     Profile,
     ProfileDeleteOut,
     ProfileUpdateOut,
+    Sample,
     SampleDeleteOut,
-    SampleTasks,
     SampleProfileOut,
     SampleSummary,
+    SampleTasks,
     SearchIn,
-    Sample,
     SetProfileIn,
     StaticAnalysisReport,
     SubmitKind,
@@ -479,7 +485,7 @@ class SandboxMgr:
 
     @debug_call
     @validate_call
-    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleStaticReportError)
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleOverviewError)
     def fetch_sample_overview_report(
         self,
         sample_id: Annotated[
@@ -487,17 +493,76 @@ class SandboxMgr:
             Field(min_length=1),
             Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
         ],
-        task_id: Annotated[
-            str,
-            Field(min_length=1),
-            Doc('Task ID, e.g. "behavioral1".'),
-        ],
     ) -> Annotated[
-        StaticAnalysisReport,
-        Doc('StaticAnalysisReport model'),
+        OverviewReport,
+        Doc('OverviewReport model'),
     ]:
-        # endpoint '/v1/samples/{0}/overview.json'.format(sample_id)
-        pass
+        """Fetch the overview report for a sample.
+
+        The overview is the one-pager that combines every task's result: the overall
+        `analysis` verdict (score, family, tags), the `sample` identity, recovered malware
+        configs in `extracted`, the sample-level `signatures`, a per-`targets` breakdown
+        (each target with its own IOCs and signature hits) and the `tasks` map keyed by
+        task id (e.g. `static1`, `behavioral1`, `urlscan1`).
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            report = mgr.fetch_sample_overview_report('260501-h4p7laawme')
+            print(report.analysis.score, report.analysis.family)
+            for cfg in report.extracted:
+                print(cfg.config.family if cfg.config else None, cfg.tasks)
+            for target in report.targets:
+                print(target.target, target.iocs.domains)
+            for task_id, task in report.tasks.items():
+                print(task_id, task.kind, task.status, task.score)
+            ```
+
+        Note:
+            The overview is only generated once the sample reaches the `reported` state.
+            A sample that exists but has not been fully analysed yet (e.g. still in
+            `static_analysis`) returns `404 REPORT_NOT_AVAILABLE`, which raises
+            `SampleReportNotAvailableError` -- distinct from a `404 NOT_FOUND` for an
+            unknown sample id.
+
+        Endpoint:
+            `GET /samples/{sample_id}/overview.json`
+
+        Raises:
+            ValidationError: If `sample_id` is empty or of incorrect type.
+            SampleReportNotAvailableError: If the sample exists but its overview is not
+                available yet (404 `REPORT_NOT_AVAILABLE`).
+            SampleReportNotFoundError: If the sample does not exist (404 `NOT_FOUND`).
+            SampleOverviewError: If the API returns any other non-2xx or a connection error
+                occurs. Base class of the two 404 errors above.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_OVERVIEW.format(base_url=self.base_url, sample_id=sample_id)
+        try:
+            response = self.sb_client.request('get', endpoint)
+        except HTTPError as err:
+            code = self._overview_404_code(err)
+            if code == 'REPORT_NOT_AVAILABLE':
+                raise SampleReportNotAvailableError(
+                    f'Overview report not available for sample {sample_id}. '
+                    'The sample may not have finished analysis yet.'
+                ) from err
+            if code == 'NOT_FOUND':
+                raise SampleReportNotFoundError(f'Sample {sample_id} not found.') from err
+            raise
+        return OverviewReport.model_validate(response.json())
+
+    @staticmethod
+    def _overview_404_code(err: HTTPError) -> str | None:
+        """Return the RF `error` code from a 404 envelope, or None if not a decodable 404."""
+        response = err.response
+        if response is None or response.status_code != 404:
+            return None
+        try:
+            return response.json().get('error')
+        except (ValueError, AttributeError):
+            return None
 
     @debug_call
     @validate_call

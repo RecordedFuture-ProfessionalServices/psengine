@@ -38,6 +38,23 @@ class SampleStaticReportError(RecordedFutureError):
     """Raised when a static report lookup against `/samples/{id}/reports/static` fails."""
 
 
+class SampleOverviewError(RecordedFutureError):
+    """Raised when an overview report lookup against `/samples/{id}/overview.json` fails."""
+
+
+class SampleReportNotAvailableError(SampleOverviewError):
+    """Raised when an overview report is not (yet) available for an existing sample.
+
+    The Sandbox API returns `404 REPORT_NOT_AVAILABLE` when the sample exists but has not
+    reached the `reported` state that produces an overview (e.g. it is still in
+    `static_analysis`).
+    """
+
+
+class SampleReportNotFoundError(SampleOverviewError):
+    """Raised when the sample itself does not exist for an overview report lookup."""
+
+
 class SampleProfileError(RecordedFutureError):
     """Raised when setting a sample profile against `/samples/{id}/profile` (POST) fails."""
 

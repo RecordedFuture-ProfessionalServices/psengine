@@ -12,6 +12,7 @@ from psengine.endpoints import (
     EP_SANDBOX_SAMPLES,
     EP_SANDBOX_SAMPLES_DOWNLOAD,
     EP_SANDBOX_SAMPLES_ID,
+    EP_SANDBOX_SAMPLES_OVERVIEW,
     EP_SANDBOX_SAMPLES_PROFILE,
     EP_SANDBOX_SAMPLES_STATIC_REPORT,
     EP_SANDBOX_SAMPLES_SUMMARY,
@@ -19,6 +20,7 @@ from psengine.endpoints import (
     SANDBOX_BASE_URLS,
 )
 from psengine.sandbox import (
+    OverviewReport,
     Profile,
     ProfileOptions,
     SampleProfileOut,
@@ -34,7 +36,10 @@ from psengine.sandbox.errors import (
     SampleDeleteError,
     SampleFetchError,
     SampleFileFetchError,
+    SampleOverviewError,
     SampleProfileError,
+    SampleReportNotAvailableError,
+    SampleReportNotFoundError,
     SampleSearchError,
     SamplesFetchError,
     SampleStaticReportError,
@@ -55,6 +60,17 @@ def _http_error(status_code: int, message: str = 'boom') -> HTTPError:
     response = Response()
     response.status_code = status_code
     err = HTTPError(message)
+    err.response = response
+    return err
+
+
+def _http_error_json(status_code: int, error_code: str) -> HTTPError:
+    # Builds an HTTPError whose response carries an RF error envelope so the
+    # manager can inspect the `error` code (e.g. NOT_FOUND vs REPORT_NOT_AVAILABLE).
+    response = Response()
+    response.status_code = status_code
+    response._content = json.dumps({'error': error_code, 'message': 'x'}).encode()
+    err = HTTPError(error_code)
     err.response = response
     return err
 
@@ -771,6 +787,152 @@ class Test_SandboxMgr:
 
         with pytest.raises(SampleStaticReportError):
             sandbox_mgr.fetch_sample_static_report('any-id')
+
+    def test_fetch_sample_overview_report_happy_path(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # overview_report.json is a real darkcomet capture: analysis verdict, one extracted
+        # config, sample-level signatures, a single target with IOCs, and the tasks map.
+        mock = mock_request(MOCK_DIR / 'overview_report.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_overview_report('251114-py23jaavtp')
+
+        assert isinstance(report, OverviewReport)
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_SAMPLES_OVERVIEW.format(
+                base_url=sandbox_mgr.base_url, sample_id='251114-py23jaavtp'
+            ),
+        )
+        # analysis verdict
+        assert report.analysis.score == 10
+        assert report.analysis.family == ['darkcomet']
+        assert 'rat' in report.analysis.tags
+        # sample identity
+        assert report.sample.id_ == '251114-py23jaavtp'
+        assert report.sample.score == 10
+        # extracted config (reuses the static-report config model) + the tasks that found it
+        assert len(report.extracted) == 1
+        extracted = report.extracted[0]
+        assert extracted.config.family == 'darkcomet'
+        assert extracted.config.c2 == ['kvejo991.ddns.net:1604']
+        assert extracted.tasks == ['static1', 'behavioral1', 'behavioral2']
+        # a target with its IOCs and signature hits
+        assert len(report.targets) == 1
+        target = report.targets[0]
+        assert target.iocs.domains == ['kvejo991.ddns.net']
+        assert '8.8.8.8' in target.iocs.ips
+        assert all(s.name for s in target.signatures)
+        # tasks map keyed by task id
+        assert set(report.tasks) == {
+            '251114-py23jaavtp-behavioral1',
+            '251114-py23jaavtp-behavioral2',
+            '251114-py23jaavtp-static1',
+        }
+        behavioral1 = report.tasks['251114-py23jaavtp-behavioral1']
+        assert behavioral1.kind == 'behavioral'
+        assert behavioral1.status == 'reported'
+        assert behavioral1.score == 10
+
+    def test_overview_targets_null_coerced_to_empty(self):
+        # The API sends `targets: null` when there are none -- it must normalise to [].
+        report = OverviewReport.model_validate(
+            {
+                'analysis': {'score': 1, 'tags': []},
+                'sample': {'id': '260101-aaaaaaaaaa', 'score': 1},
+                'targets': None,
+            }
+        )
+        assert report.targets == []
+        assert report.signatures == []
+        assert report.extracted == []
+        assert report.tasks == {}
+
+    def test_overview_dropper_urls_mixed_shapes_normalised(self):
+        # `dropper.urls` items are usually bare strings but can be {"type", "url"} objects
+        # -- both must normalise to OverviewDropperUrl so the list is uniform.
+        report = OverviewReport.model_validate(
+            {
+                'analysis': {'score': 10, 'tags': []},
+                'sample': {'id': '260101-bbbbbbbbbb', 'score': 10},
+                'extracted': [
+                    {
+                        'dropper': {
+                            'language': 'powershell',
+                            'urls': [
+                                'https://example.com/plain.exe',
+                                {'type': 'exe.dropper', 'url': 'https://example.com/obj.exe'},
+                            ],
+                        }
+                    }
+                ],
+            }
+        )
+        urls = report.extracted[0].dropper.urls
+        assert [u.url for u in urls] == [
+            'https://example.com/plain.exe',
+            'https://example.com/obj.exe',
+        ]
+        assert urls[1].type == 'exe.dropper'
+        assert urls[0].type is None
+
+    def test_fetch_sample_overview_report_bare_404_raises_overview_error(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # A 404 with no decodable RF envelope -> generic SampleOverviewError.
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
+
+        with pytest.raises(SampleOverviewError) as exc:
+            sandbox_mgr.fetch_sample_overview_report('missing')
+        assert type(exc.value) is SampleOverviewError
+
+    def test_fetch_sample_overview_report_not_found_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 NOT_FOUND -> the sample does not exist -> SampleReportNotFoundError.
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_sample_overview_report('missing')
+        # subclass of SampleOverviewError, so callers of the base error still catch it
+        with pytest.raises(SampleOverviewError):
+            sandbox_mgr.fetch_sample_overview_report('missing')
+
+    def test_fetch_sample_overview_report_report_not_available_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 REPORT_NOT_AVAILABLE -> sample exists but overview not ready -> specific error.
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=_http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+        )
+
+        with pytest.raises(SampleReportNotAvailableError):
+            sandbox_mgr.fetch_sample_overview_report('260630-svp6caets9')
+        # subclass of SampleOverviewError, so callers of the base error still catch it
+        with pytest.raises(SampleOverviewError):
+            sandbox_mgr.fetch_sample_overview_report('260630-svp6caets9')
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_sample_overview_report_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleOverviewError):
+            sandbox_mgr.fetch_sample_overview_report('any-id')
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_sample_overview_report_validation_error(
+        self, sandbox_mgr: SandboxMgr, sample_id
+    ):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_sample_overview_report(sample_id)
 
     @pytest.mark.parametrize('sample_id', ['', None, 123])
     def test_fetch_sample_static_report_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
