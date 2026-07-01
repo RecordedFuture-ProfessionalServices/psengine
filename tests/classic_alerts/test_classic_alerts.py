@@ -300,6 +300,18 @@ class Test_ClassicAlert:
 
         assert 'https://consciousness[.]tirol/agdkd/adf' in data
 
+    def test_markdown_reviewer_note(self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request):
+        nodeid = request.node.nodeid
+        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
+        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
+
+        d = ca_mgr.fetch(id_='BL-yjOF')
+        markdown_note = d.markdown(reviewer_note=True)
+        markdown_no_note = d.markdown(reviewer_note=False)
+
+        assert 'Reviewer Note' in markdown_note
+        assert 'Reviewer Note' not in markdown_no_note
+
     def test_markdown_table_not_broken(
         self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request
     ):
