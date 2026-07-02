@@ -18,6 +18,10 @@ from .pba_code_repo_leak import (
     CodeRepoPanelEvidence,
     CodeRepoPanelStatus,
 )
+from .pba_comprimised_bank_checks import (
+    CompromisedBankCheckPanelStatus,
+    CompromisedBankCheckPanelEvidenceSummary,
+)
 from .pba_cyber_vulnerability import (
     CyberVulnerabilityPanelEvidence,
     CyberVulnerabilityPanelStatus,

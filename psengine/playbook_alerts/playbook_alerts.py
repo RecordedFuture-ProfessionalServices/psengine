@@ -34,6 +34,8 @@ from ..playbook_alerts.markdown.markdown import _markdown_playbook_alert
 from .models import (
     CodeRepoPanelEvidence,
     CodeRepoPanelStatus,
+    CompromisedBankCheckPanelStatus,
+    CompromisedBankCheckPanelEvidenceSummary,
     CyberVulnerabilityPanelEvidence,
     CyberVulnerabilityPanelStatus,
     DatetimeRange,
@@ -207,6 +209,19 @@ IPV4 = (
     r'(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)'
 )
 SEQ_IPV4 = r'((?:' + IPV4 + r'(?:,\s*)?)+)'
+
+
+class PBA_CompromisedBankChecks(PBA_Generic):
+    """Model for Compromised Bank Checks. Inherit behaviors from `PBA_Generic`."""
+
+    __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
+
+    category: str = PACategory.COMPROMISED_BANK_CHECKS.value
+
+    panel_status: CompromisedBankCheckPanelStatus | None = Field(default_factory=CompromisedBankCheckPanelStatus)
+    panel_evidence_summary: CompromisedBankCheckPanelEvidenceSummary | None = Field(
+        default_factory=CompromisedBankCheckPanelEvidenceSummary
+    )
 
 
 class PBA_ThirdPartyRisk(PBA_Generic):
