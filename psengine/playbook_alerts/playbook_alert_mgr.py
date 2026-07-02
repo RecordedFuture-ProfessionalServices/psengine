@@ -422,7 +422,9 @@ class PlaybookAlertMgr:
         image_id: Annotated[str | None, Doc('ID of the image to retrieve.')] = None,
         alert_category: Annotated[
             PBA_WITH_IMAGES_VALIDATOR,
-            Doc("Category of the alert (e.g., 'domain_abuse', 'geopolitics_facility')."),
+            Doc(
+                "Category of the alert (e.g., 'domain_abuse', 'geopolitics_facility', 'compromised_bank_checks')."
+            ),
         ] = 'domain_abuse',
     ) -> Annotated[bytes, Doc('Raw image content in bytes.')]:
         """Retrieve an image from a playbook alert that includes visual content.
@@ -430,6 +432,7 @@ class PlaybookAlertMgr:
         Endpoints:
             - `playbook-alert/domain_abuse/{alert_id}/image/{image_id}`
             - `playbook-alert/geopolitics_facility/image/{image_id}`
+            - `playbook-alert/compromised_bank_checks/image/{alert_id}`
 
         Raises:
             ValidationError: If any parameter is of incorrect type.
@@ -437,6 +440,8 @@ class PlaybookAlertMgr:
         """
         if alert_category == PACategory.DOMAIN_ABUSE.value:
             url = f'/{alert_category}/{alert_id}/image/{image_id}'
+        elif alert_category == PACategory.COMPROMISED_BANK_CHECKS.value:
+            url = f'/compromised_bank_checks/image/{alert_id}'
         else:
             url = f'/{alert_category}/image/{image_id}'
 
@@ -464,6 +469,7 @@ class PlaybookAlertMgr:
         Endpoints:
             - `playbook-alert/domain_abuse/{alert_id}/image/{image_id}`
             - `playbook-alert/geopolitics_facility/image/{image_id}`
+            - `playbook-alert/compromised_bank_checks/image/{alert_id}`
 
         Example:
             Search and retrieve images for alerts:
@@ -489,11 +495,17 @@ class PlaybookAlertMgr:
             ValidationError: If the parameter is of incorrect type.
             PlaybookAlertRetrieveImageError: If an API error occurs during image retrieval.
         """
-        for image_id in playbook_alert.image_ids:
+        if playbook_alert.category == PACategory.COMPROMISED_BANK_CHECKS.value:
             image_bytes = self.fetch_one_image(
-                playbook_alert.playbook_alert_id, image_id, playbook_alert.category
+                alert_id=playbook_alert.playbook_alert_id, alert_category=playbook_alert.category
             )
-            playbook_alert.store_image(image_id, image_bytes)
+            playbook_alert.store_image(image_bytes)
+        else:
+            for image_id in playbook_alert.image_ids:
+                image_bytes = self.fetch_one_image(
+                    playbook_alert.playbook_alert_id, image_id, playbook_alert.category
+                )
+                playbook_alert.store_image(image_id, image_bytes)
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertFetchError)

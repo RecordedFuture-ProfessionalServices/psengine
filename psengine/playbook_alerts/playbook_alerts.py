@@ -216,12 +216,47 @@ class PBA_CompromisedBankChecks(PBA_Generic):
 
     __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
 
+    _images: dict | None = {}
+
     category: str = PACategory.COMPROMISED_BANK_CHECKS.value
 
-    panel_status: CompromisedBankCheckPanelStatus | None = Field(default_factory=CompromisedBankCheckPanelStatus)
+    panel_status: CompromisedBankCheckPanelStatus | None = Field(
+        default_factory=CompromisedBankCheckPanelStatus
+    )
     panel_evidence_summary: CompromisedBankCheckPanelEvidenceSummary | None = Field(
         default_factory=CompromisedBankCheckPanelEvidenceSummary
     )
+
+    def store_image(self, image_bytes: bytes) -> None:
+        """Compromised Bank Checks: Store image bytes in `self._images` dictionary."""
+
+        image_id = self.playbook_alert_id
+
+        self._images[image_id] = {}
+        self._images[image_id]['created'] = self.panel_evidence_summary.collected_date
+        self._images[image_id]['image_bytes'] = image_bytes
+
+    @property
+    def images(
+        self,
+    ) -> Annotated[
+        dict,
+        Doc('Dict containing alert images with metadata and raw bytes, or empty if not found.'),
+    ]:
+        """Compromised Bank Check: Get the raw bytes of the compromised bank check.
+
+        The data is in the following format:
+
+        ```python
+        {
+            alert_id : {
+                'created' : "date",
+                'image_bytes': b'xyz'
+            }
+        }
+        ```
+        """
+        return self._images
 
 
 class PBA_ThirdPartyRisk(PBA_Generic):
