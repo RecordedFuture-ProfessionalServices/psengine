@@ -269,12 +269,15 @@ class Test_ClassicAlert:
             alerts[0].markdown(html_tags=True),
             alerts[1].markdown(ai_insights=False),
             alerts[2].markdown(),
+            alerts[2].markdown(reviewer_note=True),
         ]
 
         assert '\n</details>' not in markdowns[0]
         assert 'AI Insights' in markdowns[1]
         assert 'AI Insights' not in markdowns[2]
         assert 'AI Insights' in markdowns[3]
+        assert 'Reviewer Note' not in markdowns[3]
+        assert 'Reviewer Note' in markdowns[4]
 
     def test_markdown_defang_iocs(self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request):
         nodeid = request.node.nodeid
@@ -299,18 +302,6 @@ class Test_ClassicAlert:
         data = d.markdown(defang_iocs=True)
 
         assert 'https://consciousness[.]tirol/agdkd/adf' in data
-
-    def test_markdown_reviewer_note(self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request):
-        nodeid = request.node.nodeid
-        mock = mock_request(MOCK_DIR / f'{nodeid.split(":")[-1]}.json')
-        mocker.patch.object(ca_mgr.rf_client, 'request', return_value=mock)
-
-        d = ca_mgr.fetch(id_='BL-yjOF')
-        markdown_note = d.markdown(reviewer_note=True)
-        markdown_no_note = d.markdown(reviewer_note=False)
-
-        assert 'Reviewer Note' in markdown_note
-        assert 'Reviewer Note' not in markdown_no_note
 
     def test_markdown_table_not_broken(
         self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request
