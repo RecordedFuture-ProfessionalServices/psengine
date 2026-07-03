@@ -1,9 +1,66 @@
+import copy
+
 import pytest
 from pydantic_core import ValidationError
 
 from psengine.playbook_alerts import PACategory, PBA_Generic
+from psengine.playbook_alerts.mappings import CATEGORY_TO_OBJECT_MAP
 from psengine.playbook_alerts.playbook_alert_mgr import PlaybookAlertMgr
 from tests.playbook_alerts.conftest import BASE_MOCK_DIR
+
+MINIMAL_STATUS = {
+    'status': 'New',
+    'priority': 'Informational',
+    'created': '2025-12-01T19:48:15.554Z',
+    'updated': '2025-10-15T01:19:21.238Z',
+    'alert_rule': {'id': 'x', 'label': 'test', 'name': 'Test Alert Rule'},
+    'entity_name': 'example.test',
+    'risk_score': 5,
+    'context_list': [],
+    'targets': [],
+    'actions_taken': [],
+}
+
+# Two comments plus a non-comment change, to verify only comments get rendered.
+COMMENT_LOG = [
+    {
+        'id': 'uuid:1',
+        'author_name': 'Ada Lovelace',
+        'created': '2026-01-02T10:00:00.000Z',
+        'changes': [{'comment': 'First comment for testing', 'type': 'comment_change'}],
+    },
+    {
+        'id': 'uuid:2',
+        'author_name': 'Alan Turing',
+        'created': '2026-01-01T09:00:00.000Z',
+        'changes': [{'comment': 'Second comment for testing', 'type': 'comment_change'}],
+    },
+    {
+        'id': 'uuid:3',
+        'author_name': 'Grace Hopper',
+        'created': '2026-01-01T08:00:00.000Z',
+        'changes': [
+            {
+                'old': 'alpha-state',
+                'new': 'beta-state',
+                'actions_taken': [],
+                'type': 'status_change',
+            }
+        ],
+    },
+]
+
+
+def _make_alert(category, panel_log_v2):
+    """Build a minimal playbook alert of ``category`` with the given ``panel_log_v2``.
+
+    deepcopy is used because the panel-log validator mutates the input in place.
+    """
+    return CATEGORY_TO_OBJECT_MAP[category](
+        playbook_alert_id='task:comments-test',
+        panel_status=copy.deepcopy(MINIMAL_STATUS),
+        panel_log_v2=copy.deepcopy(panel_log_v2),
+    )
 
 
 class Test_BasePlaybookAlert:
@@ -66,3 +123,52 @@ class Test_BasePlaybookAlert:
         generic.category = 'moise'
         with pytest.raises(NotImplementedError):
             generic.markdown()
+
+
+class Test_PlaybookAlertComments:
+    def test_markdown_comments_renders_section(self):
+        md = _make_alert(PACategory.DOMAIN_ABUSE.value, COMMENT_LOG).markdown(comments=True)
+        assert '### Comments' in md
+        assert 'First comment for testing' in md
+        assert 'Second comment for testing' in md
+        assert 'Ada Lovelace' in md
+
+    def test_markdown_comments_filters_non_comment_changes(self):
+        md = _make_alert(PACategory.DOMAIN_ABUSE.value, COMMENT_LOG).markdown(comments=True)
+        comments_block = md.split('### Comments', 1)[1].split('\n### ', 1)[0]
+        # the status_change entry must not leak into the Comments section
+        assert 'beta-state' not in comments_block
+
+    def test_markdown_comments_off_by_default(self):
+        md = _make_alert(PACategory.DOMAIN_ABUSE.value, COMMENT_LOG).markdown()
+        assert '### Comments' not in md
+        assert 'First comment for testing' not in md
+
+    def test_markdown_comments_empty_log(self):
+        # No comment entries -> no Comments section, and no crash from an empty section.
+        md = _make_alert(PACategory.DOMAIN_ABUSE.value, []).markdown(comments=True)
+        assert '### Comments' not in md
+
+    @pytest.mark.parametrize(
+        'category',
+        [
+            PACategory.DOMAIN_ABUSE.value,
+            PACategory.CYBER_VULNERABILITY.value,
+            PACategory.THIRD_PARTY_RISK.value,
+            PACategory.IDENTITY_NOVEL_EXPOSURES.value,
+            PACategory.GEOPOLITICS_FACILITY.value,
+        ],
+    )
+    def test_markdown_comments_across_categories(self, category):
+        log = [
+            {
+                'id': 'uuid:x',
+                'author_name': 'Cross Cat Author',
+                'created': '2026-01-01T00:00:00.000Z',
+                'changes': [{'comment': 'CROSS_CAT_SENTINEL', 'type': 'comment_change'}],
+            }
+        ]
+        md = _make_alert(category, log).markdown(comments=True)
+        assert '### Comments' in md
+        assert 'CROSS_CAT_SENTINEL' in md
+        assert 'Cross Cat Author' in md

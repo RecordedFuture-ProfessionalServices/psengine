@@ -34,8 +34,8 @@ from ..playbook_alerts.markdown.markdown import _markdown_playbook_alert
 from .models import (
     CodeRepoPanelEvidence,
     CodeRepoPanelStatus,
-    CompromisedBankCheckPanelStatus,
     CompromisedBankCheckPanelEvidenceSummary,
+    CompromisedBankCheckPanelStatus,
     CyberVulnerabilityPanelEvidence,
     CyberVulnerabilityPanelStatus,
     DatetimeRange,
@@ -231,7 +231,6 @@ class PBA_CompromisedBankChecks(PBA_Generic):
 
     def store_image(self, image_bytes: bytes) -> None:
         """Compromised Bank Checks: Store image bytes in `self._images` dictionary."""
-
         image_id = self.playbook_alert_id
 
         self._images[image_id] = {}

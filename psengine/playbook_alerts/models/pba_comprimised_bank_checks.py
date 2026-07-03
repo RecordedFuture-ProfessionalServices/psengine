@@ -12,11 +12,12 @@
 ##############################################################################################
 
 from datetime import datetime
+
 from pydantic import Field
 
 from ...common_models import RFBaseModel
-from .common_models import AlertRule
 from ..models.panel_status import PanelStatus
+from .common_models import AlertRule
 
 
 class Assessments(RFBaseModel):

@@ -1,10 +1,10 @@
 # Changelog
 
-## v2.9.0 - Unreleased
+## v2.8.4 - 2026-07-03
 
 ### Added
 
-- The `markdown()` method of Playbook Alerts now accepts a `comments` argument (default `False`). When set to `True`, user comments extracted from `panel_log_v2` are rendered in a dedicated **Comments** section, consistently across all playbook alert categories.
+- The `markdown()` method of Playbook Alerts now accepts a `comments` argument (default `False`). When set to `True`, user comments extracted from `panel_log_v2` are rendered in a dedicated **Comments** section, consistently across all playbook alert categories. This allows for comments to be included in the rendered Markdown. Additionally, comments can now be updated via the Recorded Future web interface and reflect when using tools such as ps-banshee.
 
 ## v2.8.3 - 2026-06-30
 

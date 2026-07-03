@@ -423,7 +423,8 @@ class PlaybookAlertMgr:
         alert_category: Annotated[
             PBA_WITH_IMAGES_VALIDATOR,
             Doc(
-                "Category of the alert (e.g., 'domain_abuse', 'geopolitics_facility', 'compromised_bank_checks')."
+                'Category of the alert '
+                "(e.g., 'domain_abuse', 'geopolitics_facility', 'compromised_bank_checks')."
             ),
         ] = 'domain_abuse',
     ) -> Annotated[bytes, Doc('Raw image content in bytes.')]:
