@@ -14,9 +14,8 @@
 from markdown_strings import bold, link
 
 from ...constants import TIMESTAMP_STR, TRUNCATE_COMMENT
-from ...markdown import (
-    MarkdownMaker,
-)
+from ...markdown import MarkdownMaker
+from ..models import panel_log
 from ..pa_category import PACategory
 from .markdown_code_repo import _code_repo_markdown
 from .markdown_cyber_vulnerability import _cyber_vulnerability_markdown
@@ -68,6 +67,7 @@ def _markdown_playbook_alert(
     defang_iocs: bool = False,
     iocs_to_defang: list = None,
     extra_context: list = None,
+    comments: bool = False,
 ) -> str:
     md_maker = MarkdownMaker(
         addendum=TRUNCATE_COMMENT.format(
@@ -78,6 +78,17 @@ def _markdown_playbook_alert(
         iocs_to_defang=iocs_to_defang or [],
     )
     _generic_pba_summary(playbook_alert, md_maker)
+
+    if comments:
+        comment_lines = []
+        for entry in playbook_alert.panel_log_v2 or []:
+            for change in entry.changes:
+                if isinstance(change, panel_log.CommentChange):
+                    who = entry.author_name or 'Unknown'
+                    when = entry.created.strftime(TIMESTAMP_STR)
+                    comment_lines.append(f'{who} ({when}): {change.comment}\n\n')
+        if comment_lines:
+            md_maker.add_section('Comments', comment_lines)
 
     if markdown := MARKDOWN_BY_PBA_TYPE.get(playbook_alert.category, _unsupported_pba)(
         playbook_alert, md_maker, html_tags, extra_context

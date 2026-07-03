@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.9.0 - Unreleased
+
+### Added
+
+- The `markdown()` method of Playbook Alerts now accepts a `comments` argument (default `False`). When set to `True`, user comments extracted from `panel_log_v2` are rendered in a dedicated **Comments** section, consistently across all playbook alert categories.
+
 ## v2.8.3 - 2026-06-30
 
 ### Changed

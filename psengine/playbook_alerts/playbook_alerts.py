@@ -166,17 +166,19 @@ class PBA_Generic(RFBaseModel):
                     """
             ),
         ] = None,
+        comments: Annotated[bool, Doc('Include comments in markdown output.')] = False,
     ) -> Annotated[
         str,
         Doc('Markdown-formatted string representation of the Playbook Alert.'),
     ]:
-        """Generate markdown for Playbook Alerts."""
+        """Generate Markdown for Playbook Alerts."""
         return _markdown_playbook_alert(
             self,
             html_tags=html_tags,
             character_limit=character_limit,
             defang_iocs=defang_iocs,
             extra_context=extra_context,
+            comments=comments,
         )
 
     def _get_changes(self, change_type):
