@@ -152,7 +152,8 @@ class DomainAbuseMaliciousDnsChange(ChangeType):
 class ReregistrationRecord(RFBaseModel):
     registrar: str | None = None
     registrar_name: str | None = None
-    iana_id: int | None = None
+    # `iana_id` may be returned as an int or a string depending on the source.
+    iana_id: int | str | None = None
     expiration: datetime | None = None
 
 
@@ -278,6 +279,174 @@ class AssessmentChange(ChangeType):
     added: Assessment | None = None
 
 
+class OnwardActionsRemovedChange(ChangeType):
+    removed_actions_taken: list[str] | None = []
+
+
+class OnwardActionsAddedChange(ChangeType):
+    added_actions_taken: list[str] | None = []
+
+
+class ThreatBehavior(RFBaseModel):
+    threat_types: list[str] | None = []
+
+
+class PhishingMaliciousBehaviorChange(ChangeType):
+    domain: str | None = None
+    added: ThreatBehavior | None = None
+    removed: ThreatBehavior | None = None
+
+
+class AttackerAddedChange(ChangeType):
+    attacker: str | None = None
+    cause: str | None = None
+    manual_addition_user_id: str | None = None
+    manual_addition_user_name: str | None = None
+    typosquat_targets: list[str] | None = []
+    similar_domains_keywords: list[str] | None = []
+
+
+class MaliciousSitesLogotypeRegion(RFBaseModel):
+    min_x: int | None = None
+    min_y: int | None = None
+    max_x: int | None = None
+    max_y: int | None = None
+
+
+class MaliciousSitesLogotype(RFBaseModel):
+    logotype_id: str | None = None
+    screenshot_id: str | None = None
+    url: str | None = None
+    screenshot_width: int | None = None
+    screenshot_height: int | None = None
+    region: MaliciousSitesLogotypeRegion | None = None
+    is_high_interest: bool | None = None
+
+
+class MaliciousSitesAttackerAddedChange(AttackerAddedChange):
+    logotypes: list[MaliciousSitesLogotype] | None = []
+
+
+class MaliciousSitesDnsChange(DomainAbuseDnsChange):
+    """`malicious_sites_dns_change` (same shape as `dns_change`)."""
+
+
+class MaliciousSitesMaliciousDnsChange(DomainAbuseMaliciousDnsChange):
+    """`malicious_sites_malicious_dns_change` (same shape as `malicious_dns_change`)."""
+
+
+class MaliciousSitesMaliciousUrlChange(DomainAbuseMaliciousUrlChange):
+    """`malicious_sites_malicious_url_change` (same shape as `malicious_url_change`)."""
+
+
+class MaliciousSitesWhoisRecord(RFBaseModel):
+    status: str | None = None
+    registrar_name: str | None = None
+    private_registration: bool | None = None
+    name_servers: list[str] | None = []
+    contact_email: str | None = None
+    created: datetime | None = None
+    updated: datetime | None = None
+    expires: datetime | None = None
+
+
+class MaliciousSitesWhoisChange(ChangeType):
+    domain: str | None = None
+    old_record: MaliciousSitesWhoisRecord | None = None
+    new_record: MaliciousSitesWhoisRecord | None = None
+    removed_contacts: list[WhoisContactRecord] | None = []
+    added_contacts: list[WhoisContactRecord] | None = []
+
+
+class MaliciousSitesReregistrationRecord(RFBaseModel):
+    registrar: str | None = None
+    registrar_name: str | None = None
+    iana_id: int | str | None = None
+    expiration: datetime | None = None
+
+
+class MaliciousSitesReregistrationChange(ChangeType):
+    domain: str | None = None
+    removed: MaliciousSitesReregistrationRecord | None = None
+    added: MaliciousSitesReregistrationRecord | None = None
+
+
+class MaliciousSitesLogoChange(ChangeType):
+    domain: str | None = None
+    removed: list[MaliciousSitesLogotype] | None = []
+    added: list[MaliciousSitesLogotype] | None = []
+
+
+class MaliciousSitesScreenshotMentionChange(ChangeType):
+    url: str | None = None
+    scan: str | None = None
+    screenshot: str | None = None
+    mentions: list[str] | None = []
+    texts: list[str] | None = []
+
+
+class ForSaleChange(ChangeType):
+    url: str | None = None
+    image: str | None = None
+
+
+class ParkedChange(ChangeType):
+    url: str | None = None
+    image: str | None = None
+
+
+class LogoHashChange(ChangeType):
+    url: str | None = None
+    scan: str | None = None
+    hashes: list[str] | None = []
+    brands: list[str] | None = []
+
+
+class PhishingVerdictChange(ChangeType):
+    domain: str | None = None
+    url: str | None = None
+    risk_rule: str | None = None
+    ttps: list[str] | None = []
+    brands: list[str] | None = []
+
+
+class SuggestedTakedownChange(ChangeType):
+    has_phishing_verdict: bool | None = None
+    has_high_interest_logo: bool | None = None
+    has_login_form: bool | None = None
+    screenshot: str | None = None
+
+
+class EventAssessment(RFBaseModel):
+    name: str | None = None
+    criticality: str | None = None
+
+
+class MainEvent(RFBaseModel):
+    event_id: str | None = None
+    assessments: list[EventAssessment] | None = []
+    type_: str | None = Field(alias='type', default=None)
+
+
+class EventCluster(RFBaseModel):
+    cluster_id: str | None = None
+    main_event: MainEvent | None = None
+    type_: str | None = Field(alias='type', default=None)
+    other_event_ids: list[str] | None = []
+
+
+class EvidenceClusterChanges(ChangeType):
+    """`evidence_changes` (note the plural, distinct from `evidence_change`)."""
+
+    added: list[EventCluster] | None = []
+
+
+class ClusterChangeAdded(ChangeType):
+    cluster_id: str | None = None
+    main_event: MainEvent | None = None
+    other_event_ids: list[str] | None = []
+
+
 TYPE_MAPPING = {
     'assignee_change': AssigneeChange,
     'status_change': StatusChange,
@@ -302,6 +471,26 @@ TYPE_MAPPING = {
     'evidence_change': CodeRepoLeakageEvidenceChange,
     'tpr_assessment_change': ThirdPartyAssessmentChange,
     'assessment_change': AssessmentChange,
+    # Malicious Sites
+    'onward_actions_removed_change': OnwardActionsRemovedChange,
+    'onward_actions_added_change': OnwardActionsAddedChange,
+    'phishing_malicious_behavior_change': PhishingMaliciousBehaviorChange,
+    'attacker_added_change': AttackerAddedChange,
+    'malicious_sites_attacker_added_change': MaliciousSitesAttackerAddedChange,
+    'malicious_sites_dns_change': MaliciousSitesDnsChange,
+    'malicious_sites_whois_change': MaliciousSitesWhoisChange,
+    'malicious_sites_malicious_dns_change': MaliciousSitesMaliciousDnsChange,
+    'malicious_sites_reregistration_change': MaliciousSitesReregistrationChange,
+    'malicious_sites_malicious_url_change': MaliciousSitesMaliciousUrlChange,
+    'malicious_sites_screenshot_mention_change': MaliciousSitesScreenshotMentionChange,
+    'malicious_sites_logo_change': MaliciousSitesLogoChange,
+    'for_sale_change': ForSaleChange,
+    'parked_change': ParkedChange,
+    'logo_hash_change': LogoHashChange,
+    'phishing_verdict_change': PhishingVerdictChange,
+    'suggested_takedown_change': SuggestedTakedownChange,
+    'evidence_changes': EvidenceClusterChanges,
+    'cluster_change_added': ClusterChangeAdded,
 }
 
 

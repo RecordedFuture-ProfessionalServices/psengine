@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.9.0 - 2026-07-06
+
+### Added
+
+- Added support for the Malicious Sites playbook alert category via the new `PBA_MaliciousSites` model. The `PlaybookAlertMgr` can now fetch, parse, render Markdown for, and retrieve images from `malicious_sites` alerts, including the category-specific `panel_log_v2` change types (attacker additions, phishing verdicts, suggested takedowns, for-sale/parked detections, and more).
+
 ## v2.8.4 - 2026-07-03
 
 ### Added

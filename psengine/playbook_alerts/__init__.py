@@ -30,6 +30,7 @@ from .playbook_alerts import (
     PBA_Generic,
     PBA_GeopoliticsFacility,
     PBA_IdentityNovelExposure,
+    PBA_MaliciousSites,
     PBA_MalwareReport,
     PBA_ThirdPartyRisk,
     PreviewAlertOut,

@@ -424,7 +424,8 @@ class PlaybookAlertMgr:
             PBA_WITH_IMAGES_VALIDATOR,
             Doc(
                 'Category of the alert '
-                "(e.g., 'domain_abuse', 'geopolitics_facility', 'compromised_bank_checks')."
+                "(e.g., 'domain_abuse', 'malicious_sites', 'geopolitics_facility', "
+                "'compromised_bank_checks')."
             ),
         ] = 'domain_abuse',
     ) -> Annotated[bytes, Doc('Raw image content in bytes.')]:
@@ -432,6 +433,7 @@ class PlaybookAlertMgr:
 
         Endpoints:
             - `playbook-alert/domain_abuse/{alert_id}/image/{image_id}`
+            - `playbook-alert/malicious_sites/{alert_id}/image/{image_id}`
             - `playbook-alert/geopolitics_facility/image/{image_id}`
             - `playbook-alert/compromised_bank_checks/image/{alert_id}`
 
@@ -439,7 +441,7 @@ class PlaybookAlertMgr:
             ValidationError: If any parameter is of incorrect type.
             PlaybookAlertRetrieveImageError: If the image fetch request fails.
         """
-        if alert_category == PACategory.DOMAIN_ABUSE.value:
+        if alert_category in (PACategory.DOMAIN_ABUSE.value, PACategory.MALICIOUS_SITES.value):
             url = f'/{alert_category}/{alert_id}/image/{image_id}'
         elif alert_category == PACategory.COMPROMISED_BANK_CHECKS.value:
             url = f'/compromised_bank_checks/image/{alert_id}'
@@ -469,6 +471,7 @@ class PlaybookAlertMgr:
 
         Endpoints:
             - `playbook-alert/domain_abuse/{alert_id}/image/{image_id}`
+            - `playbook-alert/malicious_sites/{alert_id}/image/{image_id}`
             - `playbook-alert/geopolitics_facility/image/{image_id}`
             - `playbook-alert/compromised_bank_checks/image/{alert_id}`
 
@@ -605,6 +608,7 @@ class PlaybookAlertMgr:
         if (
             category == PACategory.DOMAIN_ABUSE.value
             or category == PACategory.GEOPOLITICS_FACILITY.value
+            or category == PACategory.MALICIOUS_SITES.value
         ) and fetch_image:
             for alert in p_alerts:
                 self.fetch_images(alert)

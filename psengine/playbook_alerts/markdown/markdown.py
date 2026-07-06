@@ -22,6 +22,7 @@ from .markdown_cyber_vulnerability import _cyber_vulnerability_markdown
 from .markdown_domain_abuse import _domain_abuse_markdown
 from .markdown_geopolitics_facility import _geopolitics_facility_markdown
 from .markdown_identity_exposure import _identity_exposure_markdown
+from .markdown_malicious_sites import _malicious_sites_markdown
 from .markdown_malware_report import _malware_report_markdown
 from .markdown_third_party_risk import _third_party_risk_markdown
 
@@ -37,6 +38,7 @@ MARKDOWN_BY_PBA_TYPE = {
     PACategory.GEOPOLITICS_FACILITY.value: _geopolitics_facility_markdown,
     PACategory.CYBER_VULNERABILITY.value: _cyber_vulnerability_markdown,
     PACategory.MALWARE_REPORT.value: _malware_report_markdown,
+    PACategory.MALICIOUS_SITES.value: _malicious_sites_markdown,
 }
 
 

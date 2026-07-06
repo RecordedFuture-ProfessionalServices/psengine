@@ -42,6 +42,12 @@ from .pba_identity_exposures import (
     IdentityPanelEvidence,
     IdentityPanelStatus,
 )
+from .pba_malicious_sites import (
+    MaliciousSitesPanelEvidenceDns,
+    MaliciousSitesPanelEvidenceSummary,
+    MaliciousSitesPanelEvidenceWhois,
+    MaliciousSitesPanelStatus,
+)
 from .pba_malware_report import MalwareReportPanelEvidence, MalwareReportPanelStatus
 from .pba_third_party_risk import TPRAssessment, TPRPanelEvidence, TPRPanelStatus
 from .search_endpoint import DatetimeRange, SearchCounts, SearchData, SearchResponse, SearchStatus
