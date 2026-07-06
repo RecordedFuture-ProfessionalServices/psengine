@@ -154,6 +154,8 @@ class SandboxClient(BaseHTTPClient):
             ValidationError: If method is not one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.
         """
         headers = headers or self._prepare_headers(content_type_header)
+        # Copy so our `limit`/`offset` bookkeeping never mutates the caller's dict.
+        params = dict(params or {})
         all_results: list = []
 
         # Trim `limit` to remaining headroom so the last page doesn't overfetch.

@@ -211,12 +211,18 @@ class SandboxMgr:
             SampleSearchError: If the API returns a non-2xx (e.g. 400 `INVALID_QUERY` for a
                 malformed query) or a connection error occurs.
         """
-        params = {
-            p: v
-            for p, v in locals().items()
-            if p not in ('self', 'query', 'max_results', 'results_per_page')
-        }
-        search_query = SearchIn.model_validate(params).to_query_out()
+        search_query = SearchIn(
+            file_hash=file_hash,
+            family=family,
+            tag=tag,
+            botnet=botnet,
+            wallet=wallet,
+            ip=ip,
+            domain=domain,
+            url=url,
+            from_date=from_date,
+            to_date=to_date,
+        ).to_query_out()
 
         if query:
             search_query.query = (
