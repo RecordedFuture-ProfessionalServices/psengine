@@ -36,7 +36,7 @@ class BehavioralSample(RFBaseModel):
     static_tags: list[str] = Field(default_factory=list)
 
 
-class BehavioralTask(RFBaseModel):
+class BehavioralReportTask(RFBaseModel):
     """The `task` block of a behavioral report: the file detonated in this behavioral run."""
 
     target: str | None = None

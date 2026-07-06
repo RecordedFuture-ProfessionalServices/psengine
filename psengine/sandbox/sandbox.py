@@ -26,8 +26,8 @@ from .models.behavioral_report import (
     BehavioralError,
     BehavioralNetwork,
     BehavioralProcess,
+    BehavioralReportTask,
     BehavioralSample,
-    BehavioralTask,
 )
 from .models.overview_report import (
     OverviewAnalysis,
@@ -225,7 +225,7 @@ class BehavioralReport(RFBaseModel):
     version: str | None = None
     build: str | None = None
     sample: BehavioralSample
-    task: BehavioralTask
+    task: BehavioralReportTask
     analysis: BehavioralAnalysis
     tags: list[str] = Field(default_factory=list)
     signatures: list[OverviewSignature] = Field(default_factory=list)
