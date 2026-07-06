@@ -10,6 +10,7 @@ from psengine.endpoints import (
     EP_SANDBOX_PROFILES,
     EP_SANDBOX_PROFILES_ID,
     EP_SANDBOX_SAMPLES,
+    EP_SANDBOX_SAMPLES_BEHAVIORAL,
     EP_SANDBOX_SAMPLES_DOWNLOAD,
     EP_SANDBOX_SAMPLES_ID,
     EP_SANDBOX_SAMPLES_OVERVIEW,
@@ -20,6 +21,7 @@ from psengine.endpoints import (
     SANDBOX_BASE_URLS,
 )
 from psengine.sandbox import (
+    BehavioralReport,
     OverviewReport,
     Profile,
     ProfileOptions,
@@ -33,6 +35,7 @@ from psengine.sandbox.errors import (
     ProfileFetchError,
     ProfileNotFoundError,
     ProfileUpdateError,
+    SampleBehavioralReportError,
     SampleDeleteError,
     SampleFetchError,
     SampleFileFetchError,
@@ -933,6 +936,155 @@ class Test_SandboxMgr:
     ):
         with pytest.raises(ValidationError):
             sandbox_mgr.fetch_sample_overview_report(sample_id)
+
+    def _behavioral_dispatch(self, sandbox_mgr, sample_dict, behavioral_resp):
+        # Returns a side_effect that serves the sample record from /samples/{id} and the
+        # behavioral report from /samples/{id}/{task}/report_triage.json; anything else fails.
+        sid = sample_dict['id']
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return behavioral_resp['_sample']
+            for task_id, resp in behavioral_resp.items():
+                if task_id != '_sample' and url == EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+                    base_url=sandbox_mgr.base_url, sample_id=sid, task_id=task_id
+                ):
+                    return resp
+            raise AssertionError(f'unexpected url: {url}')
+
+        return dispatch
+
+    def test_fetch_behavioral_reports_happy_path(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        # Sample has static1 (skipped -- no triage report) + behavioral1.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'static1', 'status': 'reported'},
+                {'id': 'behavioral1', 'status': 'reported', 'target': 'x'},
+            ],
+        }
+        resp = {
+            '_sample': make_response(sample),
+            'behavioral1': mock_request(MOCK_DIR / 'behavioral_report.json'),
+        }
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
+        )
+
+        reports = sandbox_mgr.fetch_behavioral_reports(sid)
+
+        assert len(reports) == 1  # static1 skipped
+        report = reports[0]
+        assert isinstance(report, BehavioralReport)
+        assert report.task_id == 'behavioral1'  # injected, identifies the task
+        assert report.sample.id_ == sid
+        assert report.analysis.score == 10
+        assert len(report.processes) == 9
+        assert report.network.flows[0].domain == 'kvejo991.ddns.net'
+        assert report.extracted[0].config.family == 'darkcomet'
+        assert report.tags == []  # API sends null -> coerced
+
+    def test_fetch_behavioral_reports_no_behavioral_tasks_returns_empty(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # Only a static task -> no behavioral reports, and the triage endpoint is never hit.
+        sid = '260630-svp6caets9'
+        sample = {
+            'id': sid,
+            'status': 'static_analysis',
+            'kind': 'file',
+            'submitted': '2026-06-30T15:27:00Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'static1', 'status': 'reported'}],
+        }
+        resp = {'_sample': make_response(sample)}
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
+        )
+
+        assert sandbox_mgr.fetch_behavioral_reports(sid) == []
+
+    def test_fetch_behavioral_reports_concurrent_preserves_task_order(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'behavioral1', 'status': 'reported'},
+                {'id': 'behavioral2', 'status': 'reported'},
+            ],
+        }
+        resp = {
+            '_sample': make_response(sample),
+            'behavioral1': mock_request(MOCK_DIR / 'behavioral_report.json'),
+            'behavioral2': mock_request(MOCK_DIR / 'behavioral_report.json'),
+        }
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
+        )
+
+        reports = sandbox_mgr.fetch_behavioral_reports(sid, max_workers=4)
+
+        assert [r.task_id for r in reports] == ['behavioral1', 'behavioral2']
+
+    def test_fetch_behavioral_reports_sample_fetch_error_raises(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
+
+        with pytest.raises(SampleBehavioralReportError):
+            sandbox_mgr.fetch_behavioral_reports('missing')
+
+    def test_fetch_behavioral_reports_report_fetch_error_raises(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'reported'}],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            raise _http_error(500)
+
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        with pytest.raises(SampleBehavioralReportError):
+            sandbox_mgr.fetch_behavioral_reports(sid)
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_behavioral_reports_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_behavioral_reports(sample_id)
 
     @pytest.mark.parametrize('sample_id', ['', None, 123])
     def test_fetch_sample_static_report_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):

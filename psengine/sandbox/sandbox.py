@@ -20,6 +20,15 @@ from pydantic import BeforeValidator, Field, field_validator, model_validator
 from ..common_models import RFBaseModel
 from ..helpers import Validators
 from .models.analysis import LightweightSampleTask, Meta, Task
+from .models.behavioral_report import (
+    BehavioralAnalysis,
+    BehavioralDumped,
+    BehavioralError,
+    BehavioralNetwork,
+    BehavioralProcess,
+    BehavioralSample,
+    BehavioralTask,
+)
 from .models.overview_report import (
     OverviewAnalysis,
     OverviewError,
@@ -194,6 +203,39 @@ class OverviewReport(RFBaseModel):
     def _none_to_empty_list(cls, v):
         # The API sends `targets: null` when there are no targets -- coerce to [] so the
         # field is always iterable.
+        return v or []
+
+
+class BehavioralReport(RFBaseModel):
+    """Behavioral report returned by `GET /samples/{sampleID}/{taskID}/report_triage.json`.
+
+    Covers a single behavioral (detonation) task: the `sample`/`task` identity, the run
+    `analysis` verdict, the `processes` tree, `signatures`, `network` activity (flows,
+    requests, IP metadata), `dumped` artifacts and any `extracted` configs. Failed tasks
+    carry an `errors` list and omit `processes`/`dumped`/`extracted`.
+
+    `task_id` is populated by `SandboxMgr.fetch_behavioral_reports` (e.g. `behavioral1`)
+    so each report in the returned list is identifiable; it is not part of the API body.
+    """
+
+    task_id: str | None = None
+    version: str | None = None
+    build: str | None = None
+    sample: BehavioralSample
+    task: BehavioralTask
+    analysis: BehavioralAnalysis
+    tags: list[str] = Field(default_factory=list)
+    signatures: list[OverviewSignature] = Field(default_factory=list)
+    processes: list[BehavioralProcess] = Field(default_factory=list)
+    network: BehavioralNetwork = Field(default_factory=BehavioralNetwork)
+    dumped: list[BehavioralDumped] = Field(default_factory=list)
+    extracted: list[OverviewExtracted] = Field(default_factory=list)
+    errors: list[BehavioralError] = Field(default_factory=list)
+
+    @field_validator('tags', mode='before')
+    @classmethod
+    def _none_to_empty_list(cls, v):
+        # The API sends `tags: null` for the top-level tags -- coerce to [] so it is iterable.
         return v or []
 
 

@@ -12,6 +12,7 @@
 ##############################################################################################
 
 from .sandbox import (
+    BehavioralReport,
     OverviewReport,
     Profile,
     ProfileDeleteOut,

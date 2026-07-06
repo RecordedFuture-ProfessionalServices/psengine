@@ -24,6 +24,7 @@ from ..endpoints import (
     EP_SANDBOX_PROFILES,
     EP_SANDBOX_PROFILES_ID,
     EP_SANDBOX_SAMPLES,
+    EP_SANDBOX_SAMPLES_BEHAVIORAL,
     EP_SANDBOX_SAMPLES_DOWNLOAD,
     EP_SANDBOX_SAMPLES_ID,
     EP_SANDBOX_SAMPLES_OVERVIEW,
@@ -33,7 +34,7 @@ from ..endpoints import (
     EP_SANDBOX_SEARCH,
     SANDBOX_BASE_URLS,
 )
-from ..helpers import connection_exceptions, debug_call
+from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
 from .client import SAMPLES_PER_PAGE, SandboxClient
 from .constants import DEFAULT_PAGE_LIMIT
 from .errors import (
@@ -42,6 +43,7 @@ from .errors import (
     ProfileFetchError,
     ProfileNotFoundError,
     ProfileUpdateError,
+    SampleBehavioralReportError,
     SampleDeleteError,
     SampleFetchError,
     SampleFileFetchError,
@@ -56,6 +58,7 @@ from .errors import (
     SampleSummaryError,
 )
 from .sandbox import (
+    BehavioralReport,
     Browser,
     CreateUpdateProfileIn,
     NetworkMode,
@@ -566,7 +569,7 @@ class SandboxMgr:
 
     @debug_call
     @validate_call
-    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleStaticReportError)
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleBehavioralReportError)
     def fetch_behavioral_reports(
         self,
         sample_id: Annotated[
@@ -574,13 +577,78 @@ class SandboxMgr:
             Field(min_length=1),
             Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
         ],
+        max_workers: Annotated[
+            int,
+            Field(ge=0),
+            Doc(
+                'Threads for fetching the per-task reports concurrently. 0 (default) = sequential.'
+            ),
+        ] = 0,
     ) -> Annotated[
-        StaticAnalysisReport,
-        Doc('StaticAnalysisReport model'),
+        list[BehavioralReport],
+        Doc('One BehavioralReport per behavioral task, in task order. Empty if none.'),
     ]:
-        # Loop through all tasks -> fetch
-        # endpoint GET /samples/{sampleID}/{taskID}/report_triage.json
-        pass
+        """Fetch every behavioral report for a sample.
+
+        Convenience wrapper: it first fetches the sample to discover its tasks, then fetches
+        the `report_triage.json` for each behavioral task and returns them as a list -- so
+        callers get all behavioral detonation reports in one call rather than one at a time.
+
+        Every behavioral task is included, whether it succeeded or failed; a failed task's
+        report carries an `errors` list and omits `processes`/`dumped`/`extracted`. Each
+        report's `task_id` (e.g. `behavioral1`) identifies which task it belongs to. Non-behavioral
+        tasks (`static*`, `urlscan*`) have no triage report and are skipped.
+
+        Example:
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            for report in mgr.fetch_behavioral_reports('260501-h4p7laawme'):
+                print(report.task_id, report.analysis.score, report.analysis.platform)
+                for proc in report.processes:
+                    print('  ', proc.pid, proc.cmd)
+                for flow in report.network.flows:
+                    print('  ', flow.dst, flow.domain)
+            ```
+
+        Note:
+            Returns an empty list if the sample has no behavioral tasks. For samples with
+            many behavioral tasks (e.g. multi-architecture Linux submissions), pass
+            `max_workers` to fetch the per-task reports concurrently.
+
+        Endpoint:
+            `GET /samples/{sample_id}` then `GET /samples/{sample_id}/{task_id}/report_triage.json`
+
+        Raises:
+            ValidationError: If `sample_id` is empty or `max_workers` is out of range.
+            SampleBehavioralReportError: If the sample lookup or any behavioral report
+                request returns a non-2xx (e.g. 404 for an unknown sample) or a connection
+                error occurs.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
+        sample = SampleTasks.model_validate(self.sb_client.request('get', endpoint).json())
+        task_ids = [t.id_ for t in (sample.tasks or []) if t.id_.startswith('behavioral')]
+        if not task_ids:
+            return []
+
+        if max_workers:
+            return MultiThreadingHelper.multithread_it(
+                max_workers,
+                self._fetch_behavioral_report,
+                iterator=task_ids,
+                sample_id=sample_id,
+            )
+        return [self._fetch_behavioral_report(task_id, sample_id=sample_id) for task_id in task_ids]
+
+    def _fetch_behavioral_report(self, task_id: str, sample_id: str) -> BehavioralReport:
+        """Fetch and parse a single behavioral task's `report_triage.json`."""
+        endpoint = EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+            base_url=self.base_url, sample_id=sample_id, task_id=task_id
+        )
+        data = self.sb_client.request('get', endpoint).json()
+        data['task_id'] = task_id
+        return BehavioralReport.model_validate(data)
 
     @debug_call
     @validate_call

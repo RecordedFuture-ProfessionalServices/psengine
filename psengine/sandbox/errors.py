@@ -55,6 +55,15 @@ class SampleReportNotFoundError(SampleOverviewError):
     """Raised when the sample itself does not exist for an overview report lookup."""
 
 
+class SampleBehavioralReportError(RecordedFutureError):
+    """Raised when a behavioral report lookup fails.
+
+    Covers the initial sample fetch and each per-task
+    `/samples/{id}/{task_id}/report_triage.json` request made by
+    `SandboxMgr.fetch_behavioral_reports`.
+    """
+
+
 class SampleProfileError(RecordedFutureError):
     """Raised when setting a sample profile against `/samples/{id}/profile` (POST) fails."""
 
