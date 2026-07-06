@@ -8,9 +8,7 @@ SAMPLE_ID = '260501-h4p7laawme'
 mgr = SandboxMgr()
 
 try:
-    report = mgr.fetch_sample_overview_report(
-        SAMPLE_ID
-    )
+    report = mgr.fetch_sample_overview_report(SAMPLE_ID)
 except SampleReportNotAvailableError as exc:
     print(f'{SAMPLE_ID}: analysis not complete.')
     print('Retry once the sample is reported.')

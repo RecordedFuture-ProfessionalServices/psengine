@@ -8,7 +8,6 @@ TIMEOUT_SEC = 600
 
 mgr = SandboxMgr()
 
-# TODO - should add sample with file submission instead
 submission = mgr.submit_sample(
     kind='url', url='https://example.com'
 )
