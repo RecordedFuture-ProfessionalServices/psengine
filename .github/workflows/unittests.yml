@@ -24,6 +24,7 @@ jobs:
     env:
       RF_TOKEN: ${{ secrets.RF_TOKEN }}
       RF_ASI_TOKEN: ${{ secrets.RF_ASI_TOKEN }}
+      RF_SANDBOX_TOKEN: ${{ secrets.RF_SANDBOX_TOKEN }}
       MIN_COVERAGE: 94
     
     steps:
