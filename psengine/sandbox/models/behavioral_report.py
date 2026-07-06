@@ -16,6 +16,7 @@ from datetime import datetime
 from pydantic import Field, field_validator
 
 from ...common_models import RFBaseModel
+from ...helpers import Validators
 
 
 class BehavioralSample(RFBaseModel):
@@ -68,11 +69,8 @@ class BehavioralAnalysis(RFBaseModel):
     geolocation_tags: list[str] = Field(default_factory=list)
     interaction: dict = Field(default_factory=dict)
 
-    @field_validator('tags', mode='before')
-    @classmethod
-    def _none_to_empty_list(cls, v):
-        # The API sends `tags: null` when there are none -- coerce to [] so it is iterable.
-        return v or []
+    # The API sends `tags: null` when there are none -- coerce to [] so it is iterable.
+    _coerce_tags = field_validator('tags', mode='before')(Validators.none_to_empty_list)
 
 
 class BehavioralProcess(RFBaseModel):

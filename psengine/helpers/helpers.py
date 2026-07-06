@@ -494,6 +494,20 @@ class Validators:
         return value
 
     @staticmethod
+    def none_to_empty_list(
+        value: Annotated[list | None, Doc('A list or `null`/empty value from the API.')],
+    ) -> Annotated[list, Doc('The value, or [] when it is None/empty.')]:
+        """Coerce a `null`/empty API value to a list so the field is always iterable."""
+        return value or []
+
+    @staticmethod
+    def empty_str_to_none(
+        value: Annotated[str | None, Doc('A value that may be an empty string.')],
+    ) -> Annotated[str | None, Doc('None if the value is an empty string, else the value.')]:
+        """Normalise an empty string (`''`) to None; pass everything else through."""
+        return None if value == '' else value
+
+    @staticmethod
     def convert_relative_time(
         input_time: Annotated[str, Doc("Relative time string, e.g., '7d', '3h'.")],
     ) -> Annotated[str, Doc('Datetime string in ISO 8601 format if conversion is possible.')]:

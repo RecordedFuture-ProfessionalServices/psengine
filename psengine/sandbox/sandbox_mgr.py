@@ -777,13 +777,10 @@ class SandboxMgr:
                 'application/octet-stream',
             )
 
-        # `requests` sets the multipart/form-data Content-Type (with boundary) when
-        # `files=` is passed — so drop our default JSON Content-Type header.
-        headers = self.sb_client._prepare_headers()
-        headers.pop('Content-Type', None)
-
+        # `content_type_header=None` drops our default JSON Content-Type so `requests`
+        # sets the multipart/form-data Content-Type (with boundary) for the `files=` upload.
         endpoint = EP_SANDBOX_SAMPLES.format(base_url=self.base_url)
-        response = self.sb_client.request('post', endpoint, headers=headers, files=files)
+        response = self.sb_client.request('post', endpoint, files=files, content_type_header=None)
         return Sample.model_validate(response.json())
 
     @debug_call

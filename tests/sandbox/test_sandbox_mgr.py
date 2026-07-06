@@ -1213,6 +1213,10 @@ class Test_SandboxMgr:
             EP_SANDBOX_SAMPLES.format(base_url=sandbox_mgr.base_url),
         )
         assert 'data' not in mocked.call_args.kwargs
+        # content_type_header=None lets `requests` set the multipart boundary itself;
+        # the manager must not hand-build headers for the upload.
+        assert mocked.call_args.kwargs['content_type_header'] is None
+        assert 'headers' not in mocked.call_args.kwargs
         files = mocked.call_args.kwargs['files']
         body = json.loads(files['_json'][1])
         assert body == {'kind': 'url', 'url': 'https://example.com'}

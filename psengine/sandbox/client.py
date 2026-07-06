@@ -208,13 +208,16 @@ class SandboxClient(BaseHTTPClient):
 
         return all_results[:max_results]
 
-    def _prepare_headers(self, content_type_header: str = 'application/json'):
+    def _prepare_headers(self, content_type_header: str | None = 'application/json'):
         user_agent = self._get_user_agent_header()
         headers = {
             'User-Agent': user_agent,
-            'Content-Type': content_type_header,
             'accept': 'application/json',
         }
+        # `content_type_header=None` omits Content-Type so `requests` can set the
+        # multipart/form-data boundary itself (used by multipart file uploads).
+        if content_type_header is not None:
+            headers['Content-Type'] = content_type_header
         if self._api_token:
             headers['Authorization'] = f'Bearer {self._api_token}'
         else:

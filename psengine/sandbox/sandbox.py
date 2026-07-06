@@ -179,12 +179,11 @@ class StaticAnalysisReport(RFBaseModel):
     unpack_count: int | None = None
     error_count: int | None = None
 
-    @field_validator('signatures', 'files', 'extracted', mode='before')
-    @classmethod
-    def _none_to_empty_list(cls, v):
-        # The API sends `null` for these when there's nothing (e.g. `files: null` for URL
-        # reports) -- coerce to [] so the fields are always iterable.
-        return v or []
+    # The API sends `null` for these when there's nothing (e.g. `files: null` for URL
+    # reports) -- coerce to [] so the fields are always iterable.
+    _coerce_lists = field_validator('signatures', 'files', 'extracted', mode='before')(
+        Validators.none_to_empty_list
+    )
 
 
 class OverviewReport(RFBaseModel):
@@ -205,12 +204,9 @@ class OverviewReport(RFBaseModel):
     tasks: dict[str, OverviewTask] = Field(default_factory=dict)
     errors: list[OverviewError] = Field(default_factory=list)
 
-    @field_validator('targets', mode='before')
-    @classmethod
-    def _none_to_empty_list(cls, v):
-        # The API sends `targets: null` when there are no targets -- coerce to [] so the
-        # field is always iterable.
-        return v or []
+    # The API sends `targets: null` when there are no targets -- coerce to [] so the
+    # field is always iterable.
+    _coerce_targets = field_validator('targets', mode='before')(Validators.none_to_empty_list)
 
 
 class BehavioralReport(RFBaseModel):
@@ -239,11 +235,8 @@ class BehavioralReport(RFBaseModel):
     extracted: list[OverviewExtracted] = Field(default_factory=list)
     errors: list[BehavioralError] = Field(default_factory=list)
 
-    @field_validator('tags', mode='before')
-    @classmethod
-    def _none_to_empty_list(cls, v):
-        # The API sends `tags: null` for the top-level tags -- coerce to [] so it is iterable.
-        return v or []
+    # The API sends `tags: null` for the top-level tags -- coerce to [] so it is iterable.
+    _coerce_tags = field_validator('tags', mode='before')(Validators.none_to_empty_list)
 
 
 class SampleDeleteOut(RFBaseModel):
@@ -419,15 +412,9 @@ class ProfileOptions(RFBaseModel):
 
     browser: Browser | None = None
 
-    @field_validator('browser', mode='before')
-    @classmethod
-    def _empty_str_to_none(cls, v):
-        # Real-world payloads show `"browser": ""` for profiles created
-        # without a browser choice — normalise to None so the Browser
-        # Literal validator doesn't reject the shape.
-        if v == '':
-            return None
-        return v
+    # Real-world payloads show `"browser": ""` for profiles created without a browser
+    # choice — normalise to None so the Browser Literal validator doesn't reject it.
+    _browser_empty_to_none = field_validator('browser', mode='before')(Validators.empty_str_to_none)
 
 
 class ProfileDeleteOut(RFBaseModel):
@@ -463,21 +450,13 @@ class Profile(RFBaseModel):
     timeout: int | None = None
     options: ProfileOptions | None = None
 
-    @field_validator('geolocation', mode='before')
-    @classmethod
-    def _none_to_empty_list(cls, v):
-        # API returns either `null` or `[]` for unset geolocation; both normalise to [].
-        if v is None:
-            return []
-        return v
+    # API returns either `null` or `[]` for unset geolocation; both normalise to [].
+    _coerce_geolocation = field_validator('geolocation', mode='before')(
+        Validators.none_to_empty_list
+    )
 
-    @field_validator('network', mode='before')
-    @classmethod
-    def _empty_str_to_none(cls, v):
-        # POST /profiles echoes `network=""` for profiles created without a network mode.
-        if v == '':
-            return None
-        return v
+    # POST /profiles echoes `network=""` for profiles created without a network mode.
+    _network_empty_to_none = field_validator('network', mode='before')(Validators.empty_str_to_none)
 
 
 class CreateUpdateProfileIn(RFBaseModel):
