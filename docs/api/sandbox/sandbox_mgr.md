@@ -10,6 +10,7 @@
             - fetch_sample_summary
             - fetch_sample_static_report
             - fetch_sample_overview_report
+            - fetch_behavioral_reports
             - set_sample_profile
             - delete_sample
             - create_profile
