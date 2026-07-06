@@ -78,8 +78,6 @@ from .sandbox import (
     SubmitSampleIn,
 )
 
-# TODO - test other choises
-# TODO - remove publi and private?
 SandboxChoice = Literal['eu', 'usa', 'apj', 'public', 'private']
 
 
@@ -87,7 +85,8 @@ def validate_sandbox_choice(sandbox_choice: str) -> SandboxChoice:
     """Validate the sandbox selection and return a typed value."""
     if sandbox_choice not in SANDBOX_BASE_URLS:
         raise ValueError(
-            f'Invalid sandbox choice: {sandbox_choice}. Must be one of {list(SANDBOX_BASE_URLS.keys())}'
+            f'Invalid sandbox choice: {sandbox_choice}. '
+            f'Must be one of {list(SANDBOX_BASE_URLS.keys())}'
         )
     return cast(SandboxChoice, sandbox_choice)
 
@@ -1051,7 +1050,6 @@ class SandboxMgr:
                 invalid `geolocation`+`network` combination, 409 if the name
                 collides) or a connection error occurs.
         """
-        # TODO - add OS argument
         payload = CreateUpdateProfileIn(
             name=name,
             tags=tags,
@@ -1165,7 +1163,6 @@ class SandboxMgr:
             ProfileUpdateError: If the API returns a non-2xx other than 404
                 (e.g. 409 if the new `name` collides) or a connection error occurs.
         """
-        # TODO - add OS argument
         payload = CreateUpdateProfileIn(
             name=name,
             tags=tags,

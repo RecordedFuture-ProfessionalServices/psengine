@@ -475,11 +475,10 @@ class Test_SandboxMgr:
             ),
         )
 
-    @pytest.mark.parametrize('sample_id', [None, 123])
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
     def test_fetch_sample_summary_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
-        # NOTE: `fetch_sample_summary`'s `sample_id` parameter lacks `Field(min_length=1)`
-        # (unlike fetch_sample/delete_sample), so `''` passes type validation here
-        # and would hit the network. Only non-str types raise ValidationError.
+        # `sample_id` has Field(min_length=1) like fetch_sample/delete_sample, so ''
+        # (empty), None and non-str types all fail validation before any network call.
         with pytest.raises(ValidationError):
             sandbox_mgr.fetch_sample_summary(sample_id)
 
@@ -601,6 +600,26 @@ class Test_SandboxMgr:
 
         with pytest.raises(SamplesFetchError):
             sandbox_mgr.fetch_samples()
+
+    def test_request_paged_stops_on_repeating_next_offset(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # Guard against an API that returns the same `next` cursor with a non-empty page
+        # forever: the loop must terminate instead of spinning. Exactly two `request` calls
+        # are served; a third would raise StopIteration and fail the test.
+        client = sandbox_mgr.sb_client
+        mocker.patch.object(
+            client,
+            'request',
+            side_effect=[
+                make_response({'data': [{'x': 1}], 'next': 'same'}),
+                make_response({'data': [{'x': 2}], 'next': 'same'}),
+            ],
+        )
+
+        result = client.request_paged('get', 'http://x', params={}, max_results=1000)
+
+        assert result == [{'x': 1}, {'x': 2}]
 
     def test_fetch_sample_happy_path(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
         mock = mock_request(MOCK_DIR / 'sample_single.json')

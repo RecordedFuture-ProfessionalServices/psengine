@@ -42,7 +42,6 @@ def is_api_token_format_valid(
 class SandboxClient(BaseHTTPClient):
     """Recorded Future Sandbox API client."""
 
-    # TODO: add the other base URLS as well
     def __init__(
         self,
         api_token: Annotated[
@@ -148,8 +147,8 @@ class SandboxClient(BaseHTTPClient):
             int | None, Doc('The number of samples per page for pagination.')
         ] = Field(ge=1, le=MAXIMUM_SAMPLES, default=SAMPLES_PER_PAGE),
         **kwargs,
-    ) -> Annotated[Response, Doc('A requests.Response object.')]:
-        """Perform an HTTP request.
+    ) -> Annotated[list, Doc('Result rows accumulated across all fetched pages.')]:
+        """Perform a paged HTTP request, following `next` offsets until `max_results` is reached.
 
         Raises:
             ValidationError: If method is not one of GET, PUT, POST, DELETE, HEAD, OPTIONS, PATCH.
@@ -184,7 +183,7 @@ class SandboxClient(BaseHTTPClient):
         offset = json_response.get('next')
         prev_offset = None
 
-        while offset and len(all_results) < max_results:
+        while offset and offset != prev_offset and len(all_results) < max_results:
             params['offset'] = offset
             params['limit'] = min(results_per_page, max_results - len(all_results))
             response = self.request(
