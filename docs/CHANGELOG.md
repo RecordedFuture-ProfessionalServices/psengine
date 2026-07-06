@@ -1,5 +1,38 @@
 # Changelog
 
+## v2.8.3 - 2026-06-30
+
+### Changed
+
+- Bump requirements of `urllib3` and `idna`.
+
+## v2.8.2 - 2026-06-30
+
+### Changed
+
+- Bump requirements of `requests` and `pydantic-settings` to mitigate vulnerabilities.
+
+## v2.8.1 - 2026-06-15
+
+### Fixed
+
+- `EntityListMgr.info()` no longer fails validation for lists without organisation info (`organisation_id` and `organisation_name` are now optional).
+
+## v2.8.0 - 2026-06-04
+
+### Added
+
+- Added support for Links API via the `LinksMgr`.
+- Added support for Suricata rule extraction in `AnalystNote.detection_rule_type`.
+
+### Fixed
+
+- Fix `AnalystNote.markdown` to avoid removing tables headers during text cleanup.
+
+## v2.7.0 - 2026-05-01
+
+- Added support for Threat Map and Malware Map via the `ThreatMapMgr`.
+
 ## v2.6.0 - 2026-04-29
 
 ### Added

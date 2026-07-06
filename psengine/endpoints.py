@@ -136,6 +136,16 @@ EP_AUTO_SIGMA_JOB_ID_RETRY = EP_AUTO_SIGMA_JOB_ID + '/retry'
 EP_RISK_HISTORY_BASE = BASE_URL + '/risk'
 EP_RISK_HISTORY = EP_RISK_HISTORY_BASE + '/history'
 
+###############################################################################
+# Links API Endpoints
+###############################################################################
+LINKS_BASE_URL = f'{BASE_URL}/links'
+LINKS_METADATA_URL = f'{LINKS_BASE_URL}/metadata'
+EP_LINKS_SEARCH = f'{LINKS_BASE_URL}/search'
+EP_LINKS_METADATA_SECTIONS = f'{LINKS_METADATA_URL}/sections'
+EP_LINKS_METADATA_EVENTS = f'{LINKS_METADATA_URL}/events'
+EP_LINKS_METADATA_ENTITIES = f'{LINKS_METADATA_URL}/entities'
+
 ################################################################################
 # Attack Surface Intelligence API Endpoints
 ################################################################################
@@ -174,3 +184,13 @@ EP_SANDBOX_SAMPLES_PROFILE = '{base_url}/samples/{sample_id}/profile'
 EP_SANDBOX_SEARCH = '{base_url}/search'
 EP_SANDBOX_PROFILES = '{base_url}/profiles'
 EP_SANDBOX_PROFILES_ID = '{base_url}/profiles/{profile_id}'
+
+################################################################################
+# Threat Map API Endpoints
+################################################################################
+EP_THREAT_MAPS_BASE = BASE_URL + '/threat'
+EP_THREAT_MAPS_LIST = EP_THREAT_MAPS_BASE + '/maps'
+EP_THREAT_MAP = EP_THREAT_MAPS_BASE + '/map/{}'
+EP_THREAT_MAP_ORG = EP_THREAT_MAPS_BASE + '/map/{}/{}'
+EP_ACTOR_SEARCH = EP_THREAT_MAPS_BASE + '/actor/search'
+EP_CATEGORIES = EP_THREAT_MAPS_BASE + '/{}/categories'

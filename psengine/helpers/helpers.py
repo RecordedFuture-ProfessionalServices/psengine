@@ -325,10 +325,10 @@ class OSHelpers:
         try:
             path.mkdir(parents=True, exist_ok=True)
         except PermissionError as err:
-            raise WriteFileError(f'Directory {path} is not writeable') from err
-        # In case it already exists, check if it is writeable
+            raise WriteFileError(f'Directory {path} is not writable') from err
+        # In case it already exists, check if it is writable
         if not os.access(path, os.W_OK):
-            raise WriteFileError(f'Directory {path} is not writeable')
+            raise WriteFileError(f'Directory {path} is not writable')
         return path
 
 
@@ -517,6 +517,15 @@ class Validators:
             if TimeHelpers.is_rel_time_valid(input_time)
             else input_time
         )
+
+    @staticmethod
+    def is_rel_time_valid(
+        input_time: Annotated[str | None, Doc("Relative time string, e.g., '7d', '3h'.")],
+    ):
+        """Check that a relative time like `-3d` is valid."""
+        if input_time is not None and not TimeHelpers.is_rel_time_valid(input_time):
+            raise ValueError(f'Invalid relative time: {input_time}')
+        return input_time
 
     @staticmethod
     def check_uhash_prefix(

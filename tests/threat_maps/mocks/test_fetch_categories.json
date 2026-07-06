@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": "PUHS5MwXDFi4hkp",
+      "type": "MitreAttackIdentifier",
+      "attributes": {
+        "name": "Fortune cookie"
+      }
+    },
+    {
+      "id": "byP4TExmpjts5EU",
+      "type": "MitreAttackIdentifier",
+      "attributes": {
+        "name": "Calf's liver and bacon"
+      }
+    },
+    {
+      "id": "G9KA0",
+      "type": "AttackVector",
+      "attributes": {
+        "name": "Turducken",
+        "alias": [
+          "Fajitas",
+          "Milk toast",
+          "Spanish rice"
+        ]
+      }
+    }
+  ],
+  "counts": {
+    "returned": 3,
+    "total": 34
+  }
+}

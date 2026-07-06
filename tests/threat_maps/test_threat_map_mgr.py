@@ -1,0 +1,98 @@
+import json
+
+import pytest
+
+from psengine.threat_maps import (
+    EntityCategory,
+    ThreatActorProfile,
+    ThreatMap,
+    ThreatMapInfo,
+    ThreatMapMgr,
+)
+from tests.threat_maps.conftest import MOCK_DIR
+
+
+class Test_ThreatMapMgr:
+    def test_mgr(self, threat_map_mgr: ThreatMapMgr):
+        assert isinstance(threat_map_mgr, ThreatMapMgr)
+
+    def test_fetch_available_maps(self, threat_map_mgr: ThreatMapMgr, mocker):
+        json_path = MOCK_DIR / 'test_fetch_available_maps.json'
+        with open(json_path) as f:
+            file_data = json.load(f)
+        mocker.patch.object(
+            threat_map_mgr.rf_client, 'request', return_value=mocker.Mock(json=lambda: file_data)
+        )
+
+        available_maps = threat_map_mgr.fetch_available_maps()
+        sample_map = available_maps[0]
+        assert isinstance(available_maps, list)
+        assert isinstance(sample_map, ThreatMapInfo)
+
+    @pytest.mark.parametrize(
+        'map_type',
+        ['actors', 'malware'],
+    )
+    def test_fetch_entity_categories(self, threat_map_mgr: ThreatMapMgr, map_type, mocker):
+        json_path = MOCK_DIR / 'test_fetch_categories.json'
+        with open(json_path) as f:
+            file_data = json.load(f)
+        mocker.patch.object(
+            threat_map_mgr.rf_client, 'request', return_value=mocker.Mock(json=lambda: file_data)
+        )
+
+        categories = threat_map_mgr.fetch_entity_categories(map_type=map_type)
+        category = categories[0]
+        assert isinstance(categories, list)
+        assert isinstance(category, EntityCategory)
+
+    @pytest.mark.parametrize(
+        'name',
+        ['actor', None],
+    )
+    @pytest.mark.parametrize(
+        'max_results',
+        [1, 10000, None],
+    )
+    def test_search_threat_actor(self, threat_map_mgr: ThreatMapMgr, name, max_results, mocker):
+        json_path = MOCK_DIR / 'test_search_threat_actors.json'
+        with open(json_path) as f:
+            file_data = json.load(f)
+        mock_records = file_data.get('data', [])
+        mocker.patch.object(
+            threat_map_mgr.rf_client,
+            'request_paged',
+            side_effect=lambda *args, **kwargs: iter(mock_records),  # noqa: ARG005
+        )
+
+        actors = threat_map_mgr.search_threat_actor(name=name, max_results=max_results)
+        actor = actors[0]
+        assert isinstance(actor, ThreatActorProfile)
+
+    @pytest.mark.parametrize(
+        'map_type',
+        ['actors', 'malware'],
+    )
+    def test_fetch_map(self, threat_map_mgr: ThreatMapMgr, map_type, mocker, mock_request):
+        mocks = [mock_request(MOCK_DIR / f'test_validate_threat_map_{map_type}.json')]
+        mocker.patch.object(threat_map_mgr.rf_client, 'request', side_effect=mocks)
+
+        threat_map = threat_map_mgr.fetch_map(map_type=map_type)
+        assert isinstance(threat_map, ThreatMap)
+
+    @pytest.mark.parametrize(
+        'map_type',
+        ['actors', 'malware'],
+    )
+    @pytest.mark.parametrize(
+        'org_id',
+        ['uhash:36sKPnfRQsl', 'uhash:69sKLfTGsS'],
+    )
+    def test_fetch_map_org_id(
+        self, threat_map_mgr: ThreatMapMgr, map_type, org_id, mocker, mock_request
+    ):
+        mocks = [mock_request(MOCK_DIR / f'test_validate_threat_map_{map_type}.json')]
+        mocker.patch.object(threat_map_mgr.rf_client, 'request', side_effect=mocks)
+
+        threat_map = threat_map_mgr.fetch_map(map_type=map_type, org_id=org_id)
+        assert isinstance(threat_map, ThreatMap)

@@ -1,0 +1,137 @@
+{
+  "data": {
+    "threat_map": [
+      {
+        "id": "SnlLDxR23K",
+        "name": "Hot Chicken sandwich",
+        "alias": [
+          "Hot Chicken sandwich"
+        ],
+        "categories": [
+          {
+            "id": "6eJ9PYwFOYKnJ5V",
+            "name": "Chicago Hot Dog"
+          },
+          {
+            "id": "fFgW3qRS1FYHTiW",
+            "name": "Threat Actor"
+          }
+        ],
+        "intent": 49,
+        "opportunity": 10,
+        "log_entries": [
+          {
+            "watchlist": {
+              "id": "rHG6vaZ5aard4rwY",
+              "name": "Milk toast"
+            },
+            "entity": {
+              "id": "6xYDWb",
+              "name": "Alice Springs Chicken"
+            },
+            "severity": 2,
+            "axis": "intent",
+            "date": "2025-12-02T00:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "0HSELhIyAyNMLWk",
+        "name": "Clam chowder",
+        "alias": [
+          "Fajitas",
+          "Poke",
+          "Tres Leches Cake"
+        ],
+        "categories": [
+          {
+            "id": "xHAHn9nvThfVq",
+            "name": "Pumpkin pie"
+          }
+        ],
+        "intent": 74,
+        "opportunity": 25,
+        "log_entries": [
+          {
+            "entity": {
+              "id": "ohnRZ0",
+              "name": "Mulligan stew"
+            },
+            "severity": 2,
+            "axis": "capability",
+            "date": "2023-05-01T00:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "U654lpE2Qd",
+        "name": "Caviar",
+        "alias": [],
+        "categories": [
+          {
+            "id": "ZJcvmd",
+            "name": "Mini pizzas"
+          },
+          {
+            "id": "V60UyK",
+            "name": "Kung Pao Chicken"
+          }
+        ],
+        "intent": 40,
+        "opportunity": 24,
+        "log_entries": [
+          {
+            "watchlist": {
+              "id": "wjefbouvbi",
+              "name": "Ice Cream Sundae"
+            },
+            "entity": {
+              "id": "skzulr",
+              "name": "Oysters Rockefeller"
+            },
+            "severity": 1,
+            "axis": "capability",
+            "date": "2026-04-03T00:00:00.000Z"
+          }
+        ]
+      },
+      {
+        "id": "XFjYSA",
+        "name": "Hot chicken",
+        "alias": [],
+        "categories": [
+          {
+            "id": "RBxL5D",
+            "name": "Mozzarella Sticks"
+          },
+          {
+            "id": "CIxkFT69ty",
+            "name": "Underground Forum Member"
+          },
+          {
+            "id": "HiLbjp",
+            "name": "Milkshake"
+          }
+        ],
+        "intent": 32,
+        "opportunity": 5,
+        "log_entries": [
+          {
+            "watchlist": {
+              "id": "hYeuv73yD4p0Utk",
+              "name": "Sweet Potato Fries"
+            },
+            "entity": {
+              "id": "sDvVbwKv2EjlacG",
+              "name": "Chicken sandwich"
+            },
+            "severity": 1,
+            "axis": "capability",
+            "date": "2025-09-24T00:00:00.000Z"
+          }
+        ]
+      }
+    ],
+    "date": "2026-04-29T18:12:08.371Z"
+  }
+}

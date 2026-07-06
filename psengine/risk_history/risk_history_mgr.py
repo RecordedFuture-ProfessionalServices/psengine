@@ -28,12 +28,11 @@ from .models import RiskHistory, RiskHistoryIn
 class RiskHistoryMgr:
     """Manages requests for Recorded Future Risk History information."""
 
-    def __init__(self, rf_token: str = None):
-        """Initializes the `RiskHistoryMgr` object.
-
-        Args:
-            rf_token (str, optional): Recorded Future API token.
-        """
+    def __init__(
+        self,
+        rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
+    ):
+        """Initializes the `RiskHistoryMgr` object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
 

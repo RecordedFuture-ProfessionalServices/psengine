@@ -218,6 +218,35 @@ class Test_AnalystNotesModels:
 
         assert 'Entities' not in note.markdown(extract_entities=False)
 
+    def test_markdown_preserves_note_tables(self):
+        table = (
+            '| Indicator | Type |\n| -- | -- |\n| example.com | Domain |\n| 1.2.3.4 | IP Address |'
+        )
+        note = AnalystNote.model_validate(
+            {
+                'id': 'table-note',
+                'source': {
+                    'id': 'source',
+                    'name': 'Recorded Future',
+                    'type': 'Source',
+                },
+                'attributes': {
+                    'title': 'Table Note',
+                    'text': f'Before\n\n{table}\n\nAfter',
+                    'published': '2025-01-01T00:00:00.000Z',
+                    'topic': {
+                        'id': 'topic',
+                        'name': 'Threat Research',
+                        'type': 'Topic',
+                    },
+                },
+            }
+        )
+
+        data = note.markdown(extract_entities=False, diamond_model=False)
+
+        assert table in data
+
     @pytest.mark.parametrize('defang', [True, False])
     @pytest.mark.parametrize('diamond_model', [True, False])
     def test_defang_iocs(self, an_mgr: AnalystNoteMgr, defang, diamond_model, mocker, mock_request):

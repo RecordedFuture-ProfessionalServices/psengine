@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "id": "3rOA",
+      "type": "Organization",
+      "attributes": {
+        "name": "Pepperoni Pizza",
+        "common_names": [],
+        "alias": [
+          "St. Paul Sandwich",
+          "Mozzarella sticks",
+          "Corn flakes"
+        ],
+        "categories": []
+      }
+    },
+    {
+      "id": "1YXDWKRnHA",
+      "type": "Person",
+      "attributes": {
+        "name": "yara",
+        "common_names": [],
+        "alias": [
+          "Fortune cookie"
+        ],
+        "categories": []
+      }
+    },
+    {
+      "id": "DE5DoRw5wfb",
+      "type": "Organization",
+      "attributes": {
+        "name": "Al-Qaeda",
+        "common_names": [],
+        "alias": [
+          "Chicago Hot Dog",
+          "Maine Lobster"
+        ],
+        "categories": []
+      }
+    }
+  ],
+  "counts": {
+    "returned": 3,
+    "total": 1476948
+  },
+  "next_offset": "eyJvZmZzZXQiOlszMjU5MzQ5OCwiQl9GRFQiXX0="
+}
