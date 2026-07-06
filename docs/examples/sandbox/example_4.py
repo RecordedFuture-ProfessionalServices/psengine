@@ -12,9 +12,8 @@ mgr = SandboxMgr()
 submission = mgr.submit_sample(
     kind='url', url='https://example.com'
 )
-print(
-    f'Submitted {submission.id_}, polling until terminal status...'
-)
+print(f'Submitted {submission.id_}')
+print('Polling until terminal status...')
 
 deadline = time.monotonic() + TIMEOUT_SEC
 while time.monotonic() < deadline:
@@ -25,11 +24,11 @@ while time.monotonic() < deadline:
     time.sleep(POLL_INTERVAL_SEC)
 else:
     raise RuntimeError(
-        f'Sample {submission.id_} did not reach a terminal status in {TIMEOUT_SEC}s'
+        f'{submission.id_} not terminal in {TIMEOUT_SEC}s'
     )
 
 summary = mgr.fetch_sample_summary(submission.id_)
 print(f'\nScore: {summary.score}')
 print(f'Target: {summary.target}')
-for task_key, task in summary.tasks.items():
+for task_key in summary.tasks:
     print(f'  task={task_key}')

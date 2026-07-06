@@ -66,6 +66,8 @@ _SEARCH_FIELD_PREFIX_MAP = {
 
 
 class SampleSummary(RFBaseModel):
+    """Short summary for a sample returned by `GET /samples/{sample_id}/summary`."""
+
     sample: str
     status: str
     custom: str
@@ -81,10 +83,14 @@ class SampleSummary(RFBaseModel):
 
 
 class SearchQuery(RFBaseModel):
+    """Triage query string wrapper sent as the `query` param of `GET /search`."""
+
     query: str
 
 
 class SearchIn(RFBaseModel):
+    """Structured search filters translated into Triage search operators."""
+
     file_hash: list[str] | str | None = None
     family: list[str] | str | None = None
     tag: list[str] | str | None = None
@@ -119,6 +125,7 @@ class SearchIn(RFBaseModel):
         return v
 
     def to_query_out(self, join_operator='AND') -> SearchQuery:
+        """Join the structured filters into a single Triage query string."""
         parts = []
         for field_name, values in self.model_dump(exclude_none=True).items():
             if not values:
@@ -329,24 +336,26 @@ class SubmitSampleIn(RFBaseModel):
         # For kind='import' the public Triage reference (URL or bare sample id)
         # is carried in the same `url` field as url/fetch. We keep `source_id`
         # as the public-facing param name because it's semantically clearer.
-        if self.kind == 'import':
+        elif self.kind == 'import':
             body['url'] = self.source_id
-        if self.interactive is not None:
-            body['interactive'] = self.interactive
-        if self.password is not None:
-            body['password'] = self.password
-        if self.profiles is not None:
-            body['profiles'] = self.profiles
-        if self.user_tags is not None:
-            body['user_tags'] = self.user_tags
 
-        defaults: dict = {}
-        if self.timeout is not None:
-            defaults['timeout'] = self.timeout
-        if self.network is not None:
-            defaults['network'] = self.network
-        if self.geolocation is not None:
-            defaults['geolocation'] = self.geolocation
+        optional = {
+            'interactive': self.interactive,
+            'password': self.password,
+            'profiles': self.profiles,
+            'user_tags': self.user_tags,
+        }
+        body.update({k: v for k, v in optional.items() if v is not None})
+
+        defaults = {
+            k: v
+            for k, v in (
+                ('timeout', self.timeout),
+                ('network', self.network),
+                ('geolocation', self.geolocation),
+            )
+            if v is not None
+        }
         if defaults:
             body['defaults'] = defaults
 
@@ -392,11 +401,11 @@ class SetProfileIn(RFBaseModel):
 
         normalised = []
         for entry in self.profiles:
-            entry = dict(entry)
-            profile = entry.get('profile')
+            mapped = dict(entry)
+            profile = mapped.get('profile')
             if isinstance(profile, str):
-                entry['profile'] = {'id': profile}
-            normalised.append(entry)
+                mapped['profile'] = {'id': profile}
+            normalised.append(mapped)
         return {'auto': False, 'profiles': normalised}
 
 

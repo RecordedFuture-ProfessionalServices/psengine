@@ -8,6 +8,6 @@ results = mgr.search_samples(
 )
 
 for sample in results:
-    print(
-        f'{sample.id_:20s} {sample.status:12s} {sample.kind:6s} {sample.sha256 or sample.url}'
-    )
+    ioc = sample.sha256 or sample.url
+    print(f'{sample.id_:20s} {sample.status:12s}')
+    print(f'  {sample.kind:6s} {ioc}')

@@ -7,9 +7,8 @@ submission = mgr.submit_sample(
     url='https://example.com',
     user_tags=['psengine-docs', 'delete-me'],
 )
-print(
-    f'Submitted {submission.id_} (status={submission.status})'
-)
+print(f'Submitted {submission.id_}')
+print(f'status={submission.status}')
 
 result = mgr.delete_sample(submission.id_)
 print(f'Delete result: deleted={result.deleted}')

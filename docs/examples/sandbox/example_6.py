@@ -9,9 +9,8 @@ created = mgr.create_profile(
     network='internet',
     browser='chrome',
 )
-print(
-    f'Created {created.id_} (name={created.name}, timeout={created.timeout}s)'
-)
+print(f'Created {created.id_}')
+print(f'name={created.name}, timeout={created.timeout}s')
 
 all_profiles = mgr.fetch_profiles()
 print(f'\nCompany has {len(all_profiles)} profile(s):')
@@ -19,9 +18,12 @@ for p in all_profiles:
     print(f'  {p.id_:40s} {p.name}')
 
 fetched = mgr.fetch_profile(created.id_)
-print(
-    f'\nRound-trip: tags={fetched.tags}, network={fetched.network}, browser={fetched.options.browser if fetched.options else None}'
-)
+opts = fetched.options
+browser = opts.browser if opts else None
+print('\nRound-trip:')
+print(f'  tags={fetched.tags}')
+print(f'  network={fetched.network}')
+print(f'  browser={browser}')
 
 update_result = mgr.update_profile(
     profile_id=created.id_,
