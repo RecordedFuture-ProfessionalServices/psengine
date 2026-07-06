@@ -9,6 +9,7 @@ from psengine.playbook_alerts.playbook_alert_mgr import PlaybookAlertMgr
 
 ALERT_TYPE_FNAME_MAP = {
     PACategory.CODE_REPO_LEAKAGE.value: 'code_repo_leakage.json',
+    PACategory.COMPROMISED_BANK_CHECKS.value: 'compromised_bank_checks.json',
     PACategory.DOMAIN_ABUSE.value: 'domain_abuse.json',
     PACategory.CYBER_VULNERABILITY.value: 'cyber_vulnerability.json',
     PACategory.IDENTITY_NOVEL_EXPOSURES.value: 'identity_novel_exposures.json',
