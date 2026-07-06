@@ -1,12 +1,9 @@
-import re
-from pathlib import Path
-
 import pytest
 
 from psengine.playbook_alerts import PACategory
 from psengine.playbook_alerts.models.pba_compromised_bank_checks import (
-    CompromisedBankCheckPanelStatus,
     CompromisedBankCheckPanelEvidenceSummary,
+    CompromisedBankCheckPanelStatus,
 )
 
 
