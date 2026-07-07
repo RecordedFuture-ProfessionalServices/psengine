@@ -18,6 +18,7 @@ from ...markdown import MarkdownMaker
 from ..models import panel_log
 from ..pa_category import PACategory
 from .markdown_code_repo import _code_repo_markdown
+from .markdown_compromised_bank_checks import _compromised_bank_check_markdown
 from .markdown_cyber_vulnerability import _cyber_vulnerability_markdown
 from .markdown_domain_abuse import _domain_abuse_markdown
 from .markdown_geopolitics_facility import _geopolitics_facility_markdown
@@ -39,6 +40,7 @@ MARKDOWN_BY_PBA_TYPE = {
     PACategory.CYBER_VULNERABILITY.value: _cyber_vulnerability_markdown,
     PACategory.MALWARE_REPORT.value: _malware_report_markdown,
     PACategory.MALICIOUS_SITES.value: _malicious_sites_markdown,
+    PACategory.COMPROMISED_BANK_CHECKS.value: _compromised_bank_check_markdown,
 }
 
 
