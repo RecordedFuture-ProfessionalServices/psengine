@@ -1,6 +1,6 @@
 ## Introduction
 
-The `SandboxMgr` class of the `sandbox` module wraps the Recorded Future Sandbox (Triage) API so you can detonate samples, retrieve analysis reports, and manage company-wide analysis profiles without hand-rolling HTTP calls.
+The `SandboxMgr` class of the `sandbox` module wraps the Recorded Future Sandbox (Triage) API so you can detonate samples, retrieve analysis reports, and manage company-wide analysis profiles. 
 
 It covers:
 
@@ -53,11 +53,11 @@ Submitted: id=260501-h4p7laawme, kind=url, status=pending
 
 #### 2: Search for samples by malware family
 
-`search_samples` accepts the same field-prefixed query syntax as the Sandbox web UI (`family:`, `tag:`, `sha256:`, `ip:`, `domain:`, ...). Each filter kwarg (`family`, `tag`, `botnet`, ...) is composed with `AND` into the final query string. The example searches for up to five samples matching any of three malware families.
+`search_samples` accepts the same field-prefixed query syntax as the Sandbox web UI (`family:`, `tag:`, `sha256:`, `ip:`, `domain:`, ...). Each filter `kwarg` (`family`, `tag`, `botnet`, ...) is composed with `AND` into the final query string. The example searches for up to five samples matching any of three malware families.
 
 !!! tip
 
-    Pass any combination of filter kwargs — they're joined with `AND`. For free-form composition (`OR`/`NOT`), pass a raw query via the `query=` argument instead.
+    Pass any combination of filter `kwargs` — they're joined with `AND`. For free-form composition (`OR`/`NOT`), pass a raw query via the `query=` argument instead.
 
 ```python
 --8<-- "docs/examples/sandbox/example_2.py"
@@ -77,7 +77,7 @@ Submissions are asynchronous, so a fresh `id_` will return `status='pending'` fo
 
 !!! tip
 
-    A URL submission usually reaches `reported` within 1–3 minutes. The script caps the wait at 10 minutes via `TIMEOUT_SEC` — tune both knobs to your needs.
+    A URL submission usually reaches `reported` within 1–3 minutes. The script caps the wait at 10 minutes via `TIMEOUT_SEC` — tune both to your needs.
 
 ```python
 --8<-- "docs/examples/sandbox/example_4.py"
@@ -87,7 +87,7 @@ The summary's `score` is a 1–10 verdict (10 = known bad, 1 = no malicious beha
 
 #### 5: Submit and immediately delete a sample
 
-`delete_sample` removes the sample and all its analyses. This example submits a throwaway URL and deletes it in the same run — useful for housekeeping flows where the submission is only needed to drive a downstream action.
+`delete_sample` removes the sample and all its analyses. This example submits a throwaway URL and deletes it in the same run, useful for housekeeping flows where the submission is only needed to drive a downstream action.
 
 !!! note
 
@@ -103,7 +103,7 @@ Profiles are company-wide analysis configurations (OS tags, network mode, timeou
 
 !!! tip
 
-    `update_profile` and `delete_profile` are idempotent on 404 — they return `updated=False` / `deleted=False` if the target is already gone. Check the returned `.updated` / `.deleted` flag rather than wrapping the call in `try/except`.
+    `update_profile` and `delete_profile` are idempotent on 404, they return `updated=False` / `deleted=False` if the target is already gone. Check the returned `.updated` / `.deleted` flag rather than wrapping the call in `try/except`.
 
 ```python
 --8<-- "docs/examples/sandbox/example_6.py"
