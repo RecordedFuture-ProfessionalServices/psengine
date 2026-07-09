@@ -26,8 +26,8 @@ class OverviewAnalysis(RFBaseModel):
     """The `analysis` block of an overview report: overall verdict for the sample."""
 
     score: int | None = None
-    family: list[str] = Field(default_factory=list)
-    tags: list[str] = Field(default_factory=list)
+    family: list[str] = []
+    tags: list[str] = []
 
 
 class OverviewSample(RFBaseModel):
@@ -58,9 +58,9 @@ class OverviewSignature(RFBaseModel):
     label: str | None = None
     score: int | None = None
     desc: str | None = None
-    tags: list[str] = Field(default_factory=list)
-    ttp: list[str] = Field(default_factory=list)
-    indicators: list[StaticReportSignatureIndicator] = Field(default_factory=list)
+    tags: list[str] = []
+    ttp: list[str] = []
+    indicators: list[StaticReportSignatureIndicator] = []
     is_custom: bool | None = None
     url: str | None = None
 
@@ -93,7 +93,7 @@ class OverviewExtractedDropper(RFBaseModel):
     language: str | None = None
     source: str | None = None
     deobfuscated: str | None = None
-    urls: list[OverviewDropperUrl] = Field(default_factory=list)
+    urls: list[OverviewDropperUrl] = []
 
     @field_validator('urls', mode='before')
     @classmethod
@@ -110,9 +110,9 @@ class OverviewExtractedRansomNote(RFBaseModel):
 
     family: str | None = None
     note: str | None = None
-    emails: list[str] = Field(default_factory=list)
-    urls: list[str] = Field(default_factory=list)
-    wallets: list[str] = Field(default_factory=list)
+    emails: list[str] = []
+    urls: list[str] = []
+    wallets: list[str] = []
 
 
 class OverviewExtracted(RFBaseModel):
@@ -123,7 +123,7 @@ class OverviewExtracted(RFBaseModel):
     resource: str | None = None
     dumped_file: str | None = None
     path: str | None = None
-    tasks: list[str] = Field(default_factory=list)
+    tasks: list[str] = []
     config: StaticReportExtractedConfig | None = None
     credentials: OverviewExtractedCredential | None = None
     dropper: OverviewExtractedDropper | None = None
@@ -133,9 +133,9 @@ class OverviewExtracted(RFBaseModel):
 class OverviewTargetIocs(RFBaseModel):
     """The `iocs` block of a target: network indicators observed for that target."""
 
-    domains: list[str] = Field(default_factory=list)
-    ips: list[str] = Field(default_factory=list)
-    urls: list[str] = Field(default_factory=list)
+    domains: list[str] = []
+    ips: list[str] = []
+    urls: list[str] = []
 
 
 class OverviewTarget(RFBaseModel):
@@ -153,11 +153,11 @@ class OverviewTarget(RFBaseModel):
     sha512: str | None = None
     ssdeep: str | None = None
     tlsh: str | None = None
-    family: list[str] = Field(default_factory=list)
-    tags: list[str] = Field(default_factory=list)
-    tasks: list[str] = Field(default_factory=list)
+    family: list[str] = []
+    tags: list[str] = []
+    tasks: list[str] = []
     iocs: OverviewTargetIocs | None = None
-    signatures: list[OverviewSignature] = Field(default_factory=list)
+    signatures: list[OverviewSignature] = []
 
 
 class OverviewTask(RFBaseModel):
@@ -168,7 +168,7 @@ class OverviewTask(RFBaseModel):
     name: str | None = None
     score: int | None = None
     sigs: int | None = None
-    tags: list[str] = Field(default_factory=list)
+    tags: list[str] = []
     target: str | None = None
     backend: str | None = None
     os: str | None = None

@@ -39,7 +39,7 @@ class StaticReportAnalysis(RFBaseModel):
 
     reported: datetime | None = None
     score: int | None = None
-    tags: list[str] = Field(default_factory=list)
+    tags: list[str] = []
 
 
 class StaticReportSignatureIndicator(RFBaseModel):
@@ -55,9 +55,9 @@ class StaticReportSignature(RFBaseModel):
     label: str | None = None
     name: str
     score: int | None = None
-    tags: list[str] = Field(default_factory=list)
+    tags: list[str] = []
     desc: str | None = None
-    indicators: list[StaticReportSignatureIndicator] = Field(default_factory=list)
+    indicators: list[StaticReportSignatureIndicator] = []
     is_custom: bool | None = None
 
 
@@ -96,16 +96,16 @@ class StaticReportExtractedConfig(RFBaseModel):
     version: str | None = None
     botnet: str | None = None
     campaign: str | None = None
-    tags: list[str] = Field(default_factory=list)
-    c2: list[str] = Field(default_factory=list)
-    decoy: list[str] = Field(default_factory=list)
-    mutex: list[str] = Field(default_factory=list)
-    dns: list[str] = Field(default_factory=list)
-    extracted_pe: list[str] = Field(default_factory=list)
-    wallet: list[str] = Field(default_factory=list)
-    keys: list[StaticReportExtractedKey] = Field(default_factory=list)
-    credentials: list[StaticReportExtractedCredential] = Field(default_factory=list)
-    attr: dict = Field(default_factory=dict)
+    tags: list[str] = []
+    c2: list[str] = []
+    decoy: list[str] = []
+    mutex: list[str] = []
+    dns: list[str] = []
+    extracted_pe: list[str] = []
+    wallet: list[str] = []
+    keys: list[StaticReportExtractedKey] = []
+    credentials: list[StaticReportExtractedCredential] = []
+    attr: dict = {}
     raw: str | None = None
 
 
@@ -134,11 +134,11 @@ class StaticReportFile(RFBaseModel):
     sha512: str | None = None
     ssdeep: str | None = None
     tlsh: str | None = None
-    exts: list[str] = Field(default_factory=list)
-    tags: list[str] = Field(default_factory=list)
+    exts: list[str] = []
+    tags: list[str] = []
     depth: int | None = None
     error: str | None = None
     kind: str | None = None
     selected: bool | None = None
     runas: str | None = None
-    metadata: dict = Field(default_factory=dict)
+    metadata: dict = {}

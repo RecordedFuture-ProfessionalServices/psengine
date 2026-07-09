@@ -26,14 +26,14 @@ class TaskBase(RFBaseModel):
 class StaticTask(TaskBase):
     kind: Literal['static']
     score: int | None = None
-    tags: list[str] = Field(default_factory=list)
+    tags: list[str] = []
     sigs: int | None = None
 
 
 class BehavioralTask(TaskBase):
     kind: Literal['behavioral']
 
-    tags: list[str] = Field(default_factory=list)
+    tags: list[str] = []
     score: int
     target: str
     backend: str

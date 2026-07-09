@@ -35,8 +35,8 @@ from ..endpoints import (
     SANDBOX_BASE_URLS,
 )
 from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
-from .client import SAMPLES_PER_PAGE, SandboxClient
-from .constants import DEFAULT_PAGE_LIMIT
+from .client import SandboxClient
+from .constants import DEFAULT_PAGE_LIMIT, SAMPLES_PER_PAGE
 from .errors import (
     ProfileCreateError,
     ProfileDeleteError,

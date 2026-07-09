@@ -33,7 +33,7 @@ class BehavioralSample(RFBaseModel):
     sha512: str | None = None
     ssdeep: str | None = None
     tlsh: str | None = None
-    static_tags: list[str] = Field(default_factory=list)
+    static_tags: list[str] = []
 
 
 class BehavioralReportTask(RFBaseModel):
@@ -48,26 +48,26 @@ class BehavioralReportTask(RFBaseModel):
     sha512: str | None = None
     ssdeep: str | None = None
     tlsh: str | None = None
-    static_tags: list[str] = Field(default_factory=list)
+    static_tags: list[str] = []
 
 
 class BehavioralAnalysis(RFBaseModel):
     """The `analysis` block: verdict and run metadata for this behavioral task."""
 
     score: int | None = None
-    tags: list[str] = Field(default_factory=list)
-    ttp: list[str] = Field(default_factory=list)
-    features: list[str] = Field(default_factory=list)
+    tags: list[str] = []
+    ttp: list[str] = []
+    features: list[str] = []
     submitted: datetime | None = None
     reported: datetime | None = None
     max_time_network: int | None = None
     max_time_kernel: int | None = None
     backend: str | None = None
     resource: str | None = None
-    resource_tags: list[str] = Field(default_factory=list)
+    resource_tags: list[str] = []
     platform: str | None = None
-    geolocation_tags: list[str] = Field(default_factory=list)
-    interaction: dict = Field(default_factory=dict)
+    geolocation_tags: list[str] = []
+    interaction: dict = {}
 
     # The API sends `tags: null` when there are none -- coerce to [] so it is iterable.
     _coerce_tags = field_validator('tags', mode='before')(Validators.none_to_empty_list)
@@ -130,7 +130,7 @@ class BehavioralNetworkFlow(RFBaseModel):
     rx_packets: int | None = None
     tx_bytes: int | None = None
     tx_packets: int | None = None
-    protocols: list[str] = Field(default_factory=list)
+    protocols: list[str] = []
     domain: str | None = None
     tls_ja3: str | None = None
     tls_ja3s: str | None = None
@@ -154,8 +154,8 @@ class BehavioralDnsQuestion(RFBaseModel):
 class BehavioralDnsRequest(RFBaseModel):
     """The DNS query part of a network request."""
 
-    domains: list[str] = Field(default_factory=list)
-    questions: list[BehavioralDnsQuestion] = Field(default_factory=list)
+    domains: list[str] = []
+    questions: list[BehavioralDnsQuestion] = []
 
 
 class BehavioralDnsAnswer(RFBaseModel):
@@ -169,9 +169,9 @@ class BehavioralDnsAnswer(RFBaseModel):
 class BehavioralDnsResponse(RFBaseModel):
     """The DNS answer part of a network request."""
 
-    domains: list[str] = Field(default_factory=list)
-    ip: list[str] = Field(default_factory=list)
-    answers: list[BehavioralDnsAnswer] = Field(default_factory=list)
+    domains: list[str] = []
+    ip: list[str] = []
+    answers: list[BehavioralDnsAnswer] = []
 
 
 class BehavioralHttpRequest(RFBaseModel):
@@ -181,7 +181,7 @@ class BehavioralHttpRequest(RFBaseModel):
     url: str | None = None
     request: str | None = None
     stream: int | None = None
-    headers: list[str] = Field(default_factory=list)
+    headers: list[str] = []
 
 
 class BehavioralHttpResponse(RFBaseModel):
@@ -190,7 +190,7 @@ class BehavioralHttpResponse(RFBaseModel):
     status: str | None = None
     response: str | None = None
     stream: int | None = None
-    headers: list[str] = Field(default_factory=list)
+    headers: list[str] = []
 
 
 class BehavioralNetworkRequest(RFBaseModel):
@@ -207,6 +207,6 @@ class BehavioralNetworkRequest(RFBaseModel):
 class BehavioralNetwork(RFBaseModel):
     """The `network` block: flows, per-request detail and IP geo/ASN metadata."""
 
-    flows: list[BehavioralNetworkFlow] = Field(default_factory=list)
-    requests: list[BehavioralNetworkRequest] = Field(default_factory=list)
-    ips: dict[str, BehavioralNetworkIp] = Field(default_factory=dict)
+    flows: list[BehavioralNetworkFlow] = []
+    requests: list[BehavioralNetworkRequest] = []
+    ips: dict[str, BehavioralNetworkIp] = {}

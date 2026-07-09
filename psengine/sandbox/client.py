@@ -22,10 +22,7 @@ from typing_extensions import Doc
 from ..base_http_client import BaseHTTPClient
 from ..constants import SANDBOX_TOKEN_VALIDATION_REGEX
 from ..helpers import debug_call
-from .constants import DEFAULT_PAGE_LIMIT
-
-SAMPLES_PER_PAGE = 50
-MAXIMUM_SAMPLES = 200
+from .constants import DEFAULT_PAGE_LIMIT, MAXIMUM_SAMPLES, SAMPLES_PER_PAGE
 
 
 @validate_call
