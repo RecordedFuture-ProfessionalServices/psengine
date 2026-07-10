@@ -19,6 +19,7 @@ ALERT_TYPE_FNAME_MAP = {
 }
 
 BASE_MOCK_DIR = Path(__file__).parent / 'mocks'
+BANK_CHECK_MOCK = Path(__file__).parent / 'mocks' / 'bank_checks'
 CODE_REPO_MOCK = Path(__file__).parent / 'mocks' / 'code_repo'
 MALW_MOCK = Path(__file__).parent / 'mocks' / 'malware'
 VULN_MOCK = Path(__file__).parent / 'mocks' / 'vuln'

@@ -575,7 +575,7 @@ class PlaybookAlertMgr:
         Args:
             alert_ids (list): List of alert IDs to fetch
             category (str): Category of alert to fetch
-            fetch_image (bool): Whether to fetch images for Domain Abuse alerts
+            fetch_image (bool): Whether to fetch images for supported alerts with images
             panels (list): List of panels to fetch
             alerts_per_page (int): Number of alerts to fetch per page for bulk search results
 
@@ -609,6 +609,7 @@ class PlaybookAlertMgr:
             category == PACategory.DOMAIN_ABUSE.value
             or category == PACategory.GEOPOLITICS_FACILITY.value
             or category == PACategory.MALICIOUS_SITES.value
+            or category == PACategory.COMPROMISED_BANK_CHECKS.value
         ) and fetch_image:
             for alert in p_alerts:
                 self.fetch_images(alert)
