@@ -94,21 +94,21 @@ class Test_CompromisedBankCheck:
             'task:298b983c-cc0c-4f8b-9075-8d525dc098a9', PACategory.COMPROMISED_BANK_CHECKS.value
         )
         markdown = alert.markdown(character_limit=5000)
+
         assert 'Images' not in markdown
         assert len(markdown) <= 5000
 
     def test_markdown_single_alert_no_images(
         self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request
     ):
-        mocks = [
-            mock_request(BANK_CHECK_MOCK / 'test_markdown_single_alert.json')
-        ]
+        mocks = [mock_request(BANK_CHECK_MOCK / 'test_markdown_single_alert.json')]
         mocker.patch.object(playbook_mgr.rf_client, 'request', side_effect=mocks)
 
         alert = playbook_mgr.fetch(
-            'task:298b983c-cc0c-4f8b-9075-8d525dc098a9', PACategory.COMPROMISED_BANK_CHECKS.value,
-            fetch_images=False
+            'task:298b983c-cc0c-4f8b-9075-8d525dc098a9',
+            PACategory.COMPROMISED_BANK_CHECKS.value,
+            fetch_images=False,
         )
         markdown = alert.markdown()
-        assert "Images" not in markdown
 
+        assert 'Images' not in markdown
