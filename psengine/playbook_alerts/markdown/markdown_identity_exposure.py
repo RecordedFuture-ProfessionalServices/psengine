@@ -13,11 +13,10 @@
 
 from typing import TYPE_CHECKING
 
-from markdown_strings import bold, unordered_list
-
 from ...constants import TIMESTAMP_STR
 from ...markdown import MarkdownMaker
 from ...markdown.markdown import divider
+from ...markdown.markdown_strings import bold, unordered_list
 
 if TYPE_CHECKING:
     from ...playbook_alerts.playbook_alerts import PBA_IdentityNovelExposure

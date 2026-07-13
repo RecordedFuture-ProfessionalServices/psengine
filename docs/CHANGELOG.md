@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.8.4 - 2026-07-13
+
+### Changed
+
+- Removed `markdown-strings` dependency due to it being removed from Pypi.
+
 ## v2.8.3 - 2026-06-30
 
 ### Changed

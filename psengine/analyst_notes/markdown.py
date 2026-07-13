@@ -16,11 +16,10 @@ from collections import defaultdict
 from itertools import chain
 from typing import TYPE_CHECKING
 
-from markdown_strings import bold, unordered_list
-
 from ..constants import TIMESTAMP_STR
 from ..endpoints import EP_ANALYST_NOTE_LOOKUP
 from ..markdown.markdown import MarkdownMaker, divider, html_collapsible
+from ..markdown.markdown_strings import bold, unordered_list
 
 if TYPE_CHECKING:
     from ..analyst_notes import AnalystNote

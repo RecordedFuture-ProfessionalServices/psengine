@@ -15,9 +15,8 @@ import base64
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from markdown_strings import bold, link
-
 from ...markdown import MarkdownMaker, divider
+from ...markdown.markdown_strings import bold, link
 
 if TYPE_CHECKING:
     from ...playbook_alerts.playbook_alerts import PBA_GeopoliticsFacility

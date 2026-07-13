@@ -14,11 +14,11 @@
 import html
 from typing import Annotated
 
-import markdown_strings
-from markdown_strings import header
 from pydantic import validate_call
 from typing_extensions import Doc
 
+from . import markdown_strings
+from .markdown_strings import header
 from .models import Section
 
 TITLE_HEADER_LEVEL = 2
