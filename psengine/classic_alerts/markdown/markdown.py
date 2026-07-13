@@ -15,7 +15,7 @@ import re
 from itertools import chain
 from typing import TYPE_CHECKING
 
-from markdown_strings import blockquote, bold, esc_format, link
+from ...markdown.markdown_strings import blockquote, bold, esc_format, link
 
 if TYPE_CHECKING:
     from ...classic_alerts.classic_alert import ClassicAlert

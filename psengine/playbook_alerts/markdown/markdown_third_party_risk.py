@@ -15,14 +15,13 @@ import itertools
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from markdown_strings import bold, unordered_list
-
 from ...analyst_notes import AnalystNote
 from ...analyst_notes.markdown import _cleanup_insikt_note_text
 from ...constants import TIMESTAMP_STR
 from ...enrich import EnrichedIP, EnrichmentData, SOAREnrichOut
 from ...markdown import MarkdownMaker
 from ...markdown.markdown import divider, header, html_collapsible
+from ...markdown.markdown_strings import bold, unordered_list
 from ..models.pba_third_party_risk import TPRAssessment
 
 if TYPE_CHECKING:

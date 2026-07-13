@@ -14,10 +14,9 @@
 from collections import defaultdict
 from typing import TYPE_CHECKING
 
-from markdown_strings import blockquote, bold
-
 from ...constants import TIMESTAMP_STR
 from ...markdown import MarkdownMaker, clean_text, divider, html_textarea
+from ...markdown.markdown_strings import blockquote, bold
 
 if TYPE_CHECKING:
     from ...playbook_alerts.playbook_alerts import PBA_CodeRepoLeakage
