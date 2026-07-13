@@ -24,4 +24,4 @@ from .sandbox import (
     SampleTasks,
     StaticAnalysisReport,
 )
-from .sandbox_mgr import SandboxMgr
+from .sandbox_mgr import SandboxChoice, SandboxMgr, SandboxSubset

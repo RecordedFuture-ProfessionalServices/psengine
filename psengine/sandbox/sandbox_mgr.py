@@ -79,6 +79,7 @@ from .sandbox import (
 )
 
 SandboxChoice = Literal['eu', 'usa', 'apj', 'public', 'private']
+SandboxSubset = Literal['owned', 'public', 'org']
 
 
 def validate_sandbox_choice(sandbox_choice: str) -> SandboxChoice:
@@ -251,7 +252,7 @@ class SandboxMgr:
     def fetch_samples(
         self,
         subset: Annotated[
-            Literal['owned', 'public', 'org'],
+            SandboxSubset,
             Doc(
                 "Which samples to list: 'owned' (default — samples the requesting user can "
                 "access), 'public' (only valid on the public cloud), or 'org' (all "
