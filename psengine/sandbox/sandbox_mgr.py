@@ -59,6 +59,8 @@ from .errors import (
 )
 from .sandbox import (
     BehavioralReport,
+    BehavioralReportFailure,
+    BehavioralReportsResult,
     Browser,
     CreateUpdateProfileIn,
     NetworkMode,
@@ -90,6 +92,43 @@ def validate_sandbox_choice(sandbox_choice: str) -> SandboxChoice:
             f'Must be one of {list(SANDBOX_BASE_URLS.keys())}'
         )
     return cast(SandboxChoice, sandbox_choice)
+
+
+def _response_error_code(err: HTTPError) -> str | None:
+    """Return the RF `error` code from the response envelope, or None if not decodable."""
+    response = err.response
+    if response is None:
+        return None
+    try:
+        return response.json().get('error')
+    except (ValueError, AttributeError):
+        return None
+
+
+def _report_404_code(err: HTTPError) -> str | None:
+    """Return the RF `error` code from a 404 envelope, or None if not a decodable 404."""
+    if err.response is None or err.response.status_code != 404:
+        return None
+    return _response_error_code(err)
+
+
+def _raise_semantic_404(err: HTTPError, sample_id: str) -> None:
+    """Map a discriminated report 404 to its semantic error; return for anything else.
+
+    Used by the overview and static report fetches. `NOT_FOUND` means the sample does
+    not exist; `NOT_AVAILABLE` (static) and `REPORT_NOT_AVAILABLE` (overview) mean the
+    sample exists but the report is not ready yet. Any other error returns so the
+    caller re-raises the original `HTTPError` for `@connection_exceptions` to wrap
+    into the endpoint error.
+    """
+    code = _report_404_code(err)
+    if code in ('NOT_AVAILABLE', 'REPORT_NOT_AVAILABLE'):
+        raise SampleReportNotAvailableError(
+            f'Report not available for sample {sample_id}. '
+            'The sample may not have finished analysis yet.'
+        ) from err
+    if code == 'NOT_FOUND':
+        raise SampleReportNotFoundError(f'Sample {sample_id} not found.') from err
 
 
 class SandboxMgr:
@@ -482,14 +521,20 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If `sample_id` is empty or of incorrect type.
-            SampleStaticReportError: If the API returns a non-2xx (e.g. 404 if the
-                static report does not exist for the sample) or a connection error
-                occurs.
+            SampleReportNotAvailableError: If the sample exists but its static report is
+                not available yet (404 `NOT_AVAILABLE`).
+            SampleReportNotFoundError: If the sample does not exist (404 `NOT_FOUND`).
+            SampleStaticReportError: If the API returns any other non-2xx or a connection
+                error occurs. Base class of the two 404 errors above.
         """
         endpoint = EP_SANDBOX_SAMPLES_STATIC_REPORT.format(
             base_url=self.base_url, sample_id=sample_id
         )
-        response = self.sb_client.request('get', endpoint)
+        try:
+            response = self.sb_client.request('get', endpoint)
+        except HTTPError as err:
+            _raise_semantic_404(err, sample_id)
+            raise
         return StaticAnalysisReport.model_validate(response.json())
 
     @debug_call
@@ -551,27 +596,9 @@ class SandboxMgr:
         try:
             response = self.sb_client.request('get', endpoint)
         except HTTPError as err:
-            code = self._overview_404_code(err)
-            if code == 'REPORT_NOT_AVAILABLE':
-                raise SampleReportNotAvailableError(
-                    f'Overview report not available for sample {sample_id}. '
-                    'The sample may not have finished analysis yet.'
-                ) from err
-            if code == 'NOT_FOUND':
-                raise SampleReportNotFoundError(f'Sample {sample_id} not found.') from err
+            _raise_semantic_404(err, sample_id)
             raise
         return OverviewReport.model_validate(response.json())
-
-    @staticmethod
-    def _overview_404_code(err: HTTPError) -> str | None:
-        """Return the RF `error` code from a 404 envelope, or None if not a decodable 404."""
-        response = err.response
-        if response is None or response.status_code != 404:
-            return None
-        try:
-            return response.json().get('error')
-        except (ValueError, AttributeError):
-            return None
 
     @debug_call
     @validate_call
@@ -591,36 +618,47 @@ class SandboxMgr:
             ),
         ] = 0,
     ) -> Annotated[
-        list[BehavioralReport],
-        Doc('One BehavioralReport per behavioral task, in task order. Empty if none.'),
+        BehavioralReportsResult,
+        Doc(
+            'Envelope with the finished `reports` (in task order), the `not_ready` task ids '
+            'still awaiting analysis, and the `failed` task fetches.'
+        ),
     ]:
         """Fetch every behavioral report for a sample.
 
         Convenience wrapper: it first fetches the sample to discover its tasks, then fetches
-        the `report_triage.json` for each behavioral task and returns them as a list -- so
-        callers get all behavioral detonation reports in one call rather than one at a time.
+        the `report_triage.json` for each behavioral task. Per-task outcomes are returned in
+        a `BehavioralReportsResult` envelope, so one unfinished or broken task does not hide
+        the reports that are ready: finished reports land in `reports`, tasks whose report is
+        not available yet (still queued/running) in `not_ready`, and tasks whose fetch failed
+        for any other HTTP reason in `failed`.
 
-        Every behavioral task is included, whether it succeeded or failed; a failed task's
-        report carries an `errors` list and omits `processes`/`dumped`/`extracted`. Each
-        report's `task_id` (e.g. `behavioral1`) identifies which task it belongs to. Non-behavioral
-        tasks (`static*`, `urlscan*`) have no triage report and are skipped.
+        Every finished behavioral task lands in `reports`, whether its *analysis* succeeded
+        or failed; a failed analysis' report carries an `errors` list and omits
+        `processes`/`dumped`/`extracted`. Each report's `task_id` (e.g. `behavioral1`)
+        identifies which task it belongs to. Non-behavioral tasks (`static*`, `urlscan*`)
+        have no triage report and are skipped.
 
         Example:
             ```python
             from psengine.sandbox import SandboxMgr
 
             mgr = SandboxMgr(sandbox_choice='eu')
-            for report in mgr.fetch_behavioral_reports('260501-h4p7laawme'):
+            result = mgr.fetch_behavioral_reports('260501-h4p7laawme')
+            for report in result.reports:
                 print(report.task_id, report.analysis.score, report.analysis.platform)
                 for proc in report.processes:
                     print('  ', proc.pid, proc.cmd)
-                for flow in report.network.flows:
-                    print('  ', flow.dst, flow.domain)
+            if not result.complete:
+                print('still running, retry later:', result.not_ready)
+            for failure in result.failed:
+                print('gave up on:', failure.task_id, failure.status_code, failure.message)
             ```
 
         Note:
-            Returns an empty list if the sample has no behavioral tasks. For samples with
-            many behavioral tasks (e.g. multi-architecture Linux submissions), pass
+            `result.complete` is `True` when no report is still pending -- including when
+            the sample has no behavioral tasks at all (`reports` is empty then). For samples
+            with many behavioral tasks (e.g. multi-architecture Linux submissions), pass
             `max_workers` to fetch the per-task reports concurrently.
 
         Endpoint:
@@ -628,33 +666,77 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If `sample_id` is empty or `max_workers` is out of range.
-            SampleBehavioralReportError: If the sample lookup or any behavioral report
-                request returns a non-2xx (e.g. 404 for an unknown sample) or a connection
-                error occurs.
+            SampleReportNotFoundError: If the sample does not exist (404 `NOT_FOUND`).
+            SampleBehavioralReportError: If the sample lookup fails with any other non-2xx,
+                or a connection error occurs (on the lookup or any report fetch). Base class
+                of the 404 error above. Per-task HTTP failures do *not* raise -- they are
+                reported in the envelope's `not_ready`/`failed` buckets.
         """
         endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
-        sample = SampleTasks.model_validate(self.sb_client.request('get', endpoint).json())
+        try:
+            sample = SampleTasks.model_validate(self.sb_client.request('get', endpoint).json())
+        except HTTPError as err:
+            # Only NOT_FOUND is semantic here: the sample record itself is never
+            # "not ready", and SampleReportNotAvailableError is outside this
+            # endpoint's error hierarchy.
+            if _report_404_code(err) == 'NOT_FOUND':
+                raise SampleReportNotFoundError(f'Sample {sample_id} not found.') from err
+            raise
         task_ids = [t.id_ for t in (sample.tasks or []) if t.id_.startswith('behavioral')]
         if not task_ids:
-            return []
+            return BehavioralReportsResult()
 
         if max_workers:
-            return MultiThreadingHelper.multithread_it(
+            outcomes = MultiThreadingHelper.multithread_it(
                 max_workers,
                 self._fetch_behavioral_report,
                 iterator=task_ids,
                 sample_id=sample_id,
             )
-        return [self._fetch_behavioral_report(task_id, sample_id=sample_id) for task_id in task_ids]
+        else:
+            outcomes = [
+                self._fetch_behavioral_report(task_id, sample_id=sample_id) for task_id in task_ids
+            ]
 
-    def _fetch_behavioral_report(self, task_id: str, sample_id: str) -> BehavioralReport:
-        """Fetch and parse a single behavioral task's `report_triage.json`."""
+        reports, not_ready, failed = [], [], []
+        for task_id, report, failure in outcomes:
+            if report is not None:
+                reports.append(report)
+            elif failure is not None:
+                failed.append(failure)
+            else:
+                not_ready.append(task_id)
+        return BehavioralReportsResult(reports=reports, not_ready=not_ready, failed=failed)
+
+    def _fetch_behavioral_report(
+        self, task_id: str, sample_id: str
+    ) -> tuple[str, BehavioralReport | None, BehavioralReportFailure | None]:
+        """Fetch and parse a single behavioral task's `report_triage.json`.
+
+        Returns `(task_id, report, None)` on success, `(task_id, None, None)` when the
+        report is not (yet) available, and `(task_id, None, failure)` for any other HTTP
+        error. Connection-level errors propagate to the caller.
+        """
         endpoint = EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
             base_url=self.base_url, sample_id=sample_id, task_id=task_id
         )
-        data = self.sb_client.request('get', endpoint).json()
+        try:
+            data = self.sb_client.request('get', endpoint).json()
+        except HTTPError as err:
+            if _report_404_code(err) in ('NOT_AVAILABLE', 'REPORT_NOT_AVAILABLE'):
+                return task_id, None, None
+            self.log.warning(
+                f'Behavioral report fetch failed for {sample_id}/{task_id}. Error: {err}'
+            )
+            failure = BehavioralReportFailure(
+                task_id=task_id,
+                status_code=err.response.status_code if err.response is not None else None,
+                error=_response_error_code(err),
+                message=str(err),
+            )
+            return task_id, None, failure
         data['task_id'] = task_id
-        return BehavioralReport.model_validate(data)
+        return task_id, BehavioralReport.model_validate(data), None
 
     @debug_call
     @validate_call

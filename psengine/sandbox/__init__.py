@@ -13,6 +13,8 @@
 
 from .sandbox import (
     BehavioralReport,
+    BehavioralReportFailure,
+    BehavioralReportsResult,
     OverviewReport,
     Profile,
     ProfileDeleteOut,

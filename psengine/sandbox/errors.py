@@ -42,26 +42,33 @@ class SampleOverviewError(RecordedFutureError):
     """Raised when an overview report lookup against `/samples/{id}/overview.json` fails."""
 
 
-class SampleReportNotAvailableError(SampleOverviewError):
-    """Raised when an overview report is not (yet) available for an existing sample.
-
-    The Sandbox API returns `404 REPORT_NOT_AVAILABLE` when the sample exists but has not
-    reached the `reported` state that produces an overview (e.g. it is still in
-    `static_analysis`).
-    """
-
-
-class SampleReportNotFoundError(SampleOverviewError):
-    """Raised when the sample itself does not exist for an overview report lookup."""
-
-
 class SampleBehavioralReportError(RecordedFutureError):
     """Raised when a behavioral report lookup fails.
 
-    Covers the initial sample fetch and each per-task
-    `/samples/{id}/{task_id}/report_triage.json` request made by
-    `SandboxMgr.fetch_behavioral_reports`.
+    Covers the initial sample fetch and connection-level failures of the per-task
+    `/samples/{id}/{task_id}/report_triage.json` requests made by
+    `SandboxMgr.fetch_behavioral_reports`. Per-task HTTP failures do not raise --
+    they are reported in the `not_ready`/`failed` buckets of the returned
+    `BehavioralReportsResult`.
     """
+
+
+class SampleReportNotAvailableError(SampleOverviewError, SampleStaticReportError):
+    """Raised when the sample exists but the requested report is not (yet) available.
+
+    The Sandbox API returns a discriminated 404 -- `REPORT_NOT_AVAILABLE` (overview) or
+    `NOT_AVAILABLE` (static reports) -- when the sample exists but its analysis has not
+    produced the requested report yet (e.g. it is still in `static_analysis`).
+
+    `SandboxMgr.fetch_behavioral_reports` does not raise this: per-task not-ready
+    outcomes are reported in the `not_ready` bucket of its `BehavioralReportsResult`.
+    """
+
+
+class SampleReportNotFoundError(
+    SampleOverviewError, SampleStaticReportError, SampleBehavioralReportError
+):
+    """Raised when the sample itself does not exist for a report lookup (404 `NOT_FOUND`)."""
 
 
 class SampleProfileError(RecordedFutureError):

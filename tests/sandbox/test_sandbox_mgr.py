@@ -22,6 +22,7 @@ from psengine.endpoints import (
 )
 from psengine.sandbox import (
     BehavioralReport,
+    BehavioralReportsResult,
     OverviewReport,
     Profile,
     ProfileOptions,
@@ -794,11 +795,45 @@ class Test_SandboxMgr:
         assert cfg.tags == []
         assert cfg.mutex == []
 
-    def test_fetch_sample_static_report_404_raises(self, sandbox_mgr: SandboxMgr, mocker):
+    def test_fetch_sample_static_report_bare_404_raises_static_error(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # A 404 with no decodable RF envelope -> generic SampleStaticReportError.
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
 
+        with pytest.raises(SampleStaticReportError) as exc:
+            sandbox_mgr.fetch_sample_static_report('missing')
+        assert type(exc.value) is SampleStaticReportError
+
+    def test_fetch_sample_static_report_not_found_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 NOT_FOUND -> the sample does not exist -> SampleReportNotFoundError.
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_sample_static_report('missing')
+        # subclass of SampleStaticReportError, so callers of the base error still catch it
         with pytest.raises(SampleStaticReportError):
             sandbox_mgr.fetch_sample_static_report('missing')
+
+    def test_fetch_sample_static_report_not_available_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 NOT_AVAILABLE -> sample exists but the static report isn't ready -> specific error.
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=_http_error_json(404, 'NOT_AVAILABLE'),
+        )
+
+        with pytest.raises(SampleReportNotAvailableError):
+            sandbox_mgr.fetch_sample_static_report('260630-svp6caets9')
+        # subclass of SampleStaticReportError, so callers of the base error still catch it
+        with pytest.raises(SampleStaticReportError):
+            sandbox_mgr.fetch_sample_static_report('260630-svp6caets9')
 
     @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
     def test_fetch_sample_static_report_raises_on_connection_errors(
@@ -1001,10 +1036,14 @@ class Test_SandboxMgr:
             side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
         )
 
-        reports = sandbox_mgr.fetch_behavioral_reports(sid)
+        result = sandbox_mgr.fetch_behavioral_reports(sid)
 
-        assert len(reports) == 1  # static1 skipped
-        report = reports[0]
+        assert isinstance(result, BehavioralReportsResult)
+        assert result.complete
+        assert result.not_ready == []
+        assert result.failed == []
+        assert len(result.reports) == 1  # static1 skipped
+        report = result.reports[0]
         assert isinstance(report, BehavioralReport)
         assert report.task_id == 'behavioral1'  # injected, identifies the task
         assert report.sample.id_ == sid
@@ -1018,6 +1057,7 @@ class Test_SandboxMgr:
         self, sandbox_mgr: SandboxMgr, mocker, make_response
     ):
         # Only a static task -> no behavioral reports, and the triage endpoint is never hit.
+        # "Nothing to wait for" counts as complete so poll loops terminate.
         sid = '260630-svp6caets9'
         sample = {
             'id': sid,
@@ -1034,7 +1074,12 @@ class Test_SandboxMgr:
             side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
         )
 
-        assert sandbox_mgr.fetch_behavioral_reports(sid) == []
+        result = sandbox_mgr.fetch_behavioral_reports(sid)
+
+        assert result.reports == []
+        assert result.not_ready == []
+        assert result.failed == []
+        assert result.complete
 
     def test_fetch_behavioral_reports_concurrent_preserves_task_order(
         self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
@@ -1062,21 +1107,168 @@ class Test_SandboxMgr:
             side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
         )
 
-        reports = sandbox_mgr.fetch_behavioral_reports(sid, max_workers=4)
+        result = sandbox_mgr.fetch_behavioral_reports(sid, max_workers=4)
 
-        assert [r.task_id for r in reports] == ['behavioral1', 'behavioral2']
+        assert [r.task_id for r in result.reports] == ['behavioral1', 'behavioral2']
 
     def test_fetch_behavioral_reports_sample_fetch_error_raises(
         self, sandbox_mgr: SandboxMgr, mocker
     ):
+        # A 404 with no decodable RF envelope -> generic SampleBehavioralReportError.
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
 
+        with pytest.raises(SampleBehavioralReportError) as exc:
+            sandbox_mgr.fetch_behavioral_reports('missing')
+        assert type(exc.value) is SampleBehavioralReportError
+
+    def test_fetch_behavioral_reports_sample_not_found_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 NOT_FOUND on the sample lookup -> the sample does not exist.
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_behavioral_reports('missing')
+        # subclass of SampleBehavioralReportError, so callers of the base error still catch it
         with pytest.raises(SampleBehavioralReportError):
             sandbox_mgr.fetch_behavioral_reports('missing')
 
-    def test_fetch_behavioral_reports_report_fetch_error_raises(
+    def test_fetch_behavioral_reports_sample_lookup_not_available_raises_base(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # NOT_AVAILABLE is a per-task condition -- on the sample lookup it is not semantic,
+        # so it wraps into the base endpoint error, NOT SampleReportNotAvailableError
+        # (which is outside the behavioral error hierarchy).
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_AVAILABLE')
+        )
+
+        with pytest.raises(SampleBehavioralReportError) as exc:
+            sandbox_mgr.fetch_behavioral_reports('some-id')
+        assert type(exc.value) is SampleBehavioralReportError
+
+    @pytest.mark.parametrize('max_workers', [0, 2])
+    def test_fetch_behavioral_reports_running_tasks_land_in_not_ready(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response, max_workers
+    ):
+        # The sample exists (lookup 200) but its behavioral tasks are still running: their
+        # report_triage.json 404s with NOT_AVAILABLE -> the task ids land in `not_ready`
+        # (no exception), on both the sequential and the multithreaded path.
+        sid = '260714-kyly4abz1j'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2026-07-14T09:00:00Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'behavioral1', 'status': 'running'},
+                {'id': 'behavioral2', 'status': 'running'},
+            ],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            raise _http_error_json(404, 'NOT_AVAILABLE')
+
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, max_workers=max_workers)
+
+        assert result.reports == []
+        assert result.failed == []
+        assert result.not_ready == ['behavioral1', 'behavioral2']
+        assert not result.complete
+
+    @pytest.mark.parametrize('max_workers', [0, 3])
+    def test_fetch_behavioral_reports_mixed_outcomes_bucketed(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response, max_workers
+    ):
+        # One finished task, one still running, one broken (404 NOT_FOUND) -> each lands
+        # in its own bucket, and the finished report is not hidden by the other two.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'behavioral1', 'status': 'reported'},
+                {'id': 'behavioral2', 'status': 'running'},
+                {'id': 'behavioral3', 'status': 'reported'},
+            ],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+        report_resp = mock_request(MOCK_DIR / 'behavioral_report.json')
+
+        def task_url(task_id):
+            return EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+                base_url=sandbox_mgr.base_url, sample_id=sid, task_id=task_id
+            )
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            if url == task_url('behavioral1'):
+                return report_resp
+            if url == task_url('behavioral2'):
+                raise _http_error_json(404, 'NOT_AVAILABLE')
+            raise _http_error_json(404, 'NOT_FOUND')
+
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, max_workers=max_workers)
+
+        assert [r.task_id for r in result.reports] == ['behavioral1']
+        assert result.not_ready == ['behavioral2']
+        assert not result.complete
+        assert len(result.failed) == 1
+        failure = result.failed[0]
+        assert failure.task_id == 'behavioral3'
+        assert failure.status_code == 404
+        assert failure.error == 'NOT_FOUND'  # decoded from the RF envelope
+
+    def test_fetch_behavioral_reports_task_connection_error_still_raises(
         self, sandbox_mgr: SandboxMgr, mocker, make_response
     ):
+        # Connection-level failures are not per-task outcomes -- they abort the call.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'reported'}],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            raise ConnectTimeout('boom')
+
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        with pytest.raises(SampleBehavioralReportError):
+            sandbox_mgr.fetch_behavioral_reports(sid)
+
+    def test_fetch_behavioral_reports_task_500_lands_in_failed(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # A per-task hard failure (500) does not raise: the task lands in `failed`
+        # with its HTTP evidence, and the result counts as complete (nothing pending).
         sid = '251114-py23jaavtp'
         sample = {
             'id': sid,
@@ -1097,8 +1289,17 @@ class Test_SandboxMgr:
 
         mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
 
-        with pytest.raises(SampleBehavioralReportError):
-            sandbox_mgr.fetch_behavioral_reports(sid)
+        result = sandbox_mgr.fetch_behavioral_reports(sid)
+
+        assert result.reports == []
+        assert result.not_ready == []
+        assert result.complete  # failed tasks are terminal, not pending
+        assert len(result.failed) == 1
+        failure = result.failed[0]
+        assert failure.task_id == 'behavioral1'
+        assert failure.status_code == 500
+        assert failure.error is None  # bare 500, no RF envelope
+        assert failure.message == 'boom'
 
     @pytest.mark.parametrize('sample_id', ['', None, 123])
     def test_fetch_behavioral_reports_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):

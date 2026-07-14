@@ -239,6 +239,50 @@ class BehavioralReport(RFBaseModel):
     _coerce_tags = field_validator('tags', mode='before')(Validators.none_to_empty_list)
 
 
+class BehavioralReportFailure(RFBaseModel):
+    """A behavioral task whose report fetch failed for a reason other than "not ready yet".
+
+    Constructed by `SandboxMgr.fetch_behavioral_reports` (not an API body): identifies the
+    task and carries the HTTP evidence -- the status code, the RF error-envelope code when
+    one was decodable (e.g. `NOT_FOUND`) and the raw error message.
+    """
+
+    task_id: str
+    status_code: int | None = None
+    error: str | None = None
+    message: str | None = None
+
+
+class BehavioralReportsResult(RFBaseModel):
+    """Result of a `SandboxMgr.fetch_behavioral_reports` call.
+
+    Batch envelope over the sample's behavioral tasks, so one unfinished or broken task
+    does not hide the reports that are ready:
+
+    - `reports`: one `BehavioralReport` per task whose `report_triage.json` was fetched,
+      in task order. Failed *analyses* land here too (their report carries an `errors`
+      list) -- the buckets classify the report fetch, not the analysis verdict.
+    - `not_ready`: ids of tasks whose report is not available *yet* (404 `NOT_AVAILABLE`:
+      the task is still queued or running). Poll again later.
+    - `failed`: tasks whose report fetch failed for any other HTTP reason (unexpected
+      404 `NOT_FOUND`, 5xx, ...), each with its status code and error message. These are
+      terminal -- retrying is unlikely to help.
+
+    `complete` is `True` when nothing is pending (`not_ready` is empty) -- including when
+    the sample has no behavioral tasks at all -- so poll loops can simply retry until
+    `result.complete`.
+    """
+
+    reports: list[BehavioralReport] = []
+    not_ready: list[str] = []
+    failed: list[BehavioralReportFailure] = []
+
+    @property
+    def complete(self) -> bool:
+        """Whether no task report is still pending. `failed` tasks are terminal."""
+        return not self.not_ready
+
+
 class SampleDeleteOut(RFBaseModel):
     """Result of a `DELETE /samples/{sample_id}` call.
 
