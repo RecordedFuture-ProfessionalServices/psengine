@@ -16,6 +16,7 @@ ALERT_TYPE_FNAME_MAP = {
     PACategory.THIRD_PARTY_RISK.value: 'third_party_risk.json',
     PACategory.GEOPOLITICS_FACILITY.value: 'geopol.json',
     PACategory.MALWARE_REPORT.value: 'malware_report.json',
+    PACategory.MALICIOUS_SITES.value: 'malicious_sites.json',
 }
 
 BASE_MOCK_DIR = Path(__file__).parent / 'mocks'
