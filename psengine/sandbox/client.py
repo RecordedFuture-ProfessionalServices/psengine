@@ -43,7 +43,7 @@ class SandboxClient(BaseHTTPClient):
         self,
         api_token: Annotated[
             str | None,
-            Doc('The Sandbox API token. Defaults to SANDBOX_TOKEN environment variable.'),
+            Doc('The Sandbox API token. Defaults to RF_SANDBOX_TOKEN environment variable.'),
         ] = None,
         http_proxy: Annotated[str, Doc('An HTTP proxy URL.')] = None,
         https_proxy: Annotated[str, Doc('An HTTPS proxy URL.')] = None,

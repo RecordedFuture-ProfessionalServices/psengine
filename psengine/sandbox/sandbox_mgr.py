@@ -146,7 +146,7 @@ class SandboxMgr:
         self,
         api_token: Annotated[
             str | None,
-            Doc('The Sandbox API token. Defaults to SANDBOX_TOKEN environment variable.'),
+            Doc('The Sandbox API token. Defaults to RF_SANDBOX_TOKEN environment variable.'),
         ] = None,
         sandbox_choice: Annotated[
             SandboxChoice,
