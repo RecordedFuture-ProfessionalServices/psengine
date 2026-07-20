@@ -38,6 +38,8 @@ from ..endpoints import (
 from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
 from .client import SandboxClient
 from .constants import (
+    BEHAVIORAL_REPORT_WAIT_DEFAULT_TIMEOUT_SECONDS,
+    BEHAVIORAL_REPORT_WAIT_INTERVAL_SECONDS,
     DEFAULT_PAGE_LIMIT,
     SAMPLES_PER_PAGE,
     STATIC_REPORT_WAIT_DEFAULT_TIMEOUT_SECONDS,
@@ -659,6 +661,52 @@ class SandboxMgr:
             raise
         return OverviewReport.model_validate(response.json())
 
+    def _fetch_behavioral_reports_once(
+        self, sample_id: str, max_workers: int = 0
+    ) -> BehavioralReportsResult:
+        """Issue a single sample lookup + per-task report fetch pass.
+
+        Isolated in its own method (mirroring `_fetch_static_report_once`) so both the
+        immediate-return and wait-loop paths in `fetch_behavioral_reports` share the same
+        code. `SampleReportNotFoundError`/`SampleBehavioralReportError` raised on the
+        sample lookup propagate straight out -- they are never retried by the wait loop.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
+        try:
+            sample = SampleTasks.model_validate(self.sb_client.request('get', endpoint).json())
+        except HTTPError as err:
+            # Only NOT_FOUND is semantic here: the sample record itself is never
+            # "not ready", and SampleReportNotAvailableError is outside this
+            # endpoint's error hierarchy.
+            if _report_404_code(err) == 'NOT_FOUND':
+                raise SampleReportNotFoundError(f'Sample {sample_id} not found.') from err
+            raise
+        task_ids = [t.id_ for t in (sample.tasks or []) if t.id_.startswith('behavioral')]
+        if not task_ids:
+            return BehavioralReportsResult()
+
+        if max_workers:
+            outcomes = MultiThreadingHelper.multithread_it(
+                max_workers,
+                self._fetch_behavioral_report,
+                iterator=task_ids,
+                sample_id=sample_id,
+            )
+        else:
+            outcomes = [
+                self._fetch_behavioral_report(task_id, sample_id=sample_id) for task_id in task_ids
+            ]
+
+        reports, not_ready, failed = [], [], []
+        for task_id, report, failure in outcomes:
+            if report is not None:
+                reports.append(report)
+            elif failure is not None:
+                failed.append(failure)
+            else:
+                not_ready.append(task_id)
+        return BehavioralReportsResult(reports=reports, not_ready=not_ready, failed=failed)
+
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleBehavioralReportError)
@@ -676,6 +724,15 @@ class SandboxMgr:
                 'Threads for fetching the per-task reports concurrently. 0 (default) = sequential.'
             ),
         ] = 0,
+        wait_until_ready: Annotated[
+            bool,
+            Doc('When true, keep polling until the result is complete, or timeout seconds elapse.'),
+        ] = False,
+        timeout: Annotated[
+            int,
+            Field(ge=1),
+            Doc('Max seconds to keep polling when wait_until_ready is true.'),
+        ] = BEHAVIORAL_REPORT_WAIT_DEFAULT_TIMEOUT_SECONDS,
     ) -> Annotated[
         BehavioralReportsResult,
         Doc(
@@ -714,6 +771,22 @@ class SandboxMgr:
                 print('gave up on:', failure.task_id, failure.status_code, failure.message)
             ```
 
+            Block until every task has a report or a failure, instead of polling
+            `result.complete` yourself:
+
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            result = mgr.fetch_behavioral_reports(
+                '260501-h4p7laawme', max_workers=10, wait_until_ready=True
+            )
+            if result.complete:
+                print('no tasks pending')
+            else:
+                print('timed out, still pending:', result.not_ready)
+            ```
+
         Note:
             `result.complete` is `True` when no report is still pending -- including when
             the sample has no behavioral tasks at all (`reports` is empty then). For samples
@@ -724,48 +797,25 @@ class SandboxMgr:
             `GET /samples/{sample_id}` then `GET /samples/{sample_id}/{task_id}/report_triage.json`
 
         Raises:
-            ValidationError: If `sample_id` is empty or `max_workers` is out of range.
-            SampleReportNotFoundError: If the sample does not exist (404 `NOT_FOUND`).
+            ValidationError: If `sample_id` is empty, `max_workers` is out of range, or
+                `timeout` is less than 1.
+            SampleReportNotFoundError: If the sample does not exist (404 `NOT_FOUND`). Not
+                retried, even when `wait_until_ready` is true.
             SampleBehavioralReportError: If the sample lookup fails with any other non-2xx,
                 or a connection error occurs (on the lookup or any report fetch). Base class
-                of the 404 error above. Per-task HTTP failures do *not* raise -- they are
-                reported in the envelope's `not_ready`/`failed` buckets.
+                of the 404 error above. Per-task HTTP failures do *not* raise -- they land in
+                the envelope's `not_ready`/`failed` buckets, and a `wait_until_ready` timeout
+                is reflected the same way (`complete=False`) rather than as an exception.
         """
-        endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
-        try:
-            sample = SampleTasks.model_validate(self.sb_client.request('get', endpoint).json())
-        except HTTPError as err:
-            # Only NOT_FOUND is semantic here: the sample record itself is never
-            # "not ready", and SampleReportNotAvailableError is outside this
-            # endpoint's error hierarchy.
-            if _report_404_code(err) == 'NOT_FOUND':
-                raise SampleReportNotFoundError(f'Sample {sample_id} not found.') from err
-            raise
-        task_ids = [t.id_ for t in (sample.tasks or []) if t.id_.startswith('behavioral')]
-        if not task_ids:
-            return BehavioralReportsResult()
+        if not wait_until_ready:
+            return self._fetch_behavioral_reports_once(sample_id, max_workers=max_workers)
 
-        if max_workers:
-            outcomes = MultiThreadingHelper.multithread_it(
-                max_workers,
-                self._fetch_behavioral_report,
-                iterator=task_ids,
-                sample_id=sample_id,
-            )
-        else:
-            outcomes = [
-                self._fetch_behavioral_report(task_id, sample_id=sample_id) for task_id in task_ids
-            ]
-
-        reports, not_ready, failed = [], [], []
-        for task_id, report, failure in outcomes:
-            if report is not None:
-                reports.append(report)
-            elif failure is not None:
-                failed.append(failure)
-            else:
-                not_ready.append(task_id)
-        return BehavioralReportsResult(reports=reports, not_ready=not_ready, failed=failed)
+        deadline = time.monotonic() + timeout
+        result = self._fetch_behavioral_reports_once(sample_id, max_workers=max_workers)
+        while not result.complete and time.monotonic() < deadline:
+            time.sleep(BEHAVIORAL_REPORT_WAIT_INTERVAL_SECONDS)
+            result = self._fetch_behavioral_reports_once(sample_id, max_workers=max_workers)
+        return result
 
     def _fetch_behavioral_report(
         self, task_id: str, sample_id: str

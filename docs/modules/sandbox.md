@@ -144,3 +144,15 @@ Profiles are company-wide analysis configurations (OS tags, network mode, timeou
 ```python
 --8<-- "docs/examples/sandbox/example_9.py"
 ```
+
+#### 10: Wait for every behavioral task to finish
+
+Pass `wait_until_ready=True` to `fetch_behavioral_reports` to poll every `BEHAVIORAL_REPORT_WAIT_INTERVAL_SECONDS` (20s) until `result.complete` is `True` or `timeout` seconds (default 1800) elapse.
+
+!!! note
+
+    A timeout here never raises — check `result.complete`; `not_ready` still lists whatever hadn't resolved.
+
+```python
+--8<-- "docs/examples/sandbox/example_10.py"
+```

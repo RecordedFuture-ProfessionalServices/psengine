@@ -1417,6 +1417,186 @@ class Test_SandboxMgr:
         assert mocked_request.call_count == 1
         mocked_sleep.assert_not_called()
 
+    # --- fetch_behavioral_reports(wait_until_ready=True) ---------------------
+
+    def test_fetch_behavioral_reports_wait_ready_first_try(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        # Already fully resolved on the first poll -> returns immediately, no sleeping.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'reported'}],
+        }
+        resp = {
+            '_sample': make_response(sample),
+            'behavioral1': mock_request(MOCK_DIR / 'behavioral_report.json'),
+        }
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
+        )
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, wait_until_ready=True)
+
+        assert result.complete
+        assert [r.task_id for r in result.reports] == ['behavioral1']
+        mocked_sleep.assert_not_called()
+
+    def test_fetch_behavioral_reports_wait_not_ready_then_ready(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        # Not ready on the first poll, fully resolved on the second -> one sleep, two polls.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'running'}],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        task_url = EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+            base_url=sandbox_mgr.base_url, sample_id=sid, task_id='behavioral1'
+        )
+        sample_resp = make_response(sample)
+        report_resp = mock_request(MOCK_DIR / 'behavioral_report.json')
+
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                sample_resp,
+                _http_error_json(404, 'NOT_AVAILABLE'),
+                sample_resp,
+                report_resp,
+            ],
+        )
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, wait_until_ready=True)
+
+        assert result.complete
+        assert [r.task_id for r in result.reports] == ['behavioral1']
+        # sample lookup then task fetch, twice -- one full poll, one retry after not-ready.
+        assert [call.args[1] for call in mocked_request.call_args_list] == [
+            id_url,
+            task_url,
+            id_url,
+            task_url,
+        ]
+        assert mocked_sleep.call_args_list == [mocker.call(20)]
+
+    def test_fetch_behavioral_reports_wait_times_out_returns_partial_no_raise(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # Never fully resolves before the deadline -> returns the partial result, does NOT
+        # raise. This is the direct proof of Decision #2: behavioral has no "still pending"
+        # exception, so timeout is reflected purely as data (complete=False, not_ready set).
+        sid = '260714-kyly4abz1j'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2026-07-14T09:00:00Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'running'}],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            raise _http_error_json(404, 'NOT_AVAILABLE')
+
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.monotonic', side_effect=[0, 10, 30])
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, wait_until_ready=True, timeout=30)
+
+        assert not result.complete
+        assert result.not_ready == ['behavioral1']
+        assert result.reports == []
+        assert result.failed == []
+
+    def test_fetch_behavioral_reports_wait_sample_not_found_raises_immediately(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # Sample doesn't exist -> raises immediately on the first poll, never retried.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_behavioral_reports('missing', wait_until_ready=True)
+
+        assert mocked_request.call_count == 1
+        mocked_sleep.assert_not_called()
+
+    def test_fetch_behavioral_reports_wait_keeps_polling_for_not_ready_despite_failed(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        # behavioral1 fails terminally (500) on the very first poll; behavioral2 is not
+        # ready until the second poll. The loop must keep polling for behavioral2 --
+        # `failed` never blocks `complete` -- and the final result carries both outcomes.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'behavioral1', 'status': 'reported'},
+                {'id': 'behavioral2', 'status': 'running'},
+            ],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+        report_resp = mock_request(MOCK_DIR / 'behavioral_report.json')
+
+        def task_url(task_id):
+            return EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+                base_url=sandbox_mgr.base_url, sample_id=sid, task_id=task_id
+            )
+
+        call_count = {'behavioral2': 0}
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            if url == task_url('behavioral1'):
+                raise _http_error(500)
+            if url == task_url('behavioral2'):
+                call_count['behavioral2'] += 1
+                if call_count['behavioral2'] == 1:
+                    raise _http_error_json(404, 'NOT_AVAILABLE')
+                return report_resp
+            raise AssertionError(f'unexpected url: {url}')
+
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, wait_until_ready=True)
+
+        assert result.complete
+        assert [r.task_id for r in result.reports] == ['behavioral2']
+        assert len(result.failed) == 1
+        assert result.failed[0].task_id == 'behavioral1'
+        assert result.failed[0].status_code == 500
+
     # --- set_sample_profile ------------------------------------------------
 
     def test_set_sample_profile_auto_default_pick(self, sandbox_mgr: SandboxMgr, mocker):
