@@ -3,7 +3,12 @@ from psengine.sandbox import SandboxMgr
 SAMPLE_ID = '260501-h4p7laawme'
 
 mgr = SandboxMgr()
-report = mgr.fetch_sample_static_report(SAMPLE_ID)
+
+# wait_until_ready=True polls internally until the
+# report is ready, or `timeout` seconds elapse.
+report = mgr.fetch_sample_static_report(
+    SAMPLE_ID, wait_until_ready=True, timeout=300
+)
 
 print(f'Score: {report.analysis.score}')
 print(f'Tags:  {report.analysis.tags}')

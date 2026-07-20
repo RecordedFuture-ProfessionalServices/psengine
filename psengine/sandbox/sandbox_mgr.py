@@ -13,6 +13,7 @@
 
 import json
 import logging
+import time
 from pathlib import Path
 from typing import Annotated, Literal, cast
 
@@ -36,7 +37,12 @@ from ..endpoints import (
 )
 from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
 from .client import SandboxClient
-from .constants import DEFAULT_PAGE_LIMIT, SAMPLES_PER_PAGE
+from .constants import (
+    DEFAULT_PAGE_LIMIT,
+    SAMPLES_PER_PAGE,
+    STATIC_REPORT_WAIT_DEFAULT_TIMEOUT_SECONDS,
+    STATIC_REPORT_WAIT_INTERVAL_SECONDS,
+)
 from .errors import (
     ProfileCreateError,
     ProfileDeleteError,
@@ -476,6 +482,27 @@ class SandboxMgr:
         response = self.sb_client.request('get', endpoint)
         return response.content
 
+    def _fetch_static_report_once(self, sample_id: str) -> StaticAnalysisReport:
+        """Issue a single static report request.
+
+        Isolated in its own method (rather than inlined in the polling `while` loop) so
+        the `SampleReportNotAvailableError`/`SampleReportNotFoundError` raised by
+        `_raise_semantic_404` -- itself invoked from inside an `except HTTPError`
+        clause -- propagates all the way out of this call. A single `try` cannot add a
+        handler for an exception raised by one of its own `except` clauses, so the
+        polling loop's `except SampleReportNotAvailableError` needs to sit in a
+        different `try` statement than this one.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_STATIC_REPORT.format(
+            base_url=self.base_url, sample_id=sample_id
+        )
+        try:
+            response = self.sb_client.request('get', endpoint)
+        except HTTPError as err:
+            _raise_semantic_404(err, sample_id)
+            raise
+        return StaticAnalysisReport.model_validate(response.json())
+
     @debug_call
     @validate_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=SampleStaticReportError)
@@ -486,6 +513,15 @@ class SandboxMgr:
             Field(min_length=1),
             Doc('Sandbox sample ID, e.g. "260501-h4p7laawme".'),
         ],
+        wait_until_ready: Annotated[
+            bool,
+            Doc('When true, keep polling until the static report is available.'),
+        ] = False,
+        timeout: Annotated[
+            int,
+            Field(ge=1),
+            Doc('Max seconds to keep polling when wait_until_ready is true.'),
+        ] = STATIC_REPORT_WAIT_DEFAULT_TIMEOUT_SECONDS,
     ) -> Annotated[
         StaticAnalysisReport,
         Doc('StaticAnalysisReport model'),
@@ -511,6 +547,18 @@ class SandboxMgr:
                 print(cfg.config.family, cfg.config.c2)
             ```
 
+            Block until the report is ready instead of handling the not-available error:
+
+            ```python
+            from psengine.sandbox import SandboxMgr
+
+            mgr = SandboxMgr(sandbox_choice='eu')
+            report = mgr.fetch_sample_static_report(
+                '260501-h4p7laawme', wait_until_ready=True, timeout=300
+            )
+            print(report.unpack_count)
+            ```
+
         Note:
             `files`, `signatures` and `extracted` are always lists -- the API returns
             `null` for them when empty (e.g. `files` for a URL submission), which this
@@ -520,22 +568,33 @@ class SandboxMgr:
             `GET /samples/{sample_id}/reports/static`
 
         Raises:
-            ValidationError: If `sample_id` is empty or of incorrect type.
+            ValidationError: If `sample_id` is empty or of incorrect type, or `timeout`
+                is less than 1.
             SampleReportNotAvailableError: If the sample exists but its static report is
-                not available yet (404 `NOT_AVAILABLE`).
+                not available yet (404 `NOT_AVAILABLE`). When `wait_until_ready` is true,
+                this is instead raised once polling exceeds `timeout` seconds without the
+                report becoming available.
             SampleReportNotFoundError: If the sample does not exist (404 `NOT_FOUND`).
+                Not retried, even when `wait_until_ready` is true.
             SampleStaticReportError: If the API returns any other non-2xx or a connection
                 error occurs. Base class of the two 404 errors above.
         """
-        endpoint = EP_SANDBOX_SAMPLES_STATIC_REPORT.format(
-            base_url=self.base_url, sample_id=sample_id
-        )
-        try:
-            response = self.sb_client.request('get', endpoint)
-        except HTTPError as err:
-            _raise_semantic_404(err, sample_id)
-            raise
-        return StaticAnalysisReport.model_validate(response.json())
+        if not wait_until_ready:
+            return self._fetch_static_report_once(sample_id)
+
+        started = time.monotonic()
+        deadline = started + timeout
+        while True:
+            try:
+                return self._fetch_static_report_once(sample_id)
+            except SampleReportNotAvailableError:  # noqa: PERF203
+                now = time.monotonic()
+                if now >= deadline:
+                    raise SampleReportNotAvailableError(
+                        f'Static report for sample {sample_id} still not available after '
+                        f'waiting {now - started:.0f}s.'
+                    ) from None
+                time.sleep(STATIC_REPORT_WAIT_INTERVAL_SECONDS)
 
     @debug_call
     @validate_call

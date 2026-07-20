@@ -125,6 +125,10 @@ Profiles are company-wide analysis configurations (OS tags, network mode, timeou
 
 `fetch_sample_static_report` returns the pre-detonation pass: the analysis `score`, any static `signatures`, the `files` table (the submitted file plus every member unpacked from it — useful for archives), and any malware configs extractable without execution.
 
+!!! tip
+
+    Pass `wait_until_ready=True` to poll internally until the report is available, instead of catching `SampleReportNotAvailableError` yourself. It retries every `STATIC_REPORT_WAIT_INTERVAL_SECONDS` (20s) and raises `SampleReportNotAvailableError` once `timeout` seconds (default 600) elapse without success. `SampleReportNotFoundError` (unknown sample id) is never retried.
+
 ```python
 --8<-- "docs/examples/sandbox/example_8.py"
 ```
