@@ -77,8 +77,7 @@ class SandboxClient(BaseHTTPClient):
             pool_max_size=pool_max_size,
         )
 
-        sandbox_token = self.config.sandbox_token                                                           
-        self._api_token = api_token or (sandbox_token.get_secret_value() if sandbox_token else '')
+        self._api_token = api_token or self.config.sandbox_token.get_secret_value()
         if not self._api_token:
             raise ValueError('Missing Recorded Future Sandbox API token.')
         if not is_api_token_format_valid(self._api_token):
