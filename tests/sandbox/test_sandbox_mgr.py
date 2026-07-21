@@ -991,6 +991,116 @@ class Test_SandboxMgr:
         with pytest.raises(ValidationError):
             sandbox_mgr.fetch_sample_overview_report(sample_id)
 
+    # --- fetch_sample_overview_report(wait_until_ready=True) ------------------
+
+    def test_fetch_sample_overview_report_wait_ready_first_try(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # Already available -> returns immediately, no sleeping.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mock = mock_request(MOCK_DIR / 'overview_report.json')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_overview_report(
+            '251114-py23jaavtp', wait_until_ready=True
+        )
+
+        assert isinstance(report, OverviewReport)
+        mocked_sleep.assert_not_called()
+
+    def test_fetch_sample_overview_report_wait_not_available_then_ready(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # Not available twice, then ready -> returns the report after two sleeps.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mock = mock_request(MOCK_DIR / 'overview_report.json')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+                mock,
+            ],
+        )
+
+        report = sandbox_mgr.fetch_sample_overview_report(
+            '251114-py23jaavtp', wait_until_ready=True
+        )
+
+        assert isinstance(report, OverviewReport)
+        assert mocked_request.call_count == 3
+        assert mocked_sleep.call_args_list == [
+            mocker.call(20),
+            mocker.call(20),
+        ]
+
+    def test_fetch_sample_overview_report_wait_times_out(self, sandbox_mgr: SandboxMgr, mocker):
+        # Never becomes ready before the deadline -> raises with a timeout-specific message.
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch(
+            'psengine.sandbox.sandbox_mgr.time.monotonic',
+            side_effect=[0, 10, 30],
+        )
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+            ],
+        )
+
+        with pytest.raises(
+            SampleReportNotAvailableError, match='still not available after waiting 30s'
+        ):
+            sandbox_mgr.fetch_sample_overview_report(
+                '260630-svp6caets9', wait_until_ready=True, timeout=30
+            )
+
+    def test_fetch_sample_overview_report_wait_times_out_message_reflects_overshoot(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # The fixed poll interval can overshoot a `timeout` that isn't one of its exact
+        # multiples -- that's fine, but the timeout message must report the real elapsed
+        # time (35s), not the requested budget (25s), otherwise it understates how long
+        # the caller actually waited.
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch(
+            'psengine.sandbox.sandbox_mgr.time.monotonic',
+            side_effect=[0, 10, 35],
+        )
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+            ],
+        )
+
+        with pytest.raises(
+            SampleReportNotAvailableError, match='still not available after waiting 35s'
+        ):
+            sandbox_mgr.fetch_sample_overview_report(
+                '260630-svp6caets9', wait_until_ready=True, timeout=25
+            )
+
+    def test_fetch_sample_overview_report_wait_not_found_raises_immediately(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # Sample doesn't exist -> raises immediately, never retried.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_sample_overview_report('missing', wait_until_ready=True)
+
+        assert mocked_request.call_count == 1
+        mocked_sleep.assert_not_called()
+
     def _behavioral_dispatch(self, sandbox_mgr, sample_dict, behavioral_resp):
         # Returns a side_effect that serves the sample record from /samples/{id} and the
         # behavioral report from /samples/{id}/{task}/report_triage.json; anything else fails.

@@ -117,6 +117,10 @@ Profiles are company-wide analysis configurations (OS tags, network mode, timeou
 
     Two distinct 404 subclasses are raised: `SampleReportNotAvailableError` means the sample exists but analysis isn't finished yet (retry later); `SampleReportNotFoundError` means the sample id is unknown. Both are subclasses of `SampleOverviewError`.
 
+!!! tip
+
+    Pass `wait_until_ready=True` to poll internally until the overview is available, instead of catching `SampleReportNotAvailableError` yourself. It retries every `OVERVIEW_REPORT_WAIT_INTERVAL_SECONDS` (20s) and raises `SampleReportNotAvailableError` once `timeout` seconds (default 1800) elapse without success. `SampleReportNotFoundError` (unknown sample id) is never retried.
+
 ```python
 --8<-- "docs/examples/sandbox/example_7.py"
 ```

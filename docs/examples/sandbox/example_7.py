@@ -1,18 +1,14 @@
 from psengine.sandbox import SandboxMgr
-from psengine.sandbox.errors import (
-    SampleReportNotAvailableError,
-)
 
 SAMPLE_ID = '260501-h4p7laawme'
 
 mgr = SandboxMgr()
 
-try:
-    report = mgr.fetch_sample_overview_report(SAMPLE_ID)
-except SampleReportNotAvailableError as exc:
-    print(f'{SAMPLE_ID}: analysis not complete.')
-    print('Retry once the sample is reported.')
-    raise SystemExit(1) from exc
+# wait_until_ready=True polls internally until the
+# overview is ready, or `timeout` seconds elapse.
+report = mgr.fetch_sample_overview_report(
+    SAMPLE_ID, wait_until_ready=True
+)
 
 print(f'Score:  {report.analysis.score}')
 print(f'Family: {report.analysis.family}')
