@@ -24,6 +24,7 @@ from ..constants import DEFAULT_LIMIT
 from ..endpoints import (
     EP_PLAYBOOK_ALERT,
     EP_PLAYBOOK_ALERT_COMMON,
+    EP_PLAYBOOK_ALERT_MALICIOUS_SITES_CREATE,
     EP_PLAYBOOK_ALERT_SEARCH,
 )
 from ..helpers import TimeHelpers, connection_exceptions, debug_call
@@ -39,6 +40,7 @@ from .constants import (
 )
 from .errors import (
     PlaybookAlertBulkFetchError,
+    PlaybookAlertCreateError,
     PlaybookAlertFetchError,
     PlaybookAlertRetrieveImageError,
     PlaybookAlertSearchError,
@@ -48,6 +50,9 @@ from .mappings import CATEGORY_ENDPOINTS, CATEGORY_TO_OBJECT_MAP
 from .models import SearchResponse
 from .pa_category import PACategory
 from .playbook_alerts import (
+    CreateMaliciousSitesAlertIn,
+    CreateMaliciousSitesAlertOptions,
+    CreateMaliciousSitesAlertOut,
     PreviewAlertOut,
     SearchIn,
     UpdateAlertIn,
@@ -351,6 +356,84 @@ class PlaybookAlertMgr:
         self.log.info(f'Updating playbook alert: {alert_id}')
 
         return self.rf_client.request('put', url=url, data=validated_payload.json())
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertCreateError)
+    def create_malicious_sites_alert(
+        self,
+        attacker: Annotated[str, Doc('Attacker domain, e.g. `idn:mail.google.mail.pl`.')],
+        rule: Annotated[
+            str | None,
+            Doc('Alert-rule/use-case config id, e.g. `report:rule1`. One of rule/organization.'),
+        ] = None,
+        organization: Annotated[
+            str | None,
+            Doc('Org id whose Malicious Sites config is used, e.g. `uhash:40wXmPVONA`.'),
+        ] = None,
+        targets: Annotated[
+            list[str] | None, Doc('Related entities, e.g. `["idn:google.com"]`.')
+        ] = None,
+        assignee: Annotated[
+            str | None, Doc("Assignee uhash. Defaults to the alert rule's assignee.")
+        ] = None,
+        status: Annotated[
+            str | None,
+            Doc("Initial status. One of 'New', 'InProgress', 'Dismissed', 'Resolved'."),
+        ] = None,
+        priority: Annotated[
+            str | None, Doc("Initial priority. One of 'High', 'Moderate', 'Informational'.")
+        ] = None,
+        description: Annotated[str | None, Doc('Free-text description for the alert.')] = None,
+    ) -> Annotated[
+        CreateMaliciousSitesAlertOut,
+        Doc('The create outcome and the resulting playbook alert id.'),
+    ]:
+        """Create a Malicious Sites playbook alert.
+
+        Exactly one of `rule` or `organization` must be provided. If `attacker` matches an
+        existing alert's main attacker, it is added to that alert instead of creating a new one.
+
+        Endpoint:
+            `playbook-alert/malicious_sites/create`
+
+        Raises:
+            ValidationError: If any parameter is of incorrect type, or if not exactly one of
+                `rule`/`organization` is provided.
+            PlaybookAlertCreateError: If a connection or API error occurs.
+        """
+        option_fields = {
+            'targets': targets,
+            'assignee': assignee,
+            'status': status,
+            'priority': priority,
+            'description': description,
+        }
+        option_fields = {k: v for k, v in option_fields.items() if v is not None}
+        options = CreateMaliciousSitesAlertOptions(**option_fields) if option_fields else None
+
+        payload = CreateMaliciousSitesAlertIn(
+            attacker=attacker,
+            rule=rule,
+            organization=organization,
+            options=options,
+        )
+
+        self.log.info(f'Creating malicious sites playbook alert for attacker: {attacker}')
+
+        response = self.rf_client.request(
+            'post', url=EP_PLAYBOOK_ALERT_MALICIOUS_SITES_CREATE, data=payload.json()
+        )
+
+        body = response.json()
+        status_block = body.get('status') or {}
+        if status_block.get('status_code') == 'Error':
+            raise PlaybookAlertCreateError(
+                status_block.get('status_message', 'Playbook alert creation failed')
+            )
+
+        result = body.get('data', body)
+        return CreateMaliciousSitesAlertOut.model_validate(result)
 
     @debug_call
     @validate_call

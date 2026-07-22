@@ -821,3 +821,40 @@ class UpdateAlertIn(RFBaseModel):
     reopen: str | None = None
     added_actions_taken: list[str] | None = None
     removed_actions_taken: list[str] | None = None
+
+
+class CreateMaliciousSitesAlertOptions(RFBaseModel):
+    """Model for the optional `options` block of `malicious_sites/create`."""
+
+    targets: list[str] | None = None
+    assignee: str | None = None
+    status: str | None = None
+    priority: str | None = None
+    description: str | None = None
+
+
+class CreateMaliciousSitesAlertIn(RFBaseModel):
+    """Model for payload sent to POST `/malicious_sites/create` endpoint."""
+
+    attacker: str
+    rule: str | None = None
+    organization: str | None = None
+    options: CreateMaliciousSitesAlertOptions | None = None
+
+    @model_validator(mode='after')
+    def _exactly_one_of_rule_or_organization(self):
+        provided = [
+            value
+            for value in (self.rule, self.organization)
+            if value is not None and str(value).strip()
+        ]
+        if len(provided) != 1:
+            raise ValueError("exactly one of 'rule' or 'organization' must be provided")
+        return self
+
+
+class CreateMaliciousSitesAlertOut(RFBaseModel):
+    """Model for payload received from POST `/malicious_sites/create` endpoint."""
+
+    outcome: str
+    playbook_alert_id: str | None = None
