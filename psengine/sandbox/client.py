@@ -33,7 +33,7 @@ def is_api_token_format_valid(
 
     The function performs a simple regex check but does not validate the token against the API.
     """
-    return re.match(SANDBOX_TOKEN_VALIDATION_REGEX, token) is not None
+    return re.fullmatch(SANDBOX_TOKEN_VALIDATION_REGEX, token) is not None
 
 
 class SandboxClient(BaseHTTPClient):
@@ -173,7 +173,7 @@ class SandboxClient(BaseHTTPClient):
             raise
 
         try:
-            page = json_response['data']
+            page = json_response['data'] or []
         except KeyError:
             self.log.debug(f'Paged request does not contain `data` JSON key:\n{response.text}')
             raise

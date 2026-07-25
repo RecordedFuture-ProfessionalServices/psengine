@@ -25,7 +25,7 @@ See the [**API Reference**](../api/sandbox/sandbox_mgr.md) for internal details 
 - `delete_sample`, `update_profile`, and `delete_profile` are designed for best-effort cleanup:
     - `update_profile` and `delete_profile` are **idempotent on 404** — a missing target returns `updated=False` / `deleted=False` instead of raising, so you can call them without first checking existence.
     - `delete_sample` is not idempotent: any non-2xx response (including "already deleted") raises `SampleDeleteError`. The Triage API maps all delete failures to `401`, so the raw error message on the exception is your only signal for *why*.
-- `update_profile` is a **full replace**: every non-`id` field must be supplied. Any optional field you omit is cleared on the server.
+- `update_profile` is a **full replace**: name, tags and timeout are required; any optional field you omit is cleared on the server.
 - Three methods return full analysis reports — all require the sample to have reached `reported` status:
     - `fetch_sample_overview_report` — the richest result: combined verdict, extracted malware configs, per-target IOC lists (domains, IPs, URLs), and a per-task breakdown. Raises `SampleReportNotAvailableError` if the sample exists but hasn't finished analysis yet, or `SampleReportNotFoundError` if the sample id is unknown — both are subclasses of `SampleOverviewError`.
     - `fetch_sample_static_report` — the pre-detonation pass: file identification, static signatures, the `files` table (the submitted file plus any archive members), and malware configs recoverable without execution.

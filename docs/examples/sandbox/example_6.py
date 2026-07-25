@@ -1,7 +1,7 @@
 from psengine.sandbox import SandboxMgr
 
 mgr = SandboxMgr()
-
+mgr.delete_profile('psengine-docs-demo')
 created = mgr.create_profile(
     name='psengine-docs-demo',
     tags=['os:windows10-2004-x64', 'locale:en-us'],
