@@ -17,6 +17,7 @@ import time
 from pathlib import Path
 from typing import Annotated, Literal, cast
 from urllib.parse import quote
+
 from pydantic import Field, validate_call
 from requests.exceptions import HTTPError
 from typing_extensions import Doc
@@ -1227,7 +1228,9 @@ class SandboxMgr:
             ProfileNotFoundError: If the API returns a non-2xx (e.g. 404 for an
                 unknown profile id/name) or a connection error occurs.
         """
-        endpoint = EP_SANDBOX_PROFILES_ID.format(base_url=self.base_url, profile_id=quote(profile_id, safe='.'))
+        endpoint = EP_SANDBOX_PROFILES_ID.format(
+            base_url=self.base_url, profile_id=quote(profile_id, safe='.')
+        )
         response = self.sb_client.request('get', endpoint)
         return Profile.model_validate(response.json())
 
@@ -1421,7 +1424,9 @@ class SandboxMgr:
             geolocation=geolocation,
             browser=browser,
         )
-        endpoint = EP_SANDBOX_PROFILES_ID.format(base_url=self.base_url, profile_id=quote(profile_id, safe='.'))
+        endpoint = EP_SANDBOX_PROFILES_ID.format(
+            base_url=self.base_url, profile_id=quote(profile_id, safe='.')
+        )
         self.sb_client.request('put', endpoint, data=payload.to_api_payload())
         return ProfileUpdateOut(updated=True)
 
@@ -1471,6 +1476,8 @@ class SandboxMgr:
             ProfileDeleteError: If the API returns a non-2xx other than 404, or
                 a connection error occurs.
         """
-        endpoint = EP_SANDBOX_PROFILES_ID.format(base_url=self.base_url, profile_id=quote(profile_id, safe='.'))
+        endpoint = EP_SANDBOX_PROFILES_ID.format(
+            base_url=self.base_url, profile_id=quote(profile_id, safe='.')
+        )
         self.sb_client.request('delete', endpoint)
         return ProfileDeleteOut(deleted=True)

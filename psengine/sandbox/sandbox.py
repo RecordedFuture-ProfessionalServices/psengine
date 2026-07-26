@@ -512,11 +512,13 @@ class CreateUpdateProfileIn(RFBaseModel):
     network: NetworkMode | None = None
     geolocation: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
     browser: Browser | None = None
-          @model_validator(mode='after')
-          def _check_geolocation_needs_vpn(self):
-                    if self.geolocation and self.network != 'vpn':
-                              raise ValueError("`geolocation` requires `network='vpn'`")
-                    return self
+
+    @model_validator(mode='after')
+    def _check_geolocation_needs_vpn(self):
+        if self.geolocation and self.network != 'vpn':
+            raise ValueError("`geolocation` requires `network='vpn'`")
+        return self
+
     def to_api_payload(self) -> dict:
         """Build the JSON body for POST/PUT /profiles."""
         body = self.model_dump(exclude_none=True, exclude={'browser'})
