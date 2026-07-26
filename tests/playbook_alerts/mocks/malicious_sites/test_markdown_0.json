@@ -1,0 +1,26 @@
+{
+  "status": {
+    "status_code": "Ok",
+    "status_message": "Success"
+  },
+  "data": [
+    {
+      "playbook_alert_id": "string",
+      "alert_rule": {
+        "id": "string",
+        "label": "DomainAbuse"
+      },
+      "status": "Resolved",
+      "priority": "High",
+      "created": "2023-07-21T17:32:28Z",
+      "updated": "2023-07-21T17:32:28Z",
+      "category": "malicious_sites",
+      "title": "Malicious Sites Alert",
+      "actions_taken": []
+    }
+  ],
+  "counts": {
+    "returned": 1,
+    "total": 1
+  }
+}

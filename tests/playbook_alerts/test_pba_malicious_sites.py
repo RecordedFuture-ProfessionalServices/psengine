@@ -4,6 +4,8 @@ from pathlib import Path
 import pytest
 
 from psengine.playbook_alerts import PACategory
+from psengine.playbook_alerts.playbook_alert_mgr import PlaybookAlertMgr
+from tests.playbook_alerts.conftest import MALICIOUS_SITES_MOCK
 from psengine.playbook_alerts.models.panel_log import (
     TYPE_MAPPING,
     AttackerAddedChange,
@@ -152,3 +154,71 @@ class Test_MaliciousSites:
             assert isinstance(md, str)
             for section in ('Targets', 'Attackers', 'DNS Records', 'WHOIS Details'):
                 assert section in md
+
+
+class Test_MaliciousSitesMarkdown:
+    def test_markdown(
+        self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request, make_binary_response
+    ):
+        mocks = [
+            mock_request(MALICIOUS_SITES_MOCK / 'test_markdown_0.json'),
+            mock_request(MALICIOUS_SITES_MOCK / 'test_markdown_1.json'),
+            make_binary_response(
+                (MALICIOUS_SITES_MOCK / 'test_markdown_2.file').read_bytes(),
+                {'Content-Disposition': 'filename=abc.png'},
+            ),
+        ]
+        mocker.patch.object(playbook_mgr.rf_client, 'request', side_effect=mocks)
+
+        data = playbook_mgr.fetch_bulk(category='malicious_sites', fetch_images=True)
+        data = [d.markdown() for d in data]
+
+        assert all(isinstance(d, str) for d in data)
+        assert any('Screenshots' in d for d in data)
+
+    def test_markdown_fetch_images_false(
+        self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request
+    ):
+        mocks = [
+            mock_request(MALICIOUS_SITES_MOCK / 'test_markdown_0.json'),
+            mock_request(MALICIOUS_SITES_MOCK / 'test_markdown_1.json'),
+        ]
+        mocker.patch.object(playbook_mgr.rf_client, 'request', side_effect=mocks)
+
+        data = playbook_mgr.fetch_bulk(category='malicious_sites', fetch_images=False)
+        data = [d.markdown() for d in data]
+
+        assert all(isinstance(d, str) for d in data)
+        assert all('Screenshots' not in d for d in data)
+
+    def test_markdown_single_alert_no_images(
+        self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request
+    ):
+        mocks = [mock_request(MALICIOUS_SITES_MOCK / 'test_markdown_single_alert.json')]
+        mocker.patch.object(playbook_mgr.rf_client, 'request', side_effect=mocks)
+
+        alert = playbook_mgr.fetch(
+            'string', PACategory.MALICIOUS_SITES.value, fetch_images=False
+        )
+        markdown = alert.markdown()
+
+        assert isinstance(markdown, str)
+        assert 'Screenshots' not in markdown
+
+    def test_markdown_character_limit(
+        self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request, make_binary_response
+    ):
+        mocks = [
+            mock_request(MALICIOUS_SITES_MOCK / 'test_markdown_single_alert.json'),
+            make_binary_response(
+                (MALICIOUS_SITES_MOCK / 'test_markdown_2.file').read_bytes(),
+                {'Content-Disposition': 'filename=abc.png'},
+            ),
+        ]
+        mocker.patch.object(playbook_mgr.rf_client, 'request', side_effect=mocks)
+
+        alert = playbook_mgr.fetch('string', PACategory.MALICIOUS_SITES.value)
+        markdown = alert.markdown(character_limit=5000)
+
+        assert 'Screenshots' not in markdown
+        assert len(markdown) <= 5000
