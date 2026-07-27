@@ -152,7 +152,6 @@ class DomainAbuseMaliciousDnsChange(ChangeType):
 class ReregistrationRecord(RFBaseModel):
     registrar: str | None = None
     registrar_name: str | None = None
-    # `iana_id` may be returned as an int or a string depending on the source.
     iana_id: int | str | None = None
     expiration: datetime | None = None
 
@@ -471,7 +470,6 @@ TYPE_MAPPING = {
     'evidence_change': CodeRepoLeakageEvidenceChange,
     'tpr_assessment_change': ThirdPartyAssessmentChange,
     'assessment_change': AssessmentChange,
-    # Malicious Sites
     'onward_actions_removed_change': OnwardActionsRemovedChange,
     'onward_actions_added_change': OnwardActionsAddedChange,
     'phishing_malicious_behavior_change': PhishingMaliciousBehaviorChange,

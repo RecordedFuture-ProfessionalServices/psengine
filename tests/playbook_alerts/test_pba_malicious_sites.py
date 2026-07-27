@@ -97,7 +97,6 @@ class Test_MaliciousSites:
                 assert isinstance(attacker, Attacker)
                 assert all(isinstance(a, Asset) for a in attacker.assets)
 
-            # Each polymorphic asset type resolves to its own field.
             assets = {a.type_: a for a in alert.panel_evidence_summary.attackers[0].assets}
             assert assets['client_domain'].domain_id
             assert assets['similar_domain_term'].term is not None
@@ -143,9 +142,7 @@ class Test_MaliciousSites:
             ]
             mapped = [t for t in input_changes if t in TYPE_MAPPING]
             parsed = sum(len(log.changes) for log in alert.panel_log_v2)
-            # Every supported change validated; nothing silently dropped or errored.
             assert parsed == len(mapped)
-            # The fixture only carries change types the model knows how to parse.
             assert all(t in TYPE_MAPPING for t in input_changes)
 
     def test_markdown_sections(self, alerts_factory):

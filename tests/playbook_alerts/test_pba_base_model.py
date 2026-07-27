@@ -97,10 +97,6 @@ EDITED_COMMENT_LOG = [
 
 
 def _make_alert(category, panel_log_v2):
-    """Build a minimal playbook alert of ``category`` with the given ``panel_log_v2``.
-
-    deepcopy is used because the panel-log validator mutates the input in place.
-    """
     return CATEGORY_TO_OBJECT_MAP[category](
         playbook_alert_id='task:comments-test',
         panel_status=copy.deepcopy(MINIMAL_STATUS),

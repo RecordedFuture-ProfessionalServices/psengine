@@ -35,7 +35,6 @@ class ResolvedRecord(RFBaseModel):
 class Reregistration(RFBaseModel):
     registrar: str | None = None
     registrar_name: str | None = None
-    # `iana_id` is returned as an int in the summary panel but as a string in the panel log.
     iana_id: int | str | None = None
     expiration: datetime | None = None
 
