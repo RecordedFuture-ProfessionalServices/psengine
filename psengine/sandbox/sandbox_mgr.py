@@ -168,10 +168,7 @@ class SandboxMgr:
         self,
         file_hash: Annotated[
             list[str] | str | None,
-            Doc(
-                'One or more file hashes (MD5/SHA1/SHA256/SHA512). Sent bare -- Triage '
-                'auto-detects the hash type.'
-            ),
+            Doc('One or more file hashes (MD5/SHA1/SHA256/SHA512).'),
         ] = None,
         family: Annotated[
             list[str] | str | None,
@@ -259,8 +256,7 @@ class SandboxMgr:
         Raises:
             ValidationError: If any supplied parameter is of incorrect type or out of range.
             ValueError: If no filter is supplied (no structured parameter and no raw `query`).
-            SampleSearchError: If the API returns a non-2xx (e.g. 400 `INVALID_QUERY` for a
-                malformed query) or a connection error occurs.
+            SampleSearchError: If API error occurs.
         """
         search_query = SearchIn(
             file_hash=file_hash,
@@ -304,7 +300,7 @@ class SandboxMgr:
         subset: Annotated[
             SandboxSubset,
             Doc(
-                "Which samples to list: 'owned' (default — samples the requesting user can "
+                "Which samples to list: 'owned' (default, samples the requesting user can "
                 "access), 'public' (only valid on the public cloud), or 'org' (all "
                 'organisation samples).'
             ),
@@ -340,7 +336,7 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type or out of range.
-            SamplesFetchError: If the API returns a non-2xx or a connection error occurs.
+            SamplesFetchError: If API error occurs.
         """
         endpoint = EP_SANDBOX_SAMPLES.format(base_url=self.base_url)
         data = self.sb_client.request_paged(
@@ -369,7 +365,7 @@ class SandboxMgr:
         """Fetch a single sample by id.
 
         Unlike the list endpoints (which return bare `Sample` records), this returns a
-        `SampleTasks` -- the same fields plus a `tasks` list of per-target analysis tasks
+        `SampleTasks`, the same fields plus a `tasks` list of per-target analysis tasks
         (id, status, target, pick).
 
         Example:
@@ -388,8 +384,7 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If any supplied parameter is of incorrect type.
-            SampleFetchError: If the API returns a non-2xx (e.g. 404 for an unknown id,
-                401 for an inaccessible sample) or a connection error occurs.
+            SampleFetchError: If API error occurs.
         """
         endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
         response = self.sb_client.request('get', endpoint)
@@ -427,7 +422,7 @@ class SandboxMgr:
             ```
 
         Note:
-            `completed` is `None` until every task has finished -- in-progress samples
+            `completed` is `None` until every task has finished, in-progress samples
             (e.g. still in `static_analysis`) return a summary without it.
 
         Endpoint:
@@ -435,8 +430,7 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If `sample_id` is empty or of incorrect type.
-            SampleSummaryError: If the API returns a non-2xx (e.g. 404 for an unknown id)
-                or a connection error occurs.
+            SampleSummaryError: If API error occurs.
         """
         endpoint = EP_SANDBOX_SAMPLES_SUMMARY.format(base_url=self.base_url, sample_id=sample_id)
         response = self.sb_client.request('get', endpoint)
@@ -479,34 +473,11 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If `sample_id` is empty or of incorrect type.
-            SampleFileFetchError: If the API returns a non-2xx (e.g. 404 for an
-                unknown id, 401 for a sample outside your organisation) or a
-                connection error occurs.
+            SampleFileFetchError: If API error occurs.
         """
         endpoint = EP_SANDBOX_SAMPLES_DOWNLOAD.format(base_url=self.base_url, sample_id=sample_id)
         response = self.sb_client.request('get', endpoint)
         return response.content
-
-    def _fetch_static_report_once(self, sample_id: str) -> StaticAnalysisReport:
-        """Issue a single static report request.
-
-        Isolated in its own method (rather than inlined in the polling `while` loop) so
-        the `SampleReportNotAvailableError`/`SampleReportNotFoundError` raised by
-        `_raise_semantic_404` -- itself invoked from inside an `except HTTPError`
-        clause -- propagates all the way out of this call. A single `try` cannot add a
-        handler for an exception raised by one of its own `except` clauses, so the
-        polling loop's `except SampleReportNotAvailableError` needs to sit in a
-        different `try` statement than this one.
-        """
-        endpoint = EP_SANDBOX_SAMPLES_STATIC_REPORT.format(
-            base_url=self.base_url, sample_id=sample_id
-        )
-        try:
-            response = self.sb_client.request('get', endpoint)
-        except HTTPError as err:
-            _raise_semantic_404(err, sample_id)
-            raise
-        return StaticAnalysisReport.model_validate(response.json())
 
     @debug_call
     @validate_call
@@ -535,8 +506,8 @@ class SandboxMgr:
 
         The static report is the pre-detonation pass: it identifies the submitted
         sample, scores it, lists any static `signatures`, enumerates the `files`
-        table -- the submitted file plus everything unpacked from it (e.g. members
-        of a submitted archive) -- and surfaces any malware configuration recovered
+        table, the submitted file plus everything unpacked from it (e.g. members
+        of a submitted archive), and surfaces any malware configuration recovered
         at this stage in `extracted`.
 
         Example:
@@ -565,7 +536,7 @@ class SandboxMgr:
             ```
 
         Note:
-            `files`, `signatures` and `extracted` are always lists -- the API returns
+            `files`, `signatures` and `extracted` are always lists, the API returns
             `null` for them when empty (e.g. `files` for a URL submission), which this
             method normalises to `[]`.
 
@@ -581,8 +552,7 @@ class SandboxMgr:
                 report becoming available.
             SampleReportNotFoundError: If the sample does not exist (404 `NOT_FOUND`).
                 Not retried, even when `wait_until_ready` is true.
-            SampleStaticReportError: If the API returns any other non-2xx or a connection
-                error occurs. Base class of the two 404 errors above.
+            SampleStaticReportError:  If API error occurs.
         """
         if not wait_until_ready:
             return self._fetch_static_report_once(sample_id)
@@ -600,25 +570,6 @@ class SandboxMgr:
                         f'waiting {now - started:.0f}s.'
                     ) from None
                 time.sleep(STATIC_REPORT_WAIT_INTERVAL_SECONDS)
-
-    def _fetch_overview_report_once(self, sample_id: str) -> OverviewReport:
-        """Issue a single overview report request.
-
-        Isolated in its own method (mirroring `_fetch_static_report_once`) so the
-        `SampleReportNotAvailableError`/`SampleReportNotFoundError` raised by
-        `_raise_semantic_404` -- itself invoked from inside an `except HTTPError`
-        clause -- propagates all the way out of this call. A single `try` cannot add a
-        handler for an exception raised by one of its own `except` clauses, so the
-        polling loop's `except SampleReportNotAvailableError` needs to sit in a
-        different `try` statement than this one.
-        """
-        endpoint = EP_SANDBOX_SAMPLES_OVERVIEW.format(base_url=self.base_url, sample_id=sample_id)
-        try:
-            response = self.sb_client.request('get', endpoint)
-        except HTTPError as err:
-            _raise_semantic_404(err, sample_id)
-            raise
-        return OverviewReport.model_validate(response.json())
 
     @debug_call
     @validate_call
@@ -645,7 +596,7 @@ class SandboxMgr:
     ]:
         """Fetch the overview report for a sample.
 
-        The overview is the one-pager that combines every task's result: the overall
+        The overview is the a method that combines every task's result: the overall
         `analysis` verdict (score, family, tags), the `sample` identity, recovered malware
         configs in `extracted`, the sample-level `signatures`, a per-`targets` breakdown
         (each target with its own IOCs and signature hits) and the `tasks` map keyed by
@@ -682,7 +633,7 @@ class SandboxMgr:
             The overview is only generated once the sample reaches the `reported` state.
             A sample that exists but has not been fully analysed yet (e.g. still in
             `static_analysis`) returns `404 REPORT_NOT_AVAILABLE`, which raises
-            `SampleReportNotAvailableError` -- distinct from a `404 NOT_FOUND` for an
+            `SampleReportNotAvailableError`, distinct from a `404 NOT_FOUND` for an
             unknown sample id.
 
         Endpoint:
@@ -697,8 +648,7 @@ class SandboxMgr:
                 without the report becoming available.
             SampleReportNotFoundError: If the sample does not exist (404 `NOT_FOUND`).
                 Not retried, even when `wait_until_ready` is true.
-            SampleOverviewError: If the API returns any other non-2xx or a connection error
-                occurs. Base class of the two 404 errors above.
+            SampleOverviewError: If API error occurs.
         """
         if not wait_until_ready:
             return self._fetch_overview_report_once(sample_id)
@@ -716,52 +666,6 @@ class SandboxMgr:
                         f'waiting {now - started:.0f}s.'
                     ) from None
                 time.sleep(OVERVIEW_REPORT_WAIT_INTERVAL_SECONDS)
-
-    def _fetch_behavioral_reports_once(
-        self, sample_id: str, max_workers: int = 0
-    ) -> BehavioralReportsResult:
-        """Issue a single sample lookup + per-task report fetch pass.
-
-        Isolated in its own method (mirroring `_fetch_static_report_once`) so both the
-        immediate-return and wait-loop paths in `fetch_behavioral_reports` share the same
-        code. `SampleReportNotFoundError`/`SampleBehavioralReportError` raised on the
-        sample lookup propagate straight out -- they are never retried by the wait loop.
-        """
-        endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
-        try:
-            sample = SampleTasks.model_validate(self.sb_client.request('get', endpoint).json())
-        except HTTPError as err:
-            # Only NOT_FOUND is semantic here: the sample record itself is never
-            # "not ready", and SampleReportNotAvailableError is outside this
-            # endpoint's error hierarchy.
-            if _report_404_code(err) == 'NOT_FOUND':
-                raise SampleReportNotFoundError(f'Sample {sample_id} not found.') from err
-            raise
-        task_ids = [t.id_ for t in (sample.tasks or []) if t.id_.startswith('behavioral')]
-        if not task_ids:
-            return BehavioralReportsResult()
-
-        if max_workers:
-            outcomes = MultiThreadingHelper.multithread_it(
-                max_workers,
-                self._fetch_behavioral_report,
-                iterator=task_ids,
-                sample_id=sample_id,
-            )
-        else:
-            outcomes = [
-                self._fetch_behavioral_report(task_id, sample_id=sample_id) for task_id in task_ids
-            ]
-
-        reports, not_ready, failed = [], [], []
-        for task_id, report, failure in outcomes:
-            if report is not None:
-                reports.append(report)
-            elif failure is not None:
-                failed.append(failure)
-            else:
-                not_ready.append(task_id)
-        return BehavioralReportsResult(reports=reports, not_ready=not_ready, failed=failed)
 
     @debug_call
     @validate_call
@@ -844,7 +748,7 @@ class SandboxMgr:
             ```
 
         Note:
-            `result.complete` is `True` when no report is still pending -- including when
+            `result.complete` is `True` when no report is still pending, including when
             the sample has no behavioral tasks at all (`reports` is empty then). For samples
             with many behavioral tasks (e.g. multi-architecture Linux submissions), pass
             `max_workers` to fetch the per-task reports concurrently.
@@ -857,11 +761,9 @@ class SandboxMgr:
                 `timeout` is less than 1.
             SampleReportNotFoundError: If the sample does not exist (404 `NOT_FOUND`). Not
                 retried, even when `wait_until_ready` is true.
-            SampleBehavioralReportError: If the sample lookup fails with any other non-2xx,
-                or a connection error occurs (on the lookup or any report fetch). Base class
-                of the 404 error above. Per-task HTTP failures do *not* raise -- they land in
-                the envelope's `not_ready`/`failed` buckets, and a `wait_until_ready` timeout
-                is reflected the same way (`complete=False`) rather than as an exception.
+            SampleBehavioralReportError:  If API error occurs. Per-task HTTP failures do *not*
+                raise, they land in the `not_ready`/`failed` buckets, and a `wait_until_ready`
+                timeout is reflected the same way (`complete=False`) rather than as an exception.
         """
         if not wait_until_ready:
             return self._fetch_behavioral_reports_once(sample_id, max_workers=max_workers)
@@ -872,36 +774,6 @@ class SandboxMgr:
             time.sleep(BEHAVIORAL_REPORT_WAIT_INTERVAL_SECONDS)
             result = self._fetch_behavioral_reports_once(sample_id, max_workers=max_workers)
         return result
-
-    def _fetch_behavioral_report(
-        self, task_id: str, sample_id: str
-    ) -> tuple[str, BehavioralReport | None, BehavioralReportFailure | None]:
-        """Fetch and parse a single behavioral task's `report_triage.json`.
-
-        Returns `(task_id, report, None)` on success, `(task_id, None, None)` when the
-        report is not (yet) available, and `(task_id, None, failure)` for any other HTTP
-        error. Connection-level errors propagate to the caller.
-        """
-        endpoint = EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
-            base_url=self.base_url, sample_id=sample_id, task_id=task_id
-        )
-        try:
-            data = self.sb_client.request('get', endpoint).json()
-        except HTTPError as err:
-            if _report_404_code(err) in ('NOT_AVAILABLE', 'REPORT_NOT_AVAILABLE'):
-                return task_id, None, None
-            self.log.warning(
-                f'Behavioral report fetch failed for {sample_id}/{task_id}. Error: {err}'
-            )
-            failure = BehavioralReportFailure(
-                task_id=task_id,
-                status_code=err.response.status_code if err.response is not None else None,
-                error=_response_error_code(err),
-                message=str(err),
-            )
-            return task_id, None, failure
-        data['task_id'] = task_id
-        return task_id, BehavioralReport.model_validate(data), None
 
     @debug_call
     @validate_call
@@ -964,9 +836,7 @@ class SandboxMgr:
         Accepts one of four submission `kind`s: `file` (upload a local file),
         `url` (detonate a URL in a browser), `fetch` (sandbox downloads the file
         from the URL, then detonates), or `import` (import a public Triage sample
-        by id). The manager builds a `SubmitIn` payload, validates kind-specific
-        required fields, and posts it as `multipart/form-data` with the JSON body
-        carried under the `_json` part.
+        by id).
 
         Example:
             Submit a URL:
@@ -1006,7 +876,7 @@ class SandboxMgr:
             ValidationError: If kind-specific required fields are missing (e.g.
                 `kind='file'` without `file_path`) or if `geolocation` is set
                 without `network='vpn'`.
-            SampleSubmitError: If the API returns a non-2xx or a connection error occurs.
+            SampleSubmitError: If API error occurs.
         """
         payload = SubmitSampleIn(
             kind=kind,
@@ -1077,7 +947,7 @@ class SandboxMgr:
     ]:
         """Set the analysis profile for an interactive sample.
 
-        Only valid while the sample is paused in `static_analysis` -- i.e. it was
+        Only valid while the sample is paused in `static_analysis`, i.e. it was
         submitted with `interactive=True`. Setting the profile advances the sample
         into the analysis queue.
 
@@ -1106,8 +976,7 @@ class SandboxMgr:
         Raises:
             ValidationError: If `sample_id` is empty, or the `auto`/`profiles`/`pick`
                 combination is invalid (e.g. `auto=False` without `profiles`).
-            SampleProfileError: If the API returns a non-2xx (e.g. the sample is not
-                in `static_analysis`) or a connection error occurs.
+            SampleProfileError: If API error occurs.
         """
         payload = SetProfileIn(auto=auto, profiles=profiles, pick=pick)
         endpoint = EP_SANDBOX_SAMPLES_PROFILE.format(base_url=self.base_url, sample_id=sample_id)
@@ -1154,7 +1023,7 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If `sample_id` is empty or of incorrect type.
-            SampleDeleteError: If the API returns a non-2xx or a connection error occurs.
+            SampleDeleteError: If API error occurs.
         """
         endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
         self.sb_client.request('delete', endpoint)
@@ -1185,7 +1054,7 @@ class SandboxMgr:
             `GET /profiles`
 
         Raises:
-            ProfileFetchError: If the API returns a non-2xx or a connection error occurs.
+            ProfileFetchError: If API error occurs.
         """
         endpoint = EP_SANDBOX_PROFILES.format(base_url=self.base_url)
         response = self.sb_client.request('get', endpoint)
@@ -1208,8 +1077,7 @@ class SandboxMgr:
         """Fetch a single analysis profile by ID or name.
 
         The API accepts either the ID assigned at create time or the profile
-        name. Prefer the ID for stable references — renames invalidate
-        name-based lookups.
+        name.
 
         Example:
             ```python
@@ -1225,8 +1093,7 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If `profile_id` is empty or of incorrect type.
-            ProfileNotFoundError: If the API returns a non-2xx (e.g. 404 for an
-                unknown profile id/name) or a connection error occurs.
+            ProfileNotFoundError: If API error occurs.
         """
         endpoint = EP_SANDBOX_PROFILES_ID.format(
             base_url=self.base_url, profile_id=quote(profile_id, safe='.')
@@ -1299,9 +1166,7 @@ class SandboxMgr:
         Raises:
             ValidationError: If `name`/`tags` are empty, `timeout` is out of range,
                 or `browser` is not one of the allowed values.
-            ProfileCreateError: If the API returns a non-2xx (e.g. 400 for an
-                invalid `geolocation`+`network` combination, 409 if the name
-                collides) or a connection error occurs.
+            ProfileCreateError: If API error occurs.
         """
         payload = CreateUpdateProfileIn(
             name=name,
@@ -1329,7 +1194,7 @@ class SandboxMgr:
             Field(min_length=1),
             Doc(
                 'Profile ID or name. Renaming via `name=` is allowed, but stale '
-                'name-based lookups will break afterwards -- prefer the ID for '
+                'name-based lookups will break afterwards, prefer the ID for '
                 'stable references.'
             ),
         ],
@@ -1372,8 +1237,8 @@ class SandboxMgr:
     ]:
         """Update an existing analysis profile.
 
-        The PUT is a **full replace**: all fields except `id` must be submitted.
-        Any optional field omitted from this call is cleared on the server --
+        This method is a **full replace**: all fields except `id` must be submitted.
+        Any optional field omitted from this call is cleared on the server,
         e.g. calling without `browser` removes any browser previously set on
         the profile.
 
@@ -1413,8 +1278,7 @@ class SandboxMgr:
         Raises:
             ValidationError: If `name`/`tags` are empty, `timeout` is out of range,
                 or `browser` is not one of the allowed values.
-            ProfileUpdateError: If the API returns a non-2xx other than 404
-                (e.g. 409 if the new `name` collides) or a connection error occurs.
+            ProfileUpdateError: If API error occurs.
         """
         payload = CreateUpdateProfileIn(
             name=name,
@@ -1473,11 +1337,126 @@ class SandboxMgr:
 
         Raises:
             ValidationError: If `profile_id` is empty or of incorrect type.
-            ProfileDeleteError: If the API returns a non-2xx other than 404, or
-                a connection error occurs.
+            ProfileDeleteError: If API error occurs.
         """
         endpoint = EP_SANDBOX_PROFILES_ID.format(
             base_url=self.base_url, profile_id=quote(profile_id, safe='.')
         )
         self.sb_client.request('delete', endpoint)
         return ProfileDeleteOut(deleted=True)
+
+    def _fetch_static_report_once(self, sample_id: str) -> StaticAnalysisReport:
+        """Issue a single static report request.
+
+        Isolated in its own method (rather than inlined in the polling `while` loop) so
+        the `SampleReportNotAvailableError`/`SampleReportNotFoundError` raised by
+        `_raise_semantic_404`,  itself invoked from inside an `except HTTPError`
+        clause,  propagates all the way out of this call. A single `try` cannot add a
+        handler for an exception raised by one of its own `except` clauses, so the
+        polling loop's `except SampleReportNotAvailableError` needs to sit in a
+        different `try` statement than this one.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_STATIC_REPORT.format(
+            base_url=self.base_url, sample_id=sample_id
+        )
+        try:
+            response = self.sb_client.request('get', endpoint)
+        except HTTPError as err:
+            _raise_semantic_404(err, sample_id)
+            raise
+        return StaticAnalysisReport.model_validate(response.json())
+
+    def _fetch_overview_report_once(self, sample_id: str) -> OverviewReport:
+        """Issue a single overview report request.
+
+        Isolated in its own method (mirroring `_fetch_static_report_once`) so the
+        `SampleReportNotAvailableError`/`SampleReportNotFoundError` raised by
+        `_raise_semantic_404`, itself invoked from inside an `except HTTPError`
+        clause, propagates all the way out of this call. A single `try` cannot add a
+        handler for an exception raised by one of its own `except` clauses, so the
+        polling loop's `except SampleReportNotAvailableError` needs to sit in a
+        different `try` statement than this one.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_OVERVIEW.format(base_url=self.base_url, sample_id=sample_id)
+        try:
+            response = self.sb_client.request('get', endpoint)
+        except HTTPError as err:
+            _raise_semantic_404(err, sample_id)
+            raise
+        return OverviewReport.model_validate(response.json())
+
+    def _fetch_behavioral_reports_once(
+        self, sample_id: str, max_workers: int = 0
+    ) -> BehavioralReportsResult:
+        """Issue a single sample lookup + per-task report fetch pass.
+
+        Isolated in its own method (mirroring `_fetch_static_report_once`) so both the
+        immediate-return and wait-loop paths in `fetch_behavioral_reports` share the same
+        code. `SampleReportNotFoundError`/`SampleBehavioralReportError` raised on the
+        sample lookup propagate straight out, they are never retried by the wait loop.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_ID.format(base_url=self.base_url, sample_id=sample_id)
+        try:
+            sample = SampleTasks.model_validate(self.sb_client.request('get', endpoint).json())
+        except HTTPError as err:
+            # Only NOT_FOUND is semantic here: the sample record itself is never
+            # "not ready", and SampleReportNotAvailableError is outside this
+            # endpoint's error hierarchy.
+            if _report_404_code(err) == 'NOT_FOUND':
+                raise SampleReportNotFoundError(f'Sample {sample_id} not found.') from err
+            raise
+        task_ids = [t.id_ for t in (sample.tasks or []) if t.id_.startswith('behavioral')]
+        if not task_ids:
+            return BehavioralReportsResult()
+
+        if max_workers:
+            outcomes = MultiThreadingHelper.multithread_it(
+                max_workers,
+                self._fetch_behavioral_report,
+                iterator=task_ids,
+                sample_id=sample_id,
+            )
+        else:
+            outcomes = [
+                self._fetch_behavioral_report(task_id, sample_id=sample_id) for task_id in task_ids
+            ]
+
+        reports, not_ready, failed = [], [], []
+        for task_id, report, failure in outcomes:
+            if report is not None:
+                reports.append(report)
+            elif failure is not None:
+                failed.append(failure)
+            else:
+                not_ready.append(task_id)
+        return BehavioralReportsResult(reports=reports, not_ready=not_ready, failed=failed)
+
+    def _fetch_behavioral_report(
+        self, task_id: str, sample_id: str
+    ) -> tuple[str, BehavioralReport | None, BehavioralReportFailure | None]:
+        """Fetch and parse a single behavioral task's `report_triage.json`.
+
+        Returns `(task_id, report, None)` on success, `(task_id, None, None)` when the
+        report is not (yet) available, and `(task_id, None, failure)` for any other HTTP
+        error. Connection-level errors propagate to the caller.
+        """
+        endpoint = EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+            base_url=self.base_url, sample_id=sample_id, task_id=task_id
+        )
+        try:
+            data = self.sb_client.request('get', endpoint).json()
+        except HTTPError as err:
+            if _report_404_code(err) in ('NOT_AVAILABLE', 'REPORT_NOT_AVAILABLE'):
+                return task_id, None, None
+            self.log.warning(
+                f'Behavioral report fetch failed for {sample_id}/{task_id}. Error: {err}'
+            )
+            failure = BehavioralReportFailure(
+                task_id=task_id,
+                status_code=err.response.status_code if err.response is not None else None,
+                error=_response_error_code(err),
+                message=str(err),
+            )
+            return task_id, None, failure
+        data['task_id'] = task_id
+        return task_id, BehavioralReport.model_validate(data), None
