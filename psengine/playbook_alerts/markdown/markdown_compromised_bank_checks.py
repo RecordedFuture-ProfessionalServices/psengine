@@ -14,11 +14,10 @@
 import base64
 from typing import TYPE_CHECKING
 
-from markdown_strings import bold
-
 from ...constants import TIMESTAMP_STR
 from ...markdown import MarkdownMaker
 from ...markdown.markdown import divider, table_from_rows
+from ...markdown.markdown_strings import bold
 
 if TYPE_CHECKING:
     from ...playbook_alerts.playbook_alerts import PBA_CompromisedBankChecks

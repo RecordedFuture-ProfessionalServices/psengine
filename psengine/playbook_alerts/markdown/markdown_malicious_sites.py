@@ -14,12 +14,11 @@
 import base64
 from typing import TYPE_CHECKING
 
-from markdown_strings import bold
-
 from ...constants import TIMESTAMP_STR
 from ...helpers import FormattingHelpers
 from ...markdown import MarkdownMaker
 from ...markdown.markdown import divider, table_from_rows
+from ...markdown.markdown_strings import bold
 from ..models.pba_malicious_sites import ValueServer
 
 if TYPE_CHECKING:
