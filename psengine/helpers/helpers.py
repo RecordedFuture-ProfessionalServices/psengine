@@ -503,10 +503,12 @@ class Validators:
                 if v is None:
                     continue
                 if isinstance(v, str):
-                    v_strip = v.strip()
-                    if not v_strip:
+                    stripped = v.strip()
+                    if not stripped:
                         continue
-                result.append(v_strip)
+                    result.append(stripped)
+                else:
+                    result.append(v)
             return result
         return value
 
