@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.8.7 - 2026-07-27
+
+### Added
+
+- Added `EntityList.entities_with_tags()`, supporting the `list/{id}/entitiesWithTags` endpoint. It returns the entities of a list together with their list-specific tags as `ListEntityWithTags` objects, which extend `ListEntity` with a `tags` list of `ListEntityTag`. Tags are a fixed set of 57 predefined values, populated only for lists whose type has tagging enabled (currently Third-Parties Watch Lists) - see the [available tags](https://docs.recordedfuture.com/reference/lists-available-tags) reference.
+
 ## v2.8.6 - 2026-07-27
 
 ### Added

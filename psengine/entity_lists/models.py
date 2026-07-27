@@ -14,11 +14,26 @@
 
 from pydantic import Field
 
-from ..common_models import RFBaseModel
+from ..common_models import IdName, RFBaseModel
 
 
 class EntityID(RFBaseModel):
     id_: str = Field(alias='id')
+
+
+class ListEntityTag(IdName):
+    """Validate a single tag received from `/{listId}/entitiesWithTags` endpoint.
+
+    Tags are **not** free-text. They are a fixed set of 57 predefined values, populated only for
+    lists whose type has tagging enabled (currently Third-Parties Watch Lists), so arbitrary tag
+    strings cannot be supplied or expected. `id` always has the form
+    `enum:EntityListTag:<name>`, for example `enum:EntityListTag:tier1`.
+
+    `name` is the tag's API value (`tier1`), not its display name (`Tier 1`).
+
+    See https://docs.recordedfuture.com/reference/lists-available-tags for the full list of
+    valid tags.
+    """
 
 
 class Organisation(RFBaseModel):

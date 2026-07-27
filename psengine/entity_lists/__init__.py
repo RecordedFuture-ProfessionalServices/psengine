@@ -11,6 +11,13 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from .entity_list import EntityList, ListEntity, ListInfoOut, ListStatusOut
+from .entity_list import (
+    EntityList,
+    ListEntity,
+    ListEntityWithTags,
+    ListInfoOut,
+    ListStatusOut,
+)
 from .entity_list_mgr import EntityListMgr
 from .errors import ListApiError, ListResolutionError, ListStateError
+from .models import ListEntityTag

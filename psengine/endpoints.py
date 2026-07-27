@@ -75,6 +75,7 @@ EP_ENTITY_LOOKUP = BASE_URL + '/entity-match/entity/{}'
 EP_LIST = BASE_URL + '/list'
 EP_CREATE_LIST = EP_LIST + '/create'
 EP_SEARCH_LIST = EP_LIST + '/search'
+EP_LIST_ENTITIES_WITH_TAGS = EP_LIST + '/{}/entitiesWithTags'
 
 ###############################################################################
 # SOAR Endpoints

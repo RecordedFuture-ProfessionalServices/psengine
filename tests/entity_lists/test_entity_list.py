@@ -2,7 +2,15 @@ import pytest
 from requests import Response
 from requests.models import HTTPError
 
-from psengine.entity_lists import EntityList, EntityListMgr, ListApiError, ListEntity
+from psengine.endpoints import EP_LIST_ENTITIES_WITH_TAGS
+from psengine.entity_lists import (
+    EntityList,
+    EntityListMgr,
+    ListApiError,
+    ListEntity,
+    ListEntityTag,
+    ListEntityWithTags,
+)
 from psengine.entity_match.errors import MatchApiError
 from tests.entity_lists.conftest import MOCK_DIR
 
@@ -12,6 +20,7 @@ EMPTY_LIST_NAME = 'psengine-test-empty-list-do-not-delete'
 EMPTY_LIST_ID = 'report:xLSrTL'
 TEST_LIST_TEXT_ENTRIES = 'psengine-test-list-text-entries-do-not-delete'
 TEST_LIST_TEXT_ENTRIES_ID = '1oVnJy'
+TEST_COMPANY_LIST_ID = 'report:FNESDXu2WZ4'
 
 ADD_OP = 'add'
 REMOVE_OP = 'remove'
@@ -88,6 +97,76 @@ class Test_List:
         assert len(entities) == 10
         for entity in entities:
             assert isinstance(entity, ListEntity)
+
+    def test_entities_with_tags(self, list_mgr: EntityListMgr, mocker, mock_request):
+        mocks = [
+            mock_request(MOCK_DIR / 'test_entities_with_tags_0.json'),
+            mock_request(MOCK_DIR / 'test_entities_with_tags_1.json'),
+        ]
+
+        request = mocker.patch.object(list_mgr.rf_client, 'request', side_effect=mocks)
+
+        list_ = list_mgr.fetch(TEST_COMPANY_LIST_ID)
+        entities = list_.entities_with_tags()
+
+        verb, url = request.call_args.args
+        assert verb == 'get'
+        assert url == EP_LIST_ENTITIES_WITH_TAGS.format(TEST_COMPANY_LIST_ID)
+        assert url.endswith(f'/list/{TEST_COMPANY_LIST_ID}/entitiesWithTags')
+
+        assert len(entities) == 3
+        for entity in entities:
+            assert isinstance(entity, ListEntityWithTags)
+            assert isinstance(entity, ListEntity)
+            assert all(isinstance(tag, ListEntityTag) for tag in entity.tags)
+
+        tagged, with_context, untagged = entities
+
+        assert tagged.entity.id_ == 'FNESDXsdSEM'
+        assert tagged.entity.type_ == 'Company'
+        assert tagged.entity.name == 'Northwind Components AB'
+        assert tagged.status == 'ready'
+        assert tagged.added is not None
+        assert tagged.context is None
+        assert [tag.name for tag in tagged.tags] == ['tier1', 'critical', 'financial']
+        assert [tag.id_ for tag in tagged.tags] == [
+            'enum:EntityListTag:tier1',
+            'enum:EntityListTag:critical',
+            'enum:EntityListTag:financial',
+        ]
+
+        assert with_context.context == {'onboarding_ticket': 'TPR-4821'}
+        assert with_context.status == 'pending'
+        assert [tag.name for tag in with_context.tags] == ['most_critical_supplier']
+
+        assert untagged.tags == []
+
+    def test_entities_with_tags_no_tags_key(self, fresh_list: EntityList, mocker, make_response):
+        mock = make_response(
+            [
+                {
+                    'entity': {'id': 'ip:8.8.8.8', 'type': 'IpAddress', 'name': '8.8.8.8'},
+                    'status': 'ready',
+                    'added': '2026-07-21T15:11:18.069Z',
+                }
+            ]
+        )
+        mocker.patch.object(fresh_list.rf_client, 'request', return_value=mock)
+
+        entities = fresh_list.entities_with_tags()
+        assert len(entities) == 1
+        assert entities[0].tags == []
+
+    @pytest.mark.parametrize('status_code', [400, 404])
+    def test_entities_with_tags_api_error(self, fresh_list: EntityList, mocker, status_code):
+        response = Response()
+        response.status_code = status_code
+        excp_obj = HTTPError('error')
+        excp_obj.response = response
+        mocker.patch.object(fresh_list.rf_client, 'request', side_effect=excp_obj)
+
+        with pytest.raises(ListApiError):
+            fresh_list.entities_with_tags()
 
     def test_text_entries(self, list_mgr: EntityListMgr, mocker, mock_request):
         mocks = [

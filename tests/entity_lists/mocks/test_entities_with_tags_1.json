@@ -1,0 +1,53 @@
+[
+    {
+        "entity": {
+            "id": "FNESDXsdSEM",
+            "type": "Company",
+            "name": "Northwind Components AB"
+        },
+        "tags": [
+            {
+                "id": "enum:EntityListTag:tier1",
+                "name": "tier1"
+            },
+            {
+                "id": "enum:EntityListTag:critical",
+                "name": "critical"
+            },
+            {
+                "id": "enum:EntityListTag:financial",
+                "name": "financial"
+            }
+        ],
+        "status": "ready",
+        "added": "2026-03-20T09:47:10.386Z"
+    },
+    {
+        "entity": {
+            "id": "NGBHt3",
+            "type": "Company",
+            "name": "Contoso Logistics Ltd"
+        },
+        "context": {
+            "onboarding_ticket": "TPR-4821"
+        },
+        "tags": [
+            {
+                "id": "enum:EntityListTag:most_critical_supplier",
+                "name": "most_critical_supplier"
+            }
+        ],
+        "status": "pending",
+        "added": "2026-05-10T05:45:58.639Z"
+    },
+    {
+        "entity": {
+            "id": "Kj18Pq",
+            "type": "Company",
+            "name": "Untagged Vendor Inc"
+        },
+        "tags": [],
+        "status": "ready",
+        "added": "2026-06-13T22:07:20.446Z"
+    }
+]
