@@ -486,11 +486,28 @@ class Validators:
     @staticmethod
     def convert_str_to_list(
         value: Annotated[str | list | None, Doc('String or list to convert.')],
-    ) -> Annotated[list | None, Doc('Converted list with None values removed.')]:
-        """Convert value from str to list and remove None values."""
-        if value:
-            value = value if isinstance(value, list) else [value]
-            return [v for v in value if v is not None]
+    ) -> Annotated[list | None, Doc('Converted list, stripped and cleaned.')]:
+        """Convert value from str to list, strip strings, drop None/empty strings.
+
+        Non-string items in a list are passed through unchanged so enum-typed
+        fields (e.g. `list[DomainTypes]`) keep their values.
+        """
+        if value is None:
+            return None
+        if isinstance(value, str):
+            value = value.strip()
+            return [value] if value else []
+        if isinstance(value, list):
+            result = []
+            for v in value:
+                if v is None:
+                    continue
+                if isinstance(v, str):
+                    v = v.strip()
+                    if not v:
+                        continue
+                result.append(v)
+            return result
         return value
 
     @staticmethod

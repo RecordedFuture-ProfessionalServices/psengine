@@ -64,16 +64,6 @@ _SEARCH_FIELD_PREFIX_MAP = {
     'to_date': 'to:',
 }
 
-def _str_to_list(v):
-    if v is None:
-        return None
-    if isinstance(v, str):
-        v = v.strip()
-        return [v] if v else []
-    if isinstance(v, list):
-        return [s.strip() for s in v if isinstance(s, str) and s.strip()]
-    return v
-
 class SampleSummary(RFBaseModel):
     """Short summary for a sample returned by `GET /samples/{sample_id}/summary`."""
 
@@ -102,14 +92,14 @@ class SearchQuery(RFBaseModel):
 class SearchIn(RFBaseModel):
     """Structured search filters translated into Triage search operators."""
 
-    file_hash: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
-    family: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
-    tag: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
-    botnet: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
-    wallet: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
-    ip: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
-    domain: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
-    url: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
+    file_hash: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    family: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    tag: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    botnet: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    wallet: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    ip: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    domain: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
+    url: Annotated[list[str] | None, BeforeValidator(Validators.convert_str_to_list)] = None
     from_date: str | None = None
     to_date: str | None = None
 
