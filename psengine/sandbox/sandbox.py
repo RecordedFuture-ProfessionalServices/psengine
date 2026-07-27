@@ -15,7 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Annotated, Literal
 
-from pydantic import BeforeValidator, Field, field_validator, model_validator
+from pydantic import BeforeValidator, Field, model_validator
 
 from ..common_models import RFBaseModel
 from ..helpers import Validators
@@ -64,6 +64,15 @@ _SEARCH_FIELD_PREFIX_MAP = {
     'to_date': 'to:',
 }
 
+def _str_to_list(v):
+    if v is None:
+        return None
+    if isinstance(v, str):
+        v = v.strip()
+        return [v] if v else []
+    if isinstance(v, list):
+        return [s.strip() for s in v if isinstance(s, str) and s.strip()]
+    return v
 
 class SampleSummary(RFBaseModel):
     """Short summary for a sample returned by `GET /samples/{sample_id}/summary`."""
@@ -79,7 +88,7 @@ class SampleSummary(RFBaseModel):
     sha256: str | None = None
     org_id: str | None = None
     meta: Meta | None = None
-    tasks: dict[str, Task] = Field(default_factory=dict)
+    tasks: dict[str, Task] = {}
 
 
 class SearchQuery(RFBaseModel):
@@ -88,41 +97,21 @@ class SearchQuery(RFBaseModel):
     query: str
 
 
+
+
 class SearchIn(RFBaseModel):
     """Structured search filters translated into Triage search operators."""
 
-    file_hash: list[str] | str | None = None
-    family: list[str] | str | None = None
-    tag: list[str] | str | None = None
-    botnet: list[str] | str | None = None
-    wallet: list[str] | str | None = None
-    ip: list[str] | str | None = None
-    domain: list[str] | str | None = None
-    url: list[str] | str | None = None
+    file_hash: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
+    family: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
+    tag: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
+    botnet: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
+    wallet: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
+    ip: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
+    domain: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
+    url: Annotated[list[str] | None, BeforeValidator(_str_to_list)] = None
     from_date: str | None = None
     to_date: str | None = None
-
-    @field_validator(
-        'file_hash',
-        'family',
-        'tag',
-        'botnet',
-        'wallet',
-        'ip',
-        'domain',
-        'url',
-        mode='before',
-    )
-    @classmethod
-    def _str_to_list(cls, v):
-        if v is None:
-            return None
-        if isinstance(v, str):
-            v = v.strip()
-            return [v] if v else []
-        if isinstance(v, list):
-            return [s.strip() for s in v if isinstance(s, str) and s.strip()]
-        return v
 
     def to_query_out(self, join_operator='AND') -> SearchQuery:
         """Join the structured filters into a single Triage query string."""
@@ -173,17 +162,17 @@ class StaticAnalysisReport(RFBaseModel):
     sample: StaticReportSample
     task: StaticReportTask
     analysis: StaticReportAnalysis
-    signatures: list[StaticReportSignature] = Field(default_factory=list)
-    files: list[StaticReportFile] = Field(default_factory=list)
-    extracted: list[StaticReportExtracted] = Field(default_factory=list)
-    unpack_count: int | None = None
-    error_count: int | None = None
-
     # The API sends `null` for these when there's nothing (e.g. `files: null` for URL
     # reports) -- coerce to [] so the fields are always iterable.
-    _coerce_lists = field_validator('signatures', 'files', 'extracted', mode='before')(
-        Validators.none_to_empty_list
-    )
+    signatures: Annotated[
+        list[StaticReportSignature], BeforeValidator(Validators.none_to_empty_list)
+    ] = []
+    files: Annotated[list[StaticReportFile], BeforeValidator(Validators.none_to_empty_list)] = []
+    extracted: Annotated[
+        list[StaticReportExtracted], BeforeValidator(Validators.none_to_empty_list)
+    ] = []
+    unpack_count: int | None = None
+    error_count: int | None = None
 
 
 class OverviewReport(RFBaseModel):
@@ -198,15 +187,13 @@ class OverviewReport(RFBaseModel):
     build: str | None = None
     analysis: OverviewAnalysis
     sample: OverviewSample
-    signatures: list[OverviewSignature] = Field(default_factory=list)
-    extracted: list[OverviewExtracted] = Field(default_factory=list)
-    targets: list[OverviewTarget] = Field(default_factory=list)
-    tasks: dict[str, OverviewTask] = Field(default_factory=dict)
-    errors: list[OverviewError] = Field(default_factory=list)
-
+    signatures: list[OverviewSignature] = []
+    extracted: list[OverviewExtracted] = []
     # The API sends `targets: null` when there are no targets -- coerce to [] so the
     # field is always iterable.
-    _coerce_targets = field_validator('targets', mode='before')(Validators.none_to_empty_list)
+    targets: Annotated[list[OverviewTarget], BeforeValidator(Validators.none_to_empty_list)] = []
+    tasks: dict[str, OverviewTask] = {}
+    errors: list[OverviewError] = []
 
 
 class BehavioralReport(RFBaseModel):
@@ -227,16 +214,14 @@ class BehavioralReport(RFBaseModel):
     sample: BehavioralSample
     task: BehavioralReportTask
     analysis: BehavioralAnalysis
-    tags: list[str] = Field(default_factory=list)
-    signatures: list[OverviewSignature] = Field(default_factory=list)
-    processes: list[BehavioralProcess] = Field(default_factory=list)
-    network: BehavioralNetwork = Field(default_factory=BehavioralNetwork)
-    dumped: list[BehavioralDumped] = Field(default_factory=list)
-    extracted: list[OverviewExtracted] = Field(default_factory=list)
-    errors: list[BehavioralError] = Field(default_factory=list)
-
     # The API sends `tags: null` for the top-level tags -- coerce to [] so it is iterable.
-    _coerce_tags = field_validator('tags', mode='before')(Validators.none_to_empty_list)
+    tags: Annotated[list[str], BeforeValidator(Validators.none_to_empty_list)] = []
+    signatures: list[OverviewSignature] = []
+    processes: list[BehavioralProcess] = []
+    network: BehavioralNetwork = Field(default_factory=BehavioralNetwork)
+    dumped: list[BehavioralDumped] = []
+    extracted: list[OverviewExtracted] = []
+    errors: list[BehavioralError] = []
 
 
 class BehavioralReportFailure(RFBaseModel):
@@ -454,11 +439,9 @@ class ProfileOptions(RFBaseModel):
     API don't break parsing.
     """
 
-    browser: Browser | None = None
-
     # Real-world payloads show `"browser": ""` for profiles created without a browser
     # choice — normalise to None so the Browser Literal validator doesn't reject it.
-    _browser_empty_to_none = field_validator('browser', mode='before')(Validators.empty_str_to_none)
+    browser: Annotated[Browser | None, BeforeValidator(Validators.empty_str_to_none)] = None
 
 
 class ProfileDeleteOut(RFBaseModel):
@@ -488,19 +471,13 @@ class Profile(RFBaseModel):
 
     id_: str = Field(alias='id')
     name: str
-    tags: list[str] = Field(default_factory=list)
-    network: NetworkMode | None = None
-    geolocation: list[str] = Field(default_factory=list)
+    tags: list[str] = []
+    # POST /profiles echoes `network=""` for profiles created without a network mode.
+    network: Annotated[NetworkMode | None, BeforeValidator(Validators.empty_str_to_none)] = None
+    # API returns either `null` or `[]` for unset geolocation; both normalise to [].
+    geolocation: Annotated[list[str], BeforeValidator(Validators.none_to_empty_list)] = []
     timeout: int | None = None
     options: ProfileOptions | None = None
-
-    # API returns either `null` or `[]` for unset geolocation; both normalise to [].
-    _coerce_geolocation = field_validator('geolocation', mode='before')(
-        Validators.none_to_empty_list
-    )
-
-    # POST /profiles echoes `network=""` for profiles created without a network mode.
-    _network_empty_to_none = field_validator('network', mode='before')(Validators.empty_str_to_none)
 
 
 class CreateUpdateProfileIn(RFBaseModel):
