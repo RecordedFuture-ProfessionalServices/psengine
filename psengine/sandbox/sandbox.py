@@ -64,6 +64,7 @@ _SEARCH_FIELD_PREFIX_MAP = {
     'to_date': 'to:',
 }
 
+
 class SampleSummary(RFBaseModel):
     """Short summary for a sample returned by `GET /samples/{sample_id}/summary`."""
 
@@ -85,8 +86,6 @@ class SearchQuery(RFBaseModel):
     """Triage query string wrapper sent as the `query` param of `GET /search`."""
 
     query: str
-
-
 
 
 class SearchIn(RFBaseModel):
