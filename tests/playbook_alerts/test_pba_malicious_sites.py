@@ -4,8 +4,6 @@ from pathlib import Path
 import pytest
 
 from psengine.playbook_alerts import PACategory
-from psengine.playbook_alerts.playbook_alert_mgr import PlaybookAlertMgr
-from tests.playbook_alerts.conftest import MALICIOUS_SITES_MOCK
 from psengine.playbook_alerts.models.panel_log import (
     TYPE_MAPPING,
     AttackerAddedChange,
@@ -30,6 +28,8 @@ from psengine.playbook_alerts.models.pba_malicious_sites import (
     MaliciousSitesPanelEvidenceWhois,
     MaliciousSitesPanelStatus,
 )
+from psengine.playbook_alerts.playbook_alert_mgr import PlaybookAlertMgr
+from tests.playbook_alerts.conftest import MALICIOUS_SITES_MOCK
 
 CATEGORY = PACategory.MALICIOUS_SITES.value
 
@@ -197,9 +197,7 @@ class Test_MaliciousSitesMarkdown:
         mocks = [mock_request(MALICIOUS_SITES_MOCK / 'test_markdown_single_alert.json')]
         mocker.patch.object(playbook_mgr.rf_client, 'request', side_effect=mocks)
 
-        alert = playbook_mgr.fetch(
-            'string', PACategory.MALICIOUS_SITES.value, fetch_images=False
-        )
+        alert = playbook_mgr.fetch('string', PACategory.MALICIOUS_SITES.value, fetch_images=False)
         markdown = alert.markdown()
 
         assert isinstance(markdown, str)
