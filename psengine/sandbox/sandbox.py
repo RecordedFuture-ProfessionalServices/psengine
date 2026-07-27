@@ -454,7 +454,7 @@ class ProfileOptions(RFBaseModel):
     API don't break parsing.
     """
 
-    browser: Browser | str | None = None
+    browser: Browser | None = None
 
     # Real-world payloads show `"browser": ""` for profiles created without a browser
     # choice — normalise to None so the Browser Literal validator doesn't reject it.
@@ -489,7 +489,7 @@ class Profile(RFBaseModel):
     id_: str = Field(alias='id')
     name: str
     tags: list[str] = Field(default_factory=list)
-    network: NetworkMode | str | None = None
+    network: NetworkMode | None = None
     geolocation: list[str] = Field(default_factory=list)
     timeout: int | None = None
     options: ProfileOptions | None = None
