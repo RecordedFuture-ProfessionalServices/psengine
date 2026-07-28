@@ -11,6 +11,7 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from .constants import ListTagName
 from .entity_list import (
     EntityList,
     ListEntity,
@@ -20,4 +21,10 @@ from .entity_list import (
 )
 from .entity_list_mgr import EntityListMgr
 from .errors import ListApiError, ListResolutionError, ListStateError
-from .models import ListEntityTag
+from .models import (
+    EntityNotResolvedOperation,
+    ListEntityTag,
+    ReplaceEntityTagsOut,
+    TagsUnchangedOperation,
+    TagsUpdatedOperation,
+)

@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.8.8 - 2026-07-27
+
+### Added
+
+- Added `EntityList.update_entity_tags()`, supporting the `list/{id}/entity/tags` endpoint. It **replaces** every tag on an entity with the supplied set - passing an empty list clears them all. The response is returned as `ReplaceEntityTagsOut`, whose `operation` is discriminated on `status` (`TagsUpdatedOperation`, `TagsUnchangedOperation`, or `EntityNotResolvedOperation` when a `(name, type)` tuple cannot be resolved), with `changed` and `current_tags` convenience properties. The 57 predefined tag values are available as the `ListTagName` enum, which is offered for discoverability and is not enforced - plain strings are still accepted and the API remains the authority.
+
 ## v2.8.7 - 2026-07-27
 
 ### Added

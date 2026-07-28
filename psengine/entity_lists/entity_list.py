@@ -22,7 +22,7 @@ from typing_extensions import Doc
 
 from ..common_models import IdNameType, RFBaseModel
 from ..constants import TIMESTAMP_STR
-from ..endpoints import EP_LIST, EP_LIST_ENTITIES_WITH_TAGS
+from ..endpoints import EP_LIST, EP_LIST_ENTITIES_WITH_TAGS, EP_LIST_ENTITY_TAGS
 from ..entity_match import EntityMatchMgr, MatchApiError
 from ..helpers import debug_call
 from ..helpers.helpers import connection_exceptions
@@ -31,10 +31,13 @@ from .constants import ADD_OP, ERROR_NAME, IS_READY_INCREMENT, REMOVE_OP, UNCHAN
 from .errors import ListApiError
 from .models import (
     AddEntityRequestModel,
+    EntityNotResolvedOperation,
     ListEntityOperationResponse,
     ListEntityTag,
     OwnerOrganisationDetails,
     RemoveEntityRequestModel,
+    ReplaceEntityTagsIn,
+    ReplaceEntityTagsOut,
 )
 
 
@@ -317,6 +320,66 @@ class EntityList(ListInfoOut):
         url = EP_LIST_ENTITIES_WITH_TAGS.format(self.id_)
         response = self.rf_client.request('get', url)
         return [ListEntityWithTags.model_validate(entity) for entity in response.json()]
+
+    @debug_call
+    @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
+    def update_entity_tags(
+        self,
+        entity: Annotated[
+            str | tuple[str, str], Doc('ID or (name, type) tuple of the entity to tag.')
+        ],
+        tags: Annotated[
+            list[str],
+            Doc('Complete set of tags to apply. Replaces every tag already on the entity.'),
+        ],
+    ) -> Annotated[
+        ReplaceEntityTagsOut, Doc('Response from the `list/{id}/entity/tags` endpoint.')
+    ]:
+        """Replace all tags on an entity in a list.
+
+        This **replaces** rather than appends: `tags` becomes the entity's complete tag set,
+        and passing an empty list clears every tag from it.
+
+        Tags are **not** free-text. They are a fixed set of 57 predefined values - pass them as
+        plain strings or as `ListTagName` members. Invalid names are rejected by the API with a
+        400. See https://docs.recordedfuture.com/reference/lists-available-tags for the full
+        list.
+
+        Tagging is only enabled for lists whose type supports it (currently Third-Parties Watch
+        Lists); other list types respond 403.
+
+        If `entity` is a `(name, type)` tuple that cannot be resolved, the returned
+        `operation` is an `EntityNotResolvedOperation` rather than an exception, matching
+        `add` and `remove`.
+
+        Endpoint:
+            `list/{id}/entity/tags`
+
+        Raises:
+            ValidationError: if any supplied parameter is of incorrect type.
+            ListApiError: If connection error occurs. The API responds 400 for an invalid tag
+                name, entity, or list, 403 if tag updates are not enabled for the list type,
+                and 404 if the entity is not on the list.
+        """
+        if isinstance(entity, str):
+            resolved_entity_id = entity
+        else:
+            resolved_entity = self.match_mgr.resolve_entity_id(entity[0], entity_type=entity[1])
+            if not resolved_entity.is_found:
+                return ReplaceEntityTagsOut(
+                    operation=EntityNotResolvedOperation(
+                        status='entity_not_resolved', message=str(resolved_entity.content)
+                    )
+                )
+            resolved_entity_id = resolved_entity.content.id_
+
+        request_body = {'entity': {'id': resolved_entity_id}, 'tags': tags}
+        ReplaceEntityTagsIn.model_validate(request_body)
+
+        url = EP_LIST_ENTITY_TAGS.format(self.id_)
+        response = self.rf_client.request('post', url, data=request_body)
+        return ReplaceEntityTagsOut.model_validate(response.json())
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)

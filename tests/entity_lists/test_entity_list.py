@@ -1,15 +1,21 @@
 import pytest
+from pydantic import ValidationError
 from requests import Response
 from requests.models import HTTPError
 
-from psengine.endpoints import EP_LIST_ENTITIES_WITH_TAGS
+from psengine.endpoints import EP_LIST_ENTITIES_WITH_TAGS, EP_LIST_ENTITY_TAGS
 from psengine.entity_lists import (
     EntityList,
     EntityListMgr,
+    EntityNotResolvedOperation,
     ListApiError,
     ListEntity,
     ListEntityTag,
     ListEntityWithTags,
+    ListTagName,
+    ReplaceEntityTagsOut,
+    TagsUnchangedOperation,
+    TagsUpdatedOperation,
 )
 from psengine.entity_match.errors import MatchApiError
 from tests.entity_lists.conftest import MOCK_DIR
@@ -167,6 +173,129 @@ class Test_List:
 
         with pytest.raises(ListApiError):
             fresh_list.entities_with_tags()
+
+    def test_update_entity_tags_updated(self, fresh_list: EntityList, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'test_update_entity_tags_updated.json')
+        request = mocker.patch.object(fresh_list.rf_client, 'request', return_value=mock)
+
+        res = fresh_list.update_entity_tags('B_tZu', ['tier1', 'critical'])
+
+        verb, url = request.call_args.args
+        assert verb == 'post'
+        assert url == EP_LIST_ENTITY_TAGS.format(fresh_list.id_)
+        assert url.endswith(f'/list/{fresh_list.id_}/entity/tags')
+        assert request.call_args.kwargs['data'] == {
+            'entity': {'id': 'B_tZu'},
+            'tags': ['tier1', 'critical'],
+        }
+
+        assert isinstance(res, ReplaceEntityTagsOut)
+        assert res.entity_id == 'B_tZu'
+        assert isinstance(res.operation, TagsUpdatedOperation)
+        assert res.operation.tags_before == ['tier1', 'critical', 'financial']
+        assert res.operation.tags_after == ['tier1', 'critical']
+        assert res.operation.tags_added == []
+        assert res.operation.tags_removed == ['financial']
+        assert res.operation.updated is not None
+        assert res.changed is True
+        assert res.current_tags == ['tier1', 'critical']
+
+    def test_update_entity_tags_unchanged(self, fresh_list: EntityList, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'test_update_entity_tags_unchanged.json')
+        mocker.patch.object(fresh_list.rf_client, 'request', return_value=mock)
+
+        res = fresh_list.update_entity_tags('B_tZu', ['tier1', 'critical', 'financial'])
+
+        assert isinstance(res.operation, TagsUnchangedOperation)
+        assert res.operation.current_tags == ['tier1', 'critical', 'financial']
+        assert res.operation.message == 'Tags are already set to the requested values'
+        assert res.changed is False
+        assert res.current_tags == ['tier1', 'critical', 'financial']
+
+    def test_update_entity_tags_accepts_enum(self, fresh_list: EntityList, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'test_update_entity_tags_updated.json')
+        request = mocker.patch.object(fresh_list.rf_client, 'request', return_value=mock)
+
+        fresh_list.update_entity_tags('B_tZu', [ListTagName.TIER1, ListTagName.CRITICAL])
+
+        assert request.call_args.kwargs['data']['tags'] == ['tier1', 'critical']
+
+    def test_update_entity_tags_clears_all(self, fresh_list: EntityList, mocker, make_response):
+        mock = make_response(
+            {
+                'entity_id': 'B_tZu',
+                'operation': {
+                    'status': 'tags_updated',
+                    'tags_before': ['tier1'],
+                    'tags_after': [],
+                    'tags_added': [],
+                    'tags_removed': ['tier1'],
+                    'updated': '2026-07-27T23:43:57.834Z',
+                },
+            }
+        )
+        request = mocker.patch.object(fresh_list.rf_client, 'request', return_value=mock)
+
+        res = fresh_list.update_entity_tags('B_tZu', [])
+
+        assert request.call_args.kwargs['data']['tags'] == []
+        assert res.current_tags == []
+        assert res.changed is True
+
+    def test_update_entity_tags_by_name_and_type(
+        self, fresh_list: EntityList, mocker, mock_request
+    ):
+        mock = mock_request(MOCK_DIR / 'test_update_entity_tags_updated.json')
+        request = mocker.patch.object(fresh_list.rf_client, 'request', return_value=mock)
+        mocker.patch.object(
+            fresh_list.match_mgr,
+            'resolve_entity_id',
+            return_value=mocker.Mock(is_found=True, content=mocker.Mock(id_='B_tZu')),
+        )
+
+        res = fresh_list.update_entity_tags(('Sophos', 'Company'), ['tier1', 'critical'])
+
+        assert request.call_args.kwargs['data']['entity'] == {'id': 'B_tZu'}
+        assert res.changed is True
+
+    def test_update_entity_tags_unresolvable_entity(self, fresh_list: EntityList, mocker):
+        request = mocker.patch.object(fresh_list.rf_client, 'request')
+        mocker.patch.object(
+            fresh_list.match_mgr,
+            'resolve_entity_id',
+            return_value=mocker.Mock(is_found=False, content='No entity found'),
+        )
+
+        res = fresh_list.update_entity_tags(('Nope Ltd', 'Company'), ['tier1'])
+
+        request.assert_not_called()
+        assert isinstance(res.operation, EntityNotResolvedOperation)
+        assert res.operation.message == 'No entity found'
+        assert res.entity_id is None
+        assert res.changed is False
+        assert res.current_tags is None
+
+    @pytest.mark.parametrize('status_code', [400, 403, 404])
+    def test_update_entity_tags_api_error(self, fresh_list: EntityList, mocker, status_code):
+        response = Response()
+        response.status_code = status_code
+        excp_obj = HTTPError('error')
+        excp_obj.response = response
+        mocker.patch.object(fresh_list.rf_client, 'request', side_effect=excp_obj)
+
+        with pytest.raises(ListApiError):
+            fresh_list.update_entity_tags('B_tZu', ['tier1'])
+
+    def test_update_entity_tags_unknown_status_raises(self, fresh_list: EntityList, mocker):
+        mock = mocker.Mock()
+        mock.json.return_value = {
+            'entity_id': 'B_tZu',
+            'operation': {'status': 'tags_exploded', 'message': 'what'},
+        }
+        mocker.patch.object(fresh_list.rf_client, 'request', return_value=mock)
+
+        with pytest.raises(ValidationError):
+            fresh_list.update_entity_tags('B_tZu', ['tier1'])
 
     def test_text_entries(self, list_mgr: EntityListMgr, mocker, mock_request):
         mocks = [
