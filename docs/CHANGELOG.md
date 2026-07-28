@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.8.5 - 2026-07-28
+
+### Changed
+
+- Bump requirements for `more_itertools`.
+
 ## v2.8.4 - 2026-07-13
 
 ### Changed
