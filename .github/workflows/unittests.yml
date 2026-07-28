@@ -22,8 +22,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      RF_TOKEN: ${{ secrets.RF_TOKEN }}
-      RF_ASI_TOKEN: ${{ secrets.RF_ASI_TOKEN }}
+      RF_TOKEN: ${{ secrets.RF_TOKEN || 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' }}
+      RF_ASI_TOKEN: ${{ secrets.RF_ASI_TOKEN || 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' }}
       MIN_COVERAGE: 94
     
     steps:
