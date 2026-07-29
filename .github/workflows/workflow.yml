@@ -13,7 +13,7 @@ jobs:
       version:     ${{ steps.get_version.outputs.version }}
       tag_exists:  ${{ steps.tagcheck.outputs.exists }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with: { fetch-depth: 0 }
 
       - name: Extract version
@@ -42,7 +42,7 @@ jobs:
     outputs:
       version: ${{ steps.version_info.outputs.version }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with: { fetch-depth: 0 }
 
       - name: Export version
@@ -77,7 +77,7 @@ jobs:
     environment:
       name: pypi
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.release.outputs.version }}
           fetch-depth: 0
