@@ -11,12 +11,11 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from markdown_strings import bold, link
-
 from ...constants import TIMESTAMP_STR, TRUNCATE_COMMENT
 from ...markdown import (
     MarkdownMaker,
 )
+from ...markdown.markdown_strings import bold, link
 from ..pa_category import PACategory
 from .markdown_code_repo import _code_repo_markdown
 from .markdown_cyber_vulnerability import _cyber_vulnerability_markdown

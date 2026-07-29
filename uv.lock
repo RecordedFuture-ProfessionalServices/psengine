@@ -3,7 +3,7 @@ revision = 3
 requires-python = ">=3.10, <3.15"
 
 [options]
-exclude-newer = "2026-06-23T12:56:44.25711Z"
+exclude-newer = "2026-07-21T10:14:49.390657Z"
 exclude-newer-span = "P7D"
 
 [[package]]
@@ -478,15 +478,6 @@ wheels = [
 ]
 
 [[package]]
-name = "markdown-strings"
-version = "3.4.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/72/d2/ef65d0f3c150bfc99f5c4a516ae57e7c3acddfaacc1196dd296b1299ea7f/markdown_strings-3.4.0.tar.gz", hash = "sha256:7574de0606160d7291ac2e1933a8ed47d31f0b49b674f128da1f548930c8578b", size = 7869, upload-time = "2024-05-03T15:40:04.784Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/92/aa/aa65cf458a5053d24237902e7a07a2f895f4d515aee53f73636deb4d36ea/markdown_strings-3.4.0-py2.py3-none-any.whl", hash = "sha256:1a7e2a575b2af27482ccbe6a0efc3407f678ac5cece8654c36fd827ac540a631", size = 8424, upload-time = "2024-05-03T15:40:02.713Z" },
-]
-
-[[package]]
 name = "markupsafe"
 version = "3.0.3"
 source = { registry = "https://pypi.org/simple" }
@@ -822,12 +813,11 @@ wheels = [
 
 [[package]]
 name = "psengine"
-version = "2.8.2"
+version = "2.8.4"
 source = { editable = "." }
 dependencies = [
     { name = "idna" },
     { name = "jsonpath-ng" },
-    { name = "markdown-strings" },
     { name = "more-itertools" },
     { name = "pydantic" },
     { name = "pydantic-settings", extra = ["toml"] },
@@ -868,8 +858,7 @@ docs = [
 requires-dist = [
     { name = "idna", specifier = ">=3.15" },
     { name = "jsonpath-ng", specifier = ">=1.5.3,<=1.8.0" },
-    { name = "markdown-strings", specifier = "==3.4.0" },
-    { name = "more-itertools", specifier = ">=9.0.0,<=11.0.2" },
+    { name = "more-itertools", specifier = ">=9.0.0,<=11.1.0" },
     { name = "pydantic", specifier = ">=2.7,<3.0.0" },
     { name = "pydantic-settings", extras = ["toml"], specifier = ">=2.14.2,<2.15.0" },
     { name = "python-dateutil", specifier = ">=2.7.0" },
@@ -883,7 +872,7 @@ requires-dist = [
 dev = [
     { name = "freezegun", specifier = ">=1.5.5" },
     { name = "mimesis", specifier = ">=19.1.0" },
-    { name = "pytest", specifier = "==9.0.3" },
+    { name = "pytest", specifier = "==9.1.1" },
     { name = "pytest-cov", specifier = "==7.1.0" },
     { name = "pytest-httpdbg", specifier = "==0.10.2" },
     { name = "pytest-md", specifier = "==0.2.0" },
@@ -901,7 +890,7 @@ docs = [
     { name = "mkdocs-exclude", specifier = "~=1.0.2" },
     { name = "mkdocs-material", specifier = ">=9.7.6,<9.8.0" },
     { name = "mkdocstrings", extras = ["python"], specifier = ">=1.0.4" },
-    { name = "pymdown-extensions", specifier = "~=10.21.3" },
+    { name = "pymdown-extensions", specifier = "~=11.0.1" },
     { name = "rich", specifier = "==15.0.0" },
 ]
 
@@ -1068,15 +1057,15 @@ wheels = [
 
 [[package]]
 name = "pymdown-extensions"
-version = "10.21.3"
+version = "11.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "markdown" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9e/26/d1015444da4d952a1ca487a236b522eb979766f0295a0bd0c5fc089989a9/pymdown_extensions-10.21.3.tar.gz", hash = "sha256:72cfcf55f07aea0d4af2c4f11dd4e52466ddfb1bb819673146398e0bd3a77354", size = 854140, upload-time = "2026-05-13T12:57:32.267Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/21/a9/5f0c535ba3b08fe09270c16808e053a968868242ecbd5676d4e3a488bf28/pymdown_extensions-11.0.1.tar.gz", hash = "sha256:dd2905ae6fc5b75582fafb139a1266ffc754705efa902aa50067fa7ff4f94ec0", size = 857113, upload-time = "2026-07-02T17:59:22.955Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7e/85/545a951eecc270fcd688288c600017e2050a1aacb56c711d208586d3e470/pymdown_extensions-10.21.3-py3-none-any.whl", hash = "sha256:d7a5d08014fc571e80ca21dd6f854e31f94c489800350564d55d15b3c41e76b6", size = 269002, upload-time = "2026-05-13T12:57:30.296Z" },
+    { url = "https://files.pythonhosted.org/packages/d6/54/da572c98c0b77626a91b5d3b89f0231d8bff5125c225420908632f8b342d/pymdown_extensions-11.0.1-py3-none-any.whl", hash = "sha256:db3943a62bab7e03af1364f0c4083e64b91fb097675a4b6cceccfbe9a77e5eb2", size = 269455, upload-time = "2026-07-02T17:59:21.271Z" },
 ]
 
 [[package]]
@@ -1090,7 +1079,7 @@ wheels = [
 
 [[package]]
 name = "pytest"
-version = "9.0.3"
+version = "9.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
@@ -1101,9 +1090,9 @@ dependencies = [
     { name = "pygments" },
     { name = "tomli", marker = "python_full_version < '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7d/0d/549bd94f1a0a402dc8cf64563a117c0f3765662e2e668477624baeec44d5/pytest-9.0.3.tar.gz", hash = "sha256:b86ada508af81d19edeb213c681b1d48246c1a91d304c6c81a427674c17eb91c", size = 1572165, upload-time = "2026-04-07T17:16:18.027Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e4/47/b9efed96c114afcfa3c9d3fe98a76a1d14c74a9e266d397cf6eb64be5e01/pytest-9.1.1.tar.gz", hash = "sha256:1088fbde8f2b49d95a549a195707afa7a76a3ce9bcadc26b6d71f0ffda5fe313", size = 1636369, upload-time = "2026-06-19T10:58:32.857Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d4/24/a372aaf5c9b7208e7112038812994107bc65a84cd00e0354a88c2c77a617/pytest-9.0.3-py3-none-any.whl", hash = "sha256:2c5efc453d45394fdd706ade797c0a81091eccd1d6e4bccfcd476e2b8e0ab5d9", size = 375249, upload-time = "2026-04-07T17:16:16.13Z" },
+    { url = "https://files.pythonhosted.org/packages/24/25/1de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f/pytest-9.1.1-py3-none-any.whl", hash = "sha256:37a86b45efb9a47a61a36449063e8e18d0cab3161329fc099eb21783169c4f0c", size = 386536, upload-time = "2026-06-19T10:58:31.347Z" },
 ]
 
 [[package]]

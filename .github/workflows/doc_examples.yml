@@ -15,7 +15,7 @@ jobs:
       RF_SANDBOX_TOKEN: ${{ secrets.RF_SANDBOX_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v7
 
       - name: Install GNU parallel
