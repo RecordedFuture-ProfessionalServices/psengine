@@ -195,7 +195,7 @@ class ConfigModel(BaseSettings):
             # Edge case: when RF_RF_TOKEN env var is set, it is used and RF_TOKEN is ignored
             # So we check if RF_TOKEN is set and validate it
             return ''
-        if not re.match(regex, token):
+        if not re.fullmatch(regex, token):
             raise ValueError(f'Invalid {label} API token. Must match regex {regex}')
 
         return token
