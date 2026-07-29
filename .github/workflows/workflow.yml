@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
   pull_request:
     types:
-      - closed                
+      - closed
+    branches:
+      - main
 
 jobs:
   prepare:
