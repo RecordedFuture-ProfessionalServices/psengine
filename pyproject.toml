@@ -53,7 +53,7 @@ dev = [
     "pytest-md==0.2.0",
     "pytest-random-order==1.2.0",
     "pytest-httpdbg==0.10.2",
-    "ruff~=0.15.8",
+    "ruff>=0.15.8,<0.17.0",
     "mimesis>=19.1.0",
     "freezegun>=1.5.5",
 ]
