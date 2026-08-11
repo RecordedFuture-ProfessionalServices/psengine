@@ -25,6 +25,8 @@ The variables pre-defined by the `ConfigModel` are:
 - `platform_id` -> str
 - `app_id` -> str
 - `rf_token` -> `RFToken`
+- `asi_token` -> `RFToken`
+- `sandbox_token` -> `RFToken`
 - `http_proxy` -> str
 - `https_proxy` -> str
 - `client_ssl_verify` -> bool

@@ -1,0 +1,2041 @@
+import json
+from pathlib import Path
+
+import pytest
+from pydantic import ValidationError
+from requests import ConnectionError, ConnectTimeout, HTTPError, ReadTimeout  # noqa: A004
+from requests.models import Response
+
+from psengine.endpoints import (
+    EP_SANDBOX_PROFILES,
+    EP_SANDBOX_PROFILES_ID,
+    EP_SANDBOX_SAMPLES,
+    EP_SANDBOX_SAMPLES_BEHAVIORAL,
+    EP_SANDBOX_SAMPLES_DOWNLOAD,
+    EP_SANDBOX_SAMPLES_ID,
+    EP_SANDBOX_SAMPLES_OVERVIEW,
+    EP_SANDBOX_SAMPLES_PROFILE,
+    EP_SANDBOX_SAMPLES_STATIC_REPORT,
+    EP_SANDBOX_SAMPLES_SUMMARY,
+    EP_SANDBOX_SEARCH,
+    SANDBOX_BASE_URLS,
+)
+from psengine.sandbox import (
+    BehavioralReport,
+    BehavioralReportsResult,
+    OverviewReport,
+    Profile,
+    ProfileOptions,
+    SampleProfileOut,
+    SandboxMgr,
+    StaticAnalysisReport,
+)
+from psengine.sandbox.errors import (
+    ProfileCreateError,
+    ProfileDeleteError,
+    ProfileFetchError,
+    ProfileNotFoundError,
+    ProfileUpdateError,
+    SampleBehavioralReportError,
+    SampleDeleteError,
+    SampleFetchError,
+    SampleFileFetchError,
+    SampleOverviewError,
+    SampleProfileError,
+    SampleReportNotAvailableError,
+    SampleReportNotFoundError,
+    SampleSearchError,
+    SamplesFetchError,
+    SampleStaticReportError,
+    SampleSubmitError,
+    SampleSummaryError,
+)
+from psengine.sandbox.models.static_report import StaticReportExtractedConfig
+from psengine.sandbox.sandbox import (
+    Sample,
+    SampleSummary,
+    SampleTasks,
+)
+
+MOCK_DIR = Path(__file__).parent / 'mocks'
+
+
+def _http_error(status_code: int, message: str = 'boom') -> HTTPError:
+    response = Response()
+    response.status_code = status_code
+    err = HTTPError(message)
+    err.response = response
+    return err
+
+
+def _http_error_json(status_code: int, error_code: str) -> HTTPError:
+    # Builds an HTTPError whose response carries an RF error envelope so the
+    # manager can inspect the `error` code (e.g. NOT_FOUND vs REPORT_NOT_AVAILABLE).
+    response = Response()
+    response.status_code = status_code
+    response._content = json.dumps({'error': error_code, 'message': 'x'}).encode()
+    err = HTTPError(error_code)
+    err.response = response
+    return err
+
+
+class Test_SandboxMgr:
+    """Tests for SandboxMgr."""
+
+    @pytest.mark.parametrize('choice', ['eu', 'usa', 'apj', 'public', 'private'])
+    def test_sandbox_choice_valid(self, choice):
+        mgr = SandboxMgr(sandbox_choice=choice)
+        assert mgr.base_url == SANDBOX_BASE_URLS[choice]
+
+    @pytest.mark.parametrize('choice', ['invalid-sandbox', '', 'EU'])
+    def test_sandbox_choice_invalid_raises_value_error(self, choice):
+        with pytest.raises(ValueError):
+            SandboxMgr(sandbox_choice=choice)
+
+    def test_fetch_profiles_happy_path(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'profile_list.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        profiles = sandbox_mgr.fetch_profiles()
+
+        assert isinstance(profiles, list)
+        assert len(profiles) == 3
+        assert all(isinstance(p, Profile) for p in profiles)
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_PROFILES.format(base_url=sandbox_mgr.base_url),
+        )
+
+    def test_fetch_profiles_empty_list(self, sandbox_mgr: SandboxMgr, mocker, make_response):
+        mock = make_response({'data': [], 'next': None})
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        assert sandbox_mgr.fetch_profiles() == []
+
+    def test_fetch_profiles_raises_on_http_error(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(500))
+
+        with pytest.raises(ProfileFetchError):
+            sandbox_mgr.fetch_profiles()
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_profiles_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(ProfileFetchError):
+            sandbox_mgr.fetch_profiles()
+
+    def test_fetch_profiles_raises_on_malformed_response(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # Response missing the 'data' key -> KeyError in manager -> ProfileFetchError.
+        mock = make_response({'unexpected': 'shape'})
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        with pytest.raises(ProfileFetchError):
+            sandbox_mgr.fetch_profiles()
+
+    def test_fetch_profile_by_id_happy_path(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'profile_single.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        profile = sandbox_mgr.fetch_profile('979a3fb9-6c52-452d-bd14-650b9f2eecda')
+
+        assert isinstance(profile, Profile)
+        assert profile.id_ == '979a3fb9-6c52-452d-bd14-650b9f2eecda'
+        assert profile.options.browser == 'chrome'
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_PROFILES_ID.format(
+                base_url=sandbox_mgr.base_url,
+                profile_id='979a3fb9-6c52-452d-bd14-650b9f2eecda',
+            ),
+        )
+
+    def test_fetch_profile_by_name(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'profile_single.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        sandbox_mgr.fetch_profile('pse-mock-a53247df-full')
+
+        # URL substitution must use the name verbatim (no encoding surprises).
+        assert mocked.call_args.args[1].endswith('/profiles/pse-mock-a53247df-full')
+
+    def test_fetch_profile_404_raises_not_found(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error(404, 'not found')
+        )
+
+        with pytest.raises(ProfileNotFoundError):
+            sandbox_mgr.fetch_profile('does-not-exist')
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_profile_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(ProfileNotFoundError):
+            sandbox_mgr.fetch_profile('any-id')
+
+    @pytest.mark.parametrize('profile_id', ['', None, 123])
+    def test_fetch_profile_validation_error(self, sandbox_mgr: SandboxMgr, profile_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_profile(profile_id)
+
+    def test_fetch_profile_normalizes_response_oddities(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # profile_created_minimal.json has `network: ""` and `geolocation: null`
+        # — the Profile validators must normalise these to None and [].
+        mock = mock_request(MOCK_DIR / 'profile_created_minimal.json')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        profile = sandbox_mgr.fetch_profile('d7ae61a8-8897-492d-b418-70ed582d0442')
+
+        assert profile.network is None
+        assert profile.geolocation == []
+        assert profile.options is None
+
+    def test_fetch_profile_options_empty_browser_normalised_to_none(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # Real-world payloads show `"options": {"browser": ""}` for profiles
+        # created without a browser choice — ProfileOptions must normalise
+        # the empty string to None rather than failing Browser-Literal
+        # validation. Mirrors the `drew-test` row in profile_list.json.
+        mock = make_response(
+            {
+                'id': 'x',
+                'name': 'x',
+                'tags': [],
+                'timeout': 30,
+                'network': 'internet',
+                'options': {'browser': ''},
+            }
+        )
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        profile = sandbox_mgr.fetch_profile('x')
+
+        assert isinstance(profile.options, ProfileOptions)
+        assert profile.options.browser is None
+
+    def test_create_profile_minimal_payload(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'profile_created_minimal.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        profile = sandbox_mgr.create_profile(
+            name='pse-mock-a53247df-minimal',
+            tags=['os:windows10-2004-x64'],
+            timeout=60,
+        )
+
+        assert isinstance(profile, Profile)
+        assert mocked.call_args.args == (
+            'post',
+            EP_SANDBOX_PROFILES.format(base_url=sandbox_mgr.base_url),
+        )
+        assert mocked.call_args.kwargs['data'] == {
+            'name': 'pse-mock-a53247df-minimal',
+            'tags': ['os:windows10-2004-x64'],
+            'timeout': 60,
+        }
+
+    def test_create_profile_full_payload_with_browser(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        mock = mock_request(MOCK_DIR / 'profile_created_full.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        profile = sandbox_mgr.create_profile(
+            name='pse-mock-a53247df-full',
+            tags=['os:windows10-2004-x64', 'locale:en-us'],
+            timeout=120,
+            network='vpn',
+            geolocation='us',  # bare string — coercion must convert to list.
+            browser='chrome',
+        )
+
+        assert isinstance(profile, Profile)
+        assert profile.options.browser == 'chrome'
+        sent = mocked.call_args.kwargs['data']
+        assert sent['name'] == 'pse-mock-a53247df-full'
+        assert sent['tags'] == ['os:windows10-2004-x64', 'locale:en-us']
+        assert sent['timeout'] == 120
+        assert sent['network'] == 'vpn'
+        assert sent['geolocation'] == ['us']
+        assert sent['options'] == {'browser': 'chrome'}
+        assert 'browser' not in sent
+
+    def test_create_profile_tags_string_coerced_to_list(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        mock = mock_request(MOCK_DIR / 'profile_created_minimal.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        sandbox_mgr.create_profile(
+            name='whatever',
+            tags='os:windows10-2004-x64',
+            timeout=60,
+        )
+
+        assert mocked.call_args.kwargs['data']['tags'] == ['os:windows10-2004-x64']
+
+    @pytest.mark.parametrize(
+        'kwargs',
+        [
+            # empty name
+            {'name': '', 'tags': ['t'], 'timeout': 60},
+            # empty tags list (Field min_length=1)
+            {'name': 'n', 'tags': [], 'timeout': 60},
+            # timeout below range
+            {'name': 'n', 'tags': ['t'], 'timeout': 0},
+            # timeout above range
+            {'name': 'n', 'tags': ['t'], 'timeout': 3601},
+            # invalid browser
+            {'name': 'n', 'tags': ['t'], 'timeout': 60, 'browser': 'safari'},
+            # invalid network mode
+            {'name': 'n', 'tags': ['t'], 'timeout': 60, 'network': 'wifi'},
+        ],
+    )
+    def test_create_profile_validation_errors(self, sandbox_mgr: SandboxMgr, kwargs):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.create_profile(**kwargs)
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_create_profile_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(ProfileCreateError):
+            sandbox_mgr.create_profile(name='n', tags=['t'], timeout=60)
+
+    def test_create_profile_raises_on_409_duplicate_name(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error(409, 'duplicate')
+        )
+
+        with pytest.raises(ProfileCreateError):
+            sandbox_mgr.create_profile(name='n', tags=['t'], timeout=60)
+
+    def test_update_profile_happy_path(self, sandbox_mgr: SandboxMgr, mocker, make_response):
+        # PUT returns empty body {} on success.
+        mock = make_response({})
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        result = sandbox_mgr.update_profile(
+            profile_id='abc-123',
+            name='renamed',
+            tags=['os:windows10-2004-x64'],
+            timeout=180,
+        )
+
+        assert result.updated is True
+        assert mocked.call_args.args == (
+            'put',
+            EP_SANDBOX_PROFILES_ID.format(base_url=sandbox_mgr.base_url, profile_id='abc-123'),
+        )
+        assert mocked.call_args.kwargs['data'] == {
+            'name': 'renamed',
+            'tags': ['os:windows10-2004-x64'],
+            'timeout': 180,
+        }
+
+    def test_update_profile_with_browser_nested_under_options(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        mock = make_response({})
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        sandbox_mgr.update_profile(
+            profile_id='abc-123',
+            name='renamed',
+            tags=['os:windows10-2004-x64'],
+            timeout=180,
+            browser='firefox',
+        )
+
+        sent = mocked.call_args.kwargs['data']
+        assert sent['options'] == {'browser': 'firefox'}
+        assert 'browser' not in sent
+
+    def test_update_profile_404_returns_updated_false(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error(404, 'not found')
+        )
+
+        result = sandbox_mgr.update_profile(
+            profile_id='missing-id',
+            name='n',
+            tags=['t'],
+            timeout=60,
+        )
+
+        assert result.updated is False
+
+    @pytest.mark.parametrize('status_code', [400, 401, 409, 500])
+    def test_update_profile_non_404_raises(self, sandbox_mgr: SandboxMgr, mocker, status_code):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(status_code))
+
+        with pytest.raises(ProfileUpdateError):
+            sandbox_mgr.update_profile(profile_id='abc-123', name='n', tags=['t'], timeout=60)
+
+    @pytest.mark.parametrize('exception', [ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_update_profile_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=exception('boom'))
+
+        with pytest.raises(ProfileUpdateError):
+            sandbox_mgr.update_profile(profile_id='abc-123', name='n', tags=['t'], timeout=60)
+
+    @pytest.mark.parametrize(
+        'kwargs',
+        [
+            # empty profile_id
+            {'profile_id': '', 'name': 'n', 'tags': ['t'], 'timeout': 60},
+            # empty name
+            {'profile_id': 'p', 'name': '', 'tags': ['t'], 'timeout': 60},
+            # empty tags list
+            {'profile_id': 'p', 'name': 'n', 'tags': [], 'timeout': 60},
+            # bad timeout (too high)
+            {'profile_id': 'p', 'name': 'n', 'tags': ['t'], 'timeout': 3601},
+            # invalid browser
+            {'profile_id': 'p', 'name': 'n', 'tags': ['t'], 'timeout': 60, 'browser': 'safari'},
+        ],
+    )
+    def test_update_profile_validation_errors(self, sandbox_mgr: SandboxMgr, kwargs):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.update_profile(**kwargs)
+
+    def test_delete_profile_happy_path(self, sandbox_mgr: SandboxMgr, mocker, make_response):
+        mock = make_response({})
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        result = sandbox_mgr.delete_profile(profile_id='abc-123')
+
+        assert result.deleted is True
+        assert mocked.call_args.args == (
+            'delete',
+            EP_SANDBOX_PROFILES_ID.format(base_url=sandbox_mgr.base_url, profile_id='abc-123'),
+        )
+        # DELETE carries no body.
+        assert 'data' not in mocked.call_args.kwargs
+
+    def test_delete_profile_404_returns_deleted_false(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error(404, 'not found')
+        )
+
+        result = sandbox_mgr.delete_profile(profile_id='missing-id')
+
+        assert result.deleted is False
+
+    @pytest.mark.parametrize('status_code', [400, 401, 403, 500])
+    def test_delete_profile_non_404_raises(self, sandbox_mgr: SandboxMgr, mocker, status_code):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(status_code))
+
+        with pytest.raises(ProfileDeleteError):
+            sandbox_mgr.delete_profile(profile_id='abc-123')
+
+    @pytest.mark.parametrize('exception', [ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_delete_profile_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=exception('boom'))
+
+        with pytest.raises(ProfileDeleteError):
+            sandbox_mgr.delete_profile(profile_id='abc-123')
+
+    @pytest.mark.parametrize('profile_id', ['', None, 123])
+    def test_delete_profile_validation_error(self, sandbox_mgr: SandboxMgr, profile_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.delete_profile(profile_id=profile_id)
+
+    # --- sample methods ----------------------------------------------------
+
+    def test_fetch_sample_summary_happy_path(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'sample_summary.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        result = sandbox_mgr.fetch_sample_summary('260515-nta8kscxnf')
+
+        assert isinstance(result, SampleSummary)
+        assert result.sample == '260515-nta8kscxnf'
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_SAMPLES_SUMMARY.format(
+                base_url=sandbox_mgr.base_url, sample_id='260515-nta8kscxnf'
+            ),
+        )
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_sample_summary_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        # `sample_id` has Field(min_length=1) like fetch_sample/delete_sample, so ''
+        # (empty), None and non-str types all fail validation before any network call.
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_sample_summary(sample_id)
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_sample_summary_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleSummaryError):
+            sandbox_mgr.fetch_sample_summary('any-id')
+
+    def test_search_samples_happy_path(self, sandbox_mgr: SandboxMgr, mocker):
+        page = json.loads((MOCK_DIR / 'sample_list_page.json').read_text())
+        mocked = mocker.patch.object(
+            sandbox_mgr.sb_client, 'request_paged', return_value=page['data']
+        )
+
+        results = sandbox_mgr.search_samples(tag='malware')
+
+        assert isinstance(results, list)
+        assert len(results) == len(page['data'])
+        assert all(isinstance(r, Sample) for r in results)
+        assert mocked.call_args.args[:2] == (
+            'get',
+            EP_SANDBOX_SEARCH.format(base_url=sandbox_mgr.base_url),
+        )
+        # SearchIn.to_query_out() builds the query string with the field prefix.
+        assert mocked.call_args.kwargs['params'] == {'query': 'tag:malware'}
+
+    def test_search_samples_query_string_composition(self, sandbox_mgr: SandboxMgr, mocker):
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
+
+        sandbox_mgr.search_samples(tag='malware', family='zeus')
+
+        # Order in the AND-joined string is the SearchIn field-declaration order.
+        assert mocked.call_args.kwargs['params'] == {'query': 'family:zeus AND tag:malware'}
+
+    def test_search_samples_bare_query_appended(self, sandbox_mgr: SandboxMgr, mocker):
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
+
+        sandbox_mgr.search_samples(tag='malware', query='extra-text')
+
+        assert mocked.call_args.kwargs['params']['query'].endswith('extra-text')
+        assert 'tag:malware' in mocked.call_args.kwargs['params']['query']
+
+    def test_search_samples_empty_result(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
+
+        assert sandbox_mgr.search_samples(tag='nothing-here') == []
+
+    def test_search_samples_forwards_pagination_kwargs(self, sandbox_mgr: SandboxMgr, mocker):
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
+
+        sandbox_mgr.search_samples(tag='malware', max_results=42, results_per_page=17)
+
+        assert mocked.call_args.kwargs['max_results'] == 42
+        assert mocked.call_args.kwargs['results_per_page'] == 17
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_search_samples_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', side_effect=err)
+
+        with pytest.raises(SampleSearchError):
+            sandbox_mgr.search_samples(tag='anything')
+
+    def test_fetch_samples_happy_path(self, sandbox_mgr: SandboxMgr, mocker):
+        page = json.loads((MOCK_DIR / 'sample_list_page.json').read_text())
+        mocked = mocker.patch.object(
+            sandbox_mgr.sb_client, 'request_paged', return_value=page['data']
+        )
+
+        results = sandbox_mgr.fetch_samples()
+
+        assert isinstance(results, list)
+        assert len(results) == len(page['data'])
+        assert all(isinstance(r, Sample) for r in results)
+        assert mocked.call_args.args[:2] == (
+            'get',
+            EP_SANDBOX_SAMPLES.format(base_url=sandbox_mgr.base_url),
+        )
+        assert mocked.call_args.kwargs['params'] == {'subset': 'owned'}
+
+    def test_fetch_samples_non_default_subset(self, sandbox_mgr: SandboxMgr, mocker):
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
+
+        sandbox_mgr.fetch_samples(subset='public')
+
+        assert mocked.call_args.kwargs['params'] == {'subset': 'public'}
+
+    @pytest.mark.parametrize(
+        'kwargs',
+        [
+            {'subset': 'invalid'},
+            {'max_results': 0},
+            {'samples_per_page': 0},
+            {'samples_per_page': 201},
+        ],
+    )
+    def test_fetch_samples_validation_errors(self, sandbox_mgr: SandboxMgr, kwargs):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_samples(**kwargs)
+
+    def test_fetch_samples_empty_result(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', return_value=[])
+
+        assert sandbox_mgr.fetch_samples() == []
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_samples_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request_paged', side_effect=err)
+
+        with pytest.raises(SamplesFetchError):
+            sandbox_mgr.fetch_samples()
+
+    def test_request_paged_stops_on_repeating_next_offset(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # Guard against an API that returns the same `next` cursor with a non-empty page
+        # forever: the loop must terminate instead of spinning. Exactly two `request` calls
+        # are served; a third would raise StopIteration and fail the test.
+        client = sandbox_mgr.sb_client
+        mocker.patch.object(
+            client,
+            'request',
+            side_effect=[
+                make_response({'data': [{'x': 1}], 'next': 'same'}),
+                make_response({'data': [{'x': 2}], 'next': 'same'}),
+            ],
+        )
+
+        result = client.request_paged('get', 'http://x', params={}, max_results=1000)
+
+        assert result == [{'x': 1}, {'x': 2}]
+
+    def test_fetch_sample_happy_path(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'sample_single.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        sample = sandbox_mgr.fetch_sample('260515-nta8kscxnf')
+
+        assert isinstance(sample, SampleTasks)
+        assert sample.id_ == '260515-nta8kscxnf'
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_SAMPLES_ID.format(
+                base_url=sandbox_mgr.base_url, sample_id='260515-nta8kscxnf'
+            ),
+        )
+
+    def test_fetch_sample_404_raises_fetch_error(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
+
+        with pytest.raises(SampleFetchError):
+            sandbox_mgr.fetch_sample('missing')
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_sample_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleFetchError):
+            sandbox_mgr.fetch_sample('any-id')
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_sample_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_sample(sample_id)
+
+    def test_fetch_sample_file_happy_path(
+        self, sandbox_mgr: SandboxMgr, mocker, make_binary_response
+    ):
+        # The endpoint returns raw octet-stream bytes with no filename header,
+        # so the manager returns response.content verbatim.
+        mock = make_binary_response(b'\x50\x4b\x03\x04rawbytes', {})
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        content = sandbox_mgr.fetch_sample_file('260515-nta8kscxnf')
+
+        assert content == b'\x50\x4b\x03\x04rawbytes'
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_SAMPLES_DOWNLOAD.format(
+                base_url=sandbox_mgr.base_url, sample_id='260515-nta8kscxnf'
+            ),
+        )
+
+    def test_fetch_sample_file_404_raises_fetch_error(self, sandbox_mgr: SandboxMgr, mocker):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
+
+        with pytest.raises(SampleFileFetchError):
+            sandbox_mgr.fetch_sample_file('missing')
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_sample_file_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleFileFetchError):
+            sandbox_mgr.fetch_sample_file('any-id')
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_sample_file_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_sample_file(sample_id)
+
+    def test_fetch_sample_static_report_simple(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+        # static_report_simple.json is a real capture of a single-file (CSV) sample:
+        # no signatures, one file at depth 0, nothing unpacked.
+        mock = mock_request(MOCK_DIR / 'static_report_simple.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_static_report('260529-q2zl9abwxw')
+
+        assert isinstance(report, StaticAnalysisReport)
+        assert report.sample.sample == '260529-q2zl9abwxw'
+        assert report.sample.target == 'ca.csv'
+        assert report.analysis.score == 1
+        assert report.signatures == []
+        assert len(report.files) == 1
+        assert report.files[0].sha256.startswith('51bcb923')
+        assert report.unpack_count == 0
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_SAMPLES_STATIC_REPORT.format(
+                base_url=sandbox_mgr.base_url, sample_id='260529-q2zl9abwxw'
+            ),
+        )
+
+    def test_fetch_sample_static_report_archive(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # static_report_archive.json is a real capture of a zip submission: it carries
+        # signatures, analysis tags, and an unpacked files table with per-file errors.
+        mock = mock_request(MOCK_DIR / 'static_report_archive.json')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_static_report('260529-raphmsb1e5')
+
+        assert report.analysis.score == 5
+        assert report.analysis.tags == ['pdf']
+        assert [s.name for s in report.signatures] == ['Malformed data in PDF']
+        archive = next(f for f in report.files if f.kind == 'archive')
+        assert archive.exts == ['.zip']
+        # A child file with relpath, ssdeep and an analysis error round-trips.
+        errored = next(f for f in report.files if f.error)
+        assert errored.relpath is not None
+        assert errored.error.startswith('PDF crash')
+
+    def test_fetch_sample_static_report_extracted_config(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # static_report_extracted_config.json is a real darkcomet capture: a single
+        # extracted entry whose config carries c2, botnet, mutex, a typed key and the
+        # family-specific `attr` bag.
+        mock = mock_request(MOCK_DIR / 'static_report_extracted_config.json')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_static_report('251114-py23jaavtp')
+
+        assert len(report.extracted) == 1
+        cfg = report.extracted[0].config
+        assert cfg.family == 'darkcomet'
+        assert cfg.rule == 'Darkcomet'
+        assert cfg.botnet == 'AP'
+        assert cfg.c2 == ['kvejo991.ddns.net:1604']
+        assert cfg.mutex == ['DC_MUTEX-ARULYYD']
+        assert len(cfg.keys) == 1
+        assert cfg.keys[0].kind == 'rc4.plain'
+        assert cfg.keys[0].value == '#KCMDDC51#-890'
+        # `attr` stays a free-form dict (its keys are family-specific).
+        assert cfg.attr['reg_key'] == 'explorer'
+        # Lists that this family doesn't carry default to [] (never None).
+        assert cfg.decoy == []
+        assert cfg.credentials == []
+
+    def test_extracted_config_credentials(self):
+        # Real agenttesla shape: credentials carry an int `port`.
+        cfg = StaticReportExtractedConfig.model_validate(
+            {
+                'family': 'agenttesla',
+                'credentials': [
+                    {
+                        'protocol': 'ftp',
+                        'host': 'ftp://ftp.example.com',
+                        'port': 21,
+                        'username': 'user@example.com',
+                        'password': 'secret',
+                    }
+                ],
+            }
+        )
+        assert len(cfg.credentials) == 1
+        assert cfg.credentials[0].port == 21
+        assert cfg.credentials[0].protocol == 'ftp'
+
+    def test_extracted_config_omitted_lists_default_to_empty(self):
+        cfg = StaticReportExtractedConfig.model_validate({'family': 'mirai'})
+        assert cfg.c2 == []
+        assert cfg.keys == []
+        assert cfg.credentials == []
+        assert cfg.tags == []
+        assert cfg.mutex == []
+
+    def test_fetch_sample_static_report_bare_404_raises_static_error(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # A 404 with no decodable RF envelope -> generic SampleStaticReportError.
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
+
+        with pytest.raises(SampleStaticReportError) as exc:
+            sandbox_mgr.fetch_sample_static_report('missing')
+        assert type(exc.value) is SampleStaticReportError
+
+    def test_fetch_sample_static_report_not_found_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 NOT_FOUND -> the sample does not exist -> SampleReportNotFoundError.
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_sample_static_report('missing')
+        # subclass of SampleStaticReportError, so callers of the base error still catch it
+        with pytest.raises(SampleStaticReportError):
+            sandbox_mgr.fetch_sample_static_report('missing')
+
+    def test_fetch_sample_static_report_not_available_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 NOT_AVAILABLE -> sample exists but the static report isn't ready -> specific error.
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=_http_error_json(404, 'NOT_AVAILABLE'),
+        )
+
+        with pytest.raises(SampleReportNotAvailableError):
+            sandbox_mgr.fetch_sample_static_report('260630-svp6caets9')
+        # subclass of SampleStaticReportError, so callers of the base error still catch it
+        with pytest.raises(SampleStaticReportError):
+            sandbox_mgr.fetch_sample_static_report('260630-svp6caets9')
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_sample_static_report_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleStaticReportError):
+            sandbox_mgr.fetch_sample_static_report('any-id')
+
+    def test_fetch_sample_overview_report_happy_path(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # overview_report.json is a real darkcomet capture: analysis verdict, one extracted
+        # config, sample-level signatures, a single target with IOCs, and the tasks map.
+        mock = mock_request(MOCK_DIR / 'overview_report.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_overview_report('251114-py23jaavtp')
+
+        assert isinstance(report, OverviewReport)
+        assert mocked.call_args.args == (
+            'get',
+            EP_SANDBOX_SAMPLES_OVERVIEW.format(
+                base_url=sandbox_mgr.base_url, sample_id='251114-py23jaavtp'
+            ),
+        )
+        # analysis verdict
+        assert report.analysis.score == 10
+        assert report.analysis.family == ['darkcomet']
+        assert 'rat' in report.analysis.tags
+        # sample identity
+        assert report.sample.id_ == '251114-py23jaavtp'
+        assert report.sample.score == 10
+        # extracted config (reuses the static-report config model) + the tasks that found it
+        assert len(report.extracted) == 1
+        extracted = report.extracted[0]
+        assert extracted.config.family == 'darkcomet'
+        assert extracted.config.c2 == ['kvejo991.ddns.net:1604']
+        assert extracted.tasks == ['static1', 'behavioral1', 'behavioral2']
+        # a target with its IOCs and signature hits
+        assert len(report.targets) == 1
+        target = report.targets[0]
+        assert target.iocs.domains == ['kvejo991.ddns.net']
+        assert '8.8.8.8' in target.iocs.ips
+        assert all(s.name for s in target.signatures)
+        # tasks map keyed by task id
+        assert set(report.tasks) == {
+            '251114-py23jaavtp-behavioral1',
+            '251114-py23jaavtp-behavioral2',
+            '251114-py23jaavtp-static1',
+        }
+        behavioral1 = report.tasks['251114-py23jaavtp-behavioral1']
+        assert behavioral1.kind == 'behavioral'
+        assert behavioral1.status == 'reported'
+        assert behavioral1.score == 10
+
+    def test_overview_targets_null_coerced_to_empty(self):
+        # The API sends `targets: null` when there are none -- it must normalise to [].
+        report = OverviewReport.model_validate(
+            {
+                'analysis': {'score': 1, 'tags': []},
+                'sample': {'id': '260101-aaaaaaaaaa', 'score': 1},
+                'targets': None,
+            }
+        )
+        assert report.targets == []
+        assert report.signatures == []
+        assert report.extracted == []
+        assert report.tasks == {}
+
+    def test_overview_dropper_urls_mixed_shapes_normalised(self):
+        # `dropper.urls` items are usually bare strings but can be {"type", "url"} objects
+        # -- both must normalise to OverviewDropperUrl so the list is uniform.
+        report = OverviewReport.model_validate(
+            {
+                'analysis': {'score': 10, 'tags': []},
+                'sample': {'id': '260101-bbbbbbbbbb', 'score': 10},
+                'extracted': [
+                    {
+                        'dropper': {
+                            'language': 'powershell',
+                            'urls': [
+                                'https://example.com/plain.exe',
+                                {'type': 'exe.dropper', 'url': 'https://example.com/obj.exe'},
+                            ],
+                        }
+                    }
+                ],
+            }
+        )
+        urls = report.extracted[0].dropper.urls
+        assert [u.url for u in urls] == [
+            'https://example.com/plain.exe',
+            'https://example.com/obj.exe',
+        ]
+        assert urls[1].type == 'exe.dropper'
+        assert urls[0].type is None
+
+    def test_fetch_sample_overview_report_bare_404_raises_overview_error(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # A 404 with no decodable RF envelope -> generic SampleOverviewError.
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
+
+        with pytest.raises(SampleOverviewError) as exc:
+            sandbox_mgr.fetch_sample_overview_report('missing')
+        assert type(exc.value) is SampleOverviewError
+
+    def test_fetch_sample_overview_report_not_found_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 NOT_FOUND -> the sample does not exist -> SampleReportNotFoundError.
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_sample_overview_report('missing')
+        # subclass of SampleOverviewError, so callers of the base error still catch it
+        with pytest.raises(SampleOverviewError):
+            sandbox_mgr.fetch_sample_overview_report('missing')
+
+    def test_fetch_sample_overview_report_report_not_available_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 REPORT_NOT_AVAILABLE -> sample exists but overview not ready -> specific error.
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=_http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+        )
+
+        with pytest.raises(SampleReportNotAvailableError):
+            sandbox_mgr.fetch_sample_overview_report('260630-svp6caets9')
+        # subclass of SampleOverviewError, so callers of the base error still catch it
+        with pytest.raises(SampleOverviewError):
+            sandbox_mgr.fetch_sample_overview_report('260630-svp6caets9')
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_fetch_sample_overview_report_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleOverviewError):
+            sandbox_mgr.fetch_sample_overview_report('any-id')
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_sample_overview_report_validation_error(
+        self, sandbox_mgr: SandboxMgr, sample_id
+    ):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_sample_overview_report(sample_id)
+
+    # --- fetch_sample_overview_report(wait_until_ready=True) ------------------
+
+    def test_fetch_sample_overview_report_wait_ready_first_try(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # Already available -> returns immediately, no sleeping.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mock = mock_request(MOCK_DIR / 'overview_report.json')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_overview_report(
+            '251114-py23jaavtp', wait_until_ready=True
+        )
+
+        assert isinstance(report, OverviewReport)
+        mocked_sleep.assert_not_called()
+
+    def test_fetch_sample_overview_report_wait_not_available_then_ready(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # Not available twice, then ready -> returns the report after two sleeps.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mock = mock_request(MOCK_DIR / 'overview_report.json')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+                mock,
+            ],
+        )
+
+        report = sandbox_mgr.fetch_sample_overview_report(
+            '251114-py23jaavtp', wait_until_ready=True
+        )
+
+        assert isinstance(report, OverviewReport)
+        assert mocked_request.call_count == 3
+        assert mocked_sleep.call_args_list == [
+            mocker.call(20),
+            mocker.call(20),
+        ]
+
+    def test_fetch_sample_overview_report_wait_times_out(self, sandbox_mgr: SandboxMgr, mocker):
+        # Never becomes ready before the deadline -> raises with a timeout-specific message.
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch(
+            'psengine.sandbox.sandbox_mgr.time.monotonic',
+            side_effect=[0, 10, 30],
+        )
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+            ],
+        )
+
+        with pytest.raises(
+            SampleReportNotAvailableError, match='still not available after waiting 30s'
+        ):
+            sandbox_mgr.fetch_sample_overview_report(
+                '260630-svp6caets9', wait_until_ready=True, timeout=30
+            )
+
+    def test_fetch_sample_overview_report_wait_times_out_message_reflects_overshoot(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # The fixed poll interval can overshoot a `timeout` that isn't one of its exact
+        # multiples -- that's fine, but the timeout message must report the real elapsed
+        # time (35s), not the requested budget (25s), otherwise it understates how long
+        # the caller actually waited.
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch(
+            'psengine.sandbox.sandbox_mgr.time.monotonic',
+            side_effect=[0, 10, 35],
+        )
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+                _http_error_json(404, 'REPORT_NOT_AVAILABLE'),
+            ],
+        )
+
+        with pytest.raises(
+            SampleReportNotAvailableError, match='still not available after waiting 35s'
+        ):
+            sandbox_mgr.fetch_sample_overview_report(
+                '260630-svp6caets9', wait_until_ready=True, timeout=25
+            )
+
+    def test_fetch_sample_overview_report_wait_not_found_raises_immediately(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # Sample doesn't exist -> raises immediately, never retried.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_sample_overview_report('missing', wait_until_ready=True)
+
+        assert mocked_request.call_count == 1
+        mocked_sleep.assert_not_called()
+
+    def _behavioral_dispatch(self, sandbox_mgr, sample_dict, behavioral_resp):
+        # Returns a side_effect that serves the sample record from /samples/{id} and the
+        # behavioral report from /samples/{id}/{task}/report_triage.json; anything else fails.
+        sid = sample_dict['id']
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return behavioral_resp['_sample']
+            for task_id, resp in behavioral_resp.items():
+                if task_id != '_sample' and url == EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+                    base_url=sandbox_mgr.base_url, sample_id=sid, task_id=task_id
+                ):
+                    return resp
+            raise AssertionError(f'unexpected url: {url}')
+
+        return dispatch
+
+    def test_fetch_behavioral_reports_happy_path(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        # Sample has static1 (skipped -- no triage report) + behavioral1.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'static1', 'status': 'reported'},
+                {'id': 'behavioral1', 'status': 'reported', 'target': 'x'},
+            ],
+        }
+        resp = {
+            '_sample': make_response(sample),
+            'behavioral1': mock_request(MOCK_DIR / 'behavioral_report.json'),
+        }
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
+        )
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid)
+
+        assert isinstance(result, BehavioralReportsResult)
+        assert result.complete
+        assert result.not_ready == []
+        assert result.failed == []
+        assert len(result.reports) == 1  # static1 skipped
+        report = result.reports[0]
+        assert isinstance(report, BehavioralReport)
+        assert report.task_id == 'behavioral1'  # injected, identifies the task
+        assert report.sample.id_ == sid
+        assert report.analysis.score == 10
+        assert len(report.processes) == 9
+        assert report.network.flows[0].domain == 'kvejo991.ddns.net'
+        assert report.extracted[0].config.family == 'darkcomet'
+        assert report.tags == []  # API sends null -> coerced
+
+    def test_fetch_behavioral_reports_no_behavioral_tasks_returns_empty(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # Only a static task -> no behavioral reports, and the triage endpoint is never hit.
+        # "Nothing to wait for" counts as complete so poll loops terminate.
+        sid = '260630-svp6caets9'
+        sample = {
+            'id': sid,
+            'status': 'static_analysis',
+            'kind': 'file',
+            'submitted': '2026-06-30T15:27:00Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'static1', 'status': 'reported'}],
+        }
+        resp = {'_sample': make_response(sample)}
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
+        )
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid)
+
+        assert result.reports == []
+        assert result.not_ready == []
+        assert result.failed == []
+        assert result.complete
+
+    def test_fetch_behavioral_reports_concurrent_preserves_task_order(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'behavioral1', 'status': 'reported'},
+                {'id': 'behavioral2', 'status': 'reported'},
+            ],
+        }
+        resp = {
+            '_sample': make_response(sample),
+            'behavioral1': mock_request(MOCK_DIR / 'behavioral_report.json'),
+            'behavioral2': mock_request(MOCK_DIR / 'behavioral_report.json'),
+        }
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
+        )
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, max_workers=4)
+
+        assert [r.task_id for r in result.reports] == ['behavioral1', 'behavioral2']
+
+    def test_fetch_behavioral_reports_sample_fetch_error_raises(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # A 404 with no decodable RF envelope -> generic SampleBehavioralReportError.
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(404))
+
+        with pytest.raises(SampleBehavioralReportError) as exc:
+            sandbox_mgr.fetch_behavioral_reports('missing')
+        assert type(exc.value) is SampleBehavioralReportError
+
+    def test_fetch_behavioral_reports_sample_not_found_raises_specific(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # 404 NOT_FOUND on the sample lookup -> the sample does not exist.
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_behavioral_reports('missing')
+        # subclass of SampleBehavioralReportError, so callers of the base error still catch it
+        with pytest.raises(SampleBehavioralReportError):
+            sandbox_mgr.fetch_behavioral_reports('missing')
+
+    def test_fetch_behavioral_reports_sample_lookup_not_available_raises_base(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # NOT_AVAILABLE is a per-task condition -- on the sample lookup it is not semantic,
+        # so it wraps into the base endpoint error, NOT SampleReportNotAvailableError
+        # (which is outside the behavioral error hierarchy).
+        mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_AVAILABLE')
+        )
+
+        with pytest.raises(SampleBehavioralReportError) as exc:
+            sandbox_mgr.fetch_behavioral_reports('some-id')
+        assert type(exc.value) is SampleBehavioralReportError
+
+    @pytest.mark.parametrize('max_workers', [0, 2])
+    def test_fetch_behavioral_reports_running_tasks_land_in_not_ready(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response, max_workers
+    ):
+        # The sample exists (lookup 200) but its behavioral tasks are still running: their
+        # report_triage.json 404s with NOT_AVAILABLE -> the task ids land in `not_ready`
+        # (no exception), on both the sequential and the multithreaded path.
+        sid = '260714-kyly4abz1j'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2026-07-14T09:00:00Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'behavioral1', 'status': 'running'},
+                {'id': 'behavioral2', 'status': 'running'},
+            ],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            raise _http_error_json(404, 'NOT_AVAILABLE')
+
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, max_workers=max_workers)
+
+        assert result.reports == []
+        assert result.failed == []
+        assert result.not_ready == ['behavioral1', 'behavioral2']
+        assert not result.complete
+
+    @pytest.mark.parametrize('max_workers', [0, 3])
+    def test_fetch_behavioral_reports_mixed_outcomes_bucketed(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response, max_workers
+    ):
+        # One finished task, one still running, one broken (404 NOT_FOUND) -> each lands
+        # in its own bucket, and the finished report is not hidden by the other two.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'behavioral1', 'status': 'reported'},
+                {'id': 'behavioral2', 'status': 'running'},
+                {'id': 'behavioral3', 'status': 'reported'},
+            ],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+        report_resp = mock_request(MOCK_DIR / 'behavioral_report.json')
+
+        def task_url(task_id):
+            return EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+                base_url=sandbox_mgr.base_url, sample_id=sid, task_id=task_id
+            )
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            if url == task_url('behavioral1'):
+                return report_resp
+            if url == task_url('behavioral2'):
+                raise _http_error_json(404, 'NOT_AVAILABLE')
+            raise _http_error_json(404, 'NOT_FOUND')
+
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, max_workers=max_workers)
+
+        assert [r.task_id for r in result.reports] == ['behavioral1']
+        assert result.not_ready == ['behavioral2']
+        assert not result.complete
+        assert len(result.failed) == 1
+        failure = result.failed[0]
+        assert failure.task_id == 'behavioral3'
+        assert failure.status_code == 404
+        assert failure.error == 'NOT_FOUND'  # decoded from the RF envelope
+
+    def test_fetch_behavioral_reports_task_connection_error_still_raises(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # Connection-level failures are not per-task outcomes -- they abort the call.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'reported'}],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            raise ConnectTimeout('boom')
+
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        with pytest.raises(SampleBehavioralReportError):
+            sandbox_mgr.fetch_behavioral_reports(sid)
+
+    def test_fetch_behavioral_reports_task_500_lands_in_failed(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # A per-task hard failure (500) does not raise: the task lands in `failed`
+        # with its HTTP evidence, and the result counts as complete (nothing pending).
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'reported'}],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            raise _http_error(500)
+
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid)
+
+        assert result.reports == []
+        assert result.not_ready == []
+        assert result.complete  # failed tasks are terminal, not pending
+        assert len(result.failed) == 1
+        failure = result.failed[0]
+        assert failure.task_id == 'behavioral1'
+        assert failure.status_code == 500
+        assert failure.error is None  # bare 500, no RF envelope
+        assert failure.message == 'boom'
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_behavioral_reports_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_behavioral_reports(sample_id)
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_fetch_sample_static_report_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.fetch_sample_static_report(sample_id)
+
+    # --- fetch_sample_static_report(wait_until_ready=True) ------------------
+
+    def test_fetch_sample_static_report_wait_ready_first_try(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # Already available -> returns immediately, no sleeping.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mock = mock_request(MOCK_DIR / 'static_report_simple.json')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        report = sandbox_mgr.fetch_sample_static_report('260529-q2zl9abwxw', wait_until_ready=True)
+
+        assert isinstance(report, StaticAnalysisReport)
+        mocked_sleep.assert_not_called()
+
+    def test_fetch_sample_static_report_wait_not_available_then_ready(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request
+    ):
+        # Not available twice, then ready -> returns the report after two sleeps.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mock = mock_request(MOCK_DIR / 'static_report_simple.json')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                _http_error_json(404, 'NOT_AVAILABLE'),
+                _http_error_json(404, 'NOT_AVAILABLE'),
+                mock,
+            ],
+        )
+
+        report = sandbox_mgr.fetch_sample_static_report('260529-q2zl9abwxw', wait_until_ready=True)
+
+        assert isinstance(report, StaticAnalysisReport)
+        assert mocked_request.call_count == 3
+        assert mocked_sleep.call_args_list == [
+            mocker.call(20),
+            mocker.call(20),
+        ]
+
+    def test_fetch_sample_static_report_wait_times_out(self, sandbox_mgr: SandboxMgr, mocker):
+        # Never becomes ready before the deadline -> raises with a timeout-specific message.
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch(
+            'psengine.sandbox.sandbox_mgr.time.monotonic',
+            side_effect=[0, 10, 30],
+        )
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                _http_error_json(404, 'NOT_AVAILABLE'),
+                _http_error_json(404, 'NOT_AVAILABLE'),
+            ],
+        )
+
+        with pytest.raises(
+            SampleReportNotAvailableError, match='still not available after waiting 30s'
+        ):
+            sandbox_mgr.fetch_sample_static_report(
+                '260630-svp6caets9', wait_until_ready=True, timeout=30
+            )
+
+    def test_fetch_sample_static_report_wait_times_out_message_reflects_overshoot(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # The fixed poll interval can overshoot a `timeout` that isn't one of its exact
+        # multiples -- that's fine, but the timeout message must report the real elapsed
+        # time (35s), not the requested budget (25s), otherwise it understates how long
+        # the caller actually waited.
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch(
+            'psengine.sandbox.sandbox_mgr.time.monotonic',
+            side_effect=[0, 10, 35],
+        )
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                _http_error_json(404, 'NOT_AVAILABLE'),
+                _http_error_json(404, 'NOT_AVAILABLE'),
+            ],
+        )
+
+        with pytest.raises(
+            SampleReportNotAvailableError, match='still not available after waiting 35s'
+        ):
+            sandbox_mgr.fetch_sample_static_report(
+                '260630-svp6caets9', wait_until_ready=True, timeout=25
+            )
+
+    def test_fetch_sample_static_report_wait_not_found_raises_immediately(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # Sample doesn't exist -> raises immediately, never retried.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_sample_static_report('missing', wait_until_ready=True)
+
+        assert mocked_request.call_count == 1
+        mocked_sleep.assert_not_called()
+
+    # --- fetch_behavioral_reports(wait_until_ready=True) ---------------------
+
+    def test_fetch_behavioral_reports_wait_ready_first_try(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        # Already fully resolved on the first poll -> returns immediately, no sleeping.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'reported',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'reported'}],
+        }
+        resp = {
+            '_sample': make_response(sample),
+            'behavioral1': mock_request(MOCK_DIR / 'behavioral_report.json'),
+        }
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=self._behavioral_dispatch(sandbox_mgr, sample, resp),
+        )
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, wait_until_ready=True)
+
+        assert result.complete
+        assert [r.task_id for r in result.reports] == ['behavioral1']
+        mocked_sleep.assert_not_called()
+
+    def test_fetch_behavioral_reports_wait_not_ready_then_ready(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        # Not ready on the first poll, fully resolved on the second -> one sleep, two polls.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'running'}],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        task_url = EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+            base_url=sandbox_mgr.base_url, sample_id=sid, task_id='behavioral1'
+        )
+        sample_resp = make_response(sample)
+        report_resp = mock_request(MOCK_DIR / 'behavioral_report.json')
+
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            side_effect=[
+                sample_resp,
+                _http_error_json(404, 'NOT_AVAILABLE'),
+                sample_resp,
+                report_resp,
+            ],
+        )
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, wait_until_ready=True)
+
+        assert result.complete
+        assert [r.task_id for r in result.reports] == ['behavioral1']
+        # sample lookup then task fetch, twice -- one full poll, one retry after not-ready.
+        assert [call.args[1] for call in mocked_request.call_args_list] == [
+            id_url,
+            task_url,
+            id_url,
+            task_url,
+        ]
+        assert mocked_sleep.call_args_list == [mocker.call(20)]
+
+    def test_fetch_behavioral_reports_wait_times_out_returns_partial_no_raise(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        # Never fully resolves before the deadline -> returns the partial result, does NOT
+        # raise. This is the direct proof of Decision #2: behavioral has no "still pending"
+        # exception, so timeout is reflected purely as data (complete=False, not_ready set).
+        sid = '260714-kyly4abz1j'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2026-07-14T09:00:00Z',
+            'user_id': 'u',
+            'tasks': [{'id': 'behavioral1', 'status': 'running'}],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            raise _http_error_json(404, 'NOT_AVAILABLE')
+
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.monotonic', side_effect=[0, 10, 30])
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, wait_until_ready=True, timeout=30)
+
+        assert not result.complete
+        assert result.not_ready == ['behavioral1']
+        assert result.reports == []
+        assert result.failed == []
+
+    def test_fetch_behavioral_reports_wait_sample_not_found_raises_immediately(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # Sample doesn't exist -> raises immediately on the first poll, never retried.
+        mocked_sleep = mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocked_request = mocker.patch.object(
+            sandbox_mgr.sb_client, 'request', side_effect=_http_error_json(404, 'NOT_FOUND')
+        )
+
+        with pytest.raises(SampleReportNotFoundError):
+            sandbox_mgr.fetch_behavioral_reports('missing', wait_until_ready=True)
+
+        assert mocked_request.call_count == 1
+        mocked_sleep.assert_not_called()
+
+    def test_fetch_behavioral_reports_wait_keeps_polling_for_not_ready_despite_failed(
+        self, sandbox_mgr: SandboxMgr, mocker, mock_request, make_response
+    ):
+        # behavioral1 fails terminally (500) on the very first poll; behavioral2 is not
+        # ready until the second poll. The loop must keep polling for behavioral2 --
+        # `failed` never blocks `complete` -- and the final result carries both outcomes.
+        sid = '251114-py23jaavtp'
+        sample = {
+            'id': sid,
+            'status': 'running',
+            'kind': 'file',
+            'submitted': '2025-11-14T12:45:04Z',
+            'user_id': 'u',
+            'tasks': [
+                {'id': 'behavioral1', 'status': 'reported'},
+                {'id': 'behavioral2', 'status': 'running'},
+            ],
+        }
+        id_url = EP_SANDBOX_SAMPLES_ID.format(base_url=sandbox_mgr.base_url, sample_id=sid)
+        sample_resp = make_response(sample)
+        report_resp = mock_request(MOCK_DIR / 'behavioral_report.json')
+
+        def task_url(task_id):
+            return EP_SANDBOX_SAMPLES_BEHAVIORAL.format(
+                base_url=sandbox_mgr.base_url, sample_id=sid, task_id=task_id
+            )
+
+        call_count = {'behavioral2': 0}
+
+        def dispatch(method, url):
+            assert method == 'get'
+            if url == id_url:
+                return sample_resp
+            if url == task_url('behavioral1'):
+                raise _http_error(500)
+            if url == task_url('behavioral2'):
+                call_count['behavioral2'] += 1
+                if call_count['behavioral2'] == 1:
+                    raise _http_error_json(404, 'NOT_AVAILABLE')
+                return report_resp
+            raise AssertionError(f'unexpected url: {url}')
+
+        mocker.patch('psengine.sandbox.sandbox_mgr.time.sleep')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=dispatch)
+
+        result = sandbox_mgr.fetch_behavioral_reports(sid, wait_until_ready=True)
+
+        assert result.complete
+        assert [r.task_id for r in result.reports] == ['behavioral2']
+        assert len(result.failed) == 1
+        assert result.failed[0].task_id == 'behavioral1'
+        assert result.failed[0].status_code == 500
+
+    # --- set_sample_profile ------------------------------------------------
+
+    def test_set_sample_profile_auto_default_pick(self, sandbox_mgr: SandboxMgr, mocker):
+        # auto=True with no pick -> empty list (advance all targets).
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+
+        result = sandbox_mgr.set_sample_profile('260529-szm7jsc1b3', auto=True)
+
+        assert isinstance(result, SampleProfileOut)
+        assert result.success is True
+        assert mocked.call_args.args == (
+            'post',
+            EP_SANDBOX_SAMPLES_PROFILE.format(
+                base_url=sandbox_mgr.base_url, sample_id='260529-szm7jsc1b3'
+            ),
+        )
+        assert mocked.call_args.kwargs['data'] == {'auto': True, 'pick': []}
+
+    def test_set_sample_profile_auto_with_pick(self, sandbox_mgr: SandboxMgr, mocker):
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+
+        sandbox_mgr.set_sample_profile('sid', auto=True, pick=['unpack001/a.txt'])
+
+        assert mocked.call_args.kwargs['data'] == {'auto': True, 'pick': ['unpack001/a.txt']}
+
+    def test_set_sample_profile_manual_string_profile_wrapped(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # A string profile (id or name) is wrapped into the {"id": ...} object.
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+
+        sandbox_mgr.set_sample_profile(
+            'sid', profiles=[{'pick': 'unpack001/a.txt', 'profile': 'drew-test'}]
+        )
+
+        assert mocked.call_args.kwargs['data'] == {
+            'auto': False,
+            'profiles': [{'pick': 'unpack001/a.txt', 'profile': {'id': 'drew-test'}}],
+        }
+
+    def test_set_sample_profile_manual_dict_profile_passthrough(
+        self, sandbox_mgr: SandboxMgr, mocker
+    ):
+        # A dict profile is sent verbatim (no wrapping).
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+
+        sandbox_mgr.set_sample_profile(
+            'sid', profiles=[{'pick': 'unpack001/a.txt', 'profile': {'name': 'drew-test'}}]
+        )
+
+        assert mocked.call_args.kwargs['data'] == {
+            'auto': False,
+            'profiles': [{'pick': 'unpack001/a.txt', 'profile': {'name': 'drew-test'}}],
+        }
+
+    @pytest.mark.parametrize(
+        'kwargs',
+        [
+            {},  # auto=False (default) but no profiles
+            {'auto': False},  # explicit, still no profiles
+            {'auto': False, 'pick': ['a']},  # pick only valid with auto=True
+            {'auto': True, 'profiles': [{'pick': 'a', 'profile': 'p'}]},  # profiles with auto
+        ],
+    )
+    def test_set_sample_profile_invalid_combinations(self, sandbox_mgr: SandboxMgr, mocker, kwargs):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mocker.Mock())
+        with pytest.raises(ValidationError):
+            sandbox_mgr.set_sample_profile('sid', **kwargs)
+
+    def test_set_sample_profile_400_raises(self, sandbox_mgr: SandboxMgr, mocker):
+        # e.g. the sample is not paused in static_analysis.
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(400))
+
+        with pytest.raises(SampleProfileError):
+            sandbox_mgr.set_sample_profile('sid', auto=True)
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_set_sample_profile_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleProfileError):
+            sandbox_mgr.set_sample_profile('sid', auto=True)
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_set_sample_profile_sample_id_validation(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.set_sample_profile(sample_id, auto=True)
+
+    def test_submit_sample_url_kind(self, sandbox_mgr: SandboxMgr, mocker, mock_request):
+        mock = mock_request(MOCK_DIR / 'sample_submit_url.json')
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        result = sandbox_mgr.submit_sample(kind='url', url='https://example.com')
+
+        assert isinstance(result, Sample)
+        assert mocked.call_args.args == (
+            'post',
+            EP_SANDBOX_SAMPLES.format(base_url=sandbox_mgr.base_url),
+        )
+        assert 'data' not in mocked.call_args.kwargs
+        # content_type_header=None lets `requests` set the multipart boundary itself;
+        # the manager must not hand-build headers for the upload.
+        assert mocked.call_args.kwargs['content_type_header'] is None
+        assert 'headers' not in mocked.call_args.kwargs
+        files = mocked.call_args.kwargs['files']
+        body = json.loads(files['_json'][1])
+        assert body == {'kind': 'url', 'url': 'https://example.com'}
+        assert 'file' not in files
+
+    def test_submit_sample_fetch_kind(self, sandbox_mgr: SandboxMgr, mocker, make_response):
+        mocked = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            return_value=make_response(
+                {
+                    'id': 'x',
+                    'kind': 'file',
+                    'status': 'pending',
+                    'submitted': '2026-05-15T11:40:51Z',
+                    'user_id': 'u',
+                }
+            ),
+        )
+
+        sandbox_mgr.submit_sample(kind='fetch', url='https://example.com/foo.bin')
+
+        body = json.loads(mocked.call_args.kwargs['files']['_json'][1])
+        assert body == {'kind': 'fetch', 'url': 'https://example.com/foo.bin'}
+        assert 'file' not in mocked.call_args.kwargs['files']
+
+    def test_submit_sample_import_kind_maps_source_id_to_url(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        mocked = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            return_value=make_response(
+                {
+                    'id': 'x',
+                    'kind': 'file',
+                    'status': 'pending',
+                    'submitted': '2026-05-15T11:40:51Z',
+                    'user_id': 'u',
+                }
+            ),
+        )
+
+        sandbox_mgr.submit_sample(kind='import', source_id='260501-h4p7laawme')
+
+        body = json.loads(mocked.call_args.kwargs['files']['_json'][1])
+        # source_id is carried in the API's `url` field, not as `source_id`.
+        assert body == {'kind': 'import', 'url': '260501-h4p7laawme'}
+
+    def test_submit_sample_file_kind_carries_file_part(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response, tmp_path
+    ):
+        sample_file = tmp_path / 'payload.bin'
+        sample_file.write_bytes(b'malware-bytes')
+
+        mocked = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            return_value=make_response(
+                {
+                    'id': 'x',
+                    'kind': 'file',
+                    'filename': 'payload.bin',
+                    'status': 'pending',
+                    'submitted': '2026-05-15T11:40:51Z',
+                    'user_id': 'u',
+                }
+            ),
+        )
+
+        sandbox_mgr.submit_sample(kind='file', file_path=sample_file)
+
+        files = mocked.call_args.kwargs['files']
+        body = json.loads(files['_json'][1])
+        assert body == {'kind': 'file'}
+        assert files['file'] == ('payload.bin', b'malware-bytes', 'application/octet-stream')
+
+    def test_submit_sample_defaults_nesting(self, sandbox_mgr: SandboxMgr, mocker, make_response):
+        mocked = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            return_value=make_response(
+                {
+                    'id': 'x',
+                    'kind': 'url',
+                    'status': 'pending',
+                    'submitted': '2026-05-15T11:40:51Z',
+                    'user_id': 'u',
+                }
+            ),
+        )
+
+        sandbox_mgr.submit_sample(
+            kind='url',
+            url='https://example.com',
+            timeout=60,
+            network='vpn',
+            geolocation='us',
+        )
+
+        body = json.loads(mocked.call_args.kwargs['files']['_json'][1])
+        # timeout/network/geolocation go under `defaults`, not top-level.
+        assert body['defaults'] == {'timeout': 60, 'network': 'vpn', 'geolocation': 'us'}
+        assert 'timeout' not in body
+        assert 'network' not in body
+        assert 'geolocation' not in body
+
+    def test_submit_sample_user_tags_str_coerced_to_list(
+        self, sandbox_mgr: SandboxMgr, mocker, make_response
+    ):
+        mocked = mocker.patch.object(
+            sandbox_mgr.sb_client,
+            'request',
+            return_value=make_response(
+                {
+                    'id': 'x',
+                    'kind': 'url',
+                    'status': 'pending',
+                    'submitted': '2026-05-15T11:40:51Z',
+                    'user_id': 'u',
+                }
+            ),
+        )
+
+        sandbox_mgr.submit_sample(kind='url', url='https://example.com', user_tags='foo')
+
+        body = json.loads(mocked.call_args.kwargs['files']['_json'][1])
+        assert body['user_tags'] == ['foo']
+
+    @pytest.mark.parametrize(
+        ('kwargs', 'reason'),
+        [
+            # missing-per-kind
+            ({'kind': 'file'}, 'kind=file requires file_path'),
+            ({'kind': 'url'}, 'kind=url requires url'),
+            ({'kind': 'fetch'}, 'kind=fetch requires url'),
+            ({'kind': 'import'}, 'kind=import requires source_id'),
+            # cross-kind exclusivity
+            (
+                {'kind': 'url', 'url': 'https://x', 'source_id': 'y'},
+                'source_id only valid for import',
+            ),
+            (
+                {'kind': 'import', 'source_id': 'y', 'url': 'https://x'},
+                'url only valid for url/fetch',
+            ),
+            # geolocation requires vpn network
+            (
+                {'kind': 'url', 'url': 'https://x', 'geolocation': 'us', 'network': 'internet'},
+                'geolocation requires network=vpn',
+            ),
+        ],
+    )
+    def test_submit_sample_validation_errors(self, sandbox_mgr: SandboxMgr, kwargs, reason):
+        # All these are caught by SubmitSampleIn model_validators -> ValidationError
+        # before any HTTP request is made. `reason` is included for readability
+        # in the parametrized test ID.
+        del reason
+        with pytest.raises(ValidationError):
+            sandbox_mgr.submit_sample(**kwargs)
+
+    def test_submit_sample_file_path_must_exist(self, sandbox_mgr: SandboxMgr, tmp_path):
+        missing = tmp_path / 'does-not-exist.bin'
+
+        with pytest.raises(ValidationError):
+            sandbox_mgr.submit_sample(kind='file', file_path=missing)
+
+    @pytest.mark.parametrize('exception', [HTTPError, ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_submit_sample_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        err = _http_error(500) if exception is HTTPError else exception('boom')
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=err)
+
+        with pytest.raises(SampleSubmitError):
+            sandbox_mgr.submit_sample(kind='url', url='https://example.com')
+
+    @pytest.mark.parametrize('status_code', [400, 401, 409, 500])
+    def test_submit_sample_raises_on_4xx_5xx(self, sandbox_mgr: SandboxMgr, mocker, status_code):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(status_code))
+
+        with pytest.raises(SampleSubmitError):
+            sandbox_mgr.submit_sample(kind='url', url='https://example.com')
+
+    def test_delete_sample_happy_path(self, sandbox_mgr: SandboxMgr, mocker, make_response):
+        mock = make_response({})
+        mocked = mocker.patch.object(sandbox_mgr.sb_client, 'request', return_value=mock)
+
+        result = sandbox_mgr.delete_sample(sample_id='260515-nta8kscxnf')
+
+        assert result.deleted is True
+        assert mocked.call_args.args == (
+            'delete',
+            EP_SANDBOX_SAMPLES_ID.format(
+                base_url=sandbox_mgr.base_url, sample_id='260515-nta8kscxnf'
+            ),
+        )
+        assert 'data' not in mocked.call_args.kwargs
+
+    @pytest.mark.parametrize('sample_id', ['', None, 123])
+    def test_delete_sample_validation_error(self, sandbox_mgr: SandboxMgr, sample_id):
+        with pytest.raises(ValidationError):
+            sandbox_mgr.delete_sample(sample_id=sample_id)
+
+    @pytest.mark.parametrize(
+        'status_code',
+        # 401 is included on purpose: the Triage API returns it for every
+        # non-success outcome (already deleted, never existed, no permission,
+        # expired token). delete_sample has no idempotency, so all of these raise.
+        [400, 401, 404, 500],
+    )
+    def test_delete_sample_non_2xx_raises(self, sandbox_mgr: SandboxMgr, mocker, status_code):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=_http_error(status_code))
+
+        with pytest.raises(SampleDeleteError):
+            sandbox_mgr.delete_sample(sample_id='260515-nta8kscxnf')
+
+    @pytest.mark.parametrize('exception', [ConnectTimeout, ConnectionError, ReadTimeout])
+    def test_delete_sample_raises_on_connection_errors(
+        self, sandbox_mgr: SandboxMgr, exception, mocker
+    ):
+        mocker.patch.object(sandbox_mgr.sb_client, 'request', side_effect=exception('boom'))
+
+        with pytest.raises(SampleDeleteError):
+            sandbox_mgr.delete_sample(sample_id='260515-nta8kscxnf')

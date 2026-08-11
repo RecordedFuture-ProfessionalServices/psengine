@@ -1,0 +1,33 @@
+{
+  "completed": "2026-05-15T11:42:30Z",
+  "created": "2026-05-15T11:40:51Z",
+  "custom": "frontend:e5169db9-c4f0-4896-9d30-4dcb1f306e57",
+  "meta": {
+    "channel": "rfshare",
+    "rforg": "uhash:5zQaSyRpA1"
+  },
+  "org_id": "<redacted>",
+  "owner": "<redacted>",
+  "sample": "260515-nta8kscxnf",
+  "score": 1,
+  "status": "reported",
+  "target": "https://example.com",
+  "tasks": {
+    "260515-nta8kscxnf-behavioral1": {
+      "backend": "sbx4m86",
+      "kind": "behavioral",
+      "os": "windows10-2004-x64",
+      "platform": "windows10-2004_x64",
+      "resource": "win10v2004-20260227-en",
+      "score": 1,
+      "status": "reported",
+      "target": "https://example.com",
+      "timeout": 150
+    },
+    "260515-nta8kscxnf-static1": {
+      "kind": "static",
+      "score": 1,
+      "status": "reported"
+    }
+  }
+}

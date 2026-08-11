@@ -18,7 +18,7 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Annotated
 
-from pydantic import Field, Secret, field_validator, validate_call
+from pydantic import Field, Secret, ValidationInfo, field_validator, validate_call
 from pydantic_settings import (
     BaseSettings,
     DotEnvSettingsSource,
@@ -32,6 +32,7 @@ from typing_extensions import Doc
 
 from ..constants import (
     ASI_TOKEN_ENV_VAR,
+    ASI_TOKEN_VALIDATION_REGEX,
     BACKOFF_FACTOR,
     POOL_MAX_SIZE,
     REQUEST_TIMEOUT,
@@ -39,6 +40,8 @@ from ..constants import (
     RF_TOKEN_ENV_VAR,
     RF_TOKEN_VALIDATION_REGEX,
     ROOT_DIR,
+    SANDBOX_TOKEN_ENV_VAR,
+    SANDBOX_TOKEN_VALIDATION_REGEX,
     SSL_VERIFY,
     STATUS_FORCELIST,
 )
@@ -47,6 +50,20 @@ from .errors import ConfigFileError
 
 PLAT_REGEX = r'^([A-Z]|[a-z])+(\/\d+)?((\.\d+)*?)$'
 APP_ID_REGEX = r'^\S+\/\d+((\.\d+)*?)$'
+
+TOKEN_CONFIG = {
+    'rf_token': (RF_TOKEN_ENV_VAR, RF_TOKEN_VALIDATION_REGEX, 'Recorded Future'),
+    'asi_token': (
+        ASI_TOKEN_ENV_VAR,
+        ASI_TOKEN_VALIDATION_REGEX,
+        'Recorded Future Attack Surface Intelligence',
+    ),
+    'sandbox_token': (
+        SANDBOX_TOKEN_ENV_VAR,
+        SANDBOX_TOKEN_VALIDATION_REGEX,
+        'Recorded Future Sandbox',
+    ),
+}
 
 
 class RFToken(Secret[str]):
@@ -93,6 +110,7 @@ class ConfigModel(BaseSettings):
     app_id: str | None = Field(default=None, pattern=APP_ID_REGEX, examples=['get-alerts/1.0.0'])
     rf_token: RFToken | None = Field(default=os.environ.get(RF_TOKEN_ENV_VAR, ''))
     asi_token: RFToken | None = Field(default=os.environ.get(ASI_TOKEN_ENV_VAR, ''))
+    sandbox_token: RFToken | None = Field(default=os.environ.get(SANDBOX_TOKEN_ENV_VAR, ''))
     http_proxy: str | None = None
     https_proxy: str | None = None
     client_ssl_verify: bool | None = SSL_VERIFY
@@ -159,28 +177,28 @@ class ConfigModel(BaseSettings):
                 raise ValueError('The config file extension must be .toml or .json or .env')
         return tuple(sources)
 
-    @field_validator('rf_token', mode='before')
+    @field_validator('rf_token', 'asi_token', 'sandbox_token', mode='before')
     @classmethod
     def validate_token(
         cls,
-        rf_token: Annotated[str, Doc('Recorded Future token.')],
+        token: Annotated[str, Doc('API token value.')],
+        info: ValidationInfo,
     ) -> Annotated[str, Doc('Validated token.')]:
-        """Validate a Recorded Future token.
+        """Validate a Recorded Future API token (`rf_token`, `asi_token`, or `sandbox_token`).
 
         Raises:
-            ValueError: When the token is not 32 alphanumeric characters in the `[a-f][0-9]` range.
+            ValueError: When the token does not match the expected format for its field.
         """
-        rf_token = rf_token or os.environ.get(RF_TOKEN_ENV_VAR)
-        if not rf_token:
+        env_var, regex, label = TOKEN_CONFIG[info.field_name]
+        token = token or os.environ.get(env_var)
+        if not token:
             # Edge case: when RF_RF_TOKEN env var is set, it is used and RF_TOKEN is ignored
             # So we check if RF_TOKEN is set and validate it
             return ''
-        if not re.match(RF_TOKEN_VALIDATION_REGEX, rf_token):
-            raise ValueError(
-                f'Invalid Recorded Future API token.must match regex {RF_TOKEN_VALIDATION_REGEX}'
-            )
+        if not re.fullmatch(regex, token):
+            raise ValueError(f'Invalid {label} API token. Must match regex {regex}')
 
-        return rf_token
+        return token
 
     @validate_call
     def save_config(
@@ -198,7 +216,7 @@ class ConfigModel(BaseSettings):
         """
         directory = Path(directory)
         log = logging.getLogger(__name__)
-        data = self.model_dump_json(exclude=['rf_token', 'asi_token'], indent=4)
+        data = self.model_dump_json(exclude=['rf_token', 'asi_token', 'sandbox_token'], indent=4)
         OSHelpers.mkdir(directory)
         config_path = directory / file
         log.info(f'Saving config in {config_path.as_posix()}')
@@ -245,6 +263,8 @@ class Config:
             platform_id (str): Name & version of the tool this integrates with, example: ES/8.0.0.
             app_id (str): Name & version of the integration itself, example: get-alerts/1.0.0.
             rf_token (str): Recorded Future API token.
+            asi_token (str): Recorded Future Attack Surface Intelligence API token.
+            sandbox_token (str): Recorded Future Sandbox API token.
             http_proxy (str): HTTP proxy.
             https_proxy (str): HTTPS proxy.
             client_ssl_verify (bool): SSL verification. Default is True.

@@ -38,7 +38,6 @@ class Evidence(RFBaseModel):
     timestamp: datetime
     description: str
     rule: str
-    # TODO - temp fix until API team fixes/confirms behaviour of sightings
     sightings: int = 0
     mitigation: str
     level: int

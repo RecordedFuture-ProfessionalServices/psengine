@@ -106,6 +106,7 @@ nav:
       - Playbook Alerts: modules/playbook_alerts.md
       - Risk History: modules/risk_history.md
       - Risklists: modules/risklists.md
+      - Sandbox: modules/sandbox.md
       - STIX2: modules/stix2.md
       - Threat Maps: modules/threat_maps.md
       - Error Handling: modules/errors.md
@@ -240,6 +241,13 @@ nav:
           - Models: api/risklists/models.md
           - Constants: api/risklists/constants.md
           - Errors: api/risklists/errors.md
+      - Sandbox:
+          - Manager: api/sandbox/sandbox_mgr.md
+          - ADT: api/sandbox/sandbox.md
+          - Models: api/sandbox/models.md
+          - Client: api/sandbox/client.md
+          - Constants: api/sandbox/constants.md
+          - Errors: api/sandbox/errors.md
       - STIX2:
           - Base STIX Entity: api/stix2/base_stix_entity.md
           - Simple Entity: api/stix2/simple_entity.md
