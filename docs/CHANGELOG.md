@@ -1,4 +1,9 @@
 # Changelog
+## v2.9.1 - 2026-08-11
+
+### Added
+
+- Added support for suricata rules in `DetectionMgr`.
 
 ## v2.9.0 - 2026-08-11
 
