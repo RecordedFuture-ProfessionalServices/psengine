@@ -6,6 +6,7 @@ from pydantic import ValidationError
 from psengine.collective_insights import (
     Insight,
     InsightsOut,
+    SearchEntry,
 )
 from psengine.collective_insights.models import RequestDetection, RequestIOC
 
@@ -130,3 +131,66 @@ class Test_CollectiveInsight_Models:
         assert insight1 <= insight3
         assert insight1 <= insight1
         assert insight1 != insight2
+
+    def test_search_entry_str(self):
+        entry = SearchEntry.model_validate(
+            {
+                'id': 'abc',
+                'detection_time': '2025-12-15T13:05:23Z',
+                'detection_type': 'sandbox',
+                'indicator': {'type': 'ip', 'value': '1.2.3.4'},
+            },
+        )
+        assert str(entry) == (
+            'Event ID: abc, IOC: 1.2.3.4, Detection Time: 2025-12-15 13:05:23, '
+            'Detection Type: sandbox'
+        )
+
+    def test_search_entry_str_defaults_when_fields_missing(self):
+        entry = SearchEntry.model_validate({'id': 'abc'})
+        assert str(entry) == (
+            'Event ID: abc, IOC: N/A, Detection Time: N/A, Detection Type: N/A'
+        )
+
+    def test_search_entry_hash_and_equality(self):
+        payload = {
+            'id': 'abc',
+            'detection_time': '2025-12-15T13:05:23Z',
+            'indicator': {'type': 'ip', 'value': '1.2.3.4'},
+        }
+        e1 = SearchEntry.model_validate(payload)
+        e1_twin = SearchEntry.model_validate(payload)
+        e2 = SearchEntry.model_validate(
+            {
+                'id': 'def',
+                'detection_time': '2025-12-16T13:05:23Z',
+                'indicator': {'type': 'domain', 'value': 'evil.com'},
+            },
+        )
+        assert e1 == e1_twin
+        assert e1 != e2
+        assert hash(e1) == hash(e1_twin)
+        assert {e1, e1_twin, e2} == {e1, e2}
+
+    def test_search_entry_ordering(self):
+        e1 = SearchEntry.model_validate(
+            {'id': 'a', 'detection_time': '2025-09-01T13:31:56Z'},
+        )
+        e2 = SearchEntry.model_validate(
+            {'id': 'b', 'detection_time': '2022-11-23T13:31:56Z'},
+        )
+        e3 = SearchEntry.model_validate(
+            {'id': 'c', 'detection_time': '2024-11-10T13:31:56Z'},
+        )
+        e4 = SearchEntry.model_validate(
+            {'id': 'a', 'detection_time': '2025-11-01T13:31:56Z'},
+        )
+        e5 = SearchEntry.model_validate(
+            {'id': 'z', 'detection_time': '2025-11-01T13:31:56Z'},
+        )
+
+        assert sorted([e1, e2, e3, e4, e5]) == [e2, e3, e1, e4, e5]
+        assert e2 < e1
+        assert e1 <= e4
+        assert e1 <= e1
+        assert e1 != e2

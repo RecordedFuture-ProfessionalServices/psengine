@@ -1,5 +1,11 @@
 # Changelog
 
+## vx.x.x - yyyy-mm-dd
+
+### Added
+
+- `CollectiveInsights` now supports the `search` endpoint via the `search` method.
+
 ## v2.9.0 - 2026-08-11
 
 ### Added

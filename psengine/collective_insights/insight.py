@@ -15,16 +15,21 @@ from datetime import datetime
 from functools import total_ordering
 from typing import Annotated
 
-from pydantic import BeforeValidator
+from pydantic import BeforeValidator, model_validator
 
 from ..common_models import IdNameType, RFBaseModel
 from ..constants import TIMESTAMP_STR
 from ..helpers import Validators
+from .constants import SEARCH_PAGE_SIZE
 from .models import (
     RequestDetection,
     RequestIOC,
     RequestOptions,
+    SearchCounts,
+    SearchEntry,
+    SearchFilters,
     SubmissionResult,
+    _prune_none,
 )
 
 
@@ -94,3 +99,21 @@ class InsightsIn(RFBaseModel):
     """Validate data received from CI."""
 
     result: SubmissionResult
+
+
+class SearchIn(RFBaseModel):
+    """Validate data sent to the `/search` endpoint."""
+
+    filters: SearchFilters | None = None
+    limit: int = SEARCH_PAGE_SIZE
+
+    @model_validator(mode='before')
+    @classmethod
+    def _drop_empty_filters(cls, data):
+        """Drop `filters` entirely when caller supplied only `None` values."""
+        if not isinstance(data, dict):
+            return data
+        filters = data.get('filters')
+        if isinstance(filters, dict) and not _prune_none(filters):
+            data = {k: v for k, v in data.items() if k != 'filters'}
+        return data

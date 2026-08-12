@@ -88,6 +88,7 @@ EP_DETECTION_RULES = BASE_URL + '/detection-rule/search'
 ###############################################################################
 EP_COLLECTIVE_INSIGHTS = BASE_URL + '/collective-insights'
 EP_COLLECTIVE_INSIGHTS_DETECTIONS = EP_COLLECTIVE_INSIGHTS + '/detections'
+EP_COLLECTIVE_INSIGHTS_SEARCH = EP_COLLECTIVE_INSIGHTS + '/search'
 
 ###############################################################################
 # Analyst Notes API Endpoints
