@@ -148,9 +148,7 @@ class Test_CollectiveInsight_Models:
 
     def test_search_entry_str_defaults_when_fields_missing(self):
         entry = SearchEntry.model_validate({'id': 'abc'})
-        assert str(entry) == (
-            'Event ID: abc, IOC: N/A, Detection Time: N/A, Detection Type: N/A'
-        )
+        assert str(entry) == ('Event ID: abc, IOC: N/A, Detection Time: N/A, Detection Type: N/A')
 
     def test_search_entry_hash_and_equality(self):
         payload = {

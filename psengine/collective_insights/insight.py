@@ -25,8 +25,6 @@ from .models import (
     RequestDetection,
     RequestIOC,
     RequestOptions,
-    SearchCounts,
-    SearchEntry,
     SearchFilters,
     SubmissionResult,
     _prune_none,

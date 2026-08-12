@@ -225,10 +225,14 @@ SEARCH_ENTRY_SAMPLE = {
 
 class Test_CollectiveInsightsSearch:
     def test_search_returns_search_entries(
-        self, ci: CollectiveInsights, mocker,
+        self,
+        ci: CollectiveInsights,
+        mocker,
     ):
         mocker.patch.object(
-            ci.rf_client, 'request_paged', return_value=[SEARCH_ENTRY_SAMPLE],
+            ci.rf_client,
+            'request_paged',
+            return_value=[SEARCH_ENTRY_SAMPLE],
         )
         results = ci.search(indicator_type='ip')
         assert len(results) == 1
@@ -239,7 +243,9 @@ class Test_CollectiveInsightsSearch:
         assert results[0].associated_threats.malware[0].name == 'WhisperGate'
 
     def test_search_returns_empty_when_no_matches(
-        self, ci: CollectiveInsights, mocker,
+        self,
+        ci: CollectiveInsights,
+        mocker,
     ):
         mocker.patch.object(ci.rf_client, 'request_paged', return_value=[])
         assert ci.search(indicator_type='ip') == []
@@ -299,7 +305,11 @@ class Test_CollectiveInsightsSearch:
         ],
     )
     def test_search_organizations_uhash_normalized(
-        self, ci: CollectiveInsights, mocker, supplied, expected,
+        self,
+        ci: CollectiveInsights,
+        mocker,
+        supplied,
+        expected,
     ):
         spy = mocker.patch.object(ci.rf_client, 'request_paged', return_value=[])
         ci.search(organizations=supplied)
@@ -318,10 +328,14 @@ class Test_CollectiveInsightsSearch:
         assert 'filters' not in payload
 
     @pytest.mark.parametrize(
-        'presence_value', ['present', 'absent'],
+        'presence_value',
+        ['present', 'absent'],
     )
     def test_search_presence_string_passthrough(
-        self, ci: CollectiveInsights, mocker, presence_value,
+        self,
+        ci: CollectiveInsights,
+        mocker,
+        presence_value,
     ):
         spy = mocker.patch.object(ci.rf_client, 'request_paged', return_value=[])
         ci.search(indicator_type=presence_value, malware_id=presence_value)
@@ -359,7 +373,10 @@ class Test_CollectiveInsightsSearch:
         ],
     )
     def test_search_raises_CollectiveInsightsSearchError(
-        self, ci: CollectiveInsights, mocker, exc,
+        self,
+        ci: CollectiveInsights,
+        mocker,
+        exc,
     ):
         mocker.patch.object(ci.rf_client, 'request_paged', side_effect=exc)
         with pytest.raises(CollectiveInsightsSearchError):
@@ -379,7 +396,9 @@ class Test_CollectiveInsightsSearch:
             ci.search(**kwargs)
 
     def test_search_raises_ValidationError_on_bad_response(
-        self, ci: CollectiveInsights, mocker,
+        self,
+        ci: CollectiveInsights,
+        mocker,
     ):
         mocker.patch.object(
             ci.rf_client,

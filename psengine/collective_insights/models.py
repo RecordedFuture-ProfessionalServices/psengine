@@ -139,7 +139,8 @@ class IdFilter(RFBaseModel):
     """
 
     id_: Annotated[
-        list[str] | Presence | None, BeforeValidator(_to_list_or_presence),
+        list[str] | Presence | None,
+        BeforeValidator(_to_list_or_presence),
     ] = Field(alias='id', default=None)
 
     @model_validator(mode='before')
@@ -163,7 +164,8 @@ class AssociatedThreatsFilter(RFBaseModel):
 
 class ATOPFilter(RFBaseModel):
     use_case: Annotated[
-        list[ATOPUseCase] | Presence | None, BeforeValidator(_to_list_or_presence),
+        list[ATOPUseCase] | Presence | None,
+        BeforeValidator(_to_list_or_presence),
     ] = None
     profile: IdFilter | None = None
     job: IdFilter | None = None
@@ -195,14 +197,17 @@ class SearchFilters(RFBaseModel):
         AfterValidator(Validators.check_uhash_prefix),
     ] = None
     indicator_type: Annotated[
-        list[IOCType] | Presence | None, BeforeValidator(_to_list_or_presence),
+        list[IOCType] | Presence | None,
+        BeforeValidator(_to_list_or_presence),
     ] = None
     detection_rule: IdFilter | None = None
     detection_type: Annotated[
-        list[SearchDetectionType] | Presence | None, BeforeValidator(_to_list_or_presence),
+        list[SearchDetectionType] | Presence | None,
+        BeforeValidator(_to_list_or_presence),
     ] = None
     submission_method: Annotated[
-        list[SubmissionMethod] | Presence | None, BeforeValidator(_to_list_or_presence),
+        list[SubmissionMethod] | Presence | None,
+        BeforeValidator(_to_list_or_presence),
     ] = None
     detection_time: DetectionTimeFilter | None = None
     associated_threats: AssociatedThreatsFilter | None = None
@@ -298,7 +303,7 @@ class SearchEntry(RFBaseModel):
 
         ```python
         >>> print(entry)
-        Event ID: 16046941d44a85e4748a9e9a, IOC: 1.2.3.4, Detection Time: 2025-12-15 13:05:23, Detection Type: sandbox
+        Event ID: 1609a, IOC: 1.2.3.4, Detection Time: 2025-12-15 13:05:23, Detection Type: sandbox
         ```
 
     Ordering:
