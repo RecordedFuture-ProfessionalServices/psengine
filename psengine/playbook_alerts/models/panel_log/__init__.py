@@ -11,9 +11,16 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
+from .code_repo import (
+    CodeRepoLeakageEvidence,
+    CodeRepoLeakageEvidenceChange,
+    Document,
+    RepoAssessment,
+    WatchList,
+)
 from .common import (
-    ChangeType,
     Assignee,
+    ChangeType,
     DnsRecord,
     MaliciousAssessment,
     MaliciousDnsRecord,
@@ -23,13 +30,6 @@ from .common import (
     UrlAssessment,
     WhoisContactRecord,
     WhoisRecord,
-)
-from .code_repo import (
-    CodeRepoLeakageEvidence,
-    CodeRepoLeakageEvidenceChange,
-    Document,
-    RepoAssessment,
-    WatchList,
 )
 from .domain_abuse import (
     DomainAbuseDnsChange,
