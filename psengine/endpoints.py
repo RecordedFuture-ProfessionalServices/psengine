@@ -76,6 +76,7 @@ EP_LIST = BASE_URL + '/list'
 EP_CREATE_LIST = EP_LIST + '/create'
 EP_SEARCH_LIST = EP_LIST + '/search'
 EP_LIST_ENTITIES_WITH_TAGS = EP_LIST + '/{}/entitiesWithTags'
+EP_LIST_ENTITY_TAGS = EP_LIST + '/{}/entity/tags'
 
 ###############################################################################
 # SOAR Endpoints
