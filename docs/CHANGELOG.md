@@ -4,8 +4,9 @@
 
 ### Added
 
-- Added support for the Malicious Sites playbook alert category via the new `PBA_MaliciousSites` model. The `PlaybookAlertMgr` can now fetch, parse, render Markdown for, and retrieve images from `malicious_sites` alerts, including the category-specific `panel_log_v2` change types (attacker additions, phishing verdicts, suggested takedowns, for-sale/parked detections, and more).
-- The `markdown()` method of Playbook Alerts now accepts a `comments` argument (default `False`). When set to `True`, user comments extracted from `panel_log_v2` are rendered in a dedicated **Comments** section, consistently across all playbook alert categories. Editing a comment in the Recorded Future web interface updates its `panel_log_v2` entry in place, so the rendered section reflects the current text and does not duplicate edited comments.
+- `PlaybookAlertMgr` now supports Malicious Sites playbook alert category.
+- `PlaybookAlertMgr` now supports Payment Card Fraud playbook alert category.
+- The `PlaybookAlert.markdown()` now accepts a `comments` argument (default `False`) to display user comments.
 
 ## v2.9.0 - 2026-08-11
 

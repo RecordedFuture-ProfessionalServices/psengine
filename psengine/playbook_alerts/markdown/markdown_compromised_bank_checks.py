@@ -51,7 +51,7 @@ def _add_check_attributes(pba: 'PBA_CompromisedBankChecks', md_maker: MarkdownMa
     if pba.panel_evidence_summary.check_number:
         attributes.append(f'{bold("Check Number:")}  {pba.panel_evidence_summary.check_number}  ')
 
-    if len(attributes) > 0:
+    if len(attributes):
         md_maker.add_section('Check Attributes', attributes)
 
 
@@ -106,7 +106,7 @@ def _add_collection_dates(pba: 'PBA_CompromisedBankChecks', md_maker: MarkdownMa
             f'{bold("Collected Date:")} {pba.panel_evidence_summary.posted_date}  '
         )
 
-    if len(collection_dates) > 0:
+    if len(collection_dates):
         md_maker.add_section('Collection Dates', collection_dates)
 
 
@@ -174,15 +174,10 @@ def _compromised_bank_check_markdown(
         _add_images(pba, md_maker)
 
     _add_check_attributes(pba, md_maker)
-
     _add_bank_identifiers(pba, md_maker)
-
     _add_payment_details(pba, md_maker)
-
     _add_seen_details(pba, md_maker)
-
     _add_collection_dates(pba, md_maker)
-
     _add_source_information(pba, md_maker)
 
     return md_maker.format_output()

@@ -32,7 +32,7 @@ def _add_dns_records(pba: 'PBA_MaliciousSites', md_maker: MarkdownMaker):
             record.risk_score,
             record.criticality,
             record.record_type,
-            ', '.join(a.name for a in record.assessments if a and a.name),
+            ', '.join(a.name for a in record.assessments if a and a.name) or 'N/A',
         ]
         for record in pba.panel_evidence_summary.resolved_record_list
     ]
@@ -79,14 +79,7 @@ def _add_whois(pba: 'PBA_MaliciousSites', md_maker: MarkdownMaker):
             registrar = f'{bold("Registrar:")} {v.registrar_name}  ' if v.registrar_name else ''
 
             whois_data.extend(
-                [
-                    whois_entity,
-                    servers,
-                    created_dt,
-                    updated_dt,
-                    expires_dt,
-                    registrar,
-                ]
+                [whois_entity, servers, created_dt, updated_dt, expires_dt, registrar, '\n']
             )
 
     if whois_data:
