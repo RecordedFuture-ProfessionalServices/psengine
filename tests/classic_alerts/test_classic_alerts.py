@@ -269,7 +269,7 @@ class Test_ClassicAlert:
             alerts[0].markdown(html_tags=True),
             alerts[1].markdown(ai_insights=False),
             alerts[2].markdown(),
-            alerts[2].markdown(reviewer_note=True),
+            alerts[2].markdown(comment=True),
         ]
 
         assert '\n</details>' not in markdowns[0]

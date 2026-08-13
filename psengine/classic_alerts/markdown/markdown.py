@@ -306,10 +306,10 @@ def _add_hits_section_if_no_enriched_entities(
         )
 
 
-def _add_reviewer_note_section(
-    md_maker: MarkdownMaker, classic_alert: 'ClassicAlert', reviewer_note: bool
+def _add_comment_section(
+    md_maker: MarkdownMaker, classic_alert: 'ClassicAlert', comment: bool
 ) -> None:
-    if reviewer_note and classic_alert.review.note:
+    if comment and classic_alert.review.note:
         md_maker.add_section('Reviewer Note', classic_alert.review.note)
 
 
@@ -322,7 +322,7 @@ def _markdown_alert(
     html_tags: bool = False,
     character_limit: int = None,
     defang_iocs: bool = False,
-    reviewer_note: bool = False,
+    comment: bool = False,
 ) -> str:
     """Returns a markdown string representation of the `ClassicAlert` instance.
 
@@ -339,7 +339,7 @@ def _markdown_alert(
         html_tags (bool, optional): Include HTML tags in the markdown. Defaults to False.
         character_limit (int, optional): Character limit for the markdown. Defaults to None.
         defang_iocs (bool, optional): Defang IOCs in hits. Defaults to False.
-        reviewer_note (bool, optional): Include reviewer note in the markdown. Defaults to False.
+        comment (bool, optional): Include reviewer note in the markdown. Defaults to False.
 
     Raises:
         AlertMarkdownError: If fields are not available.
@@ -360,7 +360,7 @@ def _markdown_alert(
         _add_summary_section(md_maker, classic_alert)
         _add_owner_org_section(md_maker, classic_alert, owner_org)
         _add_ai_insights_section(md_maker, classic_alert, ai_insights)
-        _add_reviewer_note_section(md_maker, classic_alert, reviewer_note)
+        _add_comment_section(md_maker, classic_alert, comment)
 
         if classic_alert.enriched_entities:
             _add_enriched_entities_sections(md_maker, classic_alert, triggered_by, html_tags)
