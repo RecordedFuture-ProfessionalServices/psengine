@@ -1,0 +1,1761 @@
+{
+  "version": "0.3.1",
+  "build": "f272ba6",
+  "sample": {
+    "id": "251114-py23jaavtp",
+    "score": 10,
+    "submitted": "2025-11-14T12:45:04Z",
+    "target": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554",
+    "size": 325632,
+    "md5": "46bcf4e361cd251c958720e1198e3f0a",
+    "sha1": "57ab0765c97b230c615b43ee4ebc28b674887121",
+    "sha256": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554",
+    "sha512": "8674824eed2ff85101788750cdba20220beef485b2cf86d78d6260f2b4017710386461b500969c354da32cbef39ffe50f6411bf70627c837c11eba51b4159ce4",
+    "ssdeep": "6144:bcNYS996KFifeVjBpeExgVTFSXFoMc5RhCaL37yVwr5UpUhUjU8UG9U:bcW7KEZlPzCy37",
+    "static_tags": [
+      "windows:4",
+      "windows",
+      "x86",
+      "arch:x86"
+    ]
+  },
+  "task": {
+    "target": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554.exe",
+    "size": 325632,
+    "md5": "46bcf4e361cd251c958720e1198e3f0a",
+    "sha1": "57ab0765c97b230c615b43ee4ebc28b674887121",
+    "sha256": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554",
+    "sha512": "8674824eed2ff85101788750cdba20220beef485b2cf86d78d6260f2b4017710386461b500969c354da32cbef39ffe50f6411bf70627c837c11eba51b4159ce4",
+    "ssdeep": "6144:bcNYS996KFifeVjBpeExgVTFSXFoMc5RhCaL37yVwr5UpUhUjU8UG9U:bcW7KEZlPzCy37",
+    "static_tags": [
+      "windows:4",
+      "windows",
+      "x86",
+      "arch:x86"
+    ]
+  },
+  "analysis": {
+    "score": 10,
+    "tags": [
+      "botnet:ap",
+      "defense_evasion",
+      "discovery",
+      "family:darkcomet",
+      "persistence",
+      "rat",
+      "trojan",
+      "upx"
+    ],
+    "ttp": [
+      "T1012",
+      "T1564.001",
+      "T1082",
+      "T1547.001",
+      "T1112",
+      "T1547.004",
+      "T1543.003",
+      "T1614.001",
+      "T1562.004",
+      "T1562.001",
+      "T1547.014"
+    ],
+    "features": [
+      "analog",
+      "overview"
+    ],
+    "submitted": "2025-11-14T12:45:04Z",
+    "reported": "2025-11-14T12:47:37Z",
+    "max_time_network": 120323,
+    "max_time_kernel": 150009,
+    "backend": "sbx4m101",
+    "resource": "win7-20250407-en",
+    "resource_tags": [
+      "arch:x64",
+      "arch:x86",
+      "image:win7-20250407-en",
+      "locale:en-us",
+      "os:windows7-x64",
+      "system"
+    ],
+    "platform": "windows7_x64"
+  },
+  "processes": [
+    {
+      "procid": 29,
+      "procid_parent": 21,
+      "pid": 2072,
+      "ppid": 1180,
+      "cmd": "\"C:\\Users\\Admin\\AppData\\Local\\Temp\\5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554.exe\"",
+      "image": "C:\\Users\\Admin\\AppData\\Local\\Temp\\5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554.exe",
+      "orig": false,
+      "started": 154,
+      "terminated": 1434
+    },
+    {
+      "procid": 30,
+      "procid_parent": 29,
+      "pid": 2808,
+      "ppid": 2072,
+      "cmd": "\"C:\\Windows\\System32\\cmd.exe\" /k attrib \"C:\\Users\\Admin\\AppData\\Local\\Temp\\5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554.exe\" +s +h",
+      "image": "C:\\Windows\\SysWOW64\\cmd.exe",
+      "orig": true,
+      "started": 248
+    },
+    {
+      "procid": 32,
+      "procid_parent": 29,
+      "pid": 2828,
+      "ppid": 2072,
+      "cmd": "\"C:\\Windows\\System32\\cmd.exe\" /k attrib \"C:\\Users\\Admin\\AppData\\Local\\Temp\" +s +h",
+      "image": "C:\\Windows\\SysWOW64\\cmd.exe",
+      "orig": true,
+      "started": 248
+    },
+    {
+      "procid": 33,
+      "procid_parent": 29,
+      "pid": 2860,
+      "ppid": 2072,
+      "cmd": "notepad",
+      "image": "C:\\Windows\\SysWOW64\\notepad.exe",
+      "orig": true,
+      "started": 248,
+      "terminated": 1855
+    },
+    {
+      "procid": 35,
+      "procid_parent": 30,
+      "pid": 2648,
+      "ppid": 2808,
+      "cmd": "attrib  \"C:\\Users\\Admin\\AppData\\Local\\Temp\\5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554.exe\" +s +h",
+      "image": "C:\\Windows\\SysWOW64\\attrib.exe",
+      "orig": true,
+      "started": 264,
+      "terminated": 326
+    },
+    {
+      "procid": 36,
+      "procid_parent": 32,
+      "pid": 2680,
+      "ppid": 2828,
+      "cmd": "attrib  \"C:\\Users\\Admin\\AppData\\Local\\Temp\" +s +h",
+      "image": "C:\\Windows\\SysWOW64\\attrib.exe",
+      "orig": true,
+      "started": 310,
+      "terminated": 342
+    },
+    {
+      "procid": 37,
+      "procid_parent": 29,
+      "pid": 1400,
+      "ppid": 2072,
+      "cmd": "\"C:\\Users\\Admin\\AppData\\Roaming\\MSDCSC\\explorer.exe\" ",
+      "image": "C:\\Users\\Admin\\AppData\\Roaming\\MSDCSC\\explorer.exe",
+      "orig": false,
+      "started": 420
+    },
+    {
+      "procid": 38,
+      "procid_parent": 37,
+      "pid": 2120,
+      "ppid": 1400,
+      "cmd": "notepad",
+      "image": "C:\\Windows\\SysWOW64\\notepad.exe",
+      "orig": true,
+      "started": 466
+    },
+    {
+      "procid": 39,
+      "procid_parent": 5,
+      "pid": 2584,
+      "ppid": 428,
+      "cmd": "explorer.exe",
+      "image": "C:\\Windows\\explorer.exe",
+      "orig": true,
+      "started": 6972
+    }
+  ],
+  "signatures": [
+    {
+      "label": "darkcomet",
+      "name": "Darkcomet",
+      "score": 10,
+      "tags": [
+        "trojan",
+        "rat",
+        "family:darkcomet"
+      ],
+      "desc": "DarkComet is a remote access trojan (RAT) developed by Jean-Pierre Lesueur."
+    },
+    {
+      "name": "Darkcomet family",
+      "score": 10,
+      "tags": [
+        "family:darkcomet"
+      ]
+    },
+    {
+      "label": "winlogon_persistence",
+      "name": "Modifies WinLogon for persistence",
+      "score": 10,
+      "ttp": [
+        "T1547.004",
+        "T1112"
+      ],
+      "tags": [
+        "persistence"
+      ],
+      "indicators": [
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\UserInit = \"C:\\\\Windows\\\\system32\\\\userinit.exe,C:\\\\Users\\\\Admin\\\\AppData\\\\Roaming\\\\MSDCSC\\\\explorer.exe\"",
+          "description": "Set value (str)",
+          "procid": 29
+        }
+      ]
+    },
+    {
+      "label": "modifies_firewall_policy_registry",
+      "name": "Modifies firewall policy service",
+      "score": 10,
+      "ttp": [
+        "T1112",
+        "T1543.003",
+        "T1562.004"
+      ],
+      "tags": [
+        "defense_evasion"
+      ],
+      "indicators": [
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile",
+          "description": "Key created",
+          "procid": 37
+        },
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile\\EnableFirewall = \"0\"",
+          "description": "Set value (int)",
+          "procid": 37
+        },
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\services\\SharedAccess\\Parameters\\FirewallPolicy\\StandardProfile\\DisableNotifications = \"0\"",
+          "description": "Set value (int)",
+          "procid": 37
+        }
+      ]
+    },
+    {
+      "label": "modifies_security_service_registry",
+      "name": "Modifies security service",
+      "score": 10,
+      "ttp": [
+        "T1112",
+        "T1543.003"
+      ],
+      "tags": [
+        "defense_evasion"
+      ],
+      "indicators": [
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\services\\wscsvc\\Start = \"4\"",
+          "description": "Set value (int)",
+          "procid": 37
+        }
+      ]
+    },
+    {
+      "label": "bypasses_windows_security_registry",
+      "name": "Windows security bypass",
+      "score": 10,
+      "ttp": [
+        "T1562.001",
+        "T1112"
+      ],
+      "tags": [
+        "defense_evasion",
+        "trojan"
+      ],
+      "indicators": [
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Security Center\\AntiVirusDisableNotify = \"1\"",
+          "description": "Set value (str)",
+          "procid": 37
+        }
+      ]
+    },
+    {
+      "label": "modifies_installed_components_registry",
+      "name": "Boot or Logon Autostart Execution: Active Setup",
+      "score": 8,
+      "ttp": [
+        "T1547.014",
+        "T1112"
+      ],
+      "tags": [
+        "persistence"
+      ],
+      "indicators": [
+        {
+          "ioc": "\\REGISTRY\\USER\\S-1-5-21-1440271469-465107294-1072897557-1000\\Software\\Microsoft\\Active Setup\\Installed Components",
+          "description": "Key created",
+          "procid": 39
+        }
+      ],
+      "desc": "Adversaries may achieve persistence by adding a Registry key to the Active Setup of the local machine."
+    },
+    {
+      "label": "sets_file_hidden",
+      "name": "Sets file to hidden",
+      "score": 8,
+      "ttp": [
+        "T1564.001"
+      ],
+      "tags": [
+        "defense_evasion"
+      ],
+      "indicators": [
+        {
+          "pid": 2648,
+          "procid": 35
+        },
+        {
+          "pid": 2680,
+          "procid": 36
+        }
+      ],
+      "desc": "Modifies file attributes to stop it showing in Explorer etc."
+    },
+    {
+      "name": "Deletes itself",
+      "score": 7,
+      "indicators": [
+        {
+          "pid": 2860,
+          "procid": 33
+        }
+      ]
+    },
+    {
+      "name": "Executes dropped EXE",
+      "score": 7,
+      "indicators": [
+        {
+          "pid": 1400,
+          "procid": 37
+        }
+      ]
+    },
+    {
+      "name": "Loads dropped DLL",
+      "score": 7,
+      "indicators": [
+        {
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "pid": 2072,
+          "procid": 29
+        }
+      ]
+    },
+    {
+      "label": "modifies_windows_security_registry",
+      "name": "Windows security modification",
+      "score": 7,
+      "ttp": [
+        "T1562.001",
+        "T1112"
+      ],
+      "tags": [
+        "defense_evasion",
+        "trojan"
+      ],
+      "indicators": [
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Security Center\\AntiVirusDisableNotify = \"1\"",
+          "description": "Set value (str)",
+          "procid": 37
+        }
+      ]
+    },
+    {
+      "label": "creates_runkey_registry",
+      "name": "Adds Run key to start application",
+      "score": 6,
+      "ttp": [
+        "T1547.001",
+        "T1112"
+      ],
+      "tags": [
+        "persistence"
+      ],
+      "indicators": [
+        {
+          "ioc": "\\REGISTRY\\USER\\S-1-5-21-1440271469-465107294-1072897557-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\explorer = \"C:\\\\Users\\\\Admin\\\\AppData\\\\Roaming\\\\MSDCSC\\\\explorer.exe\"",
+          "description": "Set value (str)",
+          "procid": 29
+        },
+        {
+          "ioc": "\\REGISTRY\\USER\\S-1-5-21-1440271469-465107294-1072897557-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\explorer = \"C:\\\\Users\\\\Admin\\\\AppData\\\\Roaming\\\\MSDCSC\\\\explorer.exe\"",
+          "description": "Set value (str)",
+          "procid": 37
+        }
+      ]
+    },
+    {
+      "name": "UPX packed file",
+      "score": 5,
+      "tags": [
+        "upx"
+      ],
+      "indicators": [
+        {
+          "resource": "behavioral1/memory/2072-0-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/files/0x0006000000014bcb-21.dat",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/2072-27-0x0000000003F40000-0x0000000004018000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/2072-71-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-73-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-74-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-75-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-76-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-78-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-79-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-83-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-84-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        },
+        {
+          "resource": "behavioral1/memory/1400-89-0x0000000000400000-0x00000000004D8000-memory.dmp",
+          "yara_rule": "upx"
+        }
+      ],
+      "desc": "Detects executables packed with UPX/modified UPX open source packer."
+    },
+    {
+      "label": "file_antivm_ide_drive",
+      "name": "Enumerates physical storage devices",
+      "score": 3,
+      "ttp": [
+        "T1082"
+      ],
+      "desc": "Attempts to interact with connected storage/optical drive(s)."
+    },
+    {
+      "label": "system_language_discovery",
+      "name": "System Location Discovery: System Language Discovery",
+      "score": 3,
+      "ttp": [
+        "T1614.001"
+      ],
+      "tags": [
+        "discovery"
+      ],
+      "indicators": [
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\NLS\\Language",
+          "description": "Key opened",
+          "procid": 30
+        },
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\NLS\\Language",
+          "description": "Key opened",
+          "procid": 33
+        },
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\NLS\\Language",
+          "description": "Key opened",
+          "procid": 35
+        },
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\NLS\\Language",
+          "description": "Key opened",
+          "procid": 37
+        },
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\NLS\\Language",
+          "description": "Key opened",
+          "procid": 29
+        },
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\NLS\\Language",
+          "description": "Key opened",
+          "procid": 32
+        },
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\NLS\\Language",
+          "description": "Key opened",
+          "procid": 36
+        },
+        {
+          "ioc": "\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Control\\NLS\\Language",
+          "description": "Key opened",
+          "procid": 38
+        }
+      ],
+      "desc": "Attempt gather information about the system language of a victim in order to infer the geographical location of that host."
+    },
+    {
+      "label": "reg_software_classes",
+      "name": "Modifies registry class",
+      "indicators": [
+        {
+          "ioc": "\\REGISTRY\\USER\\S-1-5-21-1440271469-465107294-1072897557-1000_Classes\\Local Settings",
+          "description": "Key created",
+          "procid": 39
+        },
+        {
+          "ioc": "\\REGISTRY\\USER\\S-1-5-21-1440271469-465107294-1072897557-1000_CLASSES\\Local Settings\\Software\\Microsoft\\Windows\\Shell",
+          "description": "Key created",
+          "procid": 39
+        },
+        {
+          "ioc": "\\REGISTRY\\USER\\S-1-5-21-1440271469-465107294-1072897557-1000_CLASSES\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU",
+          "description": "Key created",
+          "procid": 39
+        },
+        {
+          "ioc": "\\REGISTRY\\USER\\S-1-5-21-1440271469-465107294-1072897557-1000_CLASSES\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\NodeSlots",
+          "description": "Set value (data)",
+          "procid": 39
+        },
+        {
+          "ioc": "\\REGISTRY\\USER\\S-1-5-21-1440271469-465107294-1072897557-1000_CLASSES\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\\MRUListEx = ffffffff",
+          "description": "Set value (data)",
+          "procid": 39
+        }
+      ]
+    },
+    {
+      "name": "Suspicious behavior: GetForegroundWindowSpam",
+      "indicators": [
+        {
+          "pid": 2584,
+          "procid": 39
+        }
+      ]
+    },
+    {
+      "name": "Suspicious use of AdjustPrivilegeToken",
+      "indicators": [
+        {
+          "description": "Token: SeIncreaseQuotaPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeSecurityPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeTakeOwnershipPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeLoadDriverPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeSystemProfilePrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeSystemtimePrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeProfSingleProcessPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeIncBasePriorityPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeCreatePagefilePrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeBackupPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeRestorePrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeDebugPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeSystemEnvironmentPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeChangeNotifyPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeRemoteShutdownPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeUndockPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeManageVolumePrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeImpersonatePrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeCreateGlobalPrivilege",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: 33",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: 34",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: 35",
+          "pid": 2072,
+          "procid": 29
+        },
+        {
+          "description": "Token: SeIncreaseQuotaPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeSecurityPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeTakeOwnershipPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeLoadDriverPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeSystemProfilePrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeSystemtimePrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeProfSingleProcessPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeIncBasePriorityPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeCreatePagefilePrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeBackupPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeRestorePrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeDebugPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeSystemEnvironmentPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeChangeNotifyPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeRemoteShutdownPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeUndockPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeManageVolumePrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeImpersonatePrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeCreateGlobalPrivilege",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: 33",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: 34",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: 35",
+          "pid": 1400,
+          "procid": 37
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "description": "Token: SeShutdownPrivilege",
+          "pid": 2584,
+          "procid": 39
+        }
+      ]
+    },
+    {
+      "name": "Suspicious use of FindShellTrayWindow",
+      "indicators": [
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        }
+      ]
+    },
+    {
+      "name": "Suspicious use of SendNotifyMessage",
+      "indicators": [
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        },
+        {
+          "pid": 2584,
+          "procid": 39
+        }
+      ]
+    },
+    {
+      "name": "Suspicious use of SetWindowsHookEx",
+      "indicators": [
+        {
+          "pid": 1400,
+          "procid": 37
+        }
+      ]
+    },
+    {
+      "name": "Suspicious use of WriteProcessMemory",
+      "indicators": [
+        {
+          "description": "PID 2072 wrote to memory of 2808",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 30
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2808",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 30
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2808",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 30
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2808",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 30
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2828",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 32
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2828",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 32
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2828",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 32
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2828",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 32
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2072 wrote to memory of 2860",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 33
+        },
+        {
+          "description": "PID 2808 wrote to memory of 2648",
+          "pid": 2808,
+          "procid": 30,
+          "procid_target": 35
+        },
+        {
+          "description": "PID 2808 wrote to memory of 2648",
+          "pid": 2808,
+          "procid": 30,
+          "procid_target": 35
+        },
+        {
+          "description": "PID 2808 wrote to memory of 2648",
+          "pid": 2808,
+          "procid": 30,
+          "procid_target": 35
+        },
+        {
+          "description": "PID 2808 wrote to memory of 2648",
+          "pid": 2808,
+          "procid": 30,
+          "procid_target": 35
+        },
+        {
+          "description": "PID 2828 wrote to memory of 2680",
+          "pid": 2828,
+          "procid": 32,
+          "procid_target": 36
+        },
+        {
+          "description": "PID 2828 wrote to memory of 2680",
+          "pid": 2828,
+          "procid": 32,
+          "procid_target": 36
+        },
+        {
+          "description": "PID 2828 wrote to memory of 2680",
+          "pid": 2828,
+          "procid": 32,
+          "procid_target": 36
+        },
+        {
+          "description": "PID 2828 wrote to memory of 2680",
+          "pid": 2828,
+          "procid": 32,
+          "procid_target": 36
+        },
+        {
+          "description": "PID 2072 wrote to memory of 1400",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 37
+        },
+        {
+          "description": "PID 2072 wrote to memory of 1400",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 37
+        },
+        {
+          "description": "PID 2072 wrote to memory of 1400",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 37
+        },
+        {
+          "description": "PID 2072 wrote to memory of 1400",
+          "pid": 2072,
+          "procid": 29,
+          "procid_target": 37
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        },
+        {
+          "description": "PID 1400 wrote to memory of 2120",
+          "pid": 1400,
+          "procid": 37,
+          "procid_target": 38
+        }
+      ]
+    },
+    {
+      "label": "win_tasksched_com_clsid",
+      "name": "Uses Task Scheduler COM API",
+      "ttp": [
+        "T1012"
+      ],
+      "tags": [
+        "persistence"
+      ],
+      "desc": "The Task Scheduler COM API can be used to schedule applications to run on boot or at set times."
+    },
+    {
+      "label": "attrib_generic",
+      "name": "Views/modifies file attributes",
+      "ttp": [
+        "T1564.001"
+      ],
+      "tags": [
+        "defense_evasion"
+      ],
+      "indicators": [
+        {
+          "pid": 2648,
+          "procid": 35
+        },
+        {
+          "pid": 2680,
+          "procid": 36
+        }
+      ]
+    }
+  ],
+  "tags": null,
+  "network": {
+    "flows": [
+      {
+        "id": 2,
+        "src": "10.127.1.15:52130",
+        "dst": "8.8.8.8:53",
+        "proto": "udp",
+        "pid": 1400,
+        "procid": 37,
+        "first_seen": 1221,
+        "last_seen": 1247,
+        "rx_bytes": 79,
+        "rx_packets": 1,
+        "tx_bytes": 63,
+        "tx_packets": 1,
+        "protocols": [
+          "dns"
+        ],
+        "domain": "kvejo991.ddns.net"
+      }
+    ],
+    "requests": [
+      {
+        "flow": 2,
+        "index": 1,
+        "dns_request": {
+          "domains": [
+            "kvejo991.ddns.net"
+          ],
+          "questions": [
+            {
+              "name": "kvejo991.ddns.net",
+              "type": "IN A"
+            }
+          ]
+        }
+      },
+      {
+        "flow": 2,
+        "index": 1,
+        "dns_response": {
+          "domains": [
+            "kvejo991.ddns.net"
+          ],
+          "ip": [
+            "0.0.0.0"
+          ],
+          "answers": [
+            {
+              "name": "kvejo991.ddns.net",
+              "type": "IN A",
+              "value": "0.0.0.0"
+            }
+          ]
+        }
+      }
+    ],
+    "ips": {
+      "8.8.8.8": {
+        "cc": "US",
+        "asn": "AS15169"
+      }
+    }
+  },
+  "dumped": [
+    {
+      "at": 186,
+      "pid": 2072,
+      "procid": 29,
+      "name": "memory/2072-0-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "exception",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 217,
+      "pid": 2072,
+      "procid": 29,
+      "name": "memory/2072-1-0x0000000000260000-0x0000000000261000-memory.dmp",
+      "kind": "region",
+      "origin": "exception",
+      "addr": 2490368,
+      "length": 4096
+    },
+    {
+      "at": 279,
+      "pid": 2860,
+      "procid": 33,
+      "name": "memory/2860-19-0x0000000000190000-0x0000000000191000-memory.dmp",
+      "kind": "region",
+      "origin": "thread_injection",
+      "addr": 1638400,
+      "length": 4096
+    },
+    {
+      "at": 264,
+      "pid": 2860,
+      "procid": 33,
+      "name": "memory/2860-4-0x0000000000080000-0x0000000000081000-memory.dmp",
+      "kind": "region",
+      "origin": "protect",
+      "addr": 524288,
+      "length": 4096
+    },
+    {
+      "at": 420,
+      "pid": 2072,
+      "procid": 29,
+      "path": "\\Users\\Admin\\AppData\\Roaming\\MSDCSC\\explorer.exe",
+      "name": "files/0x0006000000014bcb-21.dat",
+      "kind": "martian",
+      "origin": "imgload",
+      "md5": "46bcf4e361cd251c958720e1198e3f0a",
+      "sha1": "57ab0765c97b230c615b43ee4ebc28b674887121",
+      "sha256": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554",
+      "sha512": "8674824eed2ff85101788750cdba20220beef485b2cf86d78d6260f2b4017710386461b500969c354da32cbef39ffe50f6411bf70627c837c11eba51b4159ce4",
+      "ssdeep": "6144:bcNYS996KFifeVjBpeExgVTFSXFoMc5RhCaL37yVwr5UpUhUjU8UG9U:bcW7KEZlPzCy37",
+      "size": 325632
+    },
+    {
+      "at": 435,
+      "pid": 2072,
+      "procid": 29,
+      "name": "memory/2072-28-0x0000000003F40000-0x0000000004018000-memory.dmp",
+      "kind": "region",
+      "origin": "exception",
+      "addr": 66322432,
+      "length": 884736
+    },
+    {
+      "at": 435,
+      "pid": 2072,
+      "procid": 29,
+      "name": "memory/2072-27-0x0000000003F40000-0x0000000004018000-memory.dmp",
+      "kind": "region",
+      "origin": "exception",
+      "addr": 66322432,
+      "length": 884736
+    },
+    {
+      "at": 482,
+      "pid": 2120,
+      "procid": 38,
+      "name": "memory/2120-69-0x00000000001C0000-0x00000000001C1000-memory.dmp",
+      "kind": "region",
+      "origin": "thread_injection",
+      "addr": 1835008,
+      "length": 4096
+    },
+    {
+      "at": 1449,
+      "pid": 2072,
+      "procid": 29,
+      "name": "memory/2072-71-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "exception",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 10560,
+      "pid": 1400,
+      "procid": 37,
+      "name": "memory/1400-73-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "pe_modified",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 10591,
+      "pid": 1400,
+      "procid": 37,
+      "name": "memory/1400-74-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "exception",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 20731,
+      "pid": 1400,
+      "procid": 37,
+      "name": "memory/1400-75-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "pe_modified",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 30871,
+      "pid": 1400,
+      "procid": 37,
+      "name": "memory/1400-76-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "pe_modified",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 51167,
+      "pid": 1400,
+      "procid": 37,
+      "name": "memory/1400-78-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "pe_modified",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 61307,
+      "pid": 1400,
+      "procid": 37,
+      "name": "memory/1400-79-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "pe_modified",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 70448,
+      "pid": 1400,
+      "procid": 37,
+      "name": "memory/1400-83-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "pe_modified",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 80588,
+      "pid": 1400,
+      "procid": 37,
+      "name": "memory/1400-84-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "pe_modified",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 131304,
+      "pid": 1400,
+      "procid": 37,
+      "name": "memory/1400-89-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "kind": "region",
+      "origin": "pe_modified",
+      "addr": 4194304,
+      "length": 884736
+    },
+    {
+      "at": 134003,
+      "pid": 2584,
+      "procid": 39,
+      "name": "memory/2584-90-0x0000000002130000-0x0000000002140000-memory.dmp",
+      "kind": "region",
+      "origin": "protect",
+      "addr": 34799616,
+      "length": 65536
+    }
+  ],
+  "extracted": [
+    {
+      "dumped_file": "memory/2072-71-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "resource": "behavioral1/memory/2072-71-0x0000000000400000-0x00000000004D8000-memory.dmp",
+      "config": {
+        "family": "darkcomet",
+        "rule": "Darkcomet",
+        "c2": [
+          "kvejo991.ddns.net:1604"
+        ],
+        "botnet": "AP",
+        "mutex": [
+          "DC_MUTEX-ARULYYD"
+        ],
+        "keys": [
+          {
+            "kind": "rc4.plain",
+            "key": "RC4_key",
+            "value": "#KCMDDC51#-890"
+          }
+        ],
+        "attr": {
+          "persistence": true,
+          "reg_key": "explorer",
+          "install": true,
+          "InstallPath": "MSDCSC\\explorer.exe",
+          "gencode": "MEkifdG51Yac",
+          "offline_keylogger": true
+        }
+      }
+    }
+  ]
+}

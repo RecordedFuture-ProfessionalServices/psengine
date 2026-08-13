@@ -1,0 +1,38 @@
+{
+  "version": "0.2",
+  "build": "738c379cd",
+  "sample": {
+    "sample": "260529-q2zl9abwxw",
+    "kind": "file",
+    "size": 2518,
+    "target": "ca.csv"
+  },
+  "task": {
+    "task": "260529-q2zl9abwxw-static1",
+    "target": "ca.csv"
+  },
+  "analysis": {
+    "reported": "2026-05-29T13:46:06Z",
+    "score": 1
+  },
+  "files": [
+    {
+      "filename": "ca.csv",
+      "filesize": 2518,
+      "md5": "4d88d9398e8cc63180983977bbee187a",
+      "sha1": "c855e8002900947effd46b85226f30ea054a09b4",
+      "sha256": "51bcb9233d7a41be26d093bd7b664d5ca72572adea365afeea57febd065d2823",
+      "sha512": "e684d33523231fd9fa9196c6ec4da5aa0e4d1a85e2f6530b1c46caa58f45b21350e7079d798865892a4edf9ed5f7bc60d76f609f79e71c329bbdbd0cf7589e4f",
+      "tlsh": "T1ED514633757730936F13049B5A8BF62AE52BF0EC876F4880640DD37868125F6B36265D",
+      "exts": [],
+      "tags": [],
+      "depth": 0,
+      "kind": "file",
+      "selected": false,
+      "runas": "ca.csv",
+      "metadata": {}
+    }
+  ],
+  "unpack_count": 0,
+  "error_count": 0
+}

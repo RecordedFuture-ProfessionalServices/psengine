@@ -161,6 +161,33 @@ EP_ASI_ASSETS_SEARCH = f'{EP_ASI_ASSETS}/_search'
 EP_ASI_EXPOSURES = f'{EP_ASI_PROJECTS}/{{}}/exposures'
 EP_ASI_EXPOSURES_BY_SIGNATURE = f'{EP_ASI_EXPOSURES}/{{}}'
 
+###############################################################################
+# Recorded Future Sandbox API Base URLs and Endpoints
+###############################################################################
+SANDBOX_API_VERSION = 'v0'
+
+# Sandbox base URLs by region
+SANDBOX_BASE_URLS = {
+    'eu': 'https://sandbox.recordedfuture.com/api/' + SANDBOX_API_VERSION,
+    'usa': 'https://us-sandbox.recordedfuture.com/api/' + SANDBOX_API_VERSION,
+    'apj': 'https://apj-sandbox.recordedfuture.com/api/' + SANDBOX_API_VERSION,
+    'public': 'https://tria.ge/api/' + SANDBOX_API_VERSION,
+    'private': 'https://private.tria.ge/api/' + SANDBOX_API_VERSION,
+}
+
+# Sandbox Sample Endpoints (using {base_url} as placeholder)
+EP_SANDBOX_SAMPLES = '{base_url}/samples'
+EP_SANDBOX_SAMPLES_ID = '{base_url}/samples/{sample_id}'
+EP_SANDBOX_SAMPLES_DOWNLOAD = '{base_url}/samples/{sample_id}/sample'
+EP_SANDBOX_SAMPLES_SUMMARY = '{base_url}/samples/{sample_id}/summary'
+EP_SANDBOX_SAMPLES_STATIC_REPORT = '{base_url}/samples/{sample_id}/reports/static'
+EP_SANDBOX_SAMPLES_OVERVIEW = '{base_url}/samples/{sample_id}/overview.json'
+EP_SANDBOX_SAMPLES_BEHAVIORAL = '{base_url}/samples/{sample_id}/{task_id}/report_triage.json'
+EP_SANDBOX_SAMPLES_PROFILE = '{base_url}/samples/{sample_id}/profile'
+EP_SANDBOX_SEARCH = '{base_url}/search'
+EP_SANDBOX_PROFILES = '{base_url}/profiles'
+EP_SANDBOX_PROFILES_ID = '{base_url}/profiles/{profile_id}'
+
 ################################################################################
 # Threat Map API Endpoints
 ################################################################################

@@ -139,15 +139,26 @@ class Test_Config:
 
     def test_valid_token(self):
         Config.reset_instance()
-        Config.init(rf_token='a' * 32, asi_token='b' * 32)
+        Config.init(rf_token='a' * 32, asi_token='b' * 32, sandbox_token='c' * 40)
         gc = get_config()
         assert gc.rf_token.get_secret_value() == 'a' * 32
         assert gc.asi_token.get_secret_value() == 'b' * 32
+        assert gc.sandbox_token.get_secret_value() == 'c' * 40
 
     def test_invalid_token_raises_ValidationError(self):
         Config.reset_instance()
         with pytest.raises(ValidationError):
             Config.init(rf_token='moise')  # noqa: S106
+
+    def test_invalid_asi_token_raises_ValidationError(self):
+        Config.reset_instance()
+        with pytest.raises(ValidationError):
+            Config.init(asi_token='moise')  # noqa: S106
+
+    def test_invalid_sandbox_token_raises_ValidationError(self):
+        Config.reset_instance()
+        with pytest.raises(ValidationError):
+            Config.init(sandbox_token='moise')  # noqa: S106
 
     def test_save_config(self, tmp_path):
         Config.reset_instance()

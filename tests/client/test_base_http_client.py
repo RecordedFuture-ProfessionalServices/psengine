@@ -126,8 +126,6 @@ class Test_BaseHTTPClient:
             client.call(method='get', url='http://google.com')
 
     def test_call_bad_payload_raises_exception(self, rf_token, base_client):
-        # TODO - atm it just send the payload. need check to make sure its a dict
-        # that can be json dumped
         with pytest.raises(ValidationError):
             base_client.call(
                 method='post',

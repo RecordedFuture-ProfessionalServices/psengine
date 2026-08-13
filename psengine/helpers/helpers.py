@@ -486,12 +486,45 @@ class Validators:
     @staticmethod
     def convert_str_to_list(
         value: Annotated[str | list | None, Doc('String or list to convert.')],
-    ) -> Annotated[list | None, Doc('Converted list with None values removed.')]:
-        """Convert value from str to list and remove None values."""
-        if value:
-            value = value if isinstance(value, list) else [value]
-            return [v for v in value if v is not None]
+    ) -> Annotated[list | None, Doc('Converted list, stripped and cleaned.')]:
+        """Convert value from str to list, strip strings, drop None/empty strings.
+
+        Non-string items in a list are passed through unchanged so enum-typed
+        fields (e.g. `list[DomainTypes]`) keep their values.
+        """
+        if value is None:
+            return None
+        if isinstance(value, str):
+            value = value.strip()
+            return [value] if value else []
+        if isinstance(value, list):
+            result = []
+            for v in value:
+                if v is None:
+                    continue
+                if isinstance(v, str):
+                    stripped = v.strip()
+                    if not stripped:
+                        continue
+                    result.append(stripped)
+                else:
+                    result.append(v)
+            return result
         return value
+
+    @staticmethod
+    def none_to_empty_list(
+        value: Annotated[list | None, Doc('A list or `null`/empty value from the API.')],
+    ) -> Annotated[list, Doc('The value, or [] when it is None/empty.')]:
+        """Coerce a `null`/empty API value to a list so the field is always iterable."""
+        return value or []
+
+    @staticmethod
+    def empty_str_to_none(
+        value: Annotated[str | None, Doc('A value that may be an empty string.')],
+    ) -> Annotated[str | None, Doc('None if the value is an empty string, else the value.')]:
+        """Normalise an empty string (`''`) to None; pass everything else through."""
+        return None if value == '' else value
 
     @staticmethod
     def convert_relative_time(

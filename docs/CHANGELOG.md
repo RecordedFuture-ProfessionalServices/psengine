@@ -1,16 +1,23 @@
 # Changelog
 
-## v2.8.6 - 2026-07-27
+## v2.10.0 - 2026-08-13
 
 ### Added
 
 - Added support for the Malicious Sites playbook alert category via the new `PBA_MaliciousSites` model. The `PlaybookAlertMgr` can now fetch, parse, render Markdown for, and retrieve images from `malicious_sites` alerts, including the category-specific `panel_log_v2` change types (attacker additions, phishing verdicts, suggested takedowns, for-sale/parked detections, and more).
+- The `markdown()` method of Playbook Alerts now accepts a `comments` argument (default `False`). When set to `True`, user comments extracted from `panel_log_v2` are rendered in a dedicated **Comments** section, consistently across all playbook alert categories. Editing a comment in the Recorded Future web interface updates its `panel_log_v2` entry in place, so the rendered section reflects the current text and does not duplicate edited comments.
 
-## v2.8.5 - 2026-07-27
+## v2.9.0 - 2026-08-11
 
 ### Added
 
-- The `markdown()` method of Playbook Alerts now accepts a `comments` argument (default `False`). When set to `True`, user comments extracted from `panel_log_v2` are rendered in a dedicated **Comments** section, consistently across all playbook alert categories. Editing a comment in the Recorded Future web interface updates its `panel_log_v2` entry in place, so the rendered section reflects the current text and does not duplicate edited comments.
+- Added support for Sandbox API via the `SandboxMgr`.
+
+## v2.8.5 - 2026-07-28
+
+### Changed
+
+- Bump requirements for `more_itertools`.
 
 ## v2.8.4 - 2026-07-13
 

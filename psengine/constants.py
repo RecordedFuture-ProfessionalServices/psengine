@@ -26,6 +26,8 @@ RF_TOKEN_ENV_VAR = 'RF_TOKEN'  # noqa: S105
 RF_TOKEN_VALIDATION_REGEX = r'^[a-z0-9]{32}$'  # noqa: S105
 ASI_TOKEN_ENV_VAR = 'RF_ASI_TOKEN'  # noqa: S105
 ASI_TOKEN_VALIDATION_REGEX = r'^[a-zA-Z0-9-_]{32}$'  # noqa: S105
+SANDBOX_TOKEN_ENV_VAR = 'RF_SANDBOX_TOKEN'  # noqa: S105
+SANDBOX_TOKEN_VALIDATION_REGEX = r'^[a-f0-9]{40}$'  # noqa: S105
 
 
 #####################

@@ -1,0 +1,238 @@
+{
+  "version": "0.2",
+  "build": "738c379cd",
+  "sample": {
+    "sample": "260529-raphmsb1e5",
+    "kind": "file",
+    "size": 5240314,
+    "target": "cool-beans.zip"
+  },
+  "task": {
+    "task": "260529-raphmsb1e5-static1",
+    "target": "cool-beans.zip"
+  },
+  "analysis": {
+    "reported": "2026-05-29T13:59:39Z",
+    "score": 5,
+    "tags": [
+      "pdf"
+    ]
+  },
+  "signatures": [
+    {
+      "name": "Malformed data in PDF",
+      "score": 5,
+      "tags": [
+        "pdf"
+      ],
+      "desc": "A PDF can contain malformed data to evade detection"
+    }
+  ],
+  "files": [
+    {
+      "filename": "cool-beans.zip",
+      "filesize": 5240314,
+      "md5": "93c708bbfea3f9a37290edcc1c4f67f3",
+      "sha1": "047daeb02bf8bb521cc01cb7cfbf71b3ace4c963",
+      "sha256": "5784bce2a7dc3bf64187d8dd878663e4df5d65c6b915a7e81e96c9601301ea78",
+      "sha512": "92b38e410f5e0025ca784cad71d1a12fd1f67b6800e5de6022115d62a6410f8beb5a0f7f24ff49dc489c9508e54abee07ad0d950baef77b8748ffb92efa90453",
+      "ssdeep": "98304:Y4cT1wlPIc5+NuY0qYNFTv4vzV1/woAw0YcqQUFQmnzLwlwMvW9cfINPrsXxlZFG:EgY8TnoADhqQKNLwlwMv+cAcxlZhRc",
+      "tlsh": "T1173633CCEBA58D95E3217F3227D8931641124A3227AB64CF4D58F7C9746B1B82BD8CD2",
+      "exts": [
+        ".zip"
+      ],
+      "tags": [],
+      "depth": 0,
+      "kind": "archive",
+      "selected": false,
+      "runas": "cool-beans.zip",
+      "metadata": {}
+    },
+    {
+      "filename": "OWASP Top 10 For QA.pdf",
+      "relpath": "unpack001/OWASP Top 10 For QA.pdf",
+      "filesize": 614288,
+      "md5": "805ccd112a1fd926ffbd65b8ff5ea030",
+      "sha1": "0e5771a4e5c2d25382034e74c47caeb2174ad67a",
+      "sha256": "8728e451258886756974d673a821ae0b68bb4761c4256ae17e104231a015b9d2",
+      "sha512": "c2f8cb1ecebdf45a850ff2776fdfdf8dec61a53d1bb144d370a39fa2add44de9a52f8fee6efc7f75de526b4efb22bf42a1313e92acb2c404311750f2a56f88de",
+      "ssdeep": "12288:IYgIKFqEGQ1kLdt46iJEFKBPRQoUFJaIH6ohCEXC:9gyq1mP4gKQoIHts5",
+      "tlsh": "T142D423ABEB3AC49CCC08007EC9F39E9693DA5925A0E45EB50FE0D84ADD8F17D3416527",
+      "exts": [
+        ".pdf"
+      ],
+      "tags": [],
+      "depth": 1,
+      "error": "PDF crash: unknown predictor: 11",
+      "kind": "file",
+      "selected": true,
+      "runas": "OWASP Top 10 For QA.pdf",
+      "metadata": {}
+    },
+    {
+      "filename": "Recorded Future Security Awareness Training (2022-2023 Course).pdf",
+      "relpath": "unpack001/Recorded Future Security Awareness Training (2022-2023 Course).pdf",
+      "filesize": 444946,
+      "md5": "34dae74101fe86655881e4762cf67136",
+      "sha1": "43b2ecd33d0ce26c3b09747f5f7d17ea63eaa4b4",
+      "sha256": "2b63d044bb340c0dbe8629d185c71a3662a4412e9a2fa60f6e7c6313068f237c",
+      "sha512": "e3522929b9234dbfa73b6c096a00146df557aa15049da1856e5c3ffca73db038cf02be9e821577543167351008888506ca21eebeb8c0b73d810f6c1292d602f4",
+      "ssdeep": "6144:2BWUPSL9AvUM41MomOLJxR1JqERIVZPEcFyWD+hHyEV95mO/E4vgFsDOnEk3yDqL:tUqL927h4hHqSiZBZ653E4v6poDDvPA",
+      "tlsh": "T18A94227FD97E4A5CC906903630FEEE1657A858E314B06BA4097EBCADCC17F350A12897",
+      "exts": [
+        ".pdf"
+      ],
+      "tags": [],
+      "depth": 1,
+      "error": "PDF crash: unknown predictor: 11",
+      "kind": "file",
+      "selected": true,
+      "runas": "Recorded Future Security Awareness Training (2022-2023 Course).pdf",
+      "metadata": {}
+    },
+    {
+      "filename": "Recorded_Future_MITRE_ATT&CK_Matrix_2026-05-27.json",
+      "relpath": "unpack001/Recorded_Future_MITRE_ATT&CK_Matrix_2026-05-27.json",
+      "filesize": 50837,
+      "md5": "c0c5befbd1d0d430615508f629de5fe8",
+      "sha1": "fee3b84425bfa3731f2c5a82f815faff4ddd7398",
+      "sha256": "08ab418e79ce2a330a3a1e2daf2d44283756fc692636aa7d05d5c41233df3bc8",
+      "sha512": "77743a18ef172a12112a76ed47dea6a5f0bddfdb3d683e46737c956b2a60c4802c8e2589c7911297e351229bcbe9e84c930e60488af9aaed76f47b221ab7e097",
+      "ssdeep": "384:4l/zHidRryyrrsshh66QQ4s22MMRRTesF6puxEeO/m0k8aXsQXsW5W7ccTD2uhF0:4NoB+h94",
+      "tlsh": "T1CF33B46AE426F9F72347647E430D8231519EA94B5D943FAD3A0C29EC0F6C2BF24B1B54",
+      "exts": [],
+      "tags": [],
+      "depth": 1,
+      "kind": "file",
+      "selected": false,
+      "runas": "Recorded_Future_MITRE_ATT&CK_Matrix_2026-05-27.json",
+      "metadata": {}
+    },
+    {
+      "filename": "Screenshot 2026-05-29 at 10.01.11.png",
+      "relpath": "unpack001/Screenshot 2026-05-29 at 10.01.11.png",
+      "filesize": 4236044,
+      "md5": "19bb1dec00aa86560675c3a412e648cf",
+      "sha1": "922e525976fbdb00adf993f76f9348184bc3d5fd",
+      "sha256": "0795e2e499d01c95deac15bf24aaaef4dd012824d7344bc3d83cddd64d19f097",
+      "sha512": "9f583630de2f2a85da99cdaf93958e902b058f7c8331fc5befb1d3db1030a3dcfd5918753d30e853b474c5486cc562d192ef03f6a5c744fcd21231ba72e33091",
+      "ssdeep": "98304:36BKtTP2C1kVd+qzgwT1ovkHb/z3TEeut/OtPbHyt7DvksYoinEAQXRxIfqDdG+9:36YrqssocHX3Qe6OtPbivksoIIC9",
+      "tlsh": "T1C7163381E1DB5A15AE179B5A27E02F893D0105540725B4C30C4EDAEC6FCECEEDEAE346",
+      "exts": [
+        ".png"
+      ],
+      "tags": [],
+      "depth": 1,
+      "kind": "file",
+      "selected": false,
+      "runas": "Screenshot 2026-05-29 at 10.01.11.png",
+      "metadata": {}
+    },
+    {
+      "filename": "__MACOSX/._OWASP Top 10 For QA.pdf",
+      "relpath": "unpack001/__MACOSX/._OWASP Top 10 For QA.pdf",
+      "filesize": 381,
+      "md5": "24330734b386a6679b0e93b7f7dac2ac",
+      "sha1": "b7a3a939f760d909f54eefca5171b523be258521",
+      "sha256": "0b0df67b31458ac9a17cf008fd26e14576d88a9bba77a7498866148c883c27c1",
+      "sha512": "b638c42413e92c0eb2a04b7e814ac96e277dd0d82d2e2a6e9db128fce88fdc271424088568818e9ff1c06495a5241fde322d08a5c84c388f0a5693e7cddda2c1",
+      "tlsh": "T157E07D1003C01285C469827C03B7BF50A7630039C69283433579C6D24B045E21EF1B86",
+      "exts": [],
+      "tags": [],
+      "depth": 1,
+      "kind": "file",
+      "selected": false,
+      "runas": "__MACOSX/._OWASP Top 10 For QA.pdf",
+      "metadata": {}
+    },
+    {
+      "filename": "__MACOSX/._Recorded Future Security Awareness Training (2022-2023 Course).pdf",
+      "relpath": "unpack001/__MACOSX/._Recorded Future Security Awareness Training (2022-2023 Course).pdf",
+      "filesize": 381,
+      "md5": "b8a3bba05ab3c872c39ca724597c3e34",
+      "sha1": "151cea7c08d1838569b79cd74cc8b4631d73d298",
+      "sha256": "a800eae415f2cb3f9ee7cb035dc07fdebac378cd75254906750105b698ed16ed",
+      "sha512": "d3613f436da47a92017469332518aba0ce3ca7d3eaa73c250f95c9e486e6f5ea997ff1c1c4ad007ebc656fbf4343e685de79eaf7c260ffcb6f8c00f265aeddd0",
+      "tlsh": "T1A9E07D3003C10282C46D43BC06E3BB40D36B103A95D68653347AC5A10F041961E7578A",
+      "exts": [],
+      "tags": [],
+      "depth": 1,
+      "kind": "file",
+      "selected": false,
+      "runas": "__MACOSX/._Recorded Future Security Awareness Training (2022-2023 Course).pdf",
+      "metadata": {}
+    },
+    {
+      "filename": "__MACOSX/._Recorded_Future_MITRE_ATT&CK_Matrix_2026-05-27.json",
+      "relpath": "unpack001/__MACOSX/._Recorded_Future_MITRE_ATT&CK_Matrix_2026-05-27.json",
+      "filesize": 437,
+      "md5": "f3a0db6897cd36d7dfda17909214dc15",
+      "sha1": "afa86bff77b6bb3ef35f36cf87704f1132d75825",
+      "sha256": "c3f8e7113cf6a2afc6e474ca37fbf6d7a8692e810d146e98595c1fdf873a5d97",
+      "sha512": "f33811ddb5c0f2b716fe717e09617a3a9b493d2623df1597dd34f7d410d23358b082daf57b8b12a06070a93b432fd228b8d738fb4240900a78ce0a034f3aec70",
+      "tlsh": "T103E0262123C20291E95CC37C01A7FB41637300BAC5CA56D3B96DCA924B14ED21BB57A7",
+      "exts": [],
+      "tags": [],
+      "depth": 1,
+      "kind": "file",
+      "selected": false,
+      "runas": "__MACOSX/._Recorded_Future_MITRE_ATT&CK_Matrix_2026-05-27.json",
+      "metadata": {}
+    },
+    {
+      "filename": "__MACOSX/._Screenshot 2026-05-29 at 10.01.11.png",
+      "relpath": "unpack001/__MACOSX/._Screenshot 2026-05-29 at 10.01.11.png",
+      "filesize": 376,
+      "md5": "a870b56aa4c9f96209346cad0c5a25d4",
+      "sha1": "93ed96476d5217c77eabb151acfe54f30721ba76",
+      "sha256": "c6541df6ec06f680e52aeee6205f1a68e64cbd877d7a1ba04170c1e754ac878f",
+      "sha512": "13e8fb33f1080859d517f183ba7a9aa217fe58fdb86611b58621daacebc2c4ab0d7dceddb9937e4951df89e8e23a64c7b72d2f00a691f4af12894b3b7fe730ed",
+      "tlsh": "T139E0E75403D00140C44EC77401F7EB10973B1037C56B53933436CDDC5704A81176CB46",
+      "exts": [],
+      "tags": [],
+      "depth": 1,
+      "kind": "file",
+      "selected": false,
+      "runas": "__MACOSX/._Screenshot 2026-05-29 at 10.01.11.png",
+      "metadata": {}
+    },
+    {
+      "filename": "__MACOSX/._mailFilters.xml",
+      "relpath": "unpack001/__MACOSX/._mailFilters.xml",
+      "filesize": 530,
+      "md5": "cdab5f4ead0d313485253cf25efc5fe6",
+      "sha1": "ef01c30f73cfce05343eeb428070b2194165a668",
+      "sha256": "ec882df3e4cefbf422ade7879400c693c5ffb9f118196bc446e10ccacd1c390d",
+      "sha512": "d6b2e12d5693e03a4a74063e54c99d9d3e8d46ed9fd1c556357721c5e0a856e6da76552e176e8a8053c86f0cd38f3effb146a7d9c0a1de2f90af49d663c214e2",
+      "tlsh": "T1A6F023574BC02061C511C2BC14E7FB28979B0117ECF1678B7B1DCC521784CE162FA7A6",
+      "exts": [],
+      "tags": [],
+      "depth": 1,
+      "kind": "file",
+      "selected": false,
+      "runas": "__MACOSX/._mailFilters.xml",
+      "metadata": {}
+    },
+    {
+      "filename": "mailFilters.xml",
+      "relpath": "unpack001/mailFilters.xml",
+      "filesize": 3622,
+      "md5": "ba7b57d11eff5b272d44dc73d24a9028",
+      "sha1": "b0373471f38baa09b1047fc5437aef3062d4f950",
+      "sha256": "a2e9a6d557764bd562ce985110e4223a43c7dec02fc0650fbb2fd623135c8cb9",
+      "sha512": "91cc05bdecce8b205a914350e2260d3b539990d4b2679b2c18cd758c06ce22b48c511038e3675cddef624c3f927998d4f7251fcbf900700a6c1359e24c40caf2",
+      "tlsh": "T1B571A6BBBDACDFA297484D222D547405968770310DE824D85F0FBB2E6C92A91EC44ACB",
+      "exts": [
+        ".xml"
+      ],
+      "tags": [],
+      "depth": 1,
+      "kind": "file",
+      "selected": false,
+      "runas": "mailFilters.xml",
+      "metadata": {}
+    }
+  ],
+  "unpack_count": 3,
+  "error_count": 2
+}
