@@ -497,7 +497,7 @@ class PlaybookAlertMgr:
     @debug_call
     @validate_call
     @connection_exceptions(
-        ignore_status_code=[], exception_to_raise=PlaybookAlertRetrieveImageError
+        ignore_status_code=[404], exception_to_raise=PlaybookAlertRetrieveImageError
     )
     def fetch_one_image(
         self,
@@ -586,13 +586,15 @@ class PlaybookAlertMgr:
             image_bytes = self.fetch_one_image(
                 alert_id=playbook_alert.playbook_alert_id, alert_category=playbook_alert.category
             )
-            playbook_alert.store_image(image_bytes)
+            if image_bytes:
+                playbook_alert.store_image(image_bytes)
         else:
             for image_id in playbook_alert.image_ids:
                 image_bytes = self.fetch_one_image(
                     playbook_alert.playbook_alert_id, image_id, playbook_alert.category
                 )
-                playbook_alert.store_image(image_id, image_bytes)
+                if image_bytes:
+                    playbook_alert.store_image(image_id, image_bytes)
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertFetchError)

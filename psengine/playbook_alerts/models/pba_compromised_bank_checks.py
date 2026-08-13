@@ -51,7 +51,7 @@ class CompromisedBankCheckPanelEvidenceSummary(RFBaseModel):
     amount: float | None = None
     check_number: str | None = None
     fraction_number: str | None = None
-    bank: str | None
+    bank: str | None = None
     bank_routing_number: str | None = None
     identity_1: str | None = Field(alias='identity1', default=None)
     address_1: str | None = Field(alias='address1', default=None)

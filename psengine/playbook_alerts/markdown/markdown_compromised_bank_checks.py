@@ -26,8 +26,9 @@ if TYPE_CHECKING:
 def _add_images(pba: 'PBA_CompromisedBankChecks', md_maker: MarkdownMaker):
     images = []
     for image in pba.images:
-        formatted_timestamp = pba.panel_evidence_summary.collected_date.strftime(TIMESTAMP_STR)
-        images.append(f'{bold("Created:")} {formatted_timestamp}  ')
+        if pba.panel_evidence_summary.collected_date:
+            formatted_timestamp = pba.panel_evidence_summary.collected_date.strftime(TIMESTAMP_STR)
+            images.append(f'{bold("Created:")} {formatted_timestamp}  ')
 
         b64_image = base64.b64encode(pba.images[image]['image_bytes']).decode('utf-8')
         images.append(f'![img](data:image/png;base64,{b64_image})')
@@ -70,7 +71,8 @@ def _add_bank_identifiers(pba: 'PBA_CompromisedBankChecks', md_maker: MarkdownMa
             f'{bold("Bank Routing Number:")} {pba.panel_evidence_summary.bank_routing_number}  '
         )
 
-    md_maker.add_section('Bank Identifiers', bank_identifiers)
+    if bank_identifiers:
+        md_maker.add_section('Bank Identifiers', bank_identifiers)
 
 
 def _add_seen_details(pba: 'PBA_CompromisedBankChecks', md_maker: MarkdownMaker):
@@ -91,7 +93,8 @@ def _add_seen_details(pba: 'PBA_CompromisedBankChecks', md_maker: MarkdownMaker)
     else:
         seen_details.append(f'{bold("Seen:")} First Appearance  ')
 
-    md_maker.add_section('Seen', seen_details)
+    if seen_details:
+        md_maker.add_section('Seen', seen_details)
 
 
 def _add_collection_dates(pba: 'PBA_CompromisedBankChecks', md_maker: MarkdownMaker):
@@ -162,7 +165,8 @@ def _add_source_information(pba: 'PBA_CompromisedBankChecks', md_maker: Markdown
         md_maker.iocs_to_defang.append(pba.panel_evidence_summary.actor_url)
         sources.append(f'{bold("Actor URL:")} {pba.panel_evidence_summary.actor_url}  ')
 
-    md_maker.add_section('Source Information', sources)
+    if sources:
+        md_maker.add_section('Source Information', sources)
 
 
 def _compromised_bank_check_markdown(
