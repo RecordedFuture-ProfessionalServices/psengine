@@ -35,7 +35,7 @@ class ResolvedRecord(RFBaseModel):
 class Reregistration(RFBaseModel):
     registrar: str | None = None
     registrar_name: str | None = None
-    iana_id: int | str | None = None
+    iana_id: int | None = None
     expiration: datetime | None = None
 
 

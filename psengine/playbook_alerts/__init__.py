@@ -25,8 +25,6 @@ from .models import SearchResponse
 from .pa_category import PACategory
 from .playbook_alert_mgr import PlaybookAlertMgr
 from .playbook_alerts import (
-    CreateMaliciousSitesAlertIn,
-    CreateMaliciousSitesAlertOut,
     PBA_CodeRepoLeakage,
     PBA_CyberVulnerability,
     PBA_DomainAbuse,

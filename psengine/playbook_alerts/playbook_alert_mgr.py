@@ -409,7 +409,6 @@ class PlaybookAlertMgr:
             'priority': priority,
             'description': description,
         }
-        option_fields = {k: v for k, v in option_fields.items() if v is not None}
         options = CreateMaliciousSitesAlertOptions(**option_fields) if option_fields else None
 
         payload = CreateMaliciousSitesAlertIn(
@@ -425,14 +424,7 @@ class PlaybookAlertMgr:
             'post', url=EP_PLAYBOOK_ALERT_MALICIOUS_SITES_CREATE, data=payload.json()
         )
 
-        body = response.json()
-        status_block = body.get('status') or {}
-        if status_block.get('status_code') == 'Error':
-            raise PlaybookAlertCreateError(
-                status_block.get('status_message', 'Playbook alert creation failed')
-            )
-
-        result = body.get('data', body)
+        result = response.json()
         return CreateMaliciousSitesAlertOut.model_validate(result)
 
     @debug_call

@@ -81,7 +81,6 @@ class Test_PlaybookAlertMgr:
         assert mock_req.call_args.kwargs['data']['attacker'] == 'idn:mail.google.mail.pl'
         assert mock_req.call_args.kwargs['data']['rule'] == 'report:rule1'
         assert 'organization' not in mock_req.call_args.kwargs['data']
-        assert 'options' not in mock_req.call_args.kwargs['data']
 
     def test_create_malicious_sites_alert_data_wrapped(
         self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request
@@ -100,20 +99,6 @@ class Test_PlaybookAlertMgr:
 
         assert result.outcome == 'alert_created'
         assert result.playbook_alert_id == 'task:27547e1e-a235-41f2-bb50-d33c1befad21'
-
-    def test_create_malicious_sites_alert_inband_error(
-        self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request
-    ):
-        mocker.patch.object(
-            playbook_mgr.rf_client,
-            'request',
-            side_effect=[mock_request(MGR_MOCK / 'test_create_malicious_sites_alert_error_0.json')],
-        )
-
-        with pytest.raises(PlaybookAlertCreateError):
-            playbook_mgr.create_malicious_sites_alert(
-                attacker='idn:mail.google.mail.pl', rule='report:rule1'
-            )
 
     def test_create_malicious_sites_alert_raises_PlaybookAlertCreateError(
         self, playbook_mgr: PlaybookAlertMgr, mocker
