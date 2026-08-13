@@ -17,10 +17,12 @@ from ..constants import ROOT_DIR
 from ..playbook_alerts.pa_category import PACategory
 from .playbook_alerts import (
     PBA_CodeRepoLeakage,
+    PBA_CompromisedBankChecks,
     PBA_CyberVulnerability,
     PBA_DomainAbuse,
     PBA_GeopoliticsFacility,
     PBA_IdentityNovelExposure,
+    PBA_MaliciousSites,
     PBA_MalwareReport,
     PBA_ThirdPartyRisk,
 )
@@ -39,6 +41,7 @@ PLAYBOOK_ALERT_TYPE = (
     | PBA_ThirdPartyRisk
     | PBA_GeopoliticsFacility
     | PBA_MalwareReport
+    | PBA_MaliciousSites
 )
 
 PLAYBOOK_ALERT_INST = (
@@ -49,14 +52,25 @@ PLAYBOOK_ALERT_INST = (
     PBA_ThirdPartyRisk,
     PBA_GeopoliticsFacility,
     PBA_MalwareReport,
+    PBA_MaliciousSites,
 )
 
 
-PBA_WITH_IMAGES_TYPE = PBA_DomainAbuse | PBA_GeopoliticsFacility
+PBA_WITH_IMAGES_TYPE = (
+    PBA_DomainAbuse | PBA_GeopoliticsFacility | PBA_CompromisedBankChecks | PBA_MaliciousSites
+)
 PBA_WITH_IMAGES_VALIDATOR = (
-    Literal[PACategory.DOMAIN_ABUSE.value] | Literal[PACategory.GEOPOLITICS_FACILITY.value]
+    Literal[PACategory.DOMAIN_ABUSE.value]
+    | Literal[PACategory.GEOPOLITICS_FACILITY.value]
+    | Literal[PACategory.COMPROMISED_BANK_CHECKS.value]
+    | Literal[PACategory.MALICIOUS_SITES.value]
 )
 
-PBA_WITH_IMAGES_INST = (PBA_DomainAbuse, PBA_GeopoliticsFacility)
+PBA_WITH_IMAGES_INST = (
+    PBA_DomainAbuse,
+    PBA_GeopoliticsFacility,
+    PBA_CompromisedBankChecks,
+    PBA_MaliciousSites,
+)
 
 ALERTS_PER_PAGE = 50

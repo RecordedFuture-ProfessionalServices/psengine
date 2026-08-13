@@ -208,6 +208,7 @@ class ClassicAlert(RFBaseModel):
         html_tags: Annotated[bool, Doc('Include HTML tags in the markdown.')] = False,
         character_limit: Annotated[int | None, Doc('Character limit for the markdown.')] = None,
         defang_iocs: Annotated[bool, Doc('Defang IOCs in hits.')] = False,
+        comment: Annotated[bool, Doc('Include reviewer note in the markdown.')] = False,
     ) -> Annotated[str, Doc('Markdown representation of the alert.')]:
         """Return a markdown string representation of the `ClassicAlert` instance.
 
@@ -229,6 +230,7 @@ class ClassicAlert(RFBaseModel):
             html_tags=html_tags,
             character_limit=character_limit,
             defang_iocs=defang_iocs,
+            comment=comment,
         )
 
     @property
