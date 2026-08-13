@@ -22,7 +22,7 @@ from typing_extensions import Doc
 
 from ..common_models import IdNameType, RFBaseModel
 from ..constants import TIMESTAMP_STR
-from ..endpoints import EP_LIST
+from ..endpoints import EP_LIST, EP_LIST_ENTITIES_WITH_TAGS
 from ..entity_match import EntityMatchMgr, MatchApiError
 from ..helpers import debug_call
 from ..helpers.helpers import connection_exceptions
@@ -32,6 +32,7 @@ from .errors import ListApiError
 from .models import (
     AddEntityRequestModel,
     ListEntityOperationResponse,
+    ListEntityTag,
     OwnerOrganisationDetails,
     RemoveEntityRequestModel,
 )
@@ -83,6 +84,17 @@ class ListEntity(RFBaseModel):
         return (
             f'{self.entity.type_}: {self.entity.name}, added {self.added.strftime(TIMESTAMP_STR)}'
         )
+
+
+class ListEntityWithTags(ListEntity):
+    """Validate data received from `/{listId}/entitiesWithTags` endpoint.
+
+    Identical to `ListEntity`, with the addition of the list-specific `tags` assigned to the
+    entity. Tags are predefined and only populated for lists whose type has tagging enabled -
+    see `ListEntityTag`.
+    """
+
+    tags: list[ListEntityTag] = []
 
 
 class EntityList(ListInfoOut):
@@ -272,6 +284,39 @@ class EntityList(ListInfoOut):
         url = EP_LIST + '/' + self.id_ + '/entities'
         response = self.rf_client.request('get', url)
         return [ListEntity.model_validate(entity) for entity in response.json()]
+
+    @debug_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
+    def entities_with_tags(
+        self,
+    ) -> Annotated[
+        list[ListEntityWithTags],
+        Doc('Response from the `list/{id}/entitiesWithTags` endpoint.'),
+    ]:
+        """Get entities for a list, together with their list-specific tags.
+
+        Tags are **not** free-text. They are a fixed set of 57 predefined values, so arbitrary
+        tag strings cannot be expected. See
+        https://docs.recordedfuture.com/reference/lists-available-tags for the full list of valid
+        tags, their display names, and their API values.
+
+        `tags` is only populated for lists whose type has tagging enabled server-side (currently
+        Third-Parties Watch Lists). A list of any other type returns its entities with an empty
+        `tags` list rather than an error, so an empty `tags` does not indicate a failure. A list
+        whose type supports tagging but which has not yet been migrated server-side responds 400
+        instead.
+
+        Endpoint:
+            `list/{id}/entitiesWithTags`
+
+        Raises:
+            ListApiError: If connection error occurs. The API responds 400 if the list's type
+                supports tagging but the list has not been migrated to support tags, and 404 if
+                the list does not exist.
+        """
+        url = EP_LIST_ENTITIES_WITH_TAGS.format(self.id_)
+        response = self.rf_client.request('get', url)
+        return [ListEntityWithTags.model_validate(entity) for entity in response.json()]
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
