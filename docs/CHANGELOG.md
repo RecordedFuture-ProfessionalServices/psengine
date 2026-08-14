@@ -1,4 +1,11 @@
 # Changelog
+
+## v2.11.0 - 2026-08-18
+
+### Added
+
+- `CollectiveInsights` now supports the `search` endpoint via the `search` method.
+
 ## v2.10.1 - 2026-08-14
 
 ### Added
@@ -13,12 +20,6 @@
 - `PlaybookAlertMgr` now supports Payment Card Fraud playbook alert category.
 - The `PlaybookAlert.markdown()` now accepts a `comments` argument (default `False`) to display user comments.
 - The `ClassicAlert.markdown()` now accepts a `comments` argument (default `False`) to display user comments.
-
-## vx.x.x - yyyy-mm-dd
-
-### Added
-
-- `CollectiveInsights` now supports the `search` endpoint via the `search` method.
 
 ## v2.9.0 - 2026-08-11
 
