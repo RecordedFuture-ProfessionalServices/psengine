@@ -1,17 +1,16 @@
 name: Doc Build
+
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Doc Examples"]
-    types:
-      - completed
+  push:
+    tags:
+      - "v*"
 
 permissions:
   contents: write
 
 jobs:
   deploy:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -29,17 +28,24 @@ jobs:
       - name: Extract version
         id: get_version
         run: |
-          VERSION=$(grep -m1 '^version' pyproject.toml | cut -d '"' -f2 | cut -d '.' -f 1,2)
+          set -euo pipefail
+          if [[ "${GITHUB_REF:-}" == refs/tags/v* ]]; then
+            # Triggered by tag push — take the tag as source of truth.
+            RAW="${GITHUB_REF#refs/tags/v}"
+          else
+            # Manual dispatch — fall back to pyproject.toml.
+            RAW=$(grep -m1 '^version' pyproject.toml | cut -d '"' -f2)
+          fi
+          VERSION=$(echo "$RAW" | cut -d '.' -f 1,2)
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
       - uses: astral-sh/setup-uv@v7
 
       - name: Set up Python
-        run: uv python install ${{ vars.PYTHON_VERSION }} 
-    
+        run: uv python install ${{ vars.PYTHON_VERSION }}
+
       - name: Set up venv
-        run: |
-          uv sync --group docs --no-default-groups
+        run: uv sync --group docs --no-default-groups
 
       - name: Run Mike build
         run: |

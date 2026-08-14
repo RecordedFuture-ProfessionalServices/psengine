@@ -93,6 +93,7 @@ class DetectionRuleType(Enum):
     sigma = 'sigma'
     yara = 'yara'
     snort = 'snort'
+    suricata = 'suricata'
 
 
 class ClearTextPassword(Secret[str]):
