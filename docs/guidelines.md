@@ -45,7 +45,6 @@ from psengine.enrich import LookupMgr
 
 mgr = LookupMgr()
 domains = mgr.lookup_bulk(['google.com', 'facebook.com'], 'domain', max_workers=10)
-
 ```
 
 By default `max_workers` is set to `0`, in which case, requests are made sequentially.
@@ -78,6 +77,7 @@ You can either use `psengine.logger.RFLogger` or use the standard Python `loggin
 ```python
 import logging
 from psengine.classic_alerts import ClassicAlertMgr
+
 log = logging.getLogger(__name__)
 mgr = ClassicAlertMgr()
 ```
@@ -88,6 +88,7 @@ mgr = ClassicAlertMgr()
 ```python
 from psengine.classic_alerts import ClassicAlertMgr
 from psengine.logger import RFLogger
+
 log = RFLogger().get_logger()
 mgr = ClassicAlertMgr()
 ```
