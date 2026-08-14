@@ -7116,10 +7116,12 @@ You can still change this behaviour by setting the <code>RF_MODEL_EXTRA</code> e
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
-<span class="normal"><a href="#__codelineno-3-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">psengine.classic_alerts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicAlertMgr</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="n">mgr</span> <span class="o">=</span> <span class="n">ClassicAlertMgr</span><span class="p">()</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="n">mgr</span> <span class="o">=</span> <span class="n">ClassicAlertMgr</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 <ul>
 <li>If the integration SDK that you are using has already set up log handlers where <a href="https://docs.python.org/3/library/logging.html#logging.Logger.propagate">propagate=False</a>, then you <strong>must</strong> use the SDK logger. Code that is imported and run by the SDK will not pass log messages to the root logger, which is where <code>RFLogger</code> adds its handlers.</li>
@@ -7128,10 +7130,12 @@ You can still change this behaviour by setting the <code>RF_MODEL_EXTRA</code> e
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
-<span class="normal"><a href="#__codelineno-4-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">psengine.classic_alerts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicAlertMgr</span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">psengine.classic_alerts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassicAlertMgr</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">psengine.logger</span><span class="w"> </span><span class="kn">import</span> <span class="n">RFLogger</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">log</span> <span class="o">=</span> <span class="n">RFLogger</span><span class="p">()</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="n">mgr</span> <span class="o">=</span> <span class="n">ClassicAlertMgr</span><span class="p">()</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="n">log</span> <span class="o">=</span> <span class="n">RFLogger</span><span class="p">()</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">mgr</span> <span class="o">=</span> <span class="n">ClassicAlertMgr</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="project-layout">Project Layout<a class="headerlink" href="#project-layout" title="Permanent link">&para;</a></h2>
 <p>Below is how we typically structure code for integrations. This is more of a convention; you are free to follow it if you like.</p>

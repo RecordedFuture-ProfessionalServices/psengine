@@ -7039,11 +7039,13 @@ We use these decorators on user-facing (public) methods only, unless in rare cir
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
 <span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_call</span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_call</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="nd">@validate_call</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">my_func</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a>    <span class="k">return</span> <span class="n">x</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="nd">@validate_call</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">my_func</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>    <span class="k">return</span> <span class="n">x</span>
 </code></pre></div></td></tr></table></div>
 <h4 id="debug_call-decorator"><code>debug_call</code> decorator<a class="headerlink" href="#debug_call-decorator" title="Permanent link">&para;</a></h4>
 <p>This decorator logs the input and output of a method at debug level. It is built in to <code>psengine</code>.</p>
@@ -7070,7 +7072,8 @@ In case of a 200 the response is returned; in case of a 404, <code>None</code> i
 <span class="normal"><a href="#__codelineno-2-15">15</a></span>
 <span class="normal"><a href="#__codelineno-2-16">16</a></span>
 <span class="normal"><a href="#__codelineno-2-17">17</a></span>
-<span class="normal"><a href="#__codelineno-2-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_call</span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_call</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewFeatureLookupError</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">.new_feature</span><span class="w"> </span><span class="kn">import</span> <span class="n">NewFeature</span>
@@ -7079,15 +7082,16 @@ In case of a 200 the response is returned; in case of a 404, <code>None</code> i
 <a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">..rf_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">RFClient</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="kn">from</span><span class="w"> </span><span class="nn">..endpoints</span><span class="w"> </span><span class="kn">import</span> <span class="n">EP_NEW_FEATURE_LOOKUP</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="k">class</span><span class="w"> </span><span class="nc">NewFeatureMgr</span><span class="p">:</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a>    <span class="c1"># ... your init and code here ...</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13"></a>    <span class="nd">@debug_call</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="nd">@validate_call</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="nd">@connection_exception</span><span class="p">(</span><span class="n">ignore_status_code</span><span class="o">=</span><span class="p">[</span><span class="mi">404</span><span class="p">],</span> <span class="n">exception_to_raise</span><span class="o">=</span><span class="n">NewFeatureLookupError</span><span class="p">)</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">lookup</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NewFeature</span><span class="p">:</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17"></a>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rf_client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="n">EP_NEW_FEATURE_LOOKUP</span> <span class="o">+</span> <span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="k">return</span> <span class="n">NewFeature</span><span class="o">.</span><span class="n">enhanced_model_validate</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="k">class</span><span class="w"> </span><span class="nc">NewFeatureMgr</span><span class="p">:</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a>    <span class="c1"># ... your init and code here ...</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="nd">@debug_call</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="nd">@validate_call</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a>    <span class="nd">@connection_exception</span><span class="p">(</span><span class="n">ignore_status_code</span><span class="o">=</span><span class="p">[</span><span class="mi">404</span><span class="p">],</span> <span class="n">exception_to_raise</span><span class="o">=</span><span class="n">NewFeatureLookupError</span><span class="p">)</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">lookup</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NewFeature</span><span class="p">:</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rf_client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="n">EP_NEW_FEATURE_LOOKUP</span> <span class="o">+</span> <span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a>        <span class="k">return</span> <span class="n">NewFeature</span><span class="o">.</span><span class="n">enhanced_model_validate</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p><code>total_ordering</code>
 This decorator comes from the <code>functools</code> module in the standard library. It dynamically defines the ordering operations given at least two predefined ones. You only need to define <code>__eq__</code> and <code>__gt__</code> methods in a class and the decorator implements the others.</p>
