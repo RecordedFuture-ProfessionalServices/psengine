@@ -42,7 +42,7 @@ See the [**API Reference**](../api/sandbox/sandbox_mgr.md) for internal details 
 `submit_sample` returns immediately with a `SearchResult` carrying the new sample's `id_` and initial `status`. The example below uses `kind='url'`, which detonates the URL inside a browser VM. `user_tags` are free-form labels you can use later to find the submission.
 
 ```python
---8<-- "docs/examples/sandbox/example_1.py"
+--8 < --'docs/examples/sandbox/example_1.py'
 ```
 
 A typical run prints something like:
@@ -60,7 +60,7 @@ Submitted: id=260501-h4p7laawme, kind=url, status=pending
     Pass any combination of filter `kwargs` — they're joined with `AND`. For free-form composition (`OR`/`NOT`), pass a raw query via the `query=` argument instead.
 
 ```python
---8<-- "docs/examples/sandbox/example_2.py"
+--8 < --'docs/examples/sandbox/example_2.py'
 ```
 
 #### 3: List your own samples and inspect one in detail
@@ -68,7 +68,7 @@ Submitted: id=260501-h4p7laawme, kind=url, status=pending
 `fetch_samples` lists the samples your account can see; `subset='owned'` (the default) is just your own submissions, `'org'` is everything your company has access to, and `'public'` only works on the public Triage cloud. After listing, pass an `id_` to `fetch_sample` to retrieve the richer `SampleOut` record (the same shape but with the per-task analysis breakdown attached).
 
 ```python
---8<-- "docs/examples/sandbox/example_3.py"
+--8 < --'docs/examples/sandbox/example_3.py'
 ```
 
 #### 4: Submit, wait for the report, and read the summary
@@ -80,7 +80,7 @@ Submissions are asynchronous, so a fresh `id_` will return `status='pending'` fo
     A URL submission usually reaches `reported` within 1–3 minutes. The script caps the wait at 10 minutes via `TIMEOUT_SEC` — tune both to your needs.
 
 ```python
---8<-- "docs/examples/sandbox/example_4.py"
+--8 < --'docs/examples/sandbox/example_4.py'
 ```
 
 The summary's `score` is a 1–10 verdict (10 = known bad, 1 = no malicious behaviour observed); the `tasks` dict carries per-task results keyed by `static1`, `behavioral1`, and so on.
@@ -94,7 +94,7 @@ The summary's `score` is a 1–10 verdict (10 = known bad, 1 = no malicious beha
     `delete_sample` requires the `org_admin` role on Enterprise Sandbox. On the public Triage cloud, samples can't be deleted at all and the call will raise `SampleDeleteError`.
 
 ```python
---8<-- "docs/examples/sandbox/example_5.py"
+--8 < --'docs/examples/sandbox/example_5.py'
 ```
 
 #### 6: Manage analysis profiles end-to-end
@@ -106,7 +106,7 @@ Profiles are company-wide analysis configurations (OS tags, network mode, timeou
     `update_profile` and `delete_profile` are idempotent on 404, they return `updated=False` / `deleted=False` if the target is already gone. Check the returned `.updated` / `.deleted` flag rather than wrapping the call in `try/except`.
 
 ```python
---8<-- "docs/examples/sandbox/example_6.py"
+--8 < --'docs/examples/sandbox/example_6.py'
 ```
 
 #### 7: Fetch the overview report for a completed sample
@@ -122,7 +122,7 @@ Profiles are company-wide analysis configurations (OS tags, network mode, timeou
     Pass `wait_until_ready=True` to poll internally until the overview is available, instead of catching `SampleReportNotAvailableError` yourself. It retries every `OVERVIEW_REPORT_WAIT_INTERVAL_SECONDS` (20s) and raises `SampleReportNotAvailableError` once `timeout` seconds (default 1800) elapse without success. `SampleReportNotFoundError` (unknown sample id) is never retried.
 
 ```python
---8<-- "docs/examples/sandbox/example_7.py"
+--8 < --'docs/examples/sandbox/example_7.py'
 ```
 
 #### 8: Inspect the static analysis report
@@ -134,7 +134,7 @@ Profiles are company-wide analysis configurations (OS tags, network mode, timeou
     Pass `wait_until_ready=True` to poll internally until the report is available, instead of catching `SampleReportNotAvailableError` yourself. It retries every `STATIC_REPORT_WAIT_INTERVAL_SECONDS` (20s) and raises `SampleReportNotAvailableError` once `timeout` seconds (default 600) elapse without success. `SampleReportNotFoundError` (unknown sample id) is never retried.
 
 ```python
---8<-- "docs/examples/sandbox/example_8.py"
+--8 < --'docs/examples/sandbox/example_8.py'
 ```
 
 #### 9: Walk the behavioral detonation reports
@@ -146,7 +146,7 @@ Profiles are company-wide analysis configurations (OS tags, network mode, timeou
     Pass `max_workers` to fetch per-task reports concurrently when a sample has several behavioral tasks (e.g. multi-architecture Linux submissions). For samples with a single behavioral task the default sequential mode is sufficient.
 
 ```python
---8<-- "docs/examples/sandbox/example_9.py"
+--8 < --'docs/examples/sandbox/example_9.py'
 ```
 
 #### 10: Wait for every behavioral task to finish
@@ -158,5 +158,5 @@ Pass `wait_until_ready=True` to `fetch_behavioral_reports` to poll every `BEHAVI
     A timeout here never raises — check `result.complete`; `not_ready` still lists whatever hadn't resolved.
 
 ```python
---8<-- "docs/examples/sandbox/example_10.py"
+--8 < --'docs/examples/sandbox/example_10.py'
 ```
