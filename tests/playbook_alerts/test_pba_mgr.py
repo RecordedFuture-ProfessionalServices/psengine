@@ -9,6 +9,7 @@ from requests import Response
 from requests.exceptions import HTTPError
 
 from psengine.constants import DEFAULT_LIMIT
+from psengine.endpoints import EP_PLAYBOOK_ALERT_MALICIOUS_SITES_CREATE
 from psengine.errors import WriteFileError
 from psengine.playbook_alerts import (
     PACategory,
@@ -20,8 +21,15 @@ from psengine.playbook_alerts import (
     PlaybookAlertUpdateError,
     SearchIn,
 )
-from psengine.playbook_alerts.errors import PlaybookAlertBulkFetchError
+from psengine.playbook_alerts.errors import (
+    PlaybookAlertBulkFetchError,
+    PlaybookAlertCreateError,
+)
 from psengine.playbook_alerts.helpers import _save_image, save_pba_images
+from psengine.playbook_alerts.playbook_alerts import (
+    CreateMaliciousSitesAlertIn,
+    CreateMaliciousSitesAlertOut,
+)
 from tests.playbook_alerts.conftest import MGR_MOCK
 
 
@@ -50,6 +58,93 @@ class Test_PlaybookAlertMgr:
     def test_fetch_raises_ValidationError(self, kwargs, playbook_mgr):
         with pytest.raises(ValidationError):
             playbook_mgr.fetch(**kwargs)
+
+    def test_create_malicious_sites_alert(
+        self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request
+    ):
+        mock_req = mocker.patch.object(
+            playbook_mgr.rf_client,
+            'request',
+            side_effect=[mock_request(MGR_MOCK / 'test_create_malicious_sites_alert_0.json')],
+        )
+
+        result = playbook_mgr.create_malicious_sites_alert(
+            attacker='idn:mail.google.mail.pl', rule='report:rule1'
+        )
+
+        assert isinstance(result, CreateMaliciousSitesAlertOut)
+        assert result.outcome == 'alert_created'
+        assert result.playbook_alert_id == 'task:27547e1e-a235-41f2-bb50-d33c1befad21'
+
+        assert mock_req.call_args.args[0] == 'post'
+        assert mock_req.call_args.kwargs['url'] == EP_PLAYBOOK_ALERT_MALICIOUS_SITES_CREATE
+        assert mock_req.call_args.kwargs['data']['attacker'] == 'idn:mail.google.mail.pl'
+        assert mock_req.call_args.kwargs['data']['rule'] == 'report:rule1'
+        assert 'organization' not in mock_req.call_args.kwargs['data']
+
+    def test_create_malicious_sites_alert_data_wrapped(
+        self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request
+    ):
+        mocker.patch.object(
+            playbook_mgr.rf_client,
+            'request',
+            side_effect=[
+                mock_request(MGR_MOCK / 'test_create_malicious_sites_alert_wrapped_0.json')
+            ],
+        )
+
+        result = playbook_mgr.create_malicious_sites_alert(
+            attacker='idn:mail.google.mail.pl', organization='uhash:40wXmPVONA'
+        )
+
+        assert result.outcome == 'alert_created'
+        assert result.playbook_alert_id == 'task:27547e1e-a235-41f2-bb50-d33c1befad21'
+
+    def test_create_malicious_sites_alert_raises_PlaybookAlertCreateError(
+        self, playbook_mgr: PlaybookAlertMgr, mocker
+    ):
+        response = Response()
+        response.status_code = 400
+        excp_obj = HTTPError('error')
+        excp_obj.response = response
+        mocker.patch.object(playbook_mgr.rf_client, 'request', side_effect=excp_obj)
+
+        with pytest.raises(PlaybookAlertCreateError):
+            playbook_mgr.create_malicious_sites_alert(
+                attacker='idn:mail.google.mail.pl', rule='report:rule1'
+            )
+
+    create_validator_params = [
+        {'attacker': 'idn:mail.google.mail.pl', 'rule': 'report:rule1', 'organization': 'uhash:x'},
+        {'attacker': 'idn:mail.google.mail.pl'},
+        {'attacker': 'idn:mail.google.mail.pl', 'rule': ''},
+    ]
+
+    @pytest.mark.parametrize('kwargs', create_validator_params)
+    def test_create_malicious_sites_input_raises_ValidationError(self, kwargs):
+        with pytest.raises(ValidationError):
+            CreateMaliciousSitesAlertIn.model_validate(kwargs)
+
+    def test_create_malicious_sites_input_valid(self):
+        assert CreateMaliciousSitesAlertIn.model_validate(
+            {'attacker': 'idn:mail.google.mail.pl', 'rule': 'report:rule1'}
+        )
+        assert CreateMaliciousSitesAlertIn.model_validate(
+            {'attacker': 'idn:mail.google.mail.pl', 'organization': 'uhash:40wXmPVONA'}
+        )
+
+    create_mgr_validator_params = [
+        {'attacker': 'idn:mail.google.mail.pl', 'rule': 'report:rule1', 'organization': 'uhash:x'},
+        {'attacker': 'idn:mail.google.mail.pl'},
+        {'attacker': 'idn:mail.google.mail.pl', 'rule': ''},
+    ]
+
+    @pytest.mark.parametrize('kwargs', create_mgr_validator_params)
+    def test_create_malicious_sites_alert_raises_ValidationError(
+        self, playbook_mgr: PlaybookAlertMgr, kwargs
+    ):
+        with pytest.raises(ValidationError):
+            playbook_mgr.create_malicious_sites_alert(**kwargs)
 
     def test_fetch_without_category_supported_alert(
         self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request, make_binary_response

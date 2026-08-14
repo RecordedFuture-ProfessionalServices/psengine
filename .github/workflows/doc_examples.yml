@@ -2,9 +2,13 @@ name: Doc Examples
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  schedule:
+    # Nightly at 04:15 UTC — decoupled from merges so a flaky RF API never blocks docs.
+    - cron: "15 4 * * *"
+
+permissions:
+  contents: read
+  issues: write
 
 jobs:
   run-doc-py:
@@ -25,79 +29,56 @@ jobs:
         run: uv python install ${{ vars.PYTHON_VERSION }}
 
       - name: Set up venv
-        run: |
-          uv sync --group docs --no-default-groups
+        run: uv sync --group docs --no-default-groups
 
-      - name: Run Examples
-        shell: bash
+      - name: Run examples
+        id: run
+        run: ./scripts/run_doc_examples.sh
+
+      - name: Upload attempt logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: doc-example-logs
+          path: /tmp/doc-examples-*/**
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Open or update failure issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          FAILED_COUNT: ${{ steps.run.outputs.failed_count }}
+          FAILED_FILES: ${{ steps.run.outputs.failed_files }}
         run: |
           set -euo pipefail
+          title="Doc examples failing on nightly run"
 
-          KNOWN_FAILS=(
-            "./docs/examples/error_handling/example_1a.py"
-            "./docs/examples/error_handling/example_1b.py"
-            "./docs/examples/error_handling/example_3.py"
-            "./docs/examples/config/example_6.py"
+          body=$(cat <<EOF
+          The nightly \`Doc Examples\` workflow failed.
+
+          - Run: $RUN_URL
+          - Failed count: ${FAILED_COUNT:-unknown}
+
+          Failed files:
+          \`\`\`
+          ${FAILED_FILES:-see run logs}
+          \`\`\`
+
+          Per-attempt logs are attached to the run as the \`doc-example-logs\` artifact.
+          EOF
           )
 
-          KNOWN_FAILS_FILE="$(mktemp)"
-          RETRY_LIST_FILE="$(mktemp)"
-          trap 'rm -f "$KNOWN_FAILS_FILE" "$RETRY_LIST_FILE"' EXIT
+          existing=$(gh issue list \
+            --state open \
+            --search "in:title \"$title\"" \
+            --json number,title \
+            --jq ".[] | select(.title == \"$title\") | .number" \
+            | head -n1)
 
-          printf '%s\n' "${KNOWN_FAILS[@]}" > "$KNOWN_FAILS_FILE"
-
-          run_one() {
-            local file="$1"
-            local list_file="$2"
-            local safe_log="err-$(echo "$file" | tr '/' '_').log"
-
-            if grep -Fxq -- "$file" "$list_file"; then
-              uv run "$file" &> "$safe_log"
-              local rc=$?
-              if [[ $rc -ne 1 ]]; then
-                echo "$file failed (exit code $rc, expected 1)"
-                return 1
-              fi
-            else
-              uv run "$file" &> /dev/null
-              local rc=$?
-              if [[ $rc -ne 0 ]]; then
-                echo "$file failed (exit code $rc)"
-                return 1
-              fi
-            fi
-          }
-
-          run_one_capture() {
-            local file="$1"
-            local list_file="$2"
-            local retry_file="$3"
-
-            if ! run_one "$file" "$list_file"; then
-              echo "$file" >> "$retry_file"
-              return 1
-            fi
-          }
-
-          export -f run_one
-          export -f run_one_capture
-
-          set +e
-          find ./docs/examples -type f -name "*.py" -print0 \
-            | parallel -0 -j 30 run_one_capture {} "$KNOWN_FAILS_FILE" "$RETRY_LIST_FILE"
-          parallel_rc=$?
-          set -e
-
-          if [[ $parallel_rc -ne 0 ]]; then
-            echo "Parallel run had failures. Re-running failed files serially..."
-
-            sort -u "$RETRY_LIST_FILE" -o "$RETRY_LIST_FILE"
-
-            while IFS= read -r file; do
-              [[ -z "$file" ]] && continue
-              echo "Retrying: $file"
-              run_one "$file" "$KNOWN_FAILS_FILE"
-            done < "$RETRY_LIST_FILE"
+          if [[ -n "$existing" ]]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body" --label "docs,ci"
           fi
-
-          echo "All done ✅"

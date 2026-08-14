@@ -1,4 +1,18 @@
 # Changelog
+## v2.10.1 - 2026-08-14
+
+### Added
+
+- `DetectionMgr` now supports suricata rules.
+
+## v2.10.0 - 2026-08-13
+
+### Added
+
+- `PlaybookAlertMgr` now supports Malicious Sites playbook alert category.
+- `PlaybookAlertMgr` now supports Payment Card Fraud playbook alert category.
+- The `PlaybookAlert.markdown()` now accepts a `comments` argument (default `False`) to display user comments.
+- The `ClassicAlert.markdown()` now accepts a `comments` argument (default `False`) to display user comments.
 
 ## vx.x.x - yyyy-mm-dd
 

@@ -16,12 +16,15 @@ from ...markdown import (
     MarkdownMaker,
 )
 from ...markdown.markdown_strings import bold, link
+from ..models import panel_log
 from ..pa_category import PACategory
 from .markdown_code_repo import _code_repo_markdown
+from .markdown_compromised_bank_checks import _compromised_bank_check_markdown
 from .markdown_cyber_vulnerability import _cyber_vulnerability_markdown
 from .markdown_domain_abuse import _domain_abuse_markdown
 from .markdown_geopolitics_facility import _geopolitics_facility_markdown
 from .markdown_identity_exposure import _identity_exposure_markdown
+from .markdown_malicious_sites import _malicious_sites_markdown
 from .markdown_malware_report import _malware_report_markdown
 from .markdown_third_party_risk import _third_party_risk_markdown
 
@@ -37,6 +40,8 @@ MARKDOWN_BY_PBA_TYPE = {
     PACategory.GEOPOLITICS_FACILITY.value: _geopolitics_facility_markdown,
     PACategory.CYBER_VULNERABILITY.value: _cyber_vulnerability_markdown,
     PACategory.MALWARE_REPORT.value: _malware_report_markdown,
+    PACategory.MALICIOUS_SITES.value: _malicious_sites_markdown,
+    PACategory.COMPROMISED_BANK_CHECKS.value: _compromised_bank_check_markdown,
 }
 
 
@@ -67,6 +72,7 @@ def _markdown_playbook_alert(
     defang_iocs: bool = False,
     iocs_to_defang: list = None,
     extra_context: list = None,
+    comments: bool = False,
 ) -> str:
     md_maker = MarkdownMaker(
         addendum=TRUNCATE_COMMENT.format(
@@ -77,6 +83,17 @@ def _markdown_playbook_alert(
         iocs_to_defang=iocs_to_defang or [],
     )
     _generic_pba_summary(playbook_alert, md_maker)
+
+    if comments:
+        comment_lines = []
+        for entry in playbook_alert.panel_log_v2 or []:
+            for change in entry.changes:
+                if isinstance(change, panel_log.CommentChange):
+                    who = entry.author_name or 'Unknown'
+                    when = entry.created.strftime(TIMESTAMP_STR)
+                    comment_lines.append(f'{who} ({when}): {change.comment}\n\n')
+        if comment_lines:
+            md_maker.add_section('Comments', comment_lines)
 
     if markdown := MARKDOWN_BY_PBA_TYPE.get(playbook_alert.category, _unsupported_pba)(
         playbook_alert, md_maker, html_tags, extra_context

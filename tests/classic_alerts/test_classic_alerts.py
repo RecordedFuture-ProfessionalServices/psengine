@@ -269,12 +269,15 @@ class Test_ClassicAlert:
             alerts[0].markdown(html_tags=True),
             alerts[1].markdown(ai_insights=False),
             alerts[2].markdown(),
+            alerts[2].markdown(comment=True),
         ]
 
         assert '\n</details>' not in markdowns[0]
         assert 'AI Insights' in markdowns[1]
         assert 'AI Insights' not in markdowns[2]
         assert 'AI Insights' in markdowns[3]
+        assert 'Reviewer Note' not in markdowns[3]
+        assert 'Reviewer Note' in markdowns[4]
 
     def test_markdown_defang_iocs(self, ca_mgr: ClassicAlertMgr, request, mocker, mock_request):
         nodeid = request.node.nodeid

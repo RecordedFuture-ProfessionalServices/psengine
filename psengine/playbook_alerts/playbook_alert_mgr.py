@@ -24,6 +24,7 @@ from ..constants import DEFAULT_LIMIT
 from ..endpoints import (
     EP_PLAYBOOK_ALERT,
     EP_PLAYBOOK_ALERT_COMMON,
+    EP_PLAYBOOK_ALERT_MALICIOUS_SITES_CREATE,
     EP_PLAYBOOK_ALERT_SEARCH,
 )
 from ..helpers import TimeHelpers, connection_exceptions, debug_call
@@ -39,6 +40,7 @@ from .constants import (
 )
 from .errors import (
     PlaybookAlertBulkFetchError,
+    PlaybookAlertCreateError,
     PlaybookAlertFetchError,
     PlaybookAlertRetrieveImageError,
     PlaybookAlertSearchError,
@@ -48,6 +50,9 @@ from .mappings import CATEGORY_ENDPOINTS, CATEGORY_TO_OBJECT_MAP
 from .models import SearchResponse
 from .pa_category import PACategory
 from .playbook_alerts import (
+    CreateMaliciousSitesAlertIn,
+    CreateMaliciousSitesAlertOptions,
+    CreateMaliciousSitesAlertOut,
     PreviewAlertOut,
     SearchIn,
     UpdateAlertIn,
@@ -354,6 +359,76 @@ class PlaybookAlertMgr:
 
     @debug_call
     @validate_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertCreateError)
+    def create_malicious_sites_alert(
+        self,
+        attacker: Annotated[str, Doc('Attacker domain, e.g. `idn:mail.google.mail.pl`.')],
+        rule: Annotated[
+            str | None,
+            Doc('Alert-rule/use-case config id, e.g. `report:rule1`. One of rule/organization.'),
+        ] = None,
+        organization: Annotated[
+            str | None,
+            Doc('Org id whose Malicious Sites config is used, e.g. `uhash:40wXmPVONA`.'),
+        ] = None,
+        targets: Annotated[
+            list[str] | None, Doc('Related entities, e.g. `["idn:google.com"]`.')
+        ] = None,
+        assignee: Annotated[
+            str | None, Doc("Assignee uhash. Defaults to the alert rule's assignee.")
+        ] = None,
+        status: Annotated[
+            str | None,
+            Doc("Initial status. One of 'New', 'InProgress', 'Dismissed', 'Resolved'."),
+        ] = None,
+        priority: Annotated[
+            str | None, Doc("Initial priority. One of 'High', 'Moderate', 'Informational'.")
+        ] = None,
+        description: Annotated[str | None, Doc('Free-text description for the alert.')] = None,
+    ) -> Annotated[
+        CreateMaliciousSitesAlertOut,
+        Doc('The create outcome and the resulting playbook alert id.'),
+    ]:
+        """Create a Malicious Sites playbook alert.
+
+        Exactly one of `rule` or `organization` must be provided. If `attacker` matches an
+        existing alert's main attacker, it is added to that alert instead of creating a new one.
+
+        Endpoint:
+            `playbook-alert/malicious_sites/create`
+
+        Raises:
+            ValidationError: If any parameter is of incorrect type, or if not exactly one of
+                `rule`/`organization` is provided.
+            PlaybookAlertCreateError: If a connection or API error occurs.
+        """
+        option_fields = {
+            'targets': targets,
+            'assignee': assignee,
+            'status': status,
+            'priority': priority,
+            'description': description,
+        }
+        options = CreateMaliciousSitesAlertOptions(**option_fields) if option_fields else None
+
+        payload = CreateMaliciousSitesAlertIn(
+            attacker=attacker,
+            rule=rule,
+            organization=organization,
+            options=options,
+        )
+
+        self.log.info(f'Creating malicious sites playbook alert for attacker: {attacker}')
+
+        response = self.rf_client.request(
+            'post', url=EP_PLAYBOOK_ALERT_MALICIOUS_SITES_CREATE, data=payload.json()
+        )
+
+        result = response.json()
+        return CreateMaliciousSitesAlertOut.model_validate(result)
+
+    @debug_call
+    @validate_call
     def _prepare_query(
         self,
         alerts_per_page: int | None = ALERTS_PER_PAGE,
@@ -414,7 +489,7 @@ class PlaybookAlertMgr:
     @debug_call
     @validate_call
     @connection_exceptions(
-        ignore_status_code=[], exception_to_raise=PlaybookAlertRetrieveImageError
+        ignore_status_code=[404], exception_to_raise=PlaybookAlertRetrieveImageError
     )
     def fetch_one_image(
         self,
@@ -422,21 +497,29 @@ class PlaybookAlertMgr:
         image_id: Annotated[str | None, Doc('ID of the image to retrieve.')] = None,
         alert_category: Annotated[
             PBA_WITH_IMAGES_VALIDATOR,
-            Doc("Category of the alert (e.g., 'domain_abuse', 'geopolitics_facility')."),
+            Doc(
+                'Category of the alert '
+                "(e.g., 'domain_abuse', 'malicious_sites', 'geopolitics_facility', "
+                "'compromised_bank_checks')."
+            ),
         ] = 'domain_abuse',
     ) -> Annotated[bytes, Doc('Raw image content in bytes.')]:
         """Retrieve an image from a playbook alert that includes visual content.
 
         Endpoints:
             - `playbook-alert/domain_abuse/{alert_id}/image/{image_id}`
+            - `playbook-alert/malicious_sites/{alert_id}/image/{image_id}`
             - `playbook-alert/geopolitics_facility/image/{image_id}`
+            - `playbook-alert/compromised_bank_checks/image/{alert_id}`
 
         Raises:
             ValidationError: If any parameter is of incorrect type.
             PlaybookAlertRetrieveImageError: If the image fetch request fails.
         """
-        if alert_category == PACategory.DOMAIN_ABUSE.value:
+        if alert_category in (PACategory.DOMAIN_ABUSE.value, PACategory.MALICIOUS_SITES.value):
             url = f'/{alert_category}/{alert_id}/image/{image_id}'
+        elif alert_category == PACategory.COMPROMISED_BANK_CHECKS.value:
+            url = f'/compromised_bank_checks/image/{alert_id}'
         else:
             url = f'/{alert_category}/image/{image_id}'
 
@@ -463,7 +546,9 @@ class PlaybookAlertMgr:
 
         Endpoints:
             - `playbook-alert/domain_abuse/{alert_id}/image/{image_id}`
+            - `playbook-alert/malicious_sites/{alert_id}/image/{image_id}`
             - `playbook-alert/geopolitics_facility/image/{image_id}`
+            - `playbook-alert/compromised_bank_checks/image/{alert_id}`
 
         Example:
             Search and retrieve images for alerts:
@@ -489,11 +574,19 @@ class PlaybookAlertMgr:
             ValidationError: If the parameter is of incorrect type.
             PlaybookAlertRetrieveImageError: If an API error occurs during image retrieval.
         """
-        for image_id in playbook_alert.image_ids:
+        if playbook_alert.category == PACategory.COMPROMISED_BANK_CHECKS.value:
             image_bytes = self.fetch_one_image(
-                playbook_alert.playbook_alert_id, image_id, playbook_alert.category
+                alert_id=playbook_alert.playbook_alert_id, alert_category=playbook_alert.category
             )
-            playbook_alert.store_image(image_id, image_bytes)
+            if image_bytes:
+                playbook_alert.store_image(image_bytes)
+        else:
+            for image_id in playbook_alert.image_ids:
+                image_bytes = self.fetch_one_image(
+                    playbook_alert.playbook_alert_id, image_id, playbook_alert.category
+                )
+                if image_bytes:
+                    playbook_alert.store_image(image_id, image_bytes)
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=PlaybookAlertFetchError)
@@ -559,7 +652,7 @@ class PlaybookAlertMgr:
         Args:
             alert_ids (list): List of alert IDs to fetch
             category (str): Category of alert to fetch
-            fetch_image (bool): Whether to fetch images for Domain Abuse alerts
+            fetch_image (bool): Whether to fetch images for supported alerts with images
             panels (list): List of panels to fetch
             alerts_per_page (int): Number of alerts to fetch per page for bulk search results
 
@@ -592,6 +685,8 @@ class PlaybookAlertMgr:
         if (
             category == PACategory.DOMAIN_ABUSE.value
             or category == PACategory.GEOPOLITICS_FACILITY.value
+            or category == PACategory.MALICIOUS_SITES.value
+            or category == PACategory.COMPROMISED_BANK_CHECKS.value
         ) and fetch_image:
             for alert in p_alerts:
                 self.fetch_images(alert)
