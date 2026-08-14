@@ -12,6 +12,8 @@ See the [**API Reference**](../api/playbook_alerts/playbook_alert_mgr.md) for in
 
 - Playbook alert data is organized into panels, each containing specific information. The `status` panel is common to all playbook alert types and provides a brief summary. For example: when you use the `search` method, only the `status` panel is returned.
 
+- The `markdown` method accepts a `comments` argument (default `False`). When enabled, user comments from the alert's `panel_log_v2` are included in a dedicated **Comments** section of the output.
+
 ## Examples
 
 {! modules/_includes/examples_warning.md !}

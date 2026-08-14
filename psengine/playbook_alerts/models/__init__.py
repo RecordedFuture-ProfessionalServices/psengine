@@ -18,6 +18,10 @@ from .pba_code_repo_leak import (
     CodeRepoPanelEvidence,
     CodeRepoPanelStatus,
 )
+from .pba_compromised_bank_checks import (
+    CompromisedBankCheckPanelEvidenceSummary,
+    CompromisedBankCheckPanelStatus,
+)
 from .pba_cyber_vulnerability import (
     CyberVulnerabilityPanelEvidence,
     CyberVulnerabilityPanelStatus,
@@ -37,6 +41,12 @@ from .pba_geopolitics_facility import (
 from .pba_identity_exposures import (
     IdentityPanelEvidence,
     IdentityPanelStatus,
+)
+from .pba_malicious_sites import (
+    MaliciousSitesPanelEvidenceDns,
+    MaliciousSitesPanelEvidenceSummary,
+    MaliciousSitesPanelEvidenceWhois,
+    MaliciousSitesPanelStatus,
 )
 from .pba_malware_report import MalwareReportPanelEvidence, MalwareReportPanelStatus
 from .pba_third_party_risk import TPRAssessment, TPRPanelEvidence, TPRPanelStatus

@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "geolocation": null,
+      "id": "d7ae61a8-8897-492d-b418-70ed582d0442",
+      "name": "pse-mock-a53247df-minimal",
+      "network": "",
+      "options": null,
+      "tags": [
+        "os:windows10-2004-x64"
+      ],
+      "timeout": 60
+    },
+    {
+      "geolocation": [
+        "us"
+      ],
+      "id": "979a3fb9-6c52-452d-bd14-650b9f2eecda",
+      "name": "pse-mock-a53247df-full",
+      "network": "vpn",
+      "options": {
+        "browser": "chrome"
+      },
+      "tags": [
+        "os:windows10-2004-x64",
+        "locale:en-us"
+      ],
+      "timeout": 120
+    },
+    {
+      "geolocation": null,
+      "id": "68f98d86-f2c4-4cd0-af75-ccce2c6e15f9",
+      "name": "drew-test",
+      "network": "internet",
+      "options": {
+        "browser": ""
+      },
+      "tags": [
+        "automatic-platform",
+        "locale:en-us"
+      ],
+      "timeout": 30
+    }
+  ],
+  "next": null
+}

@@ -1,0 +1,320 @@
+{
+  "version": "0.2",
+  "build": "f272ba6",
+  "sample": {
+    "sample": "251114-py23jaavtp",
+    "kind": "file",
+    "size": 325632,
+    "target": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554"
+  },
+  "task": {
+    "task": "251114-py23jaavtp-static1",
+    "target": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554"
+  },
+  "analysis": {
+    "reported": "2025-11-14T12:45:05Z",
+    "score": 10,
+    "tags": [
+      "upx",
+      "botnet:ap",
+      "family:darkcomet"
+    ]
+  },
+  "signatures": [
+    {
+      "name": "Darkcomet family",
+      "score": 10,
+      "tags": [
+        "family:darkcomet"
+      ]
+    },
+    {
+      "name": "UPX packed file",
+      "score": 5,
+      "tags": [
+        "upx"
+      ],
+      "indicators": [
+        {
+          "resource": "sample",
+          "yara_rule": "upx"
+        }
+      ],
+      "desc": "Detects executables packed with UPX/modified UPX open source packer."
+    },
+    {
+      "label": "unsigned_pe",
+      "name": "Unsigned PE",
+      "score": 3,
+      "indicators": [
+        {
+          "resource": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554"
+        },
+        {
+          "resource": "unpack001/out.upx"
+        }
+      ],
+      "desc": "Checks for missing Authenticode signature."
+    }
+  ],
+  "files": [
+    {
+      "filename": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554",
+      "filesize": 325632,
+      "md5": "46bcf4e361cd251c958720e1198e3f0a",
+      "sha1": "57ab0765c97b230c615b43ee4ebc28b674887121",
+      "sha256": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554",
+      "sha512": "8674824eed2ff85101788750cdba20220beef485b2cf86d78d6260f2b4017710386461b500969c354da32cbef39ffe50f6411bf70627c837c11eba51b4159ce4",
+      "ssdeep": "6144:bcNYS996KFifeVjBpeExgVTFSXFoMc5RhCaL37yVwr5UpUhUjU8UG9U:bcW7KEZlPzCy37",
+      "exts": [
+        ".exe"
+      ],
+      "tags": [
+        "windows:4",
+        "windows",
+        "x86",
+        "arch:x86"
+      ],
+      "depth": 0,
+      "kind": "file",
+      "selected": true,
+      "runas": "5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554.exe",
+      "metadata": {
+        "pe": {
+          "timestamp": 1339084793,
+          "sections": [
+            {
+              "name": "UPX0",
+              "offset": 1024,
+              "virtual_size": 552960,
+              "characteristics": [
+                "IMAGE_SCN_CNT_UNINITIALIZED_DATA",
+                "IMAGE_SCN_MEM_EXECUTE",
+                "IMAGE_SCN_MEM_READ",
+                "IMAGE_SCN_MEM_WRITE"
+              ]
+            },
+            {
+              "name": "UPX1",
+              "offset": 1024,
+              "virtual_size": 253952,
+              "size": 252928,
+              "characteristics": [
+                "IMAGE_SCN_CNT_INITIALIZED_DATA",
+                "IMAGE_SCN_MEM_EXECUTE",
+                "IMAGE_SCN_MEM_READ",
+                "IMAGE_SCN_MEM_WRITE"
+              ]
+            },
+            {
+              "name": ".rsrc",
+              "offset": 253952,
+              "virtual_size": 73728,
+              "size": 71680,
+              "characteristics": [
+                "IMAGE_SCN_CNT_INITIALIZED_DATA",
+                "IMAGE_SCN_MEM_READ",
+                "IMAGE_SCN_MEM_WRITE"
+              ]
+            }
+          ],
+          "header": {
+            "entry_point": 808976,
+            "magic_number": 267,
+            "major_operating_system_version": 4,
+            "minor_operating_system_version": 0,
+            "subsystem": "IMAGE_SUBSYSTEM_WINDOWS_GUI",
+            "file_characteristics": [
+              "IMAGE_FILE_RELOCS_STRIPPED",
+              "IMAGE_FILE_EXECUTABLE_IMAGE",
+              "IMAGE_FILE_LINE_NUMS_STRIPPED",
+              "IMAGE_FILE_LOCAL_SYMS_STRIPPED",
+              "IMAGE_FILE_BYTES_REVERSED_LO",
+              "IMAGE_FILE_32BIT_MACHINE",
+              "IMAGE_FILE_BYTES_REVERSED_HI"
+            ]
+          },
+          "subtype": {
+            "type": "generic"
+          }
+        }
+      }
+    },
+    {
+      "filename": "out.upx",
+      "relpath": "unpack001/out.upx",
+      "filesize": 742400,
+      "md5": "af7314d464baa89f89f20d21bf2f915b",
+      "sha1": "7933de48d48595bf663ee3053c1fa86b1190a926",
+      "sha256": "01ffc25cb19967935eadfa99ba5a07bdbef3a4003cc01b86a930c8a0e08f9454",
+      "sha512": "44022d587b9327a9051c59411cf177fdf1ea27c24b334626862b7a2b1113d07cc4bb1780401fb0930f14642be5df1334ed9108c8ae25a553946190701d939f2c",
+      "ssdeep": "12288:D9HFJ9rJxRX1uVVjoaWSoynxdO1FVBaOiRZTERfIhNkNCCLo9EkNC/:NZ1xuVVjfFoynPaVBUR8f+kN10Ed",
+      "exts": [
+        ".exe"
+      ],
+      "tags": [
+        "windows:4",
+        "windows",
+        "x86",
+        "arch:x86"
+      ],
+      "depth": 1,
+      "kind": "file",
+      "selected": false,
+      "runas": "out.exe",
+      "metadata": {
+        "pe": {
+          "timestamp": 1339084793,
+          "sections": [
+            {
+              "name": ".text",
+              "offset": 1024,
+              "virtual_size": 579824,
+              "size": 580096,
+              "characteristics": [
+                "IMAGE_SCN_CNT_CODE",
+                "IMAGE_SCN_MEM_EXECUTE",
+                "IMAGE_SCN_MEM_READ"
+              ]
+            },
+            {
+              "name": ".itext",
+              "offset": 581120,
+              "virtual_size": 6484,
+              "size": 6656,
+              "characteristics": [
+                "IMAGE_SCN_CNT_CODE",
+                "IMAGE_SCN_MEM_EXECUTE",
+                "IMAGE_SCN_MEM_READ"
+              ]
+            },
+            {
+              "name": ".data",
+              "offset": 587776,
+              "virtual_size": 15676,
+              "size": 15872,
+              "characteristics": [
+                "IMAGE_SCN_CNT_INITIALIZED_DATA",
+                "IMAGE_SCN_MEM_READ",
+                "IMAGE_SCN_MEM_WRITE"
+              ]
+            },
+            {
+              "name": ".bss",
+              "offset": 603648,
+              "virtual_size": 29700,
+              "characteristics": [
+                "IMAGE_SCN_MEM_READ",
+                "IMAGE_SCN_MEM_WRITE"
+              ]
+            },
+            {
+              "name": ".idata",
+              "offset": 603648,
+              "virtual_size": 16704,
+              "size": 16896,
+              "characteristics": [
+                "IMAGE_SCN_CNT_INITIALIZED_DATA",
+                "IMAGE_SCN_MEM_READ",
+                "IMAGE_SCN_MEM_WRITE"
+              ]
+            },
+            {
+              "name": ".tls",
+              "offset": 620544,
+              "virtual_size": 56,
+              "characteristics": [
+                "IMAGE_SCN_MEM_READ",
+                "IMAGE_SCN_MEM_WRITE"
+              ]
+            },
+            {
+              "name": ".rdata",
+              "offset": 620544,
+              "virtual_size": 24,
+              "size": 512,
+              "characteristics": [
+                "IMAGE_SCN_CNT_INITIALIZED_DATA",
+                "IMAGE_SCN_MEM_READ"
+              ]
+            },
+            {
+              "name": ".reloc",
+              "offset": 621056,
+              "virtual_size": 35548,
+              "size": 35840,
+              "characteristics": [
+                "IMAGE_SCN_CNT_INITIALIZED_DATA",
+                "IMAGE_SCN_MEM_DISCARDABLE",
+                "IMAGE_SCN_MEM_READ"
+              ]
+            },
+            {
+              "name": ".rsrc",
+              "offset": 656896,
+              "virtual_size": 85028,
+              "size": 85504,
+              "characteristics": [
+                "IMAGE_SCN_CNT_INITIALIZED_DATA",
+                "IMAGE_SCN_MEM_READ"
+              ]
+            }
+          ],
+          "header": {
+            "entry_point": 587912,
+            "magic_number": 267,
+            "major_operating_system_version": 4,
+            "minor_operating_system_version": 0,
+            "subsystem": "IMAGE_SUBSYSTEM_WINDOWS_GUI",
+            "file_characteristics": [
+              "IMAGE_FILE_RELOCS_STRIPPED",
+              "IMAGE_FILE_EXECUTABLE_IMAGE",
+              "IMAGE_FILE_LINE_NUMS_STRIPPED",
+              "IMAGE_FILE_LOCAL_SYMS_STRIPPED",
+              "IMAGE_FILE_BYTES_REVERSED_LO",
+              "IMAGE_FILE_32BIT_MACHINE",
+              "IMAGE_FILE_BYTES_REVERSED_HI"
+            ]
+          },
+          "subtype": {
+            "type": "generic"
+          }
+        }
+      }
+    }
+  ],
+  "unpack_count": 1,
+  "error_count": 0,
+  "extracted": [
+    {
+      "dumped_file": "out.upx",
+      "resource": "static1/unpack001/out.upx",
+      "config": {
+        "family": "darkcomet",
+        "rule": "Darkcomet",
+        "c2": [
+          "kvejo991.ddns.net:1604"
+        ],
+        "botnet": "AP",
+        "mutex": [
+          "DC_MUTEX-ARULYYD"
+        ],
+        "keys": [
+          {
+            "kind": "rc4.plain",
+            "key": "RC4_key",
+            "value": "#KCMDDC51#-890"
+          }
+        ],
+        "attr": {
+          "persistence": true,
+          "reg_key": "explorer",
+          "install": true,
+          "InstallPath": "MSDCSC\\explorer.exe",
+          "gencode": "MEkifdG51Yac",
+          "offline_keylogger": true
+        }
+      }
+    }
+  ]
+}

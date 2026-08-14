@@ -29,9 +29,11 @@ class PACategory(Enum):
         return self.value.lower()
 
     DOMAIN_ABUSE = 'domain_abuse'
+    COMPROMISED_BANK_CHECKS = 'fraud_compromised_checks'
     CYBER_VULNERABILITY = 'cyber_vulnerability'
     THIRD_PARTY_RISK = 'third_party_risk'
     CODE_REPO_LEAKAGE = 'code_repo_leakage'
     IDENTITY_NOVEL_EXPOSURES = 'identity_novel_exposures'
     GEOPOLITICS_FACILITY = 'geopolitics_facility'
     MALWARE_REPORT = 'malware_report'
+    MALICIOUS_SITES = 'malicious_sites'

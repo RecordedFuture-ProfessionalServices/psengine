@@ -1,5 +1,20 @@
 # Changelog
 
+## v2.10.0 - 2026-08-13
+
+### Added
+
+- `PlaybookAlertMgr` now supports Malicious Sites playbook alert category.
+- `PlaybookAlertMgr` now supports Payment Card Fraud playbook alert category.
+- The `PlaybookAlert.markdown()` now accepts a `comments` argument (default `False`) to display user comments.
+- The `ClassicAlert.markdown()` now accepts a `comments` argument (default `False`) to display user comments.
+
+## v2.9.0 - 2026-08-11
+
+### Added
+
+- Added support for Sandbox API via the `SandboxMgr`.
+
 ## v2.8.5 - 2026-07-28
 
 ### Changed

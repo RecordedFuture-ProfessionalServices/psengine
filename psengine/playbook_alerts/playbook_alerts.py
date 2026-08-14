@@ -34,6 +34,8 @@ from ..playbook_alerts.markdown.markdown import _markdown_playbook_alert
 from .models import (
     CodeRepoPanelEvidence,
     CodeRepoPanelStatus,
+    CompromisedBankCheckPanelEvidenceSummary,
+    CompromisedBankCheckPanelStatus,
     CyberVulnerabilityPanelEvidence,
     CyberVulnerabilityPanelStatus,
     DatetimeRange,
@@ -47,6 +49,10 @@ from .models import (
     GeopolPanelStatus,
     IdentityPanelEvidence,
     IdentityPanelStatus,
+    MaliciousSitesPanelEvidenceDns,
+    MaliciousSitesPanelEvidenceSummary,
+    MaliciousSitesPanelEvidenceWhois,
+    MaliciousSitesPanelStatus,
     MalwareReportPanelEvidence,
     MalwareReportPanelStatus,
     TPRAssessment,
@@ -54,6 +60,7 @@ from .models import (
     TPRPanelStatus,
 )
 from .models.panel_log import (
+    AttackerAddedChange,
     CodeRepoLeakageEvidenceChange,
     DomainAbuseDnsChange,
     DomainAbuseLogoTypeChange,
@@ -62,7 +69,19 @@ from .models.panel_log import (
     DomainAbuseReregistrationRecordChange,
     DomainAbuseScreenshotMentions,
     DomainAbuseWhoisChange,
+    ForSaleChange,
+    LogoHashChange,
+    MaliciousSitesDnsChange,
+    MaliciousSitesLogoChange,
+    MaliciousSitesMaliciousDnsChange,
+    MaliciousSitesMaliciousUrlChange,
+    MaliciousSitesReregistrationChange,
+    MaliciousSitesScreenshotMentionChange,
+    MaliciousSitesWhoisChange,
     PanelLogV2,
+    ParkedChange,
+    PhishingVerdictChange,
+    SuggestedTakedownChange,
     ThirdPartyAssessmentChange,
     VulnerabilityLifecycleChange,
 )
@@ -164,17 +183,19 @@ class PBA_Generic(RFBaseModel):
                     """
             ),
         ] = None,
+        comments: Annotated[bool, Doc('Include comments in markdown output.')] = False,
     ) -> Annotated[
         str,
         Doc('Markdown-formatted string representation of the Playbook Alert.'),
     ]:
-        """Generate markdown for Playbook Alerts."""
+        """Generate Markdown for Playbook Alerts."""
         return _markdown_playbook_alert(
             self,
             html_tags=html_tags,
             character_limit=character_limit,
             defang_iocs=defang_iocs,
             extra_context=extra_context,
+            comments=comments,
         )
 
     def _get_changes(self, change_type):
@@ -207,6 +228,53 @@ IPV4 = (
     r'(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)'
 )
 SEQ_IPV4 = r'((?:' + IPV4 + r'(?:,\s*)?)+)'
+
+
+class PBA_CompromisedBankChecks(PBA_Generic):
+    """Model for Compromised Bank Checks. Inherit behaviors from `PBA_Generic`."""
+
+    __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
+
+    _images: dict | None = {}
+
+    category: str = PACategory.COMPROMISED_BANK_CHECKS.value
+
+    panel_status: CompromisedBankCheckPanelStatus | None = Field(
+        default_factory=CompromisedBankCheckPanelStatus
+    )
+    panel_evidence_summary: CompromisedBankCheckPanelEvidenceSummary | None = Field(
+        default_factory=CompromisedBankCheckPanelEvidenceSummary
+    )
+
+    def store_image(self, image_bytes: bytes) -> None:
+        """Compromised Bank Checks: Store image bytes in `self._images` dictionary."""
+        image_id = self.playbook_alert_id
+
+        self._images[image_id] = {}
+        self._images[image_id]['created'] = self.panel_evidence_summary.collected_date
+        self._images[image_id]['image_bytes'] = image_bytes
+
+    @property
+    def images(
+        self,
+    ) -> Annotated[
+        dict,
+        Doc('Dict containing alert images with metadata and raw bytes, or empty if not found.'),
+    ]:
+        """Compromised Bank Check: Get the raw bytes of the compromised bank check.
+
+        The data is in the following format:
+
+        ```python
+        {
+            alert_id : {
+                'created' : "date",
+                'image_bytes': b'xyz'
+            }
+        }
+        ```
+        """
+        return self._images
 
 
 class PBA_ThirdPartyRisk(PBA_Generic):
@@ -487,6 +555,148 @@ class PBA_DomainAbuse(PBA_Generic):
         return self._get_changes(DomainAbuseScreenshotMentions)
 
 
+class PBA_MaliciousSites(PBA_Generic):
+    """Model for Malicious Sites. Inherit behaviours from `PBA_Generic`."""
+
+    __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
+
+    _images: dict | None = {}
+
+    category: str = PACategory.MALICIOUS_SITES.value
+
+    panel_action: list[PanelAction] | None = []
+    panel_status: MaliciousSitesPanelStatus | None = Field(
+        default_factory=MaliciousSitesPanelStatus
+    )
+    panel_evidence_summary: MaliciousSitesPanelEvidenceSummary | None = Field(
+        default_factory=MaliciousSitesPanelEvidenceSummary
+    )
+    panel_evidence_dns: MaliciousSitesPanelEvidenceDns | None = Field(
+        default_factory=MaliciousSitesPanelEvidenceDns
+    )
+    panel_evidence_whois: MaliciousSitesPanelEvidenceWhois | None = Field(
+        default_factory=MaliciousSitesPanelEvidenceWhois
+    )
+
+    def _screenshots(self) -> list:
+        """Malicious Sites: screenshots are nested under each attacker."""
+        return [
+            screenshot
+            for attacker in self.panel_evidence_summary.attackers
+            for screenshot in attacker.screenshots
+        ]
+
+    def store_image(self, image_id: str, image_bytes: bytes) -> None:
+        """Malicious Sites: store image bytes in `self._images` dictionary.
+
+        Raises:
+            ValueError: if the `image_id` is not present in alert screenshots list
+        """
+        image_id_matches = [s for s in self._screenshots() if s.image_id == image_id]
+        if len(image_id_matches) == 0:
+            raise ValueError(
+                f"Alert '{self.playbook_alert_id}' does not contain image id: '{image_id}'"
+            )
+        image_info = image_id_matches[0]
+        self._images[image_id] = {}
+        self._images[image_id]['description'] = image_info.description
+        self._images[image_id]['created'] = image_info.created
+        self._images[image_id]['image_bytes'] = image_bytes
+
+    @property
+    def image_ids(self) -> list[str]:
+        """Get the playbook alert image IDs."""
+        return list(dict.fromkeys(s.image_id for s in self._screenshots() if s.image_id))
+
+    @property
+    def images(
+        self,
+    ) -> Annotated[
+        dict,
+        Doc('Dict containing alert images with metadata and raw bytes, or empty if not found.'),
+    ]:
+        """Malicious Sites: Get raw bytes of the screenshots.
+
+        This data is stored in the following format:
+
+        ```python
+        {
+            image_id : {
+                'description': "awesome image description",
+                'created': "date",
+                'image_bytes': b'xyz'
+            }
+        }
+        ```
+        """
+        return self._images
+
+    @property
+    def log_dns_changes(self) -> list:
+        """DNS change."""
+        return self._get_changes(MaliciousSitesDnsChange)
+
+    @property
+    def log_whois_changes(self) -> list:
+        """WHOIS change."""
+        return self._get_changes(MaliciousSitesWhoisChange)
+
+    @property
+    def log_malicious_dns_changes(self) -> list:
+        """Malicious DNS change."""
+        return self._get_changes(MaliciousSitesMaliciousDnsChange)
+
+    @property
+    def log_reregistration_changes(self) -> list:
+        """Reregistration change."""
+        return self._get_changes(MaliciousSitesReregistrationChange)
+
+    @property
+    def log_malicious_url_changes(self) -> list:
+        """Malicious URL change."""
+        return self._get_changes(MaliciousSitesMaliciousUrlChange)
+
+    @property
+    def log_logo_changes(self) -> list:
+        """Logo change."""
+        return self._get_changes(MaliciousSitesLogoChange)
+
+    @property
+    def log_screenshot_mention_changes(self) -> list:
+        """Screenshot mention change."""
+        return self._get_changes(MaliciousSitesScreenshotMentionChange)
+
+    @property
+    def log_attacker_added_changes(self) -> list:
+        """Attacker added change (includes malicious-sites attacker additions)."""
+        return self._get_changes(AttackerAddedChange)
+
+    @property
+    def log_phishing_verdict_changes(self) -> list:
+        """Phishing verdict change."""
+        return self._get_changes(PhishingVerdictChange)
+
+    @property
+    def log_suggested_takedown_changes(self) -> list:
+        """Suggested takedown change."""
+        return self._get_changes(SuggestedTakedownChange)
+
+    @property
+    def log_for_sale_changes(self) -> list:
+        """For sale change."""
+        return self._get_changes(ForSaleChange)
+
+    @property
+    def log_parked_changes(self) -> list:
+        """Parked change."""
+        return self._get_changes(ParkedChange)
+
+    @property
+    def log_logo_hash_changes(self) -> list:
+        """Logo hash change."""
+        return self._get_changes(LogoHashChange)
+
+
 class PBA_GeopoliticsFacility(PBA_Generic):
     """Model for Geopolitics Facility. Inherit behaviours from `PBA_Generic`."""
 
@@ -611,3 +821,40 @@ class UpdateAlertIn(RFBaseModel):
     reopen: str | None = None
     added_actions_taken: list[str] | None = None
     removed_actions_taken: list[str] | None = None
+
+
+class CreateMaliciousSitesAlertOptions(RFBaseModel):
+    """Model for the optional `options` block of `malicious_sites/create`."""
+
+    targets: list[str] | None = None
+    assignee: str | None = None
+    status: str | None = None
+    priority: str | None = None
+    description: str | None = None
+
+
+class CreateMaliciousSitesAlertIn(RFBaseModel):
+    """Model for payload sent to POST `/malicious_sites/create` endpoint."""
+
+    attacker: str
+    rule: str | None = None
+    organization: str | None = None
+    options: CreateMaliciousSitesAlertOptions | None = None
+
+    @model_validator(mode='after')
+    def _exactly_one_of_rule_or_organization(self):
+        provided = [
+            value
+            for value in (self.rule, self.organization)
+            if value is not None and str(value).strip()
+        ]
+        if len(provided) != 1:
+            raise ValueError("exactly one of 'rule' or 'organization' must be provided")
+        return self
+
+
+class CreateMaliciousSitesAlertOut(RFBaseModel):
+    """Model for payload received from POST `/malicious_sites/create` endpoint."""
+
+    outcome: str
+    playbook_alert_id: str | None = None
