@@ -76,6 +76,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      actions: write
     environment:
       name: pypi
     steps:
@@ -83,12 +84,12 @@ jobs:
         with:
           ref: ${{ needs.release.outputs.version }}
           fetch-depth: 0
-          
+
       - uses: astral-sh/setup-uv@v7
-      
+
       - name: Build release distributions
         run: |
-          uv python install ${{ vars.PYTHON_VERSION }} 
+          uv python install ${{ vars.PYTHON_VERSION }}
           uv build
 
 
@@ -96,3 +97,10 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist/
+
+      # Tag pushes made with GITHUB_TOKEN don't trigger other workflows,
+      # so dispatch the docs build explicitly against the freshly-cut tag.
+      - name: Trigger docs build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run build_docs.yml --ref "${{ needs.release.outputs.version }}"

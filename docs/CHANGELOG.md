@@ -1,7 +1,14 @@
 # Changelog
-## v2.10.1 - 2026-08-14
+
+## v2.11.0 - 2026-08-18
 
 ### Added
+
+- `CollectiveInsights` now supports the `search` endpoint via the `search` method.
+
+## v2.10.1 - 2026-08-14
+
+### Fixed
 
 - `DetectionMgr` now supports suricata rules.
 

@@ -13,6 +13,9 @@
 
 from .collective_insights import CollectiveInsights
 from .constants import (
+    ATOP_USE_CASE_DETECTION,
+    ATOP_USE_CASE_HUNTING,
+    ATOP_USE_CASE_PREVENTION,
     DETECTION_SUB_TYPE_SIGMA,
     DETECTION_SUB_TYPE_SNORT,
     DETECTION_SUB_TYPE_YARA,
@@ -24,6 +27,10 @@ from .constants import (
     ENTITY_IP,
     ENTITY_URL,
     ENTITY_VULNERABILITY,
+    SUBMISSION_METHOD_API,
+    SUBMISSION_METHOD_INTEGRATION,
+    SUBMISSION_METHOD_SANDBOX,
 )
-from .errors import CollectiveInsightsError
-from .insight import Insight, InsightsIn, InsightsOut
+from .errors import CollectiveInsightsError, CollectiveInsightsSearchError
+from .insight import Insight, InsightsIn, InsightsOut, SearchIn
+from .models import SearchEntry, SearchFilters
