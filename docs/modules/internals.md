@@ -20,6 +20,7 @@ Rewritten with the `validate_call` decorator:
 ```python
 from pydantic import validate_call
 
+
 @validate_call
 def my_func(x: int) -> int:
     return x
@@ -48,6 +49,7 @@ from .new_feature import NewFeature
 from ..helpers import debug_call, connection_exceptions
 from ..rf_client import RFClient
 from ..endpoints import EP_NEW_FEATURE_LOOKUP
+
 
 class NewFeatureMgr:
     # ... your init and code here ...

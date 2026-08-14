@@ -260,20 +260,24 @@ def test_dump_model(mocker, mock_request):
 
     dumped_data = dump_models(data)
     assert dumped_data == [
-        '{"entity": "1.1.1.1", "is_enriched": true, "content": {"risk": {"score": 0, '
-        '"level": 0, "context": {"phishing": {"score": 0, "rule": {"count": 0, '
-        '"maxCount": 3}}, "public": {"score": 0, "rule": {"maxCount": 79}, "summary": '
-        '[], "mostCriticalRule": ""}, "c2": {"score": 0, "rule": {"count": 0, '
-        '"maxCount": 7}}}, "rule": {"count": 0, "maxCount": 79, "summary": [], '
-        '"mostCritical": ""}}, "entity": {"id": "ip:1.1.1.1", "name": "1.1.1.1", '
-        '"type": "IpAddress"}}}',
-        '{"entity": "8.8.8.8", "is_enriched": true, "content": {"risk": {"score": 0, '
-        '"level": 0, "context": {"phishing": {"score": 0, "rule": {"count": 0, '
-        '"maxCount": 3}}, "public": {"score": 0, "rule": {"maxCount": 79}, "summary": '
-        '[], "mostCriticalRule": ""}, "c2": {"score": 0, "rule": {"count": 0, '
-        '"maxCount": 7}}}, "rule": {"count": 0, "maxCount": 79, "summary": [], '
-        '"mostCritical": ""}}, "entity": {"id": "ip:8.8.8.8", "name": "8.8.8.8", '
-        '"type": "IpAddress"}}}',
+        (
+            '{"entity": "1.1.1.1", "is_enriched": true, "content": {"risk": {"score": 0, '
+            '"level": 0, "context": {"phishing": {"score": 0, "rule": {"count": 0, '
+            '"maxCount": 3}}, "public": {"score": 0, "rule": {"maxCount": 79}, "summary": '
+            '[], "mostCriticalRule": ""}, "c2": {"score": 0, "rule": {"count": 0, '
+            '"maxCount": 7}}}, "rule": {"count": 0, "maxCount": 79, "summary": [], '
+            '"mostCritical": ""}}, "entity": {"id": "ip:1.1.1.1", "name": "1.1.1.1", '
+            '"type": "IpAddress"}}}'
+        ),
+        (
+            '{"entity": "8.8.8.8", "is_enriched": true, "content": {"risk": {"score": 0, '
+            '"level": 0, "context": {"phishing": {"score": 0, "rule": {"count": 0, '
+            '"maxCount": 3}}, "public": {"score": 0, "rule": {"maxCount": 79}, "summary": '
+            '[], "mostCriticalRule": ""}, "c2": {"score": 0, "rule": {"count": 0, '
+            '"maxCount": 7}}}, "rule": {"count": 0, "maxCount": 79, "summary": [], '
+            '"mostCritical": ""}}, "entity": {"id": "ip:8.8.8.8", "name": "8.8.8.8", '
+            '"type": "IpAddress"}}}'
+        ),
     ]
 
 

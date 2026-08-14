@@ -12,13 +12,31 @@
 ##############################################################################################
 
 
+from datetime import datetime
+from typing import Literal
+
 from pydantic import Field
 
-from ..common_models import RFBaseModel
+from ..common_models import IdName, RFBaseModel
 
 
 class EntityID(RFBaseModel):
     id_: str = Field(alias='id')
+
+
+class ListEntityTag(IdName):
+    """Validate a single tag received from `/{listId}/entitiesWithTags` endpoint.
+
+    Tags are **not** free-text. They are a fixed set of 57 predefined values, populated only for
+    lists whose type has tagging enabled (currently Third-Parties Watch Lists), so arbitrary tag
+    strings cannot be supplied or expected. `id` always has the form
+    `enum:EntityListTag:<name>`, for example `enum:EntityListTag:tier1`.
+
+    `name` is the tag's API value (`tier1`), not its display name (`Tier 1`).
+
+    See https://docs.recordedfuture.com/reference/lists-available-tags for the full list of
+    valid tags.
+    """
 
 
 class Organisation(RFBaseModel):
@@ -84,3 +102,67 @@ class ListEntityOperationResponse(RFBaseModel):
     """Validate data received from `/{listId}/entity/remove` endpoint."""
 
     result: str
+
+
+class TagsUpdatedOperation(RFBaseModel):
+    """Tags on the entity were changed."""
+
+    status: Literal['tags_updated']
+    tags_before: list[str]
+    tags_after: list[str]
+    tags_added: list[str]
+    tags_removed: list[str]
+    updated: datetime
+
+
+class TagsUnchangedOperation(RFBaseModel):
+    """Requested tags already matched the entity's tags, so nothing changed."""
+
+    status: Literal['tags_unchanged']
+    current_tags: list[str]
+    message: str
+
+
+class EntityNotResolvedOperation(RFBaseModel):
+    """A `(name, type)` tuple could not be resolved to an entity ID.
+
+    Produced by psengine, never returned by the API. Mirrors how `add` and `remove`
+    surface a failed lookup in their result rather than raising.
+    """
+
+    status: Literal['entity_not_resolved']
+    message: str
+
+
+class ReplaceEntityTagsIn(RFBaseModel):
+    """Validate data sent to `/{listId}/entity/tags` endpoint."""
+
+    entity: EntityID
+    tags: list[str]
+
+
+class ReplaceEntityTagsOut(RFBaseModel):
+    """Validate data received from `/{listId}/entity/tags` endpoint.
+
+    `operation` is discriminated on `status`, so each variant only exposes the fields the
+    API actually returns for it.
+    """
+
+    entity_id: str | None = None
+    operation: TagsUpdatedOperation | TagsUnchangedOperation | EntityNotResolvedOperation = Field(
+        discriminator='status'
+    )
+
+    @property
+    def changed(self) -> bool:
+        """Whether the call actually changed the entity's tags."""
+        return self.operation.status == 'tags_updated'
+
+    @property
+    def current_tags(self) -> list[str] | None:
+        """The entity's tags after the call, or None if the entity was not resolved."""
+        if isinstance(self.operation, TagsUpdatedOperation):
+            return self.operation.tags_after
+        if isinstance(self.operation, TagsUnchangedOperation):
+            return self.operation.current_tags
+        return None

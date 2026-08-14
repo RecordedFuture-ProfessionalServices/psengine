@@ -14,6 +14,7 @@
 from .constants import PBA_WITH_IMAGES_INST
 from .errors import (
     PlaybookAlertBulkFetchError,
+    PlaybookAlertCreateError,
     PlaybookAlertError,
     PlaybookAlertFetchError,
     PlaybookAlertRetrieveImageError,
@@ -30,6 +31,7 @@ from .playbook_alerts import (
     PBA_Generic,
     PBA_GeopoliticsFacility,
     PBA_IdentityNovelExposure,
+    PBA_MaliciousSites,
     PBA_MalwareReport,
     PBA_ThirdPartyRisk,
     PreviewAlertOut,
