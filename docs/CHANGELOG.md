@@ -3,7 +3,7 @@
 
 ### Added
 
-- Added support for suricata rules in `DetectionMgr`.
+- `DetectionMgr` now supports suricata rules.
 
 ## v2.10.0 - 2026-08-13
 
