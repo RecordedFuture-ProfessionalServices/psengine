@@ -8,7 +8,7 @@
 
 ## v2.10.1 - 2026-08-14
 
-### Added
+### Fixed
 
 - `DetectionMgr` now supports suricata rules.
 
