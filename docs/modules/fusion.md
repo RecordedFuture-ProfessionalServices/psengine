@@ -19,7 +19,7 @@ See the [**API Reference**](../api/fusion/fusion_mgr.md) for internal details of
 In this example you create a file, `file.txt` and write some data into it. With the `FusionMgr` you can then post the file to `/home`.
 
 ```python
---8 < --'docs/examples/fusion/example_1.py'
+--8<-- "docs/examples/fusion/example_1.py"
 ```
 
 The returned value is a model which provides information on the file that has been submitted.
@@ -31,7 +31,7 @@ In this example you use the `head_files` method, useful for retrieving informati
 This is often used in integrations to understand if a risklist has been updated from the last fetch using the `etag` header. This header returns an hash of the file, by comparing the local file hash with the remote one, you can understand if the file on the Recorded Future side has been updated.
 
 ```python
---8 < --'docs/examples/fusion/example_2.py'
+--8<-- "docs/examples/fusion/example_2.py"
 ```
 
 You can call `head_files` with a path or a list of paths. In both cases, the return value will be a list with eacelement representing a single file requested even the file was not found.

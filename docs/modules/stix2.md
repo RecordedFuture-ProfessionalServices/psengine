@@ -15,7 +15,7 @@ In this example, we take an analyst note with ID `o6_lui` using the `AnalystNote
 This creates an object that can be serialized with the `serialize` method and written to a file.
 
 ```python
---8 < --'docs/examples/stix2/example_1.py'
+--8<-- "docs/examples/stix2/example_1.py"
 ```
 
 #### 2: Transform a risklist into a STIX RFBundle
@@ -25,7 +25,7 @@ Similar to the example above, here we use the `RisklistMgr.fetch_risklist` metho
 The bundle is then saved to a file after being serialized.
 
 ```python
---8 < --'docs/examples/stix2/example_2.py'
+--8<-- "docs/examples/stix2/example_2.py"
 ```
 
 #### 3: Transform enriched IOCs into STIX RFBundles
@@ -33,5 +33,5 @@ The bundle is then saved to a file after being serialized.
 In this example, we use the `LookupMgr` to enrich 4 IOCs using the `links`, `riskMapping`, and `aiInsights` fields. For each IOC, if it has been enriched, an `EnrichedIndicator` object is created, and the related bundle is saved to a file.
 
 ```python
---8 < --'docs/examples/stix2/example_2.py'
+--8<-- "docs/examples/stix2/example_2.py"
 ```

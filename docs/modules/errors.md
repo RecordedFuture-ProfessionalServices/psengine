@@ -13,7 +13,7 @@ The first examples show errors as they appear without handling, followed by exam
 In this4:  example, we set the `RF_TOKEN` environment variable to an empty string before importing `psengine`. This is just a workaround to make the example reproducible, to show what happens if you run PSEngine without the variable configured.
 
 ```python
---8 < --'docs/examples/error_handling/example_1a.py'
+--8<-- "docs/examples/error_handling/example_1a.py"
 ```
 
 The whole exception traceback is:
@@ -36,7 +36,7 @@ The `ValueError` at the bottom indicates that the API token is missing.
 Another instance of `ValueError` regarding the token is a first level of validation that PSEngine performs when a token is passed. Recorded Future tokens have 32 alphanumeric characters, all lowercase, from `a` to `f` and from `0` to `9`. If you pass a token with invalid syntax, PSEngine will error out.
 
 ```python
---8 < --'docs/examples/error_handling/example_1b.py'
+--8<-- "docs/examples/error_handling/example_1b.py"
 ```
 
 In this case the traceback will be:
@@ -61,7 +61,7 @@ Showing that the token provided does not conform to the properties described abo
 In this example, we perform a lookup of a password using the `IdentityMgr`. We removed the Identity module from the token permissions.
 
 ```python
---8 < --'docs/examples/error_handling/example_2.py'
+--8<-- "docs/examples/error_handling/example_2.py"
 ```
 
 After running it, the error we get is:
@@ -87,7 +87,7 @@ Case 2 is rarer and you cannot do anything to solve it, since it comes from an e
 The `LookupMgr.lookup` method expects as the `entity_type` parameter (the second one) a string that must be one of the entity types defined in PSEngine. In this example, we pass an invalid string: `an ip address`.
 
 ```python
---8 < --'docs/examples/error_handling/example_3.py'
+--8<-- "docs/examples/error_handling/example_3.py"
 ```
 
 The `ValidationError` raised will be:
@@ -120,7 +120,7 @@ Every manager (except for `stix2`) will have some scenarios where it raises a `V
 Given the above, we can write a safe enrichment the following way:
 
 ```python
---8 < --'docs/examples/error_handling/example_4.py'
+--8<-- "docs/examples/error_handling/example_4.py"
 ```
 
 In this example, we first catch any potential `ValueError` from the `LookupMgr` initialization. If there is a missing token or a wrong token, print a message along with the `ve` exception and interrupt the script.

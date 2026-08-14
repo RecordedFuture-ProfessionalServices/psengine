@@ -22,7 +22,7 @@ The `domain_watch_list` variable is an object of `EntityList` type, which allows
 Once the entity has been added, we check that the result of the add operation is successful, and if it is, we list all the entities in the list with the `entities` method.
 
 ```python
---8 < --'docs/examples/entity_lists/example_1.py'
+--8<-- "docs/examples/entity_lists/example_1.py"
 ```
 
 The result after the print operation depends on the content of your list, but it will be similar to this:
@@ -44,7 +44,7 @@ As in example 1, here we do not know the Recorded Future ID of the entity. Inste
 The method then uses `EntityMatchMgr` from the `entity_match` module to look up the ID.
 
 ```python
---8 < --'docs/examples/entity_lists/example_2.py'
+--8<-- "docs/examples/entity_lists/example_2.py"
 ```
 
 #### 3: Remove domains in bulk from your Domain Watch List.
@@ -55,7 +55,7 @@ The method then uses `EntityMatchMgr` from the `entity_match` module to look up 
 Similar to the previous examples, here we want to remove multiple domains. We use the `bulk_remove` method to do it.
 
 ```python
---8 < --'docs/examples/entity_lists/example_3.py'
+--8<-- "docs/examples/entity_lists/example_3.py"
 ```
 
 The bulk operations return a dictionary that shows the result of each entity.

@@ -21,7 +21,7 @@ See the [**API Reference**](../api/risklists/risklist_mgr.md) for internal detai
 In this example, we fetch the risklist with the `fetch_risklist` method, giving the arguments of `default` for the type of risklist and `domain` for the type of indicator. Since the file is converted by PSEngine into a JSON-like structure, we can convert the generator to a list and then save it to a file with `json.dumps`.
 
 ```python
---8 < --'docs/examples/risklists/example_1a.py'
+--8<-- "docs/examples/risklists/example_1a.py"
 ```
 
 After executing the script, you should have a file called `default_domain_risklist.json` in the `risklists` directory. However, you will see the content of the `EvidenceDetails` block is a JSON-like string.
@@ -36,7 +36,7 @@ In the code below, we are performing the same operations but passing the `Defaul
 What will happen is that while the risklist is converted to JSON, it also gets validated. The `DefaultRiskList` model is already present in PSEngine, but a custom model can be used as well; see Example 2.
 
 ```python
---8 < --'docs/examples/risklists/example_1b.py'
+--8<-- "docs/examples/risklists/example_1b.py"
 ```
 
 #### 2: Fetch and save a custom risklist as JSON and perform validation
@@ -66,5 +66,5 @@ The whole data manipulation is done using only `pydantic` constructs, like `Befo
 Once the model is defined, we can fetch the risklist, validate the content, and save it to a file, same as the previous examples.
 
 ```python
---8 < --'docs/examples/risklists/example_2.py'
+--8<-- "docs/examples/risklists/example_2.py"
 ```

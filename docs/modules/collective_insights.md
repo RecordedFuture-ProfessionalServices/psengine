@@ -30,7 +30,7 @@ Every other value can optionally be provided and adds more context to the detect
 In our case, the timestamp has been mocked to "now", but in a real scenario it would be taken from the incident.
 
 ```python
---8 < --'docs/examples/collective_insights/example_1.py'
+--8<-- "docs/examples/collective_insights/example_1.py"
 ```
 
 The `create` method returns an `Insight` object, which can be passed to the `submit` method.

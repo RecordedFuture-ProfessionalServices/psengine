@@ -28,7 +28,7 @@ When using `LookupMgr` for enrichment and specifying the `fields` parameter, you
 This example uses the `LookupMgr.lookup` method to get the enrichment data of a CVE, adding the `cvssv3` field. Before printing the result, you need to check whether the CVE has been enriched. Do that with the `is_enriched` boolean attribute; if it is, print the result as JSON. Note that the result is stored under `content`, which can be an object or a string depending on the API response. If the entity has not been found, it will be a string containing a 404 message. More on this in example 4.
 
 ```python
---8 < --'docs/examples/enrich/example_1.py'
+--8<-- "docs/examples/enrich/example_1.py"
 ```
 
 #### 2: Enrich multiple URLs to get the related links. Make the call multithreaded
@@ -38,7 +38,7 @@ This example demonstrates how to use the `LookupMgr.lookup_bulk` method to enric
 In this case, the `links` field is specified, and `max_workers` controls the number of threads used here, one per call. For recommendations on thread usage, refer to the [**Guidelines**](../guidelines.md) page.
 
 ```python
---8 < --'docs/examples/enrich/example_2.py'
+--8<-- "docs/examples/enrich/example_2.py"
 ```
 
 Note that the `EnrichedData` object returned by the `LookupMgr` methods, as with most of the other objects returned by PSEngine, can be printed. This returns a formatted string with basic information about the entity. Executing this code, you should see something like this:
@@ -57,7 +57,7 @@ We then read the IPs from the file into `ips_to_enrich` and use the `soar` metho
 Finally, we create a new file with two columns, `ip` and `score`, and save each IP address along with its corresponding score.
 
 ```python
---8 < --'docs/examples/enrich/example_3.py'
+--8<-- "docs/examples/enrich/example_3.py"
 ```
 
 #### 4: Dealing with 404
@@ -65,7 +65,7 @@ Finally, we create a new file with two columns, `ip` and `score`, and save each 
 The `SoarMgr.soar` method never deals with 404 errors; even if the entities given do not exist on the Recorded Future platform, it returns the same payload. The `LookupMgr.lookup` and `LookupMgr.lookup_bulk` methods handle HTTP 404 status codes by returning the `EnrichmentData` object with `content` set to a string and `is_enriched` set to `False`.
 
 ```python
---8 < --'docs/examples/enrich/example_4.py'
+--8<-- "docs/examples/enrich/example_4.py"
 ```
 
 The code above will print:
@@ -84,7 +84,7 @@ The code above will print:
 In this example we enrich an IP with the `links` field. We then use the `links` method to extract a list of all the entities of type `Malware` that are related to the `Actors, Tools & TTPs` section of the `links` payload.
 
 ```python
---8 < --'docs/examples/enrich/example_5.py'
+--8<-- "docs/examples/enrich/example_5.py"
 ```
 
 This will print:

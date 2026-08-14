@@ -74,6 +74,7 @@ fixable = ["ALL"]
 unfixable = []
 preview = true
 explicit-preview-rules = true
+extend-exclude = ["*.md"]
 
 [lint.mccabe]
 max-complexity = 10

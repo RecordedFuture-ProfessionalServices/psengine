@@ -22,7 +22,7 @@ See the [**API Reference**](../api/logger/rf_logger.md) for internal details of 
 The following shows the [logging tree](https://pypi.org/project/logging-tree/) after importing and initializing `RFLogger`. Note the file handlers at the `psengine` module and root levels, and the console handler at the root level. The handlers are what actually output messages to file and the terminal.
 
 ```python
---8 < --'docs/examples/logger/log_tree_code.py'
+--8<-- "docs/examples/logger/log_tree_code.py"
 ```
 
 Prints:
@@ -113,7 +113,7 @@ In this example, we create a `Logger` instance from the `logging` standard libra
 
 
 ```python
---8 < --'docs/examples/logger/example_1.py'
+--8<-- "docs/examples/logger/example_1.py"
 ```
 
 If you set the logging level to `DEBUG`, you will see all the internal PSEngine debug logging.
@@ -152,5 +152,5 @@ In this example, we have the same code, except for the logger definition, which 
 All of these parameters can be configured during `RFLogger` initialization.
 
 ```python
---8 < --'docs/examples/logger/example_2.py'
+--8<-- "docs/examples/logger/example_2.py"
 ```

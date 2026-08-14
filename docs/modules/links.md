@@ -21,7 +21,7 @@ For filters such as sections, events, and entity types, use the metadata methods
 In this example, we call `search` with a single entity ID. For each result, we first check `result.error`. If there is no error, we print the source entity and the first 5 linked entities returned by the API.
 
 ```python
---8 < --'docs/examples/links/example_1.py'
+--8<-- "docs/examples/links/example_1.py"
 ```
 
 The output will be:
@@ -41,7 +41,7 @@ Entity: Lazarus Group
 In this example, we pass filter and limit arguments directly to `search` (for example `sources`, `entity_types`, `timeframe`, `search_scope`, and `per_entity_type`) to narrow results to technical malware links seen in the last 90 days and cap result size per entity type.
 
 ```python
---8 < --'docs/examples/links/example_2.py'
+--8<-- "docs/examples/links/example_2.py"
 ```
 
 #### 3: Extract IOCs, Threat Actors and Malwares from links
@@ -54,7 +54,7 @@ Each item returned by `LinksMgr.search()` is an `EntityLinks` object. After chec
 - `result.threat_actors()`: returns linked organizations (`type:Organization`) that are marked as threat actors through the `threat_actor` attribute.
 
 ```python
---8 < --'docs/examples/links/example_3.py'
+--8<-- "docs/examples/links/example_3.py"
 ```
 
 This will output:
