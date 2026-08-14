@@ -15,7 +15,7 @@ In this example, we are listing all the projects we have available and search fo
 After finding the project ID, we are going to search for the all the exposures that have a severity of `critical`. Printing the list of exposures will automatically sort them by severity and number of assets impacted.
 
 ```python
---8<-- "docs/examples/asi/example_1.py"
+--8 < --'docs/examples/asi/example_1.py'
 ```
 
 The output is:
@@ -48,7 +48,7 @@ Name: CVE-2020-36155 - Ultimate Member <= 2.1.11 - Unauthenticated Privilege Esc
 In this example we have an asset `www.theology.bsu.by` of which we need to find all the open ports. We use the `fetch_asset` method using the `additional_fields` parameter to enrich the asset with `open_tcp_ports` and `open_udp_ports`. Then, we print the ports that has been found.
 
 ```python
---8<-- "docs/examples/asi/example_2.py"
+--8 < --'docs/examples/asi/example_2.py'
 ```
 
 The output is:
@@ -62,7 +62,7 @@ www.theology.bsu.by has open ports: 21, 25, 80, 110, 143, 443, 465, 587, 993, 15
 #### 3: Get all the assets that are exposed to WordPress CVE-2022-2551
 
 ```python
---8<-- "docs/examples/asi/example_3.py"
+--8 < --'docs/examples/asi/example_3.py'
 ```
 
 The output is:

@@ -27,7 +27,7 @@ pip install rich
 Once installed the example can be executed. 
 
 ```python
---8<-- "docs/examples/risk_history/example_1.py"
+--8 < --'docs/examples/risk_history/example_1.py'
 ```
 
 The output of the example will be similar to:

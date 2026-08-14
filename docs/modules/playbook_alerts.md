@@ -30,7 +30,7 @@ We then use the `save_pba_images` helper function to save the file as PNG. Once 
 To run this sample, change `alert_id` to an alert ID from your organization.
 
 ```python
---8<-- "docs/examples/playbook_alerts/example_1.py"
+--8 < --'docs/examples/playbook_alerts/example_1.py'
 ```
 
 #### 2: Find the latest high-priority third-party risk alerts and save them as markdown
@@ -40,7 +40,7 @@ In this example, we show two ways of using the `markdown` method of a playbook a
 We search for the newest alerts using the `fetch_bulk` method. The search is filtered by `category`, `priority`, `statuses`, and `created_from`. Once the alerts have been retrieved, we save each of them to a file as Markdown using the `markdown` method.
 
 ```python
---8<-- "docs/examples/playbook_alerts/example_2a.py"
+--8 < --'docs/examples/playbook_alerts/example_2a.py'
 ```
 
 In this example, we use a couple of other managers available in PSEngine to show how to get the most possible data out of a Third Party Risk alert. Using `LookupMgr` and `SoarMgr` is not strictly needed for `markdown` to work, but they can be used as an addition.
@@ -51,7 +51,7 @@ The company related to this alert can also be enriched with the `lookup` method;
 
 This enriched information is passed to the `markdown` method of the alert to create a more comprehensive file.
 ```python
---8<-- "docs/examples/playbook_alerts/example_2b.py"
+--8 < --'docs/examples/playbook_alerts/example_2b.py'
 ```
 
 As mentioned above, `extra_context` is not mandatory; you can remove it from the example and the Markdown will still be generated.

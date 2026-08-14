@@ -37,7 +37,7 @@ pip install rich
 ```
 
 ```python
---8<-- "docs/examples/identity/example_1.py"
+--8 < --'docs/examples/identity/example_1.py'
 ```
 
 After running the sample code, the output would look like this:
@@ -81,7 +81,7 @@ To view the clear text password you need to use the `get_secret_value` method of
 The clear text password can be seen only if your organization has been configured to see it.
 
 ```python
---8<-- "docs/examples/identity/example_2.py"
+--8 < --'docs/examples/identity/example_2.py'
 ```
 
 #### 3: Search for an exposed password without sending it
@@ -106,7 +106,7 @@ passwords = [
 The return value is always a list of `PasswordLookup`; we can safely index the first result to get the `exposure_status`.
 
 ```python
---8<-- "docs/examples/identity/example_3.py"
+--8 < --'docs/examples/identity/example_3.py'
 ```
 
 Running this example should print `Common`, meaning this password hash prefix is a commonly used password.

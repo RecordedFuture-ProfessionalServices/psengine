@@ -32,7 +32,7 @@ pip install rich
 After that, you can run it and see the markdown being written in the terminal and saved in the `attachments` directory.
 
 ```python
---8<-- "docs/examples/analyst_notes/example_2.py"
+--8 < --'docs/examples/analyst_notes/example_2.py'
 ```
 
 The `markdown` method accepts different arguments, such as `diamond_model`, to add the diamond model information to the markdown, if present. For more information, see the [**API Reference**](../api/analyst_notes/note.md).
@@ -44,7 +44,7 @@ The `fetch_attachment` method returns a tuple with the attachment content and ex
 To limit the number of calls made to the API, check if the attribute `attachment` is present; if yes, fetch the attachment.
 
 ```python
---8<-- "docs/examples/analyst_notes/example_1.py"
+--8 < --'docs/examples/analyst_notes/example_1.py'
 ```
 
 #### 3: Save analyst notes on Ransomware Actors and Tools published in the last year
@@ -54,5 +54,5 @@ In this example, we use the `search` method with the `topic` argument, which acc
 The `save_note` method can be used to save the note as JSON.
 
 ```python
---8<-- "docs/examples/analyst_notes/example_3.py"
+--8 < --'docs/examples/analyst_notes/example_3.py'
 ```

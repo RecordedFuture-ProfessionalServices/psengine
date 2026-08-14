@@ -58,7 +58,7 @@ Initialize the `Config` object with `init`, passing the path (absolute or relati
 Since you want to print the value of `my_value`, use the `get_config` method to return the `ConfigModel` instance.
 
 ```python
---8<-- "docs/examples/config/example_1.py"
+--8 < --'docs/examples/config/example_1.py'
 ```
 
 This will print `5`.
@@ -76,7 +76,7 @@ export RF_PLATFORM_ID=Splunk/10.0.0
 Then read the config:
 
 ```python
---8<-- "docs/examples/config/example_2.py"
+--8 < --'docs/examples/config/example_2.py'
 ```
 
 The sample code will print the values defined above.
@@ -86,7 +86,7 @@ The sample code will print the values defined above.
 You can initialize your config from the `init` method directly:
 
 ```python
---8<-- "docs/examples/config/example_3.py"
+--8 < --'docs/examples/config/example_3.py'
 ```
 
 This will print `5`.
@@ -109,7 +109,7 @@ To replicate this example, first create a `custom_config.toml` file with the fol
 Place this in the same directory as the example Python code. Once the file configuration is created, the sample code will create the custom config in the `IntegrationConfig` class. Then call the `init` method, passing the custom configuration model as `config_class` and the usual TOML path.
 
 ```python
---8<-- "docs/examples/config/example_4.py"
+--8 < --'docs/examples/config/example_4.py'
 ```
 
 Each property can be accessed using dot notation, for example, `config.complex_value.data`.
@@ -132,7 +132,7 @@ You can opt for a quick script using free variables around the code or use the c
 In this example, you hardcode the values that you need for fetching the alert and enriching the IOCs. This is perfectly fine; however, in larger applications, it might be challenging to maintain if the requirements change.
 
 ```python
---8<-- "docs/examples/config/example_5_1.py"
+--8 < --'docs/examples/config/example_5_1.py'
 ```
 
 An alternative is to save the requirements to a config file and use them instead of the hardcoded values.
@@ -148,7 +148,7 @@ With the `int_config.toml` file:
 The script can be rewritten as below.
 
 ```python
---8<-- "docs/examples/config/example_5_2.py"
+--8 < --'docs/examples/config/example_5_2.py'
 ```
 
 The code itself is longer; however, you gain maintainability since a person without development experience or inner understanding of the application can change the config to meet new requirements.
@@ -160,7 +160,7 @@ In this example, a proxy is configured for the `LookupMgr` to use when connectin
 As with previous examples, you first set up the `Config`, then initialize the manager. The `https_proxy` argument specifies the proxy URL, and the manager automatically uses this configuration during initialization.
 
 ```python
---8<-- "docs/examples/config/example_6.py"
+--8 < --'docs/examples/config/example_6.py'
 ```
 
 

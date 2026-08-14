@@ -28,7 +28,7 @@ To search for new alerts you can use the `search` method, with a `-1d` trigger t
 To build markdown for alerts you only need the `url` field in addition to the fields that are always requested. In the example below, only the minimum information will be retrieved and saved as markdown.
 
 ```python
---8<-- "docs/examples/classic_alerts/example_1.py"
+--8 < --'docs/examples/classic_alerts/example_1.py'
 ```
 
 
@@ -47,7 +47,7 @@ The alerts might have an image ID in their payload, which will be collected when
 `save_images` will save in `OUTPUT_DIR` a `.png` file for each image called `img:<image_id>.png`.
 
 ```python
---8<-- "docs/examples/classic_alerts/example_2.py"
+--8 < --'docs/examples/classic_alerts/example_2.py'
 ```
 
 #### 3: Fetch all the hits of an alert, and save the result as a JSON file
@@ -67,5 +67,5 @@ Note that for each `hit` object we use the `json` method. This method is availab
 Once the new `data` dictionary is populated we can save the content to a file after transforming it to a string with `json.dumps`.
 
 ```python
---8<-- "docs/examples/classic_alerts/example_3.py"
+--8 < --'docs/examples/classic_alerts/example_3.py'
 ```

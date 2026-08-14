@@ -17,7 +17,7 @@ Also note that before running any of the examples, you need to provide a Recorde
     ```python
     from psengine.enrich import LookupMgr
 
-    token = ... # steps to retrieve the token
+    token = ...  # steps to retrieve the token
     mgr = LookupMgr(rf_token=token)
     ```
 
