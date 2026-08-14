@@ -3,7 +3,7 @@ revision = 3
 requires-python = ">=3.10, <3.15"
 
 [options]
-exclude-newer = "2026-08-07T08:35:00.872249Z"
+exclude-newer = "2026-08-07T09:38:46.562643Z"
 exclude-newer-span = "P7D"
 
 [[package]]
@@ -813,7 +813,7 @@ wheels = [
 
 [[package]]
 name = "psengine"
-version = "2.10.2"
+version = "2.11.0"
 source = { editable = "." }
 dependencies = [
     { name = "idna" },
