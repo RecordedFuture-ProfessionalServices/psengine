@@ -11,7 +11,7 @@ exclude = [
     "venv",
     "tests/static",
     "tests/tools",
-    "psengine_cli/templates"
+    "*.md"
 ]
 
 line-length = 100 # Used by both linter and E501
@@ -74,7 +74,6 @@ fixable = ["ALL"]
 unfixable = []
 preview = true
 explicit-preview-rules = true
-extend-exclude = ["*.md"]
 
 [lint.mccabe]
 max-complexity = 10
