@@ -52,7 +52,7 @@ dev = [
     "pytest-mock==3.15.1",
     "pytest-md==0.2.0",
     "pytest-random-order==1.2.0",
-    "pytest-httpdbg==0.10.2",
+    "pytest-httpdbg==0.10.3",
     "ruff>=0.16.1,<0.17.0",
     "mimesis>=19.1.0",
     "freezegun>=1.5.5",
