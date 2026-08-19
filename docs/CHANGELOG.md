@@ -1,4 +1,10 @@
 # Changelog
+## v2.11.0 - 2026-08-20
+
+### Added
+
+- Added `RiskRuleMgr` to fetch risk rules for each IOC type.
+
 ## v2.10.1 - 2026-08-14
 
 ### Added

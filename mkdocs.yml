@@ -105,6 +105,7 @@ nav:
       - Malware Intelligence: modules/malware_intel.md
       - Playbook Alerts: modules/playbook_alerts.md
       - Risk History: modules/risk_history.md
+      - Risk Rules: modules/risk_rules.md
       - Risklists: modules/risklists.md
       - Sandbox: modules/sandbox.md
       - STIX2: modules/stix2.md
@@ -237,6 +238,12 @@ nav:
           - Manager: api/risk_history/risk_history_mgr.md
           - Models: api/risk_history/models.md
           - Errors: api/risk_history/errors.md
+      - Risk Rules:
+          - Manager: api/risk_rules/risk_rule_mgr.md
+          - ADT: api/risk_rules/risk_rule.md
+          - Models: api/risk_rules/models.md
+          - Constants: api/risk_rules/constants.md
+          - Errors: api/risk_rules/errors.md
       - Risklists:
           - Manager: api/risklists/risklist_mgr.md
           - Models: api/risklists/models.md

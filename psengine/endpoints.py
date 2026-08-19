@@ -142,6 +142,11 @@ EP_RISK_HISTORY_BASE = BASE_URL + '/risk'
 EP_RISK_HISTORY = EP_RISK_HISTORY_BASE + '/history'
 
 ###############################################################################
+# Risk Rules API Endpoints
+###############################################################################
+EP_RISK_RULES = CONNECT_API_BASE_URL + '/{}/riskrules'
+
+###############################################################################
 # Links API Endpoints
 ###############################################################################
 LINKS_BASE_URL = f'{BASE_URL}/links'
