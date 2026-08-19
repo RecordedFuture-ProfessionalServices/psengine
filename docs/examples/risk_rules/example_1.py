@@ -4,7 +4,11 @@ from psengine.risk_rules import (
 )
 
 mgr = RiskRuleMgr()
-rules = mgr.fetch(RiskRuleEntityType.IP)
+rules = mgr.fetch(RiskRuleEntityType.DOMAIN)
 
-for rule in rules:
+malicious = [r for r in rules if r.criticality >= 3]
+
+for rule in sorted(malicious, reverse=True):
     print(rule)
+    for category in rule.categories:
+        print(f'  - {category.framework}: {category.name}')
