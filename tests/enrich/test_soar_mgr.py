@@ -1,5 +1,6 @@
 import pytest
 from constants import COMPANY_DOM, DOMS, HASHS, IPS, MOCK_DIR, URLS
+from pydantic import ValidationError
 from requests import HTTPError
 
 from psengine.enrich import EnrichmentSoarError, SOAREnrichedEntity, SOAREnrichOut
@@ -90,3 +91,25 @@ class Test_SoarMgr:
     def test_soar_raise_ValueError(self, soar_mgr):
         with pytest.raises(ValueError, match='At least one parameter must be used'):
             soar_mgr.soar()
+
+    def test_soar_validation_error_logs_failing_entity(
+        self, soar_mgr, mocker, mock_request, caplog
+    ):
+        mock = mock_request(MOCK_DIR / 'Test_Soar.test_soar_validation_error_at_index_3.json')
+        mocker.patch.object(soar_mgr.rf_client, 'request', return_value=mock)
+
+        with (
+            caplog.at_level('WARNING', logger='psengine.enrich.soar_mgr'),
+            pytest.raises(
+                ValidationError,
+                match=r'.*validation failed at index 3 \(entity\.name\=10\.0\.0\.3\).*',
+            ),
+        ):
+            soar_mgr.soar(ip=[f'10.0.0.{i}' for i in range(10)])
+
+        warnings = [r for r in caplog.records if r.levelname == 'WARNING']
+        assert len(warnings) == 1
+        msg = warnings[0].getMessage()
+        assert 'index 3' in msg
+        assert 'entity.name=10.0.0.3' in msg
+        assert 'SOAREnrichedEntity' in msg

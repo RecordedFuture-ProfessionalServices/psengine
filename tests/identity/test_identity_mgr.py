@@ -10,6 +10,7 @@ from data_for_tests import (
     HOSTNAME_LOOKUP_FILTER,
     IP_LOOKUP_FILTER,
 )
+from pydantic import ValidationError
 from requests.models import HTTPError
 
 from psengine.identity import IdentityMgr
@@ -311,6 +312,66 @@ class Test_IdentityMgr:
     def test_search_dump_raises_IdentitySearchError(self, identity_mgr: IdentityMgr, mocker):
         mocker.patch.object(identity_mgr.rf_client, 'request', side_effect=HTTPError)
         with pytest.raises(IdentitySearchError):
+            identity_mgr.search_dump(names='moise')
+
+    def test_lookup_hostname_validation_error_names_entity(
+        self, identity_mgr: IdentityMgr, mocker, make_response
+    ):
+        good = {'identity': {'subjects': ['ok@example.com']}, 'count': 1, 'credentials': []}
+        bad = {'identity': {'subjects': ['broken@example.com']}, 'credentials': []}
+        mocker.patch.object(
+            identity_mgr.rf_client,
+            'request',
+            return_value=make_response(
+                {'identities': [good, bad], 'count': 2, 'next_offset': None}
+            ),
+        )
+        with pytest.raises(ValidationError, match=r'LeakedIdentity validation failed at index 1'):
+            identity_mgr.lookup_hostname(hostname='Test')
+
+    def test_lookup_password_validation_error_names_entity(
+        self, identity_mgr: IdentityMgr, mocker, make_response
+    ):
+        good = {
+            'password': {'algorithm': 'SHA256', 'hash_prefix': 'okpref'},
+            'exposure_status': 'Common',
+        }
+        bad = {'password': {'algorithm': 'SHA256', 'hash_prefix': 'brokenpref'}}
+        mocker.patch.object(
+            identity_mgr.rf_client, 'request', return_value=make_response({'results': [good, bad]})
+        )
+        with pytest.raises(ValidationError, match='password.hash_prefix=brokenpref'):
+            identity_mgr.lookup_password(hash_prefix='abc', algorithm='sha256')
+
+    def test_search_credentials_validation_error_names_entity(
+        self, identity_mgr: IdentityMgr, mocker, make_response
+    ):
+        good = {'login': 'ok-login', 'domain': 'example.com'}
+        bad = {'login': 'broken-login'}
+        mocker.patch.object(
+            identity_mgr.rf_client,
+            'request',
+            return_value=make_response(
+                {'identities': [good, bad], 'count': 2, 'next_offset': None}
+            ),
+        )
+        with pytest.raises(ValidationError, match='login=broken-login'):
+            identity_mgr.search_credentials(domains='example.com')
+
+    def test_search_dump_validation_error_names_entity(
+        self, identity_mgr: IdentityMgr, mocker, make_response
+    ):
+        good = {
+            'name': 'good-dump',
+            'source': 'src',
+            'description': 'd',
+            'downloaded': '2024-01-01T00:00:00Z',
+        }
+        bad = {'name': 'broken-dump'}
+        mocker.patch.object(
+            identity_mgr.rf_client, 'request', return_value=make_response({'dumps': [good, bad]})
+        )
+        with pytest.raises(ValidationError, match='name=broken-dump'):
             identity_mgr.search_dump(names='moise')
 
     def test_incident_report_with_details(self, identity_mgr: IdentityMgr, mocker, mock_request):

@@ -60,3 +60,7 @@ PSEngine has been made public from our internal version 2.0.4. Previous versions
 
 The documentation arrived at version 2.1.1. Older versions are not explicitly documented and changes can be found in the [Release History](./CHANGELOG.md) section.
 
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup, code standards, testing conventions, and the CI workflow.
+

@@ -147,6 +147,44 @@ class Test_List:
 
         assert untagged.tags == []
 
+    def test_entities_validation_error_names_entity(
+        self, fresh_list: EntityList, mocker, make_response
+    ):
+        good = {
+            'entity': {'id': 'ip:8.8.8.8', 'type': 'IpAddress', 'name': '8.8.8.8'},
+            'status': 'ready',
+            'added': '2026-07-21T15:11:18.069Z',
+        }
+        bad = {
+            'entity': {'id': 'ip:1.1.1.1', 'type': 'IpAddress', 'name': 'broken-ip'},
+            'status': 'ready',
+        }
+        mocker.patch.object(
+            fresh_list.rf_client, 'request', return_value=make_response([good, bad, good])
+        )
+        with pytest.raises(ValidationError, match='entity.name=broken-ip'):
+            fresh_list.entities()
+
+    def test_entities_with_tags_validation_error_names_entity(
+        self, fresh_list: EntityList, mocker, make_response
+    ):
+        good = {
+            'entity': {'id': 'ip:8.8.8.8', 'type': 'IpAddress', 'name': '8.8.8.8'},
+            'status': 'ready',
+            'added': '2026-07-21T15:11:18.069Z',
+            'tags': [],
+        }
+        bad = {
+            'entity': {'id': 'ip:1.1.1.1', 'type': 'IpAddress', 'name': 'broken-ip'},
+            'status': 'ready',
+            'tags': [],
+        }
+        mocker.patch.object(
+            fresh_list.rf_client, 'request', return_value=make_response([good, bad, good])
+        )
+        with pytest.raises(ValidationError, match='entity.name=broken-ip'):
+            fresh_list.entities_with_tags()
+
     def test_entities_with_tags_no_tags_key(self, fresh_list: EntityList, mocker, make_response):
         mock = make_response(
             [

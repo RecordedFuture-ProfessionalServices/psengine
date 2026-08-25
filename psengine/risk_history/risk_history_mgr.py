@@ -18,7 +18,7 @@ from pydantic import validate_call
 from typing_extensions import Doc
 
 from ..endpoints import EP_RISK_HISTORY
-from ..helpers import debug_call
+from ..helpers import debug_call, validate_list
 from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
 from .errors import RiskHistoryError
@@ -57,4 +57,4 @@ class RiskHistoryMgr:
         data = RiskHistoryIn.model_validate({'entities': entities, 'from': from_, 'to': to})
         attrs = self.rf_client.request('post', EP_RISK_HISTORY, data=data.json()).json()['data']
 
-        return [RiskHistory.model_validate(attr) for attr in attrs]
+        return validate_list(RiskHistory, attrs, id_path='entity.id', log=self.log)
