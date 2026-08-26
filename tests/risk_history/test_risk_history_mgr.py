@@ -4,10 +4,9 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from tests.conftest import validation_match
-
 from psengine.risk_history.models import RiskHistory
 from psengine.risk_history.risk_history_mgr import RiskHistoryMgr
+from tests.conftest import validation_match
 
 MOCK_DIR = Path(__file__).parent / 'mocks'
 
@@ -79,5 +78,7 @@ class Test_RiskHistoryMgr:
         mocker.patch.object(
             riskhistory_mgr.rf_client, 'request', return_value=make_response({'data': [good, bad]})
         )
-        with pytest.raises(ValidationError, match=validation_match('entity.id=broken-id', 'string_type')):
+        with pytest.raises(
+            ValidationError, match=validation_match('entity.id=broken-id', 'string_type')
+        ):
             riskhistory_mgr.search(entities='gVd1R')

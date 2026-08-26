@@ -3,11 +3,10 @@ from constants import COMPANY_DOM, DOMS, HASHS, IPS, MOCK_DIR, URLS
 from pydantic import ValidationError
 from requests import HTTPError
 
-from tests.conftest import validation_match
-
 from psengine.enrich import EnrichmentSoarError, SOAREnrichedEntity, SOAREnrichOut
 from psengine.enrich.constants import SOAR_POST_ROWS
 from psengine.enrich.soar_mgr import SoarMgr
+from tests.conftest import validation_match
 
 
 class Test_SoarMgr:

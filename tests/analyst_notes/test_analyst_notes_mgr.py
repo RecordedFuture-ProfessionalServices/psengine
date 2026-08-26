@@ -7,8 +7,6 @@ from pydantic import ValidationError
 from requests import ConnectionError, ConnectTimeout, HTTPError, ReadTimeout  # noqa: A004
 from requests.models import Response
 
-from tests.conftest import validation_match
-
 from psengine.analyst_notes import (
     AnalystNote,
     AnalystNoteAttachmentError,
@@ -28,6 +26,7 @@ from psengine.endpoints import (
 )
 from psengine.errors import WriteFileError
 from tests.analyst_notes.constants import MOCK_DIR
+from tests.conftest import validation_match
 
 # tQHD_j - existing note without attachment
 # tPtLVw - existing note with PDF attachment

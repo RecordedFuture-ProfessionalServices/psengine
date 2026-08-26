@@ -4,7 +4,6 @@ from requests import Response
 from requests.models import HTTPError
 
 from psengine.endpoints import EP_LIST_ENTITIES_WITH_TAGS, EP_LIST_ENTITY_TAGS
-from tests.conftest import validation_match
 from psengine.entity_lists import (
     EntityList,
     EntityListMgr,
@@ -19,6 +18,7 @@ from psengine.entity_lists import (
     TagsUpdatedOperation,
 )
 from psengine.entity_match.errors import MatchApiError
+from tests.conftest import validation_match
 from tests.entity_lists.conftest import MOCK_DIR
 
 TEST_LIST = 'psengine-test-list-do-not-delete'

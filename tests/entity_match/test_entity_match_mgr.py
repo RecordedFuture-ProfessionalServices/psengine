@@ -2,8 +2,6 @@ from collections import Counter
 
 import pytest
 from pydantic import ValidationError
-
-from tests.conftest import validation_match
 from requests import HTTPError
 
 from psengine.common_models import IdNameType
@@ -13,6 +11,7 @@ from psengine.entity_match import (
     ResolvedEntity,
 )
 from psengine.entity_match.entity_match import EntityLookup
+from tests.conftest import validation_match
 
 
 class Test_EntityMatchMgr:
@@ -54,7 +53,9 @@ class Test_EntityMatchMgr:
         good = {'id': 'ip:8.8.8.8', 'name': '8.8.8.8', 'type': 'IpAddress'}
         bad = {'id': 'ip:1.1.1.1', 'name': 'broken-ip', 'type': ['not', 'a', 'string']}
         mocker.patch.object(match_mgr.rf_client, 'request', return_value=make_response([good, bad]))
-        with pytest.raises(ValidationError, match=validation_match('name=broken-ip', 'string_type')):
+        with pytest.raises(
+            ValidationError, match=validation_match('name=broken-ip', 'string_type')
+        ):
             match_mgr.match('anything')
 
     def test_resolve_entity_ids(self, match_mgr: EntityMatchMgr, mocker, make_response):

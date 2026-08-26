@@ -13,8 +13,6 @@ from data_for_tests import (
 from pydantic import ValidationError
 from requests.models import HTTPError
 
-from tests.conftest import validation_match
-
 from psengine.identity import IdentityMgr
 from psengine.identity.errors import DetectionsFetchError, IdentityLookupError, IdentitySearchError
 from psengine.identity.identity import (
@@ -28,6 +26,7 @@ from psengine.identity.models.incident_report import (
     IncidentReportCredentials,
     IncidentReportDetails,
 )
+from tests.conftest import validation_match
 from tests.identity.conftest import MOCK_DIR
 
 
@@ -345,7 +344,9 @@ class Test_IdentityMgr:
         mocker.patch.object(
             identity_mgr.rf_client, 'request', return_value=make_response({'results': [good, bad]})
         )
-        with pytest.raises(ValidationError, match=validation_match('password.hash_prefix=brokenpref')):
+        with pytest.raises(
+            ValidationError, match=validation_match('password.hash_prefix=brokenpref')
+        ):
             identity_mgr.lookup_password(hash_prefix='abc', algorithm='sha256')
 
     def test_search_credentials_validation_error_names_entity(
