@@ -46,8 +46,10 @@ def validate_list(
     Uses pydantic's `TypeAdapter` so a single validation pass collects all per-item errors with an
     index in their `loc`.
 
-    Before re-raising, each failing item is (a) logged individually as a warning and (b) attached
-    to the exception via `add_note`, so the entity identifier shows up in the traceback too.
+    Before re-raising, each failing item is (a) logged individually as a warning and (b) on
+    Python 3.11+ attached to the exception via `add_note`, so the entity identifier shows up in
+    the traceback too. On Python 3.10 the note step is skipped since `BaseException.add_note`
+    is not available.
 
     If `id_path` is provided, a human-readable identifier is extracted from the raw dict
     (e.g. `entity.name`); otherwise only the index is reported.
@@ -63,7 +65,8 @@ def validate_list(
     except ValidationError as e:
         for msg in _format_failures(e, items, id_path, model_cls):
             (log or LOG).warning(msg)
-            e.add_note(msg)
+            if hasattr(e, 'add_note'):
+                e.add_note(msg)
         raise
 
 
