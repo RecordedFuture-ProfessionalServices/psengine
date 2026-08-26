@@ -14,6 +14,16 @@ ROOT_DIR = dirname(abspath(__file__))
 sys.path.append(ROOT_DIR)
 
 
+def validation_match(note_pattern: str, py310_fallback: str = 'Field required') -> str:
+    """Return the regex to match a `ValidationError` message across Python versions.
+
+    `psengine.helpers.validation.validate_list` attaches an entity-identifying note to the raised
+    `ValidationError` via `BaseException.add_note`, which only exists on 3.11+. On 3.10 the note
+    isn't attached, so tests fall back to matching a substring of the underlying pydantic message.
+    """
+    return note_pattern if sys.version_info >= (3, 11) else py310_fallback
+
+
 @pytest.fixture
 def mock_request(mocker):
     """return a requests.Response object from a json file."""

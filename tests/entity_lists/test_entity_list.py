@@ -4,6 +4,7 @@ from requests import Response
 from requests.models import HTTPError
 
 from psengine.endpoints import EP_LIST_ENTITIES_WITH_TAGS, EP_LIST_ENTITY_TAGS
+from tests.conftest import validation_match
 from psengine.entity_lists import (
     EntityList,
     EntityListMgr,
@@ -162,7 +163,7 @@ class Test_List:
         mocker.patch.object(
             fresh_list.rf_client, 'request', return_value=make_response([good, bad, good])
         )
-        with pytest.raises(ValidationError, match='entity.name=broken-ip'):
+        with pytest.raises(ValidationError, match=validation_match('entity.name=broken-ip')):
             fresh_list.entities()
 
     def test_entities_with_tags_validation_error_names_entity(
@@ -182,7 +183,7 @@ class Test_List:
         mocker.patch.object(
             fresh_list.rf_client, 'request', return_value=make_response([good, bad, good])
         )
-        with pytest.raises(ValidationError, match='entity.name=broken-ip'):
+        with pytest.raises(ValidationError, match=validation_match('entity.name=broken-ip')):
             fresh_list.entities_with_tags()
 
     def test_entities_with_tags_no_tags_key(self, fresh_list: EntityList, mocker, make_response):

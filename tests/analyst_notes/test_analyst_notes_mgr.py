@@ -7,6 +7,8 @@ from pydantic import ValidationError
 from requests import ConnectionError, ConnectTimeout, HTTPError, ReadTimeout  # noqa: A004
 from requests.models import Response
 
+from tests.conftest import validation_match
+
 from psengine.analyst_notes import (
     AnalystNote,
     AnalystNoteAttachmentError,
@@ -167,7 +169,7 @@ class Test_AnalystNotesMgr:
         del bad['source']
         payload = {'data': [good, bad], 'next_offset': None, 'counts': {'returned': 2}}
         mocker.patch.object(an_mgr.rf_client, 'request', return_value=make_response(payload))
-        with pytest.raises(ValidationError, match='id=broken-note-id'):
+        with pytest.raises(ValidationError, match=validation_match('id=broken-note-id')):
             an_mgr.search()
 
     def test_search_raises_SearchError_dueto_KeyError(self, an_mgr: AnalystNoteMgr, mocker):

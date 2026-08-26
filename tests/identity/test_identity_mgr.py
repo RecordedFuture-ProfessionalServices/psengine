@@ -13,6 +13,8 @@ from data_for_tests import (
 from pydantic import ValidationError
 from requests.models import HTTPError
 
+from tests.conftest import validation_match
+
 from psengine.identity import IdentityMgr
 from psengine.identity.errors import DetectionsFetchError, IdentityLookupError, IdentitySearchError
 from psengine.identity.identity import (
@@ -326,7 +328,10 @@ class Test_IdentityMgr:
                 {'identities': [good, bad], 'count': 2, 'next_offset': None}
             ),
         )
-        with pytest.raises(ValidationError, match=r'LeakedIdentity validation failed at index 1'):
+        with pytest.raises(
+            ValidationError,
+            match=validation_match(r'LeakedIdentity validation failed at index 1'),
+        ):
             identity_mgr.lookup_hostname(hostname='Test')
 
     def test_lookup_password_validation_error_names_entity(
@@ -340,7 +345,7 @@ class Test_IdentityMgr:
         mocker.patch.object(
             identity_mgr.rf_client, 'request', return_value=make_response({'results': [good, bad]})
         )
-        with pytest.raises(ValidationError, match='password.hash_prefix=brokenpref'):
+        with pytest.raises(ValidationError, match=validation_match('password.hash_prefix=brokenpref')):
             identity_mgr.lookup_password(hash_prefix='abc', algorithm='sha256')
 
     def test_search_credentials_validation_error_names_entity(
@@ -355,7 +360,7 @@ class Test_IdentityMgr:
                 {'identities': [good, bad], 'count': 2, 'next_offset': None}
             ),
         )
-        with pytest.raises(ValidationError, match='login=broken-login'):
+        with pytest.raises(ValidationError, match=validation_match('login=broken-login')):
             identity_mgr.search_credentials(domains='example.com')
 
     def test_search_dump_validation_error_names_entity(
@@ -371,7 +376,7 @@ class Test_IdentityMgr:
         mocker.patch.object(
             identity_mgr.rf_client, 'request', return_value=make_response({'dumps': [good, bad]})
         )
-        with pytest.raises(ValidationError, match='name=broken-dump'):
+        with pytest.raises(ValidationError, match=validation_match('name=broken-dump')):
             identity_mgr.search_dump(names='moise')
 
     def test_incident_report_with_details(self, identity_mgr: IdentityMgr, mocker, mock_request):

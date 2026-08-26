@@ -10,6 +10,7 @@ from psengine.threat_maps import (
     ThreatMapInfo,
     ThreatMapMgr,
 )
+from tests.conftest import validation_match
 from tests.threat_maps.conftest import MOCK_DIR
 
 
@@ -84,7 +85,7 @@ class Test_ThreatMapMgr:
         mocker.patch.object(
             threat_map_mgr.rf_client, 'request', return_value=make_response({'data': [good, bad]})
         )
-        with pytest.raises(ValidationError, match='name=brokenMap'):
+        with pytest.raises(ValidationError, match=validation_match('name=brokenMap')):
             threat_map_mgr.fetch_available_maps()
 
     def test_fetch_entity_categories_validation_error_names_entity(
@@ -98,7 +99,7 @@ class Test_ThreatMapMgr:
         mocker.patch.object(
             threat_map_mgr.rf_client, 'request', return_value=make_response({'data': [good, bad]})
         )
-        with pytest.raises(ValidationError, match='id=broken-cat-id'):
+        with pytest.raises(ValidationError, match=validation_match('id=broken-cat-id')):
             threat_map_mgr.fetch_entity_categories(map_type='actors')
 
     def test_search_threat_actor_validation_error_names_entity(
@@ -114,7 +115,7 @@ class Test_ThreatMapMgr:
             'request_paged',
             side_effect=lambda *args, **kwargs: iter([good, bad]),  # noqa: ARG005
         )
-        with pytest.raises(ValidationError, match='id=broken-actor-id'):
+        with pytest.raises(ValidationError, match=validation_match('id=broken-actor-id')):
             threat_map_mgr.search_threat_actor(name='actor')
 
     @pytest.mark.parametrize(

@@ -3,6 +3,8 @@ from constants import COMPANY_DOM, DOMS, HASHS, IPS, MOCK_DIR, URLS
 from pydantic import ValidationError
 from requests import HTTPError
 
+from tests.conftest import validation_match
+
 from psengine.enrich import EnrichmentSoarError, SOAREnrichedEntity, SOAREnrichOut
 from psengine.enrich.constants import SOAR_POST_ROWS
 from psengine.enrich.soar_mgr import SoarMgr
@@ -102,7 +104,9 @@ class Test_SoarMgr:
             caplog.at_level('WARNING', logger='psengine.enrich.soar_mgr'),
             pytest.raises(
                 ValidationError,
-                match=r'.*validation failed at index 3 \(entity\.name\=10\.0\.0\.3\).*',
+                match=validation_match(
+                    r'.*validation failed at index 3 \(entity\.name\=10\.0\.0\.3\).*',
+                ),
             ),
         ):
             soar_mgr.soar(ip=[f'10.0.0.{i}' for i in range(10)])
