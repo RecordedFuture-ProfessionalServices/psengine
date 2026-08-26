@@ -136,8 +136,14 @@ export -f run_once run_with_retry capture
 say "Scanning $EXAMPLES_DIR — jobs=$JOBS attempts=$MAX_ATTEMPTS retry_delay=${RETRY_DELAY}s"
 say "Per-attempt logs: $LOG_DIR"
 
-find "$EXAMPLES_DIR" -type f -name "*.py" -print0 \
+# malware_intel examples share Auto Sigma job quota per token — the backend
+# fails concurrent jobs straight to FAILED, so run them serially. Everything
+# else fans out to $JOBS workers as before.
+find "$EXAMPLES_DIR" -type f -name "*.py" -not -path "*/malware_intel/*" -print0 \
   | parallel -0 -j "$JOBS" capture {} || true
+
+find "$EXAMPLES_DIR/malware_intel" -type f -name "*.py" -print0 2>/dev/null \
+  | parallel -0 -j 1 capture {} || true
 
 if [[ -s "$FAIL_LIST_FILE" ]]; then
   sort -u "$FAIL_LIST_FILE" -o "$FAIL_LIST_FILE"
