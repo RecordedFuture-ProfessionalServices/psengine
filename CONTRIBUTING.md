@@ -1,11 +1,4 @@
-# Developing for PSEngine
-
-In the guide below there is often the mention of "us" that means:
-
-- Ernest Bartosevic
-- Moise Medici
-
-# Development Process
+# Development Process for PSEngine
 
 ## Pre Requirements
 
