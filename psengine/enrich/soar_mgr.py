@@ -159,6 +159,4 @@ class SoarMgr:
             'results'
         ]
         contents = validate_list(SOAREnrichedEntity, res, id_path='entity.name', log=self.log)
-        return [
-            SOAREnrichOut(entity=c.entity.name, is_enriched=True, content=c) for c in contents
-        ]
+        return [SOAREnrichOut(entity=c.entity.name, is_enriched=True, content=c) for c in contents]

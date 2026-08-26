@@ -51,9 +51,7 @@ class Test_EntityMatchMgr:
     ):
         good = {'id': 'ip:8.8.8.8', 'name': '8.8.8.8', 'type': 'IpAddress'}
         bad = {'id': 'ip:1.1.1.1', 'name': 'broken-ip', 'type': ['not', 'a', 'string']}
-        mocker.patch.object(
-            match_mgr.rf_client, 'request', return_value=make_response([good, bad])
-        )
+        mocker.patch.object(match_mgr.rf_client, 'request', return_value=make_response([good, bad]))
         with pytest.raises(ValidationError, match='name=broken-ip'):
             match_mgr.match('anything')
 
