@@ -29,7 +29,7 @@ from ..endpoints import (
     EP_IDENTITY_IP_LOOKUP,
     EP_IDENTITY_PASSWORD_LOOKUP,
 )
-from ..helpers import TimeHelpers, connection_exceptions, debug_call
+from ..helpers import TimeHelpers, connection_exceptions, debug_call, validate_list
 from ..rf_client import RFClient
 from .constants import DETECTIONS_PER_PAGE, MAXIMUM_IDENTITIES
 from .errors import (
@@ -252,7 +252,7 @@ class IdentityMgr:
             results_path='identities',
             max_results=max_results or DEFAULT_LIMIT,
         )
-        resp = [LeakedIdentity.model_validate(identity) for identity in resp]
+        resp = validate_list(LeakedIdentity, resp, log=self.log)
         self.log.info(f'Returned {len(resp)} identities')
         return resp
 
@@ -321,7 +321,7 @@ class IdentityMgr:
         resp = self.rf_client.request('post', url=EP_IDENTITY_PASSWORD_LOOKUP, data=data).json()[
             'results'
         ]
-        resp = [PasswordLookup.model_validate(v) for v in resp]
+        resp = validate_list(PasswordLookup, resp, id_path='password.hash_prefix', log=self.log)
         self.log.info(f'Returned {len(resp)} passwords')
         return resp
 
@@ -436,7 +436,7 @@ class IdentityMgr:
             max_results=max_results or DEFAULT_LIMIT,
             results_path='identities',
         )
-        resp = [LeakedIdentity.model_validate(identity) for identity in resp]
+        resp = validate_list(LeakedIdentity, resp, log=self.log)
         self.log.info(f'Returned {len(resp)} identities')
         return resp
 
@@ -561,7 +561,7 @@ class IdentityMgr:
             max_results=max_results or DEFAULT_LIMIT,
             results_path='identities',
         )
-        resp = [LeakedIdentity.model_validate(identity) for identity in resp]
+        resp = validate_list(LeakedIdentity, resp, log=self.log)
         self.log.info(f'Returned {len(resp)} identities')
         return resp
 
@@ -663,7 +663,7 @@ class IdentityMgr:
             max_results=max_results or DEFAULT_LIMIT,
             results_path='identities',
         )
-        resp = [CredentialSearch.model_validate(d) for d in resp]
+        resp = validate_list(CredentialSearch, resp, id_path='login', log=self.log)
         self.log.info(f'Returned {len(resp)} credentials')
         return resp
 
@@ -707,7 +707,7 @@ class IdentityMgr:
         resp = self.rf_client.request('post', url=EP_IDENTITY_DUMP_SEARCH, data=payload).json()[
             'dumps'
         ]
-        resp = [DumpSearchOut.model_validate(d) for d in resp]
+        resp = validate_list(DumpSearchOut, resp, id_path='name', log=self.log)
         self.log.info(f'Returned {len(resp)} dump results')
         return resp
 

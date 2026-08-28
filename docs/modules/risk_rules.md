@@ -19,7 +19,7 @@ In this example we are fetching the domain's risk rules and filtering them based
 The `RiskRule` model implements ordering by criticality (highest first), which makes it easy to focus on the most severe rules.
 
 ```python
---8<-- "docs/examples/risk_rules/example_2.py"
+--8<-- "docs/examples/risk_rules/example_1.py"
 ```
 
 The output will be:

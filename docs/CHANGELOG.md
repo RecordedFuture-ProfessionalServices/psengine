@@ -1,4 +1,10 @@
 # Changelog
+## v2.12.0 - 2026-08-28
+
+### Added
+
+- Improved error handling for bulk actions in Python 3.11+. Now they are reporting the index and entity that is failing.
+
 ## v2.11.0 - 2026-08-20
 
 ### Added

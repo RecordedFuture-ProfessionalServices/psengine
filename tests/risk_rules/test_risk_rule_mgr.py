@@ -7,6 +7,7 @@ from requests.models import Response
 
 from psengine.endpoints import EP_RISK_RULES
 from psengine.risk_rules import RiskRule, RiskRuleEntityType, RiskRuleFetchError, RiskRuleMgr
+from tests.conftest import validation_match
 from tests.risk_rules.constants import MOCK_DIR
 
 ENTITY_TYPES = ['ip', 'domain', 'hash', 'vulnerability', 'url']
@@ -52,6 +53,25 @@ class Test_RiskRuleMgr:
         excp_obj.response = response
         mocker.patch.object(rr_mgr.rf_client, 'request', side_effect=excp_obj)
         with pytest.raises(RiskRuleFetchError):
+            rr_mgr.fetch(RiskRuleEntityType.IP)
+
+    def test_fetch_risk_rule_validation_error_names_entity(
+        self, rr_mgr: RiskRuleMgr, make_response, mocker
+    ):
+        good = {
+            'name': 'goodRule',
+            'description': 'ok',
+            'criticality': 3,
+            'criticalityLabel': 'Malicious',
+            'count': 1,
+            'categories': [],
+            'relatedEntities': [],
+        }
+        bad = {**good, 'name': 'brokenRule'}
+        del bad['criticality']
+        payload = {'data': {'results': [good, bad, good]}}
+        mocker.patch.object(rr_mgr.rf_client, 'request', return_value=make_response(payload))
+        with pytest.raises(ValidationError, match=validation_match('name=brokenRule')):
             rr_mgr.fetch(RiskRuleEntityType.IP)
 
     def test_fetch_risk_rule_unwraps_data_results(self, rr_mgr: RiskRuleMgr, make_response, mocker):

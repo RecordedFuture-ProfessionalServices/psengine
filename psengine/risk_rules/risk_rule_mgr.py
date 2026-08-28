@@ -18,7 +18,7 @@ from pydantic import validate_call
 from typing_extensions import Doc
 
 from ..endpoints import EP_RISK_RULES
-from ..helpers import debug_call
+from ..helpers import debug_call, validate_list
 from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
 from .errors import RiskRuleFetchError
@@ -60,4 +60,4 @@ class RiskRuleMgr:
         self.log.info(f'Fetching risk rules for entity type: {entity_type.value}')
         response = self.rf_client.request('get', url).json()
         results = response['data']['results']
-        return [RiskRule.model_validate(r) for r in results]
+        return validate_list(RiskRule, results, id_path='name', log=self.log)

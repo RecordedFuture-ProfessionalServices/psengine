@@ -18,6 +18,7 @@ from psengine.entity_lists import (
     TagsUpdatedOperation,
 )
 from psengine.entity_match.errors import MatchApiError
+from tests.conftest import validation_match
 from tests.entity_lists.conftest import MOCK_DIR
 
 TEST_LIST = 'psengine-test-list-do-not-delete'
@@ -146,6 +147,44 @@ class Test_List:
         assert [tag.name for tag in with_context.tags] == ['most_critical_supplier']
 
         assert untagged.tags == []
+
+    def test_entities_validation_error_names_entity(
+        self, fresh_list: EntityList, mocker, make_response
+    ):
+        good = {
+            'entity': {'id': 'ip:8.8.8.8', 'type': 'IpAddress', 'name': '8.8.8.8'},
+            'status': 'ready',
+            'added': '2026-07-21T15:11:18.069Z',
+        }
+        bad = {
+            'entity': {'id': 'ip:1.1.1.1', 'type': 'IpAddress', 'name': 'broken-ip'},
+            'status': 'ready',
+        }
+        mocker.patch.object(
+            fresh_list.rf_client, 'request', return_value=make_response([good, bad, good])
+        )
+        with pytest.raises(ValidationError, match=validation_match('entity.name=broken-ip')):
+            fresh_list.entities()
+
+    def test_entities_with_tags_validation_error_names_entity(
+        self, fresh_list: EntityList, mocker, make_response
+    ):
+        good = {
+            'entity': {'id': 'ip:8.8.8.8', 'type': 'IpAddress', 'name': '8.8.8.8'},
+            'status': 'ready',
+            'added': '2026-07-21T15:11:18.069Z',
+            'tags': [],
+        }
+        bad = {
+            'entity': {'id': 'ip:1.1.1.1', 'type': 'IpAddress', 'name': 'broken-ip'},
+            'status': 'ready',
+            'tags': [],
+        }
+        mocker.patch.object(
+            fresh_list.rf_client, 'request', return_value=make_response([good, bad, good])
+        )
+        with pytest.raises(ValidationError, match=validation_match('entity.name=broken-ip')):
+            fresh_list.entities_with_tags()
 
     def test_entities_with_tags_no_tags_key(self, fresh_list: EntityList, mocker, make_response):
         mock = make_response(

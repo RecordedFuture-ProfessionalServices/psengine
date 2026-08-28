@@ -25,7 +25,7 @@ from ..endpoints import (
     EP_THREAT_MAP_ORG,
     EP_THREAT_MAPS_LIST,
 )
-from ..helpers import debug_call
+from ..helpers import debug_call, validate_list
 from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
 from .errors import (
@@ -73,7 +73,7 @@ class ThreatMapMgr:
             ThreatMapInfoError: If connection error occurs.
         """
         maps_response = self.rf_client.request(method='get', url=EP_THREAT_MAPS_LIST).json()['data']
-        return [ThreatMapInfo.model_validate(entry) for entry in maps_response]
+        return validate_list(ThreatMapInfo, maps_response, id_path='name', log=self.log)
 
     @debug_call
     @validate_call
@@ -94,7 +94,7 @@ class ThreatMapMgr:
         map_type = ThreatMapType(map_type)
         url = EP_CATEGORIES.format(map_type.category_slug)
         cat_response = self.rf_client.request(method='get', url=url).json()['data']
-        return [EntityCategory.model_validate(ent) for ent in cat_response]
+        return validate_list(EntityCategory, cat_response, id_path='id', log=self.log)
 
     @debug_call
     @validate_call
@@ -134,7 +134,7 @@ class ThreatMapMgr:
             offset_key='offset',
             max_results=max_results or DEFAULT_LIMIT,
         )
-        return [ThreatActorProfile.model_validate(ta) for ta in search_response]
+        return validate_list(ThreatActorProfile, search_response, id_path='id', log=self.log)
 
     @debug_call
     @validate_call
