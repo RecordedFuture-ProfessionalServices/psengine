@@ -11,15 +11,12 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from .helpers import (
-    FileHelpers,
-    FormattingHelpers,
-    MultiThreadingHelper,
-    OSHelpers,
-    TimeHelpers,
-    Validators,
-    connection_exceptions,
-    debug_call,
-    dump_models,
-)
-from .validation import validate_list
+from ..errors import RecordedFutureError
+
+
+class RiskRuleError(RecordedFutureError):
+    """Base error for the risk_rules module."""
+
+
+class RiskRuleFetchError(RecordedFutureError):
+    """Raised when the risk rules for an entity type cannot be fetched."""

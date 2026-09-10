@@ -43,6 +43,7 @@ It can easily interact with the following Recorded Future datasets:
 - On demand IOC enrichment
 - Risklists
 - Risk History
+- Risk Rules
 - Sandbox Detonation of files and URLs
 - STIX conversion
 

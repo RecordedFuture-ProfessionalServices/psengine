@@ -19,7 +19,7 @@ from pydantic import validate_call
 from typing_extensions import Doc
 
 from ..endpoints import EP_SOAR_ENRICHMENT
-from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
+from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call, validate_list
 from ..rf_client import RFClient
 from .constants import SOAR_POST_ROWS
 from .errors import EnrichmentSoarError
@@ -158,11 +158,5 @@ class SoarMgr:
         res = self.rf_client.request('post', EP_SOAR_ENRICHMENT, data=data.json()).json()['data'][
             'results'
         ]
-        result = []
-
-        for d in res:
-            content = SOAREnrichedEntity.model_validate(d)
-            entity = content.entity.name
-            result.append(SOAREnrichOut(entity=entity, is_enriched=True, content=content))
-
-        return result
+        contents = validate_list(SOAREnrichedEntity, res, id_path='entity.name', log=self.log)
+        return [SOAREnrichOut(entity=c.entity.name, is_enriched=True, content=c) for c in contents]

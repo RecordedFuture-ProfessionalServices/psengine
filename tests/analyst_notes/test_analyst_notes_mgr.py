@@ -26,6 +26,7 @@ from psengine.endpoints import (
 )
 from psengine.errors import WriteFileError
 from tests.analyst_notes.constants import MOCK_DIR
+from tests.conftest import validation_match
 
 # tQHD_j - existing note without attachment
 # tPtLVw - existing note with PDF attachment
@@ -156,6 +157,19 @@ class Test_AnalystNotesMgr:
         assert isinstance(output, list)
         assert all(isinstance(note, AnalystNote) for note in output)
         assert all(note.attributes.title for note in output)
+
+    def test_search_validation_error_names_entity(
+        self, an_mgr: AnalystNoteMgr, mocker, make_response
+    ):
+        with open(MOCK_DIR / 'test_search_ok_without_param_0.json') as f:
+            file_data = json.load(f)
+        good = file_data['data'][0]
+        bad = {**good, 'id': 'broken-note-id'}
+        del bad['source']
+        payload = {'data': [good, bad], 'next_offset': None, 'counts': {'returned': 2}}
+        mocker.patch.object(an_mgr.rf_client, 'request', return_value=make_response(payload))
+        with pytest.raises(ValidationError, match=validation_match('id=broken-note-id')):
+            an_mgr.search()
 
     def test_search_raises_SearchError_dueto_KeyError(self, an_mgr: AnalystNoteMgr, mocker):
         mocker.patch.object(

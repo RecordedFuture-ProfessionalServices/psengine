@@ -24,7 +24,7 @@ from ..common_models import IdNameType, RFBaseModel
 from ..constants import TIMESTAMP_STR
 from ..endpoints import EP_LIST, EP_LIST_ENTITIES_WITH_TAGS, EP_LIST_ENTITY_TAGS
 from ..entity_match import EntityMatchMgr, MatchApiError
-from ..helpers import debug_call
+from ..helpers import debug_call, validate_list
 from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
 from .constants import ADD_OP, ERROR_NAME, IS_READY_INCREMENT, REMOVE_OP, UNCHANGED_NAME
@@ -286,7 +286,7 @@ class EntityList(ListInfoOut):
         """
         url = EP_LIST + '/' + self.id_ + '/entities'
         response = self.rf_client.request('get', url)
-        return [ListEntity.model_validate(entity) for entity in response.json()]
+        return validate_list(ListEntity, response.json(), id_path='entity.name', log=self.log)
 
     @debug_call
     @connection_exceptions(ignore_status_code=[], exception_to_raise=ListApiError)
@@ -319,7 +319,9 @@ class EntityList(ListInfoOut):
         """
         url = EP_LIST_ENTITIES_WITH_TAGS.format(self.id_)
         response = self.rf_client.request('get', url)
-        return [ListEntityWithTags.model_validate(entity) for entity in response.json()]
+        return validate_list(
+            ListEntityWithTags, response.json(), id_path='entity.name', log=self.log
+        )
 
     @debug_call
     @validate_call

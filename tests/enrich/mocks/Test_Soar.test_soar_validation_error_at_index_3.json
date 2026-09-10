@@ -1,0 +1,449 @@
+{
+  "data": {
+    "results": [
+      {
+        "risk": {
+          "score": 0,
+          "level": 0.0,
+          "context": {
+            "phishing": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 3
+              }
+            },
+            "malware": {
+              "score": 0.0,
+              "rule": {
+                "maxCount": 3,
+                "count": 0
+              }
+            },
+            "public": {
+              "summary": [],
+              "score": 0.0,
+              "mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+              "rule": {
+                "maxCount": 51
+              }
+            },
+            "c2": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 2
+              }
+            }
+          },
+          "rule": {
+            "summary": [],
+            "mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "count": 0,
+            "maxCount": 52
+          }
+        },
+        "entity": {
+          "id": "ip:10.0.0.0",
+          "name": "10.0.0.0",
+          "type": "IpAddress"
+        }
+      },
+      {
+        "risk": {
+          "score": 0,
+          "level": 0.0,
+          "context": {
+            "phishing": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 3
+              }
+            },
+            "malware": {
+              "score": 0.0,
+              "rule": {
+                "maxCount": 3,
+                "count": 0
+              }
+            },
+            "public": {
+              "summary": [],
+              "score": 0.0,
+              "mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+              "rule": {
+                "maxCount": 51
+              }
+            },
+            "c2": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 2
+              }
+            }
+          },
+          "rule": {
+            "summary": [],
+            "mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "count": 0,
+            "maxCount": 52
+          }
+        },
+        "entity": {
+          "id": "ip:10.0.0.1",
+          "name": "10.0.0.1",
+          "type": "IpAddress"
+        }
+      },
+      {
+        "risk": {
+          "score": 0,
+          "level": 0.0,
+          "context": {
+            "phishing": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 3
+              }
+            },
+            "malware": {
+              "score": 0.0,
+              "rule": {
+                "maxCount": 3,
+                "count": 0
+              }
+            },
+            "public": {
+              "summary": [],
+              "score": 0.0,
+              "mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+              "rule": {
+                "maxCount": 51
+              }
+            },
+            "c2": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 2
+              }
+            }
+          },
+          "rule": {
+            "summary": [],
+            "mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "count": 0,
+            "maxCount": 52
+          }
+        },
+        "entity": {
+          "id": "ip:10.0.0.2",
+          "name": "10.0.0.2",
+          "type": "IpAddress"
+        }
+      },
+      {
+        "entity": {
+          "id": "ip:10.0.0.3",
+          "name": "10.0.0.3",
+          "type": "IpAddress"
+        }
+      },
+      {
+        "risk": {
+          "score": 0,
+          "level": 0.0,
+          "context": {
+            "phishing": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 3
+              }
+            },
+            "malware": {
+              "score": 0.0,
+              "rule": {
+                "maxCount": 3,
+                "count": 0
+              }
+            },
+            "public": {
+              "summary": [],
+              "score": 0.0,
+              "mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+              "rule": {
+                "maxCount": 51
+              }
+            },
+            "c2": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 2
+              }
+            }
+          },
+          "rule": {
+            "summary": [],
+            "mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "count": 0,
+            "maxCount": 52
+          }
+        },
+        "entity": {
+          "id": "ip:10.0.0.4",
+          "name": "10.0.0.4",
+          "type": "IpAddress"
+        }
+      },
+      {
+        "risk": {
+          "score": 0,
+          "level": 0.0,
+          "context": {
+            "phishing": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 3
+              }
+            },
+            "malware": {
+              "score": 0.0,
+              "rule": {
+                "maxCount": 3,
+                "count": 0
+              }
+            },
+            "public": {
+              "summary": [],
+              "score": 0.0,
+              "mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+              "rule": {
+                "maxCount": 51
+              }
+            },
+            "c2": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 2
+              }
+            }
+          },
+          "rule": {
+            "summary": [],
+            "mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "count": 0,
+            "maxCount": 52
+          }
+        },
+        "entity": {
+          "id": "ip:10.0.0.5",
+          "name": "10.0.0.5",
+          "type": "IpAddress"
+        }
+      },
+      {
+        "risk": {
+          "score": 0,
+          "level": 0.0,
+          "context": {
+            "phishing": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 3
+              }
+            },
+            "malware": {
+              "score": 0.0,
+              "rule": {
+                "maxCount": 3,
+                "count": 0
+              }
+            },
+            "public": {
+              "summary": [],
+              "score": 0.0,
+              "mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+              "rule": {
+                "maxCount": 51
+              }
+            },
+            "c2": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 2
+              }
+            }
+          },
+          "rule": {
+            "summary": [],
+            "mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "count": 0,
+            "maxCount": 52
+          }
+        },
+        "entity": {
+          "id": "ip:10.0.0.6",
+          "name": "10.0.0.6",
+          "type": "IpAddress"
+        }
+      },
+      {
+        "risk": {
+          "score": 0,
+          "level": 0.0,
+          "context": {
+            "phishing": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 3
+              }
+            },
+            "malware": {
+              "score": 0.0,
+              "rule": {
+                "maxCount": 3,
+                "count": 0
+              }
+            },
+            "public": {
+              "summary": [],
+              "score": 0.0,
+              "mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+              "rule": {
+                "maxCount": 51
+              }
+            },
+            "c2": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 2
+              }
+            }
+          },
+          "rule": {
+            "summary": [],
+            "mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "count": 0,
+            "maxCount": 52
+          }
+        },
+        "entity": {
+          "id": "ip:10.0.0.7",
+          "name": "10.0.0.7",
+          "type": "IpAddress"
+        }
+      },
+      {
+        "risk": {
+          "score": 0,
+          "level": 0.0,
+          "context": {
+            "phishing": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 3
+              }
+            },
+            "malware": {
+              "score": 0.0,
+              "rule": {
+                "maxCount": 3,
+                "count": 0
+              }
+            },
+            "public": {
+              "summary": [],
+              "score": 0.0,
+              "mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+              "rule": {
+                "maxCount": 51
+              }
+            },
+            "c2": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 2
+              }
+            }
+          },
+          "rule": {
+            "summary": [],
+            "mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "count": 0,
+            "maxCount": 52
+          }
+        },
+        "entity": {
+          "id": "ip:10.0.0.8",
+          "name": "10.0.0.8",
+          "type": "IpAddress"
+        }
+      },
+      {
+        "risk": {
+          "score": 0,
+          "level": 0.0,
+          "context": {
+            "phishing": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 3
+              }
+            },
+            "malware": {
+              "score": 0.0,
+              "rule": {
+                "maxCount": 3,
+                "count": 0
+              }
+            },
+            "public": {
+              "summary": [],
+              "score": 0.0,
+              "mostCriticalRule": "He looked inquisitively at his keyboard and wrote another sentence.",
+              "rule": {
+                "maxCount": 51
+              }
+            },
+            "c2": {
+              "score": 0.0,
+              "rule": {
+                "count": 0,
+                "maxCount": 2
+              }
+            }
+          },
+          "rule": {
+            "summary": [],
+            "mostCritical": "In 1989 the building was heavily damaged by fire, but it has since been restored.",
+            "count": 0,
+            "maxCount": 52
+          }
+        },
+        "entity": {
+          "id": "ip:10.0.0.9",
+          "name": "10.0.0.9",
+          "type": "IpAddress"
+        }
+      }
+    ]
+  },
+  "counts": {
+    "total": 10,
+    "returned": 10
+  }
+}

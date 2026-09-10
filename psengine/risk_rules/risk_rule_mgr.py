@@ -17,44 +17,47 @@ from typing import Annotated
 from pydantic import validate_call
 from typing_extensions import Doc
 
-from ..endpoints import EP_RISK_HISTORY
+from ..endpoints import EP_RISK_RULES
 from ..helpers import debug_call, validate_list
 from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
-from .errors import RiskHistoryError
-from .models import RiskHistory, RiskHistoryIn
+from .errors import RiskRuleFetchError
+from .models import RiskRuleEntityType
+from .risk_rule import RiskRule
 
 
-class RiskHistoryMgr:
-    """Manages requests for Recorded Future Risk History information."""
+class RiskRuleMgr:
+    """Manages requests for Recorded Future risk rules."""
 
     def __init__(
         self,
         rf_token: Annotated[str | None, Doc('Recorded Future API token.')] = None,
     ):
-        """Initializes the `RiskHistoryMgr` object."""
+        """Initializes the `RiskRuleMgr` object."""
         self.log = logging.getLogger(__name__)
         self.rf_client = RFClient(api_token=rf_token) if rf_token else RFClient()
 
     @debug_call
     @validate_call
-    @connection_exceptions(ignore_status_code=[], exception_to_raise=RiskHistoryError)
-    def search(
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=RiskRuleFetchError)
+    def fetch(
         self,
-        entities: Annotated[str | list[str], Doc('Entities to search.')],
-        from_: Annotated[str | None, Doc('ISO8691 date or relative date like -1d')] = None,
-        to: Annotated[str | None, Doc('ISO8691 date or relative date like -1d')] = None,
-    ) -> Annotated[list[RiskHistory], Doc('A list of history information.')]:
-        """Search for the risk history of one or more entities.
+        entity_type: Annotated[
+            RiskRuleEntityType,
+            Doc('The IOC type to fetch risk rules for: ip, domain, hash, vulnerability, or url.'),
+        ],
+    ) -> Annotated[list[RiskRule], Doc('The list of risk rules for the given IOC type.')]:
+        """Fetch every risk rule defined for the given IOC type.
 
         Endpoint:
-            `/risk/history`
+            `/v2/{entity_type}/riskrules`
 
         Raises:
-            ValidationError: If any supplied parameter is of incorrect type.
-            RIskHistoryError: If API error occurs.
+            ValidationError: If `entity_type` is not one of the supported IOC types.
+            RiskRuleFetchError: If an API error occurs while fetching risk rules.
         """
-        data = RiskHistoryIn.model_validate({'entities': entities, 'from': from_, 'to': to})
-        attrs = self.rf_client.request('post', EP_RISK_HISTORY, data=data.json()).json()['data']
-
-        return validate_list(RiskHistory, attrs, id_path='entity.id', log=self.log)
+        url = EP_RISK_RULES.format(entity_type.value)
+        self.log.info(f'Fetching risk rules for entity type: {entity_type.value}')
+        response = self.rf_client.request('get', url).json()
+        results = response['data']['results']
+        return validate_list(RiskRule, results, id_path='name', log=self.log)

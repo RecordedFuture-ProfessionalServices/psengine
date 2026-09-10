@@ -11,6 +11,7 @@ from psengine.entity_match import (
     ResolvedEntity,
 )
 from psengine.entity_match.entity_match import EntityLookup
+from tests.conftest import validation_match
 
 
 class Test_EntityMatchMgr:
@@ -45,6 +46,17 @@ class Test_EntityMatchMgr:
         mocker.patch.object(match_mgr.rf_client, 'request', side_effect=HTTPError)
         with pytest.raises(MatchApiError):
             match_mgr.match('8.8.8.8')
+
+    def test_match_validation_error_names_entity(
+        self, match_mgr: EntityMatchMgr, mocker, make_response
+    ):
+        good = {'id': 'ip:8.8.8.8', 'name': '8.8.8.8', 'type': 'IpAddress'}
+        bad = {'id': 'ip:1.1.1.1', 'name': 'broken-ip', 'type': ['not', 'a', 'string']}
+        mocker.patch.object(match_mgr.rf_client, 'request', return_value=make_response([good, bad]))
+        with pytest.raises(
+            ValidationError, match=validation_match('name=broken-ip', 'string_type')
+        ):
+            match_mgr.match('anything')
 
     def test_resolve_entity_ids(self, match_mgr: EntityMatchMgr, mocker, make_response):
         entitylist = [

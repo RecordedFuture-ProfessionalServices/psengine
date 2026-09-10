@@ -1,10 +1,23 @@
 # Changelog
 
-## v2.11.0 - 2026-08-18
+## v2.13.0 - 2026-09-10
 
 ### Added
 
 - `CollectiveInsights` now supports the `search` endpoint via the `search` method.
+
+## v2.12.0 - 2026-08-28
+
+### Added
+
+- Improved error handling for bulk actions in Python 3.11+. Now they are reporting the index and entity that is failing.
+
+## v2.11.0 - 2026-08-20
+
+### Added
+
+- Added `RiskRuleMgr` to fetch risk rules for each IOC type.
+
 
 ## v2.10.1 - 2026-08-14
 

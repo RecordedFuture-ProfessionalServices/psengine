@@ -21,7 +21,7 @@ from typing_extensions import Doc
 from ..common_models import IdNameType
 from ..constants import DEFAULT_LIMIT, DEFAULT_MAX_WORKERS
 from ..endpoints import EP_ENTITY_LOOKUP, EP_ENTITY_MATCH
-from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call
+from ..helpers import MultiThreadingHelper, connection_exceptions, debug_call, validate_list
 from ..rf_client import RFClient
 from .entity_match import EntityLookup, EntityMatchIn, ResolvedEntity
 from .errors import MatchApiError
@@ -63,7 +63,7 @@ class EntityMatchMgr:
 
         request_body = EntityMatchIn(name=entity_name, type=entity_type, limit=limit)
         response = self.rf_client.request('post', EP_ENTITY_MATCH, data=request_body.json())
-        response = [IdNameType.model_validate(d) for d in response.json()]
+        response = validate_list(IdNameType, response.json(), id_path='name', log=self.log)
         return (
             list({ResolvedEntity(entity=d.name, is_found=bool(d.id_), content=d) for d in response})
             if response

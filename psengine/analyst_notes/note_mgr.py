@@ -28,7 +28,7 @@ from ..endpoints import (
     EP_ANALYST_NOTE_PUBLISH,
     EP_ANALYST_NOTE_SEARCH,
 )
-from ..helpers import debug_call
+from ..helpers import debug_call, validate_list
 from ..helpers.helpers import connection_exceptions
 from ..rf_client import RFClient
 from .constants import NOTES_PER_PAGE
@@ -358,4 +358,4 @@ class AnalystNoteMgr:
             max_results=max_results,
         )
 
-        return [AnalystNote.model_validate(d) for d in response]
+        return validate_list(AnalystNote, response, id_path='id', log=self.log)

@@ -1,6 +1,7 @@
 import json
 
 import pytest
+from pydantic import ValidationError
 
 from psengine.threat_maps import (
     EntityCategory,
@@ -9,6 +10,7 @@ from psengine.threat_maps import (
     ThreatMapInfo,
     ThreatMapMgr,
 )
+from tests.conftest import validation_match
 from tests.threat_maps.conftest import MOCK_DIR
 
 
@@ -68,6 +70,53 @@ class Test_ThreatMapMgr:
         actors = threat_map_mgr.search_threat_actor(name=name, max_results=max_results)
         actor = actors[0]
         assert isinstance(actor, ThreatActorProfile)
+
+    def test_fetch_available_maps_validation_error_names_entity(
+        self, threat_map_mgr: ThreatMapMgr, mocker, make_response
+    ):
+        good = {
+            'name': 'goodMap',
+            'type': 'actors',
+            'organization': {'id': 'org:1', 'name': 'RF'},
+            'url': 'https://x',
+        }
+        bad = {**good, 'name': 'brokenMap'}
+        del bad['organization']
+        mocker.patch.object(
+            threat_map_mgr.rf_client, 'request', return_value=make_response({'data': [good, bad]})
+        )
+        with pytest.raises(ValidationError, match=validation_match('name=brokenMap')):
+            threat_map_mgr.fetch_available_maps()
+
+    def test_fetch_entity_categories_validation_error_names_entity(
+        self, threat_map_mgr: ThreatMapMgr, mocker, make_response
+    ):
+        with open(MOCK_DIR / 'test_fetch_categories.json') as f:
+            file_data = json.load(f)
+        good = file_data['data'][0]
+        bad = {**good, 'id': 'broken-cat-id'}
+        del bad['attributes']
+        mocker.patch.object(
+            threat_map_mgr.rf_client, 'request', return_value=make_response({'data': [good, bad]})
+        )
+        with pytest.raises(ValidationError, match=validation_match('id=broken-cat-id')):
+            threat_map_mgr.fetch_entity_categories(map_type='actors')
+
+    def test_search_threat_actor_validation_error_names_entity(
+        self, threat_map_mgr: ThreatMapMgr, mocker
+    ):
+        with open(MOCK_DIR / 'test_search_threat_actors.json') as f:
+            file_data = json.load(f)
+        good = file_data['data'][0]
+        bad = {**good, 'id': 'broken-actor-id'}
+        del bad['attributes']
+        mocker.patch.object(
+            threat_map_mgr.rf_client,
+            'request_paged',
+            side_effect=lambda *args, **kwargs: iter([good, bad]),  # noqa: ARG005
+        )
+        with pytest.raises(ValidationError, match=validation_match('id=broken-actor-id')):
+            threat_map_mgr.search_threat_actor(name='actor')
 
     @pytest.mark.parametrize(
         'map_type',

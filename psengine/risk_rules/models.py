@@ -11,15 +11,23 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from .helpers import (
-    FileHelpers,
-    FormattingHelpers,
-    MultiThreadingHelper,
-    OSHelpers,
-    TimeHelpers,
-    Validators,
-    connection_exceptions,
-    debug_call,
-    dump_models,
-)
-from .validation import validate_list
+from enum import Enum
+
+from ..common_models import RFBaseModel
+
+
+class RiskRuleEntityType(str, Enum):
+    """Enum of IOC entity types supported by the `/v2/{entity_type}/riskrules` endpoint."""
+
+    IP = 'ip'
+    DOMAIN = 'domain'
+    HASH = 'hash'
+    VULNERABILITY = 'vulnerability'
+    URL = 'url'
+
+
+class RiskRuleCategory(RFBaseModel):
+    """A framework category attached to a risk rule (e.g. MITRE tactic or technique)."""
+
+    name: str
+    framework: str
