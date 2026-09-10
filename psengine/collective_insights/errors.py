@@ -16,3 +16,7 @@ from ..errors import RecordedFutureError
 
 class CollectiveInsightsError(RecordedFutureError):
     """Error raised when there was an error with the Collective Insights API."""
+
+
+class CollectiveInsightsSearchError(RecordedFutureError):
+    """Error raised when there was an error searching the Collective Insights API."""

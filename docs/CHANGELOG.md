@@ -1,4 +1,15 @@
 # Changelog
+
+## v2.13.0 - 2026-09-10
+
+### Added
+
+- `CollectiveInsights` now supports the `search` endpoint via the `search` method.
+
+### Fixed
+
+- `DetectionMgr` now supports nuclei rules.
+
 ## v2.12.0 - 2026-08-28
 
 ### Added
@@ -11,9 +22,10 @@
 
 - Added `RiskRuleMgr` to fetch risk rules for each IOC type.
 
+
 ## v2.10.1 - 2026-08-14
 
-### Added
+### Fixed
 
 - `DetectionMgr` now supports suricata rules.
 

@@ -38,3 +38,23 @@ The `create` method returns an `Insight` object, which can be passed to the `sub
 To see results from the API without actually submitting anything to the Recorded Future platform, use `debug=True` in your call to `submit`.
 
 The `submit` method takes a single `Insight` or a list of `Insight` objects.
+
+### 2: Search previously submitted enriched events
+
+The `search` method queries events already processed in Collective Insights analysis and enriched with associated threat entities (threat actors, malware, MITRE codes). Every filter is optional; supplying a bare value (like `indicator_type='ip'`) is coerced to a list, and the sentinel strings `'present'`/`'absent'` filter for events where a given field is set or unset.
+
+In the example below, we look for IP-typed events submitted via the `api` or `integration` methods over the last 7 days that have at least one associated malware entity, and print the resulting `SearchEntry` objects sorted from newest to oldest.
+
+```python
+--8<-- "docs/examples/collective_insights/example_2.py"
+```
+
+This example will print something like:
+
+```
+Event ID: 16046941d44a85e4748a9e9c, IOC: 1.2.3.4, Detection Time: 2026-08-11 09:14:02, Detection Type: sandbox
+Event ID: 16046941d44a85e4748a9e9b, IOC: 5.6.7.8, Detection Time: 2026-08-09 22:41:18, Detection Type: correlation
+Event ID: 16046941d44a85e4748a9e9a, IOC: 9.10.11.12, Detection Time: 2026-08-06 15:05:23, Detection Type: detection_rule
+```
+
+Each `SearchEntry` also exposes the enriched fields (`associated_threats`, `autonomous_threat_operations`, `indicator.risk`, etc.); see the [**API Reference**](../api/collective_insights/models.md) for the full schema.

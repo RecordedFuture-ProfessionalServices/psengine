@@ -13,17 +13,20 @@
 
 import json
 import logging
-from typing import Annotated
+from datetime import datetime
+from typing import Annotated, Literal
 
-from pydantic import validate_call
+from pydantic import Field, validate_call
 from typing_extensions import Doc
 
-from ..endpoints import EP_COLLECTIVE_INSIGHTS_DETECTIONS
+from ..constants import DEFAULT_LIMIT
+from ..endpoints import EP_COLLECTIVE_INSIGHTS_DETECTIONS, EP_COLLECTIVE_INSIGHTS_SEARCH
 from ..helpers import connection_exceptions, debug_call
 from ..rf_client import RFClient
-from .constants import SUMMARY_DEFAULT
-from .errors import CollectiveInsightsError
-from .insight import Insight, InsightsIn, InsightsOut
+from .constants import SEARCH_MAX_LIMIT, SEARCH_PAGE_SIZE, SUMMARY_DEFAULT
+from .errors import CollectiveInsightsError, CollectiveInsightsSearchError
+from .insight import Insight, InsightsIn, InsightsOut, SearchIn
+from .models import Presence, SearchEntry
 
 
 class CollectiveInsights:
@@ -133,6 +136,131 @@ class CollectiveInsights:
         )
 
         return InsightsIn.model_validate(response.json())
+
+    @validate_call
+    @debug_call
+    @connection_exceptions(ignore_status_code=[], exception_to_raise=CollectiveInsightsSearchError)
+    def search(
+        self,
+        indicator_type: Annotated[
+            list[str] | str | Presence | None,
+            Doc('IOC type filter (`ip`, `domain`, `hash`, `url`, `vulnerability`).'),
+        ] = None,
+        detection_type: Annotated[
+            list[str] | str | Presence | None,
+            Doc(
+                'Detection method filter (`correlation`, `playbook`, `detection_rule`, '
+                '`sandbox`, `threat_hunt`, `vulnerability_scan`).',
+            ),
+        ] = None,
+        submission_method: Annotated[
+            list[str] | str | Presence | None,
+            Doc('Submission method filter (`api`, `integration`, `sandbox`).'),
+        ] = None,
+        organizations: Annotated[
+            list[str] | str | None, Doc('Filter by organization IDs (uhash).')
+        ] = None,
+        detection_rule_id: Annotated[
+            list[str] | str | Presence | None, Doc('Filter by associated detection rule IDs.')
+        ] = None,
+        detection_time_from: Annotated[
+            str | datetime | None, Doc('Start of the detection time range (inclusive).')
+        ] = None,
+        detection_time_to: Annotated[
+            str | datetime | None, Doc('End of the detection time range (inclusive).')
+        ] = None,
+        malware_id: Annotated[
+            list[str] | str | Presence | None,
+            Doc('Filter by associated malware entity IDs.'),
+        ] = None,
+        mitre_code_id: Annotated[
+            list[str] | str | Presence | None,
+            Doc('Filter by associated MITRE ATT&CK IDs (prefixed with `mitre:`).'),
+        ] = None,
+        threat_actor_id: Annotated[
+            list[str] | str | Presence | None,
+            Doc('Filter by associated threat actor entity IDs.'),
+        ] = None,
+        atop_use_case: Annotated[
+            list[str] | str | Presence | None,
+            Doc(
+                'Filter by Autonomous Threat Operations use case '
+                '(`hunting`, `detection`, `prevention`).',
+            ),
+        ] = None,
+        atop_profile_id: Annotated[
+            list[str] | str | Presence | None,
+            Doc('Filter by Autonomous Threat Operations profile ID.'),
+        ] = None,
+        atop_job_id: Annotated[
+            list[str] | str | Presence | None,
+            Doc('Filter by Autonomous Threat Operations job ID.'),
+        ] = None,
+        integration_type_id: Annotated[
+            list[str] | str | Presence | None, Doc('Filter by integration type entity IDs.')
+        ] = None,
+        indicator_risk_score: Annotated[
+            dict | Literal['present', 'absent'] | None,
+            Doc(
+                'Filter by indicator risk score at detection time. Pass `present`/`absent` '
+                'or a range dict such as `{"gte": 50, "lt": 90}`.',
+            ),
+        ] = None,
+        max_results: Annotated[int, Doc('Maximum number of events to return.')] = Field(
+            ge=1, default=DEFAULT_LIMIT
+        ),
+        page_size: Annotated[int, Doc('Number of events per page (max 1000).')] = Field(
+            ge=1, le=SEARCH_MAX_LIMIT, default=SEARCH_PAGE_SIZE
+        ),
+    ) -> Annotated[
+        list[SearchEntry],
+        Doc('Enriched events matching the search criteria.'),
+    ]:
+        """Search enriched Collective Insights events.
+
+        Endpoint:
+            `collective-insights/search`
+
+        Raises:
+            CollectiveInsightsSearchError: If connection error occurs.
+            ValidationError: If any supplied parameter is of incorrect type.
+        """
+        data = {
+            'filters': {
+                'organizations': organizations,
+                'indicator_type': indicator_type,
+                'detection_rule': detection_rule_id,
+                'detection_type': detection_type,
+                'submission_method': submission_method,
+                'detection_time': {'from': detection_time_from, 'to': detection_time_to},
+                'associated_threats': {
+                    'malware': malware_id,
+                    'mitre_code': mitre_code_id,
+                    'threat_actor': threat_actor_id,
+                },
+                'autonomous_threat_operations': {
+                    'use_case': atop_use_case,
+                    'profile': atop_profile_id,
+                    'job': atop_job_id,
+                },
+                'integration_type': integration_type_id,
+                'indicator': {'risk': {'score': {'at_detection': indicator_risk_score}}},
+            },
+            'limit': min(page_size, max_results),
+        }
+        search_data = SearchIn.model_validate(data)
+        self.log.info(f'Searching Collective Insights events with query: {search_data.json()}')
+
+        results = self.rf_client.request_paged(
+            method='post',
+            url=EP_COLLECTIVE_INSIGHTS_SEARCH,
+            data=search_data.json(),
+            results_path='data',
+            offset_key='offset',
+            max_results=max_results,
+        )
+
+        return [SearchEntry.model_validate(r) for r in results]
 
     def _prepare_ci_request(
         self,
