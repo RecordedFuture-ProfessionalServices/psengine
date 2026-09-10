@@ -6,6 +6,10 @@
 
 - `CollectiveInsights` now supports the `search` endpoint via the `search` method.
 
+### Fixed
+
+- `DetectionMgr` now supports nuclei rules.
+
 ## v2.12.0 - 2026-08-28
 
 ### Added
