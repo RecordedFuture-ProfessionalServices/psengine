@@ -15,11 +15,13 @@ from ..endpoints import (
     EP_PLAYBOOK_ALERT_CODE_REPO_LEAKAGE,
     EP_PLAYBOOK_ALERT_COMPROMISED_BANK_CHECKS,
     EP_PLAYBOOK_ALERT_CYBER_VULNERABILITY,
+    EP_PLAYBOOK_ALERT_DARK_WEB_BRAND,
     EP_PLAYBOOK_ALERT_DOMAIN_ABUSE,
     EP_PLAYBOOK_ALERT_GEOPOLITICS_FACILITY,
     EP_PLAYBOOK_ALERT_IDENTITY_NOVEL_EXPOSURES,
     EP_PLAYBOOK_ALERT_MALICIOUS_SITES,
     EP_PLAYBOOK_ALERT_MALWARE_REPORT,
+    EP_PLAYBOOK_ALERT_SOCIAL_MEDIA_IMPERSONATION,
     EP_PLAYBOOK_ALERT_THIRD_PARTY_RISK,
 )
 from .pa_category import PACategory
@@ -27,11 +29,13 @@ from .playbook_alerts import (
     PBA_CodeRepoLeakage,
     PBA_CompromisedBankChecks,
     PBA_CyberVulnerability,
+    PBA_DarkWebBrand,
     PBA_DomainAbuse,
     PBA_GeopoliticsFacility,
     PBA_IdentityNovelExposure,
     PBA_MaliciousSites,
     PBA_MalwareReport,
+    PBA_SocialMediaImpersonation,
     PBA_ThirdPartyRisk,
 )
 
@@ -45,6 +49,8 @@ CATEGORY_ENDPOINTS = {
     PACategory.THIRD_PARTY_RISK.value: EP_PLAYBOOK_ALERT_THIRD_PARTY_RISK,
     PACategory.MALWARE_REPORT.value: EP_PLAYBOOK_ALERT_MALWARE_REPORT,
     PACategory.MALICIOUS_SITES.value: EP_PLAYBOOK_ALERT_MALICIOUS_SITES,
+    PACategory.DARK_WEB_BRAND.value: EP_PLAYBOOK_ALERT_DARK_WEB_BRAND,
+    PACategory.SOCIAL_MEDIA_IMPERSONATION.value: EP_PLAYBOOK_ALERT_SOCIAL_MEDIA_IMPERSONATION,
 }
 
 CATEGORY_TO_OBJECT_MAP = {
@@ -57,4 +63,6 @@ CATEGORY_TO_OBJECT_MAP = {
     PACategory.THIRD_PARTY_RISK.value: PBA_ThirdPartyRisk,
     PACategory.MALWARE_REPORT.value: PBA_MalwareReport,
     PACategory.MALICIOUS_SITES.value: PBA_MaliciousSites,
+    PACategory.DARK_WEB_BRAND.value: PBA_DarkWebBrand,
+    PACategory.SOCIAL_MEDIA_IMPERSONATION.value: PBA_SocialMediaImpersonation,
 }

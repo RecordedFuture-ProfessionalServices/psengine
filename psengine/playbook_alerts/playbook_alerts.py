@@ -38,6 +38,10 @@ from .models import (
     CompromisedBankCheckPanelStatus,
     CyberVulnerabilityPanelEvidence,
     CyberVulnerabilityPanelStatus,
+    DarkWebPanelAnalysisReport,
+    DarkWebPanelCachedContent,
+    DarkWebPanelEvidenceSummary,
+    DarkWebPanelTriage,
     DatetimeRange,
     DomainAbusePanelEvidenceDns,
     DomainAbusePanelEvidenceSummary,
@@ -55,6 +59,7 @@ from .models import (
     MaliciousSitesPanelStatus,
     MalwareReportPanelEvidence,
     MalwareReportPanelStatus,
+    SocialMediaImpersonationPanelEvidenceSummary,
     TPRAssessment,
     TPRPanelEvidence,
     TPRPanelStatus,
@@ -779,6 +784,35 @@ class PBA_MalwareReport(PBA_Generic):
     panel_status: MalwareReportPanelStatus | None = Field(default_factory=MalwareReportPanelStatus)
     panel_evidence_summary: MalwareReportPanelEvidence | None = Field(
         default_factory=MalwareReportPanelEvidence
+    )
+
+
+class PBA_DarkWebBrand(PBA_Generic):
+    """Model for Dark Web Brand. Inherit behaviors from `PBA_Generic`."""
+
+    __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
+
+    category: str = PACategory.DARK_WEB_BRAND.value
+
+    panel_evidence_summary: DarkWebPanelEvidenceSummary | None = Field(
+        default_factory=DarkWebPanelEvidenceSummary
+    )
+    panel_cached_content: DarkWebPanelCachedContent | None = Field(
+        default_factory=DarkWebPanelCachedContent
+    )
+    panel_triage: DarkWebPanelTriage | None = Field(default_factory=DarkWebPanelTriage)
+    panel_analysis_report: DarkWebPanelAnalysisReport | None = Field(
+        default_factory=DarkWebPanelAnalysisReport
+    )
+
+
+class PBA_SocialMediaImpersonation(PBA_Generic):
+    """Model for Social Media Impersonation. Inherits behaviors from `PBA_Generic`."""
+
+    __doc__ = __doc__ + '\n\n' + PACategory.SOCIAL_MEDIA_IMPERSONATION.value # noqa: A003
+
+    panel_evidence_summary: SocialMediaImpersonationPanelEvidenceSummary | None = Field(
+        default_factory=SocialMediaImpersonationPanelEvidenceSummary
     )
 
 

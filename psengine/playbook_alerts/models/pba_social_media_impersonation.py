@@ -11,31 +11,33 @@
 # accessed from any third party API.                                                         #
 ##############################################################################################
 
-from enum import Enum
-from typing import Annotated
+from datetime import datetime
 
-from typing_extensions import Doc
+from pydantic import Field
+
+from ...common_models import RFBaseModel
 
 
-class PACategory(Enum):
-    """Playbook Alert categories as Enum."""
+class SocialMediaMatchedAssets(RFBaseModel):
+    type: str
+    entity_id: str
+    name: str | None = None
 
-    def __str__(self) -> str:
-        """String representation of the enum value."""
-        return str(self.value)
 
-    def lower(self) -> Annotated[str, Doc('Lower case version of the enum value.')]:
-        """Return the lower case version of the enum value."""
-        return self.value.lower()
+class Assessment(RFBaseModel):
+    name: str
+    criticality: str
 
-    DOMAIN_ABUSE = 'domain_abuse'
-    COMPROMISED_BANK_CHECKS = 'fraud_compromised_checks'
-    CYBER_VULNERABILITY = 'cyber_vulnerability'
-    THIRD_PARTY_RISK = 'third_party_risk'
-    CODE_REPO_LEAKAGE = 'code_repo_leakage'
-    IDENTITY_NOVEL_EXPOSURES = 'identity_novel_exposures'
-    GEOPOLITICS_FACILITY = 'geopolitics_facility'
-    MALWARE_REPORT = 'malware_report'
-    MALICIOUS_SITES = 'malicious_sites'
-    DARK_WEB_BRAND = 'dark_web'
-    SOCIAL_MEDIA_IMPERSONATION = 'socmed_impersonation'
+
+class SocialMediaImpersonationPanelEvidenceSummary(RFBaseModel):
+    matched_assets: list[SocialMediaMatchedAssets]
+    assessments: list[Assessment]
+    profile_url_id: str
+    platform_id: str
+    user_name: str | None = Field(alias='username', default=None)
+    user_handel: str | None = None
+    description: str | None = None
+    created_date: datetime | None = None
+    number_of_posts: int | None = None
+    number_of_followers: int | None = None
+    private_profile: bool | None = None

@@ -26,6 +26,12 @@ from .pba_cyber_vulnerability import (
     CyberVulnerabilityPanelEvidence,
     CyberVulnerabilityPanelStatus,
 )
+from .pba_dark_web_brand import (
+    DarkWebPanelAnalysisReport,
+    DarkWebPanelCachedContent,
+    DarkWebPanelEvidenceSummary,
+    DarkWebPanelTriage,
+)
 from .pba_domain_abuse import (
     DomainAbusePanelEvidenceDns,
     DomainAbusePanelEvidenceSummary,
@@ -49,5 +55,6 @@ from .pba_malicious_sites import (
     MaliciousSitesPanelStatus,
 )
 from .pba_malware_report import MalwareReportPanelEvidence, MalwareReportPanelStatus
+from .pba_social_media_impersonation import SocialMediaImpersonationPanelEvidenceSummary
 from .pba_third_party_risk import TPRAssessment, TPRPanelEvidence, TPRPanelStatus
 from .search_endpoint import DatetimeRange, SearchCounts, SearchData, SearchResponse, SearchStatus
