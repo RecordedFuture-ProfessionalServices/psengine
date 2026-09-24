@@ -21,6 +21,7 @@ from ..pa_category import PACategory
 from .markdown_code_repo import _code_repo_markdown
 from .markdown_compromised_bank_checks import _compromised_bank_check_markdown
 from .markdown_cyber_vulnerability import _cyber_vulnerability_markdown
+from .markdown_dark_web import _dark_web_markdown
 from .markdown_domain_abuse import _domain_abuse_markdown
 from .markdown_geopolitics_facility import _geopolitics_facility_markdown
 from .markdown_identity_exposure import _identity_exposure_markdown
@@ -42,6 +43,7 @@ MARKDOWN_BY_PBA_TYPE = {
     PACategory.MALWARE_REPORT.value: _malware_report_markdown,
     PACategory.MALICIOUS_SITES.value: _malicious_sites_markdown,
     PACategory.COMPROMISED_BANK_CHECKS.value: _compromised_bank_check_markdown,
+    PACategory.DARK_WEB_BRAND.value: _dark_web_markdown,
 }
 
 

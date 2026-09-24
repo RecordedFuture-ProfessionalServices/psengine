@@ -17,6 +17,7 @@ ALERT_TYPE_FNAME_MAP = {
     PACategory.GEOPOLITICS_FACILITY.value: 'geopol.json',
     PACategory.MALWARE_REPORT.value: 'malware_report.json',
     PACategory.MALICIOUS_SITES.value: 'malicious_sites.json',
+    PACategory.DARK_WEB_BRAND.value: 'dark_web.json',
 }
 
 BASE_MOCK_DIR = Path(__file__).parent / 'mocks'
@@ -31,6 +32,7 @@ IDENT_MOCK = Path(__file__).parent / 'mocks' / 'identity'
 TPR_MOCK = Path(__file__).parent / 'mocks' / 'tpr'
 MGR_MOCK = Path(__file__).parent / 'mocks' / 'mgr'
 MODEL_MOCK = Path(__file__).parent / 'mocks' / 'models'
+DARK_WEB_MOCK = Path(__file__).parent / 'mocks' / 'dark_web'
 
 
 def load_raw_p_alerts(tests_dir, file_name):

@@ -794,12 +794,8 @@ class PBA_DarkWebBrand(PBA_Generic):
 
     category: str = PACategory.DARK_WEB_BRAND.value
 
-    panel_evidence_summary: DarkWebPanelEvidenceSummary | None = Field(
-        default_factory=DarkWebPanelEvidenceSummary
-    )
-    panel_cached_content: DarkWebPanelCachedContent | None = Field(
-        default_factory=DarkWebPanelCachedContent
-    )
+    panel_evidence_summary: DarkWebPanelEvidenceSummary | None = None
+    panel_cached_content: DarkWebPanelCachedContent | None = None
     panel_triage: DarkWebPanelTriage | None = Field(default_factory=DarkWebPanelTriage)
     panel_analysis_report: DarkWebPanelAnalysisReport | None = Field(
         default_factory=DarkWebPanelAnalysisReport
@@ -809,7 +805,7 @@ class PBA_DarkWebBrand(PBA_Generic):
 class PBA_SocialMediaImpersonation(PBA_Generic):
     """Model for Social Media Impersonation. Inherits behaviors from `PBA_Generic`."""
 
-    __doc__ = __doc__ + '\n\n' + PACategory.SOCIAL_MEDIA_IMPERSONATION.value # noqa: A003
+    __doc__ = __doc__ + '\n\n' + PACategory.SOCIAL_MEDIA_IMPERSONATION.value  # noqa: A003
 
     panel_evidence_summary: SocialMediaImpersonationPanelEvidenceSummary | None = Field(
         default_factory=SocialMediaImpersonationPanelEvidenceSummary

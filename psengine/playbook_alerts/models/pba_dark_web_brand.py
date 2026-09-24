@@ -78,7 +78,7 @@ class DarkWebForumMentionDetails(RFBaseModel):
     post_title: str
     post: str | None = None
     post_date: datetime
-    post_url: HttpUrl | None = None
+    post_url: str | None = None
 
 
 class DarkWebMarketDetails(RFBaseModel):
