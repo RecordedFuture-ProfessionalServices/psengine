@@ -32,16 +32,20 @@ def _add_panel_triage(pba: 'PBA_DarkWebBrand', md_maker: MarkdownMaker):
         md_maker.add_section('AI Triage', triage_details)
 
 
-def _add_matched_assets(pba: 'PBA_DarkWebBrand', md_maker: MarkdownMaker):
-    matched_assets = []
+def _add_matched_assets_assessments(pba: 'PBA_DarkWebBrand', md_maker: MarkdownMaker):
+    matched_assets_assessment = []
     if pba.panel_evidence_summary.matched_assets:
-        matched_assets.extend(
-            f'{bold("Matched Asset")}: {matched_asset.name}'
+        matched_assets_assessment.extend(
+            f'{bold("Matched Asset")}: {matched_asset.name}\n'
             for matched_asset in pba.panel_evidence_summary.matched_assets
         )
 
-    if matched_assets:
-        md_maker.add_section('Matched Asset(s)', matched_assets)
+    if pba.panel_evidence_summary.assessments:
+            assessments = [assessment.name for assessment in pba.panel_evidence_summary.assessments]
+            matched_assets_assessment.append(f"{bold('Assessments')}: {', '.join(assessments)}")
+
+    if matched_assets_assessment:
+        md_maker.add_section('Matched Asset(s)', matched_assets_assessment)
 
 
 def _add_post_details_ransomware(pba: 'PBA_DarkWebBrand', md_maker: MarkdownMaker):
@@ -121,7 +125,7 @@ def _dark_web_markdown(
     *args,  # noqa: ARG001
 ):
     _add_panel_triage(pba, md_maker)
-    _add_matched_assets(pba, md_maker)
+    _add_matched_assets_assessments(pba, md_maker)
 
     if pba.panel_evidence_summary.details.type == 'ransomware_extortion_site':
         _add_post_details_ransomware(pba, md_maker)

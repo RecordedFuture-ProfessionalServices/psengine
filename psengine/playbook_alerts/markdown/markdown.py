@@ -28,6 +28,7 @@ from .markdown_identity_exposure import _identity_exposure_markdown
 from .markdown_malicious_sites import _malicious_sites_markdown
 from .markdown_malware_report import _malware_report_markdown
 from .markdown_third_party_risk import _third_party_risk_markdown
+from .markdown_social_media_impersonation import _social_media_impersonation_markdown
 
 PORTAL_URL = 'https://app.recordedfuture.com/portal/playbook-alerts/{}'
 API_URL = 'https://api.recordedfuture.com/playbook-alert/{}/{}'
@@ -44,6 +45,7 @@ MARKDOWN_BY_PBA_TYPE = {
     PACategory.MALICIOUS_SITES.value: _malicious_sites_markdown,
     PACategory.COMPROMISED_BANK_CHECKS.value: _compromised_bank_check_markdown,
     PACategory.DARK_WEB_BRAND.value: _dark_web_markdown,
+    PACategory.SOCIAL_MEDIA_IMPERSONATION.value: _social_media_impersonation_markdown
 }
 
 

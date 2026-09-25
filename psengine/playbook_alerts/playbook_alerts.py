@@ -805,7 +805,9 @@ class PBA_DarkWebBrand(PBA_Generic):
 class PBA_SocialMediaImpersonation(PBA_Generic):
     """Model for Social Media Impersonation. Inherits behaviors from `PBA_Generic`."""
 
-    __doc__ = __doc__ + '\n\n' + PACategory.SOCIAL_MEDIA_IMPERSONATION.value  # noqa: A003
+    __doc__ = __doc__ + '\n\n' + PBA_Generic.__doc__  # noqa: A003
+
+    category: str = PACategory.SOCIAL_MEDIA_IMPERSONATION.value
 
     panel_evidence_summary: SocialMediaImpersonationPanelEvidenceSummary | None = Field(
         default_factory=SocialMediaImpersonationPanelEvidenceSummary
