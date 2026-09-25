@@ -41,8 +41,8 @@ def _add_matched_assets_assessments(pba: 'PBA_DarkWebBrand', md_maker: MarkdownM
         )
 
     if pba.panel_evidence_summary.assessments:
-            assessments = [assessment.name for assessment in pba.panel_evidence_summary.assessments]
-            matched_assets_assessment.append(f"{bold('Assessments')}: {', '.join(assessments)}")
+        assessments = [assessment.name for assessment in pba.panel_evidence_summary.assessments]
+        matched_assets_assessment.append(f'{bold("Assessments")}: {", ".join(assessments)}')
 
     if matched_assets_assessment:
         md_maker.add_section('Matched Asset(s)', matched_assets_assessment)
