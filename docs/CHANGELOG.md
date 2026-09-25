@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.14.0 - 2026-09-25
+
+### Added
+- `PlaybookAlertMgr` now supports Social Media Impersonation playbook alert category.
+- `PlaybookAlertMgr` now supports Dark Wek Brand playbook alert category.
+
 ## v2.13.0 - 2026-09-10
 
 ### Added
