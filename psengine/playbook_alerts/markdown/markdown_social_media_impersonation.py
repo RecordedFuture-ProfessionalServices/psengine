@@ -41,8 +41,8 @@ def _add_post_details(pba: 'PBA_SocialMediaImpersonation', md_maker: MarkdownMak
     if pba.panel_evidence_summary.user_name:
         post_details.append(f'{bold("Username")}: {pba.panel_evidence_summary.user_name}')
 
-    if pba.panel_evidence_summary.user_handel:
-        post_details.append(f'{bold("Username")}: {pba.panel_evidence_summary.user_handel}')
+    if pba.panel_evidence_summary.user_handle:
+        post_details.append(f'{bold("Username")}: {pba.panel_evidence_summary.user_handle}')
 
     if pba.panel_evidence_summary.description:
         post_details.append(

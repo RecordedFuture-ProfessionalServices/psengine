@@ -35,7 +35,7 @@ class SocialMediaImpersonationPanelEvidenceSummary(RFBaseModel):
     profile_url_id: str | None = None
     platform_id: str | None = None
     user_name: str | None = Field(alias='username', default=None)
-    user_handel: str | None = None
+    user_handle: str | None = None
     description: str | None = None
     created_date: datetime | None = None
     number_of_posts: int | None = None
