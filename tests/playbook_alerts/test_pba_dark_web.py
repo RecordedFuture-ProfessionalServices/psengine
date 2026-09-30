@@ -59,6 +59,11 @@ class Test_DarkWeb:
         assert mocker_fetch.call_args[1]['panels'] == [panel]
         assert sorted(mocker_post.call_args[1]['data']['panels']) == sorted({'status', panel})
 
+        assert p_alert.panel_evidence_summary is not None
+
+        if panel == 'analysis_report':
+            assert p_alert.panel_analysis_report.title is not None
+
     def test_markdown(self, playbook_mgr: PlaybookAlertMgr, mocker, mock_request):
         mocks = [
             mock_request(DARK_WEB_MOCK / 'test_markdown_0.json'),

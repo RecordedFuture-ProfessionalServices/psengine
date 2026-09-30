@@ -127,16 +127,20 @@ def _dark_web_markdown(
     _add_panel_triage(pba, md_maker)
     _add_matched_assets_assessments(pba, md_maker)
 
-    if pba.panel_evidence_summary.details.type == 'ransomware_extortion_site':
+    details = pba.panel_evidence_summary.details
+
+    if details is None:
+        pass
+    elif details.type == 'ransomware_extortion_site':
         _add_post_details_ransomware(pba, md_maker)
 
-    elif pba.panel_evidence_summary.details.type == 'telegram_mention':
+    elif details.type == 'telegram_mention':
         _add_post_details_telegram(pba, md_maker)
 
-    elif pba.panel_evidence_summary.details.type == 'dark_web_forum_mention':
+    elif details.type == 'dark_web_forum_mention':
         _add_post_details_forum_mention(pba, md_maker)
 
-    elif pba.panel_evidence_summary.details.type == 'dark_web_market_mention':
+    elif details.type == 'dark_web_market_mention':
         _add_post_details_market_mention(pba, md_maker)
 
     return md_maker.format_output()

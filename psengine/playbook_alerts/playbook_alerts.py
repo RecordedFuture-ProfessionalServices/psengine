@@ -794,7 +794,9 @@ class PBA_DarkWebBrand(PBA_Generic):
 
     category: str = PACategory.DARK_WEB_BRAND.value
 
-    panel_evidence_summary: DarkWebPanelEvidenceSummary | None = None
+    panel_evidence_summary: DarkWebPanelEvidenceSummary | None = Field(
+        default_factory=DarkWebPanelEvidenceSummary
+    )
     panel_cached_content: DarkWebPanelCachedContent | None = None
     panel_triage: DarkWebPanelTriage | None = Field(default_factory=DarkWebPanelTriage)
     panel_analysis_report: DarkWebPanelAnalysisReport | None = Field(

@@ -92,13 +92,16 @@ class DarkWebMarketDetails(RFBaseModel):
 
 
 class DarkWebPanelEvidenceSummary(RFBaseModel):
-    matched_assets: list[DarkWebMatchedAssets]
-    assessments: list[Assessment]
-    screenshot_ids: list[str]
-    details: Annotated[
-        DarkWebBrandRansomwareDetails
-        | DarkWebTelegramDetails
-        | DarkWebForumMentionDetails
-        | DarkWebMarketDetails,
-        Field(discriminator='type'),
-    ]
+    matched_assets: list[DarkWebMatchedAssets] | None = []
+    assessments: list[Assessment] | None = []
+    screenshot_ids: list[str] | None = []
+    details: (
+        Annotated[
+            DarkWebBrandRansomwareDetails
+            | DarkWebTelegramDetails
+            | DarkWebForumMentionDetails
+            | DarkWebMarketDetails,
+            Field(discriminator='type'),
+        ]
+        | None
+    ) = None
