@@ -204,6 +204,8 @@ class Test_PlaybookAlertComments:
             PACategory.IDENTITY_NOVEL_EXPOSURES.value,
             PACategory.GEOPOLITICS_FACILITY.value,
             PACategory.MALICIOUS_SITES.value,
+            PACategory.DARK_WEB_BRAND.value,
+            PACategory.SOCIAL_MEDIA_IMPERSONATION.value,
         ],
     )
     def test_markdown_comments_across_categories(self, category):

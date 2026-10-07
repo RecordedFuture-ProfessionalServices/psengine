@@ -62,6 +62,8 @@ EP_PLAYBOOK_ALERT_MALICIOUS_SITES = EP_PLAYBOOK_ALERT + '/malicious_sites'
 EP_PLAYBOOK_ALERT_MALICIOUS_SITES_CREATE = EP_PLAYBOOK_ALERT_MALICIOUS_SITES + '/create'
 EP_PLAYBOOK_ALERT_THIRD_PARTY_RISK = EP_PLAYBOOK_ALERT + '/third_party_risk'
 EP_PLAYBOOK_ALERT_MALWARE_REPORT = EP_PLAYBOOK_ALERT + '/malware_report'
+EP_PLAYBOOK_ALERT_DARK_WEB_BRAND = EP_PLAYBOOK_ALERT + '/dark_web_brand'
+EP_PLAYBOOK_ALERT_SOCIAL_MEDIA_IMPERSONATION = EP_PLAYBOOK_ALERT + '/social_media_impersonation'
 
 ###############################################################################
 # Entity Match Endpoint
