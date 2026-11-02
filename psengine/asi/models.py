@@ -136,10 +136,9 @@ class ExposureInstance(RFBaseModel):
 
 class VulnerabilityPublic(RFBaseModel):
     name: str
-    slug: str
     cvss_score: float | None = None
     cvss_metrics: str | None = None
-    references: list[str]
+    references: list[str] | None = None
     cve_id: str | None = None
     cwe_ids: list[str | None] | None = None
     epss_score: float | None = None
