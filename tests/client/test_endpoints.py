@@ -61,7 +61,7 @@ class Test_Endpoints:
         # so it can pick up the new value for the endpoint constants
         importlib.reload(endpoints)
 
-        assert endpoints.EP_CLASSIC_ALERTS_RULES == 'http://newbaseurl.com:8080/api/v3/alert/rule'
+        assert endpoints.EP_CLASSIC_ALERTS_RULES == 'http://newbaseurl.com:8080/api/v3/v2/alert/rule'
         assert endpoints.EP_CLASSIC_ALERTS_ID == 'http://newbaseurl.com:8080/api/v3/v3/alerts/{}'
         assert (
             endpoints.EP_PLAYBOOK_ALERT_CODE_REPO_LEAKAGE
@@ -72,7 +72,7 @@ class Test_Endpoints:
 
         importlib.reload(endpoints)
 
-        assert endpoints.EP_CLASSIC_ALERTS_RULES == 'http://localhost:8080/api/v3/alert/rule'
+        assert endpoints.EP_CLASSIC_ALERTS_RULES == 'http://localhost:8080/api/v3/v2/alert/rule'
 
         monkeypatch.setenv('RF_BASE_URL', 'https://newbaseurl.com')
 
