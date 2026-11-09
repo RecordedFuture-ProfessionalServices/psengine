@@ -1,5 +1,11 @@
 # Changelog
 
+## V2.14.1 - 2026-10-09
+
+### Fixed
+
+- `Endpoints` updated to keep version on connect API when a custom base URL is used
+
 ## v2.14.0 - 2026-09-25
 
 ### Added
