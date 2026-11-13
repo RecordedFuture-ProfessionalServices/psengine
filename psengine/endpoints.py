@@ -20,18 +20,20 @@ API_VERSION = 'v2'
 ###############################################################################
 # API Base URLs
 ###############################################################################
-BASE_URL = 'https://api.recordedfuture.com'
+BASE_URL = environ.get('RF_BASE_URL') or 'https://api.recordedfuture.com'
 CONNECT_API_BASE_URL = BASE_URL + '/' + API_VERSION
 
-BASE_URL = environ.get('RF_BASE_URL') or BASE_URL
-CONNECT_API_BASE_URL = environ.get('RF_BASE_URL') or CONNECT_API_BASE_URL
+###############################################################################
+# Classic Alerts Endpoints V2
+###############################################################################
+EP_CLASSIC_ALERTS_V2 = BASE_URL + '/v2'
+EP_CLASSIC_ALERTS_RULES = EP_CLASSIC_ALERTS_V2 + '/alert/rule'
+EP_CLASSIC_ALERTS_UPDATE = EP_CLASSIC_ALERTS_V2 + '/alert/update'
 
 ###############################################################################
 # Classic Alerts Endpoints V3
 ###############################################################################
 EP_CLASSIC_ALERTS_V3 = BASE_URL + '/v3'
-EP_CLASSIC_ALERTS_RULES = CONNECT_API_BASE_URL + '/alert/rule'
-EP_CLASSIC_ALERTS_UPDATE = CONNECT_API_BASE_URL + '/alert/update'
 EP_CLASSIC_ALERTS_SEARCH = EP_CLASSIC_ALERTS_V3 + '/alerts/'
 EP_CLASSIC_ALERTS_HITS = EP_CLASSIC_ALERTS_V3 + '/alerts/hits'
 EP_CLASSIC_ALERTS_IMAGE = EP_CLASSIC_ALERTS_V3 + '/alerts/image'
