@@ -386,11 +386,11 @@ wheels = [
 
 [[package]]
 name = "httpdbg"
-version = "2.1.6"
+version = "2.4.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/8c/47/69b5ceb2bbd03657b0a1458d8f3fdccd331d05bfa139569e6f293a2c4353/httpdbg-2.1.6.tar.gz", hash = "sha256:7f0925718faa0c94f5855075b168dc95bb16f9cd6826eb8449c8af9e720ea42b", size = 80616, upload-time = "2026-03-28T11:04:27.488Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/ef/06e97ff03a6564abc6be530a0f39719911c62540829be3f1880d1d4d864c/httpdbg-2.4.0.tar.gz", hash = "sha256:75c3d2d91a094f0a150430b343f4280bc80bc391b3c068a63606ffda73473631", size = 82181, upload-time = "2026-11-02T22:32:27.578Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/13/a8/6d101e4d58563e8647fe010a5ae61ba41ceb61e2abd789170573599d7d43/httpdbg-2.1.6-py3-none-any.whl", hash = "sha256:e3d5be9cd5eeb262b77e4faf113c356b7da127bb848b3360c99e394bb2dc9590", size = 87938, upload-time = "2026-03-28T11:04:26.035Z" },
+    { url = "https://files.pythonhosted.org/packages/c0/48/c00800768785462b335012fdb98b93cf94a3d271ed839dba94abeb8457b3/httpdbg-2.4.0-py3-none-any.whl", hash = "sha256:06c39f1d84d79d65624801a29a5a20df4562fe8c70bc7e0e4f15ea6ca96f3116", size = 89001, upload-time = "2026-11-02T22:32:26.312Z" },
 ]
 
 [[package]]
@@ -875,7 +875,7 @@ dev = [
     { name = "mimesis", specifier = ">=19.1.0" },
     { name = "pytest", specifier = "==9.2.0" },
     { name = "pytest-cov", specifier = "==7.1.0" },
-    { name = "pytest-httpdbg", specifier = "==0.10.3" },
+    { name = "pytest-httpdbg", specifier = "==0.11.0" },
     { name = "pytest-md", specifier = "==0.2.0" },
     { name = "pytest-mock", specifier = "==3.17.0" },
     { name = "pytest-random-order", specifier = "==1.2.0" },
@@ -1112,15 +1112,15 @@ wheels = [
 
 [[package]]
 name = "pytest-httpdbg"
-version = "0.10.3"
+version = "0.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "httpdbg" },
     { name = "pytest" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/75/13/a37b0302d887026baf8846870ab148bb9ae5d26956200ca378cb7de16eb1/pytest_httpdbg-0.10.3.tar.gz", hash = "sha256:e50d8616701fd86aec0bcb981964297449bdbee570334c94b0d4d1addf563870", size = 10056, upload-time = "2026-08-06T14:46:36.868Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/85/54/c9acad82897ae2710c85fb381ab1b83fade1fc70c974e030bdf5a0ae239f/pytest_httpdbg-0.11.0.tar.gz", hash = "sha256:ebe888c00bc5cba149633e76d74999de177096a3588e8bbfad5b04503cd0d536", size = 10085, upload-time = "2026-10-30T18:50:25.094Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/be/be/55d6351a9bf20e5af89f40605fd5d9abdf3173997006d26c011c37f25a26/pytest_httpdbg-0.10.3-py3-none-any.whl", hash = "sha256:41b79e4335168ed3b55853edd71e2dda00c5ae4fc86350a96be99fbd7c5806cc", size = 9480, upload-time = "2026-08-06T14:46:35.839Z" },
+    { url = "https://files.pythonhosted.org/packages/8b/82/ca2c7fd735922deca097677516c8993266112242f486ab641631041d661f/pytest_httpdbg-0.11.0-py3-none-any.whl", hash = "sha256:f926dd0eeb9e6c9fd30054f8b92d146694b43185f6e8053a1e346c15c814d50b", size = 9480, upload-time = "2026-10-30T18:50:23.94Z" },
 ]
 
 [[package]]
