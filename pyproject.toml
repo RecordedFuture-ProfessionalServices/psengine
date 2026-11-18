@@ -1,16 +1,21 @@
 [project]
 name = "psengine"
-version = "2.14.0"
+version = "2.14.1"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10, <3.15"
 description = "psengine is a simple, yet elegant, library for rapid development of integrations with Recorded Future."
 
 authors = [
-    {name = "Moise Medici", email = "moise.medici@recordedfuture.com"},
-    {name = "Patrick Kinsella", email = "patrick.kinsella@recordedfuture.com"},
-    {name = "Ernest Bartosevic", email = "ernest.bartosevic@recordedfuture.com"},
+    {name = "Moise Medici"},
+    {name = "Patrick Kinsella"},
+    {name = "Ernest Bartosevic"},
 ]
+
+maintainers = [
+    {name = "Jake Nenadic"}
+]
+
 keywords = ['API', 'Recorded Future', 'Cyber Security Engineering', 'Threat Intelligence']
 
 classifiers=[
