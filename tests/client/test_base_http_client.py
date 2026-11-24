@@ -8,7 +8,6 @@ from requests import Response
 from requests.exceptions import HTTPError, ProxyError
 
 from psengine.base_http_client import BaseHTTPClient
-from psengine.config import get_config
 from psengine.endpoints import BASE_URL
 from psengine.logger.rf_logger import RFLogger
 from tests.client.conftest import MOCK_DIR
@@ -213,9 +212,8 @@ class Test_BaseHTTPClient:
         assert adapter.max_retries.total == client.retries
 
     @pytest.mark.parametrize('prefix', ['https://api.recordedfuture.com', 'http://example.com'])
-    def test_adapter_uses_config_pool_max_size_by_default(self, base_client, prefix):
+    def test_adapter_uses_client_pool_max_size_by_default(self, base_client, prefix):
         adapter = base_client.session.get_adapter(prefix)
 
-        assert base_client.pool_max_size == get_config().client_pool_max_size
-        assert adapter._pool_maxsize == get_config().client_pool_max_size
+        assert adapter._pool_maxsize == base_client.pool_max_size
         assert adapter.max_retries.total == base_client.retries
