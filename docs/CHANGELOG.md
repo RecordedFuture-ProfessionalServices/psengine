@@ -1,5 +1,11 @@
 # Changelog
 
+## V2.14.2 - 2026-11-25
+
+### Fixed
+
+- `BaseHTTPClient` updated to correctly set `pool_max_size`
+
 ## V2.14.1 - 2026-10-09
 
 ### Fixed
