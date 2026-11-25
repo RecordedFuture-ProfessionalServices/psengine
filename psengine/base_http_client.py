@@ -22,7 +22,6 @@ from requests import (
     HTTPError,
     ReadTimeout,
     Session,
-    adapters,
 )
 from requests.adapters import HTTPAdapter, Retry
 from requests.exceptions import JSONDecodeError
@@ -224,8 +223,6 @@ class BaseHTTPClient:
         """
         self.log.debug('Creating an HTTP client session')
         session = Session()
-        adapter = adapters.HTTPAdapter(pool_maxsize=self.pool_max_size)
-        session.mount('https://', adapter)
 
         if len(self.proxies) > 0:
             session.proxies.update(self.proxies)
@@ -240,7 +237,9 @@ class BaseHTTPClient:
             status_forcelist=self.status_forcelist,
         )
         for prefix in 'http://', 'https://':
-            self.session.mount(prefix, HTTPAdapter(max_retries=retries))
+            self.session.mount(
+                prefix, HTTPAdapter(max_retries=retries, pool_maxsize=self.pool_max_size)
+            )
 
     def _choose_method_type(self, method: str):
         method_func = {

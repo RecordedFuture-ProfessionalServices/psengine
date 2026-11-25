@@ -202,3 +202,18 @@ class Test_BaseHTTPClient:
     def test_call_raises_ValueError(self, base_client):
         with pytest.raises(ValidationError):
             base_client.call(data={'a': 2})
+
+    @pytest.mark.parametrize('prefix', ['https://api.recordedfuture.com', 'http://example.com'])
+    def test_adapter_uses_pool_max_size(self, prefix):
+        client = BaseHTTPClient(pool_max_size=50)
+        adapter = client.session.get_adapter(prefix)
+
+        assert adapter._pool_maxsize == 50
+        assert adapter.max_retries.total == client.retries
+
+    @pytest.mark.parametrize('prefix', ['https://api.recordedfuture.com', 'http://example.com'])
+    def test_adapter_uses_client_pool_max_size_by_default(self, base_client, prefix):
+        adapter = base_client.session.get_adapter(prefix)
+
+        assert adapter._pool_maxsize == base_client.pool_max_size
+        assert adapter.max_retries.total == base_client.retries
